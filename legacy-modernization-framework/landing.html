@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Legacy Modernization Framework · Paula Silva</title>
+<meta name="description" content="Strategy guide and runbook for COBOL, Natural, and mainframe modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Legacy Modernization Framework · Paula Silva">
+<meta property="og:description" content="Strategy guide and runbook for COBOL, Natural, and mainframe modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Legacy Modernization Framework · Paula Silva">
+<meta name="twitter:description" content="Strategy guide and runbook for COBOL, Natural, and mainframe modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/landing.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+<div id="landing-root"></div>
+<script>
+window.PAGE_DATA = {
+  topicNumber: '05',
+  topicLabel: 'Legacy Modernization Framework',
+  accent: 'blue',
+  existingDeck: 'Legacy_Modernization_Deck_v1_0_0_2026-04-29_en.html',
+  existingPlaybook: 'Legacy_Modernization_Playbook_v1_1_0_2026-05-06_multi.html',
+  heroArt: `<svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gartner 5R framework">
+    <rect x="20" y="20" width="460" height="56" rx="6" fill="var(--c-blue-50)" stroke="var(--c-blue-500)" stroke-width="0.6"/>
+    <text x="40" y="42" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-blue-700)">REHOST</text>
+    <text x="40" y="62" font-family="Inter,sans-serif" font-size="13" fill="var(--c-blue-700)">Lift &amp; shift to cloud, no code change</text>
+    <rect x="20" y="86" width="460" height="56" rx="6" fill="var(--c-blue-50)" stroke="var(--c-blue-500)" stroke-width="0.6"/>
+    <text x="40" y="108" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-blue-700)">REPLATFORM</text>
+    <text x="40" y="128" font-family="Inter,sans-serif" font-size="13" fill="var(--c-blue-700)">Move runtime, minor code adjustments</text>
+    <rect x="20" y="152" width="460" height="56" rx="6" fill="var(--c-blue-50)" stroke="var(--c-blue-500)" stroke-width="0.6"/>
+    <text x="40" y="174" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-blue-700)">REFACTOR</text>
+    <text x="40" y="194" font-family="Inter,sans-serif" font-size="13" fill="var(--c-blue-700)">AI-assisted code transformation</text>
+    <rect x="20" y="218" width="460" height="56" rx="6" fill="var(--c-blue-50)" stroke="var(--c-blue-500)" stroke-width="0.6"/>
+    <text x="40" y="240" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-blue-700)">REBUILD</text>
+    <text x="40" y="260" font-family="Inter,sans-serif" font-size="13" fill="var(--c-blue-700)">Rewrite from spec, retain intent</text>
+    <rect x="20" y="284" width="460" height="56" rx="6" fill="var(--c-blue-50)" stroke="var(--c-blue-500)" stroke-width="0.6"/>
+    <text x="40" y="306" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-blue-700)">REPLACE</text>
+    <text x="40" y="326" font-family="Inter,sans-serif" font-size="13" fill="var(--c-blue-700)">Substitute with SaaS or COTS</text>
+  </svg>`,
+  hero: {
+    eyebrow: { en:'05 · Migration path', 'pt-br':'05 · Caminho de migração', es:'05 · Camino de migración' },
+    title: {
+      en: 'How legacy systems join the AI-native stack without rewrite from scratch.',
+      'pt-br': 'Como sistemas legados entram no stack AI-native sem reescrita do zero.',
+      es: 'Cómo los sistemas legados se integran al stack AI-native sin reescribir desde cero.'
+    },
+    subtitle: {
+      en: 'COBOL, Natural, mainframe. Gartner 5R framework (G00822567, G00823006), Microsoft four approaches (Refactor, Reenvision, Rebuild, Replatform/Hybrid-Extend), Carving / Performance / Coexistence operational playbook. With agentic-AI assist where it actually helps and JOBOL warnings where it does not.',
+      'pt-br': 'COBOL, Natural, mainframe. Framework 5R do Gartner (G00822567, G00823006), quatro abordagens Microsoft (Refactor, Reenvision, Rebuild, Replatform/Hybrid-Extend), playbook operacional Carving / Performance / Coexistence. Com assistência de IA agêntica onde realmente ajuda e avisos JOBOL onde não ajuda.',
+      es: 'COBOL, Natural, mainframe. Framework 5R de Gartner (G00822567, G00823006), cuatro enfoques Microsoft (Refactor, Reenvision, Rebuild, Replatform/Hybrid-Extend), playbook operacional Carving / Performance / Coexistence. Con asistencia de IA agéntica donde realmente ayuda y advertencias JOBOL donde no.'
+    }
+  },
+  stats: [
+    { num:'5R', label:{ en:'Gartner modernization options', 'pt-br':'Opções de modernização Gartner', es:'Opciones de modernización Gartner' } },
+    { num:'4', label:{ en:'Microsoft approaches', 'pt-br':'Abordagens Microsoft', es:'Enfoques Microsoft' } },
+    { num:'12', label:{ en:'Documents in the series', 'pt-br':'Documentos na série', es:'Documentos en la serie' } },
+    { num:'5', label:{ en:'Phases of the workflow', 'pt-br':'Fases do workflow', es:'Fases del workflow' } }
+  ],
+  pillarsTitle: {
+    en: 'Five phases, one workflow.',
+    'pt-br': 'Cinco fases, um workflow.',
+    es: 'Cinco fases, un workflow.'
+  },
+  pillarsLead: {
+    en: 'Modernization fails when teams treat it as a single big-bang. The five business phases below come from 07_Operational_Playbook (End-to-End Workflow). The technical workflow document defines a complementary five-step technical loop (Understand, Document, Test, Convert, Validate). Each phase has a clear exit criterion and a rollback option.',
+    'pt-br': 'Modernização falha quando times tratam como big-bang único. As cinco fases de negócio abaixo vêm de 07_Operational_Playbook (End-to-End Workflow). O documento de workflow técnico define um loop técnico complementar de cinco passos (Understand, Document, Test, Convert, Validate). Cada fase tem critério de saída claro e opção de rollback.',
+    es: 'La modernización falla cuando los equipos la tratan como un big-bang único. Las cinco fases de negocio a continuación provienen de 07_Operational_Playbook (End-to-End Workflow). El documento de workflow técnico define un loop técnico complementario de cinco pasos (Understand, Document, Test, Convert, Validate). Cada fase tiene criterio de salida claro y opción de rollback.'
+  },
+  pillars: [
+    { num:'PHASE 1', accent:'blue',
+      title:{ en:'Discover', 'pt-br':'Descobrir', es:'Descubrir' },
+      desc:{ en:'Inventory the estate. Function Point Analysis (IFPUG-standard sizing for legacy scope), dependency graph, business value mapping. Most teams underestimate this phase by 3x.',
+             'pt-br':'Inventariar o estado. Function Point Analysis (sizing IFPUG-padrão para escopo legado), grafo de dependências, mapeamento de valor de negócio. A maioria subestima essa fase em 3x.',
+             es:'Inventariar el estado. Function Point Analysis (sizing estándar IFPUG para alcance legado), grafo de dependencias, mapeo de valor de negocio. La mayoría subestima esta fase en 3x.' } },
+    { num:'PHASE 2', accent:'blue',
+      title:{ en:'Decide', 'pt-br':'Decidir', es:'Decidir' },
+      desc:{ en:'Apply the 5R framework per workload. Risk assessment. Defend / Extend ROI analysis. Pick the smallest reversible step.',
+             'pt-br':'Aplicar o framework 5R por workload. Análise de risco. Análise de ROI Defend / Extend. Escolher o menor passo reversível.',
+             es:'Aplicar el framework 5R por workload. Análisis de riesgo. Análisis de ROI Defend / Extend. Elegir el paso más pequeño reversible.' } },
+    { num:'PHASE 3', accent:'blue',
+      title:{ en:'Carve', 'pt-br':'Talhar', es:'Tallar' },
+      desc:{ en:'Strangler fig pattern. Carve the smallest module that delivers value. Keep the legacy running. Test in coexistence.',
+             'pt-br':'Padrão strangler fig. Talhe o menor módulo que entrega valor. Mantenha o legado rodando. Teste em coexistência.',
+             es:'Patrón strangler fig. Talla el módulo más pequeño que entrega valor. Mantén el legado corriendo. Testea en coexistencia.' } },
+    { num:'PHASE 4', accent:'blue',
+      title:{ en:'Perform', 'pt-br':'Performar', es:'Performar' },
+      desc:{ en:'Production cutover. Performance parity check. Side-by-side run. Rollback rehearsal. Customer acceptance.',
+             'pt-br':'Cutover em produção. Checagem de paridade de performance. Execução lado a lado. Ensaio de rollback. Aceitação do cliente.',
+             es:'Cutover en producción. Verificación de paridad de performance. Ejecución lado a lado. Ensayo de rollback. Aceptación del cliente.' } },
+    { num:'PHASE 5', accent:'blue',
+      title:{ en:'Decommission', 'pt-br':'Desativar', es:'Desactivar' },
+      desc:{ en:'Sunset the legacy module. Archive the data, the documentation, and the people knowledge. Capture lessons.',
+             'pt-br':'Desligar o módulo legado. Arquivar dados, documentação e o conhecimento das pessoas. Capturar lições.',
+             es:'Apagar el módulo legado. Archivar datos, documentación y el conocimiento de las personas. Capturar lecciones.' } }
+  ],
+  formats: [
+    { kicker:'LANDING · YOU ARE HERE', accent:'blue',
+      title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
+      desc:{ en:'10-second hook. Five phases, the 5R framework, the four Microsoft approaches, the formats available.', 'pt-br':'Hook de 10 segundos. Cinco fases, o framework 5R, as quatro abordagens Microsoft, os formatos.', es:'Hook de 10 segundos. Cinco fases, el framework 5R, los cuatro enfoques Microsoft, los formatos.' },
+      meta:{ en:'HTML · 5 min', 'pt-br':'HTML · 5 min', es:'HTML · 5 min' },
+      href:'#' },
+    { kicker:'DECK · v1.0.0', accent:'blue',
+      title:{ en:'Legacy Modernization deck', 'pt-br':'Deck Modernização de Legado', es:'Deck Modernización de Legado' },
+      desc:{ en:'Slide-based presentation. The full framework as a 60-90 minute walk-through, with case studies from LATAM banking and insurance.', 'pt-br':'Apresentação em slides. O framework completo em 60-90 min, com casos de bancos e seguros LATAM.', es:'Presentación en slides. El framework completo en 60-90 min, con casos de bancos y seguros LATAM.' },
+      meta:{ en:'HTML · 60-90 min', 'pt-br':'HTML · 60-90 min', es:'HTML · 60-90 min' },
+      href:'Legacy_Modernization_Deck_v1_0_0_2026-04-29_en.html' },
+    { kicker:'PLAYBOOK · MULTI v1.1.0', accent:'blue',
+      title:{ en:'Modernization playbook (HTML)', 'pt-br':'Playbook de modernização (HTML)', es:'Playbook de modernización (HTML)' },
+      desc:{ en:'Trilingual multi-page playbook. Strategy, framework, AI-driven analysis, assessment, technical architecture, operational runbook.', 'pt-br':'Playbook multi-página trilíngue. Estratégia, framework, análise AI-driven, assessment, arquitetura técnica, runbook operacional.', es:'Playbook multi-página trilingüe. Estrategia, framework, análisis AI-driven, assessment, arquitectura técnica, runbook operativo.' },
+      meta:{ en:'HTML · ~28K words', 'pt-br':'HTML · ~28K palavras', es:'HTML · ~28K palabras' },
+      href:'Legacy_Modernization_Playbook_v1_1_0_2026-05-06_multi.html' },
+    { kicker:'PLAYBOOK · CONSOLIDATED', accent:'ink',
+      title:{ en:'Consolidated reading guide', 'pt-br':'Guia de leitura consolidado', es:'Guía de lectura consolidada' },
+      desc:{ en:'New consolidated playbook. Maps every phase to its source document, lists the 12 reference Markdown chapters with one-line abstracts.', 'pt-br':'Novo playbook consolidado. Mapeia cada fase ao documento fonte, lista os 12 markdowns com abstracts.', es:'Nuevo playbook consolidado. Mapea cada fase al documento fuente, lista los 12 markdowns con abstracts.' },
+      meta:{ en:'HTML · 12 min', 'pt-br':'HTML · 12 min', es:'HTML · 12 min' },
+      href:'playbook.html' }
+  ],
+  crosslinks: [
+    { accent:'green', kicker:'Target stack',
+      title:{ en:'Agentic DevOps Platform', 'pt-br':'Plataforma Agentic DevOps', es:'Plataforma Agentic DevOps' },
+      hint:{ en:'The platform legacy systems migrate to.', 'pt-br':'A plataforma para a qual sistemas legados migram.', es:'La plataforma a la que migran los sistemas legados.' },
+      href:'../agentic-devops-platform/landing.html' },
+    { accent:'red', kicker:'AI-assist',
+      title:{ en:'Semantic Context Layer', 'pt-br':'Semantic Context Layer', es:'Semantic Context Layer' },
+      hint:{ en:'How agents understand legacy code without hallucinating COBOL semantics.', 'pt-br':'Como agentes entendem código legado sem alucinar semântica COBOL.', es:'Cómo los agentes entienden código legado sin alucinar semántica COBOL.' },
+      href:'../semantic-context-layer/landing.html' },
+    { accent:'yellow', kicker:'Stack model',
+      title:{ en:'Context Platform Stack', 'pt-br':'Context Platform Stack', es:'Context Platform Stack' },
+      hint:{ en:'The four-layer model that legacy modernization aims at.', 'pt-br':'O modelo de quatro camadas para o qual a modernização aponta.', es:'El modelo de cuatro capas al que apunta la modernización.' },
+      href:'../context-engineering-platform/landing.html' },
+    { accent:'ink', kicker:'Cost discipline',
+      title:{ en:'Token Management', 'pt-br':'Gestão de Tokens', es:'Gestión de Tokens' },
+      hint:{ en:'How to keep AI-assisted modernization affordable.', 'pt-br':'Como manter modernização assistida por IA viável.', es:'Cómo mantener la modernización asistida por IA viable.' },
+      href:'../token-best-practices/landing.html' }
+  ]
+};
+</script>
+<script src="../_shared/landing-template.js"></script>
+</body>
+</html>

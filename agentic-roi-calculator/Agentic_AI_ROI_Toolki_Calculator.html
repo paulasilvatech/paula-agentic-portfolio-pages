@@ -1,0 +1,2801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Agentic AI ROI Toolkit — Microsoft GBB Americas</title>
+<script src="https://unpkg.com/react@18.2.0/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.10/babel.min.js"></script>
+<style>
+/* ── Reset & Tokens ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+:root{
+  --c-blue:#0078D4;--c-green:#107C10;--c-yellow:#D19200;--c-red:#D13438;--c-purple:#7B52AB;--c-teal:#00B294;--c-orange:#C55A11;
+  --bg-page:#F0EEE9;--bg-card:#FFFFFF;--border:#E1DFDD;--border-light:#EDEBE9;
+  --text-primary:#161514;--text-secondary:#484644;--text-muted:#8A8886;--text-subtle:#B0ADAB;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.05);
+  --shadow-md:0 2px 6px rgba(0,0,0,.07),0 6px 20px rgba(0,0,0,.07);
+  --shadow-lg:0 4px 16px rgba(0,0,0,.08),0 12px 40px rgba(0,0,0,.1);
+  --shadow-blue:0 4px 24px rgba(0,120,212,.18);
+  --radius-sm:6px;--radius-md:10px;--radius-lg:14px;
+  --transition:all .18s cubic-bezier(.4,0,.2,1);
+}
+body{font-family:"Segoe UI","Segoe UI Variable","Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;line-height:1.5;background:var(--bg-page);color:var(--text-primary);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#C8C6C4;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#A19F9D}
+
+/* ── Form elements ── */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;background:#E1DFDD;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--c-blue);border:2.5px solid #fff;box-shadow:0 1px 6px rgba(0,120,212,.5);cursor:pointer;transition:transform .15s,box-shadow .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15);box-shadow:0 2px 10px rgba(0,120,212,.6)}
+input[type=number],input[type=text],select{font-family:inherit;font-size:13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:6px 10px;background:#fff;outline:none;width:100%;color:var(--text-primary);transition:var(--transition);height:34px}
+input[type=number]:focus,input[type=text]:focus,select:focus{border-color:var(--c-blue);box-shadow:0 0 0 3px rgba(0,120,212,.12)}
+input[type=number]:hover,input[type=text]:hover,select:hover{border-color:#B0ADAB}
+button{font-family:inherit;cursor:pointer}
+
+/* ── Top color bar ── */
+.topbar{height:3px;background:linear-gradient(to right,#F25022 0%,#F25022 25%,#7FBA00 25%,#7FBA00 50%,#00A4EF 50%,#00A4EF 75%,#FFB900 75%,#FFB900 100%)}
+
+/* ── Header ── */
+.hdr{
+  background:linear-gradient(160deg,#050D1A 0%,#002F5F 35%,#005A9E 65%,#003D73 100%);
+  padding:28px 40px 0;color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  position:relative;overflow:hidden;
+}
+.hdr::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(0,120,212,.18),transparent);pointer-events:none}
+.hdr-inner{max-width:1320px;margin:0 auto;position:relative}
+.hdr-brand{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:12px}
+.dots{display:flex;gap:4px}.dot{width:9px;height:9px;border-radius:2.5px}
+.hdr h1{font-size:28px;font-weight:800;margin-bottom:4px;letter-spacing:-.5px;line-height:1.15}
+.hdr p{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:20px;line-height:1.55;max-width:700px}
+.main-tabs{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.08);overflow-x:auto;margin-top:4px}
+.main-tab{padding:13px 24px;font-size:13px;font-weight:600;color:rgba(255,255,255,.45);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:var(--transition);white-space:nowrap;letter-spacing:.01em}
+.main-tab:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.05)}
+.main-tab.on{color:#fff;border-bottom-color:#FFB900;background:rgba(255,255,255,.07)}
+
+/* ── Main wrap ── */
+.wrap{max-width:1320px;margin:0 auto;padding:28px 32px 80px}
+
+/* ── Sub-tabs (pill) ── */
+.sub-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.sub-tab{padding:7px 20px;font-size:12px;font-weight:600;border-radius:100px;border:1.5px solid var(--border);background:#fff;color:var(--text-secondary);cursor:pointer;transition:var(--transition)}
+.sub-tab.on{background:var(--c-blue);color:#fff;border-color:var(--c-blue);box-shadow:0 2px 8px rgba(0,120,212,.25)}
+.sub-tab:hover:not(.on){background:#EFF6FC;color:var(--c-blue);border-color:#C7E0F4}
+
+/* ── Hero band ── */
+.hero-band{
+  background:linear-gradient(135deg,#050D1A 0%,#003D73 40%,#0078D4 100%);
+  border-radius:var(--radius-lg);padding:24px 32px;color:#fff;
+  margin-bottom:20px;box-shadow:var(--shadow-blue);
+  position:relative;overflow:hidden;
+}
+.hero-band::after{content:"";position:absolute;top:-30%;right:-5%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);pointer-events:none}
+.hb-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:800px){.hb-inner{grid-template-columns:1fr 1fr}}
+.hb-cell{text-align:center;padding:10px 16px;border-right:1px solid rgba(255,255,255,.10)}
+.hb-cell:last-child{border-right:none}
+.hb-lbl{font-size:9.5px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;font-weight:600}
+.hb-val{font-size:36px;font-weight:800;line-height:1;letter-spacing:-1.5px}
+.hb-val .u{font-size:17px;font-weight:400;letter-spacing:0}
+.hb-sub{font-size:10.5px;color:rgba(255,255,255,.45);margin-top:4px}
+.hb-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.hb-title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.r-badge{font-size:11px;font-weight:700;border-radius:100px;padding:4px 14px;letter-spacing:.02em}
+
+/* ── KPI grid ── */
+.ov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+@media(max-width:1000px){.ov-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.ov-grid{grid-template-columns:1fr}}
+
+/* ── Stat cards ── */
+.stat-card{
+  background:#fff;border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);padding:22px 24px;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden;
+  transition:transform .2s cubic-bezier(.4,0,.2,1),box-shadow .2s;
+}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.stat-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3.5px;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.stat-card.c-blue::before{background:linear-gradient(90deg,#0078D4,#2B88D8)}
+.stat-card.c-green::before{background:linear-gradient(90deg,#107C10,#40A340)}
+.stat-card.c-yellow::before{background:linear-gradient(90deg,#D19200,#FFBA00)}
+.stat-card.c-red::before{background:linear-gradient(90deg,#D13438,#E84848)}
+.stat-card.c-purple::before{background:linear-gradient(90deg,#7B52AB,#9B72CB)}
+.stat-card.c-teal::before{background:linear-gradient(90deg,#00B294,#00CCB0)}
+.stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);margin-bottom:10px}
+.stat-num{font-size:40px;font-weight:800;line-height:1;letter-spacing:-1.5px;margin-bottom:5px}
+.stat-card.c-blue .stat-num{color:#0078D4}.stat-card.c-green .stat-num{color:#107C10}
+.stat-card.c-yellow .stat-num{color:#7A5700}.stat-card.c-red .stat-num{color:#D13438}
+.stat-card.c-purple .stat-num{color:#6B3FA0}.stat-card.c-teal .stat-num{color:#006B5A}
+.stat-sub{font-size:12px;color:var(--text-muted);line-height:1.45}
+.stat-badge{display:inline-block;font-size:10px;font-weight:700;border-radius:100px;padding:2px 9px;margin-top:7px}
+
+/* ── Cards ── */
+.card{
+  background:#fff;border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);padding:22px 26px;
+  margin-bottom:18px;box-shadow:var(--shadow-sm);
+}
+.card h3{font-size:14.5px;font-weight:700;color:var(--text-primary);margin-bottom:4px;letter-spacing:-.1px}
+.sec-sub{font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.55}
+.sec-hdr{font-size:14.5px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+.card h4{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;margin-top:16px}
+
+/* ── Bars ── */
+.bar-row{margin-bottom:12px}.bar-row:last-child{margin-bottom:0}
+.bar-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.bar-lbl{font-size:12.5px;color:var(--text-secondary)}.bar-pct{font-size:10px;color:var(--text-subtle);margin-left:4px}
+.bar-val{font-size:13px;font-weight:700;color:var(--text-primary)}
+.bar-track{height:8px;background:#F0EFEE;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* ── Two-col layout ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+
+/* ── Tables ── */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl thead{position:sticky;top:0;z-index:1}
+.tbl th{text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.55px;color:var(--text-muted);padding:9px 12px 7px;border-bottom:2px solid var(--border);background:#FAFAF9;white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:middle;line-height:1.4}
+.tbl tbody tr:hover td{background:#F5F9FE}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr.hi td{background:#EFF6FC}
+.tbl .g{color:var(--c-green);font-weight:700}.tbl .m{color:var(--text-muted)}.tbl .b{color:var(--c-blue);font-weight:700}
+
+/* ── Notes ── */
+.note{font-size:11.5px;color:var(--text-secondary);line-height:1.55;padding:10px 14px;background:#FAF9F8;border-radius:var(--radius-sm);border-left:3px solid var(--border)}
+.note.warn{border-left-color:var(--c-yellow);background:#FFFBF0}
+.note.err{border-left-color:var(--c-red);background:#FDF3F4}
+.note.info{border-left-color:var(--c-blue);background:#EFF6FC}
+
+/* ── Pills ── */
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pill{font-size:11.5px;color:var(--text-secondary);background:#F3F2F1;border:1px solid var(--border);border-radius:100px;padding:4px 12px;transition:var(--transition)}
+.pill strong{color:var(--text-primary);font-weight:700}
+.pill:hover{background:#EFF6FC;border-color:#C7E0F4;color:var(--c-blue)}
+
+/* ── Presets ── */
+.preset-strip{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.preset-btn{padding:6px 15px;font-size:12px;font-weight:600;border-radius:100px;border:1.5px solid var(--border);background:#F8F7F6;color:var(--text-secondary);cursor:pointer;transition:var(--transition);font-family:inherit}
+.preset-btn:hover{border-color:var(--c-blue);background:#EFF6FC;color:var(--c-blue)}
+.preset-btn.on{background:var(--c-blue);border-color:var(--c-blue);color:#fff;box-shadow:0 2px 8px rgba(0,120,212,.2)}
+
+/* ── Divider ── */
+.divider{height:1px;background:var(--border-light);margin:14px 0}
+
+/* ── Label ── */
+.lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:7px}
+
+/* ── Scenario cards ── */
+.sc-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:700px){.sc-strip{grid-template-columns:1fr}}
+.sc{border-radius:var(--radius-md);border:1.5px solid;padding:16px 18px}
+.sc.best{border-color:#9FD99F;background:#F1FAF1}
+.sc.exp{border-color:#C7E0F4;background:#EFF6FC;box-shadow:0 0 0 2px rgba(0,120,212,.12)}
+.sc.worst{border-color:var(--border);background:#FAF9F8}
+.sc-tag{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+.sc.best .sc-tag{color:#107C10}.sc.exp .sc-tag{color:var(--c-blue)}.sc.worst .sc-tag{color:var(--text-muted)}
+.sc-roi{font-size:26px;font-weight:800;margin-bottom:2px;letter-spacing:-.5px}
+.sc.best .sc-roi{color:#107C10}.sc.exp .sc-roi{color:var(--c-blue)}.sc.worst .sc-roi{color:var(--text-secondary)}
+.sc-data{font-size:12px;color:var(--text-muted);line-height:1.65}
+
+/* ── Sliders ── */
+.sldr{margin-bottom:14px}.sldr:last-child{margin-bottom:0}
+.sldr-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.sldr-lbl{font-size:12.5px;color:var(--text-secondary);font-weight:500}
+.sldr-val{font-size:12px;font-weight:700;color:var(--text-primary);background:#F3F2F1;border:1px solid var(--border);border-radius:4px;padding:2px 9px;min-width:76px;text-align:right}
+.sldr-ends{display:flex;justify-content:space-between;font-size:10px;color:var(--text-subtle);margin-top:4px}
+
+/* ── Persona grid ── */
+.persona-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:18px}
+@media(max-width:1000px){.persona-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:700px){.persona-grid{grid-template-columns:repeat(3,1fr)}}
+.persona-btn{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 8px;cursor:pointer;text-align:center;font-family:inherit;background:#fff;transition:var(--transition)}
+.persona-btn:hover{border-color:var(--c-blue);background:#EFF6FC;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.persona-btn.on{border-color:var(--c-blue);background:#EFF6FC;box-shadow:0 0 0 2px rgba(0,120,212,.2)}
+.persona-icon{font-size:22px;display:block;margin-bottom:4px}
+.persona-name{font-size:10.5px;font-weight:600;color:#323130;line-height:1.25}
+.persona-wave{font-size:9px;color:var(--text-muted);margin-top:2px}
+
+/* ── Gartner cards ── */
+.gartner-card{
+  background:#fff;border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);padding:20px 22px;
+  margin-bottom:16px;border-left:4px solid var(--c-orange);
+  box-shadow:var(--shadow-sm);
+}
+.gartner-card h3{color:var(--c-orange);margin-bottom:8px;font-size:13.5px;font-weight:700}
+.gartner-card .src{font-size:10px;color:var(--text-subtle);margin-top:8px;font-weight:600;letter-spacing:.02em}
+
+/* ── Insight cards ── */
+.insight-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:800px){.insight-grid{grid-template-columns:1fr}}
+.insight-card{border-radius:var(--radius-lg);padding:20px;text-align:center;border:1.5px solid;transition:var(--transition)}
+.insight-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.insight-card .ic-num{font-size:38px;font-weight:800;line-height:1;margin-bottom:5px;letter-spacing:-1px}
+.insight-card .ic-lbl{font-size:12px;font-weight:700;margin-bottom:3px}
+.insight-card .ic-sub{font-size:10.5px;color:var(--text-muted)}
+
+/* ── BCP (Defend/Extend/Upend) ── */
+.bcp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:700px){.bcp-grid{grid-template-columns:1fr}}
+.bcp-card{border-radius:var(--radius-lg);padding:18px;border:1.5px solid;text-align:center;transition:var(--transition)}
+.bcp-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.bcp-tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.bcp-desc{font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px}
+.bcp-metric{font-size:11.5px;font-weight:700;margin-bottom:4px}
+
+/* ── Terminal ── */
+.term{background:#0D1117;border-radius:var(--radius-lg);padding:18px 20px;color:#fff;box-shadow:var(--shadow-md)}
+.term-hdr{display:flex;align-items:center;gap:7px;margin-bottom:12px}
+.term-dots{display:flex;gap:5px}.term-dot{width:10px;height:10px;border-radius:50%}
+.term-title{font-size:10.5px;color:rgba(255,255,255,.28);font-weight:500}
+.mono{font-family:"Cascadia Code","JetBrains Mono","Consolas","Courier New",monospace;font-size:11.5px;line-height:2;color:#8B949E}
+.mono .acc{color:#58A6FF;font-weight:600}.mono .grn{color:#3FB950}.mono .yel{color:#D29922;font-weight:700}.mono .wht{color:#E6EDF3}.mono .dim{color:#30363D}.mono .sep{color:#21262D;display:block}
+
+/* ── Footer ── */
+.footer{background:#fff;border-top:1px solid var(--border-light);padding:14px 40px}
+.footer-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text-muted);flex-wrap:wrap;gap:8px}
+.footer-brand{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--text-secondary);font-size:12px}
+.reset-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text-secondary);background:#FAF9F8;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:5px 12px;cursor:pointer;font-family:inherit;transition:var(--transition)}
+.reset-btn:hover{background:#EFF6FC;border-color:var(--c-blue);color:var(--c-blue)}
+
+/* ── Wave timeline ── */
+.wave-timeline{display:flex;gap:0;margin-bottom:20px;overflow-x:auto}
+.wave-item{flex:1;min-width:150px;padding:16px 18px;text-align:center;position:relative}
+.wave-item::after{content:"";position:absolute;top:50%;right:0;width:1px;height:55%;transform:translateY(-50%);background:var(--border-light)}
+.wave-item:last-child::after{display:none}
+.wave-num{font-size:30px;font-weight:800;margin-bottom:5px;letter-spacing:-1px}
+.wave-name{font-size:12px;font-weight:700;margin-bottom:2px}
+.wave-time{font-size:10.5px;color:var(--text-muted)}
+.wave-profiles{font-size:10.5px;color:var(--text-secondary);margin-top:6px;line-height:1.45}
+
+/* ── Callouts ── */
+.callout{border-radius:var(--radius-md);padding:14px 18px;margin-bottom:16px;display:flex;gap:14px;align-items:flex-start;border:1px solid}
+.callout-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.callout-text{flex:1}
+.callout-title{font-size:13px;font-weight:700;margin-bottom:4px}
+.callout-body{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.callout.gartner{background:#FFF8F0;border-color:#F0D4A8}
+.callout.warning{background:#FFFBF0;border-color:#FFD875}
+.callout.critical{background:#FDF3F4;border-color:#F1A7A9}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="agent_advisor_data.js"></script>
+<script type="text/babel" data-presets="react">
+const {useState,useMemo,useCallback}=React;
+const $c=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(n);
+const Nf=n=>new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(n);
+const pct=(v,t)=>t>0?Math.max(2,Math.round(v/t*100)):0;
+
+/* ── PERSONA DATA (24 profiles) ── */
+const PERSONAS=[
+  {id:"gestor-negocio",name:"Business Manager",emoji:"💼",wave:1,phase:"Client & Contract",salary:110000,prodGain:30,timeSaved:35,bugReduction:0,costPerError:5000,errRate:5,compHrs:10,agentCost:468,implCost:500,trainCost:200,color:"#107C10"},
+  {id:"gestor-projeto",name:"Project Manager",emoji:"📋",wave:1,phase:"Planning",salary:105000,prodGain:35,timeSaved:40,bugReduction:0,costPerError:3000,errRate:8,compHrs:15,agentCost:468,implCost:500,trainCost:200,color:"#0078D4"},
+  {id:"analista-requisitos",name:"Requirements Engineer",emoji:"📝",wave:2,phase:"Planning",salary:95000,prodGain:40,timeSaved:45,bugReduction:20,costPerError:5000,errRate:15,compHrs:10,agentCost:668,implCost:800,trainCost:300,color:"#5C2D91"},
+  {id:"arquiteto",name:"Solution Architect",emoji:"🏗️",wave:2,phase:"Design",salary:150000,prodGain:60,timeSaved:50,bugReduction:15,costPerError:15000,errRate:5,compHrs:20,agentCost:2268,implCost:1200,trainCost:400,color:"#5C2D91"},
+  {id:"desenvolvedor",name:"Modern Developer",emoji:"👨‍💻",wave:1,phase:"Development",salary:100000,prodGain:35,timeSaved:45,bugReduction:40,costPerError:500,errRate:15,compHrs:5,agentCost:768,implCost:600,trainCost:200,color:"#107C10"},
+  {id:"dev-legacy",name:"Legacy Developer",emoji:"🔧",wave:2,phase:"Development",salary:95000,prodGain:25,timeSaved:30,bugReduction:30,costPerError:800,errRate:20,compHrs:10,agentCost:968,implCost:1500,trainCost:500,color:"#FF8C00"},
+  {id:"devops",name:"DevOps / Platform",emoji:"⚙️",wave:2,phase:"CI/CD",salary:120000,prodGain:30,timeSaved:87,bugReduction:35,costPerError:200,errRate:10,compHrs:15,agentCost:3668,implCost:2000,trainCost:400,color:"#FF8C00"},
+  {id:"qa",name:"QA Engineer",emoji:"🧪",wave:1,phase:"Testing",salary:90000,prodGain:40,timeSaved:70,bugReduction:54,costPerError:500,errRate:20,compHrs:5,agentCost:1868,implCost:800,trainCost:300,color:"#D13438"},
+  {id:"product-owner",name:"Product Owner",emoji:"🎯",wave:1,phase:"Planning",salary:110000,prodGain:30,timeSaved:60,bugReduction:0,costPerError:5000,errRate:10,compHrs:5,agentCost:1668,implCost:600,trainCost:200,color:"#0078D4"},
+  {id:"tech-lead",name:"Tech Lead",emoji:"🧠",wave:1,phase:"Development",salary:140000,prodGain:35,timeSaved:40,bugReduction:25,costPerError:2000,errRate:8,compHrs:15,agentCost:1468,implCost:800,trainCost:300,color:"#107C10"},
+  {id:"uat",name:"UAT Analyst",emoji:"✅",wave:3,phase:"Testing",salary:80000,prodGain:35,timeSaved:50,bugReduction:30,costPerError:1000,errRate:12,compHrs:10,agentCost:868,implCost:500,trainCost:200,color:"#D13438"},
+  {id:"sre",name:"SRE / Operations",emoji:"🔥",wave:2,phase:"Operations",salary:125000,prodGain:35,timeSaved:81,bugReduction:40,costPerError:5000,errRate:8,compHrs:20,agentCost:3668,implCost:2000,trainCost:400,color:"#008272"},
+  {id:"infosec",name:"InfoSec / Compliance",emoji:"🔒",wave:2,phase:"Security",salary:130000,prodGain:50,timeSaved:75,bugReduction:46,costPerError:15000,errRate:5,compHrs:40,agentCost:7000,implCost:3000,trainCost:500,color:"#00188F"},
+  {id:"dba",name:"DBA",emoji:"🗄️",wave:1,phase:"Operations",salary:100000,prodGain:30,timeSaved:40,bugReduction:35,costPerError:2000,errRate:10,compHrs:15,agentCost:1268,implCost:800,trainCost:300,color:"#008272"},
+  {id:"appsec",name:"AppSec / Secure Code",emoji:"🛡️",wave:2,phase:"Security",salary:125000,prodGain:45,timeSaved:70,bugReduction:50,costPerError:10000,errRate:8,compHrs:30,agentCost:4500,implCost:2000,trainCost:400,color:"#00188F"},
+  {id:"scrum-master",name:"Scrum Master",emoji:"🔄",wave:3,phase:"Planning",salary:95000,prodGain:25,timeSaved:35,bugReduction:0,costPerError:2000,errRate:5,compHrs:5,agentCost:468,implCost:400,trainCost:200,color:"#0078D4"},
+  {id:"dev-cobol",name:"COBOL Developer",emoji:"🏛️",wave:2,phase:"Development",salary:110000,prodGain:20,timeSaved:25,bugReduction:25,costPerError:5000,errRate:10,compHrs:20,agentCost:1468,implCost:3000,trainCost:800,color:"#FF8C00"},
+  {id:"dev-natural",name:"Natural/ADABAS Dev",emoji:"📟",wave:2,phase:"Development",salary:105000,prodGain:18,timeSaved:22,bugReduction:20,costPerError:5000,errRate:10,compHrs:20,agentCost:1468,implCost:3000,trainCost:800,color:"#FF8C00"},
+  {id:"compliance",name:"Compliance Officer",emoji:"⚖️",wave:3,phase:"Security",salary:115000,prodGain:35,timeSaved:50,bugReduction:30,costPerError:20000,errRate:3,compHrs:60,agentCost:2500,implCost:1500,trainCost:400,color:"#00188F"},
+  {id:"release-manager",name:"Release Manager",emoji:"🚀",wave:3,phase:"CI/CD",salary:105000,prodGain:30,timeSaved:45,bugReduction:25,costPerError:3000,errRate:8,compHrs:10,agentCost:1468,implCost:1000,trainCost:300,color:"#FF8C00"},
+  {id:"data-engineer",name:"Data Engineer",emoji:"📊",wave:3,phase:"Development",salary:115000,prodGain:30,timeSaved:40,bugReduction:30,costPerError:2000,errRate:12,compHrs:10,agentCost:1868,implCost:1200,trainCost:400,color:"#107C10"},
+  {id:"ml-engineer",name:"ML / AI Engineer",emoji:"🤖",wave:3,phase:"Development",salary:135000,prodGain:25,timeSaved:35,bugReduction:20,costPerError:3000,errRate:10,compHrs:10,agentCost:2268,implCost:1500,trainCost:500,color:"#5C2D91"},
+  {id:"ux-designer",name:"UX / Product Designer",emoji:"🎨",wave:3,phase:"Design",salary:100000,prodGain:30,timeSaved:40,bugReduction:15,costPerError:2000,errRate:8,compHrs:5,agentCost:868,implCost:600,trainCost:200,color:"#5C2D91"},
+  {id:"eng-manager",name:"Engineering Manager",emoji:"📈",wave:1,phase:"Planning",salary:145000,prodGain:30,timeSaved:35,bugReduction:0,costPerError:5000,errRate:5,compHrs:15,agentCost:868,implCost:600,trainCost:200,color:"#107C10"},
+];
+
+const WAVES=[
+  {n:1,name:"Quick Win",time:"Months 1-3",color:"#107C10",profiles:PERSONAS.filter(p=>p.wave===1)},
+  {n:2,name:"Expansion",time:"Months 4-6",color:"#0078D4",profiles:PERSONAS.filter(p=>p.wave===2)},
+  {n:3,name:"Optimization",time:"Months 7-12",color:"#5C2D91",profiles:PERSONAS.filter(p=>p.wave===3)},
+];
+
+/* ── Shared Components ── */
+function Slider({label,value,min,max,step=1,unit="",onChange,color="#0078D4"}){
+  const p=Math.round((value-min)/(max-min)*100);
+  const f=v=>unit==="$"?$c(v):`${Nf(v)}${unit}`;
+  return(<div className="sldr">
+    <div className="sldr-row"><span className="sldr-lbl">{label}</span><span className="sldr-val">{f(value)}</span></div>
+    <input type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(Number(e.target.value))} style={{background:`linear-gradient(to right,${color} ${p}%,#E1DFDD ${p}%)`}}/>
+    <div className="sldr-ends"><span>{f(min)}</span><span>{f(max)}</span></div>
+  </div>);
+}
+function BarRow({l,v,total,color}){
+  const p=pct(v,total);
+  return(<div className="bar-row">
+    <div className="bar-hd"><span><span className="bar-lbl">{l}</span><span className="bar-pct">{total>0?Math.round(v/total*100):0}%</span></span><span className="bar-val">{$c(v)}</span></div>
+    <div className="bar-track"><div className="bar-fill" style={{width:`${p}%`,background:color}}/></div>
+  </div>);
+}
+function GartnerCallout({title,body,type="gartner"}){
+  const icons={gartner:"📊",warning:"⚠️",critical:"🚨"};
+  return(<div className={`callout ${type}`}><div className="callout-icon">{icons[type]}</div><div className="callout-text"><div className="callout-title">{title}</div><div className="callout-body">{body}</div></div></div>);
+}
+
+/* ══════════ TAB 1: OVERVIEW — LANDING PAGE ══════════ */
+
+function OverviewTab({onNavigate}){
+  const W={maxWidth:1140,margin:'0 auto'};
+
+  const tabs=[
+    {
+      idx:1,emoji:'🏗️',title:'Architecture Advisor',
+      color:'#107C10',bg:'#F1FAF1',border:'#9FD99F',
+      desc:'Design and cost-estimate a generic agentic AI architecture from scratch. Select LLM tier, pipeline pattern, memory strategy and get a monthly cost projection.',
+      bullets:['Model selection: GPT-4o, o3, Phi-4 and more','Pipeline patterns: ReAct, Plan-Execute, Multi-Agent','Token cost calculator with input/output breakdown','Memory, retrieval and orchestration layer design'],
+    },
+    {
+      idx:2,emoji:'💰',title:'ROI Calculator',
+      color:'#008272',bg:'#F0FAF9',border:'#99D6CE',
+      desc:'Full financial model for your AI agent investment. Enter your team details, process data and AI costs to get NPV, IRR, scenario analysis and a 5-year projection.',
+      bullets:['Labor savings by task complexity (simple/moderate/complex)','AI inference costs with caching and model tier','Scenario analysis: best / expected / worst case','Sensitivity tornado chart and 5-year NPV table'],
+    },
+    {
+      idx:3,emoji:'📚',title:'Gartner Research',
+      color:'#C55A11',bg:'#FEF6F0',border:'#F4C9A8',
+      desc:'Evidence-based insights drawn from 6 Gartner reports published in 2024–2025. Understand the market context, pitfalls and strategic frameworks before building your business case.',
+      bullets:['Productivity Paradox: why time saved ≠ money saved','Outcome-Driven Metrics (ODMs) to close the leakage gap','Headcount impact models: Defend / Extend / Upend','5 AI capabilities & enterprise adoption benchmarks (n=3,412)'],
+    },
+    {
+      idx:4,emoji:'🧮',title:'ROI by Persona',
+      color:'#0078D4',bg:'#EFF6FC',border:'#C7E0F4',
+      desc:'Deep-dive calculator for each of the 24 SDLC professional profiles — from Developer to CISO. Customize headcount, salary multiplier and get a full cost/benefit breakdown.',
+      bullets:['ROI, payback period and net annual value per persona','Agent costs: licenses, implementation and training','Before/after time allocation charts','Compare across all 24 roles in a sortable table'],
+    },
+    {
+      idx:5,emoji:'🤖',title:'Agent Advisor',
+      color:'#5C2D91',bg:'#F5F0FF',border:'#D4B8F0',
+      desc:'Get architecture recommendations tailored to each SDLC persona — which agent type to build, which MCP servers to expose and which Copilot Skills to create.',
+      bullets:['Custom Agent vs. Copilot Studio vs. MCP recommendation','MCP server list mapped to persona workflows','Copilot Skills with implementation guidance','Technology complexity and adoption risk scores'],
+    },
+  ];
+
+  const steps=[
+    {n:'1',icon:'🧮',title:'Calculate ROI by Persona',body:'Start in ROI by Persona. Pick the SDLC role most relevant to your customer, adjust headcount and salary, and instantly see the business case.'},
+    {n:'2',icon:'📚',title:'Anchor with Gartner Evidence',body:'Use the Gartner Research tab to add third-party credibility. The Productivity Paradox and ODM frameworks are essential for rigorous conversations.'},
+    {n:'3',icon:'🏗️',title:'Design the Architecture',body:'Use Architecture Advisor to design the agent stack and get a cost estimate. Then use ROI Calculator for a full NPV / scenario model to close the deal.'},
+  ];
+
+  return(
+    <div style={W}>
+
+      {/* ── Hero ── */}
+      <div style={{background:'linear-gradient(135deg,#050D1A 0%,#003D73 45%,#0078D4 100%)',borderRadius:16,padding:'36px 40px',color:'#fff',marginBottom:24,position:'relative',overflow:'hidden',boxShadow:'0 4px 24px rgba(0,120,212,.22)'}}>
+        <div style={{position:'absolute',top:'-20%',right:'-4%',width:340,height:340,borderRadius:'50%',background:'radial-gradient(circle,rgba(255,255,255,.055),transparent 70%)',pointerEvents:'none'}}/>
+        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14}}>
+          <div style={{display:'flex',gap:5}}>
+            {['#F25022','#7FBA00','#00A4EF','#FFB900'].map((c,i)=><div key={i} style={{width:10,height:10,borderRadius:'50%',background:c}}/>)}
+          </div>
+          <span style={{fontSize:11,fontWeight:700,color:'rgba(255,255,255,.45)',letterSpacing:'.07em',textTransform:'uppercase'}}>Microsoft Software GBB Americas</span>
+        </div>
+        <h2 style={{fontSize:32,fontWeight:800,letterSpacing:'-.8px',marginBottom:10,lineHeight:1.1}}>Agentic AI ROI Toolkit <span style={{fontSize:14,fontWeight:500,color:'rgba(255,255,255,.5)',letterSpacing:0}}>v2.0</span></h2>
+        <p style={{fontSize:14,color:'rgba(255,255,255,.65)',lineHeight:1.65,maxWidth:680,marginBottom:24}}>
+          A sales-enablement framework for Microsoft GBB conversations on agentic AI adoption. Combines 24 SDLC persona models, 6 Gartner research reports and a full financial calculator to build rigorous, evidence-based business cases.
+        </p>
+        {/* metric chips */}
+        <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
+          {[
+            {lbl:'24 SDLC Personas',clr:'#FFB900'},
+            {lbl:'3 Implementation Waves',clr:'#7FBA00'},
+            {lbl:'6 Gartner Reports',clr:'#00A4EF'},
+            {lbl:'Gartner-Validated ROI Models',clr:'#F25022'},
+            {lbl:'NPV · IRR · Scenario Analysis',clr:'#B4A0FF'},
+          ].map((m,i)=>(
+            <span key={i} style={{background:'rgba(255,255,255,.1)',border:'1px solid rgba(255,255,255,.18)',borderRadius:100,padding:'5px 14px',fontSize:11.5,fontWeight:600,color:'#fff',backdropFilter:'blur(4px)'}}>
+              <span style={{color:m.clr,marginRight:5}}>●</span>{m.lbl}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ── How to use ── */}
+      <div className="card" style={{marginBottom:20}}>
+        <div style={{fontSize:14.5,fontWeight:700,color:'var(--text-primary)',marginBottom:3}}>How to Use This Toolkit</div>
+        <div style={{fontSize:12,color:'var(--text-muted)',marginBottom:18}}>Three steps to a complete, evidence-backed AI business case</div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14}}>
+          {steps.map((s,i)=>(
+            <div key={i} style={{background:'#F9F8F7',borderRadius:10,padding:'18px 20px',border:'1px solid var(--border-light)',position:'relative'}}>
+              <div style={{position:'absolute',top:14,right:16,fontSize:22,opacity:.12,fontWeight:900}}>{s.n}</div>
+              <div style={{fontSize:22,marginBottom:10}}>{s.icon}</div>
+              <div style={{fontSize:12.5,fontWeight:700,color:'var(--text-primary)',marginBottom:6,lineHeight:1.3}}>{s.title}</div>
+              <div style={{fontSize:11.5,color:'var(--text-secondary)',lineHeight:1.6}}>{s.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Tab cards ── */}
+      <div style={{fontSize:14.5,fontWeight:700,color:'var(--text-primary)',marginBottom:4}}>Explore the Tabs</div>
+      <div style={{fontSize:12,color:'var(--text-muted)',marginBottom:16}}>Click any card to open that section directly</div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14,marginBottom:14}}>
+        {tabs.slice(0,3).map(t=>(
+          <TabCard key={t.idx} t={t} onNavigate={onNavigate}/>
+        ))}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:24}}>
+        {tabs.slice(3).map(t=>(
+          <TabCard key={t.idx} t={t} onNavigate={onNavigate}/>
+        ))}
+      </div>
+
+      {/* ── Gartner disclaimer ── */}
+      <div className="note info" style={{fontSize:11.5}}>
+        <strong>⚠️ Gartner: Time Saved Is Not Money Saved.</strong> Productivity gains from AI tools do not automatically translate to financial ROI. Leaders must actively convert freed capacity into headcount reduction, revenue growth or quality improvement to realize business value. All figures in this toolkit are illustrative models — validate with customer-specific data before presenting formal business cases.
+        <span style={{display:'block',marginTop:6,color:'var(--text-subtle)',fontSize:10.5}}>Sources: G00837723 · G00799085 · G00841080 · G00846878 · G00823006 · G00825224</span>
+      </div>
+
+    </div>
+  );
+}
+
+function TabCard({t, onNavigate}){
+  const [hover,setHover]=React.useState(false);
+  return(
+    <div
+      onMouseEnter={()=>setHover(true)}
+      onMouseLeave={()=>setHover(false)}
+      onClick={()=>onNavigate(t.idx)}
+      style={{
+        background:hover?t.bg:'#fff',
+        border:'1.5px solid '+(hover?t.color:t.border),
+        borderRadius:14,padding:'22px 24px',cursor:'pointer',
+        transition:'all .18s cubic-bezier(.4,0,.2,1)',
+        transform:hover?'translateY(-3px)':'none',
+        boxShadow:hover?('0 6px 24px '+t.color+'28'):'0 1px 2px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.05)',
+        display:'flex',flexDirection:'column',
+      }}
+    >
+      <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:12}}>
+        <div style={{display:'flex',alignItems:'center',gap:10}}>
+          <span style={{fontSize:26,lineHeight:1}}>{t.emoji}</span>
+          <div>
+            <div style={{fontSize:13.5,fontWeight:700,color:'var(--text-primary)',lineHeight:1.2}}>{t.title}</div>
+            <div style={{fontSize:10,color:t.color,fontWeight:700,marginTop:2,textTransform:'uppercase',letterSpacing:'.5px'}}>Tab {t.idx}</div>
+          </div>
+        </div>
+        <div style={{width:28,height:28,borderRadius:'50%',background:t.color+'18',display:'flex',alignItems:'center',justifyContent:'center',fontSize:13,color:t.color,transition:'all .18s',transform:hover?'translateX(2px)':'none',flexShrink:0}}>→</div>
+      </div>
+      <div style={{height:2.5,background:t.color,borderRadius:2,marginBottom:14,opacity:.7}}/>
+      <div style={{fontSize:12,color:'var(--text-secondary)',lineHeight:1.6,marginBottom:12,flex:1}}>{t.desc}</div>
+      <ul style={{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:5}}>
+        {t.bullets.map((b,i)=>(
+          <li key={i} style={{display:'flex',gap:7,alignItems:'flex-start',fontSize:11.5,color:'var(--text-secondary)'}}>
+            <span style={{color:t.color,fontWeight:700,flexShrink:0,marginTop:1}}>›</span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+      <div style={{marginTop:16,paddingTop:12,borderTop:'1px solid '+(hover?t.border:'var(--border-light)')}}>
+        <span style={{fontSize:11.5,fontWeight:700,color:t.color}}>Open {t.title} →</span>
+      </div>
+    </div>
+  );
+}
+
+
+/* ══════════ TAB 2: ROI BY PERSONA ══════════ */
+function PersonaROI(){
+  const[sel,setSel]=useState("desenvolvedor");
+  const[headcount,setHeadcount]=useState(5);
+  const[salaryMult,setSalaryMult]=useState(100);
+  const[sub,setSub]=useState("calculator");
+  const W={maxWidth:1140,margin:'0 auto'};
+  const secH={fontSize:14,fontWeight:700,color:'#201F1E',marginBottom:4};
+  const secSub={fontSize:11.5,color:'#605E5C',marginBottom:14,lineHeight:1.5};
+
+  const p=PERSONAS.find(x=>x.id===sel)||PERSONAS[4];
+  const adjSalary=Math.round(p.salary*(salaryMult/100));
+
+  const R=useMemo(()=>{
+    const benProd=adjSalary*(p.prodGain/100);
+    const benErrors=p.bugReduction>0?(p.errRate/100)*2080*(p.costPerError)*(p.bugReduction/100):0;
+    const benComp=p.compHrs*12*(adjSalary/2080)*0.5;
+    const totalBen=benProd+benErrors+benComp;
+    const totalCost=p.agentCost+p.implCost+p.trainCost;
+    const roi=totalCost>0?Math.round((totalBen-totalCost)/totalCost*100):0;
+    const payback=totalBen>0?Math.round((totalCost/(totalBen/12))*10)/10:0;
+    const teamBen=totalBen*headcount;
+    const teamCost=totalCost*headcount;
+    const teamROI=teamCost>0?Math.round((teamBen-teamCost)/teamCost*100):0;
+    return{benProd,benErrors,benComp,totalBen,totalCost,roi,payback,teamBen,teamCost,teamROI};
+  },[sel,headcount,salaryMult,adjSalary,p]);
+
+  return(<div style={W}>
+    {/* Sub-tab navigation */}
+    <div style={{display:"flex",gap:8,marginBottom:18,flexWrap:"wrap"}}>
+      {[["calculator","🧮 ROI Calculator"],["compare","📊 Compare All 24"]].map(([k,l])=>(
+        <button key={k} className={`sub-tab ${sub===k?"on":""}`} onClick={()=>setSub(k)}>{l}</button>
+      ))}
+    </div>
+
+    {sub==="calculator"&&(<>
+      {/* Persona selector */}
+      <div className="card">
+        <div style={secH}>Select Persona</div>
+        <div style={secSub}>24 SDLC profiles across 8 delivery phases — each with individual ROI, cost, and benefit analysis</div>
+        <div className="persona-grid">
+          {PERSONAS.map(pr=>(<button key={pr.id} className={`persona-btn ${sel===pr.id?"on":""}`} onClick={()=>setSel(pr.id)} style={{borderColor:sel===pr.id?pr.color:'#E1DFDD'}}>
+            <span className="persona-icon">{pr.emoji}</span>
+            <span className="persona-name">{pr.name}</span>
+            <span className="persona-wave">Wave {pr.wave} · {pr.phase}</span>
+          </button>))}
+        </div>
+      </div>
+
+      {/* Hero ROI band */}
+      <div className="hero-band" style={{background:`linear-gradient(135deg,#071425,${p.color})`}}>
+        <div className="hb-top">
+          <span className="hb-title">{p.emoji} {p.name} — ROI Analysis</span>
+          <span className="r-badge" style={{background:R.roi>=500?"#DFF6DD":"#EFF6FC",color:R.roi>=500?"#107C10":"#0078D4"}}>{Nf(R.roi)}% ROI</span>
+        </div>
+        <div className="hb-inner">
+          <div className="hb-cell"><div className="hb-lbl">Individual ROI</div><div className="hb-val">{Nf(R.roi)}<span className="u">%</span></div><div className="hb-sub">per person</div></div>
+          <div className="hb-cell"><div className="hb-lbl">Payback Period</div><div className="hb-val">{R.payback<1?"<1":R.payback}<span className="u"> mo</span></div><div className="hb-sub">~{Math.round(R.payback*30)} days</div></div>
+          <div className="hb-cell"><div className="hb-lbl">Annual Benefit</div><div className="hb-val" style={{fontSize:26}}>{$c(R.totalBen)}</div><div className="hb-sub">per person</div></div>
+          <div className="hb-cell"><div className="hb-lbl">Team Net Value ({headcount})</div><div className="hb-val" style={{fontSize:26}}>{$c(R.teamBen-R.teamCost)}</div><div className="hb-sub">annual net ROI</div></div>
+        </div>
+      </div>
+
+      <div className="two-col">
+        <div>
+          <div className="card">
+            <div style={secH}>Customize Parameters</div>
+            <div style={secSub}>Adjust team size and salary to match your organization's specific context</div>
+            <Slider label={`Team size (${p.name}s)`} value={headcount} min={1} max={100} onChange={setHeadcount} color={p.color}/>
+            <Slider label="Salary adjustment (%)" value={salaryMult} min={50} max={200} unit="%" onChange={setSalaryMult} color={p.color}/>
+            <div className="pills">
+              <div className="pill">Base salary: <strong>{$c(p.salary)}</strong></div>
+              <div className="pill">Adjusted: <strong>{$c(adjSalary)}</strong></div>
+              <div className="pill">Phase: <strong>{p.phase}</strong></div>
+              <div className="pill">Wave: <strong>{p.wave}</strong></div>
+            </div>
+          </div>
+
+          <div className="card">
+            <div style={secH}>Annual Benefits Breakdown</div>
+            <div style={secSub}>Per-person value created by AI augmentation — three benefit streams</div>
+            <BarRow l="Productivity gains" v={R.benProd} total={R.totalBen} color="#0078D4"/>
+            <BarRow l="Error/defect reduction" v={R.benErrors} total={R.totalBen} color="#D13438"/>
+            <BarRow l="Compliance savings" v={R.benComp} total={R.totalBen} color="#8764B8"/>
+            <div className="divider"/>
+            <div className="bar-hd"><span className="bar-lbl" style={{fontWeight:700}}>Total Benefits</span><span className="bar-val" style={{color:"#107C10"}}>{$c(R.totalBen)}</span></div>
+          </div>
+
+          <div className="card">
+            <div style={secH}>Annual Costs Breakdown</div>
+            <div style={secSub}>Total cost of ownership per person — licenses, implementation, and training</div>
+            <BarRow l="Agent licenses & AI inference" v={p.agentCost} total={R.totalCost} color="#0078D4"/>
+            <BarRow l="Implementation (amortized Y1)" v={p.implCost} total={R.totalCost} color="#D19200"/>
+            <BarRow l="Training" v={p.trainCost} total={R.totalCost} color="#8A8886"/>
+            <div className="divider"/>
+            <div className="bar-hd"><span className="bar-lbl" style={{fontWeight:700}}>Total Costs</span><span className="bar-val">{$c(R.totalCost)}</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div className="card">
+            <div style={secH}>Persona Metrics</div>
+            <div style={secSub}>Key performance indicators and baseline data for this SDLC role</div>
+            <table className="tbl">
+              <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>Productivity Gain</td><td className="g">{p.prodGain}%</td></tr>
+                <tr><td>Time Saved (automation rate)</td><td className="g">{p.timeSaved}%</td></tr>
+                <tr><td>Bug/Error Reduction</td><td className="g">{p.bugReduction}%</td></tr>
+                <tr><td>Current Error Rate</td><td>{p.errRate}%</td></tr>
+                <tr><td>Cost per Error</td><td>{$c(p.costPerError)}</td></tr>
+                <tr><td>Compliance Hours/Month</td><td>{p.compHrs} hrs</td></tr>
+                <tr><td>SDLC Phase</td><td>{p.phase}</td></tr>
+                <tr><td>Implementation Wave</td><td>Wave {p.wave}</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="card">
+            <div style={secH}>Team Summary</div>
+            <div style={secSub}>{headcount} {p.name}{headcount>1?"s":""} — aggregate investment and return</div>
+            <div className="sc-strip">
+              <div className="sc best" style={{textAlign:"center"}}><div className="sc-tag">Team Benefits</div><div className="sc-roi">{$c(R.teamBen)}</div><div className="sc-data">/year</div></div>
+              <div className="sc exp" style={{textAlign:"center"}}><div className="sc-tag">Team Cost</div><div className="sc-roi">{$c(R.teamCost)}</div><div className="sc-data">/year</div></div>
+              <div className="sc worst" style={{textAlign:"center"}}><div className="sc-tag">Team Net ROI</div><div className="sc-roi">+{Nf(R.teamROI)}%</div><div className="sc-data">return</div></div>
+            </div>
+          </div>
+
+          <GartnerCallout type="gartner" title="Gartner: Outcome-Driven Metrics (ODMs)" body={`For ${p.name}, connect operational metrics (time saved, errors reduced) to business outcomes above the line. Stop reporting just 'hours saved' — show CFOs the $ impact on labor costs, revenue, or capacity. (G00799085)`}/>
+
+          <div className="note warn">Gartner recommends limiting dashboards to 10-18 metrics focused on strategic relevance. Use OGSIM (Objectives, Goals, Strategies, Initiatives, Metrics) to connect {p.name} KPIs to enterprise goals. (G00846878)</div>
+        </div>
+      </div>
+    </>)}
+
+    {sub==="compare"&&(
+      <div className="card">
+        <div style={secH}>All 24 Personas — ROI Comparison</div>
+        <div style={secSub}>Sorted by benefit-to-cost ratio. Click any row to open the detailed calculator for that persona.</div>
+        <div style={{overflowX:"auto"}}>
+          <table className="tbl">
+            <thead><tr><th>Persona</th><th>Wave</th><th>Phase</th><th>Prod Gain</th><th>Salary</th><th>Annual Benefit</th><th>Annual Cost</th><th>ROI</th><th>Payback</th></tr></thead>
+            <tbody>{[...PERSONAS].sort((a,b)=>{
+              const ra=(a.salary*(a.prodGain/100))/(a.agentCost+a.implCost+a.trainCost);
+              const rb=(b.salary*(b.prodGain/100))/(b.agentCost+b.implCost+b.trainCost);
+              return rb-ra;
+            }).map(pr=>{
+              const ben=pr.salary*(pr.prodGain/100)+(pr.bugReduction>0?(pr.errRate/100)*2080*pr.costPerError*(pr.bugReduction/100):0)+pr.compHrs*12*(pr.salary/2080)*0.5;
+              const cost=pr.agentCost+pr.implCost+pr.trainCost;
+              const roi=Math.round((ben-cost)/cost*100);
+              const pay=Math.round((cost/(ben/12))*10)/10;
+              return(<tr key={pr.id} className={pr.id===sel?"hi":""} style={{cursor:"pointer"}} onClick={()=>{setSel(pr.id);setSub("calculator")}}>
+                <td><strong>{pr.emoji} {pr.name}</strong></td>
+                <td><span style={{background:WAVES[pr.wave-1]?.color||"#999",color:"#fff",padding:"2px 8px",borderRadius:100,fontSize:10,fontWeight:700}}>W{pr.wave}</span></td>
+                <td style={{fontSize:11}}>{pr.phase}</td>
+                <td className="g">{pr.prodGain}%</td>
+                <td>{$c(pr.salary)}</td>
+                <td className="g">{$c(ben)}</td>
+                <td className="m">{$c(cost)}</td>
+                <td className="g">{Nf(roi)}%</td>
+                <td>{pay} mo</td>
+              </tr>);
+            })}</tbody>
+          </table>
+        </div>
+      </div>
+    )}
+  </div>);
+}
+
+
+/* ══════════ TAB 3: GARTNER RESEARCH ══════════ */
+function GartnerResearch(){
+  const[section,setSection]=useState("paradox");
+  const W={maxWidth:1140,margin:'0 auto'};
+  const secH={fontSize:14,fontWeight:700,color:'#201F1E',marginBottom:4};
+  const secSub={fontSize:11.5,color:'#605E5C',marginBottom:14,lineHeight:1.5};
+
+  return(<div style={W}>
+    {/* Section navigation */}
+    <div style={{display:"flex",gap:8,marginBottom:18,flexWrap:"wrap"}}>
+      {[["paradox","⚠️ Productivity Paradox"],["odm","📊 ODM Framework"],["headcount","👥 Headcount Impact"],["capabilities","🛠️ 5 Capabilities"]].map(([k,l])=>(
+        <button key={k} className={`sub-tab ${section===k?"on":""}`} onClick={()=>setSection(k)}>{l}</button>
+      ))}
+    </div>
+
+    {section==="paradox"&&(<>
+      <div className="gartner-card">
+        <div style={{...secH,color:'#C55A11'}}>Productivity Gains Alone Won't Pay for AI</div>
+        <div style={secSub}>G00837723 · By Emily Potosky, Patrick Quinlan · Gartner, Oct 2025</div>
+        <p style={{fontSize:12.5,color:"#323130",lineHeight:1.7}}>AI promises increased productivity, yet many productivity-focused initiatives fail to achieve positive ROI. Service and support leaders looking to cut costs or drive growth by deploying AI need to learn about and account for the barriers keeping them from realizing value.</p>
+      </div>
+
+      <div className="insight-grid">
+        <div className="insight-card" style={{borderColor:"#D13438",background:"#FDF3F4"}}>
+          <div className="ic-num" style={{color:"#D13438"}}>5.47</div>
+          <div className="ic-lbl" style={{color:"#D13438"}}>Hours Saved / Week</div>
+          <div className="ic-sub">avg via AI/ML implementation</div>
+        </div>
+        <div className="insight-card" style={{borderColor:"#D19200",background:"#FFFBF0"}}>
+          <div className="ic-num" style={{color:"#D19200"}}>2.1</div>
+          <div className="ic-lbl" style={{color:"#D19200"}}>Hours Lost to Non-Value Work</div>
+          <div className="ic-sub">rework (0.7h) + busywork (1.4h)</div>
+        </div>
+        <div className="insight-card" style={{borderColor:"#107C10",background:"#F1FAF1"}}>
+          <div className="ic-num" style={{color:"#107C10"}}>2.7</div>
+          <div className="ic-lbl" style={{color:"#107C10"}}>Hours Actually Recovered</div>
+          <div className="ic-sub">skills (1h) + value work (1.7h)</div>
+        </div>
+      </div>
+
+      <div className="two-col">
+        <div>
+          <div className="card">
+            <div style={secH}>How "Time Saved" Is Really Redistributed</div>
+            <div style={secSub}>Of 5.47 hrs saved weekly, less than half translates to recoverable value</div>
+            {[
+              {l:"Redoing Work",h:0.7,c:"#D13438",type:"Lost"},
+              {l:"Developing New Skills",h:1.0,c:"#0078D4",type:"Valuable"},
+              {l:"Taking On Value-Adding Work",h:1.7,c:"#107C10",type:"Valuable"},
+              {l:"Reducing Work Hours",h:0.7,c:"#8764B8",type:"Valuable"},
+              {l:"Non-Value Additional Work",h:1.4,c:"#D19200",type:"Lost"},
+            ].map(r=>(<div key={r.l} style={{marginBottom:12}}>
+              <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+                <span style={{fontSize:12,color:"#323130"}}>{r.l}</span>
+                <span style={{fontSize:12,fontWeight:700,color:r.c}}>{r.h} hrs</span>
+              </div>
+              <div className="bar-track"><div className="bar-fill" style={{width:`${(r.h/5.47)*100}%`,background:r.c}}/></div>
+              <div style={{fontSize:10,color:r.type==="Lost"?"#D13438":"#107C10",fontWeight:600,marginTop:2}}>{r.type==="Lost"?"⚠ Lost Productivity":"✓ Necessary / Valuable Work"}</div>
+            </div>))}
+          </div>
+
+          <div className="card">
+            <div style={secH}>The Defend Case: M365 Copilot Example</div>
+            <div style={secSub}>G00823006 — Why a pure "Defend" pattern generates negative ROI</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:12}}>
+              <div style={{background:"#EFF6FC",borderRadius:8,padding:14,textAlign:"center"}}>
+                <div style={{fontSize:10,fontWeight:700,color:"#8A8886",textTransform:"uppercase",letterSpacing:".4px",marginBottom:4}}>Value Created</div>
+                <div style={{fontSize:28,fontWeight:700,color:"#0078D4"}}>$528</div>
+                <div style={{fontSize:10,color:"#8A8886"}}>per user / year</div>
+              </div>
+              <div style={{background:"#FDF3F4",borderRadius:8,padding:14,textAlign:"center"}}>
+                <div style={{fontSize:10,fontWeight:700,color:"#8A8886",textTransform:"uppercase",letterSpacing:".4px",marginBottom:4}}>Total Cost</div>
+                <div style={{fontSize:28,fontWeight:700,color:"#D13438"}}>$1,091</div>
+                <div style={{fontSize:10,color:"#8A8886"}}>per user / year</div>
+              </div>
+            </div>
+            <div style={{textAlign:"center",padding:12,background:"#FDF3F4",borderRadius:8,border:"1.5px solid #F1A7A9"}}>
+              <div style={{fontSize:11,fontWeight:700,color:"#D13438"}}>Financial Return = -52%</div>
+              <div style={{fontSize:10,color:"#8A8886",marginTop:2}}>When using "Defend" pattern only (3% daily time savings)</div>
+            </div>
+            <div className="note warn" style={{marginTop:12}}>This is why moving to "Extend" patterns with Agentic AI (30-60% gains via custom agents, MCP, skills) is critical for positive ROI.</div>
+          </div>
+        </div>
+
+        <div>
+          <div className="card">
+            <div style={secH}>Key Findings</div>
+            <div style={secSub}>Four critical insights for leaders evaluating AI productivity investments</div>
+            {[
+              {t:"Time saved is not money saved",d:"Without reducing headcount or reallocating capacity toward revenue, productivity gains fail to yield financial returns."},
+              {t:"Productivity leakage is real",d:"Time saved often disappears due to task switching, coordination costs, or workflow bottlenecks elsewhere."},
+              {t:"Scattered savings don't compound",d:"60 seconds saved per call × 1000 calls = 16.7 hours. But scattered across agents and shifts, it's unharvestable."},
+              {t:"Reframe for CFO language",d:"Instead of 'we save 2 min per call', show 'we lowered annual costs by $4M' or 'we increased renewals by 15%'."},
+            ].map((f,i)=>(<div key={i} style={{padding:"12px 0",borderBottom:i<3?"1px solid #F3F2F1":"none"}}>
+              <div style={{fontSize:12.5,fontWeight:700,color:"#201F1E",marginBottom:4}}>{f.t}</div>
+              <div style={{fontSize:11.5,color:"#605E5C",lineHeight:1.5}}>{f.d}</div>
+            </div>))}
+          </div>
+
+          <div className="card">
+            <div style={secH}>Gartner Recommendations</div>
+            <div style={secSub}>Three actions for converting AI productivity into measurable financial returns</div>
+            {[
+              {n:1,t:"Evaluate workflows and incentives",d:"Understand what blocks productivity gains from becoming real savings.",c:"#C55A11"},
+              {n:2,t:"Reallocate gains to financials",d:"Convert to reduced talent spend (headcount reduction, hiring freeze) or revenue generation.",c:"#C55A11"},
+              {n:3,t:"Reframe in CFO language",d:"Concrete, auditable financial impact, not vague productivity projections.",c:"#C55A11"},
+            ].map(r=>(<div key={r.n} style={{display:"flex",gap:10,marginBottom:12,paddingBottom:12,borderBottom:r.n<3?"1px solid #F3F2F1":"none"}}>
+              <div style={{width:26,height:26,borderRadius:"50%",background:r.c,color:"#fff",fontSize:12,fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{r.n}</div>
+              <div><div style={{fontSize:12.5,fontWeight:700,color:"#201F1E",marginBottom:2}}>{r.t}</div><div style={{fontSize:11.5,color:"#605E5C"}}>{r.d}</div></div>
+            </div>))}
+          </div>
+        </div>
+      </div>
+    </>)}
+
+    {section==="odm"&&(<>
+      <div className="gartner-card">
+        <div style={{...secH,color:'#C55A11'}}>Outcome-Driven Metrics for the Digital Era</div>
+        <div style={secSub}>G00799085 · By Paul Proctor et al. · Gartner, Jul 2025</div>
+        <p style={{fontSize:12.5,color:"#323130",lineHeight:1.7}}>ODMs link technology operational metrics to the business outcomes they support. Using ODMs, CIOs can more effectively partner with business stakeholders to drive technology priorities and investments that deliver business value.</p>
+      </div>
+
+      <div className="card">
+        <div style={secH}>Above the Line vs Below the Line</div>
+        <div style={secSub}>Business outcomes (above) must be connected to IT operational metrics (below) through ODM bridges</div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:0,border:"1px solid #E1DFDD",borderRadius:10,overflow:"hidden"}}>
+          <div style={{background:"#EFF6FC",padding:16,borderRight:"1px solid #E1DFDD"}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#0078D4",textTransform:"uppercase",letterSpacing:".4px",marginBottom:10}}>Above the Line: Business Outcomes</div>
+            {["Profitability of loan portfolio","Revenue per customer segment","Customer satisfaction (CSAT/NPS)","Time to market for new products","Contract fulfillment rate"].map(m=>(<div key={m} style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"#323130",padding:"5px 0"}}><span style={{color:"#0078D4",fontWeight:700}}>+</span>{m}</div>))}
+          </div>
+          <div style={{background:"#FAF9F8",padding:16}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#8A8886",textTransform:"uppercase",letterSpacing:".4px",marginBottom:10}}>Below the Line: IT Operations</div>
+            {["System uptime / availability","Deployment frequency","Mean time to repair (MTTR)","API response time","Infrastructure cost per user"].map(m=>(<div key={m} style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"#605E5C",padding:"5px 0"}}><span style={{color:"#8A8886"}}>–</span>{m}</div>))}
+          </div>
+        </div>
+        <div className="note info" style={{marginTop:12}}>The bridge: "Days to close a loan" (business) depends on "% unscheduled outages for online loan app" (technology).</div>
+      </div>
+
+      <div className="card">
+        <div style={secH}>Applying ODMs to Agentic DevOps</div>
+        <div style={secSub}>How to connect SDLC technology metrics to business outcomes for each key persona</div>
+        <table className="tbl">
+          <thead><tr><th>Persona</th><th>Technology ODM (Below)</th><th>Business ODM (Above)</th><th>Business Outcome</th></tr></thead>
+          <tbody>
+            <tr><td>👨‍💻 Developer</td><td>PR velocity, bugs/KLOC</td><td>Cycle time to production</td><td>Faster feature delivery</td></tr>
+            <tr><td>⚙️ DevOps/SRE</td><td>MTTR, deploy frequency</td><td>Service availability</td><td>Customer satisfaction</td></tr>
+            <tr><td>🧪 QA Engineer</td><td>Test coverage, defect rate</td><td>Production incident rate</td><td>Product quality/trust</td></tr>
+            <tr><td>🔒 Security</td><td>Vuln detection rate, MTTR</td><td>Compliance audit pass rate</td><td>Regulatory confidence</td></tr>
+            <tr><td>🎯 Product Owner</td><td>Story quality (INVEST)</td><td>Rework rate from unclear reqs</td><td>Time to market</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </>)}
+
+    {section==="headcount"&&(<>
+      <div className="gartner-card">
+        <div style={{...secH,color:'#C55A11'}}>Setting Headcount Targets in the AI Era</div>
+        <div style={secSub}>G00841080 · By Helen Poitevin, Lily Mok · Gartner, Jan 2026</div>
+        <p style={{fontSize:12.5,color:"#323130",lineHeight:1.7}}>Executive leaders are under pressure to show ROI through AI-driven workforce reductions. They should take a realistic view of how AI will impact teams and align headcount targets to enterprise strategy and AI ambition.</p>
+      </div>
+
+      <div className="bcp-grid">
+        <div className="bcp-card" style={{borderColor:"#0078D4",background:"#EFF6FC"}}>
+          <div className="bcp-tag" style={{color:"#0078D4"}}>🛡️ Defend</div>
+          <div className="bcp-desc">Augment individual productivity</div>
+          <div className="bcp-metric" style={{color:"#0078D4"}}>0-3% headcount decrease</div>
+          <div style={{fontSize:10.5,color:"#605E5C",marginTop:6}}>0-1% increase (AI-related roles)</div>
+          <div className="note" style={{marginTop:8,fontSize:10}}>Most business units will NOT see reduction. AI coding assistants alone don't change the nature of work enough.</div>
+        </div>
+        <div className="bcp-card" style={{borderColor:"#107C10",background:"#F1FAF1"}}>
+          <div className="bcp-tag" style={{color:"#107C10"}}>📈 Extend</div>
+          <div className="bcp-desc">Transform existing processes</div>
+          <div className="bcp-metric" style={{color:"#107C10"}}>0-10% headcount decrease</div>
+          <div style={{fontSize:10.5,color:"#605E5C",marginTop:6}}>0-4% increase (transformation roles)</div>
+          <div className="note" style={{marginTop:8,fontSize:10}}>Requires redesigns of jobs, work and processes. Where Agentic DevOps with custom agents makes real impact.</div>
+        </div>
+        <div className="bcp-card" style={{borderColor:"#5C2D91",background:"#F5F0FF"}}>
+          <div className="bcp-tag" style={{color:"#5C2D91"}}>🚀 Upend</div>
+          <div className="bcp-desc">Create new products and markets</div>
+          <div className="bcp-metric" style={{color:"#5C2D91"}}>0-30% headcount change</div>
+          <div style={{fontSize:10.5,color:"#605E5C",marginTop:6}}>0-30% increase (new business roles)</div>
+          <div className="note" style={{marginTop:8,fontSize:10}}>Few enterprises here yet. Both reductions and increases vary widely.</div>
+        </div>
+      </div>
+
+      <GartnerCallout type="critical" title="Key Insight: Most business units will see NO net headcount change" body="A decline in one area is offset by an increase in another. Redesigning jobs requires 20× more organizational effort than simple headcount reductions. AI-driven job gains will outpace losses starting 2028-2029, but impacts affect less than 1% of workers."/>
+
+      <div className="card">
+        <div style={secH}>Minimum Requirements for {'>'} 0% Headcount Decrease</div>
+        <div style={secSub}>Three conditions that must ALL be met simultaneously for meaningful workforce impact</div>
+        {[
+          {t:"High feasibility of using AI",d:"Technological, organizational, customer AND employee readiness must all be present."},
+          {t:"High intensity of AI usage",d:"Multiple use cases, consistent usage throughout the workday, not just occasional help."},
+          {t:"High degree of process transformation",d:"The nature, volume, speed of work, AND form of output must fundamentally change."},
+        ].map((r,i)=>(<div key={i} style={{display:"flex",gap:12,padding:"12px 0",borderBottom:i<2?"1px solid #F3F2F1":"none"}}>
+          <div style={{width:8,height:8,borderRadius:"50%",background:"#D13438",flexShrink:0,marginTop:6}}/>
+          <div><div style={{fontSize:12.5,fontWeight:700,color:"#201F1E",marginBottom:3}}>{r.t}</div><div style={{fontSize:11.5,color:"#605E5C",lineHeight:1.5}}>{r.d}</div></div>
+        </div>))}
+      </div>
+    </>)}
+
+    {section==="capabilities"&&(<>
+      <div className="gartner-card">
+        <div style={{...secH,color:'#C55A11'}}>Five Product Capabilities That Drive Agentic AI Adoption</div>
+        <div style={secSub}>Gartner, 2025 — Requirements for moving from POC to production with agentic AI</div>
+        <p style={{fontSize:12.5,color:"#323130",lineHeight:1.7}}>To move from POC to production, products must embed these five capabilities into their agentic AI offerings.</p>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:10,marginBottom:18}}>
+        {[
+          {icon:"💻",t:"Productize Levels of Autonomy",d:"Expose clear autonomy tiers so customers can safely progress from assistive AI to full automation as trust builds.",c:"#0078D4"},
+          {icon:"🔑",t:"Treat Workflows as Living Value Assets",d:"Continuously instrument workflows so every execution improves performance and shows where value is gained or lost.",c:"#107C10"},
+          {icon:"🤝",t:"Design for Human+AI Collaboration",d:"Make agent decisions and confidence visible so humans can easily approve, correct, and guide execution.",c:"#5C2D91"},
+          {icon:"🧠",t:"Engineer for Low Cognitive Load",d:"Embed AI into existing tools to reduce context switching, decisions, and user effort as autonomy increases.",c:"#D19200"},
+          {icon:"📊",t:"Embed CS Best Practices into Runtime",d:"Embed health, value, and risk monitoring directly into the product to sustain adoption and outcomes.",c:"#D13438"},
+        ].map((cap,i)=>(<div key={i} style={{background:"#fff",border:"1px solid #E1DFDD",borderRadius:10,padding:16,textAlign:"center",borderTop:`3px solid ${cap.c}`}}>
+          <div style={{fontSize:28,marginBottom:8}}>{cap.icon}</div>
+          <div style={{fontSize:11.5,fontWeight:700,color:"#201F1E",marginBottom:6,lineHeight:1.3}}>{cap.t}</div>
+          <div style={{fontSize:10.5,color:"#605E5C",lineHeight:1.5}}>{cap.d}</div>
+        </div>))}
+      </div>
+
+      <div className="card">
+        <div style={secH}>Investment Posture for Agentic AI</div>
+        <div style={secSub}>Gartner 1Q25, n=3,412 — Distribution of enterprise AI investment strategies</div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
+          {[
+            {l:"High Investment",v:"19%",c:"#107C10",bg:"#F1FAF1"},
+            {l:"Conservative",v:"42%",c:"#D19200",bg:"#FFFBF0"},
+            {l:"Wait and See",v:"20%",c:"#605E5C",bg:"#FAF9F8"},
+            {l:"No Investment / Unsure",v:"19%",c:"#D13438",bg:"#FDF3F4"},
+          ].map(r=>(<div key={r.l} style={{background:r.bg,borderRadius:8,padding:14,textAlign:"center",border:`1px solid ${r.c}30`}}>
+            <div style={{fontSize:28,fontWeight:800,color:r.c}}>{r.v}</div>
+            <div style={{fontSize:11,fontWeight:600,color:r.c}}>{r.l}</div>
+          </div>))}
+        </div>
+        <div className="note info" style={{marginTop:12}}>61% of enterprises are actively investing in agentic AI. The opportunity window for competitive differentiation is NOW, before it becomes table stakes.</div>
+      </div>
+
+      <GartnerCallout type="gartner" title="Critical Insight from Gartner" body="Misapplication is leading to stalling agentic AI projects from POCs to production. Target use cases where agentic AI could be most valuable and feasible by applying composite AI to customer pain points. Evaluate use-case feasibility by incorporating decision considerations for agentic AI. (G00825224)"/>
+    </>)}
+  </div>);
+}
+
+
+/* ══════════ TAB 4: AGENT ADVISOR ══════════ */
+/* ── AGENT ADVISOR DATA — loaded from external JSON DB ── */
+/* Edit agent_advisor_data.js to add/modify persona configs without touching this HTML */
+const AD = window.AGENT_DATA || {};
+
+/* Architecture pattern scoring */
+function getArchPattern(cfg){
+  if(!cfg) return {type:'Single Agent',score:3,color:'#107C10',reason:'Simple task automation with minimal orchestration needs'};
+  const n=cfg.ag.length;
+  const hasHandoff=cfg.ag.some(a=>a.h && a.h!==0);
+  const nMcps=cfg.mc.length;
+  if(n>=4 && hasHandoff && nMcps>=4) return {type:'Orchestration',score:Math.min(14,n*2+nMcps),color:'#5C2D91',reason:'Complex multi-step workflows requiring coordination between specialized agents with external system integrations'};
+  if(n>=3 || hasHandoff) return {type:'Multi-Agent Pipeline',score:Math.min(14,n*2+nMcps-2),color:'#0078D4',reason:'Sequential processing chain where each agent handles a specialized task and hands off to the next'};
+  return {type:'Single Agent',score:Math.min(14,n+nMcps),color:'#107C10',reason:'Focused automation with direct tool access, minimal coordination overhead'};
+}
+
+function AgentAdvisor(){
+  const[persona,setPersona]=useState("desenvolvedor");
+  const[subTab,setSubTab]=useState(0);
+  const W={maxWidth:1140,margin:'0 auto'};
+  const secH={fontSize:14,fontWeight:700,color:'#201F1E',marginBottom:4};
+  const secSub={fontSize:11.5,color:'#605E5C',marginBottom:14,lineHeight:1.5};
+
+  const p=PERSONAS.find(x=>x.id===persona)||PERSONAS[4];
+  const cfg=AD[persona]||AD['desenvolvedor']||{ag:[],mc:[],sk:[],wf:[],ca:[],ba:[]};
+  const arch=getArchPattern(cfg);
+  const avgTimeSave=cfg.ca&&cfg.ca.length>0?Math.round(cfg.ca.reduce((s,c)=>s+c.p,0)/cfg.ca.length):0;
+  const totalAgents=cfg.ag?cfg.ag.length:0;
+  const totalMcps=cfg.mc?cfg.mc.length:0;
+  const totalSkills=cfg.sk?cfg.sk.length:0;
+  const totalSteps=cfg.wf?cfg.wf.length:0;
+  const typeMap={Gen:'Generation',Aut:'Automation',Exp:'Exploration',Val:'Validation',Sug:'Suggestion'};
+  const impactMap={H:'High',M:'Medium',L:'Low'};
+  const typeColors={Gen:'#107C10',Aut:'#0078D4',Exp:'#5C2D91',Val:'#D13438',Sug:'#FF8C00'};
+
+  return(<div style={W}>
+
+    {/* Persona Selector */}
+    <div className="card">
+      <div style={secH}>Select Persona — Agent Architecture for 24 SDLC Profiles</div>
+      <div style={secSub}>Each persona has a fully designed agent architecture: custom agents with handoff chains, MCP server integrations, skills, workflow pipelines, and before/after capability analysis</div>
+      <div className="persona-grid" style={{gridTemplateColumns:'repeat(6,1fr)'}}>
+        {PERSONAS.map(pr=>(<button key={pr.id} className={`persona-btn ${persona===pr.id?"on":""}`} onClick={()=>setPersona(pr.id)} style={{borderColor:persona===pr.id?pr.color:'#E1DFDD'}}>
+          <span className="persona-icon">{pr.emoji}</span>
+          <span className="persona-name">{pr.name}</span>
+          <span className="persona-wave">Wave {pr.wave}</span>
+        </button>))}
+      </div>
+    </div>
+
+    {/* Architecture Hero Band */}
+    <div style={{background:`linear-gradient(135deg,#071425,${arch.color})`,borderRadius:10,padding:'22px 28px',color:'#fff',marginBottom:18,boxShadow:'0 4px 20px rgba(0,0,0,.2)'}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:12}}>
+        <div style={{flex:1,minWidth:200}}>
+          <div style={{fontSize:10,fontWeight:700,textTransform:'uppercase',letterSpacing:'.5px',color:'rgba(255,255,255,.5)',marginBottom:6}}>Recommended Architecture</div>
+          <div style={{fontSize:22,fontWeight:700,marginBottom:4}}>{p.emoji} {p.name}</div>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
+            <span style={{background:'rgba(255,255,255,.15)',borderRadius:100,padding:'4px 14px',fontSize:13,fontWeight:700}}>{arch.type}</span>
+            <span style={{fontSize:12,color:'rgba(255,255,255,.6)'}}>scores {arch.score}/14 on multi-agent criteria</span>
+          </div>
+          <div style={{fontSize:11.5,color:'rgba(255,255,255,.55)',lineHeight:1.6,maxWidth:500}}>{arch.reason}</div>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:0}}>
+          {[{l:'Custom Agents',v:totalAgents,c:'#9FD99F'},{l:'MCP Servers',v:totalMcps,c:'#FFD875'},{l:'Skills',v:totalSkills,c:'#D4C5F0'},{l:'Workflow Steps',v:totalSteps,c:'#C7E0F4'}].map(k=>(
+            <div key={k.l} style={{padding:'8px 18px',textAlign:'center',borderRight:'1px solid rgba(255,255,255,.1)',borderBottom:'1px solid rgba(255,255,255,.1)'}}>
+              <div style={{fontSize:24,fontWeight:800,color:k.c}}>{k.v}</div>
+              <div style={{fontSize:9.5,color:'rgba(255,255,255,.45)',letterSpacing:'.3px'}}>{k.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* Sub-tab navigation */}
+    <div style={{display:'flex',gap:8,marginBottom:18,flexWrap:'wrap'}}>
+      {['🤖 Agents & Pipeline','🔌 MCP Servers & Skills','📊 Capabilities & Impact','🗺️ Implementation'].map((t,i)=>(
+        <button key={i} className={`sub-tab ${subTab===i?'on':''}`} onClick={()=>setSubTab(i)}>{t}</button>
+      ))}
+    </div>
+
+    {/* SUB-TAB 0: Agents & Pipeline */}
+    {subTab===0&&<div className="two-col">
+      <div>
+        <div className="card">
+          <div style={secH}>Custom Agents — Handoff Chain</div>
+          <div style={secSub}>Each agent specializes in one task and passes context to the next in the pipeline</div>
+          {cfg.ag.map((a,i)=>(<div key={i} style={{padding:'14px 0',borderBottom:i<cfg.ag.length-1?'1px solid #F3F2F1':'none'}}>
+            <div style={{display:'flex',gap:12,alignItems:'flex-start'}}>
+              <div style={{width:32,height:32,borderRadius:'50%',background:arch.color,color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:700,flexShrink:0}}>{i+1}</div>
+              <div style={{flex:1}}>
+                <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
+                  <span style={{fontSize:13,fontWeight:700,color:'#201F1E',fontFamily:"'Cascadia Code',monospace"}}>{a.n}</span>
+                  {a.h&&a.h!==0&&<span style={{fontSize:9.5,color:'#8A8886',background:'#F3F2F1',borderRadius:100,padding:'2px 8px'}}>→ {a.h}</span>}
+                </div>
+                <div style={{fontSize:11.5,color:'#605E5C',lineHeight:1.5,marginBottom:8}}>{a.d}</div>
+                <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
+                  {a.t.map((tool,ti)=>(<span key={ti} style={{fontSize:10,color:'#0078D4',background:'#EFF6FC',border:'1px solid #C7E0F4',borderRadius:4,padding:'2px 7px',fontFamily:'monospace'}}>{tool}</span>))}
+                </div>
+                <div style={{fontSize:10,color:'#B0ADAB',marginTop:4,fontFamily:'monospace'}}>→ .github/agents/{a.n.replace('@','')}.agent.md</div>
+              </div>
+            </div>
+          </div>))}
+        </div>
+      </div>
+      <div>
+        <div className="card">
+          <div style={secH}>Workflow Pipeline — {totalSteps} Steps</div>
+          <div style={secSub}>End-to-end workflow showing where agents intercept and augment the process</div>
+          <div style={{display:'flex',flexDirection:'column',gap:0}}>
+            {cfg.wf.map((step,i)=>{
+              const isAgent=step.includes('@');
+              return(<div key={i}>
+                <div style={{display:'flex',gap:10,alignItems:'flex-start',padding:'8px 0'}}>
+                  <div style={{width:24,height:24,borderRadius:'50%',background:isAgent?arch.color:'#F3F2F1',color:isAgent?'#fff':'#605E5C',display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,fontWeight:700,flexShrink:0,border:isAgent?'none':'1.5px solid #E1DFDD'}}>{i+1}</div>
+                  <div style={{fontSize:12,color:isAgent?'#201F1E':'#605E5C',fontWeight:isAgent?600:400,lineHeight:1.4}}>{step}</div>
+                </div>
+                {i<cfg.wf.length-1&&<div style={{marginLeft:12,borderLeft:'2px solid #E1DFDD',height:8}}/>}
+              </div>);
+            })}
+          </div>
+        </div>
+
+        <div className="card">
+          <div style={secH}>Customization Hierarchy (5 Levels)</div>
+          <div style={secSub}>GitHub Copilot's layered customization system — from global to persona-specific</div>
+          {[
+            {n:1,t:'System Instructions',d:'.github/copilot-instructions.md',c:'#E1DFDD',cc:'#605E5C'},
+            {n:2,t:'Repository Instructions',d:'.instructions.md per folder',c:'#C7E0F4',cc:'#0078D4'},
+            {n:3,t:'Custom Agents',d:`.github/agents/ — ${totalAgents} agents defined`,c:'#9FD99F',cc:'#107C10'},
+            {n:4,t:'MCP Servers',d:`${totalMcps} external tool connections`,c:'#FFD875',cc:'#7A5700'},
+            {n:5,t:'Skills',d:`.github/skills/ — ${totalSkills} skills defined`,c:'#D4C5F0',cc:'#5C2D91'},
+          ].map(l=>(<div key={l.n} style={{display:'flex',alignItems:'center',gap:10,padding:'8px 0',borderBottom:'1px solid #F3F2F1'}}>
+            <div style={{width:26,height:26,borderRadius:4,background:l.c,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:700,color:l.cc,flexShrink:0}}>L{l.n}</div>
+            <div><div style={{fontSize:12,fontWeight:700,color:'#201F1E'}}>{l.t}</div><div style={{fontSize:10,color:'#8A8886',fontFamily:'monospace'}}>{l.d}</div></div>
+          </div>))}
+        </div>
+      </div>
+    </div>}
+
+    {/* SUB-TAB 1: MCP Servers & Skills */}
+    {subTab===1&&<div className="two-col">
+      <div>
+        <div className="card">
+          <div style={secH}>MCP Servers — External Integrations</div>
+          <div style={secSub}>{totalMcps} Model Context Protocol servers providing tool access to enterprise systems</div>
+          {cfg.mc.map((m,i)=>(<div key={i} style={{padding:'12px 0',borderBottom:i<cfg.mc.length-1?'1px solid #F3F2F1':'none'}}>
+            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+              <span style={{background:'#F1FAF1',color:'#107C10',padding:'3px 10px',borderRadius:100,fontSize:11,fontWeight:700,fontFamily:'monospace',border:'1px solid #9FD99F'}}>{m.n}</span>
+            </div>
+            <div style={{fontSize:11.5,color:'#323130',lineHeight:1.5,marginBottom:4}}>{m.d}</div>
+            <div style={{fontSize:10.5,color:'#8A8886',fontStyle:'italic'}}>→ {m.f}</div>
+          </div>))}
+        </div>
+      </div>
+      <div>
+        <div className="card">
+          <div style={secH}>Skills — Prompt Templates & Knowledge</div>
+          <div style={secSub}>{totalSkills} reusable skill files under .github/skills/ — define agent behavior and boundaries</div>
+          {cfg.sk.map((s,i)=>(<div key={i} style={{padding:'12px 0',borderBottom:i<cfg.sk.length-1?'1px solid #F3F2F1':'none'}}>
+            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
+              <span style={{background:'#F5F0FF',color:'#5C2D91',padding:'4px 12px',borderRadius:100,fontSize:11,fontWeight:700,border:'1px solid #D4C5F0'}}>{s.n}</span>
+            </div>
+            <div style={{fontSize:10.5,color:'#8A8886',fontFamily:'monospace',marginBottom:4}}>{s.p}</div>
+            <div style={{fontSize:11.5,color:'#605E5C',lineHeight:1.5}}>{s.d}</div>
+          </div>))}
+        </div>
+        <GartnerCallout type="gartner" title="Gartner: Productize Levels of Autonomy" body="Expose clear autonomy tiers so customers can safely progress from assistive AI to full automation as trust builds. MCP servers provide the external tool access layer while Skills control the templates and knowledge boundaries."/>
+      </div>
+    </div>}
+
+    {/* SUB-TAB 2: Capabilities & Impact */}
+    {subTab===2&&<>
+      <div className="hero-band" style={{marginBottom:18}}>
+        <div className="hb-top">
+          <span className="hb-title">📊 {p.name} — AI Capability Impact Analysis</span>
+          <span className="r-badge" style={{background:avgTimeSave>=85?'#DFF6DD':avgTimeSave>=70?'#EFF6FC':'#FFFBF0',color:avgTimeSave>=85?'#107C10':avgTimeSave>=70?'#0078D4':'#7A5700'}}>{avgTimeSave}% avg automation</span>
+        </div>
+        <div className="hb-inner">
+          <div className="hb-cell"><div className="hb-lbl">Capabilities</div><div className="hb-val">{cfg.ca.length}</div><div className="hb-sub">AI-augmented</div></div>
+          <div className="hb-cell"><div className="hb-lbl">High Impact</div><div className="hb-val">{cfg.ca.filter(c=>c.i==='H').length}</div><div className="hb-sub">critical improvements</div></div>
+          <div className="hb-cell"><div className="hb-lbl">Avg Automation</div><div className="hb-val">{avgTimeSave}<span className="u">%</span></div><div className="hb-sub">time/effort reduction</div></div>
+          <div className="hb-cell"><div className="hb-lbl">Evidence Sources</div><div className="hb-val">{cfg.ba.length}</div><div className="hb-sub">industry benchmarks</div></div>
+        </div>
+      </div>
+
+      <div className="card">
+        <div style={secH}>Capabilities Matrix</div>
+        <div style={secSub}>All AI-augmented capabilities for this persona — type, impact level, and time savings</div>
+        <table className="tbl">
+          <thead><tr><th>Capability</th><th>Type</th><th>Impact</th><th>Time Savings</th><th style={{textAlign:'right'}}>Automation %</th></tr></thead>
+          <tbody>
+            {cfg.ca.map((c,i)=>(<tr key={i}>
+              <td style={{fontWeight:600}}>{c.n}</td>
+              <td><span style={{fontSize:10,fontWeight:700,color:typeColors[c.y]||'#605E5C',background:(typeColors[c.y]||'#605E5C')+'15',padding:'2px 8px',borderRadius:100}}>{typeMap[c.y]||c.y}</span></td>
+              <td><span style={{fontSize:10,fontWeight:700,color:c.i==='H'?'#D13438':'#7A5700'}}>{impactMap[c.i]||c.i}</span></td>
+              <td style={{fontSize:11,color:'#323130',fontFamily:'monospace'}}>{c.t}</td>
+              <td style={{textAlign:'right'}}>
+                <div style={{display:'flex',alignItems:'center',gap:6,justifyContent:'flex-end'}}>
+                  <div style={{width:60,height:6,background:'#F3F2F1',borderRadius:3,overflow:'hidden'}}><div style={{width:`${c.p}%`,height:'100%',background:c.p>=90?'#107C10':c.p>=75?'#0078D4':'#FF8C00',borderRadius:3}}/></div>
+                  <span style={{fontSize:11,fontWeight:700,color:c.p>=90?'#107C10':c.p>=75?'#0078D4':'#FF8C00',minWidth:30}}>{c.p}%</span>
+                </div>
+              </td>
+            </tr>))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="card">
+        <div style={secH}>Before / After Analysis — Evidence-Based</div>
+        <div style={secSub}>Quantified impact of AI augmentation with industry source citations</div>
+        <table className="tbl">
+          <thead><tr><th>Function</th><th>Before (Manual)</th><th>After (AI-Augmented)</th><th style={{textAlign:'right'}}>Improvement</th><th>Source</th></tr></thead>
+          <tbody>
+            {cfg.ba.map((b,i)=>(<tr key={i}>
+              <td style={{fontWeight:600}}>{b.f}</td>
+              <td style={{color:'#D13438',fontSize:11}}>{b.b}</td>
+              <td style={{color:'#107C10',fontSize:11}}>{b.a}</td>
+              <td style={{textAlign:'right'}}><span style={{fontSize:11,fontWeight:700,color:'#107C10',background:'#DFF6DD',padding:'2px 8px',borderRadius:100}}>↑ {b.p}%</span></td>
+              <td style={{fontSize:10,color:'#8A8886'}}>{b.s}</td>
+            </tr>))}
+          </tbody>
+        </table>
+      </div>
+    </>}
+
+    {/* SUB-TAB 3: Implementation */}
+    {subTab===3&&<>
+      <div className="card">
+        <div style={secH}>Implementation Roadmap — {p.name}</div>
+        <div style={secSub}>3-phase rollout plan: Foundation → Agent Setup → Production (6 weeks total)</div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:12}}>
+          {[
+            {phase:'Phase 1: Foundation',time:'Week 1-2',color:'#107C10',steps:['Configure API credentials and authentication','Set up .github/copilot-instructions.md with team context','Install and configure MCP servers: '+cfg.mc.slice(0,2).map(m=>m.n).join(', '),'Validate connectivity to all external systems']},
+            {phase:'Phase 2: Agent Setup',time:'Week 3-4',color:'#0078D4',steps:['Create agent files: '+cfg.ag.slice(0,2).map(a=>a.n).join(', '),'Design prompt templates for each skill','Configure handoff chains between agents','Test with representative real-world scenarios']},
+            {phase:'Phase 3: Production',time:'Week 5-6',color:'#5C2D91',steps:['Deploy remaining agents: '+cfg.ag.slice(2).map(a=>a.n).join(', '),'Set up monitoring and feedback loops','Train team on new workflows','Schedule model reviews and optimization cycles']}
+          ].map(ph=>(<div key={ph.phase} style={{background:'#fff',border:'1px solid #E1DFDD',borderRadius:10,padding:'16px',borderTop:`3px solid ${ph.color}`}}>
+            <div style={{fontSize:13,fontWeight:700,color:ph.color,marginBottom:2}}>{ph.phase}</div>
+            <div style={{fontSize:10,color:'#8A8886',marginBottom:10}}>{ph.time}</div>
+            {ph.steps.map((s,i)=>(<div key={i} style={{display:'flex',gap:8,alignItems:'flex-start',marginBottom:6}}>
+              <div style={{width:16,height:16,borderRadius:'50%',border:`1.5px solid ${ph.color}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:9,color:ph.color,flexShrink:0,marginTop:1}}>{i+1}</div>
+              <div style={{fontSize:11,color:'#323130',lineHeight:1.4}}>{s}</div>
+            </div>))}
+          </div>))}
+        </div>
+      </div>
+
+      <div className="two-col">
+        <div className="card">
+          <div style={secH}>File Structure</div>
+          <div style={secSub}>Repository layout for this persona's agent configuration</div>
+          <div className="term">
+            <div className="term-hdr"><div className="term-dots"><div className="term-dot" style={{background:'#FF5F56'}}/><div className="term-dot" style={{background:'#FFBD2E'}}/><div className="term-dot" style={{background:'#27C93F'}}/></div><span className="term-title">repository structure</span></div>
+            <pre className="mono" style={{margin:0,whiteSpace:'pre-wrap'}}>
+<span className="acc">.github/</span>{'\n'}
+<span className="dim">├──</span> <span className="grn">copilot-instructions.md</span>  <span className="dim"># L1: System</span>{'\n'}
+<span className="dim">├──</span> <span className="acc">agents/</span>{'\n'}
+{cfg.ag.map((a,i)=><React.Fragment key={i}><span className="dim">│   {i<cfg.ag.length-1?'├──':'└──'}</span> <span className="yel">{a.n.replace('@','')}.agent.md</span>{'\n'}</React.Fragment>)}
+<span className="dim">└──</span> <span className="acc">skills/</span>{'\n'}
+{cfg.sk.map((s,i)=><React.Fragment key={i}><span className="dim">    {i<cfg.sk.length-1?'├──':'└──'}</span> <span className="wht">{s.n}/</span><span className="grn">SKILL.md</span>{'\n'}</React.Fragment>)}
+            </pre>
+          </div>
+        </div>
+        <div>
+          <div className="card">
+            <div style={secH}>Cost Estimation — Year 1</div>
+            <div style={secSub}>Investment breakdown per person for this persona's agent setup</div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+              {[
+                {l:'Agent Licenses',v:$c(p.agentCost)+'/yr',c:'#0078D4'},
+                {l:'Implementation',v:$c(p.implCost)+' one-time',c:'#107C10'},
+                {l:'Training',v:$c(p.trainCost)+' one-time',c:'#FF8C00'},
+                {l:'Total Year 1',v:$c(p.agentCost+p.implCost+p.trainCost),c:'#5C2D91'}
+              ].map(x=>(<div key={x.l} style={{background:'#FAF9F8',borderRadius:6,padding:'10px 12px',textAlign:'center',border:'1px solid #F3F2F1'}}>
+                <div style={{fontSize:10,color:'#8A8886',marginBottom:4}}>{x.l}</div>
+                <div style={{fontSize:15,fontWeight:700,color:x.c}}>{x.v}</div>
+              </div>))}
+            </div>
+          </div>
+
+          <GartnerCallout type="warning" title="Gartner: 'Time Saved is Not Money Saved'" body={`For ${p.name}, ensure the ${avgTimeSave}% average automation translates into measurable outcomes — not just productivity leakage. Map each capability to an Outcome-Driven Metric (ODM) above the business line.`}/>
+        </div>
+      </div>
+    </>}
+  </div>);
+}
+
+
+/* ══════════ TAB 5: ARCHITECTURE ADVISOR — exact replica of andyhayes.ai/tools/agent-advisor ══════════ */
+function ArchitectureAdvisor() {
+  const [mode, setMode] = React.useState('presets');
+  const [inputType, setInputType] = React.useState(null);
+  const [selCategory, setSelCategory] = React.useState('Document Processing');
+  const [selPreset, setSelPreset] = React.useState(null);
+  // Framework
+  const [complexity, setComplexity] = React.useState(null);
+  const [volNum, setVolNum] = React.useState(100);
+  const [volFreq, setVolFreq] = React.useState('day');
+  const [stakes, setStakes] = React.useState(null);
+  const [accuracy, setAccuracy] = React.useState(null);
+  // Task chars
+  const [taskChars, setTaskChars] = React.useState([]);
+  // Architecture
+  const [wfSteps, setWfSteps] = React.useState(2);
+  const [depSteps, setDepSteps] = React.useState(false);
+  const [parSteps, setParSteps] = React.useState(false);
+  const [humanLoop, setHumanLoop] = React.useState(false);
+  const [inFmt, setInFmt] = React.useState('Plain Text');
+  const [outFmt, setOutFmt] = React.useState('Plain Text');
+  const [docSize, setDocSize] = React.useState(50);
+  const [extTools, setExtTools] = React.useState(0);
+  // Budget
+  const [budget, setBudget] = React.useState('No constraint');
+  const [latency, setLatency] = React.useState('Near real-time (<30s)');
+  const [provPref, setProvPref] = React.useState('Any Provider');
+
+  const AD = window.ADVISOR_DATA || {MODELS:[], PRESETS:[]};
+  const MODELS = AD.MODELS || [];
+  const PRESETS = AD.PRESETS || [];
+  const CATS = [...new Set(PRESETS.map(p => p.category))];
+
+  const INPUT_TYPES = [
+    {id:'docs', label:'Documents', sub:'PDFs, images, scans, contracts, invoices'},
+    {id:'email', label:'Emails & Messages', sub:'Inbound emails, tickets, Slack, chat'},
+    {id:'data', label:'Structured Data', sub:'APIs, JSON, CSV, databases, spreadsheets'},
+    {id:'code', label:'Code & Technical', sub:'Source code, PRs, configs, logs, docs'},
+    {id:'conv', label:'Conversations', sub:'Live chat, phone transcripts, support threads'},
+    {id:'mixed', label:'Mixed / Multiple', sub:'Documents + emails, multi-channel, end-to-end'},
+  ];
+
+  const COMPLEXITY = [
+    {v:0, l:'Low', sub:'Pattern matching, simple extraction'},
+    {v:1, l:'Medium', sub:'Judgment, context awareness'},
+    {v:2, l:'High', sub:'Analysis, reasoning, nuance'},
+    {v:3, l:'Very High', sub:'Multi-step logic, math, chains'},
+  ];
+  const STAKES = [
+    {v:0, l:'Low', sub:'Low cost of errors, easy to fix'},
+    {v:1, l:'Medium', sub:'Moderate impact, some rework'},
+    {v:2, l:'High', sub:'Significant impact, customer-facing'},
+    {v:3, l:'Critical', sub:'Regulatory, financial, legal exposure'},
+  ];
+  const ACCURACY = [
+    {v:0, l:'Best Effort', sub:'Good enough, speed matters'},
+    {v:1, l:'High', sub:'Reliable, occasional errors OK'},
+    {v:2, l:'Near Perfect', sub:'Very few errors, verify output'},
+    {v:3, l:'Guaranteed', sub:'Zero tolerance, must be correct'},
+  ];
+  const TASK_CHARS = [
+    {id:'classify', l:'Text Classification', sub:'Route, label, categorize inputs', prov:'Claude'},
+    {id:'extract', l:'Data Extraction', sub:'Pull structured fields from unstructured text', prov:'Claude'},
+    {id:'summarize', l:'Document Summarization', sub:'Condense long documents into key points', prov:'Claude'},
+    {id:'generate', l:'Content Generation', sub:'Write emails, reports, structured responses', prov:'Claude'},
+    {id:'code', l:'Code Generation', sub:'Write, review, or transform code', prov:'OpenAI'},
+    {id:'reason', l:'Reasoning & Analysis', sub:'Complex inference, multi-step deduction', prov:'OpenAI'},
+    {id:'logic', l:'Multi-Step Logic', sub:'Chained decisions, conditional flows', prov:'OpenAI'},
+    {id:'vision', l:'Image / Multimodal', sub:'Analyze images, screenshots, diagrams', prov:'OpenAI'},
+    {id:'struct', l:'Structured Output', sub:'JSON, tables, rigid schema outputs', prov:'OpenAI'},
+    {id:'conv', l:'Conversational', sub:'Back-and-forth dialogue, follow-up handling', prov:'Claude'},
+  ];
+  const IN_FMTS = ['Plain Text','JSON','PDF / Documents','Images','Mixed'];
+  const OUT_FMTS = ['Plain Text','JSON / Structured','Email / Letter','Report / Document','Code'];
+  const BUDGETS = ['Under $100/mo','$100–$500/mo','$500–$2K/mo','$2K–$10K/mo','$10K+/mo','No constraint'];
+  const LATENCIES = ['Real-time (<2s)','Near real-time (<30s)','Batch (Minutes+)'];
+  const PROVS = ['Any Provider','Prefer Claude','Prefer OpenAI'];
+
+  // Monthly volume calc
+  const monthlyVol = React.useMemo(() => {
+    const m = {day: 30, week: 4.33, month: 1};
+    return Math.round(volNum * (m[volFreq] || 1));
+  }, [volNum, volFreq]);
+
+  // Architecture scoring (0-14)
+  const archScore = React.useMemo(() => {
+    let s = 0;
+    const criteria = [];
+    if (wfSteps >= 3) { s += 2; criteria.push({t:'3+ distinct workflow steps', score:2, met:true}); }
+    else criteria.push({t:'3+ distinct workflow steps', score:2, met:false});
+    if (wfSteps >= 6) { s += 1; criteria.push({t:'6+ step workflow depth', score:1, met:true}); }
+    else criteria.push({t:'6+ step workflow depth', score:1, met:false});
+    if (depSteps) { s += 1; criteria.push({t:'Step-to-step dependencies', score:1, met:true}); }
+    else criteria.push({t:'Step-to-step dependencies', score:1, met:false});
+    if (humanLoop) { s += 1; criteria.push({t:'Human-in-the-loop review', score:1, met:true}); }
+    else criteria.push({t:'Human-in-the-loop review', score:1, met:false});
+    if (extTools >= 3) { s += 2; criteria.push({t:'3+ external tools / APIs', score:2, met:true}); }
+    else criteria.push({t:'3+ external tools / APIs', score:2, met:false});
+    if (complexity !== null && complexity >= 2) { s += 2; criteria.push({t:'High complexity reasoning', score:2, met:true}); }
+    else criteria.push({t:'High complexity reasoning', score:2, met:false});
+    if (complexity === 3) { s += 1; criteria.push({t:'Very high reasoning chain', score:1, met:true}); }
+    else criteria.push({t:'Very high reasoning chain', score:1, met:false});
+    if (stakes !== null && stakes >= 2) { s += 1; criteria.push({t:'High/critical stakes', score:1, met:true}); }
+    else criteria.push({t:'High/critical stakes', score:1, met:false});
+    if (stakes === 3) { s += 1; criteria.push({t:'Critical stakes — verification required', score:1, met:true}); }
+    else criteria.push({t:'Critical stakes — verification required', score:1, met:false});
+    if (accuracy !== null && accuracy >= 2) { s += 1; criteria.push({t:'Near-perfect accuracy required', score:1, met:true}); }
+    else criteria.push({t:'Near-perfect accuracy required', score:1, met:false});
+    if (accuracy === 3) { s += 1; criteria.push({t:'Guaranteed accuracy — multi-check', score:1, met:true}); }
+    else criteria.push({t:'Guaranteed accuracy — multi-check', score:1, met:false});
+    if (taskChars.length >= 4) { s += 1; criteria.push({t:'Diverse task capability mix (4+)', score:1, met:true}); }
+    else criteria.push({t:'Diverse task capability mix (4+)', score:1, met:false});
+    return {score: s, max:14, isMulti: s >= 6, criteria};
+  }, [wfSteps, depSteps, humanLoop, extTools, complexity, stakes, accuracy, taskChars]);
+
+  // Model selection
+  const getModel = React.useCallback((role, prefer) => {
+    const tier = complexity === null ? 'mid' :
+      complexity === 0 ? 'economy' :
+      complexity === 1 ? 'mid' :
+      complexity === 2 ? 'premium' : 'frontier';
+    const isHighStakes = (stakes !== null && stakes >= 2) || (accuracy !== null && accuracy >= 2);
+    const effectiveTier = role === 'parser' ? 'economy' :
+      role === 'qc' ? (isHighStakes ? 'premium' : 'mid') :
+      role === 'formatter' ? 'mid' : tier;
+    const pref = prefer || provPref;
+    const byProvider = (p) => MODELS.filter(m => m.provider === p && m.tier === effectiveTier);
+    let pool;
+    if (pref === 'Any Provider') pool = MODELS.filter(m => m.tier === effectiveTier);
+    else if (pref === 'Prefer Claude' || pref === 'Prefer OpenAI') {
+      const main = pref === 'Prefer Claude' ? 'Anthropic' : 'OpenAI';
+      const alt = pref === 'Prefer Claude' ? 'OpenAI' : 'Anthropic';
+      pool = [...byProvider(main), ...byProvider(alt)];
+    } else pool = MODELS.filter(m => m.tier === effectiveTier);
+    // QC: use opposite provider from core
+    if (role === 'qc') {
+      const coreModel = getModel('core', provPref);
+      const otherProv = coreModel && coreModel.provider === 'Anthropic' ? 'OpenAI' : 'Anthropic';
+      pool = MODELS.filter(m => m.provider === otherProv && (m.tier === 'mid' || m.tier === 'premium'));
+    }
+    return pool[0] || MODELS[0];
+  }, [complexity, stakes, accuracy, provPref, MODELS]);
+
+  // Build pipeline steps
+  const steps = React.useMemo(() => {
+    const addQC = stakes !== null && stakes >= 2 || accuracy !== null && accuracy >= 2;
+    const addFormatter = wfSteps >= 4 || outFmt === 'Report / Document' || outFmt === 'Email / Letter';
+    const all = [
+      {id:'parser', label:'Input Parser', desc:'Extract and structure data from raw inputs', temp:0.1, tempNote:'Precision critical for structured data extraction'},
+      {id:'core', label:'Core Processor', desc:'Main analysis and reasoning logic', temp: complexity === null || complexity <= 1 ? 0.2 : 0.3, tempNote: complexity !== null && complexity >= 2 ? 'Analytical reasoning needs balanced creativity' : 'Structured processing with light variability'},
+      ...(addQC ? [{id:'qc', label:'Quality Checker', desc:'Verify accuracy and validate output against requirements', temp:0.0, tempNote:'Zero temperature for deterministic quality validation'}] : []),
+      ...(addFormatter ? [{id:'formatter', label:'Output Formatter', desc:'Format and structure the final response', temp:0.3, tempNote:'Light variability for natural-sounding output'}] : []),
+    ];
+    return all.map(s => {
+      const primary = getModel(s.id);
+      const altProvider = primary ? (primary.provider === 'Anthropic' ? 'OpenAI' : 'Anthropic') : null;
+      const altPool = MODELS.filter(m => m.provider === altProvider && m.tier === (s.id === 'parser' ? 'economy' : s.id === 'formatter' ? 'mid' : (complexity !== null && complexity >= 2 ? 'premium' : 'mid')));
+      const alt = altPool[0] || null;
+      const costPerExec = primary ? ((500/1e6 * primary.costInput) + (200/1e6 * primary.costOutput)) : 0;
+      return {...s, primary, alt, costPerExec};
+    });
+  }, [archScore.isMulti, stakes, accuracy, wfSteps, outFmt, complexity, getModel, MODELS]);
+
+  // Costs
+  const costs = React.useMemo(() => {
+    const execCost = steps.reduce((s, st) => s + (st.costPerExec || 0), 0);
+    const monthly = execCost * monthlyVol;
+    const annual = monthly * 12;
+    const cheapPool = MODELS.filter(m => m.tier === 'economy');
+    const cheapModel = cheapPool[0];
+    const cheapExec = cheapModel ? ((500/1e6 * cheapModel.costInput) + (200/1e6 * cheapModel.costOutput)) * steps.length : 0;
+    const premPool = MODELS.filter(m => m.tier === 'frontier');
+    const premModel = premPool[0];
+    const premExec = premModel ? ((500/1e6 * premModel.costInput) + (200/1e6 * premModel.costOutput)) * steps.length : 0;
+    return {execCost, monthly, annual, cheapMonthly: cheapExec * monthlyVol, premMonthly: premExec * monthlyVol};
+  }, [steps, monthlyVol, MODELS]);
+
+  const toggleChar = (id) => setTaskChars(tc => tc.includes(id) ? tc.filter(x => x !== id) : [...tc, id]);
+
+  const loadPreset = (p) => {
+    setSelPreset(p);
+    setComplexity(p.complexity);
+    setVolNum(p.volume === 'continuous' ? 500 : p.volume);
+    setVolFreq(p.volumeUnit === 'continuous' ? 'day' : p.volumeUnit);
+    setStakes(p.stakes);
+    setAccuracy(p.accuracy);
+  };
+  const reset = () => {
+    setMode('presets'); setInputType(null); setSelPreset(null);
+    setComplexity(null); setVolNum(100); setVolFreq('day');
+    setStakes(null); setAccuracy(null); setTaskChars([]);
+    setWfSteps(2); setDepSteps(false); setParSteps(false); setHumanLoop(false);
+    setInFmt('Plain Text'); setOutFmt('Plain Text'); setDocSize(50); setExtTools(0);
+    setBudget('No constraint'); setLatency('Near real-time (<30s)'); setProvPref('Any Provider');
+  };
+
+  const fmt$ = (n) => n < 0.01 ? `$${(n*1000).toFixed(2)}m` : n < 1 ? `$${n.toFixed(4)}` : n < 100 ? `$${n.toFixed(2)}` : `$${Math.round(n).toLocaleString()}`;
+
+  const confidence = (complexity !== null && stakes !== null && accuracy !== null) ? 'high' : (complexity !== null || stakes !== null) ? 'medium' : 'low';
+  const confColor = {high:'#107C10', medium:'#7A5700', low:'#605E5C'};
+  const confBg = {high:'#DFF6DD', medium:'#FFFBF0', low:'#FAF9F8'};
+
+  const sectionStyle = {marginBottom:20};
+  const cardStyle = {background:'#fff', border:'1px solid #E1DFDD', borderRadius:10, padding:'20px 22px', marginBottom:16, boxShadow:'0 1px 4px rgba(0,0,0,.06)'};
+  const secH = {fontSize:14, fontWeight:700, color:'#201F1E', marginBottom:4};
+  const secSub = {fontSize:11.5, color:'#605E5C', marginBottom:14};
+  const labelSt = {fontSize:12, fontWeight:600, color:'#323130', marginBottom:8, display:'block'};
+  const pill = (active, color='#0078D4') => ({
+    display:'inline-flex', alignItems:'center', gap:4,
+    padding:'7px 14px', borderRadius:100, fontSize:12, fontWeight:600, cursor:'pointer',
+    border:`1.5px solid ${active ? color : '#E1DFDD'}`,
+    background: active ? color+'15' : '#fff',
+    color: active ? color : '#605E5C',
+    transition:'all .15s',
+  });
+  const optBtn = (active, color='#0078D4') => ({
+    flex:1, minWidth:0, padding:'10px 8px', borderRadius:8, fontSize:11.5, fontWeight:600,
+    cursor:'pointer', border:`1.5px solid ${active ? color : '#E1DFDD'}`,
+    background: active ? color : '#fff', color: active ? '#fff' : '#323130',
+    textAlign:'center', transition:'all .15s',
+  });
+  const provBadge = (p) => ({
+    display:'inline-block', fontSize:9, fontWeight:700, padding:'1px 6px', borderRadius:100,
+    background: p === 'Claude' ? '#0078D415' : '#10701015',
+    color: p === 'Claude' ? '#0078D4' : '#107C10',
+    border: `1px solid ${p === 'Claude' ? '#0078D430' : '#107C1030'}`,
+    marginLeft:6,
+  });
+
+  return (
+    <div style={{maxWidth:1140, margin:'0 auto'}}>
+      {/* Header row */}
+      <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:18}}>
+        <div>
+          <h2 style={{fontSize:20, fontWeight:700, color:'#201F1E', margin:0}}>🏗️ AI Agent Architecture Advisor</h2>
+          <p style={{fontSize:12, color:'#605E5C', margin:'4px 0 0'}}>Determine the right architecture and model selection for any AI agent use case</p>
+        </div>
+        <button onClick={reset} style={{padding:'7px 16px', borderRadius:8, border:'1.5px solid #E1DFDD', background:'#fff', fontSize:12, fontWeight:600, color:'#605E5C', cursor:'pointer'}}>↺ Reset</button>
+      </div>
+
+      <div style={{display:'grid', gridTemplateColumns:'1fr', gap:0}}>
+
+        {/* ── SECTION 1: USE CASE ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Use Case</div>
+          <div style={secSub}>Discover your use case or browse presets</div>
+          <div style={{display:'flex', gap:8, marginBottom:16}}>
+            <button onClick={()=>setMode('discover')} style={pill(mode==='discover', '#0078D4')}>🔍 Help Me Discover</button>
+            <button onClick={()=>setMode('presets')} style={pill(mode==='presets', '#0078D4')}>📋 Browse Presets</button>
+          </div>
+
+          {mode === 'discover' && (
+            <div>
+              <label style={labelSt}>What are you receiving or processing?</label>
+              <div style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:8}}>
+                {INPUT_TYPES.map(it => (
+                  <button key={it.id} onClick={()=>setInputType(it.id)} style={{
+                    padding:'12px 10px', borderRadius:8, cursor:'pointer', textAlign:'left',
+                    border:`1.5px solid ${inputType===it.id ? '#0078D4' : '#E1DFDD'}`,
+                    background: inputType===it.id ? '#EFF6FC' : '#fff',
+                  }}>
+                    <div style={{fontSize:12, fontWeight:700, color: inputType===it.id ? '#0078D4' : '#201F1E'}}>{it.label}</div>
+                    <div style={{fontSize:10.5, color:'#605E5C', marginTop:3, lineHeight:1.4}}>{it.sub}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {mode === 'presets' && (
+            <div>
+              <div style={{display:'flex', gap:6, flexWrap:'wrap', marginBottom:12}}>
+                {CATS.map(c => (
+                  <button key={c} onClick={()=>setSelCategory(c)} style={pill(selCategory===c, '#0078D4')}>{c}</button>
+                ))}
+              </div>
+              <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(170px,1fr))', gap:8}}>
+                {PRESETS.filter(p=>p.category===selCategory).map((p,i) => (
+                  <button key={i} onClick={()=>loadPreset(p)} style={{
+                    padding:'10px 12px', borderRadius:8, cursor:'pointer', textAlign:'left',
+                    border:`1.5px solid ${selPreset===p ? '#0078D4' : '#E1DFDD'}`,
+                    background: selPreset===p ? '#EFF6FC' : '#FAFAFA',
+                  }}>
+                    <div style={{fontSize:12, fontWeight:600, color: selPreset===p ? '#0078D4' : '#201F1E'}}>{p.name}</div>
+                    <div style={{fontSize:10, color:'#8A8886', marginTop:2}}>
+                      {['Low','Med','High','V.High'][p.complexity]} complexity · {['Low','Med','High','Critical'][p.stakes]} stakes
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ── SECTION 2: FRAMEWORK QUESTIONS ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Framework Questions</div>
+          <div style={secSub}>Complexity, volume, and stakes drive the recommendation</div>
+
+          {/* Complexity */}
+          <div style={{marginBottom:16}}>
+            <label style={labelSt}>How much reasoning does this task require?</label>
+            <div style={{display:'flex', gap:8}}>
+              {COMPLEXITY.map(c => (
+                <button key={c.v} onClick={()=>setComplexity(c.v)} style={{
+                  ...optBtn(complexity===c.v, '#0078D4'), flex:1, padding:'10px 6px',
+                }}>
+                  <div style={{fontWeight:700}}>{c.l}</div>
+                  <div style={{fontSize:9.5, marginTop:3, opacity:.85, lineHeight:1.3, fontWeight:400}}>{c.sub}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Volume */}
+          <div style={{marginBottom:16}}>
+            <label style={labelSt}>How often will this run?</label>
+            <div style={{display:'flex', gap:8, alignItems:'center'}}>
+              <input type="number" value={volNum} min={1} onChange={e=>setVolNum(Number(e.target.value))}
+                style={{width:100, padding:'8px 10px', border:'1.5px solid #E1DFDD', borderRadius:8, fontSize:13, fontWeight:600}} />
+              <span style={{fontSize:12, color:'#605E5C'}}>per</span>
+              <select value={volFreq} onChange={e=>setVolFreq(e.target.value)}
+                style={{padding:'8px 10px', border:'1.5px solid #E1DFDD', borderRadius:8, fontSize:12, color:'#323130', background:'#fff'}}>
+                <option value="day">day</option>
+                <option value="week">week</option>
+                <option value="month">month</option>
+              </select>
+              <span style={{fontSize:12, color:'#0078D4', fontWeight:600, background:'#EFF6FC', padding:'6px 12px', borderRadius:100}}>~{monthlyVol.toLocaleString()} executions/month</span>
+            </div>
+          </div>
+
+          {/* Stakes */}
+          <div style={{marginBottom:16}}>
+            <label style={labelSt}>What's the cost of getting it wrong?</label>
+            <div style={{display:'flex', gap:8}}>
+              {STAKES.map(s => (
+                <button key={s.v} onClick={()=>setStakes(s.v)} style={{
+                  ...optBtn(stakes===s.v, s.v >= 2 ? '#D13438' : s.v === 1 ? '#FF8C00' : '#107C10'), flex:1, padding:'10px 6px',
+                }}>
+                  <div style={{fontWeight:700}}>{s.l}</div>
+                  <div style={{fontSize:9.5, marginTop:3, opacity:.85, lineHeight:1.3, fontWeight:400}}>{s.sub}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Accuracy */}
+          <div>
+            <label style={labelSt}>How accurate does the response need to be? <span style={{fontWeight:400, color:'#8A8886'}}>Higher accuracy favors breaking work into focused sub-tasks</span></label>
+            <div style={{display:'flex', gap:8}}>
+              {ACCURACY.map(a => (
+                <button key={a.v} onClick={()=>setAccuracy(a.v)} style={{
+                  ...optBtn(accuracy===a.v, '#5C2D91'), flex:1, padding:'10px 6px',
+                }}>
+                  <div style={{fontWeight:700}}>{a.l}</div>
+                  <div style={{fontSize:9.5, marginTop:3, opacity:.85, lineHeight:1.3, fontWeight:400}}>{a.sub}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── SECTION 3: TASK CHARACTERISTICS ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Task Characteristics</div>
+          <div style={secSub}>What does the agent need to do? Select all that apply.</div>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:8}}>
+            {TASK_CHARS.map(tc => {
+              const active = taskChars.includes(tc.id);
+              return (
+                <button key={tc.id} onClick={()=>toggleChar(tc.id)} style={{
+                  display:'flex', alignItems:'flex-start', gap:10, padding:'10px 12px',
+                  borderRadius:8, cursor:'pointer', textAlign:'left',
+                  border:`1.5px solid ${active ? '#0078D4' : '#E1DFDD'}`,
+                  background: active ? '#EFF6FC' : '#FAFAFA',
+                }}>
+                  <div style={{width:16, height:16, borderRadius:4, border:`2px solid ${active ? '#0078D4' : '#C8C6C4'}`, background: active ? '#0078D4' : '#fff', flexShrink:0, marginTop:1, display:'flex', alignItems:'center', justifyContent:'center'}}>
+                    {active && <span style={{color:'#fff', fontSize:10, fontWeight:700}}>✓</span>}
+                  </div>
+                  <div>
+                    <span style={{fontSize:12, fontWeight:600, color: active ? '#0078D4' : '#201F1E'}}>{tc.l}</span>
+                    <span style={provBadge(tc.prov)}>{tc.prov}</span>
+                    <div style={{fontSize:10.5, color:'#8A8886', marginTop:2}}>{tc.sub}</div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── SECTION 4: ARCHITECTURE ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Architecture</div>
+          <div style={secSub}>Workflow shape, dependencies, and format requirements</div>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16}}>
+            <div>
+              <label style={labelSt}>Workflow Steps</label>
+              <div style={{display:'flex', alignItems:'center', gap:10}}>
+                <input type="range" min={1} max={10} value={wfSteps} onChange={e=>setWfSteps(Number(e.target.value))}
+                  style={{flex:1, accentColor:'#0078D4'}} />
+                <span style={{fontSize:13, fontWeight:700, color:'#0078D4', minWidth:90}}>
+                  {wfSteps} {wfSteps === 1 ? 'step' : 'distinct steps'}
+                </span>
+              </div>
+              <div style={{marginTop:12}}>
+                <label style={labelSt}>Dependencies</label>
+                {[
+                  {k:'dep', v:depSteps, s:setDepSteps, l:'Steps depend on each other'},
+                  {k:'par', v:parSteps, s:setParSteps, l:'Some steps can run in parallel'},
+                  {k:'hil', v:humanLoop, s:setHumanLoop, l:'Human-in-the-loop review needed'},
+                ].map(cb => (
+                  <label key={cb.k} style={{display:'flex', alignItems:'center', gap:8, marginBottom:8, cursor:'pointer'}}>
+                    <input type="checkbox" checked={cb.v} onChange={e=>cb.s(e.target.checked)}
+                      style={{width:15, height:15, accentColor:'#0078D4'}} />
+                    <span style={{fontSize:12, color:'#323130'}}>{cb.l}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label style={labelSt}>Input Format</label>
+              <div style={{display:'flex', flexDirection:'column', gap:5, marginBottom:12}}>
+                {IN_FMTS.map(f => (
+                  <label key={f} style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}}>
+                    <input type="radio" checked={inFmt===f} onChange={()=>setInFmt(f)} style={{accentColor:'#0078D4'}} />
+                    <span style={{fontSize:12, color:'#323130'}}>{f}</span>
+                  </label>
+                ))}
+              </div>
+              <label style={labelSt}>Output Format</label>
+              <div style={{display:'flex', flexDirection:'column', gap:5}}>
+                {OUT_FMTS.map(f => (
+                  <label key={f} style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}}>
+                    <input type="radio" checked={outFmt===f} onChange={()=>setOutFmt(f)} style={{accentColor:'#0078D4'}} />
+                    <span style={{fontSize:12, color:'#323130'}}>{f}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:16}}>
+            <div>
+              <label style={labelSt}>Avg Document Size per task</label>
+              <div style={{display:'flex', alignItems:'center', gap:10}}>
+                <input type="range" min={1} max={1000} value={docSize} onChange={e=>setDocSize(Number(e.target.value))} style={{flex:1, accentColor:'#0078D4'}} />
+                <span style={{fontSize:12, fontWeight:700, color:'#0078D4', minWidth:60}}>{docSize < 1000 ? docSize + ' KB' : '1 MB+'}</span>
+              </div>
+              <div style={{fontSize:10, color:'#8A8886', marginTop:4}}>Larger documents increase token usage and cost</div>
+            </div>
+            <div>
+              <label style={labelSt}>External Tools (APIs, databases, etc.)</label>
+              <input type="number" min={0} max={20} value={extTools} onChange={e=>setExtTools(Number(e.target.value))}
+                style={{width:80, padding:'8px 10px', border:'1.5px solid #E1DFDD', borderRadius:8, fontSize:13, fontWeight:600}} />
+              <div style={{fontSize:10, color:'#8A8886', marginTop:4}}>More tools add routing overhead and system prompt tokens</div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── SECTION 5: BUDGET & SCALE ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Budget & Scale</div>
+          <div style={secSub}>Monthly budget, latency, and provider preferences</div>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:16}}>
+            <div>
+              <label style={labelSt}>Monthly AI Budget</label>
+              <div style={{display:'flex', flexDirection:'column', gap:5}}>
+                {BUDGETS.map(b => (
+                  <label key={b} style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}}>
+                    <input type="radio" checked={budget===b} onChange={()=>setBudget(b)} style={{accentColor:'#0078D4'}} />
+                    <span style={{fontSize:12, color:'#323130'}}>{b}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label style={labelSt}>Latency Requirement</label>
+              <div style={{display:'flex', flexDirection:'column', gap:5}}>
+                {LATENCIES.map(l => (
+                  <label key={l} style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}}>
+                    <input type="radio" checked={latency===l} onChange={()=>setLatency(l)} style={{accentColor:'#0078D4'}} />
+                    <span style={{fontSize:12, color:'#323130'}}>{l}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label style={labelSt}>Provider Preference</label>
+              <div style={{display:'flex', flexDirection:'column', gap:5}}>
+                {PROVS.map(p => (
+                  <label key={p} style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}}>
+                    <input type="radio" checked={provPref===p} onChange={()=>setProvPref(p)} style={{accentColor:'#0078D4'}} />
+                    <span style={{fontSize:12, color:'#323130'}}>{p}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ══ RESULTS ══════════════════════════════════════════════════════════ */}
+
+        {/* ── RESULT 1: ARCHITECTURE RECOMMENDATION ── */}
+        <div style={{
+          background: archScore.isMulti ? 'linear-gradient(135deg,#071425,#0078D4)' : 'linear-gradient(135deg,#071425,#107C10)',
+          borderRadius:10, padding:'24px 28px', color:'#fff', marginBottom:16, boxShadow:'0 4px 20px rgba(0,0,0,.18)',
+        }}>
+          <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:12, marginBottom:18}}>
+            <div>
+              <div style={{fontSize:11, fontWeight:600, opacity:.7, marginBottom:6, letterSpacing:.5}}>RECOMMENDED ARCHITECTURE</div>
+              <div style={{fontSize:26, fontWeight:800, letterSpacing:-.5}}>{archScore.isMulti ? '🔗 Multi-Agent Pipeline' : '🤖 Single Agent'}</div>
+            </div>
+            <div style={{textAlign:'right'}}>
+              <div style={{fontSize:13, opacity:.8, marginBottom:4}}>Multi-agent criteria score</div>
+              <div style={{fontSize:32, fontWeight:800}}>{archScore.score}<span style={{fontSize:18, opacity:.6}}>/{archScore.max}</span></div>
+              <span style={{display:'inline-block', background:confBg[confidence], color:confColor[confidence], borderRadius:100, padding:'3px 12px', fontSize:11, fontWeight:700, marginTop:4}}>
+                {confidence} confidence
+              </span>
+            </div>
+          </div>
+
+          {/* Criteria */}
+          <div style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:6, marginBottom:18}}>
+            {archScore.criteria.map((c,i) => (
+              <div key={i} style={{
+                background:'rgba(255,255,255,.1)', borderRadius:6, padding:'6px 10px',
+                display:'flex', alignItems:'center', gap:6,
+                border: c.met ? '1px solid rgba(255,255,255,.3)' : '1px solid rgba(255,255,255,.1)',
+              }}>
+                <span style={{fontSize:11, opacity: c.met ? 1 : .5}}>{c.met ? '✓' : '○'}</span>
+                <span style={{fontSize:10.5, opacity: c.met ? 1 : .5, lineHeight:1.3}}>{c.t} <span style={{opacity:.7}}>+{c.score}</span></span>
+              </div>
+            ))}
+          </div>
+
+          {/* Benefits & Considerations */}
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
+            <div style={{background:'rgba(255,255,255,.08)', borderRadius:8, padding:'14px 16px'}}>
+              <div style={{fontSize:12, fontWeight:700, marginBottom:8}}>✅ Benefits</div>
+              {archScore.isMulti ? [
+                'Specialized models per step reduce cost',
+                'Each agent optimized for its task',
+                'Easier to debug and monitor individual steps',
+                'Can mix Claude and OpenAI strengths',
+              ] : [
+                'Simpler to build, deploy, and maintain',
+                'Lower latency — single model call',
+                'Lower cost per execution',
+                'Easier to test and iterate on prompts',
+              ].map((b,i) => <div key={i} style={{fontSize:11, opacity:.9, marginBottom:4}}>• {b}</div>)}
+            </div>
+            <div style={{background:'rgba(255,255,255,.08)', borderRadius:8, padding:'14px 16px'}}>
+              <div style={{fontSize:12, fontWeight:700, marginBottom:8}}>⚠️ Considerations</div>
+              {archScore.isMulti ? [
+                'More complex to implement and test',
+                'Orchestration logic adds latency',
+                'Need to handle inter-agent communication',
+                'Higher initial development cost',
+              ] : [
+                'Single point of failure — one model does all',
+                'Context window limits for complex tasks',
+                'Harder to optimize individual steps',
+                'May need premium model for high complexity',
+              ].map((c,i) => <div key={i} style={{fontSize:11, opacity:.9, marginBottom:4}}>• {c}</div>)}
+            </div>
+          </div>
+          <div style={{marginTop:14, fontSize:11, opacity:.7}}>
+            Confidence: {confidence} — {confidence==='high' ? 'Strong match between task characteristics and model capabilities' : confidence==='medium' ? 'Configure more inputs for a stronger recommendation' : 'Complete the framework questions for a tailored recommendation'}
+          </div>
+        </div>
+
+        {/* ── RESULT 2: PIPELINE STEPS ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Pipeline Steps — Per-Step Model Selection</div>
+          <div style={secSub}>{steps.length === 1 ? 'Single agent handles the full workflow' : `${steps.length}-agent pipeline with specialized roles`}</div>
+          <div style={{display:'flex', flexDirection:'column', gap:12}}>
+            {steps.map((st, idx) => (
+              <div key={st.id} style={{
+                border:'1.5px solid #E1DFDD', borderRadius:10, padding:'16px 18px',
+                borderLeft:`4px solid ${st.primary?.provider === 'Anthropic' ? '#0078D4' : '#107C10'}`,
+              }}>
+                <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:8}}>
+                  <div style={{flex:1}}>
+                    <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:4}}>
+                      <span style={{fontSize:11, fontWeight:700, color:'#8A8886'}}>STEP {idx+1}</span>
+                      <span style={{fontSize:13, fontWeight:700, color:'#201F1E'}}>{st.label}</span>
+                    </div>
+                    <div style={{fontSize:11.5, color:'#605E5C', marginBottom:10}}>{st.desc}</div>
+                    {st.primary && (
+                      <div style={{display:'flex', alignItems:'center', gap:8, flexWrap:'wrap'}}>
+                        <span style={{
+                          display:'inline-block', padding:'3px 10px', borderRadius:100, fontSize:11, fontWeight:700,
+                          background: st.primary.provider === 'Anthropic' ? '#EFF6FC' : '#DFF6DD',
+                          color: st.primary.provider === 'Anthropic' ? '#0078D4' : '#107C10',
+                          border: `1.5px solid ${st.primary.provider === 'Anthropic' ? '#0078D4' : '#107C10'}`,
+                        }}>{st.primary.provider === 'Anthropic' ? '⬡ Claude' : '◎ OpenAI'}</span>
+                        <span style={{fontSize:12, fontWeight:700, color:'#201F1E'}}>{st.primary.name}</span>
+                        <span style={{fontSize:11, color:'#107C10', fontWeight:600}}>{fmt$(st.costPerExec)}/exec</span>
+                        <span style={{fontSize:10, color:'#8A8886'}}>| ${st.primary.costInput}/${st.primary.costOutput} per 1M tok in/out</span>
+                      </div>
+                    )}
+                  </div>
+                  <div style={{
+                    background:'#F8F7F6', borderRadius:8, padding:'10px 14px', textAlign:'center', minWidth:140,
+                  }}>
+                    <div style={{fontSize:10, color:'#8A8886', marginBottom:4}}>TEMPERATURE</div>
+                    <div style={{fontSize:22, fontWeight:800, color:'#0078D4'}}>{st.temp.toFixed(1)}</div>
+                    <div style={{fontSize:10, color:'#605E5C', marginTop:4, lineHeight:1.4, maxWidth:120}}>{st.tempNote}</div>
+                  </div>
+                </div>
+                {st.alt && (
+                  <div style={{
+                    marginTop:10, paddingTop:10, borderTop:'1px solid #F3F2F1',
+                    display:'flex', alignItems:'center', gap:6, fontSize:11, color:'#605E5C',
+                  }}>
+                    <span style={{fontWeight:600}}>Also consider:</span>
+                    <span style={{
+                      fontWeight:600, color: st.alt.provider === 'Anthropic' ? '#0078D4' : '#107C10',
+                    }}>{st.alt.name}</span>
+                    <span style={{color:'#8A8886'}}>· ${st.alt.costInput}/${st.alt.costOutput} per 1M tokens</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── RESULT 3: VISUAL PIPELINE DIAGRAM ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Agent Pipeline</div>
+          <div style={{overflowX:'auto', paddingBottom:8}}>
+            <div style={{display:'flex', alignItems:'center', gap:0, minWidth: steps.length * 200, padding:'12px 0'}}>
+              <div style={{
+                background:'#F3F2F1', border:'1.5px solid #E1DFDD', borderRadius:8,
+                padding:'10px 14px', fontSize:12, fontWeight:700, color:'#605E5C', textAlign:'center', minWidth:70,
+              }}>Input</div>
+              {steps.map((st, idx) => (
+                <React.Fragment key={st.id}>
+                  <div style={{flex:'0 0 24px', textAlign:'center', color:'#8A8886', fontSize:16}}>→</div>
+                  <div style={{
+                    background: st.primary?.provider === 'Anthropic' ? '#EFF6FC' : '#F1FAF1',
+                    border: `2px solid ${st.primary?.provider === 'Anthropic' ? '#0078D4' : '#107C10'}`,
+                    borderRadius:8, padding:'10px 12px', textAlign:'center', flex:'1 1 0',
+                  }}>
+                    <div style={{fontSize:11, fontWeight:700, color:'#201F1E'}}>{st.label}</div>
+                    <div style={{fontSize:10, color: st.primary?.provider === 'Anthropic' ? '#0078D4' : '#107C10', fontWeight:600, marginTop:2}}>
+                      {st.primary?.name}
+                    </div>
+                    <div style={{fontSize:10, color:'#8A8886', marginTop:2}}>{fmt$(st.costPerExec)}/exec</div>
+                  </div>
+                </React.Fragment>
+              ))}
+              <div style={{flex:'0 0 24px', textAlign:'center', color:'#8A8886', fontSize:16}}>→</div>
+              <div style={{
+                background:'#DFF6DD', border:'1.5px solid #107C10', borderRadius:8,
+                padding:'10px 14px', fontSize:12, fontWeight:700, color:'#107C10', textAlign:'center', minWidth:70,
+              }}>Output</div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── RESULT 4: COST ESTIMATION ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Cost Estimation</div>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:12, marginBottom:16}}>
+            {[
+              {l:'Per Execution', v:fmt$(costs.execCost), sub:'based on ~700 tokens/step'},
+              {l:'Monthly', v:`$${Math.round(costs.monthly).toLocaleString()}`, sub:`${monthlyVol.toLocaleString()} executions`},
+              {l:'Annual', v:`$${Math.round(costs.annual).toLocaleString()}`, sub:'at current volume'},
+            ].map((c,i) => (
+              <div key={i} style={{
+                background: i===1 ? 'linear-gradient(135deg,#0078D4,#00A4EF)' : '#F8F7F6',
+                borderRadius:10, padding:'16px', textAlign:'center',
+                border: i===1 ? 'none' : '1px solid #E1DFDD',
+              }}>
+                <div style={{fontSize:11, fontWeight:600, color: i===1 ? 'rgba(255,255,255,.8)' : '#8A8886', marginBottom:6}}>{c.l}</div>
+                <div style={{fontSize:24, fontWeight:800, color: i===1 ? '#fff' : '#201F1E'}}>{c.v}</div>
+                <div style={{fontSize:10, color: i===1 ? 'rgba(255,255,255,.7)' : '#8A8886', marginTop:4}}>{c.sub}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{background:'#FAF9F8', borderRadius:8, padding:'14px 16px'}}>
+            <div style={{fontSize:12, fontWeight:700, color:'#323130', marginBottom:10}}>Cost Range</div>
+            {[
+              {l:'Using cheapest models', v:`$${Math.round(costs.cheapMonthly).toLocaleString()}/mo`, c:'#605E5C'},
+              {l:'Recommended configuration', v:`$${Math.round(costs.monthly).toLocaleString()}/mo`, c:'#0078D4', bold:true},
+              {l:'Using most capable models', v:`$${Math.round(costs.premMonthly).toLocaleString()}/mo`, c:'#D13438'},
+            ].map((r,i) => (
+              <div key={i} style={{
+                display:'flex', justifyContent:'space-between', alignItems:'center',
+                padding:'7px 10px', borderRadius:6, marginBottom:4,
+                background: r.bold ? '#EFF6FC' : 'transparent',
+                border: r.bold ? '1px solid #0078D430' : 'none',
+              }}>
+                <span style={{fontSize:12, color: r.bold ? '#201F1E' : '#605E5C', fontWeight: r.bold ? 600 : 400}}>{r.bold && '★ '}{r.l}</span>
+                <span style={{fontSize:13, fontWeight:700, color:r.c}}>{r.v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── RESULT 5: CLAUDE vs OPENAI ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Claude vs OpenAI — Core Processor Comparison</div>
+          {steps.length > 0 && steps[1] && (() => {
+            const coreStep = steps.find(s => s.id === 'core') || steps[0];
+            const claudeM = MODELS.find(m => m.provider==='Anthropic' && m.tier===(complexity!==null && complexity>=2?'premium':complexity===3?'frontier':'mid')) || MODELS.find(m=>m.provider==='Anthropic');
+            const openaiM = MODELS.find(m => m.provider==='OpenAI' && m.tier===(complexity!==null && complexity>=2?'premium':complexity===3?'frontier':'mid')) || MODELS.find(m=>m.provider==='OpenAI');
+            return (
+              <table className="tbl">
+                <thead>
+                  <tr>
+                    <th>Criterion</th>
+                    <th style={{color:'#0078D4'}}>⬡ {claudeM?.name || 'Claude Sonnet 4.5'}</th>
+                    <th style={{color:'#107C10'}}>◎ {openaiM?.name || 'GPT-4.1'}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['Cost (in/out per 1M)', `$${claudeM?.costInput}/$${claudeM?.costOutput}`, `$${openaiM?.costInput}/$${openaiM?.costOutput}`],
+                    ['Best for', 'Nuanced reasoning, document analysis, instruction following, safe content', 'Structured output, code generation, broad tool ecosystem, JSON mode'],
+                    ['Context window', '200K tokens', '128K tokens'],
+                    ['Speed', 'Fast (Sonnet) / Slower (Opus)', 'Fast (4.1/4o) / Slower (o-series)'],
+                    ['Structured output', 'Good', 'Excellent (native JSON mode)'],
+                    ['Reasoning models', 'Sonnet 4.5 hybrid thinking', 'o4-mini / o3 series'],
+                  ].map(([crit, cl, oi], i) => (
+                    <tr key={i}>
+                      <td style={{fontWeight:600, color:'#323130'}}>{crit}</td>
+                      <td style={{color:'#323130', fontSize:11}}>{cl}</td>
+                      <td style={{color:'#323130', fontSize:11}}>{oi}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            );
+          })()}
+        </div>
+
+        {/* ── RESULT 6: IMPLEMENTATION ROADMAP ── */}
+        <div style={cardStyle}>
+          <div style={secH}>Implementation Roadmap</div>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:12}}>
+            {[
+              {phase:'1. Setup', color:'#0078D4', items:[
+                'Configure API credentials (Anthropic + OpenAI)',
+                'Set up environment variables and API keys',
+                'Install SDK: `npm install @anthropic-ai/sdk openai`',
+                'Design system and repository-level instructions',
+              ]},
+              {phase:'2. Development', color:'#107C10', items:[
+                'Write prompt templates for each pipeline step',
+                'Build orchestration logic and agent handoffs',
+                'Implement error handling and retry logic',
+                ...(archScore.isMulti ? ['Configure inter-agent communication format'] : []),
+              ]},
+              {phase:'3. Testing', color:'#5C2D91', items:[
+                'Test with representative real-world inputs',
+                'Benchmark recommended vs alternative models',
+                'Run A/B test: single agent vs multi-agent',
+                'Validate edge cases and failure modes',
+              ]},
+              {phase:'4. Deployment', color:'#FF8C00', items:[
+                'Deploy to production with gradual rollout',
+                'Set up monitoring and cost alerting',
+                'Schedule monthly model reviews',
+                'Track ODMs: accuracy, latency, cost per exec',
+              ]},
+            ].map((ph, pi) => (
+              <div key={pi} style={{border:'1px solid #E1DFDD', borderRadius:8, padding:'14px 16px', borderTop:`3px solid ${ph.color}`}}>
+                <div style={{fontSize:12, fontWeight:700, color:ph.color, marginBottom:10}}>{ph.phase}</div>
+                {ph.items.map((item, ii) => (
+                  <div key={ii} style={{display:'flex', gap:8, marginBottom:7, alignItems:'flex-start'}}>
+                    <input type="checkbox" style={{marginTop:2, accentColor:ph.color, flexShrink:0}} />
+                    <span style={{fontSize:11.5, color:'#323130', lineHeight:1.4}}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── GARTNER CALLOUT ── */}
+        <GartnerCallout
+          type="gartner"
+          title="Gartner: Measure Agent Value with ODMs"
+          body="Gartner recommends Outcome-Driven Metrics (ODMs) for agentic AI: measure accuracy rate, cost per execution, latency P95, and human-override rate. These metrics help justify investment and guide model upgrade decisions. Source: Gartner G00837723."
+        />
+
+        {/* ── DISCLAIMER ── */}
+        <div style={{fontSize:10.5, color:'#8A8886', lineHeight:1.6, padding:'14px 0', borderTop:'1px solid #F3F2F1'}}>
+          <strong>Disclaimer:</strong> Recommendations are based on general model capabilities and 2026 token pricing. Actual costs vary based on prompt length, caching, and usage patterns. Always benchmark with your specific workload before committing to an architecture. Model pricing updated April 2026.
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+
+/* ══════════ TAB 6: ROI CALCULATOR ══════════ */
+
+/* ── Shared UI helpers (scoped to this tab) ── */
+function SecPanel({title, icon, open, onToggle, children, badge}) {
+  return (
+    <div style={{marginBottom:8,border:'1px solid #E1DFDD',borderRadius:8,overflow:'hidden'}}>
+      <div onClick={onToggle} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 14px',background:'#FAF9F8',cursor:'pointer',userSelect:'none'}}>
+        <div style={{display:'flex',alignItems:'center',gap:8}}>
+          <span style={{fontSize:15}}>{icon}</span>
+          <span style={{fontSize:12,fontWeight:700,color:'#201F1E'}}>{title}</span>
+          {badge && <span style={{fontSize:9,fontWeight:700,color:'#0078D4',background:'#EFF6FC',padding:'1px 7px',borderRadius:100,border:'1px solid #0078D480'}}>{badge}</span>}
+        </div>
+        <span style={{fontSize:12,color:'#8A8886',transition:'transform .2s',transform:open?'rotate(90deg)':'none'}}>{open?'▾':'▸'}</span>
+      </div>
+      {open && <div style={{padding:'12px 14px',background:'#fff'}}>{children}</div>}
+    </div>
+  );
+}
+
+function HBarChart({bars, height=15}) {
+  const mx = Math.max(...bars.map(b=>Math.max(b.val||0,0)), 1);
+  return (
+    <div style={{display:'flex',flexDirection:'column',gap:7}}>
+      {bars.map((b,i) => {
+        const w = Math.max(b.val,0)/mx*100;
+        const fmt = b.val >= 1000000 ? '$'+(b.val/1000000).toFixed(2)+'M'
+                  : b.val >= 1000    ? '$'+(b.val/1000).toFixed(0)+'K'
+                  : '$'+Math.round(b.val).toLocaleString();
+        return (
+          <div key={i}>
+            <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}>
+              <span style={{fontSize:10,color:'#605E5C'}}>{b.lbl}</span>
+              <span style={{fontSize:10,fontWeight:700,color:b.clr}}>{fmt}</span>
+            </div>
+            <div style={{height,background:'#F3F2F1',borderRadius:4,overflow:'hidden'}}>
+              <div style={{height:'100%',width:w+'%',background:b.clr,borderRadius:4,minWidth:w>0.5?3:0}}/>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function LineChart5yr({data, height=130}) {
+  if (!data || data.length < 2) return null;
+  const vals = data.map(d=>d.y);
+  const minV = Math.min(0, ...vals);
+  const maxV = Math.max(...vals, 1);
+  const range = maxV - minV || 1;
+  const pad = {l:52,r:8,t:10,b:22};
+  const svgW = 380, svgH = height;
+  const W = svgW - pad.l - pad.r;
+  const H = svgH - pad.t - pad.b;
+  const pts = data.map((d,i) => ({
+    x: pad.l + (i/(data.length-1))*W,
+    y: pad.t + H - ((d.y-minV)/range)*H,
+  }));
+  const polyPts = pts.map(p=>`${p.x},${p.y}`).join(' ');
+  const fillPts = `${pts[0].x},${pad.t+H} ${polyPts} ${pts[pts.length-1].x},${pad.t+H}`;
+  const fmtY = v => v>=1000000?'$'+(v/1000000).toFixed(1)+'M': v>=1000?'$'+(v/1000).toFixed(0)+'K':'$'+Math.round(v);
+  const zeroY = pad.t + H - ((0-minV)/range)*H;
+  return (
+    <svg width={svgW} height={svgH} style={{width:'100%',height:'auto',display:'block'}}>
+      <defs>
+        <linearGradient id="lcGrad6" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#0078D4" stopOpacity=".18"/>
+          <stop offset="100%" stopColor="#0078D4" stopOpacity="0"/>
+        </linearGradient>
+      </defs>
+      {[0,0.25,0.5,0.75,1].map((f,i)=>{
+        const y = pad.t + H*(1-f);
+        const v = minV + range*f;
+        return <g key={i}>
+          <line x1={pad.l} y1={y} x2={pad.l+W} y2={y} stroke="#F0EFEE" strokeWidth="1"/>
+          <text x={pad.l-4} y={y+3.5} fontSize="8" fill="#8A8886" textAnchor="end">{fmtY(v)}</text>
+        </g>;
+      })}
+      {minV < 0 && (
+        <line x1={pad.l} y1={zeroY} x2={pad.l+W} y2={zeroY} stroke="#D13438" strokeWidth="1" strokeDasharray="4,3" opacity=".6"/>
+      )}
+      <polygon points={fillPts} fill="url(#lcGrad6)"/>
+      <polyline points={polyPts} fill="none" stroke="#0078D4" strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round"/>
+      {pts.map((p,i)=>(
+        <g key={i}>
+          <circle cx={p.x} cy={p.y} r="4" fill="#0078D4" stroke="#fff" strokeWidth="1.5"/>
+          <text x={p.x} y={pad.t+H+15} fontSize="9" fill="#8A8886" textAnchor="middle">{data[i].lbl}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function ROICalculatorTab() {
+  const W = {maxWidth:1140,margin:'0 auto'};
+  const secH = {fontSize:14,fontWeight:700,color:'#201F1E',marginBottom:4};
+  const secSub = {fontSize:11.5,color:'#605E5C',marginBottom:12,lineHeight:1.5};
+  const lbl = {fontSize:11,fontWeight:600,color:'#323130',display:'block',marginBottom:3};
+  const inp = {width:'100%',padding:'5px 8px',border:'1px solid #E1DFDD',borderRadius:4,fontSize:12,outline:'none',boxSizing:'border-box'};
+  const g2 = {display:'grid',gridTemplateColumns:'1fr 1fr',gap:10};
+  const g3 = {display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8};
+
+  /* ── Collapsible state ── */
+  const [open, setOpen] = useState({team:true,proc:false,cplx:false,mdl:false,hitl:false,err:false,lic:false,impl:false,adv:false});
+  const tog = k => setOpen(o=>({...o,[k]:!o[k]}));
+
+  /* ── Inputs: Team ── */
+  const [team, setTeam] = useState([
+    {lvl:'Junior/Entry (0-2 yrs)',count:2,rate:45,hrs:40},
+    {lvl:'Mid-Level (3-5 yrs)',   count:3,rate:65,hrs:40},
+    {lvl:'Senior (6-10 yrs)',     count:1,rate:110,hrs:40},
+  ]);
+  const updTeam = (i,fld,val) => setTeam(t=>t.map((r,j)=>j===i?{...r,[fld]:val}:r));
+
+  /* ── Inputs: Process ── */
+  const [nProc,setNProc]   = useState(1);
+  const [hRun, setHRun]    = useState(2);
+  const [rWk,  setRWk]     = useState(10);
+  const [pEff, setPEff]    = useState(75);
+  const [hOvr, setHOvr]    = useState(4);
+  const [dOvr, setDOvr]    = useState(15);
+  const [tProc,setTProc]   = useState(10);
+  const [slaR, setSlaR]    = useState(12);
+  const [slaC, setSlaC]    = useState(500);
+
+  /* ── Inputs: Complexity ── */
+  const [simp,setSimp] = useState(40);
+  const [mod, setMod]  = useState(40);
+  const [cplx,setCplx] = useState(20);
+  const adjCplx = (key, val) => {
+    const rem = 100 - val;
+    if (key==='simp') { setSimp(val); const r=mod+cplx||1; setMod(Math.round(mod/r*rem)); setCplx(rem-Math.round(mod/r*rem)); }
+    else if (key==='mod') { setMod(val); const r=simp+cplx||1; setSimp(Math.round(simp/r*rem)); setCplx(rem-Math.round(simp/r*rem)); }
+    else { setCplx(val); const r=simp+mod||1; setSimp(Math.round(simp/r*rem)); setMod(rem-Math.round(simp/r*rem)); }
+  };
+
+  /* ── Inputs: AI Model ── */
+  const [mTier,setMTier]   = useState('mid');
+  const [aCplx,setACplx]   = useState('multi-step');
+  const [inTok,setInTok]   = useState(8500);
+  const [outTok,setOutTok] = useState(1500);
+  const [cache,setCache]   = useState(20);
+
+  /* ── Inputs: HITL ── */
+  const [revPct,setRevPct] = useState(15);
+  const [revMin,setRevMin] = useState(5);
+  const [ops,  setOps]     = useState(1);
+  const [opR,  setOpR]     = useState(35);
+  const [opH,  setOpH]     = useState(40);
+
+  /* ── Inputs: Error ── */
+  const [eRate,setERate] = useState(8);
+  const [eCost,setECost] = useState(250);
+  const [cHrs, setCHrs]  = useState(20);
+
+  /* ── Inputs: Licensing ── */
+  const [licM,setLicM]   = useState('per-user');
+  const [pUsr,setPUsr]   = useState(50);
+  const [nUsr,setNUsr]   = useState(10);
+  const [supp,setSupp]   = useState('standard');
+  const [conn,setConn]   = useState(200);
+
+  /* ── Inputs: Implementation ── */
+  const [iCost,setICost] = useState(25000);
+  const [tCost,setTCost] = useState(5000);
+  const [mCost,setMCost] = useState(12000);
+  const [amYrs,setAmYrs] = useState(3);
+
+  /* ── Inputs: Advanced ── */
+  const [disc,setDisc] = useState(10);
+  const [grow,setGrow] = useState(4);
+
+  /* ── Models & multipliers ── */
+  const MODS = {
+    economy:{nm:'Economy',ds:'Haiku / GPT-4o-mini',ic:0.25,oc:1.00,ac:0.85},
+    mid:    {nm:'Mid-Tier',ds:'Sonnet / GPT-4o',   ic:3.00,oc:15.0,ac:0.92},
+    premium:{nm:'Premium', ds:'Opus / GPT-4.5',    ic:15.0,oc:75.0,ac:0.98},
+  };
+  const CMUL = {single:1,'multi-step':3,orchestration:8};
+
+  /* ── Industry presets ── */
+  const applyPreset = p => {
+    const P = {
+      banking: {nProc:5,rWk:50,slaR:5,slaC:5000,eRate:2,eCost:2000,hRun:3,tProc:15},
+      healthcare:{nProc:8,rWk:100,slaR:3,slaC:10000,eRate:1,eCost:5000,hRun:4,tProc:20},
+      legal:   {nProc:3,rWk:20,slaR:10,slaC:3000,eRate:3,eCost:3000,hRun:6,tProc:8},
+      industrial:{nProc:10,rWk:200,slaR:15,slaC:1000,eRate:5,eCost:500,hRun:1,tProc:5},
+      retail:  {nProc:6,rWk:80,slaR:20,slaC:500,eRate:8,eCost:200,hRun:1,tProc:12},
+    }[p];
+    if (!P) return;
+    setNProc(P.nProc); setRWk(P.rWk); setSlaR(P.slaR); setSlaC(P.slaC);
+    setERate(P.eRate); setECost(P.eCost); setHRun(P.hRun); setTProc(P.tProc);
+  };
+
+  const resetAll = () => {
+    setTeam([{lvl:'Junior/Entry (0-2 yrs)',count:2,rate:45,hrs:40},{lvl:'Mid-Level (3-5 yrs)',count:3,rate:65,hrs:40},{lvl:'Senior (6-10 yrs)',count:1,rate:110,hrs:40}]);
+    setNProc(1);setHRun(2);setRWk(10);setPEff(75);setHOvr(4);setDOvr(15);setTProc(10);setSlaR(12);setSlaC(500);
+    setSimp(40);setMod(40);setCplx(20);setMTier('mid');setACplx('multi-step');setInTok(8500);setOutTok(1500);setCache(20);
+    setRevPct(15);setRevMin(5);setOps(1);setOpR(35);setOpH(40);setERate(8);setECost(250);setCHrs(20);
+    setLicM('per-user');setPUsr(50);setNUsr(10);setSupp('standard');setConn(200);
+    setICost(25000);setTCost(5000);setMCost(12000);setAmYrs(3);setDisc(10);setGrow(4);
+  };
+
+  /* ── Core calculations ── */
+  const R = useMemo(() => {
+    const head = team.reduce((s,l)=>s+l.count, 0);
+    const annTeam = team.reduce((s,l)=>s+l.count*l.rate*l.hrs*52, 0);
+    const blendHr = head > 0 ? annTeam/(head*40*52) : 0;
+
+    const bSave = (simp*0.90 + mod*0.65 + cplx*0.35)/100;
+    const bErr  = (simp*0.95 + mod*0.80 + cplx*0.60)/100;
+    const bProd = bSave * 0.48;
+
+    const annRuns = rWk * 52;
+    const totTasks = annRuns * tProc * nProc;
+
+    const laborS  = annTeam * bSave * (pEff/100);
+    const handS   = hOvr * annRuns * nProc * (dOvr/60) * blendHr * 0.8;
+    const errS    = totTasks * (eRate/100) * bErr * eCost;
+    const slaS    = annRuns * nProc * (slaR/100) * slaC * 0.70;
+    const compS   = cHrs * 12 * blendHr * 0.5;
+    const prodS   = annTeam * bProd * 0.25;
+    const totSave = laborS + handS + errS + slaS + compS + prodS;
+
+    const tmul   = CMUL[aCplx] || 1;
+    const mod0   = MODS[mTier];
+    const cmul   = 1 - (cache/100)*0.5;
+    const apiCls = totTasks;
+    const aiCost = apiCls * ((inTok*tmul/1e6)*mod0.ic + (outTok*tmul/1e6)*mod0.oc) * cmul;
+
+    const revC   = apiCls * (revPct/100) * (revMin/60) * opR;
+    const opC    = ops * opR * opH * 52;
+
+    const smul   = supp==='premium'?1.20:supp==='enterprise'?1.35:1;
+    const platC  = licM==='per-user' ? pUsr*nUsr*12*smul + conn*12
+                 : licM==='per-exec' ? apiCls*0.03
+                 : nUsr*2000;
+
+    const implAm = (iCost+tCost)/Math.max(amYrs,1);
+    const totCostAnn = aiCost + revC + opC + platC + mCost + implAm;
+    const fullY1 = totCostAnn + iCost + tCost;
+
+    const roiY1  = fullY1>0 ? (totSave-fullY1)/fullY1*100 : 0;
+    const roi3   = (() => {
+      const s3=totSave*3; const c3=fullY1+(totCostAnn-implAm)*2;
+      return c3>0?(s3-c3)/c3*100:0;
+    })();
+    const payMo  = totSave>0 ? fullY1/totSave*12 : 0;
+
+    const di = disc/100; const gr = grow/100;
+    let cumNPV = -(iCost+tCost);
+    const yrs = [];
+    for (let y=1; y<=5; y++) {
+      const ys = totSave * Math.pow(1+gr, y-1);
+      const yc = aiCost + revC + opC + platC + mCost + (y<=amYrs?(iCost+tCost)/amYrs:0);
+      const net = ys - yc;
+      cumNPV += net / Math.pow(1+di, y);
+      yrs.push({yr:y, save:ys, cost:yc, net, cum:cumNPV});
+    }
+
+    const hrsSaved = annTeam/Math.max(blendHr,1)*bSave;
+    const fteEq    = hrsSaved/(40*52);
+    const errAvoid = totTasks*(eRate/100)*bErr;
+    const handElim = hOvr*annRuns*nProc*0.8;
+    const slaAvoid = annRuns*nProc*(slaR/100)*0.7;
+
+    const ctBefore = totTasks>0 ? (annTeam+totTasks*(eRate/100)*eCost)/totTasks : 0;
+    const ctAfter  = totTasks>0 ? totCostAnn/totTasks : 0;
+
+    const breakdown = [
+      {lbl:'Labor Savings',      val:laborS, clr:'#107C10'},
+      {lbl:'Handover Savings',   val:handS,  clr:'#0078D4'},
+      {lbl:'Error Reduction',    val:errS,   clr:'#5C2D91'},
+      {lbl:'SLA Compliance',     val:slaS,   clr:'#D19200'},
+      {lbl:'Compliance Savings', val:compS,  clr:'#00B294'},
+      {lbl:'Productivity Gains', val:prodS,  clr:'#C55A11'},
+    ].filter(b=>b.val>0).sort((a,b)=>b.val-a.val);
+
+    const costBreak = [
+      {lbl:'AI Inference',       val:aiCost, clr:'#0078D4'},
+      {lbl:'Human Review',       val:revC,   clr:'#5C2D91'},
+      {lbl:'Operators',          val:opC,    clr:'#D19200'},
+      {lbl:'Platform Licensing', val:platC,  clr:'#107C10'},
+      {lbl:'Maintenance',        val:mCost,  clr:'#C55A11'},
+      {lbl:'Impl (amortized)',   val:implAm, clr:'#8A8886'},
+    ].filter(b=>b.val>0);
+
+    const scen = {
+      best:     {save:totSave*1.15, cost:totCostAnn*0.90},
+      expected: {save:totSave,      cost:totCostAnn},
+      worst:    {save:totSave*0.85, cost:totCostAnn*1.20},
+    };
+    for (const [k,s] of Object.entries(scen)) {
+      const fc = s.cost + (k==='best'?iCost*0.9:k==='worst'?iCost*1.1:iCost) + tCost;
+      s.roi = fc>0 ? (s.save-fc)/fc*100 : 0;
+      s.pay = s.save>0 ? fc/s.save*12 : 0;
+      s.npv = yrs.reduce((acc,yr,i)=>{
+        const ys=s.save*Math.pow(1+gr,i);
+        const yc=s.cost+(i<amYrs?(iCost+tCost)/amYrs:0);
+        return acc+(ys-yc)/Math.pow(1+di,i+1);
+      }, -(iCost+tCost));
+    }
+
+    const modComp = Object.entries(MODS).map(([k,m])=>{
+      const mAI = apiCls*((inTok*tmul/1e6)*m.ic+(outTok*tmul/1e6)*m.oc)*cmul;
+      const mNet = totSave-mAI-revC-opC-platC-mCost-iCost-tCost;
+      const mROI = (mAI+revC+opC+platC+mCost+iCost+tCost)>0
+        ? mNet/(mAI+revC+opC+platC+mCost+iCost+tCost)*100 : 0;
+      const mTrans = totTasks>0?(mAI+revC+opC+platC+mCost)/totTasks:0;
+      return {key:k,nm:m.nm,aiC:mAI,acc:m.ac,net:mNet,roi:mROI,trans:mTrans,sel:k===mTier};
+    });
+
+    const sensi = [
+      {lbl:'Time Savings %',     impact: totSave*0.40},
+      {lbl:'Team Hourly Rate',   impact: totSave*0.25},
+      {lbl:'Headcount',          impact: totSave*0.20},
+      {lbl:'SLA Breach Cost',    impact: slaS*1.5},
+      {lbl:'Error Rate/Cost',    impact: errS*1.2},
+      {lbl:'Handover Delays',    impact: handS*1.5},
+      {lbl:'AI Token Usage',     impact: aiCost*2},
+      {lbl:'Cache Hit Rate',     impact: aiCost*0.5},
+    ].sort((a,b)=>b.impact-a.impact);
+
+    return {
+      head, annTeam, blendHr,
+      bSave, bErr, totSave,
+      laborS, handS, errS, slaS, compS, prodS,
+      aiCost, revC, opC, platC, mCost, implAm, totCostAnn,
+      roiY1, roi3, payMo,
+      hrsSaved, fteEq, errAvoid, handElim, slaAvoid, apiCls,
+      ctBefore, ctAfter,
+      breakdown, costBreak, yrs, scen, modComp, sensi,
+      chartData: yrs.map(y=>({y:y.cum,lbl:'Y'+y.yr})),
+    };
+  }, [team,nProc,hRun,rWk,pEff,hOvr,dOvr,tProc,slaR,slaC,simp,mod,cplx,mTier,aCplx,inTok,outTok,cache,revPct,revMin,ops,opR,opH,eRate,eCost,cHrs,licM,pUsr,nUsr,supp,conn,iCost,tCost,mCost,amYrs,disc,grow]);
+
+  /* ── Format helpers ── */
+  const c$ = n => '$'+Math.abs(Math.round(n)).toLocaleString();
+  const cm = n => Math.abs(n)>=1e6 ? '$'+(n/1e6).toFixed(2)+'M' : Math.abs(n)>=1e3 ? '$'+(n/1e3).toFixed(0)+'K' : '$'+Math.round(n).toLocaleString();
+  const pct = n => (n>=0?'+':'')+Math.round(n)+'%';
+  const mom = n => (Math.round(n*10)/10)+' mo';
+  const rclr = v => v>=100?'#107C10':v>=0?'#0078D4':'#D13438';
+  const kpiC = (cl,bg) => ({background:bg,borderRadius:8,padding:'12px',border:'1px solid '+cl+'28',textAlign:'center'});
+
+  const kpis = [
+    {lbl:'Annual Savings',  val:cm(R.totSave),     sub:'before impl costs',    clr:'#107C10',bg:'#F1FAF1'},
+    {lbl:'First Year ROI',  val:pct(R.roiY1),      sub:'net after impl costs', clr:rclr(R.roiY1),bg:R.roiY1>=0?'#EFF6FC':'#FDF3F4'},
+    {lbl:'Payback Period',  val:mom(R.payMo),      sub:'time to break even',   clr:'#C55A11',bg:'#FEF6F0'},
+    {lbl:'3-Year ROI',      val:pct(R.roi3),       sub:'cumulative return',    clr:rclr(R.roi3),bg:R.roi3>=0?'#F5F0FF':'#FDF3F4'},
+  ];
+
+  const LVLS = ['Junior/Entry (0-2 yrs)','Mid-Level (3-5 yrs)','Senior (6-10 yrs)','Lead/Principal','Manager/Director'];
+
+  return (
+    <div style={W}>
+
+      {/* ── Header ── */}
+      <div className="card">
+        <div style={secH}>💰 AI Agent ROI Calculator</div>
+        <div style={secSub}>Model the financial return of AI agent automation — compare scenarios, project 5-year NPV, and break down savings by category. Based on andyhayes.ai methodology.</div>
+        <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>
+          <span style={{fontSize:11,fontWeight:600,color:'#605E5C'}}>Industry Preset:</span>
+          <select onChange={e=>applyPreset(e.target.value)} style={{...inp,width:'auto',padding:'5px 10px'}}>
+            <option value="">Custom / Manual</option>
+            <option value="banking">Banking & Finance</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="legal">Legal</option>
+            <option value="industrial">Industrial / Manufacturing</option>
+            <option value="retail">Retail / E-Commerce</option>
+          </select>
+          <button onClick={resetAll} style={{fontSize:11,padding:'5px 14px',border:'1px solid #E1DFDD',borderRadius:6,background:'#FAF9F8',cursor:'pointer',color:'#605E5C',fontWeight:600}}>↺ Reset Defaults</button>
+        </div>
+      </div>
+
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,alignItems:'start'}}>
+
+        {/* ══ LEFT — Inputs ══ */}
+        <div>
+
+          {/* Team Composition */}
+          <SecPanel title="Team Composition" icon="👥" open={open.team} onToggle={()=>tog('team')} badge={R.head+' FTEs · '+cm(R.annTeam)+'/yr'}>
+            <div style={{fontSize:10,color:'#8A8886',marginBottom:10}}>Annual cost: <strong style={{color:'#201F1E'}}>{c$(R.annTeam)}</strong> · Blended: <strong>{c$(R.blendHr)}/hr</strong></div>
+            {team.map((lv,i)=>(
+              <div key={i} style={{border:'1px solid #F0EFEE',borderRadius:6,padding:'9px 10px',marginBottom:8,background:'#FAFAFA'}}>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:8}}>
+                  <select value={lv.lvl} onChange={e=>updTeam(i,'lvl',e.target.value)} style={{...inp,width:'auto',fontSize:11,padding:'3px 6px'}}>
+                    {LVLS.map(o=><option key={o}>{o}</option>)}
+                  </select>
+                  {team.length>1 && <button onClick={()=>setTeam(t=>t.filter((_,j)=>j!==i))} style={{fontSize:11,color:'#D13438',background:'none',border:'none',cursor:'pointer',padding:'0 6px'}}>✕</button>}
+                </div>
+                <div style={g3}>
+                  <div><label style={lbl}>Count</label><input type="number" value={lv.count} min={1} max={500} style={inp} onChange={e=>updTeam(i,'count',+e.target.value)}/></div>
+                  <div><label style={lbl}>$/hr</label><input type="number" value={lv.rate} min={10} max={1000} style={inp} onChange={e=>updTeam(i,'rate',+e.target.value)}/></div>
+                  <div><label style={lbl}>Hrs/wk</label><input type="number" value={lv.hrs} min={1} max={80} style={inp} onChange={e=>updTeam(i,'hrs',+e.target.value)}/></div>
+                </div>
+              </div>
+            ))}
+            <button onClick={()=>setTeam(t=>[...t,{lvl:'Mid-Level (3-5 yrs)',count:1,rate:65,hrs:40}])} style={{fontSize:11,padding:'6px 14px',border:'1px dashed #0078D4',borderRadius:6,background:'#EFF6FC',cursor:'pointer',color:'#0078D4',width:'100%',fontWeight:600}}>+ Add Resource Level</button>
+          </SecPanel>
+
+          {/* Process Details */}
+          <SecPanel title="Process Details" icon="⚙️" open={open.proc} onToggle={()=>tog('proc')} badge={nProc+' proc · '+rWk+' runs/wk'}>
+            <div style={g2}>
+              <div><label style={lbl}>Number of Processes</label><input type="number" value={nProc} min={1} max={100} style={inp} onChange={e=>setNProc(+e.target.value)}/></div>
+              <div><label style={lbl}>Avg Hours per Run</label><input type="number" value={hRun} min={0.1} max={100} step={0.5} style={inp} onChange={e=>setHRun(+e.target.value)}/></div>
+              <div><label style={lbl}>Runs per Week</label><input type="number" value={rWk} min={1} max={10000} style={inp} onChange={e=>setRWk(+e.target.value)}/></div>
+              <div><label style={lbl}>Tasks per Process</label><input type="number" value={tProc} min={1} max={1000} style={inp} onChange={e=>setTProc(+e.target.value)}/></div>
+              <div><label style={lbl}>Handovers per Process</label><input type="number" value={hOvr} min={0} max={50} style={inp} onChange={e=>setHOvr(+e.target.value)}/></div>
+              <div><label style={lbl}>Avg Delay per Handover (min)</label><input type="number" value={dOvr} min={0} max={480} style={inp} onChange={e=>setDOvr(+e.target.value)}/></div>
+            </div>
+            <div style={{marginTop:10}}>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}><label style={lbl}>Process Efficiency</label><span style={{fontSize:11,fontWeight:700,color:'#0078D4'}}>{pEff}%</span></div>
+              <input type="range" value={pEff} min={10} max={100} step={5} style={{width:'100%',accentColor:'#0078D4',marginBottom:10}} onChange={e=>setPEff(+e.target.value)}/>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}><label style={lbl}>SLA Breach Rate</label><span style={{fontSize:11,fontWeight:700,color:'#D13438'}}>{slaR}%</span></div>
+              <input type="range" value={slaR} min={0} max={50} step={1} style={{width:'100%',accentColor:'#D13438',marginBottom:8}} onChange={e=>setSlaR(+e.target.value)}/>
+              <div><label style={lbl}>Cost per SLA Breach ($)</label><input type="number" value={slaC} min={0} max={100000} step={50} style={inp} onChange={e=>setSlaC(+e.target.value)}/></div>
+            </div>
+          </SecPanel>
+
+          {/* Task Complexity */}
+          <SecPanel title="Task Complexity Distribution" icon="📊" open={open.cplx} onToggle={()=>tog('cplx')} badge={'Save '+Math.round(R.bSave*100)+'% · Err -'+Math.round(R.bErr*100)+'%'}>
+            <div style={{fontSize:10,color:'#8A8886',marginBottom:10}}>
+              Blended time savings: <strong style={{color:'#107C10'}}>{Math.round(R.bSave*100)}%</strong> · Error reduction: <strong style={{color:'#5C2D91'}}>{Math.round(R.bErr*100)}%</strong>
+            </div>
+            {[
+              {lbl:'Simple Tasks',   desc:'90% savings · 95% error reduction', key:'simp', val:simp, clr:'#107C10'},
+              {lbl:'Moderate Tasks', desc:'65% savings · 80% error reduction', key:'mod',  val:mod,  clr:'#0078D4'},
+              {lbl:'Complex Tasks',  desc:'35% savings · 60% error reduction', key:'cplx', val:cplx, clr:'#5C2D91'},
+            ].map(t=>(
+              <div key={t.key} style={{marginBottom:12}}>
+                <div style={{display:'flex',justifyContent:'space-between',marginBottom:2}}>
+                  <div><span style={{fontSize:11,fontWeight:600,color:'#323130'}}>{t.lbl}</span> <span style={{fontSize:10,color:'#8A8886'}}>({t.desc})</span></div>
+                  <span style={{fontSize:11,fontWeight:700,color:t.clr}}>{t.val}%</span>
+                </div>
+                <input type="range" value={t.val} min={0} max={100} step={5} style={{width:'100%',accentColor:t.clr}} onChange={e=>adjCplx(t.key,+e.target.value)}/>
+              </div>
+            ))}
+            <div style={{fontSize:10,color:simp+mod+cplx===100?'#107C10':'#D13438',fontWeight:700}}>
+              Total: {simp+mod+cplx}% {simp+mod+cplx===100?'✓ balanced':'(must equal 100)'}
+            </div>
+          </SecPanel>
+
+          {/* AI Model */}
+          <SecPanel title="AI Model & Agent Configuration" icon="🤖" open={open.mdl} onToggle={()=>tog('mdl')} badge={MODS[mTier].nm+' · '+aCplx}>
+            <div style={{marginBottom:12}}>
+              <div style={{fontSize:11,fontWeight:700,color:'#323130',marginBottom:6}}>Model Tier</div>
+              <div style={g3}>
+                {Object.entries(MODS).map(([k,m])=>{
+                  const clr = k==='economy'?'#107C10':k==='mid'?'#0078D4':'#5C2D91';
+                  return (
+                    <div key={k} onClick={()=>setMTier(k)} style={{border:'2px solid '+(mTier===k?clr:'#E1DFDD'),borderRadius:7,padding:'9px 8px',cursor:'pointer',background:mTier===k?clr+'12':'#fff',textAlign:'center',transition:'all .15s'}}>
+                      <div style={{fontSize:10,fontWeight:700,color:mTier===k?clr:'#605E5C'}}>{m.nm}</div>
+                      <div style={{fontSize:9,color:'#8A8886',marginTop:2}}>{m.ds}</div>
+                      <div style={{fontSize:9,color:'#A19F9D',marginTop:2}}>${m.ic}/${m.oc}/1M tk</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div style={{marginBottom:12}}>
+              <div style={{fontSize:11,fontWeight:700,color:'#323130',marginBottom:6}}>Agent Complexity</div>
+              <div style={g3}>
+                {[{k:'single',lbl:'Single-Step',ds:'1× tokens',clr:'#107C10'},{k:'multi-step',lbl:'Multi-Step',ds:'3× tokens',clr:'#0078D4'},{k:'orchestration',lbl:'Orchestration',ds:'8× tokens',clr:'#5C2D91'}].map(a=>(
+                  <div key={a.k} onClick={()=>setACplx(a.k)} style={{border:'2px solid '+(aCplx===a.k?a.clr:'#E1DFDD'),borderRadius:7,padding:'9px 8px',cursor:'pointer',background:aCplx===a.k?a.clr+'12':'#fff',textAlign:'center',transition:'all .15s'}}>
+                    <div style={{fontSize:10,fontWeight:700,color:aCplx===a.k?a.clr:'#605E5C'}}>{a.lbl}</div>
+                    <div style={{fontSize:9,color:'#8A8886',marginTop:2}}>{a.ds}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={g2}>
+              <div><label style={lbl}>Avg Input Tokens</label><input type="number" value={inTok} min={100} max={200000} step={500} style={inp} onChange={e=>setInTok(+e.target.value)}/></div>
+              <div><label style={lbl}>Avg Output Tokens</label><input type="number" value={outTok} min={50} max={50000} step={100} style={inp} onChange={e=>setOutTok(+e.target.value)}/></div>
+            </div>
+            <div style={{marginTop:8}}>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}><label style={lbl}>Cache Hit Rate</label><span style={{fontSize:11,fontWeight:700,color:'#0078D4'}}>{cache}%</span></div>
+              <input type="range" value={cache} min={0} max={90} step={5} style={{width:'100%',accentColor:'#0078D4'}} onChange={e=>setCache(+e.target.value)}/>
+            </div>
+            <div style={{fontSize:10,color:'#8A8886',marginTop:8,background:'#F9F8F7',padding:'7px 10px',borderRadius:5}}>
+              API calls/yr: <strong>{Math.round(R.apiCls).toLocaleString()}</strong> · Annual AI cost: <strong style={{color:'#0078D4'}}>{c$(R.aiCost)}</strong>
+            </div>
+          </SecPanel>
+
+          {/* Human-in-the-Loop */}
+          <SecPanel title="Human-in-the-Loop" icon="👁️" open={open.hitl} onToggle={()=>tog('hitl')} badge={revPct+'% review · '+ops+' operator'+( ops!==1?'s':'')}>
+            <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}><label style={lbl}>Tasks Requiring Review</label><span style={{fontSize:11,fontWeight:700,color:'#0078D4'}}>{revPct}%</span></div>
+            <input type="range" value={revPct} min={0} max={100} step={5} style={{width:'100%',accentColor:'#0078D4',marginBottom:12}} onChange={e=>setRevPct(+e.target.value)}/>
+            <div style={g3}>
+              <div><label style={lbl}>Review Time (min)</label><input type="number" value={revMin} min={1} max={120} style={inp} onChange={e=>setRevMin(+e.target.value)}/></div>
+              <div><label style={lbl}>Operators</label><input type="number" value={ops} min={0} max={100} style={inp} onChange={e=>setOps(+e.target.value)}/></div>
+              <div><label style={lbl}>$/hr</label><input type="number" value={opR} min={10} max={500} style={inp} onChange={e=>setOpR(+e.target.value)}/></div>
+            </div>
+          </SecPanel>
+
+          {/* Error & Quality */}
+          <SecPanel title="Error & Quality Costs" icon="⚠️" open={open.err} onToggle={()=>tog('err')} badge={eRate+'% error rate · '+c$(eCost)+'/error'}>
+            <div style={g3}>
+              <div><label style={lbl}>Error Rate (%)</label><input type="number" value={eRate} min={0} max={100} step={0.5} style={inp} onChange={e=>setERate(+e.target.value)}/></div>
+              <div><label style={lbl}>Cost per Error ($)</label><input type="number" value={eCost} min={0} max={100000} step={50} style={inp} onChange={e=>setECost(+e.target.value)}/></div>
+              <div><label style={lbl}>Compliance Hrs/mo</label><input type="number" value={cHrs} min={0} max={500} style={inp} onChange={e=>setCHrs(+e.target.value)}/></div>
+            </div>
+          </SecPanel>
+
+          {/* Platform Licensing */}
+          <SecPanel title="Platform Licensing" icon="📄" open={open.lic} onToggle={()=>tog('lic')} badge={c$(R.platC)+'/yr'}>
+            <div style={{display:'flex',gap:6,marginBottom:10}}>
+              {[{k:'per-user',lbl:'Per User'},{k:'per-exec',lbl:'Per Execution'},{k:'named',lbl:'Named License'}].map(lm=>(
+                <div key={lm.k} onClick={()=>setLicM(lm.k)} style={{flex:1,border:'2px solid '+(licM===lm.k?'#0078D4':'#E1DFDD'),borderRadius:6,padding:'7px 6px',cursor:'pointer',background:licM===lm.k?'#EFF6FC':'#fff',textAlign:'center',transition:'all .15s'}}>
+                  <div style={{fontSize:10,fontWeight:700,color:licM===lm.k?'#0078D4':'#605E5C'}}>{lm.lbl}</div>
+                </div>
+              ))}
+            </div>
+            <div style={g2}>
+              <div><label style={lbl}>Price/User/mo ($)</label><input type="number" value={pUsr} min={0} max={5000} style={inp} onChange={e=>setPUsr(+e.target.value)}/></div>
+              <div><label style={lbl}>Number of Users</label><input type="number" value={nUsr} min={1} max={10000} style={inp} onChange={e=>setNUsr(+e.target.value)}/></div>
+              <div><label style={lbl}>Support Tier</label>
+                <select value={supp} onChange={e=>setSupp(e.target.value)} style={inp}>
+                  <option value="standard">Standard (1×)</option>
+                  <option value="premium">Premium (+20%)</option>
+                  <option value="enterprise">Enterprise (+35%)</option>
+                </select>
+              </div>
+              <div><label style={lbl}>Connector Costs/mo ($)</label><input type="number" value={conn} min={0} max={50000} style={inp} onChange={e=>setConn(+e.target.value)}/></div>
+            </div>
+          </SecPanel>
+
+          {/* Implementation */}
+          <SecPanel title="Implementation & Ongoing Costs" icon="🏗️" open={open.impl} onToggle={()=>tog('impl')} badge={'Impl: '+c$(iCost+tCost)+' · Amort: '+amYrs+'yr'}>
+            <div style={g2}>
+              <div><label style={lbl}>Implementation (one-time $)</label><input type="number" value={iCost} min={0} max={1000000} step={1000} style={inp} onChange={e=>setICost(+e.target.value)}/></div>
+              <div><label style={lbl}>Training (one-time $)</label><input type="number" value={tCost} min={0} max={500000} step={500} style={inp} onChange={e=>setTCost(+e.target.value)}/></div>
+              <div><label style={lbl}>Maintenance (annual $)</label><input type="number" value={mCost} min={0} max={500000} step={1000} style={inp} onChange={e=>setMCost(+e.target.value)}/></div>
+              <div><label style={lbl}>Amortization Period (yrs)</label><input type="number" value={amYrs} min={1} max={10} style={inp} onChange={e=>setAmYrs(+e.target.value)}/></div>
+            </div>
+          </SecPanel>
+
+          {/* Advanced Financial */}
+          <SecPanel title="Advanced Financial Settings" icon="📈" open={open.adv} onToggle={()=>tog('adv')} badge={'NPV '+disc+'% · Growth '+grow+'%'}>
+            <div style={g2}>
+              <div><label style={lbl}>Discount Rate / NPV (%)</label><input type="number" value={disc} min={0} max={50} step={0.5} style={inp} onChange={e=>setDisc(+e.target.value)}/></div>
+              <div><label style={lbl}>Annual Salary Growth (%)</label><input type="number" value={grow} min={0} max={20} step={0.5} style={inp} onChange={e=>setGrow(+e.target.value)}/></div>
+            </div>
+            <div style={{fontSize:10,color:'#8A8886',marginTop:6,background:'#F9F8F7',padding:'7px 10px',borderRadius:5}}>
+              Savings compound at {grow}%/yr · NPV discounted at {disc}%/yr · Implementation amortized over {amYrs}yr
+            </div>
+          </SecPanel>
+
+        </div>
+
+        {/* ══ RIGHT — Results ══ */}
+        <div style={{position:'sticky',top:12}}>
+
+          {/* 4 KPI cards */}
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:10}}>
+            {kpis.map((k,i)=>(
+              <div key={i} style={kpiC(k.clr,k.bg)}>
+                <div style={{fontSize:9.5,fontWeight:700,textTransform:'uppercase',letterSpacing:.6,color:'#8A8886',marginBottom:4}}>{k.lbl}</div>
+                <div style={{fontSize:24,fontWeight:700,color:k.clr,lineHeight:1,marginBottom:3}}>{k.val}</div>
+                <div style={{fontSize:9.5,color:'#8A8886'}}>{k.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Cost per transaction */}
+          <div className="card" style={{marginBottom:10}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+              <span style={{fontSize:11,fontWeight:700,color:'#201F1E'}}>Cost / Transaction</span>
+              {R.ctBefore>0 && <span style={{fontSize:10,fontWeight:700,color:'#107C10'}}>▼ {Math.round((1-R.ctAfter/R.ctBefore)*100)}% reduction</span>}
+            </div>
+            <div style={g2}>
+              <div style={{background:'#FDF3F4',borderRadius:6,padding:'9px',textAlign:'center'}}>
+                <div style={{fontSize:9,color:'#8A8886',marginBottom:2}}>BEFORE AI</div>
+                <div style={{fontSize:20,fontWeight:700,color:'#D13438'}}>{cm(R.ctBefore)}</div>
+              </div>
+              <div style={{background:'#F1FAF1',borderRadius:6,padding:'9px',textAlign:'center'}}>
+                <div style={{fontSize:9,color:'#8A8886',marginBottom:2}}>AFTER AI</div>
+                <div style={{fontSize:20,fontWeight:700,color:'#107C10'}}>{cm(R.ctAfter)}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Scenario Analysis */}
+          <div className="card" style={{marginBottom:10}}>
+            <div style={{fontSize:11,fontWeight:700,color:'#201F1E',marginBottom:1}}>Scenario Analysis</div>
+            <div style={{fontSize:9.5,color:'#8A8886',marginBottom:8}}>Best: +15% savings, -10% cost · Worst: -15% savings, +20% cost</div>
+            <table style={{width:'100%',borderCollapse:'collapse',fontSize:10}}>
+              <thead>
+                <tr style={{background:'#F3F2F1'}}>
+                  {['Metric','Best Case','Expected','Worst Case'].map(h=>(
+                    <th key={h} style={{padding:'5px 7px',textAlign:'left',fontWeight:700,color:'#605E5C',fontSize:9.5}}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {m:'Savings',  fmt:cm,  vs:[R.scen.best.save,R.scen.expected.save,R.scen.worst.save]},
+                  {m:'ROI',      fmt:pct, vs:[R.scen.best.roi,R.scen.expected.roi,R.scen.worst.roi]},
+                  {m:'Payback',  fmt:mom, vs:[R.scen.best.pay,R.scen.expected.pay,R.scen.worst.pay]},
+                  {m:'5-Yr NPV', fmt:cm,  vs:[R.scen.best.npv,R.scen.expected.npv,R.scen.worst.npv]},
+                ].map((row,i)=>(
+                  <tr key={i} style={{borderTop:'1px solid #F3F2F1'}}>
+                    <td style={{padding:'5px 7px',color:'#605E5C',fontWeight:500}}>{row.m}</td>
+                    <td style={{padding:'5px 7px',color:'#107C10',fontWeight:600}}>{row.fmt(row.vs[0])}</td>
+                    <td style={{padding:'5px 7px',color:'#0078D4',fontWeight:600}}>{row.fmt(row.vs[1])}</td>
+                    <td style={{padding:'5px 7px',color:'#D13438',fontWeight:600}}>{row.fmt(row.vs[2])}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* 5-Year NPV Chart */}
+          <div className="card" style={{marginBottom:10}}>
+            <div style={{fontSize:11,fontWeight:700,color:'#201F1E',marginBottom:1}}>Cumulative Cash Flow (NPV)</div>
+            <div style={{fontSize:9.5,color:'#8A8886',marginBottom:8}}>{disc}% discount rate · {grow}% annual salary growth</div>
+            <LineChart5yr data={R.chartData} height={128}/>
+          </div>
+
+          {/* Savings breakdown */}
+          <div className="card" style={{marginBottom:10}}>
+            <div style={{fontSize:11,fontWeight:700,color:'#201F1E',marginBottom:1}}>Annual Savings Breakdown</div>
+            <div style={{fontSize:9.5,color:'#8A8886',marginBottom:10}}>Total: <strong style={{color:'#107C10'}}>{c$(R.totSave)}</strong></div>
+            <HBarChart bars={R.breakdown} height={15}/>
+          </div>
+
+          {/* Cost breakdown */}
+          <div className="card">
+            <div style={{fontSize:11,fontWeight:700,color:'#201F1E',marginBottom:1}}>Annual Operating Cost</div>
+            <div style={{fontSize:9.5,color:'#8A8886',marginBottom:10}}>Total: <strong style={{color:'#D13438'}}>{c$(R.totCostAnn)}</strong> · Net: <strong style={{color:R.totSave-R.totCostAnn>=0?'#107C10':'#D13438'}}>{c$(R.totSave-R.totCostAnn)}</strong></div>
+            <HBarChart bars={R.costBreak} height={15}/>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ══ Full-width sections ══ */}
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,marginTop:12}}>
+
+        {/* Impact Highlights */}
+        <div className="card">
+          <div style={secH}>Impact Highlights</div>
+          <div style={secSub}>Operational outcomes from the configured scenario</div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+            {[
+              {ic:'⏱️',lbl:'Hours Saved/Year',      val:Math.round(R.hrsSaved).toLocaleString(), sub:R.fteEq.toFixed(1)+' FTE equivalent',    clr:'#0078D4'},
+              {ic:'🐛',lbl:'Errors Avoided/Year',    val:Math.round(R.errAvoid).toLocaleString(), sub:c$(R.errS)+' in error cost savings',      clr:'#5C2D91'},
+              {ic:'🔗',lbl:'Handovers Eliminated',   val:Math.round(R.handElim).toLocaleString(), sub:c$(R.handS)+' saved/yr',                  clr:'#107C10'},
+              {ic:'🎯',lbl:'SLA Breaches Avoided',   val:Math.round(R.slaAvoid).toLocaleString(), sub:c$(R.slaS)+' compliance savings',         clr:'#C55A11'},
+              {ic:'🤖',lbl:'AI Model Selected',      val:MODS[mTier].nm,                          sub:MODS[mTier].ds+' · '+aCplx,              clr:'#201F1E'},
+              {ic:'📡',lbl:'API Calls/Year',          val:Math.round(R.apiCls).toLocaleString(),   sub:c$(R.aiCost)+' inference cost/yr',       clr:'#D19200'},
+            ].map((h,i)=>(
+              <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start',padding:'9px',background:'#FAF9F8',borderRadius:6}}>
+                <div style={{fontSize:20,flexShrink:0}}>{h.ic}</div>
+                <div>
+                  <div style={{fontSize:9.5,fontWeight:700,color:'#8A8886',textTransform:'uppercase',letterSpacing:.5}}>{h.lbl}</div>
+                  <div style={{fontSize:17,fontWeight:700,color:h.clr,lineHeight:1.2,margin:'2px 0'}}>{h.val}</div>
+                  <div style={{fontSize:9.5,color:'#8A8886'}}>{h.sub}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* AI Model Comparison */}
+        <div className="card">
+          <div style={secH}>AI Model Comparison</div>
+          <div style={secSub}>Same scenario modeled across all model tiers — currently selected: <strong>{MODS[mTier].nm}</strong></div>
+          <table style={{width:'100%',borderCollapse:'collapse',fontSize:10.5}}>
+            <thead>
+              <tr style={{background:'#F3F2F1'}}>
+                <th style={{padding:'7px 8px',textAlign:'left',fontWeight:700,color:'#605E5C',fontSize:10}}>Metric</th>
+                {R.modComp.map(m=><th key={m.key} style={{padding:'7px 8px',textAlign:'right',fontWeight:700,color:m.sel?'#0078D4':'#605E5C',fontSize:10,borderBottom:m.sel?'2px solid #0078D4':undefined}}>{m.nm}{m.sel?' ★':''}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                {lbl:'AI Cost/yr',    fn:m=>c$(m.aiC)},
+                {lbl:'Accuracy',      fn:m=>(m.acc*100).toFixed(0)+'%'},
+                {lbl:'Net Savings Y1',fn:m=>c$(m.net)},
+                {lbl:'First Yr ROI',  fn:m=>pct(m.roi)},
+                {lbl:'Cost/Task',     fn:m=>cm(m.trans)},
+              ].map((row,i)=>(
+                <tr key={i} style={{borderTop:'1px solid #F3F2F1'}}>
+                  <td style={{padding:'6px 8px',color:'#605E5C',fontWeight:500}}>{row.lbl}</td>
+                  {R.modComp.map(m=><td key={m.key} style={{padding:'6px 8px',textAlign:'right',fontWeight:m.sel?700:400,color:m.sel?'#0078D4':'#201F1E'}}>{row.fn(m)}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Sensitivity Analysis */}
+      <div className="card" style={{marginTop:12}}>
+        <div style={secH}>Sensitivity Analysis</div>
+        <div style={secSub}>Variables ranked by impact magnitude — which inputs move the needle most on your ROI</div>
+        <div style={{display:'flex',flexDirection:'column',gap:7}}>
+          {R.sensi.map((s,i)=>{
+            const maxImpact = R.sensi[0].impact || 1;
+            const wPct = Math.max(s.impact,0)/maxImpact*100;
+            return (
+              <div key={i} style={{display:'grid',gridTemplateColumns:'180px 1fr 80px',gap:10,alignItems:'center'}}>
+                <span style={{fontSize:10.5,color:'#323130',fontWeight:i===0?700:400}}>{i+1}. {s.lbl}</span>
+                <div style={{height:16,background:'#F3F2F1',borderRadius:4,overflow:'hidden'}}>
+                  <div style={{height:'100%',width:wPct+'%',background: i===0?'#0078D4':i===1?'#5C2D91':i===2?'#107C10':'#D19200',borderRadius:4,opacity:1-i*0.07}}/>
+                </div>
+                <span style={{fontSize:10,fontWeight:600,color:'#605E5C',textAlign:'right'}}>{cm(s.impact)}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{fontSize:9.5,color:'#8A8886',marginTop:10}}>Impact = estimated annual savings delta from a ±15% change in each variable.</div>
+      </div>
+
+      {/* 5-Year Projection Table */}
+      <div className="card" style={{marginTop:12}}>
+        <div style={secH}>5-Year Financial Projection</div>
+        <div style={secSub}>Includes {grow}% annual salary growth · {disc}% NPV discount rate · Implementation amortized over {amYrs} year{amYrs!==1?'s':''}</div>
+        <table style={{width:'100%',borderCollapse:'collapse',fontSize:11}}>
+          <thead>
+            <tr style={{background:'#F3F2F1'}}>
+              {['Year','Annual Savings','Annual Cost','Net Cash Flow','Cumulative NPV'].map(h=>(
+                <th key={h} style={{padding:'8px 10px',textAlign:h==='Year'?'left':'right',fontWeight:700,color:'#605E5C',fontSize:10.5}}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {R.yrs.map((y,i)=>(
+              <tr key={i} style={{borderTop:'1px solid #F3F2F1',background:i%2===0?'#fff':'#FAF9F8'}}>
+                <td style={{padding:'8px 10px',fontWeight:700,color:'#201F1E'}}>Year {y.yr}</td>
+                <td style={{padding:'8px 10px',textAlign:'right',color:'#107C10',fontWeight:600}}>{c$(y.save)}</td>
+                <td style={{padding:'8px 10px',textAlign:'right',color:'#D13438'}}>{c$(y.cost)}</td>
+                <td style={{padding:'8px 10px',textAlign:'right',fontWeight:700,color:y.net>=0?'#107C10':'#D13438'}}>{c$(y.net)}</td>
+                <td style={{padding:'8px 10px',textAlign:'right',fontWeight:700,color:y.cum>=0?'#0078D4':'#D13438'}}>{c$(y.cum)}</td>
+              </tr>
+            ))}
+            <tr style={{borderTop:'2px solid #E1DFDD',background:'#F9F8F7'}}>
+              <td style={{padding:'8px 10px',fontWeight:700,color:'#201F1E'}}>5-Year Total</td>
+              <td style={{padding:'8px 10px',textAlign:'right',color:'#107C10',fontWeight:700}}>{c$(R.yrs.reduce((s,y)=>s+y.save,0))}</td>
+              <td style={{padding:'8px 10px',textAlign:'right',color:'#D13438',fontWeight:700}}>{c$(R.yrs.reduce((s,y)=>s+y.cost,0))}</td>
+              <td style={{padding:'8px 10px',textAlign:'right',fontWeight:700,color:'#107C10'}}>{c$(R.yrs.reduce((s,y)=>s+y.net,0))}</td>
+              <td style={{padding:'8px 10px',textAlign:'right',fontWeight:700,color:'#0078D4'}}>{c$(R.yrs[R.yrs.length-1].cum)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  );
+}
+
+
+function App(){
+  const[tab,setTab]=useState(0);
+  const tabs=[
+    {l:"📊 Overview",d:"Welcome — explore the toolkit, understand each section and build your business case"},
+    {l:"🏗️ Architecture Advisor",d:"Generic AI agent architecture advisor: model selection, pipeline design, cost estimation"},
+    {l:"💰 ROI Calculator",d:"Full AI agent ROI model: team costs, process savings, NPV projection, scenario & sensitivity analysis"},
+    {l:"📚 Gartner Research",d:"Evidence-based insights: Productivity Paradox, ODMs, Headcount Impact, 5 Capabilities"},
+    {l:"🧮 ROI by Persona",d:"Deep-dive ROI calculator for each of the 24 professional profiles"},
+    {l:"🤖 Agent Advisor",d:"Architecture recommendations: Custom Agents, MCP Servers, Skills per persona"},
+  ];
+  return(<>
+    <div className="topbar"/>
+    <header className="hdr">
+      <div className="hdr-inner">
+        <div className="hdr-brand">
+          <div className="dots"><div className="dot" style={{background:"#F25022"}}/><div className="dot" style={{background:"#7FBA00"}}/><div className="dot" style={{background:"#00A4EF"}}/><div className="dot" style={{background:"#FFB900"}}/></div>
+          Microsoft Software GBB Americas
+        </div>
+        <h1>Agentic AI ROI Toolkit</h1>
+        <p>{tabs[tab].d}</p>
+        <div className="main-tabs">
+          {tabs.map((t,i)=><button key={i} className={`main-tab ${tab===i?"on":""}`} onClick={()=>setTab(i)}>{t.l}</button>)}
+        </div>
+      </div>
+    </header>
+    <div className="wrap">
+      {tab===0&&<OverviewTab onNavigate={setTab}/>}
+      {tab===1&&<ArchitectureAdvisor/>}
+      {tab===2&&<ROICalculatorTab/>}
+      {tab===3&&<GartnerResearch/>}
+      {tab===4&&<PersonaROI/>}
+      {tab===5&&<AgentAdvisor/>}
+    </div>
+    <footer className="footer">
+      <div className="footer-inner">
+        <div className="footer-brand">
+          <div className="dots"><div className="dot" style={{background:"#F25022"}}/><div className="dot" style={{background:"#7FBA00"}}/><div className="dot" style={{background:"#00A4EF"}}/><div className="dot" style={{background:"#FFB900"}}/></div>
+          Microsoft Software GBB Americas
+        </div>
+        <span>Agentic AI ROI Toolkit v2.0 | Paula Silva, Software GBB | April 2026</span>
+        <span>Sources: Gartner G00837723, G00799085, G00841080, G00846878, G00823006, G00825224</span>
+      </div>
+    </footer>
+  </>);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>

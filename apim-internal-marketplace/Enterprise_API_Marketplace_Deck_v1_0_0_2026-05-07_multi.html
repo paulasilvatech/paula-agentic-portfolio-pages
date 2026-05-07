@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Enterprise API Marketplace and Governance">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Enterprise API Marketplace and Governance">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<title data-i18n="meta.title">Enterprise API Marketplace and Governance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --c-red-50:#FFF0EB;--c-red-500:#F25022;--c-red-700:#B33816;
+  --c-green-50:#F1F8E3;--c-green-500:#7FBA00;--c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD;--c-blue-500:#00A4EF;--c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0;--c-yellow-500:#FFB900;--c-yellow-700:#B88500;
+  --ink:#1A1A1A;--ink-2:#3A3A3A;--ink-3:#737373;
+  --paper:#FFFFFF;--bg:#F7F7F5;--bg-alt:#ECECE8;--rule:#E5E5E0;--rule-2:#CECEC7;
+  --dark-bg:#141414;--dark-surface:#1C1C1A;--dark-ink:#F0F0F0;--dark-ink-2:#C7C7C2;--dark-ink-3:#A8A8A4;--dark-rule:#2E2E2A;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;}
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .18s ease-out;pointer-events:none;}
+.slide[data-active="true"]{visibility:visible;opacity:1;pointer-events:auto;}
+.slide--light{background:var(--bg);color:var(--ink);}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink);}
+.slide--paper{background:var(--paper);color:var(--ink);}
+.eyebrow{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--c-yellow-500));margin-bottom:24px;}
+.slide--dark .eyebrow{color:var(--accent,var(--c-yellow-500));}
+.title{font-size:clamp(36px,4.4vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.025em;max-width:1500px;margin-bottom:22px;text-wrap:balance;}
+.title--medium{font-size:clamp(30px,3.4vw,50px);max-width:1400px;}
+.title--small{font-size:clamp(24px,2.6vw,36px);max-width:1280px;}
+.title .accent-red{color:var(--c-red-500);} .title .accent-green{color:var(--c-green-500);} .title .accent-blue{color:var(--c-blue-500);} .title .accent-yellow{color:var(--c-yellow-500);}
+.subtitle{font-size:clamp(16px,1.5vw,22px);line-height:1.4;color:var(--ink-2);max-width:1200px;font-weight:400;text-wrap:pretty;}
+.slide--dark .subtitle{color:var(--dark-ink-2);}
+.body-large{font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--ink);max-width:1200px;margin-top:22px;}
+.caption{font-size:13px;color:var(--ink-3);font-style:italic;line-height:1.5;max-width:1100px;margin-top:18px;}
+.section-title{font-size:clamp(48px,5.6vw,90px);font-weight:500;line-height:.98;letter-spacing:-.035em;margin:20px 0 18px;max-width:1400px;}
+.section-number{font-size:clamp(160px,22vw,340px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-yellow-500));opacity:.92;}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;padding-top:22px;border-top:1px solid var(--rule);margin-top:36px;max-width:1200px;}
+.meta-item{display:flex;flex-direction:column;gap:6px;}
+.meta-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);}
+.meta-value{font-size:15px;font-weight:500;line-height:1.35;}
+.list-numbered{display:flex;flex-direction:column;gap:12px;margin-top:22px;max-width:1100px;}
+.list-numbered__item{display:grid;grid-template-columns:80px 1fr;gap:22px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule);}
+.list-numbered__num{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--ink-3);}
+.list-numbered__text{font-size:20px;font-weight:400;line-height:1.35;}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1500px;margin-top:22px;}
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1500px;margin-top:22px;}
+.card{padding:22px 22px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;gap:10px;}
+.slide--dark .card{background:var(--dark-surface);border-color:var(--dark-rule);}
+.card__kicker{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-yellow-500));}
+.card__title{font-size:18px;font-weight:500;line-height:1.25;}
+.card__body{font-size:14px;line-height:1.5;color:var(--ink-2);}
+.slide--dark .card__body{color:var(--dark-ink-2);}
+.diagram-wrap{margin-top:18px;width:100%;max-width:1600px;}
+.diagram-wrap svg{width:100%;height:auto;display:block;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1500px;margin-top:18px;}
+.split__col{display:flex;flex-direction:column;gap:14px;}
+.split__title{font-size:22px;font-weight:500;line-height:1.25;}
+.split__kicker{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-yellow-500));}
+.split__body{font-size:15px;line-height:1.55;color:var(--ink-2);}
+.deck-progress{position:fixed;top:0;left:0;height:3px;background:var(--c-yellow-500);transition:width .3s ease;z-index:200;}
+.deck-brand{position:fixed;top:22px;left:22px;display:flex;align-items:center;gap:10px;z-index:100;}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-2);}
+a.deck-brand{text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+.lang-switcher{position:fixed;top:22px;right:22px;display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;font-family:var(--font-mono);z-index:100;}
+.lang-switcher__btn{padding:5px 10px;background:transparent;border:none;border-radius:3px;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer;}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-yellow-500);color:#fff;}
+body[data-slide-theme="dark"] .lang-switcher{background:var(--dark-surface);border-color:var(--dark-rule);}
+body[data-slide-theme="dark"] .lang-switcher__btn{color:var(--dark-ink-3);}
+.deck-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:6px;z-index:100;font-family:var(--font-mono);}
+.deck-controls__btn{width:36px;height:36px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:15px;color:var(--ink);cursor:pointer;}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper);}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-controls__btn{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink);}
+body[data-slide-theme="dark"] .deck-controls__counter{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink-2);}
+
+/* Overview modal (Wave 16 injection) */
+.overview { position:fixed; inset:0; background:var(--bg,#F7F7F5); z-index:500; display:none; overflow-y:auto; padding:80px 40px 40px; }
+.overview[data-open="true"] { display:block; }
+.overview__header { max-width:1600px; margin:0 auto 28px; display:flex; justify-content:space-between; align-items:baseline; padding-bottom:18px; border-bottom:1px solid var(--rule,#E5E5E0); }
+.overview__title { font-size:28px; font-weight:500; letter-spacing:-0.02em; color:var(--ink,#1A1A1A); }
+.overview__hint { font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview__grid { max-width:1600px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+.overview-card { position:relative; aspect-ratio:16/9; padding:14px 16px; border:1px solid var(--rule,#E5E5E0); border-radius:6px; background:var(--paper,#FFFFFF); text-align:left; cursor:pointer; overflow:hidden; transition:all 0.15s; font-family:inherit; }
+.overview-card:hover { border-color:var(--ink-2,#3A3A3A); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.06); }
+.overview-card__accent { position:absolute; top:0; left:0; right:0; height:3px; background:var(--card-accent,var(--c-blue-500,#00A4EF)); }
+.overview-card__num { position:absolute; top:10px; right:12px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:10px; letter-spacing:0.14em; color:var(--ink-3,#737373); }
+.overview-card__eyebrow { display:block; margin-top:10px; margin-bottom:8px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview-card__title { font-size:14px; line-height:1.25; font-weight:500; color:var(--ink,#1A1A1A); display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.overview-card[data-current="true"] { border-color:var(--c-blue-500,#00A4EF); box-shadow:0 0 0 2px var(--c-blue-500,#00A4EF); }
+body[data-overview-open="true"] .deck-brand,
+body[data-overview-open="true"] .deck-controls,
+body[data-overview-open="true"] .lang-switcher,
+body[data-overview-open="true"] .kbd-hint { display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="deck-progress" id="progress"></div>
+
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:22px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt</span>
+</a>
+
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en" onclick="setLocale('en')" aria-current="true">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+  <button class="lang-switcher__btn" data-locale="es" onclick="setLocale('es')">ES</button>
+</div>
+
+<div class="deck-controls">
+  <button class="deck-controls__btn" onclick="prevSlide()" aria-label="Previous">&lsaquo;</button>
+  <span class="deck-controls__counter" id="counter">1 / 1</span>
+  <button class="deck-controls__btn" onclick="nextSlide()" aria-label="Next">&rsaquo;</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- 1. COVER -->
+<section class="slide slide--light" data-active="true" style="--accent: var(--c-yellow-500); justify-content: center;">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="eyebrow" data-i18n="cover.eyebrow">Enterprise API and Tooling Governance</div>
+    <h1 class="title">
+      <span data-i18n="cover.t1">APIs as products. Extensions as a</span>
+      <span class="accent-yellow" data-i18n="cover.t2">marketplace.</span>
+      <span data-i18n="cover.t3">Governance as the</span>
+      <span class="accent-blue" data-i18n="cover.t4">control plane.</span>
+    </h1>
+    <p class="subtitle" data-i18n="cover.subtitle">A unified runbook for governing APIs, VS Code extensions, MCP servers, and Copilot agents through one integrated control plane.</p>
+  </div>
+  <div class="meta-grid" style="flex-shrink:0;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-07</span></div>
+  </div>
+</section>
+
+<!-- 2. AGENDA -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="agenda.eyebrow">Agenda</div>
+  <h2 class="title title--medium" data-i18n="agenda.title">Three parts. From sprawl to a governed control plane.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">PART I</span><span class="list-numbered__text" data-i18n="agenda.i1">The sprawl, the unified vision, and the integrated platform architecture.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">PART II</span><span class="list-numbered__text" data-i18n="agenda.i2">The three hubs: Azure API Center, VS Code Private Marketplace, Copilot governance.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">PART III</span><span class="list-numbered__text" data-i18n="agenda.i3">Security, integration scenarios, the Day 0 to Day 2 operational runbook.</span></div>
+  </div>
+</section>
+
+<!-- 3. PART I COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part1.eyebrow">Part I</div>
+  <div class="section-number">I</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">01</div>
+  <h2 class="section-title" data-i18n="part1.title">The sprawl and the unified vision.</h2>
+  <p class="subtitle" data-i18n="part1.subtitle">Why enterprise development environments accumulate compounding risk, and the architecture that closes the loop.</p>
+</section>
+
+<!-- 4. THE SPRAWL -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="sprawl.eyebrow">Problem · Three converging risks</div>
+  <h2 class="title title--medium" data-i18n="sprawl.title">APIs, extensions, MCP, agents: nothing is governed end-to-end.</h2>
+  <div class="cards-3">
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="sprawl.c1.k">01 · Security</div>
+      <div class="card__title" data-i18n="sprawl.c1.t">Unvetted tooling.</div>
+      <div class="card__body" data-i18n="sprawl.c1.b">Extensions and MCP servers installed ad hoc may exfiltrate code or credentials. The IDE becomes the soft target.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="sprawl.c2.k">02 · Compliance</div>
+      <div class="card__title" data-i18n="sprawl.c2.t">Data leaving the perimeter.</div>
+      <div class="card__body" data-i18n="sprawl.c2.b">Sensitive data reaches AI model APIs without authorization. Audit teams cannot prove what left, when, and to whom.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="sprawl.c3.k">03 · Productivity</div>
+      <div class="card__title" data-i18n="sprawl.c3.t">Shadow APIs and duplication.</div>
+      <div class="card__body" data-i18n="sprawl.c3.b">Developers cannot discover what exists, so they rebuild. They use deprecated APIs and burn time on tooling setup.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. UNIFIED CONTROL PLANE DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-yellow-500);" data-i18n="plane.eyebrow">Architecture · Integrated control plane</div>
+  <h2 class="title title--small" data-i18n="plane.title">Three hubs. One developer workstation. Nothing reaches it unvetted.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 480" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="30" width="450" height="120" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="64" y="62" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">HUB 01</text>
+      <text x="64" y="92" font-size="20" font-weight="500" fill="#1A1A1A">Azure API Center</text>
+      <text x="64" y="118" font-size="13" fill="#3A3A3A">API inventory, versions, linting, shadow API.</text>
+      <text x="64" y="138" font-size="13" fill="#3A3A3A">Bidirectional sync with Azure API Management.</text>
+      <rect x="525" y="30" width="450" height="120" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="549" y="62" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">HUB 02</text>
+      <text x="549" y="92" font-size="20" font-weight="500" fill="#1A1A1A">VS Code Private Marketplace</text>
+      <text x="549" y="118" font-size="13" fill="#3A3A3A">Curated extension catalog, internal hosting,</text>
+      <text x="549" y="138" font-size="13" fill="#3A3A3A">public rehosting, air-gapped support.</text>
+      <rect x="1010" y="30" width="450" height="120" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="1034" y="62" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">HUB 03</text>
+      <text x="1034" y="92" font-size="20" font-weight="500" fill="#1A1A1A">Copilot Governance</text>
+      <text x="1034" y="118" font-size="13" fill="#3A3A3A">MCP servers, Copilot extensions,</text>
+      <text x="1034" y="138" font-size="13" fill="#3A3A3A">custom agents, prompts, skills.</text>
+      <line x1="265" y1="150" x2="265" y2="220" stroke="#1A1A1A" stroke-width="1.5"/>
+      <line x1="750" y1="150" x2="750" y2="220" stroke="#1A1A1A" stroke-width="1.5"/>
+      <line x1="1235" y1="150" x2="1235" y2="220" stroke="#1A1A1A" stroke-width="1.5"/>
+      <rect x="40" y="220" width="1420" height="80" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="64" y="252" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#0076AC">POLICY LAYER</text>
+      <text x="64" y="282" font-size="18" font-weight="500" fill="#1A1A1A">AllowedExtensions, RBAC, identity, audit log</text>
+      <line x1="750" y1="300" x2="750" y2="350" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="746,344 750,360 754,344" fill="#1A1A1A"/>
+      <rect x="40" y="370" width="1420" height="80" rx="8" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+      <text x="64" y="402" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">DEVELOPER WORKSTATION</text>
+      <text x="64" y="432" font-size="18" font-weight="500" fill="#1A1A1A">VS Code (Desktop) + GitHub Copilot</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 6. PART II COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="part2.eyebrow">Part II</div>
+  <div class="section-number">II</div>
+  <div class="section-number" style="--accent: var(--c-yellow-500);">02</div>
+  <h2 class="section-title" data-i18n="part2.title">The three hubs in detail.</h2>
+  <p class="subtitle" data-i18n="part2.subtitle">API Center, Private Marketplace, Copilot governance: same design principle, different artifact category.</p>
+</section>
+
+<!-- 7. AZURE API CENTER -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="apic.eyebrow">Hub 01 · Azure API Center</div>
+  <h2 class="title title--medium" data-i18n="apic.title">One register for every API in the organization.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="apic.c1.k">Inventory</div><div class="card__title" data-i18n="apic.c1.t">Every API, every version.</div><div class="card__body" data-i18n="apic.c1.b">Definitions, environments, deployments. CLI and CI/CD registration. Custom metadata for ownership and classification.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="apic.c2.k">Linting</div><div class="card__title" data-i18n="apic.c2.t">Style at the gate.</div><div class="card__body" data-i18n="apic.c2.b">Spectral rules at registration time. Block APIs that violate organizational design standards before they ship.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="apic.c3.k">Shadow API</div><div class="card__title" data-i18n="apic.c3.t">Dev Proxy discovery.</div><div class="card__body" data-i18n="apic.c3.b">Detect undocumented APIs the developer call. Surface them to the catalog before they become production debt.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="apic.c4.k">APIM sync</div><div class="card__title" data-i18n="apic.c4.t">Runtime feeds inventory.</div><div class="card__body" data-i18n="apic.c4.b">Azure API Management catalog flows upstream automatically. Gateway truth and inventory truth converge.</div></div>
+  </div>
+</section>
+
+<!-- 8. VS CODE PRIVATE MARKETPLACE -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="vsmp.eyebrow">Hub 02 · VS Code Private Marketplace</div>
+  <h2 class="title title--medium" data-i18n="vsmp.title">A curated marketplace under enterprise control.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-green-500);" data-i18n="vsmp.l.k">Architecture</div>
+      <div class="split__title" data-i18n="vsmp.l.t">Stateless container, object storage backing.</div>
+      <div class="split__body" data-i18n="vsmp.l.b">Deploy in any region. Serve internal and rehosted public extensions. Air-gap deploys keep developers productive without network egress.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-green-500);" data-i18n="vsmp.r.k">Policy</div>
+      <div class="split__title" data-i18n="vsmp.r.t">AllowedExtensions decides what installs.</div>
+      <div class="split__body" data-i18n="vsmp.r.b">Group Policy on Windows, Intune on macOS and managed devices. Bootstrap install ensures every dev opens a curated VS Code on day one.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. COPILOT GOVERNANCE -->
+<section class="slide slide--paper" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="cop.eyebrow">Hub 03 · Copilot governance</div>
+  <h2 class="title title--small" data-i18n="cop.title">MCP, agents, prompts, skills: each artifact category has a governance contract.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="cop.c1.k">MCP servers</div><div class="card__title" data-i18n="cop.c1.t">Approved tool surface.</div><div class="card__body" data-i18n="cop.c1.b">Registered MCP servers in .vscode/mcp.json, distributed via the marketplace. Trust model documented per server.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="cop.c2.k">Extensions</div><div class="card__title" data-i18n="cop.c2.t">Marketplace apps.</div><div class="card__body" data-i18n="cop.c2.b">Copilot extensions reviewed for data flow. Allowlist enforced at the GitHub Enterprise organization level.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="cop.c3.k">Custom agents</div><div class="card__title" data-i18n="cop.c3.t">Repo-scoped behavior.</div><div class="card__body" data-i18n="cop.c3.b">.github/agents/ files version-controlled with the code they govern. Reviewed in the same PR pipeline.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="cop.c4.k">Skills + prompts</div><div class="card__title" data-i18n="cop.c4.t">Reusable instructions.</div><div class="card__body" data-i18n="cop.c4.b">Prompt files and skills curated in a shared repo. Approval workflow before they reach the developer fleet.</div></div>
+  </div>
+</section>
+
+<!-- 10. PART III COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part3.eyebrow">Part III</div>
+  <div class="section-number">III</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">03</div>
+  <h2 class="section-title" data-i18n="part3.title">Security, scenarios, operations.</h2>
+  <p class="subtitle" data-i18n="part3.subtitle">Threat model, integration scenarios for regulated and air-gapped environments, and the Day 0 to Day 2 sequence.</p>
+</section>
+
+<!-- 11. INTEGRATION SCENARIOS -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="scen.eyebrow">Scenarios · Three deployments</div>
+  <h2 class="title title--medium" data-i18n="scen.title">Same architecture, three deployment shapes.</h2>
+  <div class="cards-3">
+    <div class="card" style="--accent: var(--c-blue-500);">
+      <div class="card__kicker" data-i18n="scen.c1.k">A · Full integrated</div>
+      <div class="card__title" data-i18n="scen.c1.t">Cloud-connected enterprise.</div>
+      <div class="card__body" data-i18n="scen.c1.b">API design in VS Code, registered to API Center, synced to APIM, consumed from the IDE. Marketplace and Copilot fully online.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-blue-500);">
+      <div class="card__kicker" data-i18n="scen.c2.k">B · Air-gapped</div>
+      <div class="card__title" data-i18n="scen.c2.t">No public network egress.</div>
+      <div class="card__body" data-i18n="scen.c2.b">Marketplace rehosts public extensions on internal storage. MCP servers run on internal endpoints. Copilot Enterprise on private link.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-blue-500);">
+      <div class="card__kicker" data-i18n="scen.c3.k">C · Regulated</div>
+      <div class="card__title" data-i18n="scen.c3.t">Finance, public sector.</div>
+      <div class="card__body" data-i18n="scen.c3.b">Audit log retention, classification labels, signed artifacts, identity propagation per request. Auditor independent from platform.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. CLOSING -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500); justify-content: center; align-items: center; text-align: center;">
+  <div class="eyebrow" data-i18n="end.eyebrow">Closing thought</div>
+  <h2 class="title title--medium" style="text-align:center;"><span data-i18n="end.t1">Governance is the platform.</span> <span class="accent-yellow" data-i18n="end.t2">Build it once.</span></h2>
+  <p class="subtitle" style="text-align:center;margin-top:24px;" data-i18n="end.sub">Three hubs, one control plane. The artifacts change. The contract does not.</p>
+
+  <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:24px;">
+    <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:96px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+    <p style="font-style:italic;font-size:15px;color:var(--ink-2);margin:0;text-align:center;">Building the future of software development with AI and Agentic DevOps.</p>
+    <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);">Paula Silva | Software Global Black Belt</div>
+    <a href="mailto:paulasilva@microsoft.com" style="display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--rule-2);border-radius:6px;text-decoration:none;color:var(--ink);font-size:14px;background:var(--paper);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;color:var(--ink-2);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+      paulasilva@microsoft.com
+    </a>
+  </div>
+</section>
+
+</div>
+
+<script>
+const I18N = {
+  "en": {
+    "meta": {"title": "Enterprise API Marketplace and Governance"},
+    "labels": {"author": "Author", "role": "Role", "contact": "Contact", "date": "Date"},
+    "cover": {"eyebrow": "Enterprise API and Tooling Governance", "t1": "APIs as products. Extensions as a", "t2": "marketplace.", "t3": "Governance as the", "t4": "control plane.", "subtitle": "A unified runbook for governing APIs, VS Code extensions, MCP servers, and Copilot agents through one integrated control plane."},
+    "agenda": {"eyebrow": "Agenda", "title": "Three parts. From sprawl to a governed control plane.", "i1": "The sprawl, the unified vision, and the integrated platform architecture.", "i2": "The three hubs: Azure API Center, VS Code Private Marketplace, Copilot governance.", "i3": "Security, integration scenarios, the Day 0 to Day 2 operational runbook."},
+    "part1": {"eyebrow": "Part I", "title": "The sprawl and the unified vision.", "subtitle": "Why enterprise development environments accumulate compounding risk, and the architecture that closes the loop."},
+    "sprawl": {"eyebrow": "Problem · Three converging risks", "title": "APIs, extensions, MCP, agents: nothing is governed end-to-end.", "c1": {"k": "01 · Security", "t": "Unvetted tooling.", "b": "Extensions and MCP servers installed ad hoc may exfiltrate code or credentials. The IDE becomes the soft target."}, "c2": {"k": "02 · Compliance", "t": "Data leaving the perimeter.", "b": "Sensitive data reaches AI model APIs without authorization. Audit teams cannot prove what left, when, and to whom."}, "c3": {"k": "03 · Productivity", "t": "Shadow APIs and duplication.", "b": "Developers cannot discover what exists, so they rebuild. They use deprecated APIs and burn time on tooling setup."}},
+    "plane": {"eyebrow": "Architecture · Integrated control plane", "title": "Three hubs. One developer workstation. Nothing reaches it unvetted."},
+    "part2": {"eyebrow": "Part II", "title": "The three hubs in detail.", "subtitle": "API Center, Private Marketplace, Copilot governance: same design principle, different artifact category."},
+    "apic": {"eyebrow": "Hub 01 · Azure API Center", "title": "One register for every API in the organization.", "c1": {"k": "Inventory", "t": "Every API, every version.", "b": "Definitions, environments, deployments. CLI and CI/CD registration. Custom metadata for ownership and classification."}, "c2": {"k": "Linting", "t": "Style at the gate.", "b": "Spectral rules at registration time. Block APIs that violate organizational design standards before they ship."}, "c3": {"k": "Shadow API", "t": "Dev Proxy discovery.", "b": "Detect undocumented APIs the developer call. Surface them to the catalog before they become production debt."}, "c4": {"k": "APIM sync", "t": "Runtime feeds inventory.", "b": "Azure API Management catalog flows upstream automatically. Gateway truth and inventory truth converge."}},
+    "vsmp": {"eyebrow": "Hub 02 · VS Code Private Marketplace", "title": "A curated marketplace under enterprise control.", "l": {"k": "Architecture", "t": "Stateless container, object storage backing.", "b": "Deploy in any region. Serve internal and rehosted public extensions. Air-gap deploys keep developers productive without network egress."}, "r": {"k": "Policy", "t": "AllowedExtensions decides what installs.", "b": "Group Policy on Windows, Intune on macOS and managed devices. Bootstrap install ensures every dev opens a curated VS Code on day one."}},
+    "cop": {"eyebrow": "Hub 03 · Copilot governance", "title": "MCP, agents, prompts, skills: each artifact category has a governance contract.", "c1": {"k": "MCP servers", "t": "Approved tool surface.", "b": "Registered MCP servers in .vscode/mcp.json, distributed via the marketplace. Trust model documented per server."}, "c2": {"k": "Extensions", "t": "Marketplace apps.", "b": "Copilot extensions reviewed for data flow. Allowlist enforced at the GitHub Enterprise organization level."}, "c3": {"k": "Custom agents", "t": "Repo-scoped behavior.", "b": ".github/agents/ files version-controlled with the code they govern. Reviewed in the same PR pipeline."}, "c4": {"k": "Skills + prompts", "t": "Reusable instructions.", "b": "Prompt files and skills curated in a shared repo. Approval workflow before they reach the developer fleet."}},
+    "part3": {"eyebrow": "Part III", "title": "Security, scenarios, operations.", "subtitle": "Threat model, integration scenarios for regulated and air-gapped environments, and the Day 0 to Day 2 sequence."},
+    "scen": {"eyebrow": "Scenarios · Three deployments", "title": "Same architecture, three deployment shapes.", "c1": {"k": "A · Full integrated", "t": "Cloud-connected enterprise.", "b": "API design in VS Code, registered to API Center, synced to APIM, consumed from the IDE. Marketplace and Copilot fully online."}, "c2": {"k": "B · Air-gapped", "t": "No public network egress.", "b": "Marketplace rehosts public extensions on internal storage. MCP servers run on internal endpoints. Copilot Enterprise on private link."}, "c3": {"k": "C · Regulated", "t": "Finance, public sector.", "b": "Audit log retention, classification labels, signed artifacts, identity propagation per request. Auditor independent from platform."}},
+    "end": {"eyebrow": "Closing thought", "t1": "Governance is the platform.", "t2": "Build it once.", "sub": "Three hubs, one control plane. The artifacts change. The contract does not."}
+  },
+  "pt-BR": {
+    "meta": {"title": "Marketplace Corporativo de APIs e Governança"},
+    "labels": {"author": "Autora", "role": "Papel", "contact": "Contato", "date": "Data"},
+    "cover": {"eyebrow": "Governança Corporativa de APIs e Tooling", "t1": "APIs como produto. Extensões como", "t2": "marketplace.", "t3": "Governança como", "t4": "plano de controle.", "subtitle": "Um runbook unificado para governar APIs, extensões VS Code, servidores MCP e agentes Copilot em um único plano de controle integrado."},
+    "agenda": {"eyebrow": "Agenda", "title": "Três partes. Da dispersão a um plano de controle governado.", "i1": "A dispersão, a visão unificada e a arquitetura da plataforma integrada.", "i2": "Os três hubs: Azure API Center, VS Code Private Marketplace, governança Copilot.", "i3": "Segurança, cenários de integração, o runbook Dia 0 a Dia 2."},
+    "part1": {"eyebrow": "Parte I", "title": "A dispersão e a visão unificada.", "subtitle": "Por que ambientes corporativos acumulam risco composto, e a arquitetura que fecha o ciclo."},
+    "sprawl": {"eyebrow": "Problema · Três riscos convergentes", "title": "APIs, extensões, MCP, agentes: nada é governado de ponta a ponta.", "c1": {"k": "01 · Segurança", "t": "Tooling sem vetting.", "b": "Extensões e servidores MCP instalados ad hoc podem exfiltrar código ou credenciais. O IDE vira o alvo fácil."}, "c2": {"k": "02 · Compliance", "t": "Dado saindo do perímetro.", "b": "Dado sensível chega às APIs de modelo IA sem autorização. A auditoria não consegue provar o que saiu, quando e para quem."}, "c3": {"k": "03 · Produtividade", "t": "Shadow APIs e duplicação.", "b": "O dev não descobre o que existe, então reconstrói. Usa APIs depreciadas e queima tempo configurando ferramentas."}},
+    "plane": {"eyebrow": "Arquitetura · Plano de controle integrado", "title": "Três hubs. Uma workstation. Nada chega lá sem vetting."},
+    "part2": {"eyebrow": "Parte II", "title": "Os três hubs em detalhe.", "subtitle": "API Center, Private Marketplace, governança Copilot: mesmo princípio, categoria de artefato diferente."},
+    "apic": {"eyebrow": "Hub 01 · Azure API Center", "title": "Um registro para cada API da organização.", "c1": {"k": "Inventário", "t": "Cada API, cada versão.", "b": "Definições, ambientes, deployments. Registro via CLI e CI/CD. Metadata customizada para ownership e classificação."}, "c2": {"k": "Linting", "t": "Estilo no portão.", "b": "Regras Spectral no momento do registro. Bloqueie APIs que violam padrões organizacionais antes do deploy."}, "c3": {"k": "Shadow API", "t": "Descoberta via Dev Proxy.", "b": "Detecte APIs não documentadas que o dev chama. Traga-as ao catálogo antes que virem dívida em produção."}, "c4": {"k": "Sync APIM", "t": "Runtime alimenta inventário.", "b": "Catálogo do Azure API Management flui upstream automaticamente. Verdade do gateway e do inventário convergem."}},
+    "vsmp": {"eyebrow": "Hub 02 · VS Code Private Marketplace", "title": "Um marketplace curado sob controle corporativo.", "l": {"k": "Arquitetura", "t": "Container stateless, object storage de apoio.", "b": "Implante em qualquer região. Sirva extensões internas e rehosted públicas. Deploy air-gap mantém devs produtivos sem egress."}, "r": {"k": "Política", "t": "AllowedExtensions decide o que instala.", "b": "Group Policy no Windows, Intune em macOS e dispositivos gerenciados. Bootstrap install garante VS Code curado já no primeiro dia."}},
+    "cop": {"eyebrow": "Hub 03 · Governança Copilot", "title": "MCP, agentes, prompts, skills: cada categoria de artefato tem contrato de governança.", "c1": {"k": "Servidores MCP", "t": "Superfície de ferramenta aprovada.", "b": "Servidores MCP registrados em .vscode/mcp.json, distribuídos pelo marketplace. Modelo de confiança documentado por servidor."}, "c2": {"k": "Extensões", "t": "Marketplace apps.", "b": "Extensões Copilot revisadas quanto ao fluxo de dados. Allowlist aplicada no nível da organização GitHub Enterprise."}, "c3": {"k": "Agentes customizados", "t": "Comportamento por repo.", "b": "Arquivos em .github/agents/ versionados junto ao código que governam. Revisados no mesmo pipeline de PR."}, "c4": {"k": "Skills + prompts", "t": "Instruções reutilizáveis.", "b": "Prompts e skills curados em repo compartilhado. Workflow de aprovação antes de chegarem à frota."}},
+    "part3": {"eyebrow": "Parte III", "title": "Segurança, cenários, operações.", "subtitle": "Modelo de ameaça, cenários de integração para ambientes regulados e air-gapped, e a sequência Dia 0 a Dia 2."},
+    "scen": {"eyebrow": "Cenários · Três deployments", "title": "Mesma arquitetura, três formatos de deploy.", "c1": {"k": "A · Integrado completo", "t": "Empresa conectada à nuvem.", "b": "Design de API no VS Code, registrado no API Center, sync para APIM, consumido no IDE. Marketplace e Copilot online."}, "c2": {"k": "B · Air-gapped", "t": "Sem egress público.", "b": "Marketplace rehosting público em storage interno. Servidores MCP em endpoints internos. Copilot Enterprise via private link."}, "c3": {"k": "C · Regulado", "t": "Financeiro, setor público.", "b": "Retenção de log de auditoria, rótulos de classificação, artefatos assinados, propagação de identidade por request. Auditor independente."}},
+    "end": {"eyebrow": "Reflexão final", "t1": "Governança é a plataforma.", "t2": "Construa uma vez.", "sub": "Três hubs, um plano de controle. Os artefatos mudam. O contrato não."}
+  },
+  "es": {
+    "meta": {"title": "Marketplace Corporativo de APIs y Gobernanza"},
+    "labels": {"author": "Autora", "role": "Rol", "contact": "Contacto", "date": "Fecha"},
+    "cover": {"eyebrow": "Gobernanza Corporativa de APIs y Tooling", "t1": "APIs como producto. Extensiones como", "t2": "marketplace.", "t3": "Gobernanza como", "t4": "plano de control.", "subtitle": "Un runbook unificado para gobernar APIs, extensiones VS Code, servidores MCP y agentes Copilot a través de un único plano de control integrado."},
+    "agenda": {"eyebrow": "Agenda", "title": "Tres partes. De la dispersión a un plano de control gobernado.", "i1": "La dispersión, la visión unificada y la arquitectura de la plataforma integrada.", "i2": "Los tres hubs: Azure API Center, VS Code Private Marketplace, gobernanza Copilot.", "i3": "Seguridad, escenarios de integración, el runbook Día 0 a Día 2."},
+    "part1": {"eyebrow": "Parte I", "title": "La dispersión y la visión unificada.", "subtitle": "Por qué los entornos empresariales acumulan riesgo compuesto, y la arquitectura que cierra el ciclo."},
+    "sprawl": {"eyebrow": "Problema · Tres riesgos convergentes", "title": "APIs, extensiones, MCP, agentes: nada se gobierna de extremo a extremo.", "c1": {"k": "01 · Seguridad", "t": "Tooling sin revisión.", "b": "Las extensiones y servidores MCP instalados ad hoc pueden exfiltrar código o credenciales. El IDE se vuelve el blanco fácil."}, "c2": {"k": "02 · Cumplimiento", "t": "Datos saliendo del perímetro.", "b": "Datos sensibles llegan a APIs de modelo IA sin autorización. La auditoría no puede probar qué salió, cuándo y a quién."}, "c3": {"k": "03 · Productividad", "t": "Shadow APIs y duplicación.", "b": "El dev no descubre lo que existe, entonces reconstruye. Usa APIs deprecadas y quema tiempo en setup de tooling."}},
+    "plane": {"eyebrow": "Arquitectura · Plano de control integrado", "title": "Tres hubs. Una estación de trabajo. Nada llega sin revisión."},
+    "part2": {"eyebrow": "Parte II", "title": "Los tres hubs en detalle.", "subtitle": "API Center, Private Marketplace, gobernanza Copilot: mismo principio, categoría de artefacto distinta."},
+    "apic": {"eyebrow": "Hub 01 · Azure API Center", "title": "Un registro para cada API de la organización.", "c1": {"k": "Inventario", "t": "Cada API, cada versión.", "b": "Definiciones, entornos, deployments. Registro vía CLI y CI/CD. Metadata customizada para propiedad y clasificación."}, "c2": {"k": "Linting", "t": "Estilo en la puerta.", "b": "Reglas Spectral al registrar. Bloquea APIs que violan estándares organizacionales antes del deploy."}, "c3": {"k": "Shadow API", "t": "Descubrimiento vía Dev Proxy.", "b": "Detecta APIs no documentadas que el dev llama. Llévalas al catálogo antes de que sean deuda en producción."}, "c4": {"k": "Sync APIM", "t": "El runtime alimenta el inventario.", "b": "El catálogo de Azure API Management fluye upstream automáticamente. Verdad del gateway y del inventario convergen."}},
+    "vsmp": {"eyebrow": "Hub 02 · VS Code Private Marketplace", "title": "Un marketplace curado bajo control empresarial.", "l": {"k": "Arquitectura", "t": "Contenedor sin estado, object storage de respaldo.", "b": "Despliega en cualquier región. Sirve extensiones internas y rehosted públicas. Deploy air-gap mantiene a los devs productivos sin egress."}, "r": {"k": "Política", "t": "AllowedExtensions decide qué se instala.", "b": "Group Policy en Windows, Intune en macOS y dispositivos gestionados. Bootstrap install asegura un VS Code curado desde el día uno."}},
+    "cop": {"eyebrow": "Hub 03 · Gobernanza Copilot", "title": "MCP, agentes, prompts, skills: cada categoría de artefacto tiene contrato de gobernanza.", "c1": {"k": "Servidores MCP", "t": "Superficie de herramienta aprobada.", "b": "Servidores MCP registrados en .vscode/mcp.json, distribuidos por el marketplace. Modelo de confianza documentado por servidor."}, "c2": {"k": "Extensiones", "t": "Marketplace apps.", "b": "Extensiones Copilot revisadas por flujo de datos. Allowlist aplicada al nivel de la organización GitHub Enterprise."}, "c3": {"k": "Agentes custom", "t": "Comportamiento por repo.", "b": "Archivos .github/agents/ versionados con el código que gobiernan. Revisados en el mismo pipeline de PR."}, "c4": {"k": "Skills + prompts", "t": "Instrucciones reutilizables.", "b": "Prompts y skills curados en repo compartido. Workflow de aprobación antes de llegar a la flota."}},
+    "part3": {"eyebrow": "Parte III", "title": "Seguridad, escenarios, operaciones.", "subtitle": "Modelo de amenaza, escenarios de integración para entornos regulados y air-gapped, y la secuencia Día 0 a Día 2."},
+    "scen": {"eyebrow": "Escenarios · Tres deployments", "title": "Misma arquitectura, tres formatos de deploy.", "c1": {"k": "A · Integrado completo", "t": "Empresa conectada a la nube.", "b": "Diseño de API en VS Code, registrado en API Center, sync a APIM, consumido desde el IDE. Marketplace y Copilot online."}, "c2": {"k": "B · Air-gapped", "t": "Sin egress público.", "b": "El marketplace rehospeda extensiones públicas en almacenamiento interno. Servidores MCP en endpoints internos. Copilot Enterprise vía private link."}, "c3": {"k": "C · Regulado", "t": "Finanzas, sector público.", "b": "Retención de log de auditoría, etiquetas de clasificación, artefactos firmados, propagación de identidad por request. Auditor independiente."}},
+    "end": {"eyebrow": "Reflexión final", "t1": "La gobernanza es la plataforma.", "t2": "Constrúyela una vez.", "sub": "Tres hubs, un plano de control. Los artefactos cambian. El contrato no."}
+  }
+};
+function resolveKey(o,p){return p.split('.').reduce((a,k)=>(a?a[k]:undefined),o);}
+function applyTextSafely(el, value){el.textContent = value;}
+function setLocale(locale){
+  if(!I18N[locale])return;
+  try{localStorage.setItem('ps-locale',locale);}catch(e){}
+  document.documentElement.setAttribute('lang',locale);
+  document.querySelectorAll('.lang-switcher__btn').forEach(b=>b.setAttribute('aria-current',b.dataset.locale===locale?'true':'false'));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v=resolveKey(I18N[locale],el.dataset.i18n);
+    if(v!==undefined && v!==null){
+      if(el.tagName==='TITLE') document.title = v;
+      else applyTextSafely(el, v);
+    }
+  });
+}
+let currentSlide=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+function syncTheme(i){document.body.dataset.slideTheme=slides[i].classList.contains('slide--dark')?'dark':'light';}
+function goToSlide(i){
+  if(i<0||i>=total)return;
+  slides.forEach(s=>s.setAttribute('data-active','false'));
+  slides[i].setAttribute('data-active','true');
+  currentSlide=i;
+  document.getElementById('counter').textContent=(i+1)+' / '+total;
+  document.getElementById('progress').style.width=(((i+1)/total)*100)+'%';
+  syncTheme(i);
+}
+function nextSlide(){goToSlide(Math.min(currentSlide+1,total-1));}
+function prevSlide(){goToSlide(Math.max(currentSlide-1,0));}
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide();}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide();}
+  if(e.key==='Home')goToSlide(0);
+  if(e.key==='End')goToSlide(total-1);
+});
+(function init(){
+  const saved=(()=>{try{return localStorage.getItem('ps-locale');}catch(e){return null;}})();
+  const browser=navigator.language && navigator.language.indexOf('pt')===0?'pt-BR':navigator.language && navigator.language.indexOf('es')===0?'es':'en';
+  setLocale(saved||browser);
+  goToSlide(0);
+})();
+
+/* Overview modal mechanism (Wave 16 injection) */
+(function() {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  if (slides.length === 0) return;
+  const overview = document.getElementById('overview');
+  if (!overview) return;
+  const overviewGrid = document.getElementById('overviewGrid');
+
+  function buildOverview() {
+    if (!overviewGrid) return;
+    while (overviewGrid.firstChild) overviewGrid.removeChild(overviewGrid.firstChild);
+    slides.forEach((s, idx) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'overview-card';
+      const accent = s.style.getPropertyValue('--accent') || '#00A4EF';
+      card.style.setProperty('--card-accent', accent);
+      card.dataset.idx = String(idx);
+
+      const accentBar = document.createElement('div');
+      accentBar.className = 'overview-card__accent';
+      card.appendChild(accentBar);
+
+      const num = document.createElement('span');
+      num.className = 'overview-card__num';
+      num.textContent = String(idx+1).padStart(2,'0');
+      card.appendChild(num);
+
+      const eyebrowEl = s.querySelector('.eyebrow');
+      if (eyebrowEl) {
+        const eb = document.createElement('span');
+        eb.className = 'overview-card__eyebrow';
+        eb.textContent = eyebrowEl.textContent.trim();
+        card.appendChild(eb);
+      }
+      const titleEl = s.querySelector('.title, .section-title, h1, h2');
+      if (titleEl) {
+        const t = document.createElement('div');
+        t.className = 'overview-card__title';
+        t.textContent = titleEl.textContent.trim();
+        card.appendChild(t);
+      }
+
+      card.addEventListener('click', () => {
+        if (typeof goToSlide === 'function') goToSlide(idx);
+        else if (typeof show === 'function') show(idx);
+        else {
+          slides.forEach(sl => sl.dataset.active = 'false');
+          slides[idx].dataset.active = 'true';
+        }
+        closeOverview();
+      });
+      overviewGrid.appendChild(card);
+    });
+    updateOverviewCurrent();
+  }
+
+  function updateOverviewCurrent() {
+    if (!overviewGrid) return;
+    const current = slides.findIndex(s => s.dataset.active === 'true');
+    overviewGrid.querySelectorAll('.overview-card').forEach((c, i) => {
+      c.dataset.current = (i === current) ? 'true' : 'false';
+    });
+  }
+
+  function openOverview() {
+    overview.dataset.open = 'true';
+    overview.setAttribute('aria-hidden', 'false');
+    document.body.dataset.overviewOpen = 'true';
+    updateOverviewCurrent();
+  }
+
+  function closeOverview() {
+    overview.dataset.open = 'false';
+    overview.setAttribute('aria-hidden', 'true');
+    document.body.dataset.overviewOpen = 'false';
+  }
+
+  function toggleOverview() {
+    if (overview.dataset.open === 'true') closeOverview();
+    else openOverview();
+  }
+
+  window.toggleOverview = toggleOverview;
+  window.openOverview = openOverview;
+  window.closeOverview = closeOverview;
+
+  document.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') {
+      if (overview.dataset.open === 'true') {
+        e.preventDefault();
+        closeOverview();
+      } else if (e.key === 'o' || e.key === 'O') {
+        e.preventDefault();
+        openOverview();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        openOverview();
+      }
+    }
+  });
+
+  buildOverview();
+})();
+</script>
+
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title" id="overviewTitle">Overview</div>
+    <div class="overview__hint" id="overviewHint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+</body>
+</html>

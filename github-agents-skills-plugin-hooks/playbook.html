@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>GitHub Agents, Skills, Plugins, Hooks · Playbook · Paula Silva</title>
+<meta name="description" content="Reference playbook by Paula Silva, AI-Native Software Engineer @paulasilvatech, on agents, skills, plugins, hooks and the configuration hierarchy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GitHub Agents, Skills, Plugins, Hooks · Playbook · Paula Silva">
+<meta property="og:description" content="Reference playbook by Paula Silva, AI-Native Software Engineer @paulasilvatech, on agents, skills, plugins, hooks and the configuration hierarchy.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GitHub Agents, Skills, Plugins, Hooks · Playbook · Paula Silva">
+<meta name="twitter:description" content="Reference playbook by Paula Silva, AI-Native Software Engineer @paulasilvatech, on agents, skills, plugins, hooks and the configuration hierarchy.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/playbook.css">
+</head>
+<body class="acc-red">
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+
+<section class="doc-hero">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <div class="doc-hero__eyebrow">Playbook · v1.0.0 · 2026-05-07 · AI-Native Software Engineer · @paulasilvatech</div>
+    <h1 class="doc-hero__title"><span data-lang="en" class="lang-active">GitHub Agents, Skills, Plugins, Hooks.</span><span data-lang="pt-br">Agentes, Skills, Plugins e Hooks no GitHub.</span><span data-lang="es">Agentes, Skills, Plugins y Hooks en GitHub.</span></h1>
+    <p class="doc-hero__lead"><span data-lang="en" class="lang-active">Reference playbook on the agentic ecosystem inside the modern coding workspace. Skill anatomy, decision tree, orchestration flow, prompt integration in six layers, configuration hierarchy and hooks lifecycle. Read in order, or jump by section.</span><span data-lang="pt-br">Playbook de referência sobre o ecossistema agêntico no workspace de código moderno. Anatomia de skill, árvore de decisão, fluxo de orquestração, integração de prompt em seis camadas, hierarquia de configuração e ciclo de hooks. Leia em ordem, ou pule por seção.</span><span data-lang="es">Playbook de referencia sobre el ecosistema agéntico en el espacio de código moderno. Anatomía de skill, árbol de decisión, flujo de orquestación, integración de prompt en seis capas, jerarquía de configuración y ciclo de hooks. Lee en orden, o salta por sección.</span></p>
+  </div>
+</section>
+
+<div class="doc">
+
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#overview" class="active">1. Overview</a>
+    <a href="#thesis">2. The thesis</a>
+    <a href="#numbers">3. The numbers</a>
+    <a href="#parts">4. Seven parts</a>
+    <a href="#sources">5. Source documents</a>
+    <a href="#decks">6. Companion decks</a>
+    <a href="#personas">7. Reading by persona</a>
+  </aside>
+
+  <article class="article">
+
+    <section id="overview">
+      <h2>1. <span data-lang="en" class="lang-active">Overview</span><span data-lang="pt-br">Visão geral</span><span data-lang="es">Resumen</span></h2>
+      <p data-lang="en" class="lang-active">The modern coding assistant is a composition of six concepts: <strong>agents</strong>, <strong>skills</strong>, <strong>plugins</strong>, <strong>MCP servers</strong>, <strong>hooks</strong> and a <strong>configuration hierarchy</strong>. Each concept has its own file format, lifecycle and contract with the others. Understanding their boundaries is what separates a workspace that scales from one that breaks at the second use case.</p>
+      <p data-lang="pt-br">O assistente de código moderno é uma composição de seis conceitos: <strong>agentes</strong>, <strong>skills</strong>, <strong>plugins</strong>, <strong>servidores MCP</strong>, <strong>hooks</strong> e uma <strong>hierarquia de configuração</strong>. Cada conceito tem formato de arquivo, ciclo de vida e contrato com os demais. Entender as fronteiras é o que separa um workspace que escala de um que quebra no segundo caso de uso.</p>
+      <p data-lang="es">El asistente de código moderno es una composición de seis conceptos: <strong>agentes</strong>, <strong>skills</strong>, <strong>plugins</strong>, <strong>servidores MCP</strong>, <strong>hooks</strong> y una <strong>jerarquía de configuración</strong>. Cada concepto tiene formato de archivo, ciclo de vida y contrato con los demás. Entender las fronteras separa un workspace que escala de uno que se rompe en el segundo caso de uso.</p>
+      <p data-lang="en" class="lang-active">This playbook consolidates seven source documents into one reading. It is written from the perspective of an AI-Native Software Engineer who ships agentic features and pioneers software development with the Agentic DevOps Platform.</p>
+      <p data-lang="pt-br">Este playbook consolida sete documentos-fonte em uma leitura única. Está escrito da perspectiva de uma AI-Native Software Engineer que entrega recursos agênticos e pioneira o desenvolvimento de software com a Agentic DevOps Platform.</p>
+      <p data-lang="es">Este playbook consolida siete documentos fuente en una sola lectura. Está escrito desde la perspectiva de una AI-Native Software Engineer que entrega capacidades agénticas y pionera el desarrollo de software con la Agentic DevOps Platform.</p>
+    </section>
+
+    <section id="thesis">
+      <h2>2. <span data-lang="en" class="lang-active">The thesis</span><span data-lang="pt-br">A tese</span><span data-lang="es">La tesis</span></h2>
+      <blockquote data-lang="en" class="lang-active">Agents pick the path. Skills pack the knowledge. Plugins reach into the world. MCP servers expose typed tools. Hooks keep the rails. The configuration hierarchy decides who wins when they disagree. Compose all six on purpose, and the workspace scales from one developer to the whole org.</blockquote>
+      <blockquote data-lang="pt-br">Agentes escolhem o caminho. Skills empacotam o conhecimento. Plugins alcançam o mundo. Servidores MCP expõem ferramentas tipadas. Hooks mantêm os trilhos. A hierarquia de configuração decide quem vence quando há discordância. Componha os seis com intenção, e o workspace escala de um dev para a organização inteira.</blockquote>
+      <blockquote data-lang="es">Los agentes eligen el camino. Las skills empaquetan el conocimiento. Los plugins alcanzan el mundo. Los servidores MCP exponen herramientas tipadas. Los hooks mantienen los rieles. La jerarquía de configuración decide quién gana cuando hay desacuerdo. Componlos los seis a propósito, y el workspace escala de un dev a la organización entera.</blockquote>
+    </section>
+
+    <section id="numbers">
+      <h2>3. <span data-lang="en" class="lang-active">The numbers that justify the effort</span><span data-lang="pt-br">Os números que justificam o esforço</span><span data-lang="es">Los números que justifican el esfuerzo</span></h2>
+      <ul>
+        <li><strong>4 questions, 3 outcomes.</strong> The decision tree resolves any new task in under a minute.</li>
+        <li><strong>6 prompt-integration layers.</strong> System, project, user, session, skill, tool. Order matters.</li>
+        <li><strong>3 configuration tiers.</strong> Enterprise, project, user. Last-write-wins with explicit precedence.</li>
+        <li><strong>6 hook events.</strong> PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop.</li>
+        <li><strong>2 deck formats.</strong> Skills &amp; Agents (60 min) and GitHub Copilot in VS Code (75 min).</li>
+      </ul>
+    </section>
+
+    <section id="parts">
+      <h2>4. <span data-lang="en" class="lang-active">Seven parts of this playbook</span><span data-lang="pt-br">Sete partes deste playbook</span><span data-lang="es">Siete partes de este playbook</span></h2>
+      <table>
+        <thead><tr><th>Part</th><th>Topic</th><th>For whom</th></tr></thead>
+        <tbody>
+          <tr><td><strong>I. Skill lifecycle</strong></td><td>Anatomy of SKILL.md, discovery, activation, expiration</td><td>Skill authors, platform engineers</td></tr>
+          <tr><td><strong>II. Ecosystem map</strong></td><td>How agents, skills, plugins, MCP, hooks relate</td><td>Everyone, before going deeper</td></tr>
+          <tr><td><strong>III. Decision tree</strong></td><td>Custom agent vs generalist vs skill</td><td>Architects and tech leads</td></tr>
+          <tr><td><strong>IV. Orchestration flow</strong></td><td>Task arrival, routing, agent and skill loading</td><td>Platform engineers</td></tr>
+          <tr><td><strong>V. Prompt integration</strong></td><td>Six layers, ordering and overrides</td><td>Engineers and prompt authors</td></tr>
+          <tr><td><strong>VI. Configuration hierarchy</strong></td><td>Enterprise, project, user, precedence rules</td><td>Platform, security, IT</td></tr>
+          <tr><td><strong>VII. Hooks lifecycle</strong></td><td>Six events, deterministic gates</td><td>Platform engineers, SREs</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sources">
+      <h2>5. <span data-lang="en" class="lang-active">Source documents</span><span data-lang="pt-br">Documentos-fonte</span><span data-lang="es">Documentos fuente</span></h2>
+      <div class="chapter-grid">
+        <a class="chap-card" href="skill-lifecycle-complete_v1.0.0_2026-03-18.md"><div class="chap-card__num">PT I</div><div class="chap-card__title">Skill lifecycle</div><div class="chap-card__desc">Anatomy of SKILL.md, frontmatter, body, scripts, references.</div></a>
+        <a class="chap-card" href="ecosystem-reference-map_v1.0.0_2026-03-18.md"><div class="chap-card__num">PT II</div><div class="chap-card__title">Ecosystem reference map</div><div class="chap-card__desc">How the six concepts wire together.</div></a>
+        <a class="chap-card" href="decision-tree-agent-vs-skill_v1.0.0_2026-03-18.md"><div class="chap-card__num">PT III</div><div class="chap-card__title">Agent vs skill decision tree</div><div class="chap-card__desc">Four questions, three outcomes.</div></a>
+        <a class="chap-card" href="orchestration-flow-agents-skills_v1.0.0_2026-03-18.md"><div class="chap-card__num">PT IV</div><div class="chap-card__title">Orchestration flow</div><div class="chap-card__desc">Task arrival, routing, agent loading, skill activation.</div></a>
+        <a class="chap-card" href="prompt-integration-6-layers_v1.0.0_2026-03-18.md"><div class="chap-card__num">PT V</div><div class="chap-card__title">Prompt integration: 6 layers</div><div class="chap-card__desc">System, project, user, session, skill, tool.</div></a>
+        <a class="chap-card" href="configuration-file-hierarchy-guide_v1.1.0_2026-04-06.md"><div class="chap-card__num">PT VI</div><div class="chap-card__title">Configuration hierarchy</div><div class="chap-card__desc">Enterprise, project, user. Precedence rules.</div></a>
+        <a class="chap-card" href="hooks-lifecycle_v1.0.0_2026-03-18.md"><div class="chap-card__num">PT VII</div><div class="chap-card__title">Hooks lifecycle</div><div class="chap-card__desc">Six events: PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop.</div></a>
+        <a class="chap-card" href="Config_Context_Architecture_v3.0.0_2026-04-22_en.md"><div class="chap-card__num">REF</div><div class="chap-card__title">Config &amp; Context architecture</div><div class="chap-card__desc">Reference architecture for config and context surfaces.</div></a>
+      </div>
+    </section>
+
+    <section id="decks">
+      <h2>6. <span data-lang="en" class="lang-active">Companion decks</span><span data-lang="pt-br">Decks companheiros</span><span data-lang="es">Decks acompañantes</span></h2>
+      <div class="chapter-grid">
+        <a class="chap-card" href="Skills_Agents_Deck_v2_0_0_2026-04-22_en.html" target="_blank" rel="noopener noreferrer"><div class="chap-card__num">DECK A</div><div class="chap-card__title">Skills &amp; Agents · v2.0.0</div><div class="chap-card__desc">Walk-through deck on the decision tree, the orchestration flow and the six prompt layers.</div></a>
+        <a class="chap-card" href="GitHub_Copilot_VS_Code_Deck_v1_0_2_2026-04-22_en-pt-es.html" target="_blank" rel="noopener noreferrer"><div class="chap-card__num">DECK B</div><div class="chap-card__title">GitHub Copilot in VS Code · v1.0.2</div><div class="chap-card__desc">Trilingual deck on the day-to-day workspace: agents, skills, plugins, hooks inside VS Code.</div></a>
+      </div>
+    </section>
+
+    <section id="personas">
+      <h2>7. <span data-lang="en" class="lang-active">Reading by persona</span><span data-lang="pt-br">Leitura por persona</span><span data-lang="es">Lectura por persona</span></h2>
+      <table>
+        <thead><tr><th>Persona</th><th>Priority parts</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td>Developer</td><td>II, III, V, Deck B</td><td>2-3 h</td></tr>
+          <tr><td>Tech Lead / Staff Engineer</td><td>All seven parts, Deck A</td><td>4-5 h</td></tr>
+          <tr><td>Platform Engineer</td><td>I, IV, VI, VII</td><td>3-4 h</td></tr>
+          <tr><td>Security / IT</td><td>VI, VII</td><td>1-2 h</td></tr>
+          <tr><td>Architect</td><td>II, III, IV, V, VI</td><td>3 h</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <nav class="pagenav">
+      <a href="landing.html">← Landing</a>
+      <a href="../token-best-practices/landing.html">Next: Token Management →</a>
+    </nav>
+
+  </article>
+
+  <aside class="scrollspy">
+    <h4>Related</h4>
+    <a href="../token-best-practices/landing.html">Token Management</a>
+    <a href="../context-engineering-platform/landing.html">Context Stack</a>
+    <a href="../agentic-devops-platform/landing.html">Agentic DevOps</a>
+    <a href="../sdd-tdd-spec-kit-specky/landing.html">Spec-Driven</a>
+    <a href="../index.html">Hub</a>
+  </aside>
+
+</div>
+
+<script>
+window.PLAYBOOK_DATA = {
+  topicLabel: 'GitHub Agents, Skills, Plugins, Hooks',
+  role: 'AI-Native Software Engineer',
+  handle: '@paulasilvatech',
+  nextLabel: { en: 'Token Management', "pt-br": 'Gestão de Tokens', es: 'Gestión de Tokens' },
+  nextHref: '../token-best-practices/landing.html'
+};
+</script>
+<script src="../_shared/playbook.js"></script>
+</body>
+</html>

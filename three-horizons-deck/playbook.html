@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Three Horizons Platform Engineering (Red Hat on Azure) · Playbook · Paula Silva</title>
+<meta name="description" content="Playbook for Three Horizons Platform Engineering (Red Hat on Azure), trilingual reference under the Microsoft identity.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Three Horizons Platform Engineering (Red Hat on Azure) · Playbook · Paula Silva">
+<meta property="og:description" content="Playbook for Three Horizons Platform Engineering (Red Hat on Azure), trilingual reference under the Microsoft identity.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Three Horizons Platform Engineering (Red Hat on Azure) · Playbook · Paula Silva">
+<meta name="twitter:description" content="Playbook for Three Horizons Platform Engineering (Red Hat on Azure), trilingual reference under the Microsoft identity.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/playbook.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+
+<section class="doc-hero">
+  <div class="doc-hero__inner">
+    <div class="doc-hero__eyebrow">Playbook · v1.0.0 · 2026-05-06</div>
+    <h1 class="doc-hero__title">
+      <span data-lang="en" class="lang-active">Three Horizons, the Red Hat stack on Azure.</span><span data-lang="pt-br">Três Horizontes, a stack Red Hat no Azure.</span><span data-lang="es">Tres Horizontes, el stack Red Hat en Azure.</span>
+    </h1>
+    <p class="doc-hero__lead">
+      <span data-lang="en" class="lang-active">The Three Horizons reference architecture, materialized with the Red Hat OpenShift + AAP + Quay stack on Azure. Same horizons, opinionated stack, vendor-supported substrate.</span><span data-lang="pt-br">A arquitetura de referência Três Horizontes, materializada com a stack Red Hat OpenShift + AAP + Quay no Azure. Mesmos horizontes, stack opinada, substrato com suporte do fornecedor.</span><span data-lang="es">La arquitectura de referencia Tres Horizontes, materializada con el stack Red Hat OpenShift + AAP + Quay en Azure. Mismos horizontes, stack opinado, sustrato con soporte del vendor.</span>
+    </p>
+  </div>
+</section>
+
+<div class="layout">
+  <aside class="toc">
+    <h4>On this page</h4>
+    <ol class="toc-list">
+      <li><a href="#overview"><span data-lang="en" class="lang-active">Overview</span><span data-lang="pt-br">Visão geral</span><span data-lang="es">Visión general</span></a></li>
+      <li><a href="#thesis"><span data-lang="en" class="lang-active">Thesis</span><span data-lang="pt-br">Tese</span><span data-lang="es">Tesis</span></a></li>
+      <li><a href="#numbers"><span data-lang="en" class="lang-active">Numbers</span><span data-lang="pt-br">Números</span><span data-lang="es">Números</span></a></li>
+      <li><a href="#parts"><span data-lang="en" class="lang-active">Parts</span><span data-lang="pt-br">Partes</span><span data-lang="es">Partes</span></a></li>
+      <li><a href="#deck"><span data-lang="en" class="lang-active">Companion deck</span><span data-lang="pt-br">Deck complementar</span><span data-lang="es">Deck complementario</span></a></li>
+    </ol>
+  </aside>
+
+  <article class="article">
+
+    <section id="overview">
+      <h2>1. <span data-lang="en" class="lang-active">Overview</span><span data-lang="pt-br">Visão geral</span><span data-lang="es">Visión general</span></h2>
+      <p>
+        <span data-lang="en" class="lang-active">When the org wants vendor support and a single throat to choke, the Red Hat variant ships.</span><span data-lang="pt-br">Quando a org quer suporte do fornecedor e uma única ponta de contato, a variante Red Hat entrega.</span><span data-lang="es">Cuando la org quiere soporte del vendor y una sola contraparte, la variante Red Hat entrega.</span>
+      </p>
+    </section>
+
+    
+    <section id="thesis">
+      <h2>2. <span data-lang="en" class="lang-active">The thesis</span><span data-lang="pt-br">A tese</span><span data-lang="es">La tesis</span></h2>
+      <p class="lead-quote">
+        <span data-lang="en" class="lang-active">Three horizons, one substrate, vendor-supported. When the org needs single-throat-to-choke ops, the Red Hat variant trades neutrality for support velocity.</span><span data-lang="pt-br">Três horizontes, um substrato, com suporte do fornecedor. Quando a org precisa de uma única ponta de contato, a variante Red Hat troca neutralidade por velocidade de suporte.</span><span data-lang="es">Tres horizontes, un sustrato, con soporte del vendor. Cuando la org necesita una sola contraparte ops, la variante Red Hat cambia neutralidad por velocidad de soporte.</span>
+      </p>
+    </section>
+
+    <section id="numbers">
+      <h2>3. <span data-lang="en" class="lang-active">The numbers</span><span data-lang="pt-br">Os números</span><span data-lang="es">Los números</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th><span data-lang="en" class="lang-active">Stat</span><span data-lang="pt-br">Stat</span><span data-lang="es">Stat</span></th>
+            <th><span data-lang="en" class="lang-active">What it represents</span><span data-lang="pt-br">O que representa</span><span data-lang="es">Qué representa</span></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><span data-lang="en" class="lang-active">Horizons</span><span data-lang="pt-br">Horizontes</span><span data-lang="es">Horizontes</span></td>
+        </tr>
+        <tr>
+          <td><strong>Red Hat</strong></td>
+          <td><span data-lang="en" class="lang-active">Opinionated stack</span><span data-lang="pt-br">Stack opinada</span><span data-lang="es">Stack opinado</span></td>
+        </tr>
+        <tr>
+          <td><strong>Azure</strong></td>
+          <td><span data-lang="en" class="lang-active">Reference cloud</span><span data-lang="pt-br">Cloud de referência</span><span data-lang="es">Nube de referencia</span></td>
+        </tr>
+        <tr>
+          <td><strong>Support</strong></td>
+          <td><span data-lang="en" class="lang-active">Vendor-supported</span><span data-lang="pt-br">Com suporte do vendor</span><span data-lang="es">Con soporte del vendor</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="parts">
+      <h2>4. <span data-lang="en" class="lang-active">Same horizons. Opinionated stack.</span><span data-lang="pt-br">Mesmos horizontes. Stack opinada.</span><span data-lang="es">Mismos horizontes. Stack opinado.</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th><span data-lang="en" class="lang-active">Part</span><span data-lang="pt-br">Parte</span><span data-lang="es">Parte</span></th>
+            <th><span data-lang="en" class="lang-active">Title</span><span data-lang="pt-br">Título</span><span data-lang="es">Título</span></th>
+            <th><span data-lang="en" class="lang-active">Summary</span><span data-lang="pt-br">Resumo</span><span data-lang="es">Resumen</span></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><strong>HORIZON 1</strong></td>
+          <td><span data-lang="en" class="lang-active">Now: OpenShift + AAP</span><span data-lang="pt-br">Agora: OpenShift + AAP</span><span data-lang="es">Ahora: OpenShift + AAP</span></td>
+          <td><span data-lang="en" class="lang-active">ARO, Ansible Automation Platform, golden paths.</span><span data-lang="pt-br">ARO, Ansible Automation Platform, golden paths.</span><span data-lang="es">ARO, Ansible Automation Platform, golden paths.</span></td>
+        </tr>
+        <tr>
+          <td><strong>HORIZON 2</strong></td>
+          <td><span data-lang="en" class="lang-active">Near: Quay + ACS</span><span data-lang="pt-br">Próximo: Quay + ACS</span><span data-lang="es">Próximo: Quay + ACS</span></td>
+          <td><span data-lang="en" class="lang-active">Image registry, Advanced Cluster Security, identity boundary.</span><span data-lang="pt-br">Image registry, Advanced Cluster Security, fronteira de identidade.</span><span data-lang="es">Image registry, Advanced Cluster Security, frontera de identidad.</span></td>
+        </tr>
+        <tr>
+          <td><strong>HORIZON 3</strong></td>
+          <td><span data-lang="en" class="lang-active">Far: AI-native ops</span><span data-lang="pt-br">Distante: ops AI-native</span><span data-lang="es">Lejano: ops AI-native</span></td>
+          <td><span data-lang="en" class="lang-active">Agent-driven SRE on the OpenShift substrate.</span><span data-lang="pt-br">SRE guiado por agentes no substrato OpenShift.</span><span data-lang="es">SRE guiado por agentes en el sustrato OpenShift.</span></td>
+        </tr>
+        <tr>
+          <td><strong>MATURITY</strong></td>
+          <td><span data-lang="en" class="lang-active">CNCF maturity model</span><span data-lang="pt-br">Modelo de maturidade CNCF</span><span data-lang="es">Modelo de madurez CNCF</span></td>
+          <td><span data-lang="en" class="lang-active">Provisional to AI-native, mapped to Red Hat capabilities.</span><span data-lang="pt-br">Provisional a AI-native, mapeado para capabilities Red Hat.</span><span data-lang="es">Provisional a AI-native, mapeado a capacidades Red Hat.</span></td>
+        </tr>
+        <tr>
+          <td><strong>VARIANT</strong></td>
+          <td><span data-lang="en" class="lang-active">Why Red Hat</span><span data-lang="pt-br">Por que Red Hat</span><span data-lang="es">Por qué Red Hat</span></td>
+          <td><span data-lang="en" class="lang-active">Vendor support, certification path, Azure-native deployment.</span><span data-lang="pt-br">Suporte do fornecedor, caminho de certificação, deploy Azure-native.</span><span data-lang="es">Soporte del vendor, ruta de certificación, deploy Azure-native.</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="deck">
+      <h2>5. <span data-lang="en" class="lang-active">Companion deck</span><span data-lang="pt-br">Deck complementar</span><span data-lang="es">Deck complementario</span></h2>
+      <p>
+        <span data-lang="en" class="lang-active">For the full presentation with diagrams and animations, see the deck:</span>
+        <span data-lang="pt-br">Para a apresentação completa com diagramas e animações, veja o deck:</span>
+        <span data-lang="es">Para la presentación completa con diagramas y animaciones, ver el deck:</span>
+      </p>
+      <p>
+        <a href="Three_Horizons_RedHat_Deck_v1_0_0_2026-05-05_multi.html" class="deck-link" target="_blank" rel="noopener noreferrer">Deck v1.0 →</a>
+      </p>
+    </section>
+
+    <nav class="pagenav">
+      <a href="landing.html">← Landing</a>
+      <a href="../index.html">Hub →</a>
+    </nav>
+
+  </article>
+
+  <aside class="scrollspy">
+    <h4>Related</h4>
+    <a href="../agentic-devops-platform/landing.html">Agentic DevOps</a>
+    <a href="../context-engineering-platform/landing.html">Context Stack</a>
+    <a href="../semantic-context-layer/landing.html">Semantic Layer</a>
+    <a href="../token-best-practices/landing.html">Token Economy</a>
+    <a href="../legacy-modernization-framework/landing.html">Modernization</a>
+    <a href="../index.html">Hub</a>
+  </aside>
+
+</div>
+
+<script>
+window.PLAYBOOK_DATA = {
+  topicLabel: 'Three Horizons Platform Engineering (Red Hat on Azure)',
+  nextLabel: { en: 'Hub', "pt-br": 'Hub', es: 'Hub' },
+  nextHref: '../index.html'
+};
+</script>
+<script src="../_shared/playbook.js"></script>
+</body>
+</html>

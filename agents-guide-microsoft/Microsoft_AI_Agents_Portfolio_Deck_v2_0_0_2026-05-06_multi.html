@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Microsoft AI Agents Masterclass, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Microsoft AI Agents Masterclass, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<title data-i18n="meta.title">Microsoft AI Agents Masterclass, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --c-red-50:#FFF0EB; --c-red-100:#FFD6C7; --c-red-500:#F25022; --c-red-700:#B33816;
+  --c-green-50:#F1F8E3; --c-green-100:#D8EDA5; --c-green-500:#7FBA00; --c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD; --c-blue-100:#B8E5FA; --c-blue-500:#00A4EF; --c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0; --c-yellow-100:#FFE79C; --c-yellow-500:#FFB900; --c-yellow-700:#B88500;
+  --ink:#1A1A1A; --ink-2:#3A3A3A; --ink-3:#737373;
+  --paper:#FFFFFF; --bg:#F7F7F5; --bg-alt:#ECECE8; --rule:#E5E5E0; --rule-2:#CECEC7;
+  --dark-bg:#141414; --dark-surface:#1C1C1A; --dark-ink:#F0F0F0; --dark-ink-2:#C7C7C2; --dark-ink-3:#A8A8A4; --dark-rule:#2E2E2A;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;}
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .18s ease-out;pointer-events:none;}
+.slide[data-active="true"]{visibility:visible;opacity:1;pointer-events:auto;}
+.slide--light{background:var(--bg);color:var(--ink);}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink);}
+.slide--paper{background:var(--paper);color:var(--ink);}
+.eyebrow{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--c-blue-500));margin-bottom:24px;}
+.slide--dark .eyebrow{color:var(--accent,var(--c-yellow-500));}
+.title{font-size:clamp(36px,4.4vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.025em;max-width:1500px;margin-bottom:22px;text-wrap:balance;}
+.title--medium{font-size:clamp(30px,3.4vw,50px);max-width:1400px;}
+.title--small{font-size:clamp(24px,2.6vw,36px);max-width:1280px;}
+.title .accent-red{color:var(--c-red-500);} .title .accent-green{color:var(--c-green-500);} .title .accent-blue{color:var(--c-blue-500);} .title .accent-yellow{color:var(--c-yellow-500);}
+.subtitle{font-size:clamp(16px,1.5vw,22px);line-height:1.4;color:var(--ink-2);max-width:1200px;font-weight:400;text-wrap:pretty;}
+.slide--dark .subtitle{color:var(--dark-ink-2);}
+.body-large{font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--ink);max-width:1200px;margin-top:22px;text-wrap:pretty;}
+.slide--dark .body-large{color:var(--dark-ink);}
+.caption{font-size:13px;color:var(--ink-3);font-style:italic;line-height:1.5;max-width:1100px;margin-top:18px;}
+.section-title{font-size:clamp(48px,5.6vw,90px);font-weight:500;line-height:.98;letter-spacing:-.035em;margin:20px 0 18px;max-width:1400px;text-wrap:balance;}
+.section-number{font-family:var(--font-sans);font-size:clamp(160px,22vw,340px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-blue-500));opacity:.92;}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;padding-top:22px;border-top:1px solid var(--rule);margin-top:36px;max-width:1200px;}
+.meta-item{display:flex;flex-direction:column;gap:6px;}
+.meta-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);}
+.meta-value{font-size:15px;font-weight:500;line-height:1.35;}
+.list-numbered{display:flex;flex-direction:column;gap:12px;margin-top:22px;max-width:1100px;}
+.list-numbered__item{display:grid;grid-template-columns:80px 1fr;gap:22px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule);}
+.list-numbered__num{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--ink-3);}
+.list-numbered__text{font-size:20px;font-weight:400;line-height:1.35;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1500px;margin-top:18px;}
+.split__col{display:flex;flex-direction:column;gap:14px;}
+.split__title{font-size:22px;font-weight:500;line-height:1.25;}
+.split__kicker{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-blue-500));}
+.split__body{font-size:15px;line-height:1.55;color:var(--ink-2);}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1500px;margin-top:22px;}
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1500px;margin-top:22px;}
+.card{padding:22px 22px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;gap:10px;}
+.slide--dark .card{background:var(--dark-surface);border-color:var(--dark-rule);}
+.card__kicker{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-blue-500));}
+.card__title{font-size:18px;font-weight:500;line-height:1.25;}
+.card__body{font-size:14px;line-height:1.5;color:var(--ink-2);}
+.slide--dark .card__body{color:var(--dark-ink-2);}
+.diagram-wrap{margin-top:18px;width:100%;max-width:1600px;}
+.diagram-wrap svg{width:100%;height:auto;display:block;}
+.deck-progress{position:fixed;top:0;left:0;height:3px;background:var(--c-blue-500);transition:width .3s ease;z-index:200;}
+.deck-brand{position:fixed;top:22px;left:22px;display:flex;align-items:center;gap:10px;z-index:100;}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-2);}
+.lang-switcher{position:fixed;top:22px;right:22px;display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;font-family:var(--font-mono);z-index:100;}
+.lang-switcher__btn{padding:5px 10px;background:transparent;border:none;border-radius:3px;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer;}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-blue-500);color:#fff;}
+body[data-slide-theme="dark"] .lang-switcher{background:var(--dark-surface);border-color:var(--dark-rule);}
+body[data-slide-theme="dark"] .lang-switcher__btn{color:var(--dark-ink-3);}
+.deck-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:6px;z-index:100;font-family:var(--font-mono);}
+.deck-controls__btn{width:36px;height:36px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:15px;color:var(--ink);cursor:pointer;}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper);}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-controls__btn{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink);}
+body[data-slide-theme="dark"] .deck-controls__counter{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink-2);}
+
+/* Back-to-Hub link affordance (added by Wave 4) */
+a.deck-brand{text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+
+/* Overview modal (Wave 16 injection) */
+.overview { position:fixed; inset:0; background:var(--bg,#F7F7F5); z-index:500; display:none; overflow-y:auto; padding:80px 40px 40px; }
+.overview[data-open="true"] { display:block; }
+.overview__header { max-width:1600px; margin:0 auto 28px; display:flex; justify-content:space-between; align-items:baseline; padding-bottom:18px; border-bottom:1px solid var(--rule,#E5E5E0); }
+.overview__title { font-size:28px; font-weight:500; letter-spacing:-0.02em; color:var(--ink,#1A1A1A); }
+.overview__hint { font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview__grid { max-width:1600px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+.overview-card { position:relative; aspect-ratio:16/9; padding:14px 16px; border:1px solid var(--rule,#E5E5E0); border-radius:6px; background:var(--paper,#FFFFFF); text-align:left; cursor:pointer; overflow:hidden; transition:all 0.15s; font-family:inherit; }
+.overview-card:hover { border-color:var(--ink-2,#3A3A3A); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.06); }
+.overview-card__accent { position:absolute; top:0; left:0; right:0; height:3px; background:var(--card-accent,var(--c-blue-500,#00A4EF)); }
+.overview-card__num { position:absolute; top:10px; right:12px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:10px; letter-spacing:0.14em; color:var(--ink-3,#737373); }
+.overview-card__eyebrow { display:block; margin-top:10px; margin-bottom:8px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview-card__title { font-size:14px; line-height:1.25; font-weight:500; color:var(--ink,#1A1A1A); display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.overview-card[data-current="true"] { border-color:var(--c-blue-500,#00A4EF); box-shadow:0 0 0 2px var(--c-blue-500,#00A4EF); }
+body[data-overview-open="true"] .deck-brand,
+body[data-overview-open="true"] .deck-controls,
+body[data-overview-open="true"] .lang-switcher,
+body[data-overview-open="true"] .kbd-hint { display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="deck-progress" id="progress"></div>
+
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:22px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt</span>
+</a>
+
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en" onclick="setLocale('en')" aria-current="true">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+  <button class="lang-switcher__btn" data-locale="es" onclick="setLocale('es')">ES</button>
+</div>
+
+<div class="deck-controls">
+  <button class="deck-controls__btn" onclick="prevSlide()" aria-label="Previous">&lsaquo;</button>
+  <span class="deck-controls__counter" id="counter">1 / 1</span>
+  <button class="deck-controls__btn" onclick="nextSlide()" aria-label="Next">&rsaquo;</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- 1 COVER -->
+<section class="slide slide--light" data-active="true" style="--accent: var(--c-blue-500); justify-content: center;">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="eyebrow" data-i18n="cover.eyebrow">Microsoft AI Agents · Masterclass</div>
+    <h1 class="title">
+      <span data-i18n="cover.t1">Three platforms,</span>
+      <span class="accent-blue" data-i18n="cover.kw1">one decision framework</span>
+      <span data-i18n="cover.t2">for enterprise AI agents.</span>
+    </h1>
+    <p class="subtitle" data-i18n="cover.subtitle">When to use Copilot Studio, GitHub Copilot Agents, and Azure AI Foundry, with real industry use cases and Human-in-the-Loop guardrails.</p>
+  </div>
+  <div class="meta-grid" style="flex-shrink:0;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-06</span></div>
+  </div>
+</section>
+
+<!-- 2 AGENDA -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="agenda.eyebrow">Agenda</div>
+  <h2 class="title title--medium" data-i18n="agenda.title">Eight parts. From definition to deployment.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="agenda.i1">What is an AI Agent, definition and anatomy.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="agenda.i2">The three platforms, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="agenda.i3">Agent types, development, productivity, business, data.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="agenda.i4">Human-in-the-Loop, when and how to review.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="agenda.i5">Case study, vehicle leasing and sales industry.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">06</span><span class="list-numbered__text" data-i18n="agenda.i6">Vertical examples, finance, healthcare, retail, manufacturing.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">07</span><span class="list-numbered__text" data-i18n="agenda.i7">Architecture best practices.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">08</span><span class="list-numbered__text" data-i18n="agenda.i8">Implementation roadmap.</span></div>
+  </div>
+</section>
+
+<!-- 3 PART I COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part1.eyebrow">Part I</div>
+  <div class="section-number">I</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">01</div>
+  <h2 class="section-title" data-i18n="part1.title">What is an AI agent?</h2>
+  <p class="subtitle" data-i18n="part1.subtitle">Beyond chatbots: agents perceive, decide, act, and learn.</p>
+</section>
+
+<!-- 4 AGENT DEFINITION -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="def.eyebrow">Definition</div>
+  <h2 class="title title--medium"><span data-i18n="def.t1">An AI agent is software that</span> <span class="accent-blue" data-i18n="def.kw1">perceives, decides, acts</span> <span data-i18n="def.t2">, with autonomy bounded by policy.</span></h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-red-500);" data-i18n="def.l.k">Chatbot (yesterday)</div>
+      <div class="split__title" data-i18n="def.l.t">Q&amp;A. Stateless. Reactive.</div>
+      <div class="split__body" data-i18n="def.l.b">Receives a question, returns a single answer. No memory across turns. No tool use. No goal pursuit.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-green-500);" data-i18n="def.r.k">Agent (today)</div>
+      <div class="split__title" data-i18n="def.r.t">Goal-driven. Stateful. Tool-using.</div>
+      <div class="split__body" data-i18n="def.r.b">Receives a goal, plans, calls tools, observes results, iterates until the goal is met or escalates to a human.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 AGENT ANATOMY DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" data-i18n="anat.eyebrow">Anatomy</div>
+  <h2 class="title title--small" data-i18n="anat.title">Five components every agent needs.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 380" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="60" width="260" height="240" rx="10" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="60" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#0076AC">01 · BRAIN</text>
+      <text x="60" y="124" font-size="20" font-weight="500" fill="#1A1A1A">LLM</text>
+      <text x="60" y="160" font-size="13" fill="#3A3A3A"><tspan x="60">GPT-4o, Claude,</tspan><tspan x="60" dy="18">Llama, Phi.</tspan><tspan x="60" dy="18">Reasons over input,</tspan><tspan x="60" dy="18">plans next step.</tspan></text>
+      <text x="60" y="276" font-size="11" font-style="italic" fill="#737373">Picked per task.</text>
+      <line x1="300" y1="180" x2="340" y2="180" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="340,176 352,180 340,184" fill="#1A1A1A"/>
+      <rect x="360" y="60" width="260" height="240" rx="10" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="380" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">02 · MEMORY</text>
+      <text x="380" y="124" font-size="20" font-weight="500" fill="#1A1A1A">Context + state</text>
+      <text x="380" y="160" font-size="13" fill="#3A3A3A"><tspan x="380">Conversation history,</tspan><tspan x="380" dy="18">scratchpad, vector</tspan><tspan x="380" dy="18">store for RAG, episodic</tspan><tspan x="380" dy="18">memory across runs.</tspan></text>
+      <text x="380" y="276" font-size="11" font-style="italic" fill="#737373">Bounded by policy.</text>
+      <line x1="620" y1="180" x2="660" y2="180" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="660,176 672,180 660,184" fill="#1A1A1A"/>
+      <rect x="680" y="60" width="260" height="240" rx="10" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="700" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">03 · TOOLS</text>
+      <text x="700" y="124" font-size="20" font-weight="500" fill="#1A1A1A">Functions + APIs</text>
+      <text x="700" y="160" font-size="13" fill="#3A3A3A"><tspan x="700">Search, query DB,</tspan><tspan x="700" dy="18">call REST, run code,</tspan><tspan x="700" dy="18">trigger workflows.</tspan><tspan x="700" dy="18">MCP, plugins, skills.</tspan></text>
+      <text x="700" y="276" font-size="11" font-style="italic" fill="#737373">Catalogued + scoped.</text>
+      <line x1="940" y1="180" x2="980" y2="180" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="980,176 992,180 980,184" fill="#1A1A1A"/>
+      <rect x="1000" y="60" width="220" height="240" rx="10" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="1020" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">04 · POLICY</text>
+      <text x="1020" y="124" font-size="20" font-weight="500" fill="#1A1A1A">Guardrails</text>
+      <text x="1020" y="160" font-size="13" fill="#3A3A3A"><tspan x="1020">RBAC, content filters,</tspan><tspan x="1020" dy="18">rate limits, HITL</tspan><tspan x="1020" dy="18">checkpoints, audit.</tspan></text>
+      <text x="1020" y="276" font-size="11" font-style="italic" fill="#737373">Non-negotiable.</text>
+      <rect x="1240" y="60" width="220" height="240" rx="10" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+      <text x="1260" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFB900">05 · ORCH.</text>
+      <text x="1260" y="124" font-size="20" font-weight="500" fill="#FFFFFF">Loop runtime</text>
+      <text x="1260" y="160" font-size="13" fill="#C7C7C2"><tspan x="1260">Plan, act, observe,</tspan><tspan x="1260" dy="18">repeat. Multi-agent</tspan><tspan x="1260" dy="18">coordination, retries,</tspan><tspan x="1260" dy="18">timeouts.</tspan></text>
+      <text x="1260" y="276" font-size="11" font-style="italic" fill="#A8A8A4">The platform&rsquo;s job.</text>
+      <line x1="40" y1="340" x2="1460" y2="340" stroke="#E5E5E0"/>
+      <text x="40" y="368" font-size="12" font-style="italic" fill="#737373" data-i18n="anat.caption">Brain reasons. Memory persists. Tools act on the world. Policy bounds. Orchestration drives the loop.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 6 PART II COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part2.eyebrow">Part II</div>
+  <div class="section-number">II</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">02</div>
+  <h2 class="section-title" data-i18n="part2.title">The three platforms.</h2>
+  <p class="subtitle" data-i18n="part2.subtitle">Copilot Studio, GitHub Copilot Agents, Azure AI Foundry, when to use each.</p>
+</section>
+
+<!-- 7 THREE PLATFORMS CARDS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="plat.eyebrow">Microsoft &middot; AI agent platforms</div>
+  <h2 class="title title--small" data-i18n="plat.title">Three platforms, three audiences, one Microsoft AI stack.</h2>
+  <div class="cards-3">
+    <div class="card" style="--accent: var(--c-blue-500);">
+      <div class="card__kicker" data-i18n="plat.c1.k">01 · Copilot Studio</div>
+      <div class="card__title" data-i18n="plat.c1.t">Low-code business agents</div>
+      <div class="card__body" data-i18n="plat.c1.b">For business users and citizen developers. Drag-and-drop topics, connectors to Microsoft 365, Dataverse, Power Platform. Best for HR, IT helpdesk, customer service bots.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-green-500);">
+      <div class="card__kicker" data-i18n="plat.c2.k">02 · GitHub Copilot Agents</div>
+      <div class="card__title" data-i18n="plat.c2.t">Developer agents in the IDE</div>
+      <div class="card__body" data-i18n="plat.c2.b">For software engineers. Agent Mode, custom agents in repos, MCP tools, extensions. Best for code generation, refactoring, PR automation, tests.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="plat.c3.k">03 · Azure AI Foundry</div>
+      <div class="card__title" data-i18n="plat.c3.t">Pro-code custom agents</div>
+      <div class="card__body" data-i18n="plat.c3.b">For ML engineers and platform teams. Full SDK, model catalog, multi-agent orchestration, fine-tuning, observability. Best for production-grade vertical agents.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 COMPARISON MATRIX DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" data-i18n="cmp.eyebrow">Decision matrix</div>
+  <h2 class="title title--small" data-i18n="cmp.title">Pick the platform that matches the audience and the control surface.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 460" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <text x="40" y="50" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">CRITERIA</text>
+      <text x="320" y="50" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#0076AC">COPILOT STUDIO</text>
+      <text x="720" y="50" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">COPILOT AGENTS (GH)</text>
+      <text x="1140" y="50" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">AI FOUNDRY</text>
+      <line x1="40" y1="68" x2="1460" y2="68" stroke="#1A1A1A" stroke-width="1"/>
+      <text x="40" y="100" font-size="14" font-weight="500" fill="#1A1A1A" data-i18n="cmp.r1">Audience</text>
+      <text x="320" y="100" font-size="13" fill="#3A3A3A" data-i18n="cmp.r1.a">Business / citizen dev</text>
+      <text x="720" y="100" font-size="13" fill="#3A3A3A" data-i18n="cmp.r1.b">Software engineers</text>
+      <text x="1140" y="100" font-size="13" fill="#3A3A3A" data-i18n="cmp.r1.c">ML / platform teams</text>
+      <line x1="40" y1="118" x2="1460" y2="118" stroke="#E5E5E0"/>
+      <text x="40" y="148" font-size="14" font-weight="500" fill="#1A1A1A" data-i18n="cmp.r2">Skill level</text>
+      <text x="320" y="148" font-size="13" fill="#3A3A3A" data-i18n="cmp.r2.a">Low-code, no-code</text>
+      <text x="720" y="148" font-size="13" fill="#3A3A3A" data-i18n="cmp.r2.b">Code-first, IDE-native</text>
+      <text x="1140" y="148" font-size="13" fill="#3A3A3A" data-i18n="cmp.r2.c">Pro-code, SDK</text>
+      <line x1="40" y1="166" x2="1460" y2="166" stroke="#E5E5E0"/>
+      <text x="40" y="196" font-size="14" font-weight="500" fill="#1A1A1A" data-i18n="cmp.r3">Best for</text>
+      <text x="320" y="196" font-size="13" fill="#3A3A3A" data-i18n="cmp.r3.a">HR, IT helpdesk, CS</text>
+      <text x="720" y="196" font-size="13" fill="#3A3A3A" data-i18n="cmp.r3.b">DevEx, code, PRs</text>
+      <text x="1140" y="196" font-size="13" fill="#3A3A3A" data-i18n="cmp.r3.c">Vertical, multi-agent</text>
+      <line x1="40" y1="214" x2="1460" y2="214" stroke="#E5E5E0"/>
+      <text x="40" y="244" font-size="14" font-weight="500" fill="#1A1A1A" data-i18n="cmp.r4">Connectors</text>
+      <text x="320" y="244" font-size="13" fill="#3A3A3A" data-i18n="cmp.r4.a">M365, Dataverse, PP</text>
+      <text x="720" y="244" font-size="13" fill="#3A3A3A" data-i18n="cmp.r4.b">Repos, MCP, GitHub API</text>
+      <text x="1140" y="244" font-size="13" fill="#3A3A3A" data-i18n="cmp.r4.c">Any (Python, REST, MCP)</text>
+      <line x1="40" y1="262" x2="1460" y2="262" stroke="#E5E5E0"/>
+      <text x="40" y="292" font-size="14" font-weight="500" fill="#1A1A1A" data-i18n="cmp.r5">Time-to-pilot</text>
+      <text x="320" y="292" font-size="13" fill="#3A3A3A" data-i18n="cmp.r5.a">Hours to days</text>
+      <text x="720" y="292" font-size="13" fill="#3A3A3A" data-i18n="cmp.r5.b">Days</text>
+      <text x="1140" y="292" font-size="13" fill="#3A3A3A" data-i18n="cmp.r5.c">Weeks</text>
+      <line x1="40" y1="310" x2="1460" y2="310" stroke="#E5E5E0"/>
+      <text x="40" y="340" font-size="14" font-weight="500" fill="#1A1A1A" data-i18n="cmp.r6">Customization</text>
+      <text x="320" y="340" font-size="13" fill="#3A3A3A" data-i18n="cmp.r6.a">Topics + connectors</text>
+      <text x="720" y="340" font-size="13" fill="#3A3A3A" data-i18n="cmp.r6.b">Custom agents in repo</text>
+      <text x="1140" y="340" font-size="13" fill="#3A3A3A" data-i18n="cmp.r6.c">Full code + fine-tune</text>
+      <line x1="40" y1="358" x2="1460" y2="358" stroke="#E5E5E0"/>
+      <text x="40" y="388" font-size="14" font-weight="500" fill="#1A1A1A" data-i18n="cmp.r7">Governance</text>
+      <text x="320" y="388" font-size="13" fill="#3A3A3A" data-i18n="cmp.r7.a">Power Platform admin</text>
+      <text x="720" y="388" font-size="13" fill="#3A3A3A" data-i18n="cmp.r7.b">GitHub policies</text>
+      <text x="1140" y="388" font-size="13" fill="#3A3A3A" data-i18n="cmp.r7.c">Azure RBAC + Content Safety</text>
+      <line x1="40" y1="406" x2="1460" y2="406" stroke="#E5E5E0"/>
+      <text x="40" y="440" font-size="12" font-style="italic" fill="#737373" data-i18n="cmp.caption">The three are complementary, not competitive. Most enterprises run all three; the question is which use case lands where.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 9 PART III COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="part3.eyebrow">Part III</div>
+  <div class="section-number">III</div>
+  <div class="section-number" style="--accent: var(--c-yellow-500);">03</div>
+  <h2 class="section-title" data-i18n="part3.title">Agent types.</h2>
+  <p class="subtitle" data-i18n="part3.subtitle">Where each platform shines: development, productivity, business, data.</p>
+</section>
+
+<!-- 10 AGENT TYPES 4 CARDS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="types.eyebrow">Four agent types &middot; Where they fit</div>
+  <h2 class="title title--small" data-i18n="types.title">Match the agent type to the right platform.</h2>
+  <div class="cards-4">
+    <div class="card" style="--accent: var(--c-green-500);">
+      <div class="card__kicker" data-i18n="types.c1.k">01 · Development</div>
+      <div class="card__title" data-i18n="types.c1.t">Bug-fix, refactor, test gen</div>
+      <div class="card__body" data-i18n="types.c1.b">Lives in the repo and IDE. GitHub Copilot Agents is the home. Custom agents in <code>.github/agents/</code>, MCP tools for build and ticket integration.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-blue-500);">
+      <div class="card__kicker" data-i18n="types.c2.k">02 · Productivity</div>
+      <div class="card__title" data-i18n="types.c2.t">Meeting notes, drafts, search</div>
+      <div class="card__body" data-i18n="types.c2.b">Inside Microsoft 365. Copilot Studio for custom topics; Microsoft 365 Copilot Agents for embedded experiences in Teams, Outlook, SharePoint.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-yellow-500);">
+      <div class="card__kicker" data-i18n="types.c3.k">03 · Business + processes</div>
+      <div class="card__title" data-i18n="types.c3.t">Onboarding, approvals, claims</div>
+      <div class="card__body" data-i18n="types.c3.b">Cross-system orchestration. Copilot Studio for the conversational layer; AI Foundry when SLAs, multi-agent, or fine-tuning are required.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="types.c4.k">04 · Data + analytics</div>
+      <div class="card__title" data-i18n="types.c4.t">NL-to-SQL, insight summaries</div>
+      <div class="card__body" data-i18n="types.c4.b">AI Foundry with grounding on Fabric, Synapse, or your warehouse. Strict prompt engineering, evaluation harness, and human approval before publish.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 PART IV COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part4.eyebrow">Part IV</div>
+  <div class="section-number">IV</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">04</div>
+  <h2 class="section-title" data-i18n="part4.title">Human-in-the-Loop.</h2>
+  <p class="subtitle" data-i18n="part4.subtitle">Autonomy is not the goal. Trustworthy outcomes are.</p>
+</section>
+
+<!-- 12 HITL PRINCIPLE -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="hitl.eyebrow">HITL &middot; Principle</div>
+  <h2 class="title title--medium"><span data-i18n="hitl.t1">More autonomy</span> <span class="accent-red" data-i18n="hitl.kw">requires more guardrails</span><span data-i18n="hitl.t2">, not fewer.</span></h2>
+  <p class="body-large" data-i18n="hitl.body">An agent that can act on regulated data, sign documents, move money, or change customer records must have explicit human checkpoints. The cost of one wrong autonomous action exceeds the savings of one hundred correct ones.</p>
+</section>
+
+<!-- 13 HITL DECISION MATRIX DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" data-i18n="hitlm.eyebrow">HITL &middot; Decision matrix</div>
+  <h2 class="title title--small" data-i18n="hitlm.title">Map every action to a quadrant before deploying.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1200 540" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <text x="600" y="30" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">IMPACT &rarr;</text>
+      <text x="35" y="270" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373" transform="rotate(-90 35 270)">REVERSIBILITY &uarr;</text>
+      <line x1="80" y1="60" x2="80" y2="500" stroke="#1A1A1A" stroke-width="1.5"/>
+      <line x1="80" y1="500" x2="1180" y2="500" stroke="#1A1A1A" stroke-width="1.5"/>
+      <line x1="630" y1="60" x2="630" y2="500" stroke="#737373" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="80" y1="280" x2="1180" y2="280" stroke="#737373" stroke-width="1" stroke-dasharray="4 4"/>
+      <rect x="100" y="80" width="510" height="180" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="120" y="110" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">Q1 &middot; AUTOMATE</text>
+      <text x="120" y="138" font-size="20" font-weight="500" fill="#1A1A1A">Low impact, high reversibility</text>
+      <text x="120" y="168" font-size="13" fill="#3A3A3A"><tspan x="120">Suggest commit messages, draft email replies,</tspan><tspan x="120" dy="18">summarize meetings, search docs.</tspan></text>
+      <text x="120" y="240" font-size="11" font-style="italic" fill="#737373">Run in agent loop. Audit, no checkpoint.</text>
+      <rect x="650" y="80" width="510" height="180" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="670" y="110" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">Q2 &middot; REVIEW</text>
+      <text x="670" y="138" font-size="20" font-weight="500" fill="#1A1A1A">High impact, high reversibility</text>
+      <text x="670" y="168" font-size="13" fill="#3A3A3A"><tspan x="670">Open PR, schedule meeting, send draft to client,</tspan><tspan x="670" dy="18">propose code change for review.</tspan></text>
+      <text x="670" y="240" font-size="11" font-style="italic" fill="#737373">Human approves before commit / send.</text>
+      <rect x="100" y="300" width="510" height="180" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="120" y="330" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">Q3 &middot; CONFIRM</text>
+      <text x="120" y="358" font-size="20" font-weight="500" fill="#1A1A1A">Low impact, low reversibility</text>
+      <text x="120" y="388" font-size="13" fill="#3A3A3A"><tspan x="120">Delete temp file, archive ticket,</tspan><tspan x="120" dy="18">close conversation.</tspan></text>
+      <text x="120" y="460" font-size="11" font-style="italic" fill="#737373">Single confirmation step.</text>
+      <rect x="650" y="300" width="510" height="180" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="670" y="330" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">Q4 &middot; DUAL CONTROL</text>
+      <text x="670" y="358" font-size="20" font-weight="500" fill="#1A1A1A">High impact, low reversibility</text>
+      <text x="670" y="388" font-size="13" fill="#3A3A3A"><tspan x="670">Sign contract, transfer funds, change RBAC,</tspan><tspan x="670" dy="18">delete production data, file taxes.</tspan></text>
+      <text x="670" y="460" font-size="11" font-style="italic" fill="#737373">Two humans approve. Audit + signed evidence.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 14 HITL PATTERNS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="hitlp.eyebrow">HITL &middot; Implementation patterns</div>
+  <h2 class="title title--small" data-i18n="hitlp.title">Three patterns cover most cases.</h2>
+  <div class="cards-3">
+    <div class="card" style="--accent: var(--c-green-500);">
+      <div class="card__kicker" data-i18n="hitlp.c1.k">Pattern 01 · Approve-before</div>
+      <div class="card__title" data-i18n="hitlp.c1.t">Agent proposes, human approves.</div>
+      <div class="card__body" data-i18n="hitlp.c1.b">Agent prepares the action and waits at a checkpoint. Approval logged with reviewer identity. Use for PRs, drafts, recommendations.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-yellow-500);">
+      <div class="card__kicker" data-i18n="hitlp.c2.k">Pattern 02 · Sample-and-review</div>
+      <div class="card__title" data-i18n="hitlp.c2.t">Agent acts, human spot-checks.</div>
+      <div class="card__body" data-i18n="hitlp.c2.b">High-volume, low-individual-impact actions. Random sample audited. KPIs trigger escalation. Use for tagging, classification, routing.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="hitlp.c3.k">Pattern 03 · Dual-control</div>
+      <div class="card__title" data-i18n="hitlp.c3.t">Two humans, one action.</div>
+      <div class="card__body" data-i18n="hitlp.c3.b">Irreversible or regulated. Initiator + approver, never the same person. Cryptographic signature on both. Use for finance, legal, prod data.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 PART V COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part5.eyebrow">Part V &middot; Case study</div>
+  <div class="section-number">V</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">05</div>
+  <h2 class="section-title" data-i18n="part5.title">Vehicle leasing &amp; sales.</h2>
+  <p class="subtitle" data-i18n="part5.subtitle">Two real problems: traffic-fine driver indication, and tax compliance for NF-e.</p>
+</section>
+
+<!-- 16 VEHICLE PROBLEM -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="vp.eyebrow">Problem 01 &middot; Traffic fines</div>
+  <h2 class="title title--medium"><span data-i18n="vp.t1">Driver indication has a</span> <span class="accent-red" data-i18n="vp.kw">15-day deadline</span><span data-i18n="vp.t2">. Miss it, the leasing company pays.</span></h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-red-500);" data-i18n="vp.l.k">Manual today</div>
+      <div class="split__title" data-i18n="vp.l.t">Mailroom &rarr; spreadsheet &rarr; chase customer.</div>
+      <div class="split__body" data-i18n="vp.l.b">Notifications arrive by mail, scanned by hand, transcribed into Excel. Operator emails the customer who leased the car. Some replies, many do not. Deadlines slip; the company pays + penalty.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-green-500);" data-i18n="vp.r.k">Agent-led</div>
+      <div class="split__title" data-i18n="vp.r.t">Ingest &rarr; extract &rarr; route &rarr; track.</div>
+      <div class="split__body" data-i18n="vp.r.b">Document Intelligence agent extracts plate, date, code, value, deadline. Lookup agent finds the lessee in SAP/Salesforce. Notification agent sends portal link. Tracking agent escalates on day 7.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 VEHICLE SOLUTION DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" data-i18n="vs.eyebrow">Architecture &middot; Multi-agent flow</div>
+  <h2 class="title title--small" data-i18n="vs.title">Four agents in choreography on Azure AI Foundry.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 320" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="80" width="240" height="180" rx="8" fill="#FFFFFF" stroke="#737373" stroke-width="1.5"/>
+      <text x="60" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">SOURCES</text>
+      <text x="60" y="140" font-size="16" font-weight="500" fill="#1A1A1A">Mail, email, API</text>
+      <text x="60" y="170" font-size="12" fill="#3A3A3A"><tspan x="60">Scanned PDFs,</tspan><tspan x="60" dy="16">SEFAZ feed,</tspan><tspan x="60" dy="16">DETRAN portal.</tspan></text>
+      <text x="60" y="234" font-size="11" font-style="italic" fill="#737373">Ingestion endpoint.</text>
+      <line x1="280" y1="170" x2="320" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="320,166 332,170 320,174" fill="#1A1A1A"/>
+      <rect x="340" y="80" width="240" height="180" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="360" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#0076AC">AGENT 01</text>
+      <text x="360" y="140" font-size="16" font-weight="500" fill="#1A1A1A">Ingestion</text>
+      <text x="360" y="170" font-size="12" fill="#3A3A3A"><tspan x="360">Document</tspan><tspan x="360" dy="16">Intelligence</tspan><tspan x="360" dy="16">extracts fields.</tspan></text>
+      <text x="360" y="234" font-size="11" font-style="italic" fill="#737373">Plate, date, value.</text>
+      <line x1="580" y1="170" x2="620" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="620,166 632,170 620,174" fill="#1A1A1A"/>
+      <rect x="640" y="80" width="240" height="180" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="660" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">AGENT 02</text>
+      <text x="660" y="140" font-size="16" font-weight="500" fill="#1A1A1A">Lookup</text>
+      <text x="660" y="170" font-size="12" fill="#3A3A3A"><tspan x="660">Cross-references</tspan><tspan x="660" dy="16">SAP / Salesforce</tspan><tspan x="660" dy="16">for active lease.</tspan></text>
+      <text x="660" y="234" font-size="11" font-style="italic" fill="#737373">Customer + contract.</text>
+      <line x1="880" y1="170" x2="920" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="920,166 932,170 920,174" fill="#1A1A1A"/>
+      <rect x="940" y="80" width="240" height="180" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="960" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">AGENT 03</text>
+      <text x="960" y="140" font-size="16" font-weight="500" fill="#1A1A1A">Notification</text>
+      <text x="960" y="170" font-size="12" fill="#3A3A3A"><tspan x="960">Sends portal link,</tspan><tspan x="960" dy="16">SMS, email.</tspan><tspan x="960" dy="16">HITL on template.</tspan></text>
+      <text x="960" y="234" font-size="11" font-style="italic" fill="#737373">Reviewed by ops.</text>
+      <line x1="1180" y1="170" x2="1220" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="1220,166 1232,170 1220,174" fill="#1A1A1A"/>
+      <rect x="1240" y="80" width="220" height="180" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="1260" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">AGENT 04</text>
+      <text x="1260" y="140" font-size="16" font-weight="500" fill="#1A1A1A">Tracking</text>
+      <text x="1260" y="170" font-size="12" fill="#3A3A3A"><tspan x="1260">Day 7 escalation,</tspan><tspan x="1260" dy="16">day 12 final ping,</tspan><tspan x="1260" dy="16">day 14 paralegal.</tspan></text>
+      <text x="1260" y="234" font-size="11" font-style="italic" fill="#737373">Closes the loop.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 18 NFE PROBLEM -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="nfp.eyebrow">Problem 02 &middot; Tax compliance</div>
+  <h2 class="title title--medium"><span data-i18n="nfp.t1">NF-e errors trigger</span> <span class="accent-red" data-i18n="nfp.kw">SEFAZ rejections + ICMS-ST risk</span><span data-i18n="nfp.t2">.</span></h2>
+  <p class="body-large" data-i18n="nfp.body">Every contract closure, lease termination, and inter-branch transfer must produce a valid NF-e or NFS-e. Tax rules vary by state (RICMS), municipality, and product category (NCM). Manual issuance breaks at scale; one wrong CFOP code blocks invoices for the whole month.</p>
+</section>
+
+<!-- 19 NFE SOLUTION DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" data-i18n="nfs.eyebrow">Architecture &middot; NF-e compliance flow</div>
+  <h2 class="title title--small" data-i18n="nfs.title">Three agents from ERP event to SEFAZ-validated invoice.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 320" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="80" width="260" height="180" rx="8" fill="#FFFFFF" stroke="#737373" stroke-width="1.5"/>
+      <text x="60" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">TRIGGER</text>
+      <text x="60" y="140" font-size="16" font-weight="500" fill="#1A1A1A">ERP event</text>
+      <text x="60" y="170" font-size="12" fill="#3A3A3A"><tspan x="60">SAP / Oracle / TOTVS:</tspan><tspan x="60" dy="16">contract closed,</tspan><tspan x="60" dy="16">vehicle returned,</tspan><tspan x="60" dy="16">inter-branch transfer.</tspan></text>
+      <line x1="300" y1="170" x2="340" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="340,166 352,170 340,174" fill="#1A1A1A"/>
+      <rect x="360" y="80" width="260" height="180" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="380" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#0076AC">AGENT 01</text>
+      <text x="380" y="140" font-size="16" font-weight="500" fill="#1A1A1A">Tax classifier (RAG)</text>
+      <text x="380" y="170" font-size="12" fill="#3A3A3A"><tspan x="380">Azure AI Search +</tspan><tspan x="380" dy="16">RICMS legislation</tspan><tspan x="380" dy="16">+ NCM table.</tspan><tspan x="380" dy="16">Picks CFOP, CST, ICMS.</tspan></text>
+      <line x1="620" y1="170" x2="660" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="660,166 672,170 660,174" fill="#1A1A1A"/>
+      <rect x="680" y="80" width="260" height="180" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="700" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">AGENT 02</text>
+      <text x="700" y="140" font-size="16" font-weight="500" fill="#1A1A1A">NF-e issuer</text>
+      <text x="700" y="170" font-size="12" fill="#3A3A3A"><tspan x="700">Calls SEFAZ NF-e 4.0</tspan><tspan x="700" dy="16">API. Handles retries,</tspan><tspan x="700" dy="16">contingency mode,</tspan><tspan x="700" dy="16">cancellation flow.</tspan></text>
+      <line x1="940" y1="170" x2="980" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="980,166 992,170 980,174" fill="#1A1A1A"/>
+      <rect x="1000" y="80" width="260" height="180" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="1020" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">AGENT 03</text>
+      <text x="1020" y="140" font-size="16" font-weight="500" fill="#1A1A1A">Bookkeeping</text>
+      <text x="1020" y="170" font-size="12" fill="#3A3A3A"><tspan x="1020">Daily run: SPED,</tspan><tspan x="1020" dy="16">EFD-Contribuições,</tspan><tspan x="1020" dy="16">in/out ledgers,</tspan><tspan x="1020" dy="16">ICMS-ST report.</tspan></text>
+      <rect x="1280" y="80" width="180" height="180" rx="8" fill="#1A1A1A" stroke="#1A1A1A"/>
+      <text x="1300" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFB900">HITL</text>
+      <text x="1300" y="140" font-size="16" font-weight="500" fill="#FFFFFF">CFO sign-off</text>
+      <text x="1300" y="170" font-size="12" fill="#C7C7C2"><tspan x="1300">Monthly close.</tspan><tspan x="1300" dy="16">Dual-control on</tspan><tspan x="1300" dy="16">tax filing.</tspan></text>
+    </svg>
+  </div>
+</section>
+
+<!-- 20 PART VI COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="part6.eyebrow">Part VI</div>
+  <div class="section-number">VI</div>
+  <div class="section-number" style="--accent: var(--c-yellow-500);">06</div>
+  <h2 class="section-title" data-i18n="part6.title">Vertical examples.</h2>
+  <p class="subtitle" data-i18n="part6.subtitle">Same pattern, different domain.</p>
+</section>
+
+<!-- 21 VERTICALS 4 CARDS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="vert.eyebrow">Vertical &middot; Same pattern, different domain</div>
+  <h2 class="title title--small" data-i18n="vert.title">Where multi-agent flows pay off in four industries.</h2>
+  <div class="cards-4">
+    <div class="card" style="--accent: var(--c-blue-500);">
+      <div class="card__kicker" data-i18n="vert.c1.k">Finance</div>
+      <div class="card__title" data-i18n="vert.c1.t">KYC + AML triage</div>
+      <div class="card__body" data-i18n="vert.c1.b">Document agent reads onboarding files, risk-scoring agent matches sanctions lists, escalation agent routes to compliance officer with dual-control on approval.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-green-500);">
+      <div class="card__kicker" data-i18n="vert.c2.k">Healthcare</div>
+      <div class="card__title" data-i18n="vert.c2.t">Prior authorization</div>
+      <div class="card__body" data-i18n="vert.c2.b">Clinical-extraction agent + payer-rules RAG + HITL with physician before submission. Cuts authorization time from days to hours, all decisions logged for audit.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-yellow-500);">
+      <div class="card__kicker" data-i18n="vert.c3.k">Retail</div>
+      <div class="card__title" data-i18n="vert.c3.t">Returns &amp; reverse logistics</div>
+      <div class="card__body" data-i18n="vert.c3.b">Triage agent classifies return reason, refund agent runs policy check, logistics agent books pickup. HITL only on exceptions over the SKU threshold.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="vert.c4.k">Manufacturing</div>
+      <div class="card__title" data-i18n="vert.c4.t">Predictive maintenance</div>
+      <div class="card__body" data-i18n="vert.c4.b">Telemetry agent watches IoT signals, diagnostics agent proposes work orders, scheduling agent slots technicians. Plant manager approves work orders over 4 hours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 22 PART VII COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part7.eyebrow">Part VII</div>
+  <div class="section-number">VII</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">07</div>
+  <h2 class="section-title" data-i18n="part7.title">Architecture best practices.</h2>
+  <p class="subtitle" data-i18n="part7.subtitle">Six layers that turn pilots into platforms.</p>
+</section>
+
+<!-- 23 ARCHITECTURE LAYERS DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" data-i18n="arch.eyebrow">Architecture &middot; Six layers</div>
+  <h2 class="title title--small" data-i18n="arch.title">Build agents on top of platform primitives, not around them.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="80" y="40" width="1040" height="60" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="100" y="64" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#B33816">06 &middot; SURFACE</text>
+      <text x="100" y="84" font-size="14" font-weight="500" fill="#1A1A1A">Teams, Outlook, IDE, custom apps &mdash; where users meet the agent.</text>
+      <rect x="80" y="110" width="1040" height="60" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="100" y="134" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#B88500">05 &middot; ORCHESTRATION</text>
+      <text x="100" y="154" font-size="14" font-weight="500" fill="#1A1A1A">Multi-agent runtime, planning, retries, HITL checkpoints, evaluation.</text>
+      <rect x="80" y="180" width="1040" height="60" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="100" y="204" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#5A8500">04 &middot; TOOLS &middot; MCP</text>
+      <text x="100" y="224" font-size="14" font-weight="500" fill="#1A1A1A">Catalogued, versioned, scoped tools. MCP servers + native plugins + custom skills.</text>
+      <rect x="80" y="250" width="1040" height="60" rx="6" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="100" y="274" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#0076AC">03 &middot; CONTEXT &middot; RAG</text>
+      <text x="100" y="294" font-size="14" font-weight="500" fill="#1A1A1A">Vector store, semantic context layer, recipe registry, identity-scoped retrieval.</text>
+      <rect x="80" y="320" width="1040" height="60" rx="6" fill="#1A1A1A"/>
+      <text x="100" y="344" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#FFB900">02 &middot; MODELS</text>
+      <text x="100" y="364" font-size="14" font-weight="500" fill="#FFFFFF">Foundry catalog. GPT-4o, Claude, Llama, Phi. Picked per task. Fine-tuned where it pays.</text>
+      <rect x="80" y="390" width="1040" height="60" rx="6" fill="#ECECE8" stroke="#737373" stroke-width="1.5"/>
+      <text x="100" y="414" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#3A3A3A">01 &middot; PLATFORM &middot; GOVERNANCE</text>
+      <text x="100" y="434" font-size="14" font-weight="500" fill="#1A1A1A">Identity, RBAC, Content Safety, audit, observability, FinOps. Same as the rest of Azure.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 24 BEST PRACTICES PRINCIPLES -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="bp.eyebrow">Architecture &middot; Five principles</div>
+  <h2 class="title title--small" data-i18n="bp.title">Five rules every Microsoft AI agent program should adopt.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="bp.i1">Start narrow. One use case, one agent, one team. Generalize after value is proven.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="bp.i2">Reuse Azure governance. Identity, RBAC, Content Safety, Purview &mdash; same controls as the rest of the stack.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="bp.i3">Catalogue every tool. MCP server registry, scoped tokens, audit per call. No agent talks to a random API.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="bp.i4">Evaluate before deploy. Golden test set per agent, regression on every model swap, latency budget per loop.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="bp.i5">Plan the deprecation. Version every prompt, log every change, keep the rollback &mdash; agents drift like models do.</span></div>
+  </div>
+</section>
+
+<!-- 25 PART VIII COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part8.eyebrow">Part VIII</div>
+  <div class="section-number">VIII</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">08</div>
+  <h2 class="section-title" data-i18n="part8.title">Implementation roadmap.</h2>
+  <p class="subtitle" data-i18n="part8.subtitle">From first pilot to production-grade fleet.</p>
+</section>
+
+<!-- 26 ROADMAP TIMELINE DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" data-i18n="rm.eyebrow">Roadmap &middot; Five phases over 12 months</div>
+  <h2 class="title title--small" data-i18n="rm.title">Phase by phase, with measurable exit criteria.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 360" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <line x1="80" y1="180" x2="1420" y2="180" stroke="#1A1A1A" stroke-width="2"/>
+      <circle cx="160" cy="180" r="22" fill="#FFFFFF" stroke="#737373" stroke-width="2"/>
+      <text x="160" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#1A1A1A">01</text>
+      <text x="160" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A">Discover</text>
+      <text x="160" y="148" text-anchor="middle" font-size="11" font-style="italic" fill="#737373">Month 1</text>
+      <text x="160" y="234" text-anchor="middle" font-size="12" fill="#3A3A3A"><tspan x="160">Use-case map</tspan><tspan x="160" dy="16">Value vs effort</tspan><tspan x="160" dy="16">Stakeholder signoff</tspan></text>
+      <circle cx="410" cy="180" r="22" fill="#E5F6FD" stroke="#00A4EF" stroke-width="2"/>
+      <text x="410" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#0076AC">02</text>
+      <text x="410" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A">Pilot</text>
+      <text x="410" y="148" text-anchor="middle" font-size="11" font-style="italic" fill="#737373">Months 2-3</text>
+      <text x="410" y="234" text-anchor="middle" font-size="12" fill="#3A3A3A"><tspan x="410">One agent</tspan><tspan x="410" dy="16">One team</tspan><tspan x="410" dy="16">Closed-loop eval</tspan></text>
+      <circle cx="660" cy="180" r="22" fill="#FFF7E0" stroke="#FFB900" stroke-width="2"/>
+      <text x="660" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#B88500">03</text>
+      <text x="660" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A">Harden</text>
+      <text x="660" y="148" text-anchor="middle" font-size="11" font-style="italic" fill="#737373">Months 4-6</text>
+      <text x="660" y="234" text-anchor="middle" font-size="12" fill="#3A3A3A"><tspan x="660">RBAC + audit</tspan><tspan x="660" dy="16">SLA + cost cap</tspan><tspan x="660" dy="16">HITL checkpoints</tspan></text>
+      <circle cx="910" cy="180" r="22" fill="#F1F8E3" stroke="#7FBA00" stroke-width="2"/>
+      <text x="910" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#5A8500">04</text>
+      <text x="910" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A">Scale</text>
+      <text x="910" y="148" text-anchor="middle" font-size="11" font-style="italic" fill="#737373">Months 7-9</text>
+      <text x="910" y="234" text-anchor="middle" font-size="12" fill="#3A3A3A"><tspan x="910">Tool registry</tspan><tspan x="910" dy="16">Multi-agent</tspan><tspan x="910" dy="16">Self-service onboarding</tspan></text>
+      <circle cx="1180" cy="180" r="22" fill="#FFF0EB" stroke="#F25022" stroke-width="2"/>
+      <text x="1180" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#B33816">05</text>
+      <text x="1180" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A">Operate</text>
+      <text x="1180" y="148" text-anchor="middle" font-size="11" font-style="italic" fill="#737373">Months 10-12+</text>
+      <text x="1180" y="234" text-anchor="middle" font-size="12" fill="#3A3A3A"><tspan x="1180">FinOps + drift</tspan><tspan x="1180" dy="16">Model swap drills</tspan><tspan x="1180" dy="16">Quarterly review</tspan></text>
+      <text x="80" y="320" font-size="12" font-style="italic" fill="#737373" data-i18n="rm.caption">Each phase has explicit exit criteria. Skip none. Pilot without harden is a demo; scale without operate is debt.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 27 CLOSING -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500); justify-content: center; align-items: flex-start;">
+  <div class="eyebrow" data-i18n="end.eyebrow">Closing thought</div>
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:120px;height:auto;margin:14px 0 28px;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <h1 class="section-title"><span data-i18n="end.t1">Three platforms.</span> <span class="accent-blue" data-i18n="end.t2">One Microsoft AI fabric.</span></h1>
+  <p class="subtitle" style="font-style: italic;">Building the future of software development with AI and Agentic DevOps.</p>
+  <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dark-ink-3); margin: 18px 0 14px;">Paula Silva | Software Global Black Belt</div>
+  <a href="mailto:paulasilva@microsoft.com" style="display:inline-flex; align-items:center; gap:12px; padding:14px 20px; border:1px solid rgba(240,240,240,.2); border-radius:8px; text-decoration:none; color:var(--dark-ink);">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;color:var(--dark-ink-2);flex-shrink:0;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+    <span style="font-size:15px;">paulasilva@microsoft.com</span>
+  </a>
+</section>
+
+</div>
+
+<script>
+const I18N = {
+  "en": {
+    "meta": {"title": "Microsoft AI Agents Masterclass, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry"},
+    "labels": {"author": "Author", "role": "Role", "contact": "Contact", "date": "Date"},
+    "cover": {"eyebrow": "Microsoft AI Agents · Masterclass", "t1": "Three platforms,", "kw1": "one decision framework", "t2": "for enterprise AI agents.", "subtitle": "When to use Copilot Studio, GitHub Copilot Agents, and Azure AI Foundry, with real industry use cases and Human-in-the-Loop guardrails."},
+    "agenda": {"eyebrow": "Agenda", "title": "Eight parts. From definition to deployment.", "i1": "What is an AI Agent, definition and anatomy.", "i2": "The three platforms, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry.", "i3": "Agent types, development, productivity, business, data.", "i4": "Human-in-the-Loop, when and how to review.", "i5": "Case study, vehicle leasing and sales industry.", "i6": "Vertical examples, finance, healthcare, retail, manufacturing.", "i7": "Architecture best practices.", "i8": "Implementation roadmap."},
+    "part1": {"eyebrow": "Part I", "title": "What is an AI agent?", "subtitle": "Beyond chatbots: agents perceive, decide, act, and learn."},
+    "def": {"eyebrow": "Definition", "t1": "An AI agent is software that", "kw1": "perceives, decides, acts", "t2": ", with autonomy bounded by policy.", "l": {"k": "Chatbot (yesterday)", "t": "Q&A. Stateless. Reactive.", "b": "Receives a question, returns a single answer. No memory across turns. No tool use. No goal pursuit."}, "r": {"k": "Agent (today)", "t": "Goal-driven. Stateful. Tool-using.", "b": "Receives a goal, plans, calls tools, observes results, iterates until the goal is met or escalates to a human."}},
+    "anat": {"eyebrow": "Anatomy", "title": "Five components every agent needs.", "caption": "Brain reasons. Memory persists. Tools act on the world. Policy bounds. Orchestration drives the loop."},
+    "part2": {"eyebrow": "Part II", "title": "The three platforms.", "subtitle": "Copilot Studio, GitHub Copilot Agents, Azure AI Foundry, when to use each."},
+    "plat": {"eyebrow": "Microsoft · AI agent platforms", "title": "Three platforms, three audiences, one Microsoft AI stack.", "c1": {"k": "01 · Copilot Studio", "t": "Low-code business agents", "b": "For business users and citizen developers. Drag-and-drop topics, connectors to Microsoft 365, Dataverse, Power Platform. Best for HR, IT helpdesk, customer service bots."}, "c2": {"k": "02 · GitHub Copilot Agents", "t": "Developer agents in the IDE", "b": "For software engineers. Agent Mode, custom agents in repos, MCP tools, extensions. Best for code generation, refactoring, PR automation, tests."}, "c3": {"k": "03 · Azure AI Foundry", "t": "Pro-code custom agents", "b": "For ML engineers and platform teams. Full SDK, model catalog, multi-agent orchestration, fine-tuning, observability. Best for production-grade vertical agents."}},
+    "cmp": {"eyebrow": "Decision matrix", "title": "Pick the platform that matches the audience and the control surface.", "r1": "Audience", "r1.a": "Business / citizen dev", "r1.b": "Software engineers", "r1.c": "ML / platform teams", "r2": "Skill level", "r2.a": "Low-code, no-code", "r2.b": "Code-first, IDE-native", "r2.c": "Pro-code, SDK", "r3": "Best for", "r3.a": "HR, IT helpdesk, CS", "r3.b": "DevEx, code, PRs", "r3.c": "Vertical, multi-agent", "r4": "Connectors", "r4.a": "M365, Dataverse, PP", "r4.b": "Repos, MCP, GitHub API", "r4.c": "Any (Python, REST, MCP)", "r5": "Time-to-pilot", "r5.a": "Hours to days", "r5.b": "Days", "r5.c": "Weeks", "r6": "Customization", "r6.a": "Topics + connectors", "r6.b": "Custom agents in repo", "r6.c": "Full code + fine-tune", "r7": "Governance", "r7.a": "Power Platform admin", "r7.b": "GitHub policies", "r7.c": "Azure RBAC + Content Safety", "caption": "The three are complementary, not competitive. Most enterprises run all three; the question is which use case lands where."},
+    "part3": {"eyebrow": "Part III", "title": "Agent types.", "subtitle": "Where each platform shines: development, productivity, business, data."},
+    "types": {"eyebrow": "Four agent types · Where they fit", "title": "Match the agent type to the right platform.", "c1": {"k": "01 · Development", "t": "Bug-fix, refactor, test gen", "b": "Lives in the repo and IDE. GitHub Copilot Agents is the home. Custom agents in .github/agents/, MCP tools for build and ticket integration."}, "c2": {"k": "02 · Productivity", "t": "Meeting notes, drafts, search", "b": "Inside Microsoft 365. Copilot Studio for custom topics; Microsoft 365 Copilot Agents for embedded experiences in Teams, Outlook, SharePoint."}, "c3": {"k": "03 · Business + processes", "t": "Onboarding, approvals, claims", "b": "Cross-system orchestration. Copilot Studio for the conversational layer; AI Foundry when SLAs, multi-agent, or fine-tuning are required."}, "c4": {"k": "04 · Data + analytics", "t": "NL-to-SQL, insight summaries", "b": "AI Foundry with grounding on Fabric, Synapse, or your warehouse. Strict prompt engineering, evaluation harness, and human approval before publish."}},
+    "part4": {"eyebrow": "Part IV", "title": "Human-in-the-Loop.", "subtitle": "Autonomy is not the goal. Trustworthy outcomes are."},
+    "hitl": {"eyebrow": "HITL · Principle", "t1": "More autonomy", "kw": "requires more guardrails", "t2": ", not fewer.", "body": "An agent that can act on regulated data, sign documents, move money, or change customer records must have explicit human checkpoints. The cost of one wrong autonomous action exceeds the savings of one hundred correct ones."},
+    "hitlm": {"eyebrow": "HITL · Decision matrix", "title": "Map every action to a quadrant before deploying."},
+    "hitlp": {"eyebrow": "HITL · Implementation patterns", "title": "Three patterns cover most cases.", "c1": {"k": "Pattern 01 · Approve-before", "t": "Agent proposes, human approves.", "b": "Agent prepares the action and waits at a checkpoint. Approval logged with reviewer identity. Use for PRs, drafts, recommendations."}, "c2": {"k": "Pattern 02 · Sample-and-review", "t": "Agent acts, human spot-checks.", "b": "High-volume, low-individual-impact actions. Random sample audited. KPIs trigger escalation. Use for tagging, classification, routing."}, "c3": {"k": "Pattern 03 · Dual-control", "t": "Two humans, one action.", "b": "Irreversible or regulated. Initiator + approver, never the same person. Cryptographic signature on both. Use for finance, legal, prod data."}},
+    "part5": {"eyebrow": "Part V · Case study", "title": "Vehicle leasing & sales.", "subtitle": "Two real problems: traffic-fine driver indication, and tax compliance for NF-e."},
+    "vp": {"eyebrow": "Problem 01 · Traffic fines", "t1": "Driver indication has a", "kw": "15-day deadline", "t2": ". Miss it, the leasing company pays.", "l": {"k": "Manual today", "t": "Mailroom → spreadsheet → chase customer.", "b": "Notifications arrive by mail, scanned by hand, transcribed into Excel. Operator emails the customer who leased the car. Some replies, many do not. Deadlines slip; the company pays + penalty."}, "r": {"k": "Agent-led", "t": "Ingest → extract → route → track.", "b": "Document Intelligence agent extracts plate, date, code, value, deadline. Lookup agent finds the lessee in SAP/Salesforce. Notification agent sends portal link. Tracking agent escalates on day 7."}},
+    "vs": {"eyebrow": "Architecture · Multi-agent flow", "title": "Four agents in choreography on Azure AI Foundry."},
+    "nfp": {"eyebrow": "Problem 02 · Tax compliance", "t1": "NF-e errors trigger", "kw": "SEFAZ rejections + ICMS-ST risk", "t2": ".", "body": "Every contract closure, lease termination, and inter-branch transfer must produce a valid NF-e or NFS-e. Tax rules vary by state (RICMS), municipality, and product category (NCM). Manual issuance breaks at scale; one wrong CFOP code blocks invoices for the whole month."},
+    "nfs": {"eyebrow": "Architecture · NF-e compliance flow", "title": "Three agents from ERP event to SEFAZ-validated invoice."},
+    "part6": {"eyebrow": "Part VI", "title": "Vertical examples.", "subtitle": "Same pattern, different domain."},
+    "vert": {"eyebrow": "Vertical · Same pattern, different domain", "title": "Where multi-agent flows pay off in four industries.", "c1": {"k": "Finance", "t": "KYC + AML triage", "b": "Document agent reads onboarding files, risk-scoring agent matches sanctions lists, escalation agent routes to compliance officer with dual-control on approval."}, "c2": {"k": "Healthcare", "t": "Prior authorization", "b": "Clinical-extraction agent + payer-rules RAG + HITL with physician before submission. Cuts authorization time from days to hours, all decisions logged for audit."}, "c3": {"k": "Retail", "t": "Returns & reverse logistics", "b": "Triage agent classifies return reason, refund agent runs policy check, logistics agent books pickup. HITL only on exceptions over the SKU threshold."}, "c4": {"k": "Manufacturing", "t": "Predictive maintenance", "b": "Telemetry agent watches IoT signals, diagnostics agent proposes work orders, scheduling agent slots technicians. Plant manager approves work orders over 4 hours."}},
+    "part7": {"eyebrow": "Part VII", "title": "Architecture best practices.", "subtitle": "Six layers that turn pilots into platforms."},
+    "arch": {"eyebrow": "Architecture · Six layers", "title": "Build agents on top of platform primitives, not around them."},
+    "bp": {"eyebrow": "Architecture · Five principles", "title": "Five rules every Microsoft AI agent program should adopt.", "i1": "Start narrow. One use case, one agent, one team. Generalize after value is proven.", "i2": "Reuse Azure governance. Identity, RBAC, Content Safety, Purview, same controls as the rest of the stack.", "i3": "Catalogue every tool. MCP server registry, scoped tokens, audit per call. No agent talks to a random API.", "i4": "Evaluate before deploy. Golden test set per agent, regression on every model swap, latency budget per loop.", "i5": "Plan the deprecation. Version every prompt, log every change, keep the rollback, agents drift like models do."},
+    "part8": {"eyebrow": "Part VIII", "title": "Implementation roadmap.", "subtitle": "From first pilot to production-grade fleet."},
+    "rm": {"eyebrow": "Roadmap · Five phases over 12 months", "title": "Phase by phase, with measurable exit criteria.", "caption": "Each phase has explicit exit criteria. Skip none. Pilot without harden is a demo; scale without operate is debt."},
+    "end": {"eyebrow": "Closing thought", "t1": "Three platforms.", "t2": "One Microsoft AI fabric."}
+  },
+  "pt-BR": {
+    "meta": {"title": "Masterclass de Agentes IA Microsoft, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry"},
+    "labels": {"author": "Autora", "role": "Papel", "contact": "Contato", "date": "Data"},
+    "cover": {"eyebrow": "Agentes IA Microsoft · Masterclass", "t1": "Três plataformas,", "kw1": "uma estrutura de decisão", "t2": "para agentes de IA enterprise.", "subtitle": "Quando usar Copilot Studio, GitHub Copilot Agents e Azure AI Foundry, com casos reais e guardrails Human-in-the-Loop."},
+    "agenda": {"eyebrow": "Agenda", "title": "Oito partes. Da definição ao deploy.", "i1": "O que é um Agente de IA, definição e anatomia.", "i2": "As três plataformas, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry.", "i3": "Tipos de agentes, desenvolvimento, produtividade, negócios, dados.", "i4": "Human-in-the-Loop, quando e como revisar.", "i5": "Caso de uso, indústria de locação e venda de veículos.", "i6": "Exemplos por vertical, financeiro, saúde, varejo, manufatura.", "i7": "Boas práticas de arquitetura.", "i8": "Roteiro de implementação."},
+    "part1": {"eyebrow": "Parte I", "title": "O que é um agente de IA?", "subtitle": "Além de chatbots: agentes percebem, decidem, agem e aprendem."},
+    "def": {"eyebrow": "Definição", "t1": "Um agente de IA é software que", "kw1": "percebe, decide, age", "t2": ", com autonomia limitada por política.", "l": {"k": "Chatbot (ontem)", "t": "Pergunta/resposta. Sem estado. Reativo.", "b": "Recebe uma pergunta, retorna uma resposta. Sem memória entre turnos. Sem uso de ferramentas. Sem perseguir objetivo."}, "r": {"k": "Agente (hoje)", "t": "Orientado a objetivo. Com estado. Usa ferramentas.", "b": "Recebe um objetivo, planeja, chama ferramentas, observa resultados, itera até atingir o objetivo ou escala para um humano."}},
+    "anat": {"eyebrow": "Anatomia", "title": "Cinco componentes que todo agente precisa.", "caption": "Cérebro raciocina. Memória persiste. Ferramentas atuam no mundo. Política limita. Orquestração conduz o loop."},
+    "part2": {"eyebrow": "Parte II", "title": "As três plataformas.", "subtitle": "Copilot Studio, GitHub Copilot Agents, Azure AI Foundry, quando usar cada."},
+    "plat": {"eyebrow": "Microsoft · Plataformas de agentes IA", "title": "Três plataformas, três públicos, uma stack Microsoft AI.", "c1": {"k": "01 · Copilot Studio", "t": "Agentes de negócio low-code", "b": "Para usuários de negócio e desenvolvedores cidadãos. Tópicos drag-and-drop, conectores para Microsoft 365, Dataverse, Power Platform. Ideal para RH, helpdesk de TI, atendimento."}, "c2": {"k": "02 · GitHub Copilot Agents", "t": "Agentes de desenvolvedor na IDE", "b": "Para engenheiros de software. Agent Mode, agentes customizados em repos, MCP tools, extensions. Ideal para geração de código, refactor, automação de PR, testes."}, "c3": {"k": "03 · Azure AI Foundry", "t": "Agentes pro-code customizados", "b": "Para engenheiros ML e times de plataforma. SDK completo, catálogo de modelos, orquestração multi-agente, fine-tuning, observabilidade. Ideal para agentes verticais em produção."}},
+    "cmp": {"eyebrow": "Matriz de decisão", "title": "Escolha a plataforma que combina público e superfície de controle.", "r1": "Público", "r1.a": "Negócio / citizen dev", "r1.b": "Engenheiros de software", "r1.c": "Times ML / plataforma", "r2": "Nível técnico", "r2.a": "Low-code, no-code", "r2.b": "Code-first, IDE-nativo", "r2.c": "Pro-code, SDK", "r3": "Ideal para", "r3.a": "RH, helpdesk, atendimento", "r3.b": "DevEx, código, PRs", "r3.c": "Vertical, multi-agente", "r4": "Conectores", "r4.a": "M365, Dataverse, PP", "r4.b": "Repos, MCP, GitHub API", "r4.c": "Qualquer (Python, REST, MCP)", "r5": "Tempo-de-piloto", "r5.a": "Horas a dias", "r5.b": "Dias", "r5.c": "Semanas", "r6": "Customização", "r6.a": "Tópicos + conectores", "r6.b": "Agentes custom em repo", "r6.c": "Código + fine-tune", "r7": "Governança", "r7.a": "Admin Power Platform", "r7.b": "Políticas GitHub", "r7.c": "Azure RBAC + Content Safety", "caption": "As três são complementares, não concorrentes. A maioria das empresas roda as três; a pergunta é qual caso vai onde."},
+    "part3": {"eyebrow": "Parte III", "title": "Tipos de agentes.", "subtitle": "Onde cada plataforma brilha: desenvolvimento, produtividade, negócios, dados."},
+    "types": {"eyebrow": "Quatro tipos · Onde se encaixam", "title": "Combine o tipo de agente com a plataforma certa.", "c1": {"k": "01 · Desenvolvimento", "t": "Bug-fix, refactor, geração de testes", "b": "Vive no repo e na IDE. GitHub Copilot Agents é a casa. Agentes em .github/agents/, MCP tools para build e tickets."}, "c2": {"k": "02 · Produtividade", "t": "Notas de reunião, rascunhos, busca", "b": "Dentro do Microsoft 365. Copilot Studio para tópicos custom; Microsoft 365 Copilot Agents para experiências embutidas em Teams, Outlook, SharePoint."}, "c3": {"k": "03 · Negócios + processos", "t": "Onboarding, aprovações, sinistros", "b": "Orquestração cross-sistema. Copilot Studio para a camada conversacional; AI Foundry quando SLAs, multi-agente ou fine-tuning são exigidos."}, "c4": {"k": "04 · Dados + analytics", "t": "NL-to-SQL, sumários de insight", "b": "AI Foundry com grounding em Fabric, Synapse ou seu warehouse. Engenharia rigorosa de prompt, harness de avaliação e aprovação humana antes de publicar."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Human-in-the-Loop.", "subtitle": "Autonomia não é o objetivo. Resultados confiáveis são."},
+    "hitl": {"eyebrow": "HITL · Princípio", "t1": "Mais autonomia", "kw": "exige mais guardrails", "t2": ", não menos.", "body": "Um agente que pode atuar sobre dados regulados, assinar documentos, mover dinheiro ou alterar registros de cliente precisa ter checkpoints humanos explícitos. O custo de uma ação autônoma errada excede a economia de cem corretas."},
+    "hitlm": {"eyebrow": "HITL · Matriz de decisão", "title": "Mapeie cada ação para um quadrante antes de implantar."},
+    "hitlp": {"eyebrow": "HITL · Padrões de implementação", "title": "Três padrões cobrem a maioria dos casos.", "c1": {"k": "Padrão 01 · Aprovar-antes", "t": "Agente propõe, humano aprova.", "b": "Agente prepara a ação e espera no checkpoint. Aprovação logada com identidade do revisor. Use para PRs, rascunhos, recomendações."}, "c2": {"k": "Padrão 02 · Amostragem", "t": "Agente age, humano confere por amostragem.", "b": "Ações de alto volume e baixo impacto individual. Amostra aleatória auditada. KPIs disparam escalação. Use para tagging, classificação, roteamento."}, "c3": {"k": "Padrão 03 · Duplo controle", "t": "Dois humanos, uma ação.", "b": "Irreversível ou regulado. Iniciador + aprovador, nunca a mesma pessoa. Assinatura criptográfica em ambos. Use para financeiro, jurídico, dados de produção."}},
+    "part5": {"eyebrow": "Parte V · Caso de uso", "title": "Locação e venda de veículos.", "subtitle": "Dois problemas reais: indicação de condutor em multa, e conformidade fiscal NF-e."},
+    "vp": {"eyebrow": "Problema 01 · Multas de trânsito", "t1": "Indicação de condutor tem", "kw": "prazo de 15 dias", "t2": ". Perdeu, a locadora paga.", "l": {"k": "Manual hoje", "t": "Malote → planilha → cobrar cliente.", "b": "Notificações chegam por correio, escaneadas à mão, transcritas em Excel. Operador envia e-mail ao cliente que locou o carro. Alguns respondem, muitos não. Prazos vencem; a empresa paga + penalidade."}, "r": {"k": "Com agentes", "t": "Ingerir → extrair → rotear → acompanhar.", "b": "Agente Document Intelligence extrai placa, data, código, valor, prazo. Agente de lookup encontra o locatário em SAP/Salesforce. Agente de notificação envia link do portal. Agente de tracking escala no dia 7."}},
+    "vs": {"eyebrow": "Arquitetura · Fluxo multi-agente", "title": "Quatro agentes em coreografia no Azure AI Foundry."},
+    "nfp": {"eyebrow": "Problema 02 · Conformidade fiscal", "t1": "Erros em NF-e disparam", "kw": "rejeição SEFAZ + risco ICMS-ST", "t2": ".", "body": "Toda assinatura de contrato, devolução de locação e transferência entre filiais precisa gerar NF-e ou NFS-e válida. Regras variam por estado (RICMS), município e categoria (NCM). Emissão manual quebra na escala; um CFOP errado bloqueia notas do mês inteiro."},
+    "nfs": {"eyebrow": "Arquitetura · Fluxo de conformidade NF-e", "title": "Três agentes do evento ERP à nota validada pela SEFAZ."},
+    "part6": {"eyebrow": "Parte VI", "title": "Exemplos por vertical.", "subtitle": "Mesmo padrão, domínio diferente."},
+    "vert": {"eyebrow": "Vertical · Mesmo padrão, domínios diferentes", "title": "Onde fluxos multi-agente compensam em quatro indústrias.", "c1": {"k": "Financeiro", "t": "Triagem KYC + AML", "b": "Agente de documento lê onboarding, agente de risk-scoring cruza listas de sanções, agente de escalação roteia para compliance com duplo controle na aprovação."}, "c2": {"k": "Saúde", "t": "Autorização prévia", "b": "Agente de extração clínica + RAG de regras do convênio + HITL com médico antes da submissão. Reduz tempo de autorização de dias para horas, todas as decisões logadas para auditoria."}, "c3": {"k": "Varejo", "t": "Devoluções e logística reversa", "b": "Agente de triagem classifica o motivo, agente de reembolso roda checagem de política, agente de logística agenda coleta. HITL só em exceções acima do limite por SKU."}, "c4": {"k": "Manufatura", "t": "Manutenção preditiva", "b": "Agente de telemetria observa sinais IoT, agente de diagnóstico propõe ordens de serviço, agente de scheduling aloca técnicos. Gerente de planta aprova OS acima de 4h."}},
+    "part7": {"eyebrow": "Parte VII", "title": "Boas práticas de arquitetura.", "subtitle": "Seis camadas que transformam pilotos em plataformas."},
+    "arch": {"eyebrow": "Arquitetura · Seis camadas", "title": "Construa agentes sobre primitivas de plataforma, não em volta delas."},
+    "bp": {"eyebrow": "Arquitetura · Cinco princípios", "title": "Cinco regras que todo programa Microsoft AI deve adotar.", "i1": "Comece estreito. Um caso, um agente, um time. Generalize após o valor ser provado.", "i2": "Reaproveite a governança Azure. Identidade, RBAC, Content Safety, Purview, mesmos controles do resto da stack.", "i3": "Catalogue toda ferramenta. Registry de MCP, tokens com escopo, auditoria por chamada. Nenhum agente fala com API aleatória.", "i4": "Avalie antes de deploy. Golden test set por agente, regressão a cada troca de modelo, orçamento de latência por loop.", "i5": "Planeje a depreciação. Versione cada prompt, logue cada mudança, mantenha o rollback, agentes derivam como modelos."},
+    "part8": {"eyebrow": "Parte VIII", "title": "Roteiro de implementação.", "subtitle": "Do primeiro piloto à frota production-grade."},
+    "rm": {"eyebrow": "Roadmap · Cinco fases em 12 meses", "title": "Fase por fase, com critérios mensuráveis de saída.", "caption": "Cada fase tem critérios de saída explícitos. Não pule nenhuma. Piloto sem hardening é demo; scale sem operação é dívida."},
+    "end": {"eyebrow": "Reflexão final", "t1": "Três plataformas.", "t2": "Um tecido Microsoft AI."}
+  },
+  "es": {
+    "meta": {"title": "Masterclass de Agentes IA Microsoft, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry"},
+    "labels": {"author": "Autora", "role": "Rol", "contact": "Contacto", "date": "Fecha"},
+    "cover": {"eyebrow": "Agentes IA Microsoft · Masterclass", "t1": "Tres plataformas,", "kw1": "un marco de decisión", "t2": "para agentes de IA empresariales.", "subtitle": "Cuándo usar Copilot Studio, GitHub Copilot Agents y Azure AI Foundry, con casos reales y guardrails Human-in-the-Loop."},
+    "agenda": {"eyebrow": "Agenda", "title": "Ocho partes. De la definición al despliegue.", "i1": "Qué es un Agente de IA, definición y anatomía.", "i2": "Las tres plataformas, Copilot Studio, GitHub Copilot Agents, Azure AI Foundry.", "i3": "Tipos de agentes, desarrollo, productividad, negocio, datos.", "i4": "Human-in-the-Loop, cuándo y cómo revisar.", "i5": "Caso de uso, industria de leasing y venta de vehículos.", "i6": "Ejemplos por vertical, finanzas, salud, retail, manufactura.", "i7": "Buenas prácticas de arquitectura.", "i8": "Hoja de ruta de implementación."},
+    "part1": {"eyebrow": "Parte I", "title": "¿Qué es un agente de IA?", "subtitle": "Más allá de chatbots: los agentes perciben, deciden, actúan y aprenden."},
+    "def": {"eyebrow": "Definición", "t1": "Un agente de IA es software que", "kw1": "percibe, decide, actúa", "t2": ", con autonomía acotada por política.", "l": {"k": "Chatbot (ayer)", "t": "Pregunta/respuesta. Sin estado. Reactivo.", "b": "Recibe una pregunta, devuelve una respuesta. Sin memoria entre turnos. Sin uso de herramientas. Sin perseguir objetivo."}, "r": {"k": "Agente (hoy)", "t": "Orientado a objetivo. Con estado. Usa herramientas.", "b": "Recibe un objetivo, planifica, llama herramientas, observa resultados, itera hasta cumplir el objetivo o escalar a un humano."}},
+    "anat": {"eyebrow": "Anatomía", "title": "Cinco componentes que todo agente necesita.", "caption": "Cerebro razona. Memoria persiste. Herramientas actúan en el mundo. Política limita. Orquestación conduce el bucle."},
+    "part2": {"eyebrow": "Parte II", "title": "Las tres plataformas.", "subtitle": "Copilot Studio, GitHub Copilot Agents, Azure AI Foundry, cuándo usar cada una."},
+    "plat": {"eyebrow": "Microsoft · Plataformas de agentes IA", "title": "Tres plataformas, tres audiencias, una stack Microsoft AI.", "c1": {"k": "01 · Copilot Studio", "t": "Agentes de negocio low-code", "b": "Para usuarios de negocio y desarrolladores ciudadanos. Tópicos drag-and-drop, conectores a Microsoft 365, Dataverse, Power Platform. Ideal para RR.HH., helpdesk TI, atención."}, "c2": {"k": "02 · GitHub Copilot Agents", "t": "Agentes de desarrollador en la IDE", "b": "Para ingenieros de software. Agent Mode, agentes custom en repos, MCP tools, extensions. Ideal para generación de código, refactor, automatización de PR, tests."}, "c3": {"k": "03 · Azure AI Foundry", "t": "Agentes pro-code custom", "b": "Para ingenieros ML y equipos de plataforma. SDK completo, catálogo de modelos, orquestación multi-agente, fine-tuning, observabilidad. Ideal para agentes verticales en producción."}},
+    "cmp": {"eyebrow": "Matriz de decisión", "title": "Elige la plataforma que combina audiencia y superficie de control.", "r1": "Audiencia", "r1.a": "Negocio / citizen dev", "r1.b": "Ingenieros de software", "r1.c": "Equipos ML / plataforma", "r2": "Nivel técnico", "r2.a": "Low-code, no-code", "r2.b": "Code-first, IDE-nativo", "r2.c": "Pro-code, SDK", "r3": "Ideal para", "r3.a": "RR.HH., helpdesk, atención", "r3.b": "DevEx, código, PRs", "r3.c": "Vertical, multi-agente", "r4": "Conectores", "r4.a": "M365, Dataverse, PP", "r4.b": "Repos, MCP, GitHub API", "r4.c": "Cualquiera (Python, REST, MCP)", "r5": "Tiempo-a-piloto", "r5.a": "Horas a días", "r5.b": "Días", "r5.c": "Semanas", "r6": "Customización", "r6.a": "Tópicos + conectores", "r6.b": "Agentes custom en repo", "r6.c": "Código + fine-tune", "r7": "Gobernanza", "r7.a": "Admin Power Platform", "r7.b": "Políticas GitHub", "r7.c": "Azure RBAC + Content Safety", "caption": "Las tres son complementarias, no competitivas. La mayoría de empresas usa las tres; la pregunta es qué caso va dónde."},
+    "part3": {"eyebrow": "Parte III", "title": "Tipos de agentes.", "subtitle": "Dónde brilla cada plataforma: desarrollo, productividad, negocio, datos."},
+    "types": {"eyebrow": "Cuatro tipos · Dónde encajan", "title": "Combina el tipo de agente con la plataforma adecuada.", "c1": {"k": "01 · Desarrollo", "t": "Bug-fix, refactor, generación de tests", "b": "Vive en el repo y en la IDE. GitHub Copilot Agents es la casa. Agentes en .github/agents/, MCP tools para build y tickets."}, "c2": {"k": "02 · Productividad", "t": "Notas de reunión, borradores, búsqueda", "b": "Dentro de Microsoft 365. Copilot Studio para tópicos custom; Microsoft 365 Copilot Agents para experiencias embebidas en Teams, Outlook, SharePoint."}, "c3": {"k": "03 · Negocio + procesos", "t": "Onboarding, aprobaciones, siniestros", "b": "Orquestación cross-sistema. Copilot Studio para la capa conversacional; AI Foundry cuando SLAs, multi-agente o fine-tuning son requeridos."}, "c4": {"k": "04 · Datos + analytics", "t": "NL-to-SQL, resúmenes de insight", "b": "AI Foundry con grounding en Fabric, Synapse o tu warehouse. Ingeniería estricta de prompt, harness de evaluación y aprobación humana antes de publicar."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Human-in-the-Loop.", "subtitle": "La autonomía no es el objetivo. Los resultados confiables sí."},
+    "hitl": {"eyebrow": "HITL · Principio", "t1": "Más autonomía", "kw": "requiere más guardrails", "t2": ", no menos.", "body": "Un agente que puede actuar sobre datos regulados, firmar documentos, mover dinero o cambiar registros de cliente debe tener checkpoints humanos explícitos. El costo de una acción autónoma equivocada excede el ahorro de cien correctas."},
+    "hitlm": {"eyebrow": "HITL · Matriz de decisión", "title": "Mapea cada acción a un cuadrante antes de desplegar."},
+    "hitlp": {"eyebrow": "HITL · Patrones de implementación", "title": "Tres patrones cubren la mayoría de los casos.", "c1": {"k": "Patrón 01 · Aprobar-antes", "t": "Agente propone, humano aprueba.", "b": "Agente prepara la acción y espera en el checkpoint. Aprobación registrada con identidad del revisor. Usa para PRs, borradores, recomendaciones."}, "c2": {"k": "Patrón 02 · Muestreo", "t": "Agente actúa, humano revisa por muestreo.", "b": "Acciones de alto volumen y bajo impacto individual. Muestra aleatoria auditada. KPIs disparan escalación. Usa para tagging, clasificación, ruteo."}, "c3": {"k": "Patrón 03 · Doble control", "t": "Dos humanos, una acción.", "b": "Irreversible o regulado. Iniciador + aprobador, nunca la misma persona. Firma criptográfica en ambos. Usa para finanzas, legal, datos de producción."}},
+    "part5": {"eyebrow": "Parte V · Caso de uso", "title": "Leasing y venta de vehículos.", "subtitle": "Dos problemas reales: indicación de conductor en multa, y conformidad fiscal NF-e."},
+    "vp": {"eyebrow": "Problema 01 · Multas de tránsito", "t1": "La indicación de conductor tiene", "kw": "plazo de 15 días", "t2": ". Si lo pierdes, la arrendadora paga.", "l": {"k": "Manual hoy", "t": "Correo → planilla → perseguir cliente.", "b": "Las notificaciones llegan por correo, escaneadas a mano, transcritas en Excel. Operador envía email al cliente. Algunos responden, muchos no. Plazos se vencen; la empresa paga + penalización."}, "r": {"k": "Con agentes", "t": "Ingestar → extraer → rutear → seguir.", "b": "Agente Document Intelligence extrae placa, fecha, código, valor, plazo. Agente lookup encuentra al arrendatario en SAP/Salesforce. Agente notificación envía link del portal. Agente tracking escala el día 7."}},
+    "vs": {"eyebrow": "Arquitectura · Flujo multi-agente", "title": "Cuatro agentes en coreografía sobre Azure AI Foundry."},
+    "nfp": {"eyebrow": "Problema 02 · Conformidad fiscal", "t1": "Errores NF-e disparan", "kw": "rechazo SEFAZ + riesgo ICMS-ST", "t2": ".", "body": "Cada cierre de contrato, devolución de leasing y transferencia inter-sucursal debe generar NF-e o NFS-e válida. Reglas varían por estado (RICMS), municipio y categoría (NCM). Emisión manual rompe a escala; un CFOP equivocado bloquea facturas del mes."},
+    "nfs": {"eyebrow": "Arquitectura · Flujo de conformidad NF-e", "title": "Tres agentes del evento ERP a la factura validada por SEFAZ."},
+    "part6": {"eyebrow": "Parte VI", "title": "Ejemplos por vertical.", "subtitle": "Mismo patrón, dominio diferente."},
+    "vert": {"eyebrow": "Vertical · Mismo patrón, dominios distintos", "title": "Dónde los flujos multi-agente pagan en cuatro industrias.", "c1": {"k": "Finanzas", "t": "Triaje KYC + AML", "b": "Agente de documento lee onboarding, agente de risk-scoring cruza listas de sanciones, agente de escalación rutea a compliance con doble control en la aprobación."}, "c2": {"k": "Salud", "t": "Autorización previa", "b": "Agente de extracción clínica + RAG de reglas de la aseguradora + HITL con médico antes de la submisión. Reduce tiempo de autorización de días a horas, todas las decisiones registradas para auditoría."}, "c3": {"k": "Retail", "t": "Devoluciones y logística inversa", "b": "Agente de triaje clasifica el motivo, agente de reembolso corre check de política, agente de logística agenda recogida. HITL solo en excepciones sobre el umbral por SKU."}, "c4": {"k": "Manufactura", "t": "Mantenimiento predictivo", "b": "Agente de telemetría observa señales IoT, agente de diagnóstico propone órdenes de trabajo, agente de scheduling asigna técnicos. Gerente de planta aprueba OT sobre 4h."}},
+    "part7": {"eyebrow": "Parte VII", "title": "Buenas prácticas de arquitectura.", "subtitle": "Seis capas que convierten pilotos en plataformas."},
+    "arch": {"eyebrow": "Arquitectura · Seis capas", "title": "Construye agentes sobre primitivas de plataforma, no alrededor de ellas."},
+    "bp": {"eyebrow": "Arquitectura · Cinco principios", "title": "Cinco reglas que todo programa Microsoft AI debe adoptar.", "i1": "Empieza estrecho. Un caso, un agente, un equipo. Generaliza después de probar valor.", "i2": "Reutiliza la gobernanza Azure. Identidad, RBAC, Content Safety, Purview, mismos controles que el resto de la stack.", "i3": "Cataloga toda herramienta. Registry de MCP, tokens con scope, auditoría por llamada. Ningún agente habla con API aleatoria.", "i4": "Evalúa antes de desplegar. Golden test set por agente, regresión en cada cambio de modelo, presupuesto de latencia por bucle.", "i5": "Planifica la depreciación. Versiona cada prompt, registra cada cambio, mantén el rollback, los agentes derivan como los modelos."},
+    "part8": {"eyebrow": "Parte VIII", "title": "Hoja de ruta de implementación.", "subtitle": "Del primer piloto a la flota production-grade."},
+    "rm": {"eyebrow": "Roadmap · Cinco fases en 12 meses", "title": "Fase por fase, con criterios medibles de salida.", "caption": "Cada fase tiene criterios de salida explícitos. No saltes ninguna. Piloto sin hardening es demo; scale sin operación es deuda."},
+    "end": {"eyebrow": "Reflexión final", "t1": "Tres plataformas.", "t2": "Un tejido Microsoft AI."}
+  }
+};
+
+let currentLocale = (localStorage.getItem('locale') || (navigator.language || 'en').slice(0,2)).replace('pt','pt-BR');
+if (!I18N[currentLocale]) currentLocale = currentLocale.startsWith('pt') ? 'pt-BR' : (currentLocale.startsWith('es') ? 'es' : 'en');
+
+function resolveKey(obj, path) {
+  return path.split('.').reduce((o,k) => (o && o[k] !== undefined) ? o[k] : null, obj);
+}
+function setLocale(loc) {
+  currentLocale = loc;
+  localStorage.setItem('locale', loc);
+  document.documentElement.lang = loc;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = resolveKey(I18N[loc], el.getAttribute('data-i18n'));
+    if (v != null) el.textContent = v;
+  });
+  document.querySelectorAll('.lang-switcher__btn').forEach(b => {
+    b.setAttribute('aria-current', b.dataset.locale === loc ? 'true' : 'false');
+  });
+}
+
+const slides = Array.from(document.querySelectorAll('.slide'));
+let idx = 0;
+function showSlide(i) {
+  idx = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, n) => s.dataset.active = (n === idx) ? 'true' : 'false');
+  document.body.dataset.slideTheme = slides[idx].classList.contains('slide--dark') ? 'dark' : 'light';
+  document.getElementById('counter').textContent = (idx + 1) + ' / ' + slides.length;
+  document.getElementById('progress').style.width = ((idx + 1) / slides.length * 100) + '%';
+}
+function nextSlide() { showSlide(idx + 1); }
+function prevSlide() { showSlide(idx - 1); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); }
+  else if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
+  else if (e.key === 'End') { e.preventDefault(); showSlide(slides.length - 1); }
+});
+setLocale(currentLocale);
+showSlide(0);
+
+/* Overview modal mechanism (Wave 16 injection) */
+(function() {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  if (slides.length === 0) return;
+  const overview = document.getElementById('overview');
+  if (!overview) return;
+  const overviewGrid = document.getElementById('overviewGrid');
+
+  function buildOverview() {
+    if (!overviewGrid) return;
+    while (overviewGrid.firstChild) overviewGrid.removeChild(overviewGrid.firstChild);
+    slides.forEach((s, idx) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'overview-card';
+      const accent = s.style.getPropertyValue('--accent') || '#00A4EF';
+      card.style.setProperty('--card-accent', accent);
+      card.dataset.idx = String(idx);
+
+      const accentBar = document.createElement('div');
+      accentBar.className = 'overview-card__accent';
+      card.appendChild(accentBar);
+
+      const num = document.createElement('span');
+      num.className = 'overview-card__num';
+      num.textContent = String(idx+1).padStart(2,'0');
+      card.appendChild(num);
+
+      const eyebrowEl = s.querySelector('.eyebrow');
+      if (eyebrowEl) {
+        const eb = document.createElement('span');
+        eb.className = 'overview-card__eyebrow';
+        eb.textContent = eyebrowEl.textContent.trim();
+        card.appendChild(eb);
+      }
+      const titleEl = s.querySelector('.title, .section-title, h1, h2');
+      if (titleEl) {
+        const t = document.createElement('div');
+        t.className = 'overview-card__title';
+        t.textContent = titleEl.textContent.trim();
+        card.appendChild(t);
+      }
+
+      card.addEventListener('click', () => {
+        if (typeof goToSlide === 'function') goToSlide(idx);
+        else if (typeof show === 'function') show(idx);
+        else {
+          slides.forEach(sl => sl.dataset.active = 'false');
+          slides[idx].dataset.active = 'true';
+        }
+        closeOverview();
+      });
+      overviewGrid.appendChild(card);
+    });
+    updateOverviewCurrent();
+  }
+
+  function updateOverviewCurrent() {
+    if (!overviewGrid) return;
+    const current = slides.findIndex(s => s.dataset.active === 'true');
+    overviewGrid.querySelectorAll('.overview-card').forEach((c, i) => {
+      c.dataset.current = (i === current) ? 'true' : 'false';
+    });
+  }
+
+  function openOverview() {
+    overview.dataset.open = 'true';
+    overview.setAttribute('aria-hidden', 'false');
+    document.body.dataset.overviewOpen = 'true';
+    updateOverviewCurrent();
+  }
+
+  function closeOverview() {
+    overview.dataset.open = 'false';
+    overview.setAttribute('aria-hidden', 'true');
+    document.body.dataset.overviewOpen = 'false';
+  }
+
+  function toggleOverview() {
+    if (overview.dataset.open === 'true') closeOverview();
+    else openOverview();
+  }
+
+  window.toggleOverview = toggleOverview;
+  window.openOverview = openOverview;
+  window.closeOverview = closeOverview;
+
+  document.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') {
+      if (overview.dataset.open === 'true') {
+        e.preventDefault();
+        closeOverview();
+      } else if (e.key === 'o' || e.key === 'O') {
+        e.preventDefault();
+        openOverview();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        openOverview();
+      }
+    }
+  });
+
+  buildOverview();
+})();
+</script>
+
+</body>
+</html>
+
+
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title" id="overviewTitle">Overview</div>
+    <div class="overview__hint" id="overviewHint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+</body>
+</html>

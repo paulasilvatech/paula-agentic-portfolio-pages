@@ -1,0 +1,1297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Legacy Modernization Playbook v1.1.0 · Paula Silva">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Legacy Modernization Playbook v1.1.0 · Paula Silva">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<meta name="author" content="Paula Silva, Software Global Black Belt">
+<title data-i18n="meta.title">Legacy Modernization Playbook v1.1.0 · Paula Silva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-red-50:#FFF0EB;--c-red-500:#F25022;--c-red-700:#B33816;
+  --c-green-50:#F1F8E3;--c-green-500:#7FBA00;--c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD;--c-blue-500:#00A4EF;--c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0;--c-yellow-500:#FFB900;--c-yellow-700:#B88500;
+  --ink:#1A1A1A;--ink-2:#3A3A3A;--ink-3:#737373;
+  --paper:#FFFFFF;--bg:#F7F7F5;--bg-alt:#ECECE8;
+  --rule:#E5E5E0;--rule-2:#CECEC7;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --measure:680px;
+  --accent:var(--c-blue-500);--accent-ink:var(--c-blue-700);--accent-50:var(--c-blue-50);
+}
+[data-theme="dark"]{--ink:#F0F0F0;--ink-2:#C7C7C2;--ink-3:#A8A8A4;--paper:#1C1C1A;--bg:#141414;--bg-alt:#242420;--rule:#2E2E2A;--rule-2:#3A3A36}
+[data-theme="dark"] .acc-blue{--accent-50:rgba(0,164,239,0.12)}
+[data-theme="dark"] .acc-green{--accent-50:rgba(127,186,0,0.12)}
+[data-theme="dark"] .acc-yellow{--accent-50:rgba(255,185,0,0.12)}
+[data-theme="dark"] .acc-red{--accent-50:rgba(242,80,34,0.12)}
+
+.acc-intro{--accent:var(--ink);--accent-ink:var(--ink);--accent-50:var(--bg-alt)}
+.acc-blue{--accent:var(--c-blue-500);--accent-ink:var(--c-blue-700);--accent-50:var(--c-blue-50)}
+.acc-green{--accent:var(--c-green-500);--accent-ink:var(--c-green-700);--accent-50:var(--c-green-50)}
+.acc-yellow{--accent:var(--c-yellow-500);--accent-ink:var(--c-yellow-700);--accent-50:var(--c-yellow-50)}
+.acc-red{--accent:var(--c-red-500);--accent-ink:var(--c-red-700);--accent-50:var(--c-red-50)}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);scroll-behavior:smooth}
+
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:101;transition:width 0.1s ease-out, background 0.2s ease;width:0%}
+
+.meta-bar{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--rule);padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.meta-bar__left{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.meta-bar__left:hover{opacity:0.7}
+.meta-bar__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3)}
+.meta-bar__right{display:flex;align-items:center;gap:18px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3)}
+.theme-toggle{background:none;border:1px solid var(--rule-2);padding:5px 10px;border-radius:4px;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);transition:all 0.15s}
+.theme-toggle:hover{border-color:var(--ink-2);color:var(--ink)}
+.lang-switcher{display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px}
+.lang-switcher__btn{padding:4px 9px;background:transparent;border:none;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-blue-500);color:#fff}
+.lang-switcher__btn:hover:not([aria-current="true"]){color:var(--ink)}
+.diagram{margin:32px 0 36px;max-width:920px}
+.diagram svg{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px}
+.diagram-caption{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-top:10px}
+.search{padding:5px 10px;border:1px solid var(--rule-2);border-radius:4px;font-family:var(--font-mono);font-size:11px;background:var(--bg);color:var(--ink);width:140px}
+
+.doc-header{max-width:1100px;margin:0 auto;padding:80px 48px 40px}
+.doc-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-blue-700);margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
+.doc-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--c-blue-500)}
+h1.doc-title{font-size:clamp(40px,5vw,68px);font-weight:500;letter-spacing:-0.025em;line-height:1.04;margin:0 0 22px;text-wrap:balance;max-width:1000px}
+.doc-lead{font-size:21px;line-height:1.5;color:var(--ink-2);max-width:760px;margin:0 0 36px;font-weight:400}
+.doc-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:900px;border-top:1px solid var(--rule);padding-top:24px}
+.doc-meta-item{display:flex;flex-direction:column;gap:6px}
+.doc-meta-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3)}
+.doc-meta-value{font-size:14px;color:var(--ink);font-weight:500}
+
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr) 240px;gap:56px;max-width:1500px;margin:0 auto;padding:32px 48px 120px}
+@media (max-width:1200px){.layout{grid-template-columns:260px minmax(0,1fr);gap:40px}.onpage{display:none}}
+@media (max-width:900px){.layout{grid-template-columns:1fr;padding:24px 24px 80px}.toc{position:static;max-height:none;background:var(--paper);border:1px solid var(--rule);border-radius:8px;margin-bottom:32px;padding:18px}}
+
+.toc{position:sticky;top:88px;align-self:start;max-height:calc(100vh - 108px);overflow-y:auto;padding-right:12px;scrollbar-width:thin}
+.toc-label{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px;padding:0 14px;font-weight:500}
+.toc-list{list-style:none;padding:0;margin:0 0 6px;display:flex;flex-direction:column;gap:1px}
+.toc-list li a{display:flex;align-items:baseline;gap:12px;padding:9px 14px;border-left:2px solid transparent;text-decoration:none;color:var(--ink-2);font-size:13.5px;font-weight:500;line-height:1.35;border-radius:0 4px 4px 0;transition:background 0.15s, border-color 0.15s, color 0.15s}
+.toc-list li a:hover{background:var(--bg-alt);color:var(--ink)}
+.toc-list li a.active{background:var(--accent-50);border-left-color:var(--accent);color:var(--ink);font-weight:600}
+.toc-list li a .num{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:0.08em;min-width:22px;font-weight:500}
+
+.onpage{position:sticky;top:88px;align-self:start;max-height:calc(100vh - 108px);overflow-y:auto;padding-left:16px;border-left:1px solid var(--rule)}
+.onpage-label{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px;font-weight:500}
+.onpage-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.onpage-list a{display:block;padding:4px 0;text-decoration:none;color:var(--ink-3);font-size:12.5px;transition:color 0.15s}
+.onpage-list a:hover{color:var(--ink)}
+.onpage-list a.active{color:var(--accent-ink);font-weight:500}
+
+.content{max-width:920px}
+.chapter{padding-bottom:88px;scroll-margin-top:76px}
+.chapter+.chapter{border-top:1px solid var(--rule);padding-top:88px}
+.chapter-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:14px;color:var(--accent-ink)}
+.chapter-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:6px;font-family:var(--font-mono);font-size:12px;font-weight:600}
+.acc-yellow .chapter-num{color:var(--ink)}
+h1.chapter-title{font-size:clamp(34px,4vw,52px);font-weight:500;letter-spacing:-0.025em;line-height:1.04;margin:0 0 18px;text-wrap:balance}
+.chapter-lead{font-size:21px;line-height:1.45;color:var(--ink);margin:0 0 44px;max-width:var(--measure);font-weight:400;border-bottom:1px solid var(--rule);padding-bottom:32px}
+.chapter-body h2{font-size:32px;font-weight:500;letter-spacing:-0.022em;line-height:1.12;margin:72px 0 20px;scroll-margin-top:80px;max-width:var(--measure);color:var(--ink)}
+.chapter-body h3{font-size:20px;font-weight:600;letter-spacing:-0.008em;margin:40px 0 10px;max-width:var(--measure);color:var(--ink)}
+.chapter-body p{font-size:17.5px;line-height:1.62;letter-spacing:-0.003em;margin:0 0 18px;max-width:var(--measure);text-wrap:pretty;color:var(--ink-2)}
+.chapter-body p strong{color:var(--ink);font-weight:600}
+.chapter-body a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;text-decoration-thickness:1px}
+.chapter-body a:hover{text-decoration-color:var(--accent);text-decoration-thickness:1.5px}
+.chapter-body ul,.chapter-body ol{padding-left:22px;margin:0 0 22px;max-width:var(--measure)}
+.chapter-body li{font-size:17px;line-height:1.55;color:var(--ink-2);margin-bottom:8px}
+.chapter-body li strong{color:var(--ink)}
+.chapter-body code{font-family:var(--font-mono);font-size:0.92em;padding:1px 5px;background:var(--bg-alt);border-radius:3px;color:var(--ink)}
+.chapter-body blockquote{margin:24px 0;padding:20px 28px;border-left:4px solid var(--accent);background:var(--accent-50);border-radius:0 6px 6px 0;max-width:920px}
+.chapter-body blockquote p{margin:0;font-size:15.5px;line-height:1.55}
+
+table{border-collapse:collapse;margin:18px 0 28px;width:100%;max-width:920px;font-size:14px;background:var(--paper);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+th{text-align:left;font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500;padding:12px 16px;border-bottom:2px solid var(--rule-2);background:var(--bg)}
+td{padding:12px 16px;border-bottom:1px solid var(--rule);color:var(--ink-2);line-height:1.5;vertical-align:top}
+td strong{color:var(--ink)}
+tr:last-child td{border-bottom:none}
+
+.callout{margin:22px 0;padding:18px 24px;border-left:4px solid var(--accent);background:var(--accent-50);border-radius:0 6px 6px 0;max-width:920px}
+.callout__label{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:500;margin-bottom:8px}
+.callout p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-2)}
+.callout p strong{color:var(--ink)}
+
+mark.search-hit{background:var(--c-yellow-500);color:#1A1A1A;padding:0 3px;border-radius:2px}
+
+.doc-footer{max-width:1100px;margin:80px auto 0;padding:48px 48px 60px;border-top:1px solid var(--rule);background:var(--paper)}
+.footer-card{display:flex;flex-direction:column;gap:8px;max-width:560px}
+.footer-name{font-size:18px;font-weight:600;color:var(--ink)}
+.footer-role{font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3)}
+.footer-tagline{font-size:14px;color:var(--ink-2);font-style:italic;margin:6px 0}
+.footer-card a{display:inline-block;margin-top:12px;padding:10px 18px;border:1px solid var(--rule-2);border-radius:6px;text-decoration:none;color:var(--ink);font-size:14px;width:fit-content}
+.footer-card a:hover{border-color:var(--ink);background:var(--bg-alt)}
+
+@media print{
+  .meta-bar,.progress,.onpage,.toc,.theme-toggle,.search{display:none}
+  .layout{grid-template-columns:1fr;padding:0;max-width:100%}
+  .chapter+.chapter{page-break-before:always}
+  body{background:#fff;font-size:11pt}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="meta-bar">
+  <a class="meta-bar__left" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+    <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:auto;flex-shrink:0;"><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+    <span class="meta-bar__text">Paula Silva | Software Global Black Belt · <span data-i18n="meta.brand">Legacy Modernization</span></span>
+  </a>
+  <div class="meta-bar__right">
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-switcher__btn" data-locale="en" onclick="setLocale('en')" aria-current="true">EN</button>
+      <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+      <button class="lang-switcher__btn" data-locale="es" onclick="setLocale('es')">ES</button>
+    </div>
+    <input class="search" id="searchInput" type="text" placeholder="Search…" data-i18n-placeholder="meta.search">
+    <span>v1.1.0 · 2026-05-06</span>
+    <button class="theme-toggle" id="themeToggle" data-i18n="meta.dark">Dark</button>
+  </div>
+</header>
+
+<div class="doc-header">
+  <div class="doc-eyebrow"><span class="dot"></span><span data-i18n="doc.eyebrow">Legacy Modernization Framework · Playbook</span></div>
+  <h1 class="doc-title" data-i18n="doc.title">Modernizing COBOL and mainframe estates with agentic AI, without big-bang risk.</h1>
+  <p class="doc-lead" data-i18n="doc.lead">A reference playbook synthesizing Gartner's 5R framework, Microsoft's four modernization approaches, the five-layer agentic architecture, and the seven-phase journey from assessment to factory model. Twelve chapters, one method.</p>
+  <div class="doc-meta">
+    <div class="doc-meta-item"><span class="doc-meta-label" data-i18n="labels.author">Author</span><span class="doc-meta-value">Paula Silva</span></div>
+    <div class="doc-meta-item"><span class="doc-meta-label" data-i18n="labels.role">Role</span><span class="doc-meta-value">Software Global Black Belt</span></div>
+    <div class="doc-meta-item"><span class="doc-meta-label" data-i18n="labels.contact">Contact</span><span class="doc-meta-value">paulasilva@microsoft.com</span></div>
+    <div class="doc-meta-item"><span class="doc-meta-label" data-i18n="labels.date">Date</span><span class="doc-meta-value">2026-05-06</span></div>
+  </div>
+</div>
+
+<div class="layout">
+
+<nav class="toc">
+  <p class="toc-label" data-i18n="toc.label">Chapters</p>
+  <ul class="toc-list" id="tocList">
+    <li><a href="#ch-01" data-chapter="01"><span class="num">01</span><span data-i18n="toc.ch1">Why modernize now</span></a></li>
+    <li><a href="#ch-02" data-chapter="02"><span class="num">02</span><span data-i18n="toc.ch2">The 5R framework</span></a></li>
+    <li><a href="#ch-03" data-chapter="03"><span class="num">03</span><span data-i18n="toc.ch3">Microsoft's four approaches</span></a></li>
+    <li><a href="#ch-04" data-chapter="04"><span class="num">04</span><span data-i18n="toc.ch4">Assessment framework</span></a></li>
+    <li><a href="#ch-05" data-chapter="05"><span class="num">05</span><span data-i18n="toc.ch5">The AI advantage</span></a></li>
+    <li><a href="#ch-06" data-chapter="06"><span class="num">06</span><span data-i18n="toc.ch6">Five-layer architecture</span></a></li>
+    <li><a href="#ch-07" data-chapter="07"><span class="num">07</span><span data-i18n="toc.ch7">Six specialized agents</span></a></li>
+    <li><a href="#ch-08" data-chapter="08"><span class="num">08</span><span data-i18n="toc.ch8">Eight MCP servers</span></a></li>
+    <li><a href="#ch-09" data-chapter="09"><span class="num">09</span><span data-i18n="toc.ch9">Application carving</span></a></li>
+    <li><a href="#ch-10" data-chapter="10"><span class="num">10</span><span data-i18n="toc.ch10">Performance + coexistence</span></a></li>
+    <li><a href="#ch-11" data-chapter="11"><span class="num">11</span><span data-i18n="toc.ch11">Governance framework</span></a></li>
+    <li><a href="#ch-12" data-chapter="12"><span class="num">12</span><span data-i18n="toc.ch12">Monday morning</span></a></li>
+  </ul>
+</nav>
+
+<main class="content">
+
+<article class="chapter acc-red" id="ch-01">
+  <div class="chapter-eyebrow"><span class="chapter-num">01</span><span data-i18n="ch1.eyebrow">FORCING FUNCTIONS · CHAPTER 01</span></div>
+  <h1 class="chapter-title" data-i18n="ch1.title">Why modernize now</h1>
+  <p class="chapter-lead" data-i18n="ch1.lead">Mainframe and legacy modernization is no longer optional for most enterprises. The convergence of retiring COBOL expertise, regulatory deadlines, and AI-driven cost economics has compressed a decade-long question into a 24-36 month decision window.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="Cost waterfall TCO reduction">
+      <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>TCO reduction waterfall, before to after AI</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">COST WATERFALL · TCO REDUCTION</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">AI flips the cost equation. Understanding becomes cheap.</text>
+        <!-- Before bar 100% -->
+        <g>
+          <rect x="40"  y="110" width="200" height="180" fill="#F25022"/>
+          <text x="140" y="138" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">BEFORE</text>
+          <text x="140" y="200" font-family="Inter,sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle" font-weight="500">100%</text>
+          <text x="140" y="244" font-family="Inter,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan x="140">Understanding 40-60%</tspan>
+            <tspan x="140" dy="16">of total project budget</tspan>
+          </text>
+        </g>
+        <text x="270" y="208" font-family="Inter,sans-serif" font-size="32" fill="#737373">→</text>
+        <!-- Step 1: AI discovery -->
+        <g>
+          <rect x="320" y="170" width="160" height="120" fill="#FFB900"/>
+          <text x="400" y="198" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing="2" fill="#1A1A1A" text-anchor="middle" font-weight="500">AI DISCOVERY</text>
+          <text x="400" y="232" font-family="Inter,sans-serif" font-size="22" fill="#1A1A1A" text-anchor="middle" font-weight="500">-30%</text>
+          <text x="400" y="262" font-family="Inter,sans-serif" font-size="11" fill="#1A1A1A" text-anchor="middle">Opus reads codebase</text>
+        </g>
+        <text x="500" y="208" font-family="Inter,sans-serif" font-size="32" fill="#737373">→</text>
+        <!-- Step 2: AI translation -->
+        <g>
+          <rect x="540" y="200" width="160" height="90" fill="#7FBA00"/>
+          <text x="620" y="226" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">AI TRANSLATION</text>
+          <text x="620" y="254" font-family="Inter,sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle" font-weight="500">-20%</text>
+          <text x="620" y="280" font-family="Inter,sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Sonnet translates</text>
+        </g>
+        <text x="720" y="208" font-family="Inter,sans-serif" font-size="32" fill="#737373">→</text>
+        <!-- Step 3: AI testing -->
+        <g>
+          <rect x="760" y="225" width="160" height="65" fill="#00A4EF"/>
+          <text x="840" y="248" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">AI TESTING</text>
+          <text x="840" y="278" font-family="Inter,sans-serif" font-size="20" fill="#FFFFFF" text-anchor="middle" font-weight="500">-10%</text>
+        </g>
+        <text x="940" y="208" font-family="Inter,sans-serif" font-size="32" fill="#737373">→</text>
+        <!-- After bar 40% -->
+        <g>
+          <rect x="980" y="218" width="180" height="72" fill="#7FBA00" stroke="#5A8500" stroke-width="2"/>
+          <text x="1070" y="246" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">AFTER</text>
+          <text x="1070" y="280" font-family="Inter,sans-serif" font-size="26" fill="#FFFFFF" text-anchor="middle" font-weight="600">40%</text>
+        </g>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.cost">Diagram 4 · Cost waterfall. Total project cost cut by 60% with AI agents.</figcaption>
+    </figure>
+    <h2 id="brazil-landscape">The Brazilian COBOL estate</h2>
+    <p>Brazil has one of the largest COBOL estates in Latin America, concentrated in regulated industries. Understanding this landscape is the starting point for any modernization plan.</p>
+    <table>
+      <thead><tr><th>Industry segment</th><th>COBOL LOC</th><th>Key systems</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Commercial banks</strong></td><td>500M, 1B</td><td>Core banking, payments, clearing</td></tr>
+        <tr><td><strong>Development banks</strong></td><td>100M, 300M</td><td>Credit, treasury, regulatory reporting</td></tr>
+        <tr><td><strong>Insurance</strong></td><td>50M, 200M</td><td>Policy administration, claims, actuarial</td></tr>
+        <tr><td><strong>Government</strong></td><td>200M, 500M</td><td>Tax, social services, payroll</td></tr>
+        <tr><td><strong>Retail</strong></td><td>50M, 100M</td><td>Supply chain, POS, ERP integrations</td></tr>
+      </tbody>
+    </table>
+    <p>The total Brazilian COBOL estate is between 1.25B and 2.1B lines of code. Most enterprises sit at organizational maturity Level 0-1 (no agentic AI adoption or early experimentation). This creates both urgency and opportunity. Organizations that move first will establish a competitive advantage that compounds for years.</p>
+    <h2 id="workforce">The workforce demographic</h2>
+    <p>Brazil faces a <strong>15% annual COBOL developer loss</strong> as experienced developers retire without replacement. Universities stopped teaching COBOL two decades ago. Junior engineers are not entering the field. The runway is shorter than most current modernization plans assume.</p>
+    <p>This is the first reason AI-assisted modernization is not optional. It is workforce-critical. The institutional knowledge embedded in 30-year-old COBOL is in the heads of people who will not be working in five years. Encoding that knowledge into testable, modernizable artifacts is a race against retirement.</p>
+    <h2 id="regulatory">Regulatory forcing functions</h2>
+    <p>Brazilian enterprises face specific regulatory deadlines that transform modernization from a strategic option into a compliance requirement.</p>
+    <ul>
+      <li><strong>BACEN 2028.</strong> The Central Bank of Brazil set 2028 as the target for banking modernization. Modern technology controls, API-based open banking interfaces, and enhanced cybersecurity that mainframe platforms cannot deliver natively.</li>
+      <li><strong>LGPD (Lei Geral de Proteção de Dados).</strong> Brazil's data protection law requires data governance capabilities (consent management, data lineage, right to erasure) that mainframe architectures were not designed to support.</li>
+      <li><strong>SOX, ISAE 3402, PCI-DSS.</strong> International compliance standards expecting modern security controls, encryption practices, and audit mechanisms that legacy platforms struggle to provide.</li>
+    </ul>
+    <p>These deadlines create a 24-36 month window for enterprise modernization. Agentic AI acceleration is essential to meet compliance targets without big-bang risk.</p>
+    <h2 id="cost-equation">How AI flips the cost equation</h2>
+    <p>The traditional cost structure of COBOL modernization placed the highest expense on <strong>understanding</strong>, reverse-engineering business rules embedded in decades-old code written by developers who long since retired. <strong>This understanding phase consumed 40-60% of project budgets</strong> and was the primary bottleneck that caused projects to fail or extend indefinitely.</p>
+    <p>AI fundamentally inverts this equation. <a href="https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude">Claude Opus 4.6</a> can process up to 1 million tokens in a single context window, enough to analyze an entire COBOL application with all its copybooks, JCL, and data definitions simultaneously. <strong>What previously took a team of COBOL experts weeks to document can now be completed in hours with AI-generated analysis validated by human experts.</strong></p>
+    <div class="callout">
+      <div class="callout__label">Industry data</div>
+      <p><strong>Gartner G00833880</strong> identifies 5-20% of operational cost as addressable via AI optimization in legacy systems. <strong>Gartner G00842103</strong> projects that agentic AI will reduce the cost-to-value gap by 50% by 2027. <strong>Gartner G00835157</strong> shows 61% of enterprises are investing in agentic AI as of June 2025.</p>
+    </div>
+    <h2 id="monday-morning-01">Monday morning</h2>
+    <p>If your modernization roadmap still treats AI as "we will pilot in 2027", the runway already expired. The teams compounding now are in production this quarter. Five concrete actions for the first two weeks are listed in Chapter 12.</p>
+  </div>
+</article>
+
+<article class="chapter acc-yellow" id="ch-02">
+  <div class="chapter-eyebrow"><span class="chapter-num">02</span><span data-i18n="ch2.eyebrow">FRAMEWORK · CHAPTER 02</span></div>
+  <h1 class="chapter-title" data-i18n="ch2.title">Gartner's 5R modernization framework</h1>
+  <p class="chapter-lead" data-i18n="ch2.lead">Five strategies, ranked by transformation depth and risk. The discipline is not picking the right one. It is applying each to the right tier of the estate.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="5R framework">
+      <svg viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Gartner 5R modernization framework</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">FRAMEWORK · GARTNER 5R</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">Five strategies, ranked by depth and risk.</text>
+        <!-- 5 cards left to right -->
+        <g>
+          <rect x="40"  y="100" width="216" height="220" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+          <rect x="40"  y="100" width="216" height="44"  fill="#737373"/>
+          <text x="60"  y="128" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" font-weight="500">R01 · LOW EFFORT</text>
+          <text x="60"  y="172" font-family="Inter,sans-serif" font-size="22" fill="#1A1A1A" font-weight="500">Retain</text>
+          <text x="60"  y="206" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A" font-weight="600">Stable, end of life.</text>
+          <text x="60"  y="234" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="60">No code change.</tspan>
+            <tspan x="60" dy="16">Low risk. Defer or</tspan>
+            <tspan x="60" dy="16">freeze the system.</tspan>
+          </text>
+          <line x1="60" y1="290" x2="236" y2="290" stroke="#E5E5E0"/>
+          <text x="60"  y="308" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Value: low</text>
+        </g>
+        <g>
+          <rect x="272" y="100" width="216" height="220" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+          <rect x="272" y="100" width="216" height="44"  fill="#00A4EF"/>
+          <text x="292" y="128" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" font-weight="500">R02 · LOW-MED</text>
+          <text x="292" y="172" font-family="Inter,sans-serif" font-size="22" fill="#1A1A1A" font-weight="500">Rehost</text>
+          <text x="292" y="206" font-family="Inter,sans-serif" font-size="13" fill="#0076AC" font-weight="600">Lift and shift.</text>
+          <text x="292" y="234" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="292">Cloud cost win.</tspan>
+            <tspan x="292" dy="16">Mainframe emulation</tspan>
+            <tspan x="292" dy="16">on Azure VMs.</tspan>
+          </text>
+          <line x1="292" y1="290" x2="468" y2="290" stroke="#E5E5E0"/>
+          <text x="292" y="308" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Value: medium</text>
+        </g>
+        <g>
+          <rect x="504" y="100" width="216" height="220" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+          <rect x="504" y="100" width="216" height="44"  fill="#7FBA00"/>
+          <text x="524" y="128" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" font-weight="500">R03 · MEDIUM</text>
+          <text x="524" y="172" font-family="Inter,sans-serif" font-size="22" fill="#1A1A1A" font-weight="500">Refactor</text>
+          <text x="524" y="206" font-family="Inter,sans-serif" font-size="13" fill="#5A8500" font-weight="600">AI sweet spot.</text>
+          <text x="524" y="234" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="524">COBOL to Java/.NET.</tspan>
+            <tspan x="524" dy="16">Translation agents</tspan>
+            <tspan x="524" dy="16">with full validation.</tspan>
+          </text>
+          <line x1="524" y1="290" x2="700" y2="290" stroke="#E5E5E0"/>
+          <text x="524" y="308" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Value: med-high</text>
+        </g>
+        <g>
+          <rect x="736" y="100" width="216" height="220" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+          <rect x="736" y="100" width="216" height="44"  fill="#FFB900"/>
+          <text x="756" y="128" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#1A1A1A" font-weight="500">R04 · HIGH</text>
+          <text x="756" y="172" font-family="Inter,sans-serif" font-size="22" fill="#1A1A1A" font-weight="500">Rearchitect</text>
+          <text x="756" y="206" font-family="Inter,sans-serif" font-size="13" fill="#B88500" font-weight="600">New boundaries.</text>
+          <text x="756" y="234" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="756">Open banking APIs.</tspan>
+            <tspan x="756" dy="16">Strategic transform.</tspan>
+            <tspan x="756" dy="16">Service redesign.</tspan>
+          </text>
+          <line x1="756" y1="290" x2="932" y2="290" stroke="#E5E5E0"/>
+          <text x="756" y="308" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Value: high</text>
+        </g>
+        <g>
+          <rect x="968" y="100" width="192" height="220" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+          <rect x="968" y="100" width="192" height="44"  fill="#F25022"/>
+          <text x="988" y="128" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" font-weight="500">R05 · VERY HIGH</text>
+          <text x="988" y="172" font-family="Inter,sans-serif" font-size="22" fill="#1A1A1A" font-weight="500">Replace</text>
+          <text x="988" y="206" font-family="Inter,sans-serif" font-size="13" fill="#B33816" font-weight="600">SaaS or exit.</text>
+          <text x="988" y="234" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="988">Dynamics 365.</tspan>
+            <tspan x="988" dy="16">Power Platform.</tspan>
+            <tspan x="988" dy="16">Strategic exit path.</tspan>
+          </text>
+          <line x1="988" y1="290" x2="1140" y2="290" stroke="#E5E5E0"/>
+          <text x="988" y="308" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Value: very high</text>
+        </g>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.r5">Diagram 1 · The 5R framework, ranked from low to very high transformation</figcaption>
+    </figure>
+    <h2 id="five-rs">The five Rs</h2>
+    <table>
+      <thead><tr><th>R</th><th>Strategy</th><th>Effort</th><th>Value</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><strong>R01</strong></td><td>Retain</td><td>Low</td><td>Low</td><td>Stable, low-risk, end-of-life systems</td></tr>
+        <tr><td><strong>R02</strong></td><td>Rehost</td><td>Low-Med</td><td>Medium</td><td>Cloud cost optimization, infra modernization</td></tr>
+        <tr><td><strong>R03</strong></td><td>Refactor</td><td>Medium</td><td>Med-High</td><td>COBOL → Java/.NET, AI sweet spot</td></tr>
+        <tr><td><strong>R04</strong></td><td>Rearchitect</td><td>High</td><td>High</td><td>Strategic transformation, new boundaries</td></tr>
+        <tr><td><strong>R05</strong></td><td>Replace</td><td>Very High</td><td>Very High</td><td>SaaS exists, or strategic exit</td></tr>
+      </tbody>
+    </table>
+    <h2 id="portfolio-approach">The portfolio approach</h2>
+    <p>No single R fits all workloads. The successful modernization is a portfolio: classify the estate, apply the right pattern per tier, sequence the work so value compounds early.</p>
+    <p>A typical portfolio for a Brazilian commercial bank with 500M lines of COBOL might land roughly as: 30% R01 Retain (stable batch jobs), 25% R02 Rehost (cost-driven migrations to mainframe-on-cloud), 30% R03 Refactor (the AI sweet spot, customer-facing systems), 10% R04 Rearchitect (open banking APIs, real-time payments), 5% R05 Replace (commodity HR/finance going to SaaS).</p>
+    <h2 id="gartner-prediction">Gartner's 2030 prediction</h2>
+    <blockquote><p>By 2030, over 75% of enterprises using IBM mainframes will adopt low-risk modernization strategies that prioritize incremental transformation over big-bang replacements.</p></blockquote>
+    <p>The "low-risk" framing is doing a lot of work here. It means: <strong>strangler fig over single cutover</strong>, <strong>R02/R03 over R05</strong>, <strong>multi-year coexistence over 18-month rip-and-replace</strong>.</p>
+    <h2 id="genai-scope">Critical insight: GenAI scope</h2>
+    <div class="callout">
+      <div class="callout__label">Gartner G00822567</div>
+      <p>Current GenAI tools excel at code translation and framework refactoring but explicitly <strong>exclude architecture modernization</strong> from their scope. Simple translation creates "JOBOL", COBOL logic implemented in Java, which represents insufficient modernization.</p>
+    </div>
+    <p>Effective GenAI-assisted modernization requires combining general-purpose LLMs, specialist domain tools, and rule-based systems. Run a rearchitect pass before translation. AI proposes target boundaries; humans approve them. Then translate to the new shape, not the old one.</p>
+  </div>
+</article>
+
+<article class="chapter acc-blue" id="ch-03">
+  <div class="chapter-eyebrow"><span class="chapter-num">03</span><span data-i18n="ch3.eyebrow">FRAMEWORK · CHAPTER 03</span></div>
+  <h1 class="chapter-title" data-i18n="ch3.title">Microsoft's four modernization approaches</h1>
+  <p class="chapter-lead" data-i18n="ch3.lead">Microsoft's modernization stack maps cleanly to Gartner's 5R, with concrete Azure tooling and a mainframe modernization agent that closes the gap on the hardest parts.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="Microsoft 4 approaches">
+      <svg viewBox="0 0 1200 280" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Microsoft four modernization approaches</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">MICROSOFT · FOUR APPROACHES</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">Each approach maps to a Gartner R, with Azure tooling.</text>
+        <g>
+          <rect x="40"  y="100" width="270" height="150" rx="6" fill="#E5F6FD" stroke="#00A4EF"/>
+          <text x="60"  y="130" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#0076AC" font-weight="500">MIGRATE · R02</text>
+          <text x="60"  y="160" font-family="Inter,sans-serif" font-size="18" fill="#1A1A1A" font-weight="500">Lift to Azure</text>
+          <text x="60"  y="190" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="60">Azure Migrate, Azure VM,</tspan>
+            <tspan x="60" dy="16">mainframe emulation.</tspan>
+          </text>
+          <text x="60"  y="240" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Faster, no rewrite.</text>
+        </g>
+        <g>
+          <rect x="326" y="100" width="270" height="150" rx="6" fill="#F1F8E3" stroke="#7FBA00"/>
+          <text x="346" y="130" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#5A8500" font-weight="500">MODERNIZE · R03</text>
+          <text x="346" y="160" font-family="Inter,sans-serif" font-size="18" fill="#1A1A1A" font-weight="500">AI refactor</text>
+          <text x="346" y="190" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="346">Mainframe Modernization Agent,</tspan>
+            <tspan x="346" dy="16">Azure AI Foundry, Claude.</tspan>
+          </text>
+          <text x="346" y="240" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Where most value lands.</text>
+        </g>
+        <g>
+          <rect x="612" y="100" width="270" height="150" rx="6" fill="#FFF7E0" stroke="#FFB900"/>
+          <text x="632" y="130" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#B88500" font-weight="500">REARCHITECT · R04</text>
+          <text x="632" y="160" font-family="Inter,sans-serif" font-size="18" fill="#1A1A1A" font-weight="500">Cloud-native</text>
+          <text x="632" y="190" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="632">AKS, Azure Functions,</tspan>
+            <tspan x="632" dy="16">Service Bus, Cosmos DB.</tspan>
+          </text>
+          <text x="632" y="240" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">New service boundaries.</text>
+        </g>
+        <g>
+          <rect x="898" y="100" width="262" height="150" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+          <text x="918" y="130" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#B33816" font-weight="500">REPLACE · R05</text>
+          <text x="918" y="160" font-family="Inter,sans-serif" font-size="18" fill="#1A1A1A" font-weight="500">SaaS swap</text>
+          <text x="918" y="190" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">
+            <tspan x="918">Dynamics 365, Power Platform,</tspan>
+            <tspan x="918" dy="16">Microsoft Fabric.</tspan>
+          </text>
+          <text x="918" y="240" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Strategic exit only.</text>
+        </g>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.ms4">Diagram 2 · Microsoft's four approaches mapped to Gartner Rs</figcaption>
+    </figure>
+    <h2 id="four-approaches">The four approaches</h2>
+    <table>
+      <thead><tr><th>Microsoft</th><th>Gartner</th><th>Tooling</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Migrate</strong></td><td>R02 Rehost</td><td>Azure Migrate, Azure VM, mainframe emulation</td></tr>
+        <tr><td><strong>Modernize</strong></td><td>R03 Refactor</td><td>Mainframe Modernization Agent, Azure AI Foundry, Claude on Foundry</td></tr>
+        <tr><td><strong>Rearchitect</strong></td><td>R04 Rearchitect</td><td>Azure Functions, AKS, Service Bus, Event Grid, Cosmos DB</td></tr>
+        <tr><td><strong>Replace</strong></td><td>R05 Replace</td><td>Dynamics 365, Power Platform, Microsoft Fabric</td></tr>
+      </tbody>
+    </table>
+    <h2 id="modernize-deep-dive">The "Modernize" path in detail</h2>
+    <p>Microsoft's "Modernize" approach is where most enterprise value lands. It combines:</p>
+    <ul>
+      <li><strong><a href="https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude">Azure AI Foundry</a></strong> hosting Claude models (Opus 4.6, Sonnet 4.6, Haiku 4.5) via serverless deployment with Model Router for cost optimization.</li>
+      <li><strong>The Mainframe Modernization Agent</strong>, a specialized agent for COBOL discovery, dependency mapping, and translation orchestration.</li>
+      <li><strong>GitHub Copilot in Agent Mode</strong> for developer workflow integration with the IDE.</li>
+      <li><strong>Microsoft Semantic Kernel</strong> for multi-agent orchestration patterns (Sequential, Handoff, Group Chat).</li>
+      <li><strong>MCP servers</strong> for enterprise system integration (covered in Chapter 8).</li>
+    </ul>
+    <h2 id="azure-services-mapping">Azure service mapping</h2>
+    <p>For each modernized capability, the Azure service mapping is concrete and opinionated:</p>
+    <ul>
+      <li><strong>Stateless services</strong> → Azure Container Apps or AKS with managed identity</li>
+      <li><strong>Long-running batches</strong> → Azure Functions Durable, Logic Apps Standard, or AKS jobs</li>
+      <li><strong>Event-driven flows</strong> → Service Bus + Event Grid, with Cosmos DB for state</li>
+      <li><strong>Real-time data</strong> → Event Hubs + Stream Analytics, or Azure Database for PostgreSQL</li>
+      <li><strong>API perimeter</strong> → Azure API Management with policy-based authorization</li>
+      <li><strong>Identity</strong> → Microsoft Entra ID with workload identity federation</li>
+      <li><strong>Observability</strong> → Azure Monitor + Application Insights, with structured logs from every agent</li>
+    </ul>
+  </div>
+</article>
+
+<article class="chapter acc-green" id="ch-04">
+  <div class="chapter-eyebrow"><span class="chapter-num">04</span><span data-i18n="ch4.eyebrow">ASSESSMENT · CHAPTER 04</span></div>
+  <h1 class="chapter-title" data-i18n="ch4.title">The ten-dimension assessment framework</h1>
+  <p class="chapter-lead" data-i18n="ch4.lead">Before any modernization engagement begins, ten dimensions must be assessed. Skipping this is the most reliable way to convert a budget into a stalled project.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="Risk vs effort 2x2 matrix">
+      <svg viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Risk versus effort 2x2 modernization matrix</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">ASSESSMENT · DECISION MATRIX</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">Risk vs effort. Which workload goes where.</text>
+        <!-- Axes -->
+        <line x1="160" y1="120" x2="160" y2="400" stroke="#3A3A3A" stroke-width="1.5"/>
+        <line x1="160" y1="400" x2="1140" y2="400" stroke="#3A3A3A" stroke-width="1.5"/>
+        <polygon points="160,114 156,124 164,124" fill="#3A3A3A"/>
+        <polygon points="1146,400 1136,396 1136,404" fill="#3A3A3A"/>
+        <text x="86"  y="124" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373" transform="rotate(-90 86 124)">RISK · HIGH</text>
+        <text x="86"  y="380" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373" transform="rotate(-90 86 380)">RISK · LOW</text>
+        <text x="170" y="424" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373">EFFORT · LOW</text>
+        <text x="990" y="424" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373">EFFORT · HIGH</text>
+        <!-- Quadrants -->
+        <line x1="650" y1="120" x2="650" y2="400" stroke="#E5E5E0" stroke-dasharray="4 4"/>
+        <line x1="160" y1="260" x2="1140" y2="260" stroke="#E5E5E0" stroke-dasharray="4 4"/>
+        <!-- Q1 top-left high-risk low-effort RED quick fix -->
+        <rect x="180" y="140" width="450" height="100" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+        <text x="200" y="170" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#B33816" font-weight="500">DEFER OR RETIRE</text>
+        <text x="200" y="196" font-family="Inter,sans-serif" font-size="15" fill="#1A1A1A" font-weight="500">High risk, low effort</text>
+        <text x="200" y="220" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">End-of-life systems. R01 Retain. Reassess yearly.</text>
+        <!-- Q2 top-right high-risk high-effort RED -->
+        <rect x="670" y="140" width="450" height="100" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+        <text x="690" y="170" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#B33816" font-weight="500">REARCHITECT</text>
+        <text x="690" y="196" font-family="Inter,sans-serif" font-size="15" fill="#1A1A1A" font-weight="500">High risk, high effort</text>
+        <text x="690" y="220" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Core ledger, regulatory. R04 with strangler fig.</text>
+        <!-- Q3 bottom-left low-risk low-effort GREEN sweet spot -->
+        <rect x="180" y="280" width="450" height="100" rx="6" fill="#F1F8E3" stroke="#7FBA00"/>
+        <text x="200" y="310" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#5A8500" font-weight="500">QUICK WIN · WAVE 1</text>
+        <text x="200" y="336" font-family="Inter,sans-serif" font-size="15" fill="#1A1A1A" font-weight="500">Low risk, low effort</text>
+        <text x="200" y="360" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Leaf modules under 5K LOC. R03 Refactor with AI.</text>
+        <!-- Q4 bottom-right low-risk high-effort BLUE strategic -->
+        <rect x="670" y="280" width="450" height="100" rx="6" fill="#E5F6FD" stroke="#00A4EF"/>
+        <text x="690" y="310" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#0076AC" font-weight="500">STRATEGIC INVEST</text>
+        <text x="690" y="336" font-family="Inter,sans-serif" font-size="15" fill="#1A1A1A" font-weight="500">Low risk, high effort</text>
+        <text x="690" y="360" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Customer-facing systems. R02 Rehost or R03 Refactor.</text>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.matrix">Diagram 3 · Risk vs effort 2x2. Where each workload should land.</figcaption>
+    </figure>
+    <h2 id="ten-dimensions">The ten dimensions</h2>
+    <ol>
+      <li><strong>Business strategy and modernization drivers.</strong> What forcing function is on the table? Cost, risk, regulation, capability gap, competitive pressure?</li>
+      <li><strong>Financial assessment.</strong> ROI model, TCO baseline, value realization timeline. Includes the AI cost-equation flip from Chapter 1.</li>
+      <li><strong>Technical portfolio assessment.</strong> CAST analysis (or equivalent) plus AI-driven complexity scoring. Maps applications to modernization tiers.</li>
+      <li><strong>Gartner TIME classification and 7R disposition.</strong> Tolerate, Invest, Migrate, Eliminate. Combined with the 5R framework from Chapter 2.</li>
+      <li><strong>People, knowledge, and tribal expertise risk.</strong> Who knows what? Who is leaving? What knowledge is uncodified?</li>
+      <li><strong>Organizational readiness and change management.</strong> Has the team done agentic AI before? What is the maturity baseline?</li>
+      <li><strong>Data governance and architecture.</strong> Where does master data live? What does LGPD require that mainframe cannot provide?</li>
+      <li><strong>Regulatory compliance and risk.</strong> SOX, ISAE 3402, PCI-DSS, BACEN, LGPD, sector-specific obligations.</li>
+      <li><strong>Operational baseline and performance requirements.</strong> SMF data: CPU, I/O, response times, batch windows. The yardstick the modernized system must match.</li>
+      <li><strong>Vendor and technology ecosystem.</strong> Existing partner contracts, ISV dependencies, SaaS exits, multi-cloud constraints.</li>
+    </ol>
+    <h2 id="go-no-go">The Go / No-Go gate</h2>
+    <p>The assessment produces a Go/No-Go decision. The No-Go criteria are explicit:</p>
+    <ul>
+      <li>No executive sponsor accountable for the outcome</li>
+      <li>No funding committed beyond Wave 1</li>
+      <li>No production telemetry baseline (SMF) available</li>
+      <li>Tribal knowledge concentrated in one person and that person is leaving</li>
+      <li>Compliance gates not pre-cleared with the regulator</li>
+    </ul>
+    <p>If any of these is true, the answer is No-Go. Fix the precondition, then reassess. Modernization initiated without these in place fails 100% of the time.</p>
+    <h2 id="ai-accelerated-assessment">How agentic AI accelerates the assessment</h2>
+    <p>The Discovery agent (Chapter 7) automates roughly 40-60% of the assessment work: codebase scanning, dependency mapping, complexity scoring, business rule cataloging. What used to be a six-week consulting engagement becomes a two-week effort with a higher-fidelity output.</p>
+    <p>The remaining 40-60% is human work: business strategy alignment, stakeholder interviews, organizational readiness, compliance interpretation. These are not automatable in 2026 and should not be attempted.</p>
+  </div>
+</article>
+
+<article class="chapter acc-green" id="ch-05">
+  <div class="chapter-eyebrow"><span class="chapter-num">05</span><span data-i18n="ch5.eyebrow">AI ADVANTAGE · CHAPTER 05</span></div>
+  <h1 class="chapter-title" data-i18n="ch5.title">The AI advantage and its limits</h1>
+  <p class="chapter-lead" data-i18n="ch5.lead">Agentic AI brings four capabilities that flip the cost equation. It does NOT replace six categories of human judgment. The 70/30 operating model is the default.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="Decision tree which R for which workload">
+      <svg viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Decision tree, which R for which workload</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">DECISION TREE · WORKLOAD ROUTING</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">Four questions. One R per workload.</text>
+        <!-- Root -->
+        <rect x="480" y="100" width="240" height="60" rx="6" fill="#1A1A1A"/>
+        <text x="600" y="124" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">START</text>
+        <text x="600" y="146" font-family="Inter,sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">Is the system end-of-life?</text>
+        <!-- Yes branch -->
+        <line x1="540" y1="160" x2="200" y2="200" stroke="#737373" stroke-width="1.5"/>
+        <text x="320" y="184" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373">YES</text>
+        <rect x="80" y="200" width="240" height="60" rx="6" fill="#737373"/>
+        <text x="200" y="224" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">R01 RETAIN</text>
+        <text x="200" y="246" font-family="Inter,sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">Defer or freeze.</text>
+        <!-- No branch -->
+        <line x1="660" y1="160" x2="600" y2="200" stroke="#737373" stroke-width="1.5"/>
+        <text x="640" y="184" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373">NO</text>
+        <rect x="480" y="200" width="240" height="60" rx="6" fill="#1A1A1A"/>
+        <text x="600" y="224" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">SAAS AVAILABLE?</text>
+        <text x="600" y="246" font-family="Inter,sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">Commodity capability?</text>
+        <!-- Yes -> Replace -->
+        <line x1="720" y1="230" x2="900" y2="230" stroke="#737373" stroke-width="1.5"/>
+        <text x="800" y="220" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373">YES</text>
+        <rect x="900" y="200" width="240" height="60" rx="6" fill="#F25022"/>
+        <text x="1020" y="224" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">R05 REPLACE</text>
+        <text x="1020" y="246" font-family="Inter,sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">Dynamics, Fabric.</text>
+        <!-- No -> deeper -->
+        <line x1="600" y1="260" x2="600" y2="300" stroke="#737373" stroke-width="1.5"/>
+        <rect x="480" y="300" width="240" height="60" rx="6" fill="#1A1A1A"/>
+        <text x="600" y="324" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">NEW BOUNDARIES?</text>
+        <text x="600" y="346" font-family="Inter,sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">Strategic redesign?</text>
+        <!-- Yes -> Rearchitect -->
+        <line x1="540" y1="360" x2="320" y2="400" stroke="#737373" stroke-width="1.5"/>
+        <text x="420" y="384" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373">YES</text>
+        <rect x="200" y="400" width="240" height="50" rx="6" fill="#FFB900"/>
+        <text x="320" y="423" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#1A1A1A" text-anchor="middle" font-weight="500">R04 REARCHITECT</text>
+        <text x="320" y="442" font-family="Inter,sans-serif" font-size="12" fill="#1A1A1A" text-anchor="middle">Cloud-native redesign</text>
+        <!-- No -> R02/R03 -->
+        <line x1="660" y1="360" x2="880" y2="400" stroke="#737373" stroke-width="1.5"/>
+        <text x="760" y="384" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#737373">NO</text>
+        <rect x="480" y="400" width="180" height="50" rx="6" fill="#00A4EF"/>
+        <text x="570" y="423" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">R02 REHOST</text>
+        <text x="570" y="442" font-family="Inter,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Cost-driven only</text>
+        <rect x="700" y="400" width="200" height="50" rx="6" fill="#7FBA00"/>
+        <text x="800" y="423" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" font-weight="500">R03 REFACTOR</text>
+        <text x="800" y="442" font-family="Inter,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">AI sweet spot</text>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.tree">Diagram 8 · Decision tree. Routes each workload to its R.</figcaption>
+    </figure>
+    <h2 id="four-capabilities">Four AI capabilities that change the game</h2>
+    <ol>
+      <li><strong>Automated exploration and discovery.</strong> Claude Code maps dependencies across thousands of files, identifies program entry points, traces execution paths, and surfaces implicit couplings that even experienced developers may miss. It reads the entire codebase, not just the files someone remembered to document.</li>
+      <li><strong>Risk analysis and opportunity mapping.</strong> AI evaluates each component's complexity, coupling, test coverage, and business criticality to produce a prioritized modernization roadmap. This replaces subjective expert judgment with data-driven assessment.</li>
+      <li><strong>Strategic planning with expert oversight.</strong> AI generates modernization plans (target architectures, migration sequences, resource estimates) that human architects review and approve. The human-in-the-loop ensures strategic decisions remain under expert control.</li>
+      <li><strong>Incremental implementation with validation.</strong> AI assists with code translation, test generation, and documentation, one component at a time, with validation at each step. Not a black-box conversion. Every output is reviewable and reversible.</li>
+    </ol>
+    <h2 id="what-ai-does-not">What AI does NOT replace</h2>
+    <p>Six decisions remain in human hands:</p>
+    <ol>
+      <li><strong>Final approval of target architecture decisions.</strong> AI proposes; humans choose.</li>
+      <li><strong>Validation of business rule preservation.</strong> Subject matter experts certify the new code reproduces the legacy behavior.</li>
+      <li><strong>Performance tuning for specific workload patterns.</strong> Production telemetry beats AI projection.</li>
+      <li><strong>Production cutover decisions.</strong> A human signs the go-live and accepts the rollback plan.</li>
+      <li><strong>Regulatory compliance sign-off.</strong> The accountable executive owns the audit trail.</li>
+      <li><strong>Escalation handling for edge cases.</strong> When AI cannot resolve, route to a domain expert.</li>
+    </ol>
+    <h2 id="seventy-thirty">The 70/30 operating model</h2>
+    <p>The target operating model is approximately <strong>70-80% AI-executed with 20-30% human oversight, validation, and decision-making</strong>, consistent with <a href="https://www.gartner.com/en/documents/5769515">Gartner's AI-assisted modernization productivity estimates</a>.</p>
+    <div class="callout">
+      <div class="callout__label">IDC US54300026</div>
+      <p>Only 45% of AI projects deliver measurable business value. The framework in this playbook, with assessment gates, cost ceilings, and governance, is what gets you into that 45%.</p>
+    </div>
+    <h2 id="three-wave-pilot">The three-wave pilot</h2>
+    <p>Twelve weeks. Three waves. Each one validates the next.</p>
+    <table>
+      <thead><tr><th>Wave</th><th>Timeline</th><th>Platform</th><th>Key metric</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wave 1, Quick Win</strong></td><td>Weeks 1-2</td><td>GitHub Copilot + Claude</td><td>Reduce triage from 4-8h to 30min</td></tr>
+        <tr><td><strong>Wave 2, Deep Analysis</strong></td><td>Weeks 3-6</td><td>Azure AI Foundry + Claude Code</td><td>50K-100K LOC analyzed (vs 500-1K manual)</td></tr>
+        <tr><td><strong>Wave 3, Scale</strong></td><td>Weeks 7-12</td><td>Multi-agent pipeline + Semantic Kernel</td><td>200K-500K LOC, automatic triage</td></tr>
+      </tbody>
+    </table>
+  </div>
+</article>
+
+<article class="chapter acc-blue" id="ch-06">
+  <div class="chapter-eyebrow"><span class="chapter-num">06</span><span data-i18n="ch6.eyebrow">ARCHITECTURE · CHAPTER 06</span></div>
+  <h1 class="chapter-title" data-i18n="ch6.title">The five-layer reference architecture</h1>
+  <p class="chapter-lead" data-i18n="ch6.lead">Five layers, top to bottom: Core, Agents, MCP Tools, Platform and Security, Perimeter. Each layer builds on the one below. Five principles govern the whole stack.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="Five-layer agentic architecture">
+      <svg viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Five-layer agentic reference architecture</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">ARCHITECTURE · FIVE-LAYER STACK</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">Each layer builds on the one below.</text>
+        <!-- Layer 1 Core -->
+        <rect x="40"  y="100" width="1120" height="62" rx="6" fill="#E5F6FD" stroke="#00A4EF"/>
+        <text x="60"  y="128" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#0076AC" font-weight="500">LAYER 1 · CORE</text>
+        <text x="60"  y="150" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A">Developer interface · GitHub Copilot Agent Mode, Claude Code CLI, AGENTS.md, CLAUDE.md</text>
+        <!-- Layer 2 Agents -->
+        <rect x="40"  y="172" width="1120" height="62" rx="6" fill="#FFF7E0" stroke="#FFB900"/>
+        <text x="60"  y="200" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#B88500" font-weight="500">LAYER 2 · AGENTS</text>
+        <text x="60"  y="222" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A">Multi-model orchestration · Opus 4.6, Sonnet 4.6, Haiku 4.5 via Semantic Kernel</text>
+        <!-- Layer 3 MCP -->
+        <rect x="40"  y="244" width="1120" height="62" rx="6" fill="#F1F8E3" stroke="#7FBA00"/>
+        <text x="60"  y="272" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#5A8500" font-weight="500">LAYER 3 · MCP TOOLS</text>
+        <text x="60"  y="294" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A">Enterprise connectors · GitHub, Azure DevOps, Backstage, Database, Observability, Key Vault, Jira, CMDB</text>
+        <!-- Layer 4 Platform -->
+        <rect x="40"  y="316" width="1120" height="62" rx="6" fill="#E5F6FD" stroke="#00A4EF"/>
+        <text x="60"  y="344" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#0076AC" font-weight="500">LAYER 4 · PLATFORM &amp; SECURITY</text>
+        <text x="60"  y="366" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A">Azure AI Foundry, Entra ID, Key Vault, Azure Monitor, Defender for Cloud, Azure Policy</text>
+        <!-- Layer 5 Perimeter -->
+        <rect x="40"  y="388" width="1120" height="62" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+        <text x="60"  y="416" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#B33816" font-weight="500">LAYER 5 · PERIMETER</text>
+        <text x="60"  y="438" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A">Customer mainframe · Target Azure services · External APIs</text>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.layers">Diagram 5 · Five-layer agentic reference architecture</figcaption>
+    </figure>
+    <h2 id="layer-1-core">Layer 1: Core (developer interface)</h2>
+    <p>Developers interact with Claude models through <a href="https://github.blog/news-insights/company-news/pick-your-agent-use-claude-and-codex-on-agent-hq/">GitHub Copilot Agent Mode</a> in VS Code, JetBrains, or the GitHub web interface. The model picker allows selecting Claude Opus 4.6 or Sonnet 4.6 for specific tasks.</p>
+    <p>For power users and automation, <a href="https://docs.anthropic.com/en/docs/claude-code/mcp">Claude Code CLI</a> provides a terminal-based interface with MCP integration. The GitHub Copilot SDK enables building specialized interfaces tailored to modernization workflows.</p>
+    <p>Configuration files in the repository root, <code>AGENTS.md</code> and <code>CLAUDE.md</code>, provide persistent instructions to agents about project conventions, architecture, and modernization rules.</p>
+    <h2 id="layer-2-agents">Layer 2: Agents (multi-model orchestration)</h2>
+    <p>The agent layer implements the intelligence of the modernization pipeline. The multi-agent architecture is validated by Gartner research [G00822558 Figure 3], which identifies a five-agent workflow pattern: Specification → Architecture → Code Generation → Verification → Deployment.</p>
+    <ul>
+      <li><strong>Orchestrator (Claude Opus 4.6).</strong> The primary reasoning engine. Receives high-level tasks, decomposes them into subtasks, assigns to workers, consolidates results. Uses the full 1M token context window.</li>
+      <li><strong>Worker agents (Claude Sonnet 4.6).</strong> Execute specific tasks: code translation, test generation, documentation writing, PR creation. Each worker has focused scope and a clear input/output contract.</li>
+      <li><strong>Scanner agents (Claude Haiku 4.5).</strong> Handle high-volume, low-complexity tasks: syntax validation, pattern matching, triage classification, CI/CD checks. Optimized for speed and cost.</li>
+    </ul>
+    <p>Orchestration is managed by <a href="https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/">Microsoft Semantic Kernel</a> using built-in agent patterns: Sequential (step-by-step), Handoff (agent-to-agent delegation), and Group Chat (collaborative reasoning).</p>
+    <h2 id="layer-3-mcp">Layer 3: MCP Tools (enterprise connectors)</h2>
+    <p>The <a href="https://modelcontextprotocol.io/specification/2025-06-18">Model Context Protocol (MCP)</a> provides a standardized way for agents to connect to enterprise systems. Eight MCP servers form the integration backbone (detailed in Chapter 8).</p>
+    <h2 id="layer-4-platform">Layer 4: Platform and Security</h2>
+    <ul>
+      <li><strong>Azure AI Foundry</strong> hosts Claude models via serverless deployment. Provides Model Router, Foundry IQ (dynamic RAG), and Fleet Management.</li>
+      <li><strong>Microsoft Entra ID</strong> is the identity provider for all agents and users. RBAC policies control resource access.</li>
+      <li><strong>Azure Key Vault</strong> stores all secrets, API keys, and certificates. Agents retrieve credentials through the Vault MCP server.</li>
+      <li><strong>Azure Monitor</strong> centralizes logging, metrics, and alerting. Every agent action is logged with structured metadata.</li>
+      <li><strong>Azure Policy and Defender for Cloud</strong> enforce compliance and manage security posture.</li>
+    </ul>
+    <h2 id="layer-5-perimeter">Layer 5: Perimeter (external interfaces)</h2>
+    <ul>
+      <li><strong>Customer mainframe.</strong> Source COBOL accessed via secure file transfer, mainframe API adapters, or Git mirrors</li>
+      <li><strong>Target Azure services.</strong> The modernized application destination</li>
+      <li><strong>External APIs.</strong> Third-party integrations the modernized system continues to depend on</li>
+    </ul>
+    <h2 id="five-principles">Five principles that govern the stack</h2>
+    <ol>
+      <li><strong>Multi-model by design.</strong> Opus analyzes, Sonnet translates, Haiku scans. Model Router optimizes cost automatically.</li>
+      <li><strong>Human-in-the-loop at decision points.</strong> Agents execute autonomously for routine tasks but pause at approval gates.</li>
+      <li><strong>Enterprise governance first.</strong> Every agent action is logged, permissioned, and auditable.</li>
+      <li><strong>Incremental and reversible.</strong> Every step produces a reviewable artifact. Every deployment can roll back.</li>
+      <li><strong>Platform-native integration.</strong> Uses GitHub and Azure native services rather than custom infrastructure.</li>
+    </ol>
+  </div>
+</article>
+
+<article class="chapter acc-yellow" id="ch-07">
+  <div class="chapter-eyebrow"><span class="chapter-num">07</span><span data-i18n="ch7.eyebrow">ARCHITECTURE · CHAPTER 07</span></div>
+  <h1 class="chapter-title" data-i18n="ch7.title">Six specialized agents</h1>
+  <p class="chapter-lead" data-i18n="ch7.lead">Six agents, each implementing Gartner's agent anatomy: perceive, decide, act, plan. Each has its own model, MCP servers, and a clear input/output contract.</p>
+  <div class="chapter-body">
+    <h2 id="discovery-agent">Discovery agent</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Model</strong></td><td>Claude Haiku 4.5 (initial scan) → Claude Opus 4.6 (deep analysis)</td></tr>
+        <tr><td><strong>MCP servers</strong></td><td>GitHub API, Database, Backstage</td></tr>
+        <tr><td><strong>Inputs</strong></td><td>Repository path, file patterns (*.cbl, *.cpy, *.jcl, *.nat)</td></tr>
+        <tr><td><strong>Outputs</strong></td><td>Application inventory, dependency graph, complexity scores, business rule catalog</td></tr>
+      </tbody>
+    </table>
+    <p>The Discovery agent scans the entire codebase, identifies programs and copybooks, traces CALL dependencies, maps JCL job flows, and catalogs data structures. Output is a JSON inventory plus a Markdown report with embedded Mermaid diagrams.</p>
+    <h2 id="analysis-agent">Analysis agent</h2>
+    <table>
+      <tbody>
+        <tr><td><strong>Model</strong></td><td>Claude Opus 4.6</td></tr>
+        <tr><td><strong>MCP servers</strong></td><td>GitHub API, Database, Observability</td></tr>
+        <tr><td><strong>Outputs</strong></td><td>Modernization priority matrix, risk assessment, target architecture recommendation</td></tr>
+      </tbody>
+    </table>
+    <p>The Analysis agent evaluates each application against prioritization criteria (business criticality, technical complexity, AI suitability, dependency coupling), recommends a strategy, proposes sequencing, and estimates effort.</p>
+    <h2 id="translation-agent">Translation agent</h2>
+    <table>
+      <tbody>
+        <tr><td><strong>Model</strong></td><td>Claude Sonnet 4.6</td></tr>
+        <tr><td><strong>MCP servers</strong></td><td>GitHub API, Database</td></tr>
+        <tr><td><strong>Outputs</strong></td><td>Translated code (Java/.NET/Python), mapping documentation, PR</td></tr>
+      </tbody>
+    </table>
+    <p>The Translation agent translates COBOL logic preserving business semantics, generates inline documentation, produces mapping files, and creates a PR. <strong>Critically, it does not inject any proprietary SDK</strong>. Output is standard, idiomatic target language code.</p>
+    <h2 id="test-generation-agent">Test generation agent</h2>
+    <p>Sonnet 4.6 generates test suites validating that translated code produces identical outputs to the original COBOL. Creates test data fixtures, edge case tests, boundary condition tests. Targets 85% minimum coverage with 100% on critical business rule paths.</p>
+    <h2 id="review-agent">Review agent</h2>
+    <p>Sonnet 4.6 reviews PRs for code quality, security findings, compliance flags. Produces inline comments, requested changes, or approval. The Review agent's findings supplement (not replace) human review.</p>
+    <h2 id="migration-agent">Migration agent</h2>
+    <p>Opus 4.6 plans coexistence: traffic migration sequence, feature flag rollout, rollback procedures. The output is a phased migration plan with explicit decision gates, ready for human approval.</p>
+  </div>
+</article>
+
+<article class="chapter acc-green" id="ch-08">
+  <div class="chapter-eyebrow"><span class="chapter-num">08</span><span data-i18n="ch8.eyebrow">ARCHITECTURE · CHAPTER 08</span></div>
+  <h1 class="chapter-title" data-i18n="ch8.title">Eight MCP servers</h1>
+  <p class="chapter-lead" data-i18n="ch8.lead">The Model Context Protocol is "USB for AI agents", a universal connector. Eight servers form the integration backbone for enterprise modernization.</p>
+  <div class="chapter-body">
+    <h2 id="what-is-mcp">What is MCP</h2>
+    <p>The <a href="https://modelcontextprotocol.io/specification/2025-06-18">Model Context Protocol</a> is an open protocol providing a standardized way for AI agents to connect to external data sources and tools. Each server exposes <strong>tools</strong> (functions the agent can call), <strong>resources</strong> (data the agent can read), and <strong>prompts</strong> (pre-configured instructions).</p>
+    <h2 id="eight-servers">The eight servers</h2>
+    <table>
+      <thead><tr><th>Server</th><th>Purpose</th><th>Key tools</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GitHub API</strong></td><td>Repository and code operations</td><td><code>read_file</code>, <code>search_code</code>, <code>create_branch</code>, <code>create_pull_request</code></td></tr>
+        <tr><td><strong>Azure DevOps</strong></td><td>Pipeline orchestration, work items</td><td><code>trigger_pipeline</code>, <code>create_work_item</code>, <code>get_build_logs</code></td></tr>
+        <tr><td><strong>Backstage</strong></td><td>Service discovery and ownership</td><td><code>get_service</code>, <code>list_dependencies</code>, <code>get_owner</code></td></tr>
+        <tr><td><strong>Database</strong></td><td>Schema introspection, data context</td><td><code>get_schema</code>, <code>describe_table</code>, <code>sample_data</code></td></tr>
+        <tr><td><strong>Observability</strong></td><td>Production metrics and traces</td><td><code>get_metrics</code>, <code>query_traces</code>, <code>get_error_rate</code></td></tr>
+        <tr><td><strong>Key Vault</strong></td><td>Secrets and credentials</td><td><code>get_secret</code>, <code>rotate_secret</code></td></tr>
+        <tr><td><strong>Jira</strong></td><td>Work tracking and triage</td><td><code>create_issue</code>, <code>update_issue</code>, <code>list_assigned</code></td></tr>
+        <tr><td><strong>CMDB</strong></td><td>Asset inventory and config baselines</td><td><code>get_asset</code>, <code>list_changes</code>, <code>get_baseline</code></td></tr>
+      </tbody>
+    </table>
+    <h2 id="mcp-modernization-uses">Modernization-specific use cases</h2>
+    <ul>
+      <li><strong>Reading COBOL source files</strong> via GitHub API server, both source and copybooks resolved together</li>
+      <li><strong>Understanding legacy data structures</strong> (VSAM, Adabas, DB2) via Database server schema introspection</li>
+      <li><strong>Triggering CI/CD</strong> after each module translation via Azure DevOps server</li>
+      <li><strong>Mapping ownership</strong> via Backstage so PRs route to the right team automatically</li>
+      <li><strong>Establishing performance baselines</strong> via Observability server before cutover decisions</li>
+    </ul>
+    <h2 id="mcp-maturity">MCP maturity and AgentOps</h2>
+    <p>MCP server quality varies. Production-ready servers should provide: schema validation, RBAC at the tool level, rate limiting per agent, structured audit logs, and circuit breakers for runaway invocation patterns. AgentOps maturity correlates strongly with successful production cutovers.</p>
+  </div>
+</article>
+
+<article class="chapter acc-yellow" id="ch-09">
+  <div class="chapter-eyebrow"><span class="chapter-num">09</span><span data-i18n="ch9.eyebrow">OPERATIONAL · CHAPTER 09</span></div>
+  <h1 class="chapter-title" data-i18n="ch9.title">Application carving</h1>
+  <p class="chapter-lead" data-i18n="ch9.lead">The hardest problem in COBOL modernization is not translation. It is figuring out how to slice a monolithic estate into independently modernizable units. Carving is the discipline that determines whether the project ships.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="Seven-phase modernization journey">
+      <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Seven-phase modernization journey</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">JOURNEY · ASSESSMENT TO FACTORY</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">Seven phases. Each gate validates the next.</text>
+        <!-- Spine line -->
+        <line x1="80" y1="200" x2="1140" y2="200" stroke="#737373" stroke-width="1.5"/>
+        <!-- Phases -->
+        <g><circle cx="120" cy="200" r="22" fill="#00A4EF"/><text x="120" y="206" font-family="JetBrains Mono,monospace" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="600">01</text><text x="120" y="160" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="500">Assess</text><text x="120" y="246" font-family="Inter,sans-serif" font-size="11" fill="#737373" text-anchor="middle">10 dimensions</text></g>
+        <g><circle cx="270" cy="200" r="22" fill="#FFB900"/><text x="270" y="206" font-family="JetBrains Mono,monospace" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="600">02</text><text x="270" y="160" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="500">Carve</text><text x="270" y="246" font-family="Inter,sans-serif" font-size="11" fill="#737373" text-anchor="middle">Tier 1 leaves</text></g>
+        <g><circle cx="420" cy="200" r="22" fill="#7FBA00"/><text x="420" y="206" font-family="JetBrains Mono,monospace" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="600">03</text><text x="420" y="160" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="500">Translate</text><text x="420" y="246" font-family="Inter,sans-serif" font-size="11" fill="#737373" text-anchor="middle">AI agents</text></g>
+        <g><circle cx="570" cy="200" r="22" fill="#F25022"/><text x="570" y="206" font-family="JetBrains Mono,monospace" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="600">04</text><text x="570" y="160" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="500">Performance</text><text x="570" y="246" font-family="Inter,sans-serif" font-size="11" fill="#737373" text-anchor="middle">Match SLOs</text></g>
+        <g><circle cx="720" cy="200" r="22" fill="#FFB900"/><text x="720" y="206" font-family="JetBrains Mono,monospace" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="600">05</text><text x="720" y="160" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="500">Coexist</text><text x="720" y="246" font-family="Inter,sans-serif" font-size="11" fill="#737373" text-anchor="middle">Strangler fig</text></g>
+        <g><circle cx="870" cy="200" r="22" fill="#7FBA00"/><text x="870" y="206" font-family="JetBrains Mono,monospace" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="600">06</text><text x="870" y="160" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="500">Test</text><text x="870" y="246" font-family="Inter,sans-serif" font-size="11" fill="#737373" text-anchor="middle">Shadow traffic</text></g>
+        <g><circle cx="1020" cy="200" r="22" fill="#F25022"/><text x="1020" y="206" font-family="JetBrains Mono,monospace" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="600">07</text><text x="1020" y="160" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="500">Cutover</text><text x="1020" y="246" font-family="Inter,sans-serif" font-size="11" fill="#737373" text-anchor="middle">Factory model</text></g>
+        <text x="600" y="294" font-family="Inter,sans-serif" font-size="12" font-style="italic" fill="#737373" text-anchor="middle">90-180 days to first production · 12-24 months coexistence · sustained 200-500K LOC per quarter</text>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.journey">Diagram 6 · Seven phases. Assessment to factory model.</figcaption>
+    </figure>
+    <h2 id="why-carving-hard">Why carving is the hard part</h2>
+    <p>A typical COBOL estate is interconnected in ways that the documentation never captured. CALL chains span dozens of programs, copybooks are shared across modules, JCL jobs cascade. Everything is connected; the question is which connections can be cut and where new contracts can be drawn.</p>
+    <p>Big-bang attempts fail here. Picking modules to translate without understanding the dependency surface produces translated artifacts that cannot run independently. The carved units must hold their own when traffic shifts to them in Phase 5.</p>
+    <h2 id="carving-tiers">Tiered dependency difficulty model</h2>
+    <ul>
+      <li><strong>Tier 1, leaf modules.</strong> Low coupling, no callers depending on internal state. Easy to carve first. Most utilities, formatters, validators land here.</li>
+      <li><strong>Tier 2, intermediate modules.</strong> Some shared state with callers. Moderate difficulty. Domain services for specific business capabilities (loan origination, claim adjudication) typically land here.</li>
+      <li><strong>Tier 3, core modules.</strong> High coupling. Save for last. Core ledger, account management, regulatory reporting are typical Tier 3. Translating these first guarantees rework when Tier 1 and 2 surface incompatible assumptions.</li>
+    </ul>
+    <h2 id="smf-analysis">SMF runtime behavior analysis</h2>
+    <p>System Management Facility (SMF) records on z/OS contain runtime behavior that static code analysis misses: which programs are actually called in production, how often, with what data shape, in what time windows. SMF data informs the slicing order: heavy real-time programs may need different patterns than batch jobs that run weekly.</p>
+    <h2 id="carving-with-claude">Automated discovery with Claude Opus</h2>
+    <p>Run Claude Opus 4.6 against the entire codebase with the Discovery agent (Chapter 7). The 1M-token context window allows Opus to load every COBOL program, copybook, and JCL job simultaneously. Output is a dependency graph with edges weighted by SMF call frequency and complexity scores per module.</p>
+    <p>Use this output to draft the carving plan: which modules carve first, which later, where the new service boundaries land, and what API contracts the modernized units expose.</p>
+    <div class="callout">
+      <div class="callout__label">Anti-pattern</div>
+      <p><strong>Carving without SMF data.</strong> Static-only analysis suggests boundaries that look clean but disagree with how the system actually behaves under production load. The first time a high-frequency cross-boundary call surfaces in shadow traffic, the architecture has to be redrawn.</p>
+    </div>
+  </div>
+</article>
+
+<article class="chapter acc-red" id="ch-10">
+  <div class="chapter-eyebrow"><span class="chapter-num">10</span><span data-i18n="ch10.eyebrow">OPERATIONAL · CHAPTER 10</span></div>
+  <h1 class="chapter-title" data-i18n="ch10.title">Performance, coexistence, testing</h1>
+  <p class="chapter-lead" data-i18n="ch10.lead">Three challenges that determine production success: matching mainframe performance, running both systems together for 12-24 months, and validating behavioral equivalence with shadow traffic.</p>
+  <div class="chapter-body">
+    <h2 id="performance">Performance assurance</h2>
+    <p>Mainframes process workloads with characteristics that distributed systems do not naturally match: sustained throughput on batch jobs measured in millions of records per minute, sub-second response for transactional banking, predictable latency under load.</p>
+    <p>Performance assurance has four steps:</p>
+    <ol>
+      <li><strong>Establish the baseline.</strong> SMF data captures CPU, I/O, and response time distributions for every modernization target.</li>
+      <li><strong>Load test with production-like volume.</strong> Generate traffic that matches real production patterns. Synthetic load that hits a mean response time hides the tail latency that matters.</li>
+      <li><strong>Profile hot paths.</strong> Use Application Insights and Azure Monitor to identify the 5% of code paths consuming 80% of CPU. Optimize those first.</li>
+      <li><strong>Benchmark vs mainframe.</strong> No regression beyond defined SLOs. If response time degrades, capacity expands, or throughput drops, the cutover gate stays closed.</li>
+    </ol>
+    <h2 id="coexistence">Coexistence (the strangler fig pattern)</h2>
+    <p>The strangler fig metaphor: a vine grows around an old tree, gradually taking over until the tree dies. Modernization works the same way. The mainframe remains the source of truth while modern services take over functionality, one capability at a time.</p>
+    <p>Concrete pattern:</p>
+    <ul>
+      <li><strong>Router (CDC + feature flags).</strong> Routes traffic by percentage rollout, customer ID, region, or business rule. Starts at 10% to modern, 90% to legacy.</li>
+      <li><strong>CDC bidirectional sync.</strong> Change Data Capture keeps both systems in sync. No double writes, no eventual consistency surprises.</li>
+      <li><strong>Idempotent modern services.</strong> Every operation can be retried safely. State changes are reversible.</li>
+      <li><strong>Gradual traffic migration.</strong> 10% → 30% → 50% → 80% → 100%. Each step validated by metrics before advancing.</li>
+    </ul>
+    <p>Coexistence typically runs 12-24 months for a major application. Compressing it shorter than 12 months is the most common cause of cutover failure.</p>
+    <h2 id="testing">Testing strategy: shadow traffic and behavioral equivalence</h2>
+    <ol>
+      <li><strong>Shadow traffic.</strong> Production requests are duplicated to the modernized service in read-only mode. Responses are compared, not used. Identifies divergences before they affect users.</li>
+      <li><strong>Behavioral equivalence tests.</strong> Generated by the Test agent during translation. Validate that modernized code produces identical outputs to the original COBOL across thousands of input fixtures.</li>
+      <li><strong>Mutation testing.</strong> Inject defects into the modernized code, confirm tests fail. Validates test suite quality, not just code correctness.</li>
+      <li><strong>Edge case mining.</strong> Discovery agent reads decades of audit logs, surfaces rare scenarios. Generated test fixtures cover them explicitly.</li>
+    </ol>
+    <div class="callout">
+      <div class="callout__label">Anti-pattern</div>
+      <p><strong>Test rot.</strong> Tests pass but the code is wrong because tests inherit the same bugs as the translation. Mitigation: generate tests from the original COBOL behavior, not from the translated code. Mutation-test the suite to catch tests that always pass.</p>
+    </div>
+  </div>
+</article>
+
+<article class="chapter acc-blue" id="ch-11">
+  <div class="chapter-eyebrow"><span class="chapter-num">11</span><span data-i18n="ch11.eyebrow">GOVERNANCE · CHAPTER 11</span></div>
+  <h1 class="chapter-title" data-i18n="ch11.title">Governance framework</h1>
+  <p class="chapter-lead" data-i18n="ch11.lead">Auditability is not a feature. It is the difference between a pilot and production. The governance framework is what gets the project past compliance review.</p>
+  <div class="chapter-body">
+    <h2 id="governance-pillars">Five governance pillars</h2>
+    <ol>
+      <li><strong>Every agent action logged with structured metadata.</strong> Azure Monitor captures who, when, what, why, and what changed. The audit trail is the side effect of normal operation, not a separate workstream.</li>
+      <li><strong>Approval gates at decision points.</strong> Architecture decisions, production deployments, and schema changes pause for human sign-off. The accountable executive owns each gate.</li>
+      <li><strong>RBAC at every layer.</strong> Microsoft Entra ID controls which agents can read which resources. Key Vault holds all secrets. No agent stores credentials directly.</li>
+      <li><strong>Cost ceilings per workflow.</strong> Token spend capped per agent invocation. Runaways trigger circuit breakers and alert the platform team.</li>
+      <li><strong>Compliance evidence generated automatically.</strong> SOX, ISAE 3402, LGPD, PCI-DSS audit trails as a side effect of normal operation, not a separate compliance project.</li>
+    </ol>
+    <h2 id="risk-categories">Risk categories</h2>
+    <table>
+      <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cost runaway</strong></td><td>Per-module cost ceilings; Wave 1/2/3 budget gates; circuit breakers on token spend</td></tr>
+        <tr><td><strong>Agent anarchy</strong></td><td>Single Orchestrator; structured action log; approval gates at decision points</td></tr>
+        <tr><td><strong>Vendor lock-in</strong></td><td>Standard idiomatic target code; no proprietary SDK injection; multi-model routing</td></tr>
+        <tr><td><strong>Regulatory non-compliance</strong></td><td>Compliance gates pre-cleared with regulator; audit trail automated; signed evidence</td></tr>
+        <tr><td><strong>Data loss</strong></td><td>CDC bidirectional sync; reversible deployments; production telemetry baseline</td></tr>
+        <tr><td><strong>Knowledge concentration</strong></td><td>Tribal expertise codified into AGENTS.md and skills; pair-programming with senior engineers</td></tr>
+      </tbody>
+    </table>
+    <h2 id="agentops">AgentOps maturity</h2>
+    <p>AgentOps is the operational discipline of running agents in production at scale. Maturity levels:</p>
+    <ul>
+      <li><strong>Level 0.</strong> Ad-hoc agent invocations. No structured logging. No cost tracking.</li>
+      <li><strong>Level 1.</strong> Logging and cost tracking exist but are reviewed manually after the fact.</li>
+      <li><strong>Level 2.</strong> Real-time dashboards, alerts on cost runaway and error rates, structured audit log.</li>
+      <li><strong>Level 3.</strong> Automated remediation: circuit breakers, fallback paths, hot-swappable models, compliance evidence pipelines.</li>
+      <li><strong>Level 4.</strong> Continuous improvement: agent prompts versioned and A/B tested, model performance tracked, cost-per-LOC trended over quarters.</li>
+    </ul>
+    <p>Most enterprises starting modernization sit at Level 0-1. Production cutover gates require Level 2 minimum. Factory model (Chapter 12) requires Level 3.</p>
+  </div>
+</article>
+
+<article class="chapter acc-yellow" id="ch-12">
+  <div class="chapter-eyebrow"><span class="chapter-num">12</span><span data-i18n="ch12.eyebrow">EXECUTION · CHAPTER 12</span></div>
+  <h1 class="chapter-title" data-i18n="ch12.title">Monday morning</h1>
+  <p class="chapter-lead" data-i18n="ch12.lead">Five concrete actions for the next two weeks. After Wave 1 ships, the next 100 modules become factory work.</p>
+  <div class="chapter-body">
+    <figure class="diagram" aria-label="Reference architecture">
+      <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Reference architecture, Claude on Azure with GitHub</title>
+        <text x="40" y="38" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="#737373" font-weight="500">REFERENCE ARCHITECTURE · CLAUDE + AZURE + GITHUB</text>
+        <text x="40" y="68" font-family="Inter,sans-serif" font-size="20" fill="#1A1A1A" font-weight="500">Three vendor pillars. One integrated stack.</text>
+        <!-- GitHub -->
+        <g>
+          <rect x="40"  y="110" width="340" height="250" rx="6" fill="#FFFFFF" stroke="#1A1A1A"/>
+          <rect x="40"  y="110" width="340" height="44" fill="#1A1A1A"/>
+          <text x="60"  y="138" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" font-weight="500">DEVELOPER · GITHUB</text>
+          <text x="60"  y="184" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Copilot Agent Mode</text>
+          <text x="60"  y="206" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">VS Code, JetBrains, web</text>
+          <text x="60"  y="240" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Repos and Actions</text>
+          <text x="60"  y="262" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Source, PR, CI/CD</text>
+          <text x="60"  y="296" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">AGENTS.md, CLAUDE.md</text>
+          <text x="60"  y="318" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Project conventions</text>
+          <line x1="60" y1="340" x2="360" y2="340" stroke="#E5E5E0"/>
+          <text x="60"  y="356" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Where developers work</text>
+        </g>
+        <!-- Arrows -->
+        <line x1="380" y1="235" x2="430" y2="235" stroke="#737373" stroke-width="1.5"/>
+        <polygon points="436,235 426,231 426,239" fill="#737373"/>
+        <line x1="820" y1="235" x2="870" y2="235" stroke="#737373" stroke-width="1.5"/>
+        <polygon points="876,235 866,231 866,239" fill="#737373"/>
+        <!-- Azure -->
+        <g>
+          <rect x="430" y="110" width="380" height="250" rx="6" fill="#FFFFFF" stroke="#00A4EF"/>
+          <rect x="430" y="110" width="380" height="44" fill="#00A4EF"/>
+          <text x="450" y="138" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" font-weight="500">PLATFORM · MICROSOFT AZURE</text>
+          <text x="450" y="184" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Azure AI Foundry</text>
+          <text x="450" y="206" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Model Router, Foundry IQ</text>
+          <text x="450" y="240" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Entra ID + Key Vault</text>
+          <text x="450" y="262" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">RBAC, secrets, audit</text>
+          <text x="450" y="296" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Monitor + App Insights</text>
+          <text x="450" y="318" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Telemetry, traces, alerts</text>
+          <line x1="450" y1="340" x2="790" y2="340" stroke="#E5E5E0"/>
+          <text x="450" y="356" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Governance and platform</text>
+        </g>
+        <!-- Claude -->
+        <g>
+          <rect x="870" y="110" width="290" height="250" rx="6" fill="#FFFFFF" stroke="#7FBA00"/>
+          <rect x="870" y="110" width="290" height="44" fill="#7FBA00"/>
+          <text x="890" y="138" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2" fill="#FFFFFF" font-weight="500">MODELS · CLAUDE</text>
+          <text x="890" y="184" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Opus 4.6</text>
+          <text x="890" y="206" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Reasoning · 1M context</text>
+          <text x="890" y="240" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Sonnet 4.6</text>
+          <text x="890" y="262" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Translation, tests</text>
+          <text x="890" y="296" font-family="Inter,sans-serif" font-size="14" fill="#1A1A1A" font-weight="500">Haiku 4.5</text>
+          <text x="890" y="318" font-family="Inter,sans-serif" font-size="12" fill="#3A3A3A">Scan, triage, classify</text>
+          <line x1="890" y1="340" x2="1140" y2="340" stroke="#E5E5E0"/>
+          <text x="890" y="356" font-family="Inter,sans-serif" font-size="11" font-style="italic" fill="#737373">Multi-model by design</text>
+        </g>
+      </svg>
+      <figcaption class="diagram-caption" data-i18n="dia.refarch">Diagram 7 · Reference architecture. GitHub developer surface, Azure platform, Claude models.</figcaption>
+    </figure>
+    <h2 id="five-actions">Five actions for the first two weeks</h2>
+    <ol>
+      <li><strong>Pick one COBOL module under 5K LOC with low business criticality.</strong> Not the most important system. The most learnable. This is your Wave 1 quick win.</li>
+      <li><strong>Stand up GitHub Copilot + Claude on Azure AI Foundry.</strong> Provision the Foundry workspace, deploy Claude Opus 4.6 and Sonnet 4.6, connect via Model Router.</li>
+      <li><strong>Run the Discovery agent on the chosen module.</strong> Output: dependency graph, business rule catalog, complexity score. Compare against your team's mental model.</li>
+      <li><strong>Generate translation + tests for one leaf module.</strong> Sonnet 4.6 with behavioral equivalence test generation. Review the PR with senior engineers.</li>
+      <li><strong>Establish governance baseline.</strong> Approval gates, cost ceilings, audit logging. Wave 2 cannot start without this.</li>
+    </ol>
+    <h2 id="two-week-target">Two-week target</h2>
+    <p>At the end of Wave 1, you have a translated module with passing behavioral tests, a documented governance plan, and a credible Wave 2 budget. That is what you bring to the steering committee. Not a slide deck. The actual artifact.</p>
+    <h2 id="factory-model">The factory model</h2>
+    <p>After Module 1, the next 100 are repeatable. The factory model is what compounds:</p>
+    <ul>
+      <li>Reusable carving rules, agent prompts, test fixtures</li>
+      <li>Standardized PR template, review checklist</li>
+      <li>Pre-built CI/CD pipeline per target language</li>
+      <li>Cost predictability: token spend per LOC measured and tracked</li>
+      <li>Throughput: 50K-500K LOC per quarter sustained at steady state</li>
+    </ul>
+    <h2 id="success-metrics">What success looks like at 12 months</h2>
+    <ul>
+      <li><strong>Throughput</strong> of 200K-500K LOC modernized per quarter at steady state</li>
+      <li><strong>Time to first production</strong> of 90-180 days, vs industry median of 9-18 months</li>
+      <li><strong>Test coverage</strong> of 85%+ minimum, with 100% on critical business rule paths</li>
+      <li><strong>Cost predictability</strong> of ±15% token cost per LOC variance band</li>
+      <li><strong>Compliance evidence</strong> generated continuously, not as a separate audit project</li>
+      <li><strong>Knowledge codified</strong> from tribal expertise into AGENTS.md, skills, and prompts</li>
+    </ul>
+    <h2 id="references">References</h2>
+    <p><strong>Companion documents in this framework:</strong></p>
+    <ul>
+      <li>02 Legacy Modernization Strategy Guide</li>
+      <li>03 AI-Driven Modernization, Claude Opus Analysis</li>
+      <li>04 Comprehensive Assessment Framework</li>
+      <li>06 Technical Architecture, Agentic Framework</li>
+      <li>07 Operational Playbook, Carving + Performance + Coexistence</li>
+      <li>12 Technical Implementation Runbook</li>
+    </ul>
+    <p><strong>Industry sources:</strong> Gartner G00822558, G00822567, G00827372, G00833880, G00835157, G00842103, G00844741, G00825163. IDC US54300026 ("2026 Ushers in Deeper Maturity in the Agentic Era"). Anthropic Claude model documentation. Microsoft Learn (Azure AI Foundry, Semantic Kernel, Mainframe Modernization Agent).</p>
+  </div>
+</article>
+
+</main>
+
+<nav class="onpage" id="onpageNav">
+  <p class="onpage-label" data-i18n="onpage.label">On this chapter</p>
+  <ul class="onpage-list" id="onpageList"></ul>
+</nav>
+
+</div>
+
+<footer class="doc-footer">
+  <div class="footer-card">
+    <div class="footer-name">Paula Silva</div>
+    <div class="footer-role">Software Global Black Belt</div>
+    <div class="footer-tagline" data-i18n="footer.tagline">Building the future of software development with AI and Agentic DevOps.</div>
+    <a href="mailto:paulasilva@microsoft.com">paulasilva@microsoft.com</a>
+  </div>
+</footer>
+
+<script>
+const I18N = {
+  "en": {
+    "meta": {"title": "Legacy Modernization Playbook v1.1.0 · Paula Silva", "brand": "Legacy Modernization", "search": "Search…", "dark": "Dark"},
+    "labels": {"author": "Author", "role": "Role", "contact": "Contact", "date": "Date"},
+    "doc": {
+      "eyebrow": "Legacy Modernization Framework · Playbook",
+      "title": "Modernizing COBOL and mainframe estates with agentic AI, without big-bang risk.",
+      "lead": "A reference playbook synthesizing Gartner's 5R framework, Microsoft's four modernization approaches, the five-layer agentic architecture, and the seven-phase journey from assessment to factory model. Twelve chapters, one method."
+    },
+    "toc": {"label": "Chapters", "ch1": "Why modernize now", "ch2": "The 5R framework", "ch3": "Microsoft's four approaches", "ch4": "Assessment framework", "ch5": "The AI advantage", "ch6": "Five-layer architecture", "ch7": "Six specialized agents", "ch8": "Eight MCP servers", "ch9": "Application carving", "ch10": "Performance + coexistence", "ch11": "Governance framework", "ch12": "Monday morning"},
+    "onpage": {"label": "On this chapter"},
+    "ch1":  {"eyebrow": "FORCING FUNCTIONS · CHAPTER 01", "title": "Why modernize now", "lead": "Mainframe and legacy modernization is no longer optional for most enterprises. The convergence of retiring COBOL expertise, regulatory deadlines, and AI-driven cost economics has compressed a decade-long question into a 24-36 month decision window."},
+    "ch2":  {"eyebrow": "FRAMEWORK · CHAPTER 02", "title": "Gartner's 5R modernization framework", "lead": "Five strategies, ranked by transformation depth and risk. The discipline is not picking the right one. It is applying each to the right tier of the estate."},
+    "ch3":  {"eyebrow": "FRAMEWORK · CHAPTER 03", "title": "Microsoft's four modernization approaches", "lead": "Microsoft's modernization stack maps cleanly to Gartner's 5R, with concrete Azure tooling and a mainframe modernization agent that closes the gap on the hardest parts."},
+    "ch4":  {"eyebrow": "ASSESSMENT · CHAPTER 04", "title": "The ten-dimension assessment framework", "lead": "Before any modernization engagement begins, ten dimensions must be assessed. Skipping this is the most reliable way to convert a budget into a stalled project."},
+    "ch5":  {"eyebrow": "AI ADVANTAGE · CHAPTER 05", "title": "The AI advantage and its limits", "lead": "Agentic AI brings four capabilities that flip the cost equation. It does NOT replace six categories of human judgment. The 70/30 operating model is the default."},
+    "ch6":  {"eyebrow": "ARCHITECTURE · CHAPTER 06", "title": "The five-layer reference architecture", "lead": "Five layers, top to bottom: Core, Agents, MCP Tools, Platform and Security, Perimeter. Each layer builds on the one below. Five principles govern the whole stack."},
+    "ch7":  {"eyebrow": "ARCHITECTURE · CHAPTER 07", "title": "Six specialized agents", "lead": "Six agents, each implementing Gartner's agent anatomy: perceive, decide, act, plan. Each has its own model, MCP servers, and a clear input/output contract."},
+    "ch8":  {"eyebrow": "ARCHITECTURE · CHAPTER 08", "title": "Eight MCP servers", "lead": "The Model Context Protocol is \"USB for AI agents\", a universal connector. Eight servers form the integration backbone for enterprise modernization."},
+    "ch9":  {"eyebrow": "OPERATIONAL · CHAPTER 09", "title": "Application carving", "lead": "The hardest problem in COBOL modernization is not translation. It is figuring out how to slice a monolithic estate into independently modernizable units. Carving is the discipline that determines whether the project ships."},
+    "ch10": {"eyebrow": "OPERATIONAL · CHAPTER 10", "title": "Performance, coexistence, testing", "lead": "Three challenges that determine production success: matching mainframe performance, running both systems together for 12-24 months, and validating behavioral equivalence with shadow traffic."},
+    "ch11": {"eyebrow": "GOVERNANCE · CHAPTER 11", "title": "Governance framework", "lead": "Auditability is not a feature. It is the difference between a pilot and production. The governance framework is what gets the project past compliance review."},
+    "ch12": {"eyebrow": "EXECUTION · CHAPTER 12", "title": "Monday morning", "lead": "Five concrete actions for the next two weeks. After Wave 1 ships, the next 100 modules become factory work."},
+    "dia": {
+      "r5": "Diagram 1 · The 5R framework, ranked from low to very high transformation",
+      "ms4": "Diagram 2 · Microsoft's four approaches mapped to Gartner Rs",
+      "matrix": "Diagram 3 · Risk vs effort 2x2. Where each workload should land.",
+      "cost": "Diagram 4 · Cost waterfall. Total project cost cut by 60% with AI agents.",
+      "layers": "Diagram 5 · Five-layer agentic reference architecture",
+      "journey": "Diagram 6 · Seven phases. Assessment to factory model.",
+      "refarch": "Diagram 7 · Reference architecture. GitHub developer surface, Azure platform, Claude models.",
+      "tree": "Diagram 8 · Decision tree. Routes each workload to its R."
+    },
+    "footer": {"tagline": "Building the future of software development with AI and Agentic DevOps."}
+  },
+  "pt-BR": {
+    "meta": {"title": "Playbook de Modernização Legada v1.1.0 · Paula Silva", "brand": "Modernização Legada", "search": "Buscar…", "dark": "Escuro"},
+    "labels": {"author": "Autora", "role": "Papel", "contact": "Contato", "date": "Data"},
+    "doc": {
+      "eyebrow": "Framework de Modernização Legada · Playbook",
+      "title": "Modernizando estados COBOL e mainframe com IA agêntica, sem risco big-bang.",
+      "lead": "Um playbook de referência que sintetiza o framework 5R do Gartner, as quatro abordagens de modernização da Microsoft, a arquitetura agêntica de cinco camadas e a jornada de sete fases, da avaliação ao modelo de fábrica. Doze capítulos, um método."
+    },
+    "toc": {"label": "Capítulos", "ch1": "Por que modernizar agora", "ch2": "O framework 5R", "ch3": "As quatro abordagens da Microsoft", "ch4": "Framework de avaliação", "ch5": "A vantagem da IA", "ch6": "Arquitetura de cinco camadas", "ch7": "Seis agentes especializados", "ch8": "Oito servidores MCP", "ch9": "Recorte de aplicações", "ch10": "Desempenho + coexistência", "ch11": "Framework de governança", "ch12": "Segunda-feira de manhã"},
+    "onpage": {"label": "Neste capítulo"},
+    "ch1":  {"eyebrow": "FORÇAS MOTRIZES · CAPÍTULO 01", "title": "Por que modernizar agora", "lead": "Modernização de mainframe e sistemas legados deixou de ser opcional para a maioria das empresas. A convergência da expertise COBOL em aposentadoria, prazos regulatórios e a economia de custos guiada por IA comprimiu uma questão de uma década em uma janela de decisão de 24 a 36 meses."},
+    "ch2":  {"eyebrow": "FRAMEWORK · CAPÍTULO 02", "title": "Framework 5R de modernização do Gartner", "lead": "Cinco estratégias, classificadas pela profundidade de transformação e risco. A disciplina não é escolher a certa. É aplicar cada uma à camada certa do estado."},
+    "ch3":  {"eyebrow": "FRAMEWORK · CAPÍTULO 03", "title": "As quatro abordagens de modernização da Microsoft", "lead": "A pilha de modernização da Microsoft mapeia diretamente para o 5R do Gartner, com ferramentas Azure concretas e um agente de modernização de mainframe que fecha a lacuna nas partes mais difíceis."},
+    "ch4":  {"eyebrow": "AVALIAÇÃO · CAPÍTULO 04", "title": "O framework de avaliação de dez dimensões", "lead": "Antes de qualquer engajamento de modernização começar, dez dimensões devem ser avaliadas. Pular isso é a forma mais confiável de converter orçamento em projeto travado."},
+    "ch5":  {"eyebrow": "VANTAGEM DA IA · CAPÍTULO 05", "title": "A vantagem da IA e seus limites", "lead": "IA agêntica traz quatro capacidades que invertem a equação de custo. Ela NÃO substitui seis categorias de julgamento humano. O modelo operacional 70/30 é o padrão."},
+    "ch6":  {"eyebrow": "ARQUITETURA · CAPÍTULO 06", "title": "A arquitetura de referência de cinco camadas", "lead": "Cinco camadas, de cima a baixo: Núcleo, Agentes, Ferramentas MCP, Plataforma e Segurança, Perímetro. Cada camada constrói sobre a anterior. Cinco princípios governam toda a pilha."},
+    "ch7":  {"eyebrow": "ARQUITETURA · CAPÍTULO 07", "title": "Seis agentes especializados", "lead": "Seis agentes, cada um implementando a anatomia de agente do Gartner: perceber, decidir, agir, planejar. Cada um tem seu próprio modelo, servidores MCP e contrato claro de entrada/saída."},
+    "ch8":  {"eyebrow": "ARQUITETURA · CAPÍTULO 08", "title": "Oito servidores MCP", "lead": "O Model Context Protocol é \"USB para agentes de IA\", um conector universal. Oito servidores formam a espinha dorsal de integração para modernização empresarial."},
+    "ch9":  {"eyebrow": "OPERACIONAL · CAPÍTULO 09", "title": "Recorte de aplicações", "lead": "O problema mais difícil em modernização COBOL não é tradução. É descobrir como fatiar um estado monolítico em unidades modernizáveis independentes. Recorte é a disciplina que determina se o projeto vai entregar."},
+    "ch10": {"eyebrow": "OPERACIONAL · CAPÍTULO 10", "title": "Desempenho, coexistência, testes", "lead": "Três desafios que determinam sucesso em produção: igualar o desempenho do mainframe, rodar os dois sistemas juntos por 12 a 24 meses e validar equivalência comportamental com tráfego sombra."},
+    "ch11": {"eyebrow": "GOVERNANÇA · CAPÍTULO 11", "title": "Framework de governança", "lead": "Auditabilidade não é uma feature. É a diferença entre um piloto e produção. O framework de governança é o que faz o projeto passar pela revisão de compliance."},
+    "ch12": {"eyebrow": "EXECUÇÃO · CAPÍTULO 12", "title": "Segunda-feira de manhã", "lead": "Cinco ações concretas para as próximas duas semanas. Depois que a Onda 1 entregar, os próximos 100 módulos se tornam trabalho de fábrica."},
+    "dia": {
+      "r5": "Diagrama 1 · O framework 5R, classificado de baixa a muito alta transformação",
+      "ms4": "Diagrama 2 · As quatro abordagens da Microsoft mapeadas para os Rs do Gartner",
+      "matrix": "Diagrama 3 · Risco vs esforço 2x2. Onde cada carga deve cair.",
+      "cost": "Diagrama 4 · Cascata de custo. Custo total do projeto cortado em 60% com agentes de IA.",
+      "layers": "Diagrama 5 · Arquitetura de referência agêntica de cinco camadas",
+      "journey": "Diagrama 6 · Sete fases. Da avaliação ao modelo de fábrica.",
+      "refarch": "Diagrama 7 · Arquitetura de referência. Superfície de dev GitHub, plataforma Azure, modelos Claude.",
+      "tree": "Diagrama 8 · Árvore de decisão. Roteia cada carga ao seu R."
+    },
+    "footer": {"tagline": "Building the future of software development with AI and Agentic DevOps."}
+  },
+  "es": {
+    "meta": {"title": "Playbook de Modernización Legada v1.1.0 · Paula Silva", "brand": "Modernización Legada", "search": "Buscar…", "dark": "Oscuro"},
+    "labels": {"author": "Autora", "role": "Rol", "contact": "Contacto", "date": "Fecha"},
+    "doc": {
+      "eyebrow": "Framework de Modernización Legada · Playbook",
+      "title": "Modernizando patrimonios COBOL y mainframe con IA agéntica, sin riesgo big-bang.",
+      "lead": "Un playbook de referencia que sintetiza el framework 5R de Gartner, los cuatro enfoques de modernización de Microsoft, la arquitectura agéntica de cinco capas y el viaje de siete fases desde la evaluación hasta el modelo de fábrica. Doce capítulos, un método."
+    },
+    "toc": {"label": "Capítulos", "ch1": "Por qué modernizar ahora", "ch2": "El framework 5R", "ch3": "Los cuatro enfoques de Microsoft", "ch4": "Framework de evaluación", "ch5": "La ventaja de la IA", "ch6": "Arquitectura de cinco capas", "ch7": "Seis agentes especializados", "ch8": "Ocho servidores MCP", "ch9": "Recorte de aplicaciones", "ch10": "Rendimiento + coexistencia", "ch11": "Framework de gobernanza", "ch12": "Lunes por la mañana"},
+    "onpage": {"label": "En este capítulo"},
+    "ch1":  {"eyebrow": "FUNCIONES FORZANTES · CAPÍTULO 01", "title": "Por qué modernizar ahora", "lead": "La modernización de mainframe y sistemas legados ya no es opcional para la mayoría de las empresas. La convergencia de la experticia COBOL en jubilación, plazos regulatorios y la economía de costos impulsada por IA comprimió una pregunta de una década en una ventana de decisión de 24 a 36 meses."},
+    "ch2":  {"eyebrow": "FRAMEWORK · CAPÍTULO 02", "title": "Framework 5R de modernización de Gartner", "lead": "Cinco estrategias, clasificadas por profundidad de transformación y riesgo. La disciplina no es elegir la correcta. Es aplicar cada una a la capa correcta del patrimonio."},
+    "ch3":  {"eyebrow": "FRAMEWORK · CAPÍTULO 03", "title": "Los cuatro enfoques de modernización de Microsoft", "lead": "La pila de modernización de Microsoft mapea limpiamente al 5R de Gartner, con herramientas Azure concretas y un agente de modernización de mainframe que cierra la brecha en las partes más difíciles."},
+    "ch4":  {"eyebrow": "EVALUACIÓN · CAPÍTULO 04", "title": "El framework de evaluación de diez dimensiones", "lead": "Antes de que cualquier compromiso de modernización comience, diez dimensiones deben evaluarse. Saltar esto es la forma más confiable de convertir presupuesto en proyecto estancado."},
+    "ch5":  {"eyebrow": "VENTAJA DE LA IA · CAPÍTULO 05", "title": "La ventaja de la IA y sus límites", "lead": "La IA agéntica trae cuatro capacidades que invierten la ecuación de costo. NO reemplaza seis categorías de juicio humano. El modelo operativo 70/30 es el predeterminado."},
+    "ch6":  {"eyebrow": "ARQUITECTURA · CAPÍTULO 06", "title": "La arquitectura de referencia de cinco capas", "lead": "Cinco capas, de arriba a abajo: Núcleo, Agentes, Herramientas MCP, Plataforma y Seguridad, Perímetro. Cada capa construye sobre la anterior. Cinco principios gobiernan toda la pila."},
+    "ch7":  {"eyebrow": "ARQUITECTURA · CAPÍTULO 07", "title": "Seis agentes especializados", "lead": "Seis agentes, cada uno implementando la anatomía de agente de Gartner: percibir, decidir, actuar, planificar. Cada uno tiene su propio modelo, servidores MCP y un contrato claro de entrada/salida."},
+    "ch8":  {"eyebrow": "ARQUITECTURA · CAPÍTULO 08", "title": "Ocho servidores MCP", "lead": "El Model Context Protocol es \"USB para agentes de IA\", un conector universal. Ocho servidores forman la columna vertebral de integración para la modernización empresarial."},
+    "ch9":  {"eyebrow": "OPERACIONAL · CAPÍTULO 09", "title": "Recorte de aplicaciones", "lead": "El problema más difícil en la modernización COBOL no es traducción. Es descubrir cómo dividir un patrimonio monolítico en unidades modernizables independientes. El recorte es la disciplina que determina si el proyecto entrega."},
+    "ch10": {"eyebrow": "OPERACIONAL · CAPÍTULO 10", "title": "Rendimiento, coexistencia, pruebas", "lead": "Tres desafíos que determinan el éxito en producción: igualar el rendimiento del mainframe, ejecutar ambos sistemas juntos por 12 a 24 meses y validar equivalencia conductual con tráfico sombra."},
+    "ch11": {"eyebrow": "GOBERNANZA · CAPÍTULO 11", "title": "Framework de gobernanza", "lead": "La auditabilidad no es una feature. Es la diferencia entre un piloto y producción. El framework de gobernanza es lo que pasa al proyecto por la revisión de compliance."},
+    "ch12": {"eyebrow": "EJECUCIÓN · CAPÍTULO 12", "title": "Lunes por la mañana", "lead": "Cinco acciones concretas para las próximas dos semanas. Después de que la Ola 1 se entregue, los próximos 100 módulos se vuelven trabajo de fábrica."},
+    "dia": {
+      "r5": "Diagrama 1 · El framework 5R, clasificado de baja a muy alta transformación",
+      "ms4": "Diagrama 2 · Los cuatro enfoques de Microsoft mapeados a las Rs de Gartner",
+      "matrix": "Diagrama 3 · Riesgo vs esfuerzo 2x2. Dónde debe caer cada carga.",
+      "cost": "Diagrama 4 · Cascada de costo. Costo total del proyecto recortado en 60% con agentes de IA.",
+      "layers": "Diagrama 5 · Arquitectura de referencia agéntica de cinco capas",
+      "journey": "Diagrama 6 · Siete fases. De evaluación a modelo de fábrica.",
+      "refarch": "Diagrama 7 · Arquitectura de referencia. Superficie dev GitHub, plataforma Azure, modelos Claude.",
+      "tree": "Diagrama 8 · Árbol de decisión. Enruta cada carga a su R."
+    },
+    "footer": {"tagline": "Building the future of software development with AI and Agentic DevOps."}
+  }
+};
+function resolveKey(o,p){return p.split('.').reduce((a,k)=>(a?a[k]:undefined),o);}
+function setLocale(locale){
+  if(!I18N[locale])return;
+  try{localStorage.setItem('ps-locale',locale);}catch(e){}
+  document.documentElement.setAttribute('lang',locale);
+  document.querySelectorAll('.lang-switcher__btn').forEach(b=>b.setAttribute('aria-current',b.dataset.locale===locale?'true':'false'));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v=resolveKey(I18N[locale],el.dataset.i18n);
+    if(v!==undefined && v!==null){
+      if(el.tagName==='TITLE') document.title = v;
+      else el.textContent = v;
+    }
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const v=resolveKey(I18N[locale],el.dataset.i18nPlaceholder);
+    if(v) el.setAttribute('placeholder', v);
+  });
+}
+(function initLocale(){
+  const saved=(()=>{try{return localStorage.getItem('ps-locale');}catch(e){return null;}})();
+  const browser=navigator.language && navigator.language.indexOf('pt')===0?'pt-BR':navigator.language && navigator.language.indexOf('es')===0?'es':'en';
+  setLocale(saved||browser);
+})();
+
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.dataset.theme;
+  const next = current === 'dark' ? '' : 'dark';
+  if(next) document.documentElement.dataset.theme = next; else delete document.documentElement.dataset.theme;
+  themeToggle.textContent = next === 'dark' ? 'Light' : 'Dark';
+  try{ localStorage.setItem('mod-theme', next); }catch(_){}
+});
+try{
+  const stored = localStorage.getItem('mod-theme');
+  if(stored === 'dark'){ document.documentElement.dataset.theme = 'dark'; themeToggle.textContent = 'Light'; }
+}catch(_){}
+
+const chapters = Array.from(document.querySelectorAll('.chapter'));
+const tocLinks = Array.from(document.querySelectorAll('#tocList a'));
+const onpageList = document.getElementById('onpageList');
+const progress = document.getElementById('progress');
+let activeChapter = null;
+
+function buildOnpage(chapter){
+  while(onpageList.firstChild) onpageList.removeChild(onpageList.firstChild);
+  const h2s = Array.from(chapter.querySelectorAll('.chapter-body > h2'));
+  h2s.forEach(h => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    a.dataset.target = h.id;
+    li.appendChild(a);
+    onpageList.appendChild(li);
+  });
+}
+
+function updateActive(){
+  let topChapter = chapters[0];
+  for(const c of chapters){
+    const r = c.getBoundingClientRect();
+    if(r.top <= 120) topChapter = c;
+  }
+  if(topChapter !== activeChapter){
+    activeChapter = topChapter;
+    const num = activeChapter.id.replace('ch-','');
+    tocLinks.forEach(a => a.classList.toggle('active', a.dataset.chapter === num));
+    buildOnpage(activeChapter);
+    const style = getComputedStyle(activeChapter);
+    progress.style.background = style.getPropertyValue('--accent') || '#00A4EF';
+  }
+  if(activeChapter){
+    const r = activeChapter.getBoundingClientRect();
+    const total = activeChapter.offsetHeight - window.innerHeight;
+    const pct = total > 0 ? (Math.max(0,-r.top) / total) * 100 : 0;
+    progress.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  }
+  if(activeChapter){
+    const h2s = Array.from(activeChapter.querySelectorAll('.chapter-body > h2'));
+    let topH2 = null;
+    for(const h of h2s){ if(h.getBoundingClientRect().top <= 140) topH2 = h; }
+    onpageList.querySelectorAll('a').forEach(a => a.classList.toggle('active', topH2 && a.dataset.target === topH2.id));
+  }
+}
+
+window.addEventListener('scroll', updateActive, {passive:true});
+updateActive();
+
+document.addEventListener('keydown', (e) => {
+  if(['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+  if(e.key === 'j' || e.key === 'J'){
+    const idx = chapters.indexOf(activeChapter);
+    if(idx < chapters.length - 1) chapters[idx+1].scrollIntoView({behavior:'smooth'});
+  }
+  if(e.key === 'k' || e.key === 'K'){
+    const idx = chapters.indexOf(activeChapter);
+    if(idx > 0) chapters[idx-1].scrollIntoView({behavior:'smooth'});
+  }
+  if(e.key === 'g'){ window.scrollTo({top:0, behavior:'smooth'}); }
+  if(e.key === '/'){ e.preventDefault(); document.getElementById('searchInput').focus(); }
+  if(e.key === 'Escape' && document.activeElement === document.getElementById('searchInput')){
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchInput').blur();
+    clearSearchHighlights();
+  }
+});
+
+function clearSearchHighlights(){
+  document.querySelectorAll('mark.search-hit').forEach(m => {
+    const t = document.createTextNode(m.textContent);
+    m.replaceWith(t);
+  });
+}
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', (e) => {
+  clearSearchHighlights();
+  const q = e.target.value.trim();
+  if(q.length < 3) return;
+  const re = new RegExp(q.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&'), 'gi');
+  const walker = document.createTreeWalker(document.querySelector('main.content'), NodeFilter.SHOW_TEXT, {
+    acceptNode: n => (n.parentNode.tagName === 'SCRIPT' || n.parentNode.tagName === 'STYLE') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+  });
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(n => {
+    const text = n.textContent;
+    const matches = Array.from(text.matchAll(re));
+    if(matches.length === 0) return;
+    const frag = document.createDocumentFragment();
+    let lastIdx = 0;
+    matches.forEach(m => {
+      const idx = m.index;
+      if(idx > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, idx)));
+      const mark = document.createElement('mark');
+      mark.className = 'search-hit';
+      mark.textContent = m[0];
+      frag.appendChild(mark);
+      lastIdx = idx + m[0].length;
+    });
+    if(lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+    n.replaceWith(frag);
+  });
+});
+</script>
+
+</body>
+</html>

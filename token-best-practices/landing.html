@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Token Management &amp; Agent Design · Paula Silva</title>
+<meta name="description" content="Comprehensive playbook for the era of token-based billing. June 2026 GitHub Copilot transition.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Token Management &amp; Agent Design · Paula Silva">
+<meta property="og:description" content="Comprehensive playbook for the era of token-based billing. June 2026 GitHub Copilot transition.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Token Management &amp; Agent Design · Paula Silva">
+<meta name="twitter:description" content="Comprehensive playbook for the era of token-based billing. June 2026 GitHub Copilot transition.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/landing.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+<div id="landing-root"></div>
+<script>
+window.PAGE_DATA = {
+  topicNumber: '04',
+  topicLabel: 'Token Management & Agent Design',
+  accent: 'ink',
+  existingDeck: 'Token_Management_Agent_Design_Deck_v3_0_0_2026-05-06_multi.html',
+  existingPlaybook: 'playbook.html',
+  heroArt: `<svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Token economy">
+    <rect x="20" y="20" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="42" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">JUNE 1, 2026</text>
+    <text x="40" y="62" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">PRUs retired. AI Credits start.</text>
+    <rect x="20" y="92" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="114" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">CONTEXT ENGINEERING</text>
+    <text x="40" y="134" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Treat tokens as a finite resource.</text>
+    <rect x="20" y="164" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="186" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">PROMPT CACHING</text>
+    <text x="40" y="206" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Reuse expensive prefixes safely.</text>
+    <rect x="20" y="236" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="258" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">AGENT DESIGN</text>
+    <text x="40" y="278" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Pick the pattern, not the buzzword.</text>
+    <rect x="20" y="288" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="310" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">FINOPS AI</text>
+    <text x="40" y="330" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Instrument observability at scale.</text>
+  </svg>`,
+  hero: {
+    eyebrow: { en:'04 · Cross-cutting · Token economy', 'pt-br':'04 · Transversal · Economia de tokens', es:'04 · Transversal · Economía de tokens' },
+    title: {
+      en: 'Token-based billing rewards disciplined engineering.',
+      'pt-br': 'A cobrança por tokens recompensa a engenharia disciplinada.',
+      es: 'La facturación por tokens recompensa la ingeniería disciplinada.'
+    },
+    subtitle: {
+      en: 'On June 1, 2026 GitHub Copilot stops charging per request. Premium Request Units retire. GitHub AI Credits take over. Teams that treat tokens as a finite resource, apply context engineering, architect agents with the right pattern, and instrument observability will pay 30 to 70% less than teams that use Copilot as a black box. The difference is not talent. It is practice.',
+      'pt-br': 'Em 1 de junho de 2026 o GitHub Copilot para de cobrar por request. PRUs se aposentam. AI Credits assumem. Times que tratam tokens como recurso finito, aplicam context engineering, arquitetam agentes com o padrão certo e instrumentam observabilidade vão pagar 30 a 70% menos que times que usam Copilot como caixa-preta. A diferença não é talento. É prática.',
+      es: 'El 1 de junio de 2026 GitHub Copilot deja de cobrar por request. Las PRU se retiran. Los AI Credits toman el control. Los equipos que tratan los tokens como recurso finito, aplican context engineering, arquitectan agentes con el patrón correcto e instrumentan observabilidad pagarán 30 a 70% menos que los equipos que usan Copilot como caja negra. La diferencia no es talento. Es práctica.'
+    }
+  },
+  stats: [
+    { num:'Jun 1, 2026', label:{ en:'GitHub PRU to AI Credits transition', 'pt-br':'GitHub: transição PRU para AI Credits', es:'GitHub: transición PRU a AI Credits' } },
+    { num:'25-45%', label:{ en:'Cost reduction in 60-90 days (baseline)', 'pt-br':'Redução de custo em 60-90 dias (baseline)', es:'Reducción de costo en 60-90 días (baseline)' } },
+    { num:'40-70%', label:{ en:'Reduction in agentic workloads (Ch.12)', 'pt-br':'Redução em cargas agênticas (Cap.12)', es:'Reducción en cargas agénticas (Cap.12)' } },
+    { num:'<60', label:{ en:'Days to payback', 'pt-br':'Dias até payback', es:'Días hasta payback' } }
+  ],
+  pillarsTitle: {
+    en: 'Five parts, thirteen chapters.',
+    'pt-br': 'Cinco partes, treze capítulos.',
+    es: 'Cinco partes, trece capítulos.'
+  },
+  pillarsLead: {
+    en: 'The playbook is organized in five parts. Foundations grounds the math. Technical disciplines stack the savings. Change handles the migration. Governance instruments the platform. Application turns it into eight concrete optimization patterns.',
+    'pt-br': 'O playbook é organizado em cinco partes. Fundações ancoram a matemática. Disciplinas técnicas empilham economia. Mudança trata a migração. Governança instrumenta a plataforma. Aplicação vira oito padrões concretos de otimização.',
+    es: 'El playbook se organiza en cinco partes. Fundaciones anclan la matemática. Disciplinas técnicas acumulan ahorro. Cambio gestiona la migración. Gobernanza instrumenta la plataforma. Aplicación se convierte en ocho patrones concretos de optimización.'
+  },
+  pillars: [
+    { num:'PART I', accent:'ink',
+      title:{ en:'Foundations', 'pt-br':'Fundações', es:'Fundaciones' },
+      desc:{ en:'Chapters 01 to 03. How tokens are counted, where they go inside a session, and how model families and multipliers shape the bill. Without this, every later discipline is guessing.',
+             'pt-br':'Capítulos 01 a 03. Como tokens são contados, para onde vão dentro de uma sessão, e como famílias de modelo e multiplicadores moldam a conta. Sem isso, toda disciplina seguinte é chute.',
+             es:'Capítulos 01 a 03. Cómo se cuentan los tokens, adónde van dentro de una sesión, y cómo las familias de modelo y multiplicadores forman la cuenta. Sin esto, toda disciplina posterior es adivinanza.' } },
+    { num:'PART II', accent:'ink',
+      title:{ en:'Technical disciplines', 'pt-br':'Disciplinas técnicas', es:'Disciplinas técnicas' },
+      desc:{ en:'Chapters 04 to 08. Context engineering with the concave utility curve and 22.7% compaction technique. Prompt caching. Agent design. SkillReducer cuts skill body 39%. Plus the June 2026 GitHub change.',
+             'pt-br':'Capítulos 04 a 08. Context engineering com curva de utilidade côncava e técnica de compactação de 22.7%. Prompt caching. Design de agente. SkillReducer corta corpo de skill em 39%. E a mudança do GitHub em junho 2026.',
+             es:'Capítulos 04 a 08. Context engineering con curva de utilidad cóncava y técnica de compactación del 22.7%. Prompt caching. Diseño de agente. SkillReducer recorta cuerpo de skill en 39%. Y el cambio del GitHub en junio 2026.' } },
+    { num:'PART III', accent:'ink',
+      title:{ en:'Change', 'pt-br':'Mudança', es:'Cambio' },
+      desc:{ en:'Chapter 09. Migration strategy from PRU to AI Credits. How to move existing teams without runaway overage. Communication, gates, fallback plans.',
+             'pt-br':'Capítulo 09. Estratégia de migração de PRU para AI Credits. Como mover times existentes sem explosão de overage. Comunicação, gates, planos de fallback.',
+             es:'Capítulo 09. Estrategia de migración de PRU a AI Credits. Cómo mover equipos existentes sin explosión de overage. Comunicación, gates, planes de fallback.' } },
+    { num:'PART IV', accent:'ink',
+      title:{ en:'Governance', 'pt-br':'Governança', es:'Gobernanza' },
+      desc:{ en:'Chapters 10 and 11. FinOps for AI: budgets, alerts, attribution per session, agent, and repo. Azure AI Foundry economics and patterns for enterprise scale.',
+             'pt-br':'Capítulos 10 e 11. FinOps para IA: orçamentos, alertas, atribuição por sessão, agente e repo. Economia e padrões do Azure AI Foundry em escala corporativa.',
+             es:'Capítulos 10 y 11. FinOps para IA: presupuestos, alertas, atribución por sesión, agente y repo. Economía y patrones de Azure AI Foundry a escala corporativa.' } },
+    { num:'PART V', accent:'ink',
+      title:{ en:'Application', 'pt-br':'Aplicação', es:'Aplicación' },
+      desc:{ en:'Chapters 12 and 13. Eight applied patterns: dynamic routing, hierarchical cache, subagent fan-out, plan/execute, semantic cache, tool composition, lean MCP, custom agent Spec-Kit. 40 to 70% reduction in agentic workloads.',
+             'pt-br':'Capítulos 12 e 13. Oito padrões aplicados: roteamento dinâmico, cache hierárquico, subagent fan-out, plan/execute, cache semântico, composição de ferramentas, MCP enxuto, agente custom Spec-Kit. 40 a 70% de redução em cargas agênticas.',
+             es:'Capítulos 12 y 13. Ocho patrones aplicados: ruteo dinámico, cache jerárquico, subagent fan-out, plan/execute, cache semántico, composición de herramientas, MCP esbelto, agente custom Spec-Kit. 40 a 70% de reducción en cargas agénticas.' } }
+  ],
+  formats: [
+    { kicker:'LANDING · YOU ARE HERE', accent:'ink',
+      title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
+      desc:{ en:'10-second hook. The June 2026 transition, the five parts, the formats available.', 'pt-br':'Hook de 10 segundos. A transição de junho 2026, as cinco partes, os formatos.', es:'Hook de 10 segundos. La transición de junio 2026, las cinco partes, los formatos.' },
+      meta:{ en:'HTML · 5 min', 'pt-br':'HTML · 5 min', es:'HTML · 5 min' },
+      href:'#' },
+    { kicker:'DECK · v3.0.0', accent:'ink',
+      title:{ en:'Token &amp; Agent Design deck', 'pt-br':'Deck Token &amp; Agent Design', es:'Deck Token &amp; Agent Design' },
+      desc:{ en:'Trilingual deck. Cost numbers for a 500-developer org, before-and-after scenarios, agent design patterns side-by-side.', 'pt-br':'Deck trilíngue. Números de custo para org de 500 devs, cenários antes-e-depois, padrões de agente lado a lado.', es:'Deck trilingüe. Números de costo para org de 500 devs, escenarios antes-y-después, patrones de agente lado a lado.' },
+      meta:{ en:'HTML · 90 min', 'pt-br':'HTML · 90 min', es:'HTML · 90 min' },
+      href:'Token_Management_Agent_Design_Deck_v3_0_0_2026-05-06_multi.html' },
+    { kicker:'PLAYBOOK · 13 CH + 4 APP', accent:'ink',
+      title:{ en:'Token Management playbook', 'pt-br':'Playbook de Gestão de Tokens', es:'Playbook de Gestión de Tokens' },
+      desc:{ en:'Modular playbook, 13 chapters plus 4 appendices. Read by persona: CIO, CFO, Tech Lead, Developer, Platform, Architect, MCP dev.', 'pt-br':'Playbook modular, 13 capítulos mais 4 apêndices. Leia por persona: CIO, CFO, Tech Lead, Dev, Plataforma, Arquiteto, dev MCP.', es:'Playbook modular, 13 capítulos más 4 apéndices. Lee por persona: CIO, CFO, Tech Lead, Dev, Plataforma, Arquitecto, dev MCP.' },
+      meta:{ en:'HTML · ~50K words', 'pt-br':'HTML · ~50K palavras', es:'HTML · ~50K palabras' },
+      href:'playbook.html' }
+  ],
+  crosslinks: [
+    { accent:'yellow', kicker:'Stack model',
+      title:{ en:'Context Platform Stack', 'pt-br':'Context Platform Stack', es:'Context Platform Stack' },
+      hint:{ en:'Layer 03 context decisions are where most token waste happens.', 'pt-br':'Decisões de contexto na camada 03 são onde mais desperdício de token acontece.', es:'Las decisiones de contexto en la capa 03 son donde más desperdicio de token ocurre.' },
+      href:'../context-engineering-platform/landing.html' },
+    { accent:'red', kicker:'Pre-shaped context',
+      title:{ en:'Semantic Context Layer', 'pt-br':'Semantic Context Layer', es:'Semantic Context Layer' },
+      hint:{ en:'SCL-AD recipes are how you operationalize context engineering at scale.', 'pt-br':'As receitas SCL-AD são como você operacionaliza context engineering em escala.', es:'Las recetas SCL-AD son cómo operacionalizas context engineering a escala.' },
+      href:'../semantic-context-layer/landing.html' },
+    { accent:'green', kicker:'Runtime',
+      title:{ en:'Agentic DevOps Platform', 'pt-br':'Plataforma Agentic DevOps', es:'Plataforma Agentic DevOps' },
+      hint:{ en:'Where the FinOps observability for AI agents lives.', 'pt-br':'Onde mora a observabilidade FinOps para agentes de IA.', es:'Donde vive la observabilidad FinOps para agentes de IA.' },
+      href:'../agentic-devops-platform/landing.html' },
+    { accent:'blue', kicker:'Migration',
+      title:{ en:'Legacy Modernization', 'pt-br':'Modernização de Legado', es:'Modernización de Legado' },
+      hint:{ en:'AI-assisted modernization is token-intensive. Apply this discipline before scaling.', 'pt-br':'Modernização assistida por IA é intensiva em token. Aplique essa disciplina antes de escalar.', es:'La modernización asistida por IA es intensiva en token. Aplica esta disciplina antes de escalar.' },
+      href:'../legacy-modernization-framework/landing.html' }
+  ]
+};
+</script>
+<script src="../_shared/landing-template.js"></script>
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="_shared/favicon.svg">
+<title>Paula Silva · Software Global Black Belt · Knowledge Hub</title>
+<meta name="description" content="Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Paula Silva · Software Global Black Belt · Knowledge Hub">
+<meta property="og:description" content="Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paula Silva · Software Global Black Belt · Knowledge Hub">
+<meta name="twitter:description" content="Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="_shared/paulasilva-logo.png">
+<meta name="author" content="Paula Silva" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared/landing.css">
+<style>
+/* Hub-specific overrides */
+.hub-stack { background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:32px 36px; }
+.hub-stack__row { display:grid; grid-template-columns:auto 1fr auto; gap:24px; padding:18px 0; border-bottom:1px solid var(--rule); align-items:center; }
+.hub-stack__row:last-child { border-bottom:none; }
+.hub-stack__num { width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; border-radius:4px; font-family:var(--font-mono); font-size:11px; font-weight:600; color:#fff; flex-shrink:0; }
+.hub-stack__row--red    .hub-stack__num { background:var(--c-red-500); }
+.hub-stack__row--yellow .hub-stack__num { background:var(--c-yellow-500); color:var(--ink); }
+.hub-stack__row--green  .hub-stack__num { background:var(--c-green-500); }
+.hub-stack__row--blue   .hub-stack__num { background:var(--c-blue-500); }
+.hub-stack__name { font-size:16px; font-weight:500; letter-spacing:-0.01em; }
+.hub-stack__name-accent { font-family:var(--font-mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; margin-right:10px; }
+.hub-stack__row--red    .hub-stack__name-accent { color:var(--c-red-700); }
+.hub-stack__row--yellow .hub-stack__name-accent { color:var(--c-yellow-700); }
+.hub-stack__row--green  .hub-stack__name-accent { color:var(--c-green-700); }
+.hub-stack__row--blue   .hub-stack__name-accent { color:var(--c-blue-700); }
+.hub-stack__question { font-size:13.5px; color:var(--ink-3); font-style:italic; margin-top:4px; }
+.hub-stack__link { font-family:var(--font-mono); font-size:11px; letter-spacing:0.12em; color:var(--ink-3); text-decoration:none; padding:6px 10px; border-radius:4px; white-space:nowrap; text-transform:uppercase; }
+.hub-stack__link:hover { background:var(--bg-alt); color:var(--ink); }
+
+.topics { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; }
+.topic-card { display:flex; flex-direction:column; background:var(--paper); border:1px solid var(--rule); border-radius:8px; text-decoration:none; color:inherit; overflow:hidden; transition:all 0.2s var(--ease); }
+.topic-card:hover { transform:translateY(-3px); border-color:var(--card-accent,var(--rule-2)); box-shadow:0 12px 28px rgba(0,0,0,0.06); }
+.topic-card__accent { height:4px; background:var(--card-accent,var(--ink-3)); }
+.topic-card__body { padding:28px 28px 22px; display:flex; flex-direction:column; flex:1; }
+.topic-card__kicker { font-family:var(--font-mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--card-accent); font-weight:500; margin-bottom:14px; }
+.topic-card__title { font-size:22px; font-weight:500; letter-spacing:-0.015em; margin:0 0 12px; line-height:1.2; }
+.topic-card__desc { font-size:14.5px; line-height:1.55; color:var(--ink-2); margin:0 0 22px; flex:1; }
+.topic-card__formats { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+.fmt-chip { font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; padding:4px 8px; border-radius:3px; background:var(--bg-alt); color:var(--ink-2); text-transform:uppercase; }
+.topic-card__meta { font-family:var(--font-mono); font-size:11px; color:var(--ink-3); display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:1px solid var(--rule); }
+.topic-card__arrow svg { width:14px; height:14px; stroke:currentColor; stroke-width:2; fill:none; transition:transform 0.2s; }
+.topic-card:hover .topic-card__arrow svg { transform:translateX(4px); }
+
+/* Hero portrait layout (Wave 13) */
+.hero__layout { display:grid; grid-template-columns:1fr 320px; gap:64px; align-items:center; margin-bottom:0; }
+.hero__content { min-width:0; }
+.hero__portrait { display:flex; justify-content:flex-end; align-items:center; }
+.hero__portrait img { width:300px; height:300px; border-radius:50%; object-fit:cover; box-shadow:0 12px 32px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06); border:4px solid var(--paper); }
+@media (max-width:860px) {
+  .hero__layout { grid-template-columns:1fr; gap:36px; }
+  .hero__portrait { justify-content:center; order:-1; }
+  .hero__portrait img { width:220px; height:220px; }
+}
+[data-theme="dark"] .hero__portrait img { border-color:var(--paper); box-shadow:0 12px 32px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25); }
+
+/* Logo image (Wave 15) */
+.deck-brand__logo { height:22px; width:auto; flex-shrink:0; display:block; }
+.closing__brand-logo { height:54px; width:auto; flex-shrink:0; display:block; }
+
+/* Hub fixed topbar (Wave 18) */
+.hub-topbar { position:fixed; top:0; left:0; right:0; height:56px; z-index:49; background:var(--paper); border-bottom:1px solid var(--rule); backdrop-filter:saturate(150%) blur(8px); -webkit-backdrop-filter:saturate(150%) blur(8px); }
+[data-theme="dark"] .hub-topbar { background:rgba(28,28,26,0.92); border-bottom-color:var(--rule); }
+body { padding-top:56px; }
+/* Existing fixed elements: lift z-index above topbar so they sit on it */
+.deck-brand { z-index:60; top:14px; }
+.lang-switcher { z-index:60; top:12px; }
+
+/* Featured tools (Wave 17) */
+.featured-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:18px; }
+.featured-card { display:flex; flex-direction:column; background:var(--paper); border:1px solid var(--rule); border-radius:8px; text-decoration:none; color:inherit; overflow:hidden; transition:all 0.2s var(--ease, ease); position:relative; }
+.featured-card:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,0.06); border-color:var(--card-accent, var(--rule-2)); }
+.featured-card[data-accent="red"]    { --card-accent:var(--c-red-500); }
+.featured-card[data-accent="green"]  { --card-accent:var(--c-green-500); }
+.featured-card[data-accent="blue"]   { --card-accent:var(--c-blue-500); }
+.featured-card[data-accent="yellow"] { --card-accent:var(--c-yellow-500); }
+.featured-card__accent { height:4px; background:var(--card-accent, var(--ink-3)); }
+.featured-card__body { padding:26px 28px 22px; display:flex; flex-direction:column; flex:1; }
+.featured-card__head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px; gap:12px; }
+.featured-card__kicker { font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--card-accent); font-weight:600; }
+.featured-card__chip { font-family:var(--font-mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; padding:3px 8px; border-radius:3px; background:var(--bg-alt); color:var(--ink-2); white-space:nowrap; }
+.featured-card__title { font-size:20px; font-weight:500; letter-spacing:-0.015em; margin:0 0 12px; line-height:1.25; color:var(--ink); }
+.featured-card__desc { font-size:14px; line-height:1.55; color:var(--ink-2); margin:0 0 22px; flex:1; }
+.featured-card__meta { font-family:var(--font-mono); font-size:11px; color:var(--ink-3); display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:1px solid var(--rule); gap:12px; }
+.featured-card__url { color:var(--card-accent); font-weight:500; letter-spacing:0.04em; }
+.featured-card__github { color:var(--ink-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:60%; }
+@media (max-width:560px) {
+  .featured-grid { grid-template-columns:1fr; }
+  .featured-card__head { flex-direction:column; align-items:flex-start; gap:8px; }
+  .featured-card__meta { flex-direction:column; align-items:flex-start; gap:6px; }
+}
+
+/* About + Connect (Wave 14) */
+.about-layout { display:grid; grid-template-columns:240px 1fr; gap:56px; align-items:start; }
+.about-photo { display:flex; justify-content:center; padding-top:6px; }
+.about-photo img { width:240px; height:240px; border-radius:50%; object-fit:cover; box-shadow:0 8px 24px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05); border:3px solid var(--paper); }
+.about-content { min-width:0; }
+.about-content .section__lead strong { color:var(--ink); font-weight:600; }
+.about-title { font-size:clamp(26px, 3.6vw, 38px); line-height:1.18; letter-spacing:-0.02em; max-width:100%; overflow-wrap:break-word; word-wrap:break-word; hyphens:auto; margin-top:14px; }
+.about-content .section__lead { max-width:760px; overflow-wrap:break-word; }
+.about-bio { font-size:15px; line-height:1.65; color:var(--ink-2); margin:18px 0 0; max-width:760px; overflow-wrap:break-word; }
+[data-theme="dark"] .about-bio { color:var(--ink-2); }
+.about-connect { margin-top:36px; padding-top:28px; border-top:1px solid var(--rule); }
+.about-connect__label { font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:18px; }
+.about-connect__grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; }
+.about-link { display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--paper); border:1px solid var(--rule); border-radius:8px; text-decoration:none; color:inherit; transition:all 0.18s var(--ease, ease); min-width:0; }
+.about-link:hover { border-color:var(--ink-2); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.06); }
+.about-link svg { width:22px; height:22px; flex-shrink:0; color:var(--ink-2); transition:color 0.18s; }
+.about-link:hover svg { color:var(--ink); }
+.about-link__name { display:block; font-size:14px; font-weight:500; color:var(--ink); line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.about-link__handle { display:block; font-family:var(--font-mono); font-size:11px; color:var(--ink-3); margin-top:2px; letter-spacing:0.04em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.about-link[data-net="linkedin"]:hover svg { color:#0A66C2; }
+.about-link[data-net="github"]:hover svg { color:#181717; }
+.about-link[data-net="medium"]:hover svg { color:#000; }
+.about-link[data-net="email"]:hover svg { color:var(--c-blue-700); }
+[data-theme="dark"] .about-link[data-net="github"]:hover svg { color:#fff; }
+[data-theme="dark"] .about-link[data-net="medium"]:hover svg { color:#fff; }
+[data-theme="dark"] .about-photo img { border-color:var(--paper); box-shadow:0 8px 24px rgba(0,0,0,0.4); }
+@media (max-width:860px) {
+  .about-layout { grid-template-columns:1fr; gap:32px; text-align:center; }
+  .about-photo img { width:180px; height:180px; }
+  .about-connect__label { text-align:left; }
+  .about-content { text-align:left; }
+  .about-photo { padding-top:0; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="hub-topbar" aria-hidden="true"></div>
+
+<a class="deck-brand" href="index.html" title="Knowledge Hub">
+  <img class="deck-brand__logo" src="_shared/paulasilva-logo.png" alt="Paula Silva" aria-hidden="true">
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt · Knowledge Hub</span>
+</a>
+
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-br">PT</button>
+  <button class="lang-switcher__btn" data-locale="es">ES</button>
+</div>
+
+<div class="deck-controls">
+  <a class="deck-controls__btn" href="mailto:paulasilva@microsoft.com" title="Contact">
+    <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+    <span data-lang="en" class="lang-active">Contact</span><span data-lang="pt-br">Contato</span><span data-lang="es">Contacto</span>
+  </a>
+  <button class="deck-controls__btn deck-controls__btn--theme" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+    <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+    <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+  </button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__layout">
+      <div class="hero__content">
+        <div class="hero__eyebrow"><span class="dot"></span>
+          <span data-lang="en" class="lang-active">Knowledge hub · Microsoft Latin America</span>
+          <span data-lang="pt-br">Hub de conhecimento · Microsoft América Latina</span>
+          <span data-lang="es">Centro de conocimiento · Microsoft América Latina</span>
+        </div>
+        <h1 class="hero__title">
+          <span data-lang="en" class="lang-active">Building the future of software development with AI and Agentic DevOps.</span>
+          <span data-lang="pt-br">Construindo o futuro do desenvolvimento de software com IA e Agentic DevOps.</span>
+          <span data-lang="es">Construyendo el futuro del desarrollo de software con IA y Agentic DevOps.</span>
+        </h1>
+        <p class="hero__subtitle">
+          <span data-lang="en" class="lang-active">A consolidated body of work on the engineering disciplines that turn AI pilots into production systems. Fifteen interconnected topics, each available as a deck, a landing page, and a long-form playbook.</span>
+          <span data-lang="pt-br">Um corpo de trabalho consolidado sobre as disciplinas de engenharia que transformam pilotos de IA em sistemas em produção. Quinze tópicos interconectados, cada um disponível como deck, landing page e playbook completo.</span>
+          <span data-lang="es">Un cuerpo de trabajo consolidado sobre las disciplinas de ingeniería que transforman los pilotos de IA en sistemas en producción. Quince tópicos interconectados, cada uno disponible como deck, landing y playbook completo.</span>
+        </p>
+      </div>
+      <div class="hero__portrait">
+        <img src="_shared/paula-portrait.jpg" alt="Paula Silva, Software Global Black Belt at Microsoft" loading="eager" width="300" height="300">
+      </div>
+    </div>
+    <div class="stat-strip" style="margin-top:48px;">
+      <div class="stat"><div class="stat__num">17</div><div class="stat__label"><span data-lang="en" class="lang-active">Topic areas</span><span data-lang="pt-br">Áreas temáticas</span><span data-lang="es">Áreas temáticas</span></div></div>
+      <div class="stat"><div class="stat__num">58</div><div class="stat__label"><span data-lang="en" class="lang-active">Deliverables</span><span data-lang="pt-br">Artefatos</span><span data-lang="es">Entregables</span></div></div>
+      <div class="stat"><div class="stat__num">3</div><div class="stat__label"><span data-lang="en" class="lang-active">Languages</span><span data-lang="pt-br">Idiomas</span><span data-lang="es">Idiomas</span></div></div>
+      <div class="stat"><div class="stat__num">2026</div><div class="stat__label"><span data-lang="en" class="lang-active">Reference year</span><span data-lang="pt-br">Ano de referência</span><span data-lang="es">Año de referencia</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE STACK -->
+<section class="section section--alt" id="stack">
+  <div class="container">
+    <div class="section__label"><span data-lang="en" class="lang-active">The stack at a glance</span><span data-lang="pt-br">O stack em síntese</span><span data-lang="es">El stack en síntesis</span></div>
+    <h2 class="section__title">
+      <span data-lang="en" class="lang-active">Each layer serves the one above. Each constrains the one below.</span>
+      <span data-lang="pt-br">Cada camada serve a de cima. Cada uma restringe a de baixo.</span>
+      <span data-lang="es">Cada capa sirve a la de arriba. Cada una restringe a la de abajo.</span>
+    </h2>
+    <p class="section__lead">
+      <span data-lang="en" class="lang-active">Five topics, one model. The Agentic DevOps body of work is organized as a four-layer stack plus a transversal economy: tokens. Modernization is the migration path that brings legacy systems onto this stack.</span>
+      <span data-lang="pt-br">Cinco temas, um modelo. O corpo de trabalho de Agentic DevOps é organizado como um stack de quatro camadas mais uma economia transversal: tokens. Modernização é o caminho de migração que traz sistemas legados para este stack.</span>
+      <span data-lang="es">Cinco temas, un modelo. El cuerpo de trabajo de Agentic DevOps se organiza como un stack de cuatro capas más una economía transversal: tokens. La modernización es el camino de migración que lleva los sistemas legados a este stack.</span>
+    </p>
+
+    <div class="hub-stack">
+      <div class="hub-stack__row hub-stack__row--red">
+        <span class="hub-stack__num">04</span>
+        <div>
+          <div class="hub-stack__name"><span class="hub-stack__name-accent">Intent &amp; Semantic</span>
+            <span data-lang="en" class="lang-active">Constitutions, specifications, semantic context layer</span>
+            <span data-lang="pt-br">Constituições, especificações, semantic context layer</span>
+            <span data-lang="es">Constituciones, especificaciones, semantic context layer</span>
+          </div>
+          <div class="hub-stack__question">
+            <span data-lang="en" class="lang-active">What should the agent optimize for, and what does the codebase mean?</span>
+            <span data-lang="pt-br">O que o agente deve otimizar, e o que a base de código significa?</span>
+            <span data-lang="es">¿Para qué debe optimizar el agente, y qué significa la base de código?</span>
+          </div>
+        </div>
+        <a href="semantic-context-layer/landing.html" class="hub-stack__link">SCL-AD →</a>
+      </div>
+      <div class="hub-stack__row hub-stack__row--yellow">
+        <span class="hub-stack__num">03</span>
+        <div>
+          <div class="hub-stack__name"><span class="hub-stack__name-accent">Context engineering</span>
+            <span data-lang="en" class="lang-active">ACE, skills, memory tiers, MCP, golden context</span>
+            <span data-lang="pt-br">ACE, skills, camadas de memória, MCP, contexto golden</span>
+            <span data-lang="es">ACE, skills, capas de memoria, MCP, contexto golden</span>
+          </div>
+          <div class="hub-stack__question">
+            <span data-lang="en" class="lang-active">What can the agent know, and at what cost in tokens?</span>
+            <span data-lang="pt-br">O que o agente pode saber, e a que custo em tokens?</span>
+            <span data-lang="es">¿Qué puede saber el agente, y a qué costo en tokens?</span>
+          </div>
+        </div>
+        <a href="context-engineering-platform/landing.html" class="hub-stack__link">Context →</a>
+      </div>
+      <div class="hub-stack__row hub-stack__row--green">
+        <span class="hub-stack__num">02</span>
+        <div>
+          <div class="hub-stack__name"><span class="hub-stack__name-accent">Platform engineering</span>
+            <span data-lang="en" class="lang-active">Golden paths, guardrails, safety nets, manual review</span>
+            <span data-lang="pt-br">Golden paths, guardrails, redes de segurança, revisão manual</span>
+            <span data-lang="es">Golden paths, guardrails, redes de seguridad, revisión manual</span>
+          </div>
+          <div class="hub-stack__question">
+            <span data-lang="en" class="lang-active">What can agents do, and who governs them?</span>
+            <span data-lang="pt-br">O que os agentes podem fazer, e quem os governa?</span>
+            <span data-lang="es">¿Qué pueden hacer los agentes, y quién los gobierna?</span>
+          </div>
+        </div>
+        <a href="agentic-devops-platform/landing.html" class="hub-stack__link">Agentic DevOps →</a>
+      </div>
+      <div class="hub-stack__row hub-stack__row--blue">
+        <span class="hub-stack__num">01</span>
+        <div>
+          <div class="hub-stack__name"><span class="hub-stack__name-accent">Migration path</span>
+            <span data-lang="en" class="lang-active">Legacy modernization, COBOL/Natural, mainframe to cloud</span>
+            <span data-lang="pt-br">Modernização de legado, COBOL/Natural, mainframe para nuvem</span>
+            <span data-lang="es">Modernización de legado, COBOL/Natural, mainframe a la nube</span>
+          </div>
+          <div class="hub-stack__question">
+            <span data-lang="en" class="lang-active">How do legacy systems join the stack without rewriting from scratch?</span>
+            <span data-lang="pt-br">Como sistemas legados entram no stack sem reescrita do zero?</span>
+            <span data-lang="es">¿Cómo se integran los sistemas legados al stack sin reescribir desde cero?</span>
+          </div>
+        </div>
+        <a href="legacy-modernization-framework/landing.html" class="hub-stack__link">Modernization →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPIC AREAS -->
+<section class="section" id="topics">
+  <div class="container">
+    <div class="section__label"><span data-lang="en" class="lang-active">Five topic areas</span><span data-lang="pt-br">Cinco áreas temáticas</span><span data-lang="es">Cinco áreas temáticas</span></div>
+    <h2 class="section__title"><span data-lang="en" class="lang-active">Read it, present it, build with it.</span><span data-lang="pt-br">Leia, apresente, construa com isso.</span><span data-lang="es">Léelo, preséntalo, construye con ello.</span></h2>
+    <p class="section__lead"><span data-lang="en" class="lang-active">Each topic ships in three formats: a discovery landing page, a presentation deck, and a long-form playbook. The same thesis, calibrated to how you need to engage with it.</span><span data-lang="pt-br">Cada tema é entregue em três formatos: uma landing de descoberta, um deck de apresentação e um playbook completo. A mesma tese, calibrada para a forma como você precisa engajar com ela.</span><span data-lang="es">Cada tema se entrega en tres formatos: una landing de descubrimiento, un deck de presentación y un playbook completo. La misma tesis, calibrada para la forma en que necesitas interactuar con ella.</span></p>
+
+    <div class="topics">
+
+      <a href="agentic-devops-platform/landing.html" class="topic-card" data-accent="green">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">01 · Platform</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Agentic DevOps Platform</span><span data-lang="pt-br">Plataforma Agentic DevOps</span><span data-lang="es">Plataforma Agentic DevOps</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">The foundation layer for the AI-native enterprise. CNCF four pillars (Golden Paths, Guardrails, Safety Nets, Manual Review) plus the Open Horizons accelerator: 22 Backstage templates, 17 Copilot agents, 16 Terraform modules.</span><span data-lang="pt-br">A camada base da empresa AI-native. Quatro pilares CNCF mais o acelerador Open Horizons: 22 templates Backstage, 17 agentes Copilot, 16 módulos Terraform.</span><span data-lang="es">La capa base de la empresa AI-native. Cuatro pilares CNCF más el acelerador Open Horizons: 22 templates Backstage, 17 agentes Copilot, 16 módulos Terraform.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~12,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+
+      <a href="context-engineering-platform/landing.html" class="topic-card" data-accent="yellow">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">02 · Context</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Context Platform Stack</span><span data-lang="pt-br">Context Platform Stack</span><span data-lang="es">Context Platform Stack</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Four interdependent layers of engineering discipline that prevent the agent cemetery: Cloud Infra, Platform, Context, Intent. With Harness Engineering as the sixth layer.</span><span data-lang="pt-br">Quatro camadas interdependentes que previnem o cemitério de agentes: Cloud Infra, Plataforma, Contexto, Intenção. Harness Engineering como sexta camada.</span><span data-lang="es">Cuatro capas interdependientes que previenen el cementerio de agentes: Cloud Infra, Plataforma, Contexto, Intención. Harness Engineering como sexta capa.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook 7ch</span></div>
+          <div class="topic-card__meta"><span>HTML · ~16,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+
+      <a href="semantic-context-layer/landing.html" class="topic-card" data-accent="red">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">03 · Semantic</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Semantic Context Layer (SCL-AD)</span><span data-lang="pt-br">Semantic Context Layer (SCL-AD)</span><span data-lang="es">Semantic Context Layer (SCL-AD)</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Vendor-neutral framework for engineering deterministic, reusable semantic context that grounds AI coding agents in enterprise codebases. Four capability pillars, eight context recipes.</span><span data-lang="pt-br">Framework vendor-neutral para contexto semântico determinístico e reusável que ancora agentes de IA em bases corporativas. Quatro pilares, oito receitas.</span><span data-lang="es">Framework vendor-neutral para contexto semántico determinístico y reutilizable que ancla agentes de IA en bases corporativas. Cuatro pilares, ocho recetas.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook 11d</span></div>
+          <div class="topic-card__meta"><span>HTML · ~22,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+
+      <a href="token-best-practices/landing.html" class="topic-card" data-accent="ink">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">04 · Economy</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Token Management &amp; Agent Design</span><span data-lang="pt-br">Gestão de Tokens &amp; Design de Agentes</span><span data-lang="es">Gestión de Tokens &amp; Diseño de Agentes</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Comprehensive playbook for the era of token-based billing. June 2026 GitHub Copilot transition, context engineering, prompt caching, agent design patterns. Targeting 25-45% cost reduction over baseline.</span><span data-lang="pt-br">Playbook completo para a era de cobrança por tokens. Transição do GitHub Copilot em junho 2026, context engineering, prompt caching, padrões de agente. Meta: 25-45% de redução vs. baseline.</span><span data-lang="es">Playbook completo para la era de facturación por tokens. Transición del GitHub Copilot en junio 2026, context engineering, prompt caching, patrones de agente. Meta: 25-45% de reducción vs. baseline.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook 13ch</span></div>
+          <div class="topic-card__meta"><span>HTML · ~50,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+
+      <a href="legacy-modernization-framework/landing.html" class="topic-card" data-accent="blue">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">05 · Migration</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Legacy Modernization Framework</span><span data-lang="pt-br">Framework de Modernização de Legado</span><span data-lang="es">Framework de Modernización de Legado</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Strategy guide and runbook for COBOL, Natural, and mainframe modernization. Gartner 5R framework, four Microsoft approaches, Carving / Performance / Coexistence operational playbook.</span><span data-lang="pt-br">Guia estratégico e runbook para modernização de COBOL, Natural e mainframe. Framework 5R do Gartner, quatro abordagens Microsoft, playbook operacional Carving / Performance / Coexistence.</span><span data-lang="es">Guía estratégica y runbook para modernización de COBOL, Natural y mainframe. Framework 5R de Gartner, cuatro enfoques Microsoft, playbook operacional Carving / Performance / Coexistence.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook 7d</span></div>
+          <div class="topic-card__meta"><span>HTML · ~28,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="platform-engineering-playbook/landing.html" class="topic-card" data-accent="green">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">01b · Open Horizons</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Open Horizons</span><span data-lang="pt-br">Open Horizons</span><span data-lang="es">Open Horizons</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Vendor-neutral CNCF-based DevOps platform for the agentic era. Three horizons (now, near, far), CNCF maturity model, golden paths and policy-as-code on Azure.</span><span data-lang="pt-br">Plataforma DevOps vendor-neutral baseada em CNCF para a era agêntica. Três horizontes, modelo de maturidade CNCF, golden paths e policy-as-code no Azure.</span><span data-lang="es">Plataforma DevOps vendor-neutral basada en CNCF para la era agéntica. Tres horizontes, modelo de madurez CNCF, golden paths y policy-as-code en Azure.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~9,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="three-horizons-deck/landing.html" class="topic-card" data-accent="red">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">01c · Platform variant</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Three Horizons (Red Hat on Azure)</span><span data-lang="pt-br">Três Horizontes (Red Hat no Azure)</span><span data-lang="es">Tres Horizontes (Red Hat en Azure)</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Same Three Horizons reference, materialized with the Red Hat OpenShift + AAP + Quay stack on Azure. Vendor-supported substrate for orgs that want a single throat to choke.</span><span data-lang="pt-br">Mesmas Três Horizontes, materializadas com a stack Red Hat OpenShift + AAP + Quay no Azure. Substrato com suporte do fornecedor.</span><span data-lang="es">Mismas Tres Horizontes, materializadas con el stack Red Hat OpenShift + AAP + Quay en Azure. Sustrato con soporte del vendor.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~9,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="config-context-architecture/landing.html" class="topic-card" data-accent="yellow">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">02b · Configuration</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Config & Context Architecture</span><span data-lang="pt-br">Arquitetura de Configuração e Contexto</span><span data-lang="es">Arquitectura de Configuración y Contexto</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Complete map of GitHub Copilot configuration in VS Code. Ten layers, three tiers (hot, warm, cold). Workspace, authoring, runtime, what each file does and when to use it.</span><span data-lang="pt-br">Mapa completo de configuração do GitHub Copilot no VS Code. Dez camadas, três tiers (hot, warm, cold). Workspace, autoria, runtime.</span><span data-lang="es">Mapa completo de configuración de GitHub Copilot en VS Code. Diez capas, tres tiers (hot, warm, cold). Workspace, autoría, runtime.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~14,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="sdd-tdd-spec-kit-specky/landing.html" class="topic-card" data-accent="red">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">04b · Discipline</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Spec-Driven Development (Spec Kit / Specky)</span><span data-lang="pt-br">Spec-Driven Development (Spec Kit / Specky)</span><span data-lang="es">Spec-Driven Development (Spec Kit / Specky)</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Specifications upstream make AI agents reliable, testable, reviewable. Spec Kit + Specky as the contract that turns chatbot prompts into engineering. TDD with agents.</span><span data-lang="pt-br">Especificações upstream tornam agentes de IA confiáveis, testáveis, revisáveis. Spec Kit + Specky como contrato que transforma prompts de chatbot em engenharia.</span><span data-lang="es">Las especificaciones upstream vuelven los agentes de IA confiables, testables, revisables. Spec Kit + Specky como contrato que convierte prompts de chatbot en ingeniería.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~16,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="agents-guide-microsoft/landing.html" class="topic-card" data-accent="blue">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">06 · Microsoft platform</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Microsoft AI Agents Portfolio</span><span data-lang="pt-br">Portfólio Microsoft AI Agents</span><span data-lang="es">Portafolio Microsoft AI Agents</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">The full portfolio: Copilot Studio, GitHub Copilot Agents, Azure AI Foundry. Three platforms, one decision framework. Verticals plus Human-in-the-Loop guardrails.</span><span data-lang="pt-br">Portfólio completo: Copilot Studio, GitHub Copilot Agents, Azure AI Foundry. Três plataformas, uma estrutura de decisão. Verticais com guardrails Human-in-the-Loop.</span><span data-lang="es">Portafolio completo: Copilot Studio, GitHub Copilot Agents, Azure AI Foundry. Tres plataformas, un marco de decisión. Verticales con guardrails Human-in-the-Loop.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~12,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="guia-agentes-microsoft/landing.html" class="topic-card" data-accent="green">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">06b · Masterclass</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Agents Skills Plugins Customization Masterclass</span><span data-lang="pt-br">Masterclass de Agentes, Skills, Plugins, Customization</span><span data-lang="es">Masterclass de Agentes, Skills, Plugins, Customization</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Eight-part masterclass: definition, three platforms, agent types, Human-in-the-Loop quadrants, vehicle leasing case study, vertical examples, architecture principles, deployment.</span><span data-lang="pt-br">Masterclass em oito partes: definição, três plataformas, tipos de agentes, quadrantes HITL, caso locação de veículos, verticais, princípios, deploy.</span><span data-lang="es">Masterclass en ocho partes: definición, tres plataformas, tipos de agentes, cuadrantes HITL, caso leasing de vehículos, verticales, principios, despliegue.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~14,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="full-agentic-engineering-platform/landing.html" class="topic-card" data-accent="blue">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">00 · Meta</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Full Agentic Engineering Platform</span><span data-lang="pt-br">Full Agentic Engineering Platform</span><span data-lang="es">Full Agentic Engineering Platform</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">The umbrella topic that unifies all five layers (Cloud Infra, Platform, Context, Intent, Harness) plus the token economy. 14 chapters and 4 appendices for the comprehensive Agentic DevOps body of work.</span><span data-lang="pt-br">O tópico guarda-chuva que unifica as cinco camadas (Cloud Infra, Platform, Context, Intent, Harness) mais a economia de tokens. 14 capítulos e 4 apêndices.</span><span data-lang="es">El tópico paraguas que unifica las cinco capas (Cloud Infra, Platform, Context, Intent, Harness) más la economía de tokens. 14 capítulos y 4 apéndices.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~80,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="apim-internal-marketplace/landing.html" class="topic-card" data-accent="yellow">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">07 · Governance</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Enterprise API & Tooling Governance</span><span data-lang="pt-br">Governança de APIs e Ferramentas Enterprise</span><span data-lang="es">Gobernanza de APIs y Herramientas Enterprise</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Internal developer marketplace for APIs and tools. Lifecycle management, RBAC, contract testing, golden paths for API consumers, and the FinOps angle when AI agents call APIs at scale.</span><span data-lang="pt-br">Marketplace interno para APIs e ferramentas. Gestão de ciclo de vida, RBAC, testes de contrato, golden paths e o ângulo FinOps quando agentes IA consomem APIs em escala.</span><span data-lang="es">Marketplace interno para APIs y herramientas. Gestión de ciclo de vida, RBAC, pruebas de contrato, golden paths y el ángulo FinOps cuando agentes IA consumen APIs a escala.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~10,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="github-copilot-onboarding/landing.html" class="topic-card" data-accent="green">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">08 · Enablement</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">GitHub Copilot Onboarding</span><span data-lang="pt-br">Onboarding GitHub Copilot</span><span data-lang="es">Onboarding GitHub Copilot</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Engineering team onboarding for agentic SDLC literacy. Personas, week-by-week curriculum, hands-on labs, common pitfalls, and the measurement framework for adoption maturity.</span><span data-lang="pt-br">Onboarding de times de engenharia para letramento em agentic SDLC. Personas, currículo semanal, labs práticos, armadilhas comuns e framework de medição.</span><span data-lang="es">Onboarding de equipos de ingeniería para alfabetización en agentic SDLC. Personas, currículo semanal, labs prácticos, trampas comunes y framework de medición.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~12,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="github-agents-skills-plugin-hooks/landing.html" class="topic-card" data-accent="red">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">09 · Personal · Agents anatomy</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">GitHub Agents, Skills, Plugins, Hooks</span><span data-lang="pt-br">Agents, Skills, Plugins e Hooks no GitHub Copilot</span><span data-lang="es">Agents, Skills, Plugins y Hooks en GitHub Copilot</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Personal-identity deep dive into the customization surfaces of GitHub Copilot: skill anatomy, agent decision tree, plugins, hooks lifecycle, orchestration patterns, and configuration hierarchy.</span><span data-lang="pt-br">Deep dive identidade pessoal sobre superfícies de customização do GitHub Copilot: anatomia de skills, árvore de decisão de agentes, plugins, hooks, orquestração e hierarquia de configuração.</span><span data-lang="es">Deep dive identidad personal sobre superficies de customización de GitHub Copilot: anatomía de skills, árbol de decisión de agentes, plugins, hooks, orquestación y jerarquía de configuración.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck</span><span class="fmt-chip">Playbook</span></div>
+          <div class="topic-card__meta"><span>HTML · ~14,000 words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="agentic-roi-calculator/landing.html" class="topic-card" data-accent="green">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">10 · ROI</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Agentic AI ROI Toolkit</span><span data-lang="pt-br">Toolkit de ROI para IA Agêntica</span><span data-lang="es">Toolkit de ROI para IA Agéntica</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Interactive calculator and methodology for quantifying agentic AI return on investment across the SDLC. Role-specific ROI for 24 personas, baseline benchmarks, scenario modeling, and CFO-ready outputs.</span><span data-lang="pt-br">Calculadora interativa e metodologia para quantificar retorno de IA agêntica ao longo do SDLC. ROI por papel para 24 personas, benchmarks de baseline, modelagem de cenários e saídas prontas para o CFO.</span><span data-lang="es">Calculadora interactiva y metodología para cuantificar retorno de IA agéntica a lo largo del SDLC. ROI por rol para 24 personas, benchmarks de baseline, modelado de escenarios y salidas listas para el CFO.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing · planning lens</span><span class="fmt-chip">Interactive calculator</span></div>
+          <div class="topic-card__meta"><span>HTML · React · interactive</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="personas-ai-impact-sdlc/landing.html" class="topic-card" data-accent="red">
+        <div class="topic-card__accent"></div>
+        <div class="topic-card__body">
+          <span class="topic-card__kicker">11 · Personas</span>
+          <h3 class="topic-card__title"><span data-lang="en" class="lang-active">Agentic DevOps SDLC, 24 Personas</span><span data-lang="pt-br">SDLC Agentic DevOps, 24 Personas</span><span data-lang="es">SDLC Agentic DevOps, 24 Personas</span></h3>
+          <p class="topic-card__desc"><span data-lang="en" class="lang-active">Role-by-role analysis of AI impact across the 24 personas of the modern SDLC. Trilingual 25-slide deck (v3.0), 68k-word long-form companion, four-wave transformation framework, five-level GitHub Copilot hierarchy, ODM matrix, and a companion Astro site.</span><span data-lang="pt-br">Análise papel a papel do impacto de IA nas 24 personas do SDLC moderno. Deck trilíngue de 25 slides (v3.0), long-form de 68 mil palavras, framework de transformação em quatro ondas, hierarquia Copilot em cinco níveis, matriz ODM e site Astro complementar.</span><span data-lang="es">Análisis rol por rol del impacto de IA en las 24 personas del SDLC moderno. Deck trilingüe de 25 slides (v3.0), long-form de 68 mil palabras, marco de transformación en cuatro olas, jerarquía Copilot en cinco niveles, matriz ODM y sitio Astro complementario.</span></p>
+          <div class="topic-card__formats"><span class="fmt-chip">Landing</span><span class="fmt-chip">Deck v3 trilingual</span><span class="fmt-chip">Long-form EN</span><span class="fmt-chip">Playbook</span><span class="fmt-chip">Astro Site</span><span class="fmt-chip">24 Copilot kits ZIP</span></div>
+          <div class="topic-card__meta"><span>HTML + ZIP · 6 deliverables · ~340K words</span><span class="topic-card__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED TOOLS -->
+<section class="section" id="featured">
+  <div class="container">
+    <div class="section__label">
+      <span data-lang="en" class="lang-active">Featured</span>
+      <span data-lang="pt-br">Destaques</span>
+      <span data-lang="es">Destacados</span>
+    </div>
+    <h2 class="section__title">
+      <span data-lang="en" class="lang-active">Tools and platforms I built.</span>
+      <span data-lang="pt-br">Ferramentas e plataformas que construí.</span>
+      <span data-lang="es">Herramientas y plataformas que construí.</span>
+    </h2>
+    <p class="section__lead">
+      <span data-lang="en" class="lang-active">Open-source frameworks, platform accelerators, and an assessment SaaS used by teams that take this body of work into production. Each one solves a concrete problem the hub describes.</span>
+      <span data-lang="pt-br">Frameworks open-source, aceleradores de plataforma e um SaaS de avaliação usados por times que levam este corpo de trabalho para produção. Cada um resolve um problema concreto descrito no hub.</span>
+      <span data-lang="es">Frameworks open-source, aceleradores de plataforma y un SaaS de evaluación usados por equipos que llevan este cuerpo de trabajo a producción. Cada uno resuelve un problema concreto descrito en el hub.</span>
+    </p>
+
+    <div class="featured-grid">
+      <a class="featured-card" data-accent="red" href="https://getspecky.ai" target="_blank" rel="noopener noreferrer">
+        <div class="featured-card__accent"></div>
+        <div class="featured-card__body">
+          <div class="featured-card__head">
+            <span class="featured-card__kicker">SPECKY</span>
+            <span class="featured-card__chip">Open-source</span>
+          </div>
+          <h3 class="featured-card__title">
+            <span data-lang="en" class="lang-active">Spec-Driven Development engine for AI agents.</span>
+            <span data-lang="pt-br">Motor de Spec-Driven Development para agentes de IA.</span>
+            <span data-lang="es">Motor de Spec-Driven Development para agentes de IA.</span>
+          </h3>
+          <p class="featured-card__desc">
+            <span data-lang="en" class="lang-active">MCP server with 53 validated tools that turn the SDD methodology from Spec-Kit into a programmable enforcement engine. Specs become reviewable, testable, and shippable contracts that agents read upstream.</span>
+            <span data-lang="pt-br">Servidor MCP com 53 ferramentas validadas que transformam a metodologia SDD do Spec-Kit em um motor de enforcement programável. Specs viram contratos revisáveis, testáveis e entregáveis que os agentes leem upstream.</span>
+            <span data-lang="es">Servidor MCP con 53 herramientas validadas que convierten la metodología SDD del Spec-Kit en un motor de enforcement programable. Specs se vuelven contratos revisables, testables y entregables que los agentes leen upstream.</span>
+          </p>
+          <div class="featured-card__meta">
+            <span class="featured-card__url">getspecky.ai</span>
+            <span class="featured-card__github">github.com/paulasilvatech/spec</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="featured-card" data-accent="green" href="https://ohorizons.ai" target="_blank" rel="noopener noreferrer">
+        <div class="featured-card__accent"></div>
+        <div class="featured-card__body">
+          <div class="featured-card__head">
+            <span class="featured-card__kicker">OPEN HORIZONS</span>
+            <span class="featured-card__chip">Accelerator</span>
+          </div>
+          <h3 class="featured-card__title">
+            <span data-lang="en" class="lang-active">Vendor-neutral platform engineering accelerator.</span>
+            <span data-lang="pt-br">Acelerador de platform engineering vendor-neutral.</span>
+            <span data-lang="es">Acelerador de platform engineering vendor-neutral.</span>
+          </h3>
+          <p class="featured-card__desc">
+            <span data-lang="en" class="lang-active">CNCF OSS stack on Azure: AKS, Backstage, Argo CD, Tekton, OPA Gatekeeper, Kyverno, Sigstore, OpenTelemetry. Compresses the path from raw infra to production AI workloads from 9-18 months to 90-180 days.</span>
+            <span data-lang="pt-br">Stack CNCF OSS no Azure: AKS, Backstage, Argo CD, Tekton, OPA Gatekeeper, Kyverno, Sigstore, OpenTelemetry. Comprime o caminho de infra raw para cargas de IA em produção de 9-18 meses para 90-180 dias.</span>
+            <span data-lang="es">Stack CNCF OSS en Azure: AKS, Backstage, Argo CD, Tekton, OPA Gatekeeper, Kyverno, Sigstore, OpenTelemetry. Comprime el camino de infra raw a cargas de IA en producción de 9-18 meses a 90-180 días.</span>
+          </p>
+          <div class="featured-card__meta">
+            <span class="featured-card__url">ohorizons.ai</span>
+            <span class="featured-card__github">CNCF · OSS</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="featured-card" data-accent="blue" href="https://3horizons.ai" target="_blank" rel="noopener noreferrer">
+        <div class="featured-card__accent"></div>
+        <div class="featured-card__body">
+          <div class="featured-card__head">
+            <span class="featured-card__kicker">THREE HORIZONS</span>
+            <span class="featured-card__chip">Accelerator</span>
+          </div>
+          <h3 class="featured-card__title">
+            <span data-lang="en" class="lang-active">Red Hat-powered platform engineering accelerator.</span>
+            <span data-lang="pt-br">Acelerador de platform engineering com Red Hat.</span>
+            <span data-lang="es">Acelerador de platform engineering con Red Hat.</span>
+          </h3>
+          <p class="featured-card__desc">
+            <span data-lang="en" class="lang-active">OpenShift + Ansible Automation Platform + Quay + Advanced Cluster Security on Azure, jointly supported by Microsoft and Red Hat. The vendor-backed alternative to Open Horizons for organizations that need a single throat to choke for production support.</span>
+            <span data-lang="pt-br">OpenShift + Ansible Automation Platform + Quay + Advanced Cluster Security no Azure, com suporte conjunto Microsoft e Red Hat. Alternativa com suporte de fornecedor à Open Horizons para organizações que precisam de uma única ponta de contato para suporte em produção.</span>
+            <span data-lang="es">OpenShift + Ansible Automation Platform + Quay + Advanced Cluster Security en Azure, con soporte conjunto Microsoft y Red Hat. Alternativa con soporte del vendor a Open Horizons para organizaciones que necesitan una sola contraparte para soporte en producción.</span>
+          </p>
+          <div class="featured-card__meta">
+            <span class="featured-card__url">3horizons.ai</span>
+            <span class="featured-card__github">Red Hat · Azure</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="featured-card" data-accent="yellow" href="https://aimaturity.dev" target="_blank" rel="noopener noreferrer">
+        <div class="featured-card__accent"></div>
+        <div class="featured-card__body">
+          <div class="featured-card__head">
+            <span class="featured-card__kicker">AI MATURITY</span>
+            <span class="featured-card__chip">SaaS</span>
+          </div>
+          <h3 class="featured-card__title">
+            <span data-lang="en" class="lang-active">AI maturity assessment for engineering organizations.</span>
+            <span data-lang="pt-br">Avaliação de maturidade de IA para organizações de engenharia.</span>
+            <span data-lang="es">Evaluación de madurez de IA para organizaciones de ingeniería.</span>
+          </h3>
+          <p class="featured-card__desc">
+            <span data-lang="en" class="lang-active">Assessment platform that maps your team across the dimensions that determine whether AI investments compound or amplify existing friction. Outputs a roadmap, not just a score.</span>
+            <span data-lang="pt-br">Plataforma de avaliação que mapeia seu time nas dimensões que determinam se investimentos em IA se acumulam ou amplificam fricção existente. Entrega um roadmap, não apenas um score.</span>
+            <span data-lang="es">Plataforma de evaluación que mapea a tu equipo en las dimensiones que determinan si las inversiones en IA se acumulan o amplifican fricción existente. Entrega un roadmap, no solo un score.</span>
+          </p>
+          <div class="featured-card__meta">
+            <span class="featured-card__url">aimaturity.dev</span>
+            <span class="featured-card__github">Assessment · Roadmap</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="featured-card" data-accent="blue" href="agentic-roi-calculator/landing.html">
+        <div class="featured-card__accent"></div>
+        <div class="featured-card__body">
+          <div class="featured-card__head">
+            <span class="featured-card__kicker">AGENTIC AI ROI CALCULATOR</span>
+            <span class="featured-card__chip">Toolkit · v1.0</span>
+          </div>
+          <h3 class="featured-card__title">
+            <span data-lang="en" class="lang-active">Build the agentic AI business case in numbers.</span>
+            <span data-lang="pt-br">Monte o business case de IA agêntica em números.</span>
+            <span data-lang="es">Construye el business case de IA agéntica en números.</span>
+          </h3>
+          <p class="featured-card__desc">
+            <span data-lang="en" class="lang-active">Interactive React calculator combining 24 SDLC persona ROI models, six Gartner research anchors, NPV / IRR / scenario analysis, and an architecture advisor that recommends Single Agent vs Multi-Agent Pipeline. Outputs CFO-ready business cases with sensitivity tables.</span>
+            <span data-lang="pt-br">Calculadora React interativa combinando 24 modelos de ROI por persona do SDLC, seis âncoras Gartner, análise NPV / IRR / cenários e advisor de arquitetura (Single Agent vs Multi-Agent Pipeline). Saída pronta para CFO com tabelas de sensibilidade.</span>
+            <span data-lang="es">Calculadora React interactiva combinando 24 modelos de ROI por persona del SDLC, seis anclas Gartner, análisis NPV / IRR / escenarios y advisor de arquitectura (Single Agent vs Multi-Agent Pipeline). Salida lista para CFO con tablas de sensibilidad.</span>
+          </p>
+          <div class="featured-card__meta">
+            <span class="featured-card__url">Open the toolkit</span>
+            <span class="featured-card__github">24 personas · 6 Gartner reports</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="featured-card" data-accent="red" href="https://paulanunes85.github.io/super-agentic-devops-world/" target="_blank" rel="noopener noreferrer">
+        <div class="featured-card__accent"></div>
+        <div class="featured-card__body">
+          <div class="featured-card__head">
+            <span class="featured-card__kicker">SUPER AGENTIC DEVOPS WORLD</span>
+            <span class="featured-card__chip">Learning game</span>
+          </div>
+          <h3 class="featured-card__title">
+            <span data-lang="en" class="lang-active">An 8-bit learning adventure for Agentic DevOps.</span>
+            <span data-lang="pt-br">Uma aventura de aprendizado 8-bit para Agentic DevOps.</span>
+            <span data-lang="es">Una aventura de aprendizaje 8-bit para Agentic DevOps.</span>
+          </h3>
+          <p class="featured-card__desc">
+            <span data-lang="en" class="lang-active">Side-scrolling browser game that teaches the core concepts of agentic DevOps through pixel-art levels: agents, MCP servers, governance, and the path from ask to plan to agent. Press start, learn by playing.</span>
+            <span data-lang="pt-br">Jogo browser side-scrolling que ensina os conceitos centrais de agentic DevOps em fases pixel-art: agentes, MCP servers, governança e o caminho de ask para plan para agent. Aperte start, aprenda jogando.</span>
+            <span data-lang="es">Juego browser side-scrolling que enseña los conceptos centrales de agentic DevOps en fases pixel-art: agentes, MCP servers, gobernanza y el camino de ask a plan a agent. Aprieta start, aprende jugando.</span>
+          </p>
+          <div class="featured-card__meta">
+            <span class="featured-card__url">paulanunes85.github.io/super-agentic-devops-world</span>
+            <span class="featured-card__github">github.com/paulanunes85/super-agentic-devops-world</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT + CONNECT -->
+<section class="section section--alt" id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-photo">
+        <img src="_shared/paula-speaker.jpg" alt="Paula Silva, Software Global Black Belt at Microsoft" loading="lazy" width="240" height="240">
+      </div>
+      <div class="about-content">
+        <div class="section__label">
+          <span data-lang="en" class="lang-active">About</span>
+          <span data-lang="pt-br">Sobre</span>
+          <span data-lang="es">Sobre mí</span>
+        </div>
+        <h2 class="section__title about-title">
+          <span data-lang="en" class="lang-active">Hi, I am Paula.<br><span class="accent-blue">Software Global Black Belt at Microsoft.</span></span>
+          <span data-lang="pt-br">Olá, sou Paula.<br><span class="accent-blue">Software Global Black Belt na Microsoft.</span></span>
+          <span data-lang="es">Hola, soy Paula.<br><span class="accent-blue">Software Global Black Belt en Microsoft.</span></span>
+        </h2>
+        <p class="section__lead">
+          <span data-lang="en" class="lang-active"><strong>Most companies aren't adopting AI. They're buying the feeling of adopting AI.</strong> I work with the ones that want to do it differently.</span>
+          <span data-lang="pt-br"><strong>A maioria das empresas não está adotando IA. Está comprando a sensação de adotar IA.</strong> Trabalho com as que querem fazer diferente.</span>
+          <span data-lang="es"><strong>La mayoría de las empresas no está adoptando IA. Está comprando la sensación de adoptar IA.</strong> Trabajo con las que quieren hacerlo diferente.</span>
+        </p>
+        <p class="about-bio">
+          <span data-lang="en" class="lang-active">Software Global Black Belt at Microsoft Americas, focused on Agentic DevOps Platform for enterprise clients across Latin America. Twenty years in technology: data center transformation, application modernization, enterprise architecture, and now agentic engineering. Before Microsoft: Accenture, AWS, and Google Cloud. I write on Medium, in English and Portuguese, about AI adoption, Spec-Driven Development, platform engineering, and what is really happening inside companies trying to scale AI. Always grounded in empirical evidence and the papers that support each argument.</span>
+          <span data-lang="pt-br">Software Global Black Belt na Microsoft Americas, focada em Agentic DevOps Platform para clientes enterprise na América Latina. Vinte anos em tecnologia: transformação de data center, modernização de aplicações, arquitetura enterprise, e agora engenharia agêntica. Antes da Microsoft: Accenture, AWS e Google Cloud. Escrevo no Medium, em inglês e português, sobre adoção de IA, Spec-Driven Development, platform engineering, e o que realmente acontece dentro de empresas tentando escalar IA. Sempre ancorado em evidência empírica e nos papers que sustentam cada argumento.</span>
+          <span data-lang="es">Software Global Black Belt en Microsoft Americas, enfocada en Agentic DevOps Platform para clientes empresariales en América Latina. Veinte años en tecnología: transformación de data center, modernización de aplicaciones, arquitectura empresarial, y ahora ingeniería agéntica. Antes de Microsoft: Accenture, AWS y Google Cloud. Escribo en Medium, en inglés y portugués, sobre adopción de IA, Spec-Driven Development, platform engineering, y lo que realmente sucede dentro de empresas intentando escalar IA. Siempre anclado en evidencia empírica y los papers que sostienen cada argumento.</span>
+        </p>
+
+        <div class="about-connect">
+          <div class="about-connect__label">
+            <span data-lang="en" class="lang-active">Connect</span>
+            <span data-lang="pt-br">Conectar</span>
+            <span data-lang="es">Conectar</span>
+          </div>
+          <div class="about-connect__grid">
+            <a href="https://linkedin.com/in/paulanunes" target="_blank" rel="noopener noreferrer" class="about-link" data-net="linkedin">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+              <span class="about-link__name">LinkedIn</span>
+              <span class="about-link__handle">in/paulanunes</span>
+            </a>
+            <a href="https://github.com/paulasilvatech" target="_blank" rel="noopener noreferrer" class="about-link" data-net="github">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.79 23.4c.6.1.83-.26.83-.57v-2.06c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.31 3.5 1 .1-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.46-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .31.22.69.84.57A12 12 0 0 0 12 .3"/></svg>
+              <span class="about-link__name"><span data-lang="en" class="lang-active">GitHub Projects</span><span data-lang="pt-br">GitHub Projetos</span><span data-lang="es">GitHub Proyectos</span></span>
+              <span class="about-link__handle">@paulasilvatech</span>
+            </a>
+            <a href="https://github.com/paulanunes85" target="_blank" rel="noopener noreferrer" class="about-link" data-net="github">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.79 23.4c.6.1.83-.26.83-.57v-2.06c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.31 3.5 1 .1-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.46-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .31.22.69.84.57A12 12 0 0 0 12 .3"/></svg>
+              <span class="about-link__name"><span data-lang="en" class="lang-active">GitHub Personal</span><span data-lang="pt-br">GitHub Pessoal</span><span data-lang="es">GitHub Personal</span></span>
+              <span class="about-link__handle">@paulanunes85</span>
+            </a>
+            <a href="https://medium.com/@paulanunes85" target="_blank" rel="noopener noreferrer" class="about-link" data-net="medium">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 0v24h24V0H0zm19.94 5.68l-1.29 1.23c-.11.08-.16.22-.14.36v8.94c-.02.13.04.27.14.35l1.26 1.23v.27h-6.34v-.27l1.3-1.26c.13-.13.13-.16.13-.35V8.95l-3.62 9.18h-.49l-4.21-9.18v6.15c-.04.26.05.51.23.7l1.69 2.05v.27H3.83v-.27l1.69-2.05c.18-.18.26-.45.21-.7V8.05c.02-.2-.06-.39-.21-.51L4.02 5.68v-.27h4.66l3.6 7.9 3.16-7.9h4.45v.27z"/></svg>
+              <span class="about-link__name">Medium</span>
+              <span class="about-link__handle">@paulanunes85</span>
+            </a>
+            <a href="mailto:paulasilva@microsoft.com" class="about-link" data-net="email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+              <span class="about-link__name">Email</span>
+              <span class="about-link__handle">paulasilva@microsoft.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing__container">
+    <div class="closing__brand">
+      <img class="closing__brand-logo" src="_shared/paulasilva-logo.png" alt="Paula Silva" aria-hidden="true">
+      <span>Paula Silva | Software Global Black Belt</span>
+    </div>
+    <h2 class="closing__title">
+      <span data-lang="en" class="lang-active">Start with the <span class="accent-blue">platform</span>, not the agents.</span>
+      <span data-lang="pt-br">Comece pela <span class="accent-blue">plataforma</span>, não pelos agentes.</span>
+      <span data-lang="es">Comience por la <span class="accent-blue">plataforma</span>, no por los agentes.</span>
+    </h2>
+    <p class="closing__tagline">Building the future of software development with AI and Agentic DevOps.</p>
+    <div class="closing__role">Knowledge Hub · v1.0.0 · 2026-05-06</div>
+    <div class="closing__cta">
+      <a href="agentic-devops-platform/landing.html" class="closing__btn closing__btn--primary">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <div class="closing__btn-label"><span data-lang="en" class="lang-active">Start here</span><span data-lang="pt-br">Comece aqui</span><span data-lang="es">Empieza aquí</span><span class="closing__btn-value"><span data-lang="en" class="lang-active">Agentic DevOps Platform</span><span data-lang="pt-br">Plataforma Agentic DevOps</span><span data-lang="es">Plataforma Agentic DevOps</span></span></div>
+      </a>
+      <a href="mailto:paulasilva@microsoft.com" class="closing__btn">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M22 7l-10 6L2 7" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        <div class="closing__btn-label"><span data-lang="en" class="lang-active">Contact</span><span data-lang="pt-br">Contato</span><span data-lang="es">Contacto</span><span class="closing__btn-value">paulasilva@microsoft.com</span></div>
+      </a>
+    </div>
+    <div class="closing__meta">
+      <span>paulasilva · 2026-05-06</span>
+      <span>EN · PT-BR · ES</span>
+    </div>
+  </div>
+</section>
+
+<script src="_shared/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>SCL-AD Playbook · Paula Silva</title>
+<meta name="description" content="Eleven-document framework for the Semantic Context Layer for Agentic DevOps.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SCL-AD Playbook · Paula Silva">
+<meta property="og:description" content="Eleven-document framework for the Semantic Context Layer for Agentic DevOps.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SCL-AD Playbook · Paula Silva">
+<meta name="twitter:description" content="Eleven-document framework for the Semantic Context Layer for Agentic DevOps.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/playbook.css">
+</head>
+<body class="acc-red">
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+
+<section class="doc-hero">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <div class="doc-hero__eyebrow">Playbook · v1.1.0 · 2026-05-04</div>
+    <h1 class="doc-hero__title"><span data-lang="en" class="lang-active">SCL-AD: Semantic Context Layer for Agentic DevOps.</span><span data-lang="pt-br">SCL-AD: Semantic Context Layer para Agentic DevOps.</span><span data-lang="es">SCL-AD: Semantic Context Layer para Agentic DevOps.</span></h1>
+    <p class="doc-hero__lead"><span data-lang="en" class="lang-active">A vendor-neutral framework for engineering deterministic, reusable semantic context that grounds AI coding agents in enterprise codebases. Reduces tokens, hallucinations, and developer trust erosion at scale.</span><span data-lang="pt-br">Um framework vendor-neutral para engenharia de contexto semântico determinístico e reusável que ancora agentes IA em bases corporativas. Reduz tokens, alucinações e erosão de confiança em escala.</span><span data-lang="es">Un framework vendor-neutral para ingeniería de contexto semántico determinístico y reutilizable que ancla agentes IA en bases corporativas. Reduce tokens, alucinaciones y erosión de confianza a escala.</span></p>
+  </div>
+</section>
+
+<div class="doc">
+
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#problem" class="active">1. The problem</a>
+    <a href="#audience">2. Who reads this</a>
+    <a href="#pillars">3. Capability pillars</a>
+    <a href="#recipes">4. Recipe categories</a>
+    <a href="#docs">5. Document map</a>
+    <a href="#paths">6. Reading paths</a>
+    <a href="#principles">7. Core principles</a>
+  </aside>
+
+  <article class="article">
+
+    <section id="problem">
+      <h2>1. <span data-lang="en" class="lang-active">What this framework solves</span><span data-lang="pt-br">O que este framework resolve</span><span data-lang="es">Lo que este framework resuelve</span></h2>
+      <p data-lang="en" class="lang-active">AI coding agents in enterprise environments share a common failure pattern. They reconstruct context on every interaction, infer architecture from raw files, and generate code that violates conventions the codebase already encodes. The cost is measurable in three dimensions: tokens consumed, hallucinations introduced, and developer trust eroded.</p>
+      <p data-lang="pt-br">Agentes de codificação IA em ambientes corporativos compartilham um padrão de falha comum. Reconstroem contexto a cada interação, inferem arquitetura de arquivos brutos, e geram código que viola convenções que a base já codifica. O custo é mensurável em três dimensões: tokens consumidos, alucinações introduzidas, e confiança do dev erodida.</p>
+      <p data-lang="es">Los agentes de codificación IA en ambientes corporativos comparten un patrón de falla común. Reconstruyen contexto en cada interacción, infieren arquitectura desde archivos crudos, y generan código que viola convenciones que la base ya codifica. El costo es medible en tres dimensiones: tokens consumidos, alucinaciones introducidas, y confianza del dev erosionada.</p>
+      <blockquote data-lang="en" class="lang-active">A 2025 study by METR found experienced developers took <strong>19% longer</strong> to complete tasks when using AI tools in large, mature repositories, with fewer than half of AI outputs accepted as-is. The cause was not the model's reasoning capability; it was the absence of structured context about how the codebase actually works.</blockquote>
+      <blockquote data-lang="pt-br">Um estudo de 2025 do METR encontrou que devs experientes levaram <strong>19% mais tempo</strong> para completar tarefas com IA em repositórios grandes e maduros, com menos da metade dos outputs aceitos sem mudança. A causa não foi a capacidade de raciocínio do modelo; foi a ausência de contexto estruturado sobre como a base realmente funciona.</blockquote>
+      <blockquote data-lang="es">Un estudio de 2025 de METR encontró que los devs experimentados tardaron un <strong>19% más</strong> en completar tareas con IA en repositorios grandes y maduros, con menos de la mitad de los outputs aceptados tal cual. La causa no fue la capacidad de razonamiento del modelo; fue la ausencia de contexto estructurado sobre cómo la base realmente funciona.</blockquote>
+    </section>
+
+    <section id="audience">
+      <h2>2. <span data-lang="en" class="lang-active">Who should read this</span><span data-lang="pt-br">Quem deve ler isto</span><span data-lang="es">Quién debe leer esto</span></h2>
+      <ul>
+        <li data-lang="en" class="lang-active"><strong>Platform Engineering Leaders.</strong> Scaling GitHub Copilot, custom agents, or any AI coding tool across hundreds of repositories without runaway token costs.</li>
+        <li data-lang="pt-br"><strong>Líderes de Platform Engineering.</strong> Escalando GitHub Copilot, agentes custom, ou qualquer ferramenta de codificação IA em centenas de repos sem explosão de custo de token.</li>
+        <li data-lang="es"><strong>Líderes de Platform Engineering.</strong> Escalando GitHub Copilot, agentes custom, o cualquier herramienta de codificación IA en cientos de repos sin explosión de costo de token.</li>
+        <li data-lang="en" class="lang-active"><strong>Enterprise Architects.</strong> Designing the next iteration of internal developer platforms, planning context as a shared asset.</li>
+        <li data-lang="pt-br"><strong>Arquitetos Corporativos.</strong> Desenhando a próxima iteração de IDPs, planejando contexto como ativo compartilhado.</li>
+        <li data-lang="es"><strong>Arquitectos Corporativos.</strong> Diseñando la próxima iteración de IDPs, planeando contexto como activo compartido.</li>
+        <li data-lang="en" class="lang-active"><strong>DevOps and SRE Teams.</strong> Operationalizing AI coding workflows: CI integration, refresh cadence, incident response.</li>
+        <li data-lang="pt-br"><strong>Times DevOps e SRE.</strong> Operacionalizando workflows IA: integração CI, cadência de refresh, resposta a incidente.</li>
+        <li data-lang="es"><strong>Equipos DevOps y SRE.</strong> Operacionalizando workflows IA: integración CI, cadencia de refresh, respuesta a incidente.</li>
+        <li data-lang="en" class="lang-active"><strong>Security and Governance.</strong> Establishing policies for what agents see, produce, and how to audit reasoning chains.</li>
+        <li data-lang="pt-br"><strong>Segurança e Governança.</strong> Estabelecendo políticas do que agentes veem, produzem, e como auditar cadeias de raciocínio.</li>
+        <li data-lang="es"><strong>Seguridad y Gobernanza.</strong> Estableciendo políticas de lo que los agentes ven, producen, y cómo auditar cadenas de razonamiento.</li>
+      </ul>
+    </section>
+
+    <section id="pillars">
+      <h2>3. <span data-lang="en" class="lang-active">The four capability pillars</span><span data-lang="pt-br">Os quatro pilares de capacidade</span><span data-lang="es">Los cuatro pilares de capacidad</span></h2>
+      <p data-lang="en" class="lang-active">The four-layer reference architecture (Code Intelligence, Context Recipes, Registry, Agent Integration) describes structure. The four pillars (originally from Moderne) describe behavior. Adoption typically achieves Precompute first (Phase 1), Target during Phase 2, Execute and Coordinate during Phase 3.</p>
+      <p data-lang="pt-br">A arquitetura de referência de quatro camadas (Code Intelligence, Context Recipes, Registry, Agent Integration) descreve estrutura. Os quatro pilares (originalmente da Moderne) descrevem comportamento. A adoção tipicamente atinge Precompute primeiro (Fase 1), Target na Fase 2, Execute e Coordinate na Fase 3.</p>
+      <p data-lang="es">La arquitectura de referencia de cuatro capas (Code Intelligence, Context Recipes, Registry, Agent Integration) describe estructura. Los cuatro pilares (originalmente de Moderne) describen comportamiento. La adopción típicamente alcanza Precompute primero (Fase 1), Target en la Fase 2, Execute y Coordinate en la Fase 3.</p>
+      <table>
+        <thead><tr><th>Pillar</th><th>What it does</th><th>When it lands</th></tr></thead>
+        <tbody>
+          <tr><td><strong>01. Precompute</strong></td><td>Derive structured system knowledge ahead of time. Architecture, dependencies, conventions resolved once, versioned, reused.</td><td>Phase 1</td></tr>
+          <tr><td><strong>02. Target</strong></td><td>Pre-computed indexes and structured queries narrow agent work to the relevant repositories and symbols.</td><td>Phase 2</td></tr>
+          <tr><td><strong>03. Execute</strong></td><td>Coordinated changesets, validation gates, parallel rollout. Reliable large-scale transformation, not pilot mode.</td><td>Phase 3</td></tr>
+          <tr><td><strong>04. Coordinate</strong></td><td>Share change context across agents and the organization. Drop duplication, conflict, wasted token spend.</td><td>Phase 3</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="recipes">
+      <h2>4. <span data-lang="en" class="lang-active">The eight context recipe categories</span><span data-lang="pt-br">As oito categorias de receita de contexto</span><span data-lang="es">Las ocho categorías de receta de contexto</span></h2>
+      <p data-lang="en" class="lang-active">A recipe is a versioned extraction routine that derives a specific kind of structured knowledge from a codebase. Source 04_Context_Recipes defines eight canonical recipe categories. Each produces a deterministic artifact in a defined format.</p>
+      <p data-lang="pt-br">Uma receita é uma rotina de extração versionada que deriva um tipo específico de conhecimento estruturado de uma base de código. O documento fonte 04_Context_Recipes define oito categorias canônicas. Cada uma produz um artefato determinístico em formato definido.</p>
+      <p data-lang="es">Una receta es una rutina de extracción versionada que deriva un tipo específico de conocimiento estructurado de una base de código. El documento fuente 04_Context_Recipes define ocho categorías canónicas. Cada una produce un artefacto determinístico en formato definido.</p>
+      <table>
+        <thead><tr><th>#</th><th>Recipe category</th><th>What it answers</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Structural Inventory</td><td>What is in this repository?</td><td>Markdown + CSV</td></tr>
+          <tr><td>2</td><td>Dependency Intelligence</td><td>What does it depend on, and what depends on it?</td><td>CSV + SBOM</td></tr>
+          <tr><td>3</td><td>Service Topology</td><td>What services exist and how do they relate?</td><td>CALM (JSON)</td></tr>
+          <tr><td>4</td><td>Convention Extraction</td><td>How is code written in this codebase?</td><td>Markdown</td></tr>
+          <tr><td>5</td><td>Test Intent Mapping</td><td>What is tested, how, and what is the test telling us?</td><td>CSV</td></tr>
+          <tr><td>6</td><td>Configuration Surface</td><td>What configuration affects runtime behavior?</td><td>Markdown + JSON</td></tr>
+          <tr><td>7</td><td>Security Posture Snapshot</td><td>What security-relevant facts are encoded in the code?</td><td>Markdown</td></tr>
+          <tr><td>8</td><td>Deployment Context <em>(added v1.1.0)</em></td><td>What runs where and under which constraints?</td><td>Markdown + JSON</td></tr>
+        </tbody>
+      </table>
+      <p data-lang="en" class="lang-active">For organizations evaluating reference implementations, Moderne Prethink publishes two starter recipes (added in v1.1.0): <code>io.moderne.prethink.UpdatePrethinkContextNoAiStarter</code> and <code>io.moderne.prethink.UpdatePrethinkContextStarter</code>, demonstrating the canonical pattern with and without AI-generated summaries.</p>
+      <p data-lang="pt-br">Para organizações avaliando implementações de referência, o Moderne Prethink publica duas starter recipes (adicionadas em v1.1.0): <code>io.moderne.prethink.UpdatePrethinkContextNoAiStarter</code> e <code>io.moderne.prethink.UpdatePrethinkContextStarter</code>, demonstrando o padrão canônico com e sem resumos gerados por IA.</p>
+      <p data-lang="es">Para organizaciones evaluando implementaciones de referencia, Moderne Prethink publica dos starter recipes (añadidas en v1.1.0): <code>io.moderne.prethink.UpdatePrethinkContextNoAiStarter</code> y <code>io.moderne.prethink.UpdatePrethinkContextStarter</code>, demostrando el patrón canónico con y sin resúmenes generados por IA.</p>
+      <h3><span data-lang="en" class="lang-active">Four agent integration patterns (source 06)</span><span data-lang="pt-br">Quatro padrões de integração de agente (fonte 06)</span><span data-lang="es">Cuatro patrones de integración de agente (fuente 06)</span></h3>
+      <ul>
+        <li><strong>Pattern 1: Static File Injection.</strong> Recipes write context as files alongside the codebase; agents read them directly.</li>
+        <li><strong>Pattern 2: MCP Server Integration.</strong> Context exposed via Model Context Protocol servers (Moderne Moddy is one example), queryable on demand.</li>
+        <li><strong>Pattern 3: Custom Agent Configuration.</strong> Context bundled into agent system prompts and skill definitions for vendor-specific tooling.</li>
+        <li><strong>Pattern 4: Hybrid Distribution.</strong> Combine the above. Static for stable knowledge, MCP for mutable state, custom for tool-specific needs.</li>
+      </ul>
+    </section>
+
+    <section id="docs">
+      <h2>5. <span data-lang="en" class="lang-active">All eleven documents</span><span data-lang="pt-br">Todos os onze documentos</span><span data-lang="es">Todos los once documentos</span></h2>
+      <div class="chapter-grid">
+        <a class="chap-card" href="00_README_v1.1.0_2026-05-04.md"><div class="chap-card__num">00</div><div class="chap-card__title">README</div><div class="chap-card__desc">Overview, pillars, navigation.</div></a>
+        <a class="chap-card" href="01_Concept_and_Problem_Statement_v1.0.0_2026-05-04.md"><div class="chap-card__num">01</div><div class="chap-card__title">Concept &amp; problem</div><div class="chap-card__desc">Why semantic context, what fails without it.</div></a>
+        <a class="chap-card" href="02_Architecture_and_Components_v1.0.0_2026-05-04.md"><div class="chap-card__num">02</div><div class="chap-card__title">Architecture</div><div class="chap-card__desc">High-level component view.</div></a>
+        <a class="chap-card" href="03_Code_Intelligence_Layer_v1.0.0_2026-05-04.md"><div class="chap-card__num">03</div><div class="chap-card__title">Code intelligence</div><div class="chap-card__desc">AST, deps, taxonomy.</div></a>
+        <a class="chap-card" href="04_Context_Recipes_v1.1.0_2026-05-04.md"><div class="chap-card__num">04</div><div class="chap-card__title">Context recipes</div><div class="chap-card__desc">Eight task-specific bundles.</div></a>
+        <a class="chap-card" href="05_Context_Registry_and_Distribution_v1.0.0_2026-05-04.md"><div class="chap-card__num">05</div><div class="chap-card__title">Registry</div><div class="chap-card__desc">Where context lives, how distributed.</div></a>
+        <a class="chap-card" href="06_Agent_Integration_Patterns_v1.1.0_2026-05-04.md"><div class="chap-card__num">06</div><div class="chap-card__title">Agent integration</div><div class="chap-card__desc">How agents consume the layer.</div></a>
+        <a class="chap-card" href="07_Governance_and_Compliance_v1.0.0_2026-05-04.md"><div class="chap-card__num">07</div><div class="chap-card__title">Governance</div><div class="chap-card__desc">Auth, audit, compliance.</div></a>
+        <a class="chap-card" href="08_Adoption_Roadmap_and_Metrics_v1.0.0_2026-05-04.md"><div class="chap-card__num">08</div><div class="chap-card__title">Adoption</div><div class="chap-card__desc">Roadmap and metrics.</div></a>
+        <a class="chap-card" href="09_Glossary_and_References_v1.1.0_2026-05-04.md"><div class="chap-card__num">09</div><div class="chap-card__title">Glossary</div><div class="chap-card__desc">Terms and references.</div></a>
+        <a class="chap-card" href="10_Build_vs_Buy_Competitive_Positioning_v1.0.0_2026-05-04.md"><div class="chap-card__num">10</div><div class="chap-card__title">Build vs buy</div><div class="chap-card__desc">Competitive positioning.</div></a>
+      </div>
+    </section>
+
+    <section id="paths">
+      <h2>6. <span data-lang="en" class="lang-active">Reading paths</span><span data-lang="pt-br">Caminhos de leitura</span><span data-lang="es">Caminos de lectura</span></h2>
+      <p data-lang="en" class="lang-active">Source README defines three canonical paths optimized for time-to-decision.</p>
+      <p data-lang="pt-br">O README fonte define três caminhos canônicos otimizados para tempo-até-decisão.</p>
+      <p data-lang="es">El README fuente define tres caminos canónicos optimizados para tiempo hasta decisión.</p>
+      <table>
+        <thead><tr><th>Path</th><th>Sequence</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Executive</strong></td><td>00 README → 01 Concept (sec. 1-3) → 10 Build vs Buy → 08 Adoption Roadmap</td><td>60 min</td></tr>
+          <tr><td><strong>Architect</strong></td><td>00 → 01 (full) → 02 Architecture → 05 Registry → 10 Build vs Buy → 07 Governance (sec. 1-4)</td><td>3 h</td></tr>
+          <tr><td><strong>Implementer</strong></td><td>All eleven documents in order</td><td>Full framework</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="principles">
+      <h2>7. <span data-lang="en" class="lang-active">Five core principles</span><span data-lang="pt-br">Cinco princípios centrais</span><span data-lang="es">Cinco principios centrales</span></h2>
+      <p data-lang="en" class="lang-active">Non-negotiable. Apply uniformly across implementations.</p>
+      <p data-lang="pt-br">Não negociáveis. Aplicam-se uniformemente em todas as implementações.</p>
+      <p data-lang="es">No negociables. Se aplican uniformemente en todas las implementaciones.</p>
+      <ul>
+        <li><strong>Determinism over inference.</strong> Context is derived through deterministic analysis, not probabilistic retrieval. Same input always produces same output.</li>
+        <li><strong>Reusability over recomputation.</strong> Context is computed once, versioned, reused across agent sessions, tasks, tools.</li>
+        <li><strong>Vendor neutrality over lock-in.</strong> The framework specifies interfaces and artifacts, not products. Any compliant implementation can replace any other.</li>
+        <li><strong>Auditability over magic.</strong> Every artifact is human-readable, traceable to a recipe execution, signed with a content hash.</li>
+        <li><strong>Refresh over staleness.</strong> Context is treated as a build artifact, regenerated on a defined cadence, invalidated when code changes materially.</li>
+      </ul>
+    </section>
+
+    <nav class="pagenav">
+      <a href="landing.html">← Landing</a>
+      <a href="../token-best-practices/landing.html">Next: Token Management →</a>
+    </nav>
+
+  </article>
+
+  <aside class="scrollspy">
+    <h4>Related</h4>
+    <a href="../agentic-devops-platform/landing.html">Agentic DevOps</a>
+    <a href="../context-engineering-platform/landing.html">Context Stack</a>
+    <a href="../token-best-practices/landing.html">Token Mgmt</a>
+    <a href="../legacy-modernization-framework/landing.html">Modernization</a>
+    <a href="../index.html">Hub</a>
+  </aside>
+
+</div>
+
+<script>
+window.PLAYBOOK_DATA = {
+  topicLabel: 'Semantic Context Layer',
+  nextLabel: { en: 'Token Management', "pt-br": 'Gestão de Tokens', es: 'Gestión de Tokens' },
+  nextHref: '../token-best-practices/landing.html'
+};
+</script>
+<script src="../_shared/playbook.js"></script>
+</body>
+</html>

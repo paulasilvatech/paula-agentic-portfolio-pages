@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Context Platform Stack · Paula Silva</title>
+<meta name="description" content="Four interdependent layers of engineering discipline that prevent the agent cemetery.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Context Platform Stack · Paula Silva">
+<meta property="og:description" content="Four interdependent layers of engineering discipline that prevent the agent cemetery.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Context Platform Stack · Paula Silva">
+<meta name="twitter:description" content="Four interdependent layers of engineering discipline that prevent the agent cemetery.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/landing.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+<div id="landing-root"></div>
+<script>
+window.PAGE_DATA = {
+  topicNumber: '02',
+  topicLabel: 'Context Platform Stack',
+  accent: 'yellow',
+  existingDeck: 'Context_Platform_Stack_Deck_v2_0_0_2026-04-27_multi.html',
+  existingPlaybook: 'playbook.html',
+  heroArt: `<svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four-layer stack">
+    <rect x="20" y="20" width="460" height="70" rx="8" fill="var(--c-red-50)" stroke="var(--c-red-500)" stroke-width="0.6"/>
+    <rect x="20" y="20" width="5" height="70" fill="var(--c-red-500)"/>
+    <text x="44" y="46" font-family="JetBrains Mono,monospace" font-size="10" font-weight="500" letter-spacing="0.14em" fill="var(--c-red-700)">LAYER 04 · INTENT</text>
+    <text x="44" y="68" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="var(--c-red-700)">What should the agent optimize for?</text>
+    <line x1="240" y1="98" x2="240" y2="118" stroke="var(--ink-3)" stroke-width="1.2"/>
+    <polygon points="236,120 244,120 240,126" fill="var(--ink-3)"/>
+    <rect x="20" y="132" width="460" height="70" rx="8" fill="var(--c-yellow-50)" stroke="var(--c-yellow-500)" stroke-width="0.6"/>
+    <rect x="20" y="132" width="5" height="70" fill="var(--c-yellow-500)"/>
+    <text x="44" y="158" font-family="JetBrains Mono,monospace" font-size="10" font-weight="500" letter-spacing="0.14em" fill="var(--c-yellow-700)">LAYER 03 · CONTEXT</text>
+    <text x="44" y="180" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="var(--c-yellow-700)">What can the agent know?</text>
+    <line x1="240" y1="210" x2="240" y2="230" stroke="var(--ink-3)" stroke-width="1.2"/>
+    <polygon points="236,232 244,232 240,238" fill="var(--ink-3)"/>
+    <rect x="20" y="244" width="460" height="70" rx="8" fill="var(--c-green-50)" stroke="var(--c-green-500)" stroke-width="0.6"/>
+    <rect x="20" y="244" width="5" height="70" fill="var(--c-green-500)"/>
+    <text x="44" y="270" font-family="JetBrains Mono,monospace" font-size="10" font-weight="500" letter-spacing="0.14em" fill="var(--c-green-700)">LAYER 02 · PLATFORM</text>
+    <text x="44" y="292" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="var(--c-green-700)">What can agents do, who governs?</text>
+    <rect x="20" y="324" width="460" height="40" rx="8" fill="var(--c-blue-50)" stroke="var(--c-blue-500)" stroke-width="0.5" stroke-dasharray="4 3"/>
+    <text x="44" y="349" font-family="JetBrains Mono,monospace" font-size="10" font-weight="500" letter-spacing="0.14em" fill="var(--c-blue-700)">LAYER 01 · CLOUD &amp; INFRASTRUCTURE</text>
+  </svg>`,
+  hero: {
+    eyebrow: { en:'02 · Context layer', 'pt-br':'02 · Camada de contexto', es:'02 · Capa de contexto' },
+    title: {
+      en: 'Four layers of engineering discipline to prevent the agent cemetery.',
+      'pt-br': 'Quatro camadas de disciplina de engenharia para prevenir o cemitério de agentes.',
+      es: 'Cuatro capas de disciplina de ingeniería para prevenir el cementerio de agentes.'
+    },
+    subtitle: {
+      en: 'Why pilots work in the lab and die in production. The smallest set of patterns that prevents it. Backed by 2026 evidence from Gartner, Deloitte, KPMG and the GitHub agent study.',
+      'pt-br': 'Por que pilotos funcionam no laboratório e morrem em produção. O menor conjunto de padrões que evita isso. Baseado em evidência 2026 de Gartner, Deloitte, KPMG e estudo de agentes do GitHub.',
+      es: 'Por qué los pilotos funcionan en el laboratorio y mueren en producción. El menor conjunto de patrones que lo evita. Basado en evidencia 2026 de Gartner, Deloitte, KPMG y estudio de agentes de GitHub.'
+    }
+  },
+  stats: [
+    { num:'75%', label:{ en:'Plan agentic AI within 2 years (Deloitte 2026, n=3,235)', 'pt-br':'Planejam IA agêntica em 2 anos (Deloitte 2026, n=3.235)', es:'Planean IA agéntica en 2 años (Deloitte 2026, n=3,235)' } },
+    { num:'34%', label:{ en:'Actually transforming the business (Deloitte)', 'pt-br':'De fato transformando o negócio (Deloitte)', es:'De hecho transformando el negocio (Deloitte)' } },
+    { num:'+18% / +39%', label:{ en:'Static-analysis warnings / cognitive complexity (CMU)', 'pt-br':'Warnings de análise / complexidade cognitiva (CMU)', es:'Warnings de análisis / complejidad cognitiva (CMU)' } },
+    { num:'304K', label:{ en:'AI commits across 6,275 repos analyzed (Liu et al. 2026)', 'pt-br':'Commits IA em 6.275 repos analisados (Liu et al. 2026)', es:'Commits IA en 6,275 repos analizados (Liu et al. 2026)' } }
+  ],
+  pillarsTitle: {
+    en: 'Four layers, one model.',
+    'pt-br': 'Quatro camadas, um modelo.',
+    es: 'Cuatro capas, un modelo.'
+  },
+  pillarsLead: {
+    en: 'Each layer answers a single question. Each constrains the layer below. Skip a layer and the agent cemetery grows.',
+    'pt-br': 'Cada camada responde a uma pergunta. Cada uma restringe a de baixo. Pule uma camada e o cemitério de agentes cresce.',
+    es: 'Cada capa responde a una pregunta. Cada una restringe a la de abajo. Salta una capa y el cementerio de agentes crece.'
+  },
+  pillars: [
+    { num:'LAYER 04', accent:'red',
+      title:{ en:'Intent engineering', 'pt-br':'Intent engineering', es:'Intent engineering' },
+      desc:{ en:'Constitutions, specifications, governance. The codified rules an agent must follow before doing anything else.',
+             'pt-br':'Constituições, especificações, governança. As regras codificadas que um agente deve seguir antes de qualquer coisa.',
+             es:'Constituciones, especificaciones, gobernanza. Las reglas codificadas que un agente debe seguir antes que nada.' } },
+    { num:'LAYER 03', accent:'yellow',
+      title:{ en:'Context engineering', 'pt-br':'Context engineering', es:'Context engineering' },
+      desc:{ en:'ACE, skills, memory tiers, MCP. What the agent can read at runtime, where it lives, how it expires.',
+             'pt-br':'ACE, skills, camadas de memória, MCP. O que o agente pode ler em runtime, onde mora, como expira.',
+             es:'ACE, skills, capas de memoria, MCP. Lo que el agente puede leer en runtime, dónde vive, cómo expira.' } },
+    { num:'LAYER 02', accent:'green',
+      title:{ en:'Platform engineering', 'pt-br':'Platform engineering', es:'Platform engineering' },
+      desc:{ en:'IDP, golden paths, guardrails, RBAC. The runtime that lets agents act safely without inventing infrastructure.',
+             'pt-br':'IDP, golden paths, guardrails, RBAC. O runtime que permite ao agente agir com segurança sem reinventar infra.',
+             es:'IDP, golden paths, guardrails, RBAC. El runtime que permite al agente actuar con seguridad sin reinventar infra.' } },
+    { num:'LAYER 01', accent:'blue',
+      title:{ en:'Cloud & infrastructure', 'pt-br':'Cloud & infraestrutura', es:'Cloud & infraestructura' },
+      desc:{ en:'GPUs, Kubernetes, CNCF services. Where do agents run, and at what cost.',
+             'pt-br':'GPUs, Kubernetes, serviços CNCF. Onde os agentes rodam, e a que custo.',
+             es:'GPUs, Kubernetes, servicios CNCF. Dónde corren los agentes, y a qué costo.' } }
+  ],
+  formats: [
+    { kicker:'LANDING · YOU ARE HERE', accent:'yellow',
+      title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
+      desc:{ en:'10-second hook. The agent cemetery problem, the four layers, the formats available.', 'pt-br':'Hook de 10 segundos. O problema do cemitério de agentes, as quatro camadas, os formatos.', es:'Hook de 10 segundos. El problema del cementerio de agentes, las cuatro capas, los formatos.' },
+      meta:{ en:'HTML · 5 min', 'pt-br':'HTML · 5 min', es:'HTML · 5 min' },
+      href:'#' },
+    { kicker:'DECK · v2.0.0', accent:'yellow',
+      title:{ en:'Context Platform Stack deck', 'pt-br':'Deck Context Platform Stack', es:'Deck Context Platform Stack' },
+      desc:{ en:'Slide-based presentation. Trilingual. Deep dive into each layer with field examples from LATAM customers.', 'pt-br':'Apresentação em slides. Trilíngue. Deep dive em cada camada com exemplos de campo da LATAM.', es:'Presentación en slides. Trilingüe. Deep dive en cada capa con ejemplos de campo de LATAM.' },
+      meta:{ en:'HTML · 90 min', 'pt-br':'HTML · 90 min', es:'HTML · 90 min' },
+      href:'Context_Platform_Stack_Deck_v2_0_0_2026-04-27_multi.html' },
+    { kicker:'PLAYBOOK · 7 CHAPTERS', accent:'yellow',
+      title:{ en:'The Context Platform Stack playbook', 'pt-br':'O playbook Context Platform Stack', es:'El playbook Context Platform Stack' },
+      desc:{ en:'Seven chapters: Introduction, Cloud Infra, Platform, Context, Intent, Integration, Harness. Fully annotated with research citations.', 'pt-br':'Sete capítulos: Introdução, Cloud Infra, Plataforma, Contexto, Intenção, Integração, Harness. Anotado com citações de pesquisa.', es:'Siete capítulos: Introducción, Cloud Infra, Plataforma, Contexto, Intención, Integración, Harness. Anotado con citas de investigación.' },
+      meta:{ en:'HTML · ~16K words · 90 min', 'pt-br':'HTML · ~16K palavras · 90 min', es:'HTML · ~16K palabras · 90 min' },
+      href:'playbook.html' }
+  ],
+  crosslinks: [
+    { accent:'green', kicker:'Layer 02',
+      title:{ en:'Agentic DevOps Platform', 'pt-br':'Plataforma Agentic DevOps', es:'Plataforma Agentic DevOps' },
+      hint:{ en:'The platform that implements layer 02 of this stack.', 'pt-br':'A plataforma que implementa a camada 02 deste stack.', es:'La plataforma que implementa la capa 02 de este stack.' },
+      href:'../agentic-devops-platform/landing.html' },
+    { accent:'red', kicker:'Layer 04 · deep dive',
+      title:{ en:'Semantic Context Layer', 'pt-br':'Semantic Context Layer', es:'Semantic Context Layer' },
+      hint:{ en:'The deep dive into deterministic semantic context for layer 04.', 'pt-br':'O deep dive em contexto semântico determinístico para a camada 04.', es:'El deep dive en contexto semántico determinístico para la capa 04.' },
+      href:'../semantic-context-layer/landing.html' },
+    { accent:'ink', kicker:'Cross-cutting',
+      title:{ en:'Token Management', 'pt-br':'Gestão de Tokens', es:'Gestión de Tokens' },
+      hint:{ en:'How layer 03 context decisions affect token cost across the stack.', 'pt-br':'Como decisões de contexto da camada 03 afetam custo de token em todo o stack.', es:'Cómo las decisiones de contexto de la capa 03 afectan el costo de token en todo el stack.' },
+      href:'../token-best-practices/landing.html' },
+    { accent:'blue', kicker:'Migration',
+      title:{ en:'Legacy Modernization', 'pt-br':'Modernização de Legado', es:'Modernización de Legado' },
+      hint:{ en:'How legacy code becomes context for agents on this stack.', 'pt-br':'Como código legado vira contexto para agentes neste stack.', es:'Cómo código legado se convierte en contexto para agentes en este stack.' },
+      href:'../legacy-modernization-framework/landing.html' }
+  ]
+};
+</script>
+<script src="../_shared/landing-template.js"></script>
+</body>
+</html>

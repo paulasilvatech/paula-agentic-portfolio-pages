@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="meta.title">Token Management & Agent Design</title>
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Token Management & Agent Design">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Token Management & Agent Design">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --c-red-50:#FFF0EB; --c-red-100:#FFD6C7; --c-red-500:#F25022; --c-red-700:#B33816;
+  --c-green-50:#F1F8E3; --c-green-100:#D8EDA5; --c-green-500:#7FBA00; --c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD; --c-blue-100:#B8E5FA; --c-blue-500:#00A4EF; --c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0; --c-yellow-100:#FFE79C; --c-yellow-500:#FFB900; --c-yellow-700:#B88500;
+  --ink:#1A1A1A; --ink-2:#3A3A3A; --ink-3:#737373;
+  --paper:#FFFFFF; --bg:#F7F7F5; --bg-alt:#ECECE8; --rule:#E5E5E0; --rule-2:#CECEC7;
+  --dark-bg:#141414; --dark-surface:#1C1C1A; --dark-ink:#F0F0F0; --dark-ink-2:#C7C7C2; --dark-ink-3:#A8A8A4; --dark-rule:#2E2E2A;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+  --ease:cubic-bezier(0.2,0,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased}
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .18s ease-out;pointer-events:none}
+.slide[data-active="true"]{visibility:visible;opacity:1;pointer-events:auto}
+.slide--light{background:var(--bg);color:var(--ink)}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink)}
+.slide--paper{background:var(--paper);color:var(--ink)}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes scaleInX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .slide[data-active="true"] .eyebrow{animation:fadeUp .5s var(--ease) 0ms both}
+  .slide[data-active="true"] .title{animation:fadeUp .6s var(--ease) 80ms both}
+  .slide[data-active="true"] .subtitle{animation:fadeUp .5s var(--ease) 180ms both}
+  .slide[data-active="true"] .meta-grid{animation:fadeUp .5s var(--ease) 260ms both}
+  .slide[data-active="true"] .body-large{animation:fadeUp .5s var(--ease) 220ms both}
+  .slide[data-active="true"] .big-number{animation:fadeUp .6s var(--ease) 150ms both}
+  .slide[data-active="true"] .section-number{animation:fadeIn .8s var(--ease) 50ms both}
+  .slide[data-active="true"] .section-title{animation:fadeUp .6s var(--ease) 250ms both}
+  .slide[data-active="true"] .stagger>*{opacity:0;animation:fadeUp .5s var(--ease) both}
+  .slide[data-active="true"] .stagger>*:nth-child(1){animation-delay:280ms}
+  .slide[data-active="true"] .stagger>*:nth-child(2){animation-delay:360ms}
+  .slide[data-active="true"] .stagger>*:nth-child(3){animation-delay:440ms}
+  .slide[data-active="true"] .stagger>*:nth-child(4){animation-delay:520ms}
+  .slide[data-active="true"] .stagger>*:nth-child(5){animation-delay:600ms}
+  .slide[data-active="true"] .stagger>*:nth-child(6){animation-delay:680ms}
+  .slide[data-active="true"] .stagger>*:nth-child(7){animation-delay:760ms}
+  .slide[data-active="true"] .stagger>*:nth-child(8){animation-delay:840ms}
+}
+.eyebrow{font-family:var(--font-mono);font-size:16px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--c-blue-500));margin-bottom:28px}
+.slide--dark .eyebrow{color:var(--accent,var(--c-yellow-500))}
+.title{font-size:clamp(40px,5vw,80px);font-weight:500;line-height:1.05;letter-spacing:-0.025em;max-width:1500px;margin-bottom:24px;text-wrap:balance}
+.title.title--medium{font-size:clamp(32px,3.6vw,54px);max-width:1400px}
+.title.title--small{font-size:clamp(26px,2.8vw,40px);max-width:1280px}
+.title .accent-red{color:var(--c-red-500)}
+.title .accent-green{color:var(--c-green-500)}
+.title .accent-blue{color:var(--c-blue-500)}
+.title .accent-yellow{color:var(--c-yellow-500)}
+.subtitle{font-size:clamp(17px,1.6vw,24px);line-height:1.4;color:var(--ink-2);max-width:1200px;font-weight:400;text-wrap:pretty}
+.slide--dark .subtitle{color:var(--dark-ink-2)}
+.body-large{font-size:clamp(18px,1.7vw,24px);line-height:1.5;color:var(--ink);max-width:1200px;margin-top:24px;text-wrap:pretty}
+.slide--dark .body-large{color:var(--dark-ink)}
+.caption{font-size:13px;color:var(--ink-3);font-style:italic;line-height:1.5;max-width:1100px;margin-top:20px;text-wrap:pretty}
+.section-title{font-size:clamp(52px,6vw,100px);font-weight:500;line-height:.98;letter-spacing:-0.035em;margin:24px 0 20px;max-width:1400px;text-wrap:balance}
+.section-number{font-family:var(--font-sans);font-size:clamp(180px,26vw,400px);font-weight:300;line-height:.85;letter-spacing:-0.05em;color:var(--accent,var(--c-red-500));opacity:.9}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-top:24px;border-top:1px solid var(--rule);margin-top:40px;max-width:1200px}
+.meta-item{display:flex;flex-direction:column;gap:6px}
+.meta-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.meta-value{font-size:15px;font-weight:500;line-height:1.35}
+.chapter-cover{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:end;max-width:1500px}
+.chapter-cover__num{font-family:var(--font-sans);font-size:clamp(160px,20vw,280px);font-weight:300;line-height:.85;letter-spacing:-0.045em;color:var(--chapter-color);opacity:.88}
+.chapter-cover__content{padding-bottom:40px}
+.chapter-cover__tag{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--chapter-color);margin-bottom:18px}
+.chapter-cover__title{font-size:clamp(40px,4.6vw,70px);font-weight:500;line-height:1.02;letter-spacing:-0.025em;margin-bottom:18px;text-wrap:balance}
+.chapter-cover__sub{font-size:clamp(17px,1.6vw,22px);line-height:1.45;color:var(--ink-2);max-width:900px;text-wrap:pretty}
+.big-number{font-family:var(--font-sans);font-size:clamp(130px,20vw,280px);font-weight:300;line-height:.85;letter-spacing:-0.05em;color:var(--accent,var(--c-red-500));margin:16px 0 32px}
+.big-number__unit{font-size:.4em;font-weight:400;color:var(--ink-2);margin-left:10px}
+.slide--dark .big-number__unit{color:var(--dark-ink-2)}
+.big-number__sub{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:block;margin-top:12px}
+.list-numbered{display:flex;flex-direction:column;gap:14px;margin-top:24px;max-width:1200px}
+.list-numbered__item{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--rule)}
+.slide--dark .list-numbered__item{border-bottom-color:var(--dark-rule)}
+.list-numbered__num{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--ink-3)}
+.slide--dark .list-numbered__num{color:var(--dark-ink-3)}
+.list-numbered__text{font-size:21px;font-weight:400;line-height:1.35}
+
+/* card grids */
+.card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;max-width:1500px}
+.card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;max-width:1500px}
+.card-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px;max-width:1500px}
+.ps-card{background:var(--paper);border:1px solid var(--rule);border-top:6px solid var(--card-color,var(--c-blue-500));border-radius:0 0 8px 8px;padding:22px 24px;display:flex;flex-direction:column;gap:10px}
+.slide--dark .ps-card{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink)}
+.ps-card__kicker{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--card-color,var(--c-blue-500))}
+.ps-card__title{font-size:18px;font-weight:500;line-height:1.2;text-wrap:balance}
+.ps-card__body{font-size:13px;line-height:1.55;color:var(--ink-2)}
+.slide--dark .ps-card__body{color:var(--dark-ink-2)}
+.ps-card__points{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.ps-card__points li{font-size:12.5px;line-height:1.5;color:var(--ink-2);padding-left:14px;position:relative}
+.slide--dark .ps-card__points li{color:var(--dark-ink-2)}
+.ps-card__points li::before{content:'·';position:absolute;left:0;top:-3px;font-size:18px;color:var(--card-color,var(--c-blue-500));font-weight:700}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--paper);margin-top:24px;max-width:1500px}
+.split__side{padding:30px 32px;position:relative}
+.split__side::before{content:'';position:absolute;top:0;left:0;right:0;height:6px}
+.split__side--left::before{background:var(--c-red-500)}
+.split__side--right::before{background:var(--c-green-500)}
+.split__side--left{border-right:1px solid var(--rule)}
+.split__eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:10px}
+.split__side--left .split__eyebrow{color:var(--c-red-700)}
+.split__side--right .split__eyebrow{color:var(--c-green-700)}
+.split__title{font-size:22px;font-weight:500;line-height:1.18;margin:0 0 14px;text-wrap:balance}
+.split__points{list-style:none;padding:0;display:flex;flex-direction:column;gap:9px}
+.split__points li{font-size:13.5px;line-height:1.5;color:var(--ink-2);padding-left:18px;position:relative}
+.split__points li::before{content:'·';position:absolute;left:0;top:-2px;font-size:18px;color:var(--ink-3);font-weight:700}
+
+/* stat trio */
+.stat-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;max-width:1500px}
+.stat-card{padding:24px 26px;border-left:4px solid var(--stat-color);border-radius:0 6px 6px 0;background:var(--stat-bg)}
+.stat-card__eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--stat-color-ink);margin-bottom:10px}
+.stat-card__value{font-size:clamp(38px,4vw,56px);font-weight:300;line-height:.9;letter-spacing:-0.03em;color:var(--stat-color-ink);margin-bottom:8px}
+.stat-card__desc{font-size:13px;color:var(--ink-2);line-height:1.5}
+
+/* code */
+.code-block{background:var(--dark-bg);color:var(--dark-ink);padding:22px 26px;border-radius:8px;font-family:var(--font-mono);font-size:13px;line-height:1.6;max-width:1300px;margin-top:18px;overflow-x:auto}
+.code-block__header{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dark-ink-3);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--dark-rule)}
+.code-block__header::before{content:'';width:10px;height:10px;background:var(--c-green-500);border-radius:50%}
+.code-kw{color:var(--c-blue-500)}.code-str{color:var(--c-green-500)}.code-com{color:var(--dark-ink-3);font-style:italic}.code-hl{color:var(--c-yellow-500)}.code-red{color:var(--c-red-500)}
+
+/* table */
+.ps-table{width:100%;max-width:1500px;border-collapse:collapse;margin-top:18px;font-size:13.5px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.ps-table th{text-align:left;padding:14px 18px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);background:var(--bg-alt);border-bottom:1px solid var(--rule)}
+.ps-table td{padding:14px 18px;border-bottom:1px solid var(--rule);color:var(--ink-2);line-height:1.45}
+.ps-table tr:last-child td{border-bottom:none}
+.ps-table td.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:500;color:var(--ink)}
+.ps-table td.tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-blue-700);font-weight:500}
+
+/* CHROME */
+.deck-progress{position:fixed;top:0;left:0;height:3px;background:var(--c-blue-500);transition:width .3s ease;z-index:200}
+.deck-brand{position:fixed;top:22px;left:22px;display:flex;align-items:center;gap:10px;z-index:100}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.lang-switcher{position:fixed;top:22px;right:22px;display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;font-family:var(--font-mono);z-index:100}
+.lang-switcher__btn{padding:5px 10px;background:transparent;border:none;border-radius:3px;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-blue-500);color:white}
+.deck-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:6px;z-index:100;font-family:var(--font-mono)}
+.deck-controls__btn{width:38px;height:38px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:16px;color:var(--ink);cursor:pointer}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper)}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--ink-2)}
+
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-2)}
+body[data-slide-theme="dark"] .lang-switcher{background:var(--dark-surface);border-color:var(--dark-rule)}
+body[data-slide-theme="dark"] .lang-switcher__btn{color:var(--dark-ink-3)}
+body[data-slide-theme="dark"] .lang-switcher__btn[aria-current="true"]{background:var(--c-blue-500);color:white}
+body[data-slide-theme="dark"] .deck-controls__btn{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink)}
+body[data-slide-theme="dark"] .deck-controls__btn:hover{background:var(--dark-ink);color:var(--dark-bg)}
+body[data-slide-theme="dark"] .deck-controls__counter{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink-2)}
+
+.lang-switcher__btn:focus-visible,.deck-controls__btn:focus-visible{outline:2px solid var(--c-blue-500);outline-offset:2px}
+.kbd-hint{position:fixed;bottom:74px;right:22px;z-index:99;padding:8px 14px;background:rgba(26,26,26,.92);color:var(--dark-ink);font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .4s ease}
+.kbd-hint[data-visible="true"]{opacity:1}
+.kbd-hint kbd{display:inline-block;padding:1px 6px;margin:0 2px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);border-radius:3px;font-family:inherit;font-size:10px}
+
+.overview{position:fixed;inset:0;background:var(--bg);z-index:500;display:none;overflow-y:auto;padding:80px 40px 40px}
+.overview[data-open="true"]{display:block}
+.overview__header{max-width:1600px;margin:0 auto 32px;display:flex;align-items:baseline;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.overview__title{font-size:28px;font-weight:500;letter-spacing:-0.018em}
+.overview__hint{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.overview__grid{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.overview-card{position:relative;aspect-ratio:16/9;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;cursor:pointer;overflow:hidden;text-align:left;font-family:inherit;transition:border-color .15s ease,transform .12s ease}
+.overview-card:hover{border-color:var(--c-blue-500);transform:translateY(-1px)}
+.overview-card[data-current="true"]{border-color:var(--c-blue-500);border-width:2px;padding:13px 15px}
+.overview-card--dark{background:var(--dark-bg)}
+.overview-card--dark .overview-card__title{color:var(--dark-ink)}
+.overview-card--dark .overview-card__eyebrow{color:var(--dark-ink-3)}
+.overview-card__num{position:absolute;top:10px;right:12px;font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.14em;color:var(--ink-3)}
+.overview-card__accent{position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent,var(--c-blue-500))}
+.overview-card__eyebrow{font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-top:10px;margin-bottom:8px;display:block}
+.overview-card__title{font-size:14px;font-weight:500;line-height:1.25;color:var(--ink);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+
+@media (max-width:1400px){.slide{padding:48px 64px}.meta-grid{gap:28px}}
+@media (max-width:1100px){.slide{padding:40px 48px}.title{font-size:clamp(32px,5vw,56px)}.meta-grid{grid-template-columns:repeat(2,1fr)}.card-grid-3,.card-grid-4{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}.stat-trio{grid-template-columns:1fr}}
+@media (max-width:860px){.slide{padding:32px 28px}.deck-brand__text{display:none}.card-grid-3,.card-grid-4{grid-template-columns:1fr}}
+body[data-overview-open="true"] .deck-brand,body[data-overview-open="true"] .deck-progress,body[data-overview-open="true"] .deck-controls,body[data-overview-open="true"] .kbd-hint{display:none}
+
+/* Back-to-Hub link affordance (added by Wave 4) */
+a.deck-brand{text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+</style>
+</head>
+<body>
+<div class="deck-progress" id="progress"></div>
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:22px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt · token management</span>
+</a>
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en"    onclick="setLocale('en')" aria-current="true">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+  <button class="lang-switcher__btn" data-locale="es"    onclick="setLocale('es')">ES</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- ============ SLIDE 1 · COVER ============ -->
+<section class="slide slide--light" data-active="true" style="--accent: var(--c-blue-500); justify-content: center; gap: 0;">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+    <div class="eyebrow" data-i18n="cover.eyebrow">Token management & agent design</div>
+    <h1 class="title">
+      <span data-i18n="cover.part1">Where the tokens go.</span><br>
+      <span class="accent-blue" data-i18n="cover.keyword1">Where the cost lives.</span>
+      <span data-i18n="cover.part2">And how to</span>
+      <span class="accent-yellow" data-i18n="cover.keyword2">redesign agents</span>
+      <span data-i18n="cover.part3">to spend less and ship more.</span>
+    </h1>
+    <p class="subtitle" data-i18n="cover.subtitle">A field guide for engineering leaders who run real agentic workloads in GitHub Copilot, Anthropic API, and Azure AI Foundry, with the June 2026 GitHub AI Credits change as the inflection point.</p>
+    <!-- Hero diagram: Token economy stack -->
+    <div style="margin-top:18px;">
+      <svg viewBox="0 0 1400 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1300px;height:auto;">
+        <defs>
+          <marker id="arrHero" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><polygon points="0,0 10,5 0,10" fill="#737373"/></marker>
+        </defs>
+        <!-- Layer 1 Models -->
+        <rect x="20" y="30" width="320" height="160" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+        <rect x="20" y="30" width="320" height="6" fill="#00A4EF"/>
+        <text x="40" y="62" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#0076AC">L1 · MODELS</text>
+        <text x="40" y="92" font-family="Inter" font-size="20" font-weight="500" fill="#1A1A1A">Multipliers</text>
+        <text x="40" y="120" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="40">Opus 4.7, Sonnet 4.6, Haiku 4.5,</tspan><tspan x="40" dy="16">GPT-5, Gemini 3.1, Grok Code.</tspan><tspan x="40" dy="16">5× cost spreads inside one task.</tspan></text>
+        <line x1="40" y1="170" x2="320" y2="170" stroke="#E5E5E0"/>
+        <text x="40" y="184" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#737373">CH 03</text>
+        <!-- arrow -->
+        <line x1="345" y1="110" x2="375" y2="110" stroke="#737373" stroke-width="1.5" marker-end="url(#arrHero)"/>
+        <!-- Layer 2 Context -->
+        <rect x="380" y="30" width="320" height="160" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+        <rect x="380" y="30" width="320" height="6" fill="#FFB900"/>
+        <text x="400" y="62" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#B88500">L2 · CONTEXT</text>
+        <text x="400" y="92" font-family="Inter" font-size="20" font-weight="500" fill="#1A1A1A">Engineering</text>
+        <text x="400" y="120" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="400">Compaction, prompt caching,</tspan><tspan x="400" dy="16">tool result clearing, less-is-more.</tspan><tspan x="400" dy="16">Up to 90% input savings.</tspan></text>
+        <line x1="400" y1="170" x2="680" y2="170" stroke="#E5E5E0"/>
+        <text x="400" y="184" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#737373">CH 04 · 05 · 07</text>
+        <line x1="705" y1="110" x2="735" y2="110" stroke="#737373" stroke-width="1.5" marker-end="url(#arrHero)"/>
+        <!-- Layer 3 Agents -->
+        <rect x="740" y="30" width="320" height="160" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+        <rect x="740" y="30" width="320" height="6" fill="#7FBA00"/>
+        <text x="760" y="62" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#5A8500">L3 · AGENTS</text>
+        <text x="760" y="92" font-family="Inter" font-size="20" font-weight="500" fill="#1A1A1A">Design</text>
+        <text x="760" y="120" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="760">Workflow vs. agent, 5 patterns,</tspan><tspan x="760" dy="16">MCP, hooks, custom agents.</tspan><tspan x="760" dy="16">Quadratic input is the trap.</tspan></text>
+        <line x1="760" y1="170" x2="1040" y2="170" stroke="#E5E5E0"/>
+        <text x="760" y="184" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#737373">CH 06 · 12 · 13</text>
+        <line x1="1065" y1="110" x2="1095" y2="110" stroke="#737373" stroke-width="1.5" marker-end="url(#arrHero)"/>
+        <!-- Layer 4 FinOps -->
+        <rect x="1100" y="30" width="280" height="160" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+        <rect x="1100" y="30" width="280" height="6" fill="#F25022"/>
+        <text x="1120" y="62" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#B33816">L4 · FINOPS</text>
+        <text x="1120" y="92" font-family="Inter" font-size="20" font-weight="500" fill="#1A1A1A">Governance</text>
+        <text x="1120" y="120" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="1120">Inform, optimize, operate.</tspan><tspan x="1120" dy="16">Cost-per-feature, budgets,</tspan><tspan x="1120" dy="16">Foundry as the control plane.</tspan></text>
+        <line x1="1120" y1="170" x2="1360" y2="170" stroke="#E5E5E0"/>
+        <text x="1120" y="184" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#737373">CH 10 · 11</text>
+      </svg>
+    </div>
+  </div>
+  <div class="meta-grid" style="flex-shrink:0;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-06</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · AGENDA ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="agenda.eyebrow">Agenda</div>
+  <h2 class="title" data-i18n="agenda.title">What we cover, in five parts.</h2>
+  <div class="list-numbered stagger">
+    <div class="list-numbered__item"><span class="list-numbered__num">PART I</span><span class="list-numbered__text" data-i18n="agenda.item1">Foundations · what a token is, where it goes, which model multiplier you pay.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">PART II</span><span class="list-numbered__text" data-i18n="agenda.item2">Technical disciplines · context engineering, prompt caching, agent design, less-is-more.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">PART III</span><span class="list-numbered__text" data-i18n="agenda.item3">The June 2026 change · GitHub AI Credits, the 16-week migration, decisions per persona.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">PART IV</span><span class="list-numbered__text" data-i18n="agenda.item4">Governance and operations · FinOps for AI, Azure AI Foundry as the control plane.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">PART V</span><span class="list-numbered__text" data-i18n="agenda.item5">Practical application · five optimization patterns, ten anti-patterns, three decision frameworks.</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 · WHO ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="who.eyebrow">Who is speaking</div>
+  <h2 class="title" data-i18n="who.title" style="max-width:1100px;">Paula Silva, <span class="accent-blue">Software Global Black Belt</span>.</h2>
+  <p class="subtitle" style="margin-top:-8px;margin-bottom:20px;font-style:italic;" data-i18n="who.tagline">Building the future of software development with AI and Agentic DevOps.</p>
+  <p class="body-large" data-i18n="who.body" style="max-width:1100px;">I work with enterprise customers running real agentic workloads on GitHub Copilot, the Anthropic API, and Azure AI Foundry. This deck collects what I see across dozens of accounts: where tokens actually go, where the cost actually lives, and which design choices separate teams that ship agents in production from teams that pay for impressive demos.</p>
+</section>
+
+<!-- ============ SLIDE 4 · THE FACT (provocation) ============ -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="prov.eyebrow">The fact</div>
+  <h2 class="title title--medium" data-i18n="prov.title">On June 1, 2026, GitHub Copilot retires PRUs and switches every paid SKU to AI Credits, a per-million-token meter where the model you pick decides the bill.</h2>
+  <p class="subtitle" style="color:var(--dark-ink-2);margin-top:18px;" data-i18n="prov.sub">If your team still treats "Copilot" as one undifferentiated commodity, your spend is about to triple silently. This deck is the playbook to keep it from happening.</p>
+</section>
+
+<!-- ============ SLIDE 5 · PART I COVER ============ -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part1.eyebrow">Part I</div>
+  <div class="section-number">I</div>
+  <h1 class="section-title" data-i18n="part1.title">Foundations.</h1>
+  <p class="subtitle" style="color:var(--dark-ink-2);" data-i18n="part1.subtitle">What a token is, where it goes, which model multiplier you pay. Three chapters.</p>
+</section>
+
+<!-- ============ SLIDE 6 · CH 01 INTRO ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-blue-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">01</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="ch01.tag">Chapter 01 · Foundations</div>
+      <h2 class="chapter-cover__title" data-i18n="ch01.title">Token fundamentals.</h2>
+      <p class="chapter-cover__sub" data-i18n="ch01.sub">The model never sees your text. It operates on integers indexed into a vocabulary of 32K to 200K entries. Without this foundation every cost estimate is a guess.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 · CH 01 EQUIVALENCES ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="ch01eq.eyebrow">Practical equivalences</div>
+  <h2 class="title title--medium" data-i18n="ch01eq.title">A token is not a word. It is a sub-word unit discovered by BPE on a training corpus.</h2>
+  <table class="ps-table">
+    <thead><tr>
+      <th data-i18n="ch01eq.col1">Content type</th>
+      <th data-i18n="ch01eq.col2">Words per token</th>
+      <th data-i18n="ch01eq.col3">Why</th>
+    </tr></thead>
+    <tbody>
+      <tr><td data-i18n="ch01eq.r1c1">English prose</td><td class="num">~0.75</td><td data-i18n="ch01eq.r1c3">Common words map to single tokens; the densest case</td></tr>
+      <tr><td data-i18n="ch01eq.r2c1">Brazilian Portuguese</td><td class="num">~0.60</td><td data-i18n="ch01eq.r2c3">Accents and cedillas split into multiple sub-words</td></tr>
+      <tr><td data-i18n="ch01eq.r3c1">Spanish</td><td class="num">~0.65</td><td data-i18n="ch01eq.r3c3">Slightly denser than Portuguese</td></tr>
+      <tr><td data-i18n="ch01eq.r4c1">Python source</td><td class="num">~0.40</td><td data-i18n="ch01eq.r4c3">Symbols, indentation, identifiers are token-heavy</td></tr>
+      <tr><td data-i18n="ch01eq.r5c1">TypeScript / JSX</td><td class="num">~0.35</td><td data-i18n="ch01eq.r5c3">Generics and JSX symbols inflate further</td></tr>
+      <tr><td data-i18n="ch01eq.r6c1">Structured JSON</td><td class="num">~0.30</td><td data-i18n="ch01eq.r6c3">Quotes, braces, separators dominate</td></tr>
+    </tbody>
+  </table>
+  <p class="caption" data-i18n="ch01eq.caption">Rule of thumb: a 1,000-line Python file ≈ 12,000 tokens. A 2,000-word PT-BR markdown ≈ 3,300 tokens. A 500-word EN response ≈ 670 tokens.</p>
+</section>
+
+<!-- ============ SLIDE 8 · CH 02 INTRO ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-yellow-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">02</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="ch02.tag">Chapter 02 · Foundations</div>
+      <h2 class="chapter-cover__title" data-i18n="ch02.title">Anatomy of consumption.</h2>
+      <p class="chapter-cover__sub" data-i18n="ch02.sub">Tokens are not consumed uniformly. Three phases (input, output, cache), each with a different cost, hardware, and latency profile. Optimize each with different techniques.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 · CH 02 CONSUMPTION DONUT ============ -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="ch02b.eyebrow">Where the tokens go · empirical distribution</div>
+  <h2 class="title title--medium" data-i18n="ch02b.title">In real agentic SDLC workloads, input dominates and output is a rounding error.</h2>
+  <svg viewBox="0 0 1400 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <!-- Stacked horizontal bar -->
+    <text x="40" y="40" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#737373">TOKENS PER SESSION · TYPICAL DISTRIBUTION</text>
+    <!-- Bar -->
+    <rect x="40" y="60" width="780" height="34" fill="#00A4EF"/>
+    <rect x="820" y="60" width="180" height="34" fill="#FFB900"/>
+    <rect x="1000" y="60" width="270" height="34" fill="#7FBA00"/>
+    <rect x="1270" y="60" width="60" height="34" fill="#F25022"/>
+    <text x="42" y="115" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#0076AC">INPUT · 60%</text>
+    <text x="822" y="115" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B88500">OUTPUT · 14%</text>
+    <text x="1002" y="115" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500">CACHE READ · 21%</text>
+    <text x="1272" y="115" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B33816">WRITE · 5%</text>
+    <!-- Cards underneath -->
+    <rect x="40" y="160" width="320" height="190" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="40" y="160" width="320" height="6" fill="#00A4EF"/>
+    <text x="60" y="192" font-family="JetBrains Mono" font-size="10" letter-spacing="1.6" fill="#0076AC">INPUT · PARALLEL ATTENTION</text>
+    <text x="60" y="218" font-family="Inter" font-size="17" font-weight="500" fill="#1A1A1A">Cheap per token, expensive in volume</text>
+    <text x="60" y="248" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="60">Sonnet 4.6 · $3 / M input</tspan><tspan x="60" dy="18">Bottleneck is GPU memory.</tspan><tspan x="60" dy="18">Grows quadratically in agent loops.</tspan></text>
+    <line x1="60" y1="320" x2="340" y2="320" stroke="#E5E5E0"/>
+    <text x="60" y="338" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: caching, compaction, lean tools.</text>
+
+    <rect x="380" y="160" width="320" height="190" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="380" y="160" width="320" height="6" fill="#FFB900"/>
+    <text x="400" y="192" font-family="JetBrains Mono" font-size="10" letter-spacing="1.6" fill="#B88500">OUTPUT · AUTOREGRESSIVE</text>
+    <text x="400" y="218" font-family="Inter" font-size="17" font-weight="500" fill="#1A1A1A">5× input price, but small share</text>
+    <text x="400" y="248" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="400">Sonnet 4.6 · $15 / M output</tspan><tspan x="400" dy="18">Strictly sequential. No parallelism.</tspan><tspan x="400" dy="18">Cap with concise prompts and JSON.</tspan></text>
+    <line x1="400" y1="320" x2="680" y2="320" stroke="#E5E5E0"/>
+    <text x="400" y="338" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: dense formats, stop criteria.</text>
+
+    <rect x="720" y="160" width="320" height="190" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="720" y="160" width="320" height="6" fill="#7FBA00"/>
+    <text x="740" y="192" font-family="JetBrains Mono" font-size="10" letter-spacing="1.6" fill="#5A8500">CACHE READ · KV REUSE</text>
+    <text x="740" y="218" font-family="Inter" font-size="17" font-weight="500" fill="#1A1A1A">10% of input · the 90% lever</text>
+    <text x="740" y="248" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="740">Sonnet 4.6 · $0.30 / M read</tspan><tspan x="740" dy="18">Triggers when prefix hash matches.</tspan><tspan x="740" dy="18">Architecture decision, not a flag.</tspan></text>
+    <line x1="740" y1="320" x2="1020" y2="320" stroke="#E5E5E0"/>
+    <text x="740" y="338" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: stable prefix + dynamic suffix.</text>
+
+    <rect x="1060" y="160" width="320" height="190" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="1060" y="160" width="320" height="6" fill="#F25022"/>
+    <text x="1080" y="192" font-family="JetBrains Mono" font-size="10" letter-spacing="1.6" fill="#B33816">CACHE WRITE · TTL COST</text>
+    <text x="1080" y="218" font-family="Inter" font-size="17" font-weight="500" fill="#1A1A1A">Pay once, save on every reuse</text>
+    <text x="1080" y="248" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="1080">$3.75 / M (5 min) · $6 / M (1 h)</tspan><tspan x="1080" dy="18">Worth it above ~3 reads per write.</tspan><tspan x="1080" dy="18">Wrong TTL = silent waste.</tspan></text>
+    <line x1="1080" y1="320" x2="1360" y2="320" stroke="#E5E5E0"/>
+    <text x="1080" y="338" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: pick TTL by session shape.</text>
+  </svg>
+</section>
+
+<!-- ============ SLIDE 10 · AGENTIC MULTIPLIER ============ -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="ch02c.eyebrow">The agentic multiplier</div>
+  <h2 class="title title--medium" data-i18n="ch02c.title">A 10-turn agent loop does not cost 10× a single call. It costs <span class="accent-red">~55×</span>, input grows quadratically.</h2>
+  <div class="stat-trio stagger">
+    <div class="stat-card" style="--stat-color:var(--c-blue-500); --stat-color-ink:var(--c-blue-700); --stat-bg:var(--c-blue-50);">
+      <div class="stat-card__eyebrow" data-i18n="ch02c.s1e">Turn 1</div>
+      <div class="stat-card__value">1×</div>
+      <div class="stat-card__desc" data-i18n="ch02c.s1d">Baseline input. System + tools + first user message.</div>
+    </div>
+    <div class="stat-card" style="--stat-color:var(--c-yellow-500); --stat-color-ink:var(--c-yellow-700); --stat-bg:var(--c-yellow-50);">
+      <div class="stat-card__eyebrow" data-i18n="ch02c.s2e">Turn 5</div>
+      <div class="stat-card__value">15×</div>
+      <div class="stat-card__desc" data-i18n="ch02c.s2d">Conversation history + tool results accumulated four times over.</div>
+    </div>
+    <div class="stat-card" style="--stat-color:var(--c-red-500); --stat-color-ink:var(--c-red-700); --stat-bg:var(--c-red-50);">
+      <div class="stat-card__eyebrow" data-i18n="ch02c.s3e">Turn 10</div>
+      <div class="stat-card__value">55×</div>
+      <div class="stat-card__desc" data-i18n="ch02c.s3d">Without compaction or caching, the loop re-sends everything every turn.</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="ch02c.caption">This is why "agent for everything" decks always blow their budget. Caching and compaction collapse this curve back toward linear.</p>
+</section>
+
+<!-- ============ SLIDE 11 · CH 03 INTRO ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-green-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">03</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="ch03.tag">Chapter 03 · Foundations</div>
+      <h2 class="chapter-cover__title" data-i18n="ch03.title">Models and multipliers.</h2>
+      <p class="chapter-cover__sub" data-i18n="ch03.sub">Model is the first-order cost lever. Sonnet vs. Opus on the same task can be 5× without 5× more quality. Bundled vs. premium can be an order of magnitude.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 · MODEL MULTIPLIERS DIAGRAM ============ -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="ch03b.eyebrow">Anthropic family · cost spread on identical workloads</div>
+  <h2 class="title title--medium" data-i18n="ch03b.title">Picking Sonnet over Opus by default is the single biggest lever most teams never pull.</h2>
+  <svg viewBox="0 0 1400 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <text x="40" y="40" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#737373">USD PER MILLION TOKENS · INPUT / OUTPUT · POST-JUNE 2026 LIST</text>
+    <!-- Opus -->
+    <rect x="40" y="70" width="420" height="260" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="40" y="70" width="420" height="6" fill="#F25022"/>
+    <text x="60" y="102" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#B33816">OPUS 4.7 · PREMIUM</text>
+    <text x="60" y="138" font-family="Inter" font-size="42" font-weight="300" fill="#1A1A1A">$15<tspan font-size="20" fill="#737373"> / M in</tspan></text>
+    <text x="60" y="180" font-family="Inter" font-size="42" font-weight="300" fill="#1A1A1A">$75<tspan font-size="20" fill="#737373"> / M out</tspan></text>
+    <line x1="60" y1="210" x2="440" y2="210" stroke="#E5E5E0"/>
+    <text x="60" y="240" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="60">Architecture, distributed debugging,</tspan><tspan x="60" dy="18">complex tradeoff analysis.</tspan></text>
+    <text x="60" y="298" font-family="Inter" font-size="11" font-style="italic" fill="#737373"><tspan x="60">Use only when reasoning depth justifies</tspan><tspan x="60" dy="14">5× the bill of Sonnet.</tspan></text>
+    <!-- Sonnet -->
+    <rect x="490" y="70" width="420" height="260" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="490" y="70" width="420" height="6" fill="#7FBA00"/>
+    <text x="510" y="102" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#5A8500">SONNET 4.6 · WORKHORSE</text>
+    <text x="510" y="138" font-family="Inter" font-size="42" font-weight="300" fill="#1A1A1A">$3<tspan font-size="20" fill="#737373"> / M in</tspan></text>
+    <text x="510" y="180" font-family="Inter" font-size="42" font-weight="300" fill="#1A1A1A">$15<tspan font-size="20" fill="#737373"> / M out</tspan></text>
+    <line x1="510" y1="210" x2="890" y2="210" stroke="#E5E5E0"/>
+    <text x="510" y="240" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="510">Daily code use, deep review,</tspan><tspan x="510" dy="18">multi-file refactors, debugging.</tspan></text>
+    <text x="510" y="298" font-family="Inter" font-size="11" font-style="italic" fill="#737373"><tspan x="510">The default for 80% of agentic tasks.</tspan><tspan x="510" dy="14">Same quality envelope, 1/5 the cost.</tspan></text>
+    <!-- Haiku -->
+    <rect x="940" y="70" width="420" height="260" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="940" y="70" width="420" height="6" fill="#00A4EF"/>
+    <text x="960" y="102" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#0076AC">HAIKU 4.5 · BATCH</text>
+    <text x="960" y="138" font-family="Inter" font-size="42" font-weight="300" fill="#1A1A1A">$1<tspan font-size="20" fill="#737373"> / M in</tspan></text>
+    <text x="960" y="180" font-family="Inter" font-size="42" font-weight="300" fill="#1A1A1A">$5<tspan font-size="20" fill="#737373"> / M out</tspan></text>
+    <line x1="960" y1="210" x2="1340" y2="210" stroke="#E5E5E0"/>
+    <text x="960" y="240" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="960">Classification, extraction,</tspan><tspan x="960" dy="18">low-complexity batch completions.</tspan></text>
+    <text x="960" y="298" font-family="Inter" font-size="11" font-style="italic" fill="#737373"><tspan x="960">Fan-out workhorse. 15× cheaper than Opus,</tspan><tspan x="960" dy="14">good enough for fixed-shape tasks.</tspan></text>
+  </svg>
+</section>
+
+<!-- ============ SLIDE 13 · DECISION HEURISTIC ============ -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="ch03c.eyebrow">Five-level heuristic</div>
+  <h2 class="title title--medium" data-i18n="ch03c.title">Default Sonnet. Step up to Opus only on demonstrable hard reasoning. Step down to Haiku when shape is fixed.</h2>
+  <div class="card-grid-3 stagger">
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker" data-i18n="ch03c.l1k">Level 1 · Trivial</span><h3 class="ps-card__title" data-i18n="ch03c.l1t">Bundled or Haiku</h3><p class="ps-card__body" data-i18n="ch03c.l1b">Code completions, format fixes, doc lookups. No reasoning needed.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker" data-i18n="ch03c.l2k">Level 2 · Routine</span><h3 class="ps-card__title" data-i18n="ch03c.l2t">Bundled (GPT-4.1, GPT-5 mini)</h3><p class="ps-card__body" data-i18n="ch03c.l2b">Edit mode, single-file refactors, test stubs. Latency matters more than depth.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker" data-i18n="ch03c.l3k">Level 3 · Default</span><h3 class="ps-card__title" data-i18n="ch03c.l3t">Sonnet 4.6</h3><p class="ps-card__body" data-i18n="ch03c.l3b">Deep code review, agent mode, multi-file work. The 80% case.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-yellow-500);"><span class="ps-card__kicker" data-i18n="ch03c.l4k">Level 4 · Hard</span><h3 class="ps-card__title" data-i18n="ch03c.l4t">Opus 4.7 · scoped</h3><p class="ps-card__body" data-i18n="ch03c.l4b">Architecture, distributed debugging, security review. Plan-only, then hand off.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-yellow-500);"><span class="ps-card__kicker" data-i18n="ch03c.l5k">Level 5 · Long context</span><h3 class="ps-card__title" data-i18n="ch03c.l5t">Gemini 3.1 Pro</h3><p class="ps-card__body" data-i18n="ch03c.l5b">Whole-codebase analysis, log forensics, &gt;200K context with no surcharge.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);"><span class="ps-card__kicker" data-i18n="ch03c.l6k">Anti-pattern</span><h3 class="ps-card__title" data-i18n="ch03c.l6t">Opus as default</h3><p class="ps-card__body" data-i18n="ch03c.l6b">Most expensive failure mode. 5× the bill, &lt;1.1× the quality on routine tasks.</p></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14 · PART II COVER ============ -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="part2.eyebrow">Part II</div>
+  <div class="section-number">II</div>
+  <h1 class="section-title" data-i18n="part2.title">Technical disciplines.</h1>
+  <p class="subtitle" style="color:var(--dark-ink-2);" data-i18n="part2.subtitle">Context engineering. Prompt caching. Agent design. Token-efficient strategies. Four chapters.</p>
+</section>
+
+<!-- ============ SLIDE 15 · CH 04 CONTEXT ROT ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-yellow-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">04</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="ch04.tag">Chapter 04 · Context engineering</div>
+      <h2 class="chapter-cover__title" data-i18n="ch04.title">Context rot. The marginal-utility curve.</h2>
+      <p class="chapter-cover__sub" data-i18n="ch04.sub">More context is not better. After a threshold, every extra token adds cost without adding signal, and starts subtracting quality. The golden rule: minimum signal-rich context, never maximum context.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 16 · CONTEXT ROT TABLE ============ -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="ch04b.eyebrow">Context rot · measured</div>
+  <h2 class="title title--medium" data-i18n="ch04b.title">Cost climbs linearly with noise. Quality holds, until it cliffs.</h2>
+  <table class="ps-table">
+    <thead><tr>
+      <th data-i18n="ch04b.col1">Noise level</th>
+      <th data-i18n="ch04b.col2">Quality score</th>
+      <th data-i18n="ch04b.col3">Cost / session</th>
+      <th data-i18n="ch04b.col4">Verdict</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="num">0</td><td class="num">0.95</td><td class="num">$0.10</td><td data-i18n="ch04b.r1">Optimal</td></tr>
+      <tr><td class="num">1×</td><td class="num">0.94</td><td class="num">$0.20</td><td data-i18n="ch04b.r2" style="color:#B88500;">Cost doubles, quality flat, already losing money</td></tr>
+      <tr><td class="num">5×</td><td class="num">0.88</td><td class="num">$0.60</td><td data-i18n="ch04b.r3" style="color:#B88500;">Quality starts dropping</td></tr>
+      <tr><td class="num">10×</td><td class="num">0.79</td><td class="num">$1.10</td><td data-i18n="ch04b.r4" style="color:#B33816;">Visible degradation</td></tr>
+      <tr><td class="num">50×</td><td class="num">0.62</td><td class="num">$5.10</td><td data-i18n="ch04b.r5" style="color:#B33816;">Severe rot · agent forgets the goal</td></tr>
+    </tbody>
+  </table>
+  <p class="caption" data-i18n="ch04b.caption">Levers: compaction (structured compression), tool-result clearing, retrieval-on-demand. Chapter 4 of the playbook covers each.</p>
+</section>
+
+<!-- ============ SLIDE 17 · CH 05 PROMPT CACHING INTRO ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-green-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">05</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="ch05.tag">Chapter 05 · Technical disciplines</div>
+      <h2 class="chapter-cover__title" data-i18n="ch05.title">Prompt caching. The 90% lever.</h2>
+      <p class="chapter-cover__sub" data-i18n="ch05.sub">In conversational workloads, prefix caching cuts input cost by up to 90% without changing one line of prompt. But it requires architectural discipline: stable prefix, dynamic suffix, cache_control on the right blocks.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 18 · CACHE COLD/WARM DIAGRAM ============ -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="ch05b.eyebrow">Cold · warm · the prefix-hash mechanic</div>
+  <h2 class="title title--medium" data-i18n="ch05b.title">A single byte change in the prefix invalidates the whole cache. Stable first, dynamic last.</h2>
+  <svg viewBox="0 0 1400 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <defs>
+      <marker id="arrCache" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><polygon points="0,0 10,5 0,10" fill="#737373"/></marker>
+    </defs>
+    <!-- Cold path -->
+    <text x="40" y="40" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#B33816">SESSION 1 · COLD · CACHE MISS</text>
+    <rect x="40" y="60" width="220" height="60" rx="4" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="50" y="84" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">System prompt v1</text>
+    <text x="50" y="104" font-family="JetBrains Mono" font-size="11" fill="#B33816">5K tok · cache_control</text>
+    <rect x="270" y="60" width="180" height="60" rx="4" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="280" y="84" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">Tools definition</text>
+    <text x="280" y="104" font-family="JetBrains Mono" font-size="11" fill="#B33816">2K · cache_control</text>
+    <rect x="460" y="60" width="220" height="60" rx="4" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="470" y="84" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">Static documents</text>
+    <text x="470" y="104" font-family="JetBrains Mono" font-size="11" fill="#B33816">20K · cache_control</text>
+    <rect x="690" y="60" width="160" height="60" rx="4" fill="#FFFFFF" stroke="#737373" stroke-dasharray="4 3"/>
+    <text x="700" y="84" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">User Q1 (fresh)</text>
+    <text x="700" y="104" font-family="JetBrains Mono" font-size="11" fill="#737373">300 tok · live</text>
+    <text x="40" y="150" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="40">Pays full input on the prefix (1×) plus a write surcharge (+0.25×).</tspan><tspan x="40" dy="18">Total ≈ 27K × 1.25 = 33.75K equivalent input tokens.</tspan></text>
+
+    <!-- Warm path -->
+    <text x="40" y="220" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#5A8500">SESSION 2 · WARM · CACHE HIT</text>
+    <rect x="40" y="240" width="220" height="60" rx="4" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="50" y="264" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">System prompt v1</text>
+    <text x="50" y="284" font-family="JetBrains Mono" font-size="11" fill="#5A8500">cache HIT · 0.1×</text>
+    <rect x="270" y="240" width="180" height="60" rx="4" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="280" y="264" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">Tools definition</text>
+    <text x="280" y="284" font-family="JetBrains Mono" font-size="11" fill="#5A8500">cache HIT · 0.1×</text>
+    <rect x="460" y="240" width="220" height="60" rx="4" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="470" y="264" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">Static documents</text>
+    <text x="470" y="284" font-family="JetBrains Mono" font-size="11" fill="#5A8500">cache HIT · 0.1×</text>
+    <rect x="690" y="240" width="160" height="60" rx="4" fill="#FFFFFF" stroke="#737373" stroke-dasharray="4 3"/>
+    <text x="700" y="264" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A">User Q2 (fresh)</text>
+    <text x="700" y="284" font-family="JetBrains Mono" font-size="11" fill="#737373">320 tok · live</text>
+    <text x="40" y="330" font-family="Inter" font-size="13" fill="#5A8500"><tspan x="40">Prefix paid at 0.1× of input. Total ≈ 27K × 0.1 + 320 = ~3K equivalent tokens.</tspan><tspan x="40" dy="18" fill="#1A1A1A" font-weight="500">Saving on session 2: ~89% of input cost. From session 3 onward, ~90%.</tspan></text>
+
+    <!-- Right summary -->
+    <rect x="900" y="60" width="460" height="240" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <text x="920" y="92" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#737373">RULE OF THUMB</text>
+    <text x="920" y="124" font-family="Inter" font-size="20" font-weight="500" fill="#1A1A1A">Cache pays off above</text>
+    <text x="920" y="152" font-family="Inter" font-size="20" font-weight="500" fill="#1A1A1A">~3 reads per write.</text>
+    <line x1="920" y1="172" x2="1340" y2="172" stroke="#E5E5E0"/>
+    <text x="920" y="200" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="920">5-min TTL · per-session, low cost.</tspan><tspan x="920" dy="18">1-h TTL · multi-session, higher write.</tspan><tspan x="920" dy="18">Below threshold = silent waste.</tspan></text>
+    <text x="920" y="280" font-family="Inter" font-size="11" font-style="italic" fill="#737373"><tspan x="920">Anti-pattern: timestamps inside the cached prefix.</tspan><tspan x="920" dy="14">Each request hashes differently, cache never warms.</tspan></text>
+  </svg>
+</section>
+
+<!-- ============ SLIDE 19 · CH 06 AGENT DESIGN INTRO ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-blue-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">06</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="ch06.tag">Chapter 06 · Technical disciplines</div>
+      <h2 class="chapter-cover__title" data-i18n="ch06.title">Agent design.</h2>
+      <p class="chapter-cover__sub" data-i18n="ch06.sub">There is a hype bias: agents for everything. Workflows solve 70% of enterprise cases at a fraction of the cost. This chapter teaches you to distinguish, choose, and implement agents only when they earn the spend.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 20 · WORKFLOW vs AGENT ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="ch06b.eyebrow">The distinction that matters</div>
+  <h2 class="title title--medium" data-i18n="ch06b.title">Workflow vs. agent. The choice changes cost, latency, and operational risk.</h2>
+  <div class="split">
+    <div class="split__side split__side--left">
+      <span class="split__eyebrow" data-i18n="ch06b.lk">Workflow · deterministic</span>
+      <h3 class="split__title" data-i18n="ch06b.lt">LLMs and tools orchestrated by code paths.</h3>
+      <ul class="split__points">
+        <li data-i18n="ch06b.lp1">Known, stable sequence. The LLM does parts; the code decides the order.</li>
+        <li data-i18n="ch06b.lp2">Cost is predictable. Same N calls per execution, regardless of input.</li>
+        <li data-i18n="ch06b.lp3">Easy to instrument, debug, audit step by step.</li>
+        <li data-i18n="ch06b.lp4">Low and stable latency. Fits 70% of enterprise cases.</li>
+      </ul>
+    </div>
+    <div class="split__side split__side--right">
+      <span class="split__eyebrow" data-i18n="ch06b.rk">Agent · dynamic</span>
+      <h3 class="split__title" data-i18n="ch06b.rt">LLM decides which tools, in which order, based on intermediate results.</h3>
+      <ul class="split__points">
+        <li data-i18n="ch06b.rp1">Sequence varies per input. Cost is a distribution, not a number.</li>
+        <li data-i18n="ch06b.rp2">Pays for the open exploration. Quadratic input growth without compaction.</li>
+        <li data-i18n="ch06b.rp3">Worth it when the problem is genuinely open-ended and tools are first-class.</li>
+        <li data-i18n="ch06b.rp4">Demands stop criteria, budgets, telemetry. Otherwise it loops forever.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption" data-i18n="ch06b.caption">The decision heuristic: if you can sketch the steps on paper, use a workflow. If you genuinely cannot, an agent earns its keep.</p>
+</section>
+
+<!-- ============ SLIDE 21 · 5-LAYER AGENT ARCHITECTURE ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="ch06c.eyebrow">Reference architecture · 5 layers</div>
+  <h2 class="title title--medium" data-i18n="ch06c.title">The augmented LLM, the orchestration plane, and four token-cost levers, one per layer.</h2>
+  <svg viewBox="0 0 1400 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <!-- Layer 5 Intent -->
+    <rect x="40" y="30" width="1320" height="56" rx="4" fill="#FFFFFF" stroke="#E5E5E0" stroke-width="1"/>
+    <rect x="40" y="30" width="6" height="56" fill="#F25022"/>
+    <text x="70" y="56" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#B33816">L5 · INTENT</text>
+    <text x="280" y="56" font-family="Inter" font-size="16" font-weight="500" fill="#1A1A1A">User goal · evaluator-optimizer</text>
+    <text x="780" y="56" font-family="Inter" font-size="13" fill="#3A3A3A">Stop criteria, budgets, success checks</text>
+    <text x="1230" y="56" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B33816" text-anchor="end">CH 13</text>
+    <text x="70" y="74" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: stop early on partial success.</text>
+    <!-- Layer 4 Orchestration -->
+    <rect x="40" y="96" width="1320" height="56" rx="4" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="40" y="96" width="6" height="56" fill="#FFB900"/>
+    <text x="70" y="122" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#B88500">L4 · ORCHESTRATION</text>
+    <text x="280" y="122" font-family="Inter" font-size="16" font-weight="500" fill="#1A1A1A">Patterns · routing, parallel, orchestrator-workers</text>
+    <text x="780" y="122" font-family="Inter" font-size="13" fill="#3A3A3A">Plan · Execute split, model routing</text>
+    <text x="1230" y="122" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B88500" text-anchor="end">CH 06 · 12</text>
+    <text x="70" y="140" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: cheap models for 80% of subcalls.</text>
+    <!-- Layer 3 Context -->
+    <rect x="40" y="162" width="1320" height="56" rx="4" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="40" y="162" width="6" height="56" fill="#7FBA00"/>
+    <text x="70" y="188" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#5A8500">L3 · CONTEXT</text>
+    <text x="280" y="188" font-family="Inter" font-size="16" font-weight="500" fill="#1A1A1A">Memory · compaction · tool result clearing</text>
+    <text x="780" y="188" font-family="Inter" font-size="13" fill="#3A3A3A">Progressive disclosure, retrieval on demand</text>
+    <text x="1230" y="188" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500" text-anchor="end">CH 04 · 07</text>
+    <text x="70" y="206" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: minimum signal-rich context.</text>
+    <!-- Layer 2 Tools -->
+    <rect x="40" y="228" width="1320" height="56" rx="4" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="40" y="228" width="6" height="56" fill="#00A4EF"/>
+    <text x="70" y="254" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#0076AC">L2 · TOOLS</text>
+    <text x="280" y="254" font-family="Inter" font-size="16" font-weight="500" fill="#1A1A1A">MCP servers · hooks · skills</text>
+    <text x="780" y="254" font-family="Inter" font-size="13" fill="#3A3A3A">Lean tool definitions, deterministic offload</text>
+    <text x="1230" y="254" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#0076AC" text-anchor="end">CH 06</text>
+    <text x="70" y="272" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: do not pay an LLM to grep.</text>
+    <!-- Layer 1 Model -->
+    <rect x="40" y="294" width="1320" height="56" rx="4" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="40" y="294" width="6" height="56" fill="#1A1A1A"/>
+    <text x="70" y="320" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#1A1A1A">L1 · MODEL</text>
+    <text x="280" y="320" font-family="Inter" font-size="16" font-weight="500" fill="#1A1A1A">Augmented LLM · prompt + tools + memory</text>
+    <text x="780" y="320" font-family="Inter" font-size="13" fill="#3A3A3A">Cache_control on stable blocks</text>
+    <text x="1230" y="320" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#1A1A1A" text-anchor="end">CH 01 · 03 · 05</text>
+    <text x="70" y="338" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Lever: right model · stable prefix.</text>
+  </svg>
+</section>
+
+<!-- ============ SLIDE 22 · 5 ANTHROPIC PATTERNS ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="ch06d.eyebrow">The five Anthropic patterns</div>
+  <h2 class="title title--medium" data-i18n="ch06d.title">Compose these. Do not invent. Each has a known cost and risk profile.</h2>
+  <div class="card-grid-3 stagger">
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker">01</span><h3 class="ps-card__title" data-i18n="ch06d.p1t">Prompt chaining</h3><p class="ps-card__body" data-i18n="ch06d.p1b">Decompose into ordered steps. Cheapest, most auditable. Default for SDLC subroutines.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker">02</span><h3 class="ps-card__title" data-i18n="ch06d.p2t">Routing</h3><p class="ps-card__body" data-i18n="ch06d.p2b">A cheap classifier sends each request to the right specialist. Massive saves on mixed traffic.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-yellow-500);"><span class="ps-card__kicker">03</span><h3 class="ps-card__title" data-i18n="ch06d.p3t">Parallelization</h3><p class="ps-card__body" data-i18n="ch06d.p3b">Fan out independent subtasks, reduce latency. Watch the multiplier on cache writes.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker">04</span><h3 class="ps-card__title" data-i18n="ch06d.p4t">Orchestrator-workers</h3><p class="ps-card__body" data-i18n="ch06d.p4b">Plan with Opus, execute with Sonnet/Haiku. The single best premium-to-bundled bridge.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker">05</span><h3 class="ps-card__title" data-i18n="ch06d.p5t">Evaluator-optimizer</h3><p class="ps-card__body" data-i18n="ch06d.p5b">Loop with a critic. Bounded iterations or it never stops. Pair with a budget.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);"><span class="ps-card__kicker" data-i18n="ch06d.p6k">Anti-pattern</span><h3 class="ps-card__title" data-i18n="ch06d.p6t">Multi-agent without coordination</h3><p class="ps-card__body" data-i18n="ch06d.p6b">N agents, no shared memory, no contracts. Pays N× and contradicts itself. Don&rsquo;t.</p></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 23 · CH 07 LESS IS MORE ============ -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="ch07.eyebrow">Chapter 07 · Token-efficient strategies</div>
+  <h2 class="title title--medium" data-i18n="ch07.title">Less is more. The 700-token review prompt and the 50-token review prompt produce equivalent reviews.</h2>
+  <div class="card-grid-2 stagger">
+    <div class="ps-card" style="--card-color:var(--c-red-500);"><span class="ps-card__kicker" data-i18n="ch07.lk">Verbose · 700 tokens</span><h3 class="ps-card__title" data-i18n="ch07.lt">"Review this code carefully, considering security implications, performance characteristics, architecture decisions, code style, naming conventions, error handling, edge cases, and please be thorough and detailed in your feedback. Format your response as..."</h3><p class="ps-card__body" data-i18n="ch07.lb">Pays $700 / M tokens just on instructions. Repeated every turn.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker" data-i18n="ch07.rk">Compact · 50 tokens</span><h3 class="ps-card__title" data-i18n="ch07.rt">"Senior reviewer. Flag security, perf, correctness. JSON: {issues:[{severity, file, line, fix}]}."</h3><p class="ps-card__body" data-i18n="ch07.rb">93% reduction. In tests, review quality is equivalent or better, the model has more attention budget for the actual code.</p></div>
+  </div>
+  <p class="caption" data-i18n="ch07.caption">Pair with progressive disclosure: a small SKILL.md on every call, large checklists loaded only on demand via a load_section tool.</p>
+</section>
+
+<!-- ============ SLIDE 24 · PART III COVER ============ -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part3.eyebrow">Part III</div>
+  <div class="section-number">III</div>
+  <h1 class="section-title" data-i18n="part3.title">The change.</h1>
+  <p class="subtitle" style="color:var(--dark-ink-2);" data-i18n="part3.subtitle">June 1, 2026 · GitHub AI Credits replace PRUs. The 16-week migration. Decisions per persona.</p>
+</section>
+
+<!-- ============ SLIDE 25 · CH 08 SEVEN CHANGES ============ -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="ch08.eyebrow">Chapter 08 · The seven changes</div>
+  <h2 class="title title--medium" data-i18n="ch08.title">Seven changes ship together on June 1. Four are silent. Two double your bill if you do nothing.</h2>
+  <table class="ps-table">
+    <thead><tr><th data-i18n="ch08.col1">#</th><th data-i18n="ch08.col2">Change</th><th data-i18n="ch08.col3">Effect</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td data-i18n="ch08.r1c2">PRUs retired in monthly plans</td><td data-i18n="ch08.r1c3">Old budgets stop applying. Per-call meter starts.</td></tr>
+      <tr><td class="num">2</td><td data-i18n="ch08.r2c2">GitHub AI Credits replace PRUs</td><td data-i18n="ch08.r2c3">$1 of credits ≈ 1 USD of metered usage at list price.</td></tr>
+      <tr><td class="num">3</td><td data-i18n="ch08.r3c2">Plan base price unchanged</td><td data-i18n="ch08.r3c3">$10 / $19 / $39 / $99. The illusion that nothing changed.</td></tr>
+      <tr><td class="num">4</td><td data-i18n="ch08.r4c2">Completions and NES included</td><td data-i18n="ch08.r4c3">Code completions and Next Edit Suggestions do not consume credits.</td></tr>
+      <tr><td class="num">5</td><td data-i18n="ch08.r5c2">Fallback experiences removed</td><td data-i18n="ch08.r5c3">No more silent downgrade to a free tier when credits run out.</td></tr>
+      <tr><td class="num">6</td><td data-i18n="ch08.r6c2">Code review doubles in billing</td><td style="color:#B33816;" data-i18n="ch08.r6c3">Each review now bills as two interactions. Watch this.</td></tr>
+      <tr><td class="num">7</td><td data-i18n="ch08.r7c2">Pro/Pro+ annual stays in PRUs</td><td data-i18n="ch08.r7c3">Until renewal. Decide path A/B/C before that date.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ SLIDE 26 · CH 09 16-WEEK MIGRATION TIMELINE ============ -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="ch09.eyebrow">Chapter 09 · The 16-week timeline</div>
+  <h2 class="title title--medium" data-i18n="ch09.title">May to August · discovery, D-Day, stabilization, optimization, maturation.</h2>
+  <svg viewBox="0 0 1400 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <text x="40" y="40" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#737373">16 WEEKS · DISCOVERY → D-DAY → STABILIZE → OPTIMIZE → MATURE</text>
+    <!-- Timeline base -->
+    <line x1="60" y1="160" x2="1340" y2="160" stroke="#E5E5E0" stroke-width="2"/>
+    <!-- Phase 1 -->
+    <rect x="60" y="80" width="280" height="60" rx="4" fill="#E5F6FD" stroke="#00A4EF"/>
+    <text x="80" y="106" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#0076AC">WEEKS 1–4 · MAY</text>
+    <text x="80" y="128" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Discovery &amp; preparation</text>
+    <circle cx="200" cy="160" r="6" fill="#00A4EF"/>
+    <text x="80" y="200" font-family="Inter" font-size="12" fill="#3A3A3A"><tspan x="80">Inventory PRU spend.</tspan><tspan x="80" dy="16">Build baseline cost-per-feature.</tspan><tspan x="80" dy="16">Pick path A/B/C per persona.</tspan></text>
+    <!-- Phase 2 D-Day -->
+    <rect x="350" y="80" width="180" height="60" rx="4" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="370" y="106" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B33816">WK 5 · JUN 1–7</text>
+    <text x="370" y="128" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">D-Day · cutover</text>
+    <circle cx="440" cy="160" r="8" fill="#F25022"/>
+    <text x="370" y="200" font-family="Inter" font-size="12" fill="#3A3A3A"><tspan x="370">AI Credits live.</tspan><tspan x="370" dy="16">Default model = Sonnet.</tspan><tspan x="370" dy="16">Daily cost monitor on.</tspan></text>
+    <!-- Phase 3 -->
+    <rect x="540" y="80" width="220" height="60" rx="4" fill="#FFF7E0" stroke="#FFB900"/>
+    <text x="560" y="106" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B88500">WEEKS 6–8 · JUN</text>
+    <text x="560" y="128" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Stabilize · quick wins</text>
+    <circle cx="650" cy="160" r="6" fill="#FFB900"/>
+    <text x="560" y="200" font-family="Inter" font-size="12" fill="#3A3A3A"><tspan x="560">Cache_control roll-out.</tspan><tspan x="560" dy="16">Lean tool definitions.</tspan><tspan x="560" dy="16">Kill Opus-by-default.</tspan></text>
+    <!-- Phase 4 -->
+    <rect x="770" y="80" width="280" height="60" rx="4" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="790" y="106" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500">WEEKS 9–12 · JUL</text>
+    <text x="790" y="128" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Systematic optimization</text>
+    <circle cx="910" cy="160" r="6" fill="#7FBA00"/>
+    <text x="790" y="200" font-family="Inter" font-size="12" fill="#3A3A3A"><tspan x="790">Model routing in pipeline.</tspan><tspan x="790" dy="16">Plan/Execute split.</tspan><tspan x="790" dy="16">Cost-per-feature dashboards.</tspan></text>
+    <!-- Phase 5 -->
+    <rect x="1060" y="80" width="280" height="60" rx="4" fill="#E5F6FD" stroke="#00A4EF"/>
+    <text x="1080" y="106" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#0076AC">WEEKS 13–16 · AUG</text>
+    <text x="1080" y="128" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Maturation · operate</text>
+    <circle cx="1200" cy="160" r="6" fill="#00A4EF"/>
+    <text x="1080" y="200" font-family="Inter" font-size="12" fill="#3A3A3A"><tspan x="1080">Anomaly detection on.</tspan><tspan x="1080" dy="16">Quarterly tariff review.</tspan><tspan x="1080" dy="16">FinOps cadence stabilized.</tspan></text>
+  </svg>
+</section>
+
+<!-- ============ SLIDE 27 · DECISION PER PERSONA ============ -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="ch09b.eyebrow">Decision per persona · Pro / Pro+ annual</div>
+  <h2 class="title title--medium" data-i18n="ch09b.title">Three paths. Pick by usage, not by inertia.</h2>
+  <div class="card-grid-3 stagger">
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker" data-i18n="ch09b.ak">Path A</span><h3 class="ps-card__title" data-i18n="ch09b.at">Stay on annual PRUs until expiration</h3><p class="ps-card__body" data-i18n="ch09b.ab">Best for steady, predictable usage. No action needed today. Re-evaluate at renewal.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-yellow-500);"><span class="ps-card__kicker" data-i18n="ch09b.bk">Path B</span><h3 class="ps-card__title" data-i18n="ch09b.bt">Convert to monthly with AI Credits</h3><p class="ps-card__body" data-i18n="ch09b.bb">Best for power users who want premium models on demand. Higher ceiling, real bill.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker" data-i18n="ch09b.ck">Path C</span><h3 class="ps-card__title" data-i18n="ch09b.ct">Cancel · prorated refund · move to API</h3><p class="ps-card__body" data-i18n="ch09b.cb">Best for teams already running mostly direct Anthropic API. Hybrid setup is common.</p></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 28 · PART IV COVER ============ -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part4.eyebrow">Part IV</div>
+  <div class="section-number">IV</div>
+  <h1 class="section-title" data-i18n="part4.title">Governance and operations.</h1>
+  <p class="subtitle" style="color:var(--dark-ink-2);" data-i18n="part4.subtitle">FinOps for AI · Inform, Optimize, Operate. Azure AI Foundry as the enterprise control plane.</p>
+</section>
+
+<!-- ============ SLIDE 29 · CH 10 FINOPS THREE PHASES ============ -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="ch10.eyebrow">Chapter 10 · FinOps for AI</div>
+  <h2 class="title title--medium" data-i18n="ch10.title">Inform, Optimize, Operate. The FinOps Foundation phases applied to token spend.</h2>
+  <div class="card-grid-3 stagger">
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker" data-i18n="ch10.p1k">Phase 1 · Inform</span><h3 class="ps-card__title" data-i18n="ch10.p1t">Visibility before action</h3><ul class="ps-card__points"><li data-i18n="ch10.p1a">Cost-per-token, per-feature, per-user dashboards.</li><li data-i18n="ch10.p1b">Tag every call with cost-center and feature.</li><li data-i18n="ch10.p1c">Surface the top-10 outliers daily.</li></ul></div>
+    <div class="ps-card" style="--card-color:var(--c-yellow-500);"><span class="ps-card__kicker" data-i18n="ch10.p2k">Phase 2 · Optimize</span><h3 class="ps-card__title" data-i18n="ch10.p2t">Pull each lever in ROI order</h3><ul class="ps-card__points"><li data-i18n="ch10.p2a">Model routing first, biggest delta.</li><li data-i18n="ch10.p2b">Prompt caching second, silent 60–90%.</li><li data-i18n="ch10.p2c">Compaction and lean tools third.</li></ul></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker" data-i18n="ch10.p3k">Phase 3 · Operate</span><h3 class="ps-card__title" data-i18n="ch10.p3t">FinOps as a habit</h3><ul class="ps-card__points"><li data-i18n="ch10.p3a">Weekly operational report, monthly executive.</li><li data-i18n="ch10.p3b">Anomaly alerts (3σ over rolling baseline).</li><li data-i18n="ch10.p3c">Quarterly tariff review tied to roadmap.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 30 · COST WATERFALL SVG ============ -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="ch10b.eyebrow">FinOps waterfall · cumulative savings</div>
+  <h2 class="title title--medium" data-i18n="ch10b.title">In sequence, the four levers compound from $1.00 to <span class="accent-green">$0.18</span> per equivalent session.</h2>
+  <svg viewBox="0 0 1400 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <text x="40" y="40" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#737373">RELATIVE COST PER SESSION · INDEX 1.00 = BASELINE OPUS-BY-DEFAULT</text>
+    <!-- Baseline bar -->
+    <rect x="60" y="80" width="220" height="180" fill="#F25022"/>
+    <text x="170" y="280" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A" text-anchor="middle">Baseline</text>
+    <text x="170" y="300" font-family="Inter" font-size="12" fill="#3A3A3A" text-anchor="middle">Opus-by-default</text>
+    <text x="170" y="318" font-family="JetBrains Mono" font-size="14" fill="#1A1A1A" text-anchor="middle" font-weight="500">$1.00</text>
+    <!-- Drop 1 model routing -->
+    <rect x="320" y="170" width="220" height="90" fill="#FFB900"/>
+    <text x="430" y="280" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A" text-anchor="middle">+ Model routing</text>
+    <text x="430" y="300" font-family="Inter" font-size="12" fill="#3A3A3A" text-anchor="middle">Sonnet default · Opus scoped</text>
+    <text x="430" y="318" font-family="JetBrains Mono" font-size="14" fill="#1A1A1A" text-anchor="middle" font-weight="500">$0.50 · −50%</text>
+    <line x1="280" y1="170" x2="320" y2="170" stroke="#737373" stroke-dasharray="3 3"/>
+    <!-- Drop 2 caching -->
+    <rect x="580" y="220" width="220" height="40" fill="#7FBA00"/>
+    <text x="690" y="280" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A" text-anchor="middle">+ Prompt caching</text>
+    <text x="690" y="300" font-family="Inter" font-size="12" fill="#3A3A3A" text-anchor="middle">Stable prefix · 5 min TTL</text>
+    <text x="690" y="318" font-family="JetBrains Mono" font-size="14" fill="#1A1A1A" text-anchor="middle" font-weight="500">$0.28 · −44%</text>
+    <line x1="540" y1="220" x2="580" y2="220" stroke="#737373" stroke-dasharray="3 3"/>
+    <!-- Drop 3 compaction -->
+    <rect x="840" y="232" width="220" height="28" fill="#00A4EF"/>
+    <text x="950" y="280" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A" text-anchor="middle">+ Compaction</text>
+    <text x="950" y="300" font-family="Inter" font-size="12" fill="#3A3A3A" text-anchor="middle">Tool-result clearing</text>
+    <text x="950" y="318" font-family="JetBrains Mono" font-size="14" fill="#1A1A1A" text-anchor="middle" font-weight="500">$0.22 · −21%</text>
+    <line x1="800" y1="232" x2="840" y2="232" stroke="#737373" stroke-dasharray="3 3"/>
+    <!-- Drop 4 lean -->
+    <rect x="1100" y="240" width="220" height="20" fill="#1A1A1A"/>
+    <text x="1210" y="280" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A" text-anchor="middle">+ Lean prompts</text>
+    <text x="1210" y="300" font-family="Inter" font-size="12" fill="#3A3A3A" text-anchor="middle">Progressive disclosure</text>
+    <text x="1210" y="318" font-family="JetBrains Mono" font-size="14" fill="#5A8500" text-anchor="middle" font-weight="500">$0.18 · −18%</text>
+    <line x1="1060" y1="240" x2="1100" y2="240" stroke="#737373" stroke-dasharray="3 3"/>
+    <!-- baseline rule -->
+    <line x1="40" y1="260" x2="1360" y2="260" stroke="#1A1A1A" stroke-width="1"/>
+  </svg>
+  <p class="caption" data-i18n="ch10b.caption">Order matters. Each lever stacks on the previous one. Skipping model routing first leaves the largest delta unclaimed.</p>
+</section>
+
+<!-- ============ SLIDE 31 · CH 11 FOUNDRY STACK ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-blue-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">11</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="ch11.tag">Chapter 11 · Governance</div>
+      <h2 class="chapter-cover__title" data-i18n="ch11.title">Azure AI Foundry · the enterprise control plane.</h2>
+      <p class="chapter-cover__sub" data-i18n="ch11.sub">Where Foundry fits next to Copilot and direct API. Model catalog, prompt flow, content safety, identity, FinOps tagging, one plane to govern them all.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 32 · FOUNDRY STACK SVG ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="ch11b.eyebrow">Where Foundry fits</div>
+  <h2 class="title title--medium" data-i18n="ch11b.title">Three lanes, one control plane. Use them in combination, not in opposition.</h2>
+  <svg viewBox="0 0 1400 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <!-- Foundry control plane -->
+    <rect x="40" y="30" width="1320" height="80" rx="6" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+    <text x="60" y="58" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#0076AC">CONTROL PLANE · AZURE AI FOUNDRY</text>
+    <text x="60" y="86" font-family="Inter" font-size="20" font-weight="500" fill="#1A1A1A">Catalog · 1,800+ models · prompt flow · evals · content safety · identity · tagging</text>
+    <!-- 3 lanes -->
+    <rect x="40" y="140" width="420" height="180" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="40" y="140" width="420" height="6" fill="#7FBA00"/>
+    <text x="60" y="172" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#5A8500">LANE A · GITHUB COPILOT</text>
+    <text x="60" y="200" font-family="Inter" font-size="17" font-weight="500" fill="#1A1A1A">Developer experience</text>
+    <text x="60" y="226" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="60">VS Code, Coding Agent, code review,</tspan><tspan x="60" dy="18">PR completions. AI Credits meter.</tspan></text>
+    <line x1="60" y1="270" x2="440" y2="270" stroke="#E5E5E0"/>
+    <text x="60" y="294" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Use for: developer-facing IDE work</text>
+    <text x="60" y="308" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500">CH 03 · 08 · 09</text>
+
+    <rect x="490" y="140" width="420" height="180" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="490" y="140" width="420" height="6" fill="#FFB900"/>
+    <text x="510" y="172" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#B88500">LANE B · DIRECT API</text>
+    <text x="510" y="200" font-family="Inter" font-size="17" font-weight="500" fill="#1A1A1A">Backend agents</text>
+    <text x="510" y="226" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="510">Anthropic, OpenAI, Google direct.</tspan><tspan x="510" dy="18">Full control over caching, batching.</tspan></text>
+    <line x1="510" y1="270" x2="890" y2="270" stroke="#E5E5E0"/>
+    <text x="510" y="294" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Use for: production agentic services</text>
+    <text x="510" y="308" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B88500">CH 05 · 06 · 12</text>
+
+    <rect x="940" y="140" width="420" height="180" rx="6" fill="#FFFFFF" stroke="#E5E5E0"/>
+    <rect x="940" y="140" width="420" height="6" fill="#00A4EF"/>
+    <text x="960" y="172" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#0076AC">LANE C · FOUNDRY DEPLOYS</text>
+    <text x="960" y="200" font-family="Inter" font-size="17" font-weight="500" fill="#1A1A1A">Governed deployments</text>
+    <text x="960" y="226" font-family="Inter" font-size="13" fill="#3A3A3A"><tspan x="960">Private network, identity-bound,</tspan><tspan x="960" dy="18">content safety, regional residency.</tspan></text>
+    <line x1="960" y1="270" x2="1340" y2="270" stroke="#E5E5E0"/>
+    <text x="960" y="294" font-family="Inter" font-size="11" font-style="italic" fill="#737373">Use for: regulated, regional, audited</text>
+    <text x="960" y="308" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#0076AC">CH 11</text>
+  </svg>
+</section>
+
+<!-- ============ SLIDE 33 · CH 12 PATTERNS ============ -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="ch12.eyebrow">Chapter 12 · Five applied patterns</div>
+  <h2 class="title title--medium" data-i18n="ch12.title">Five patterns you can paste into production this week. Each cuts a measurable percentage of spend.</h2>
+  <div class="card-grid-3 stagger">
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker">01</span><h3 class="ps-card__title" data-i18n="ch12.p1t">Dynamic routing by complexity</h3><p class="ps-card__body" data-i18n="ch12.p1b">Static keyword heuristic dispatches to Haiku / Sonnet / Opus. Zero LLM cost on the routing decision.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker">02</span><h3 class="ps-card__title" data-i18n="ch12.p2t">Hierarchical cache · 3 layers</h3><p class="ps-card__body" data-i18n="ch12.p2b">In-process LRU → Redis → Anthropic prefix cache. Hits absorb 60–80% of repeated traffic.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-yellow-500);"><span class="ps-card__kicker">03</span><h3 class="ps-card__title" data-i18n="ch12.p3t">Subagent fan-out</h3><p class="ps-card__body" data-i18n="ch12.p3b">Independent subtasks parallel on Haiku, synthesis on Sonnet. Latency down, cost flat.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);"><span class="ps-card__kicker">04</span><h3 class="ps-card__title" data-i18n="ch12.p4t">Plan / Execute</h3><p class="ps-card__body" data-i18n="ch12.p4b">Opus designs the plan once. Sonnet/Haiku execute the steps. The premium-to-bundled bridge.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-green-500);"><span class="ps-card__kicker">05</span><h3 class="ps-card__title" data-i18n="ch12.p5t">Semantic cache with fallback</h3><p class="ps-card__body" data-i18n="ch12.p5b">Embedding-similarity hits return canned answers. Strict threshold + LLM fallback on miss.</p></div>
+    <div class="ps-card" style="--card-color:var(--c-blue-500);"><span class="ps-card__kicker" data-i18n="ch12.p6k">Reference</span><h3 class="ps-card__title" data-i18n="ch12.p6t">Code · Appendix D</h3><p class="ps-card__body" data-i18n="ch12.p6b">Production-ready router, cache helpers, OpenTelemetry instrumentation, MCP server template.</p></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 34 · CH 13 ANTI-PATTERNS DECISION TREE ============ -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="ch13.eyebrow">Chapter 13 · Anti-patterns and decision frameworks</div>
+  <h2 class="title title--medium" data-i18n="ch13.title">The decision tree · which optimization to pull, in which order.</h2>
+  <svg viewBox="0 0 1400 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <defs>
+      <marker id="arrTree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><polygon points="0,0 10,5 0,10" fill="#737373"/></marker>
+    </defs>
+    <!-- Root question -->
+    <rect x="540" y="20" width="320" height="60" rx="6" fill="#1A1A1A"/>
+    <text x="700" y="48" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#A8A8A4" text-anchor="middle">QUESTION</text>
+    <text x="700" y="68" font-family="Inter" font-size="14" font-weight="500" fill="#F0F0F0" text-anchor="middle">Where does the cost actually live?</text>
+    <!-- Branches -->
+    <line x1="700" y1="80" x2="180" y2="130" stroke="#737373" marker-end="url(#arrTree)"/>
+    <line x1="700" y1="80" x2="500" y2="130" stroke="#737373" marker-end="url(#arrTree)"/>
+    <line x1="700" y1="80" x2="900" y2="130" stroke="#737373" marker-end="url(#arrTree)"/>
+    <line x1="700" y1="80" x2="1220" y2="130" stroke="#737373" marker-end="url(#arrTree)"/>
+    <!-- Branch A: Wrong model -->
+    <rect x="40" y="140" width="280" height="80" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="60" y="166" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B33816">A · OPUS BY DEFAULT</text>
+    <text x="60" y="190" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Wrong-model spend</text>
+    <text x="60" y="210" font-family="Inter" font-size="12" fill="#3A3A3A">→ Route to Sonnet · Haiku</text>
+    <rect x="40" y="240" width="280" height="80" rx="6" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="60" y="266" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500">FIX · LARGEST DELTA</text>
+    <text x="60" y="290" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Model routing</text>
+    <text x="60" y="310" font-family="Inter" font-size="12" fill="#3A3A3A">Save 40–60% in week 1</text>
+    <line x1="180" y1="220" x2="180" y2="240" stroke="#737373" marker-end="url(#arrTree)"/>
+    <!-- Branch B: Cache cold -->
+    <rect x="360" y="140" width="280" height="80" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="380" y="166" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B33816">B · CACHE NEVER WARMS</text>
+    <text x="380" y="190" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Timestamps in prefix</text>
+    <text x="380" y="210" font-family="Inter" font-size="12" fill="#3A3A3A">→ Stable prefix · cache_control</text>
+    <rect x="360" y="240" width="280" height="80" rx="6" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="380" y="266" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500">FIX · SILENT 60–90%</text>
+    <text x="380" y="290" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Prompt caching</text>
+    <text x="380" y="310" font-family="Inter" font-size="12" fill="#3A3A3A">No prompt rewrite needed</text>
+    <line x1="500" y1="220" x2="500" y2="240" stroke="#737373" marker-end="url(#arrTree)"/>
+    <!-- Branch C: Tool blowup -->
+    <rect x="760" y="140" width="280" height="80" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="780" y="166" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B33816">C · TOOL RESULT BLOWUP</text>
+    <text x="780" y="190" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">10K+ tokens per call</text>
+    <text x="780" y="210" font-family="Inter" font-size="12" fill="#3A3A3A">→ Compaction · clearing</text>
+    <rect x="760" y="240" width="280" height="80" rx="6" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="780" y="266" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500">FIX · 20–40%</text>
+    <text x="780" y="290" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Lean tool definitions</text>
+    <text x="780" y="310" font-family="Inter" font-size="12" fill="#3A3A3A">Summarize, then drop</text>
+    <line x1="900" y1="220" x2="900" y2="240" stroke="#737373" marker-end="url(#arrTree)"/>
+    <!-- Branch D: Loop -->
+    <rect x="1080" y="140" width="280" height="80" rx="6" fill="#FFF0EB" stroke="#F25022"/>
+    <text x="1100" y="166" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#B33816">D · NO STOP CRITERIA</text>
+    <text x="1100" y="190" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Agent loops forever</text>
+    <text x="1100" y="210" font-family="Inter" font-size="12" fill="#3A3A3A">→ Budget · success check</text>
+    <rect x="1080" y="240" width="280" height="80" rx="6" fill="#F1F8E3" stroke="#7FBA00"/>
+    <text x="1100" y="266" font-family="JetBrains Mono" font-size="10" letter-spacing="1.4" fill="#5A8500">FIX · CAPS THE TAIL</text>
+    <text x="1100" y="290" font-family="Inter" font-size="14" font-weight="500" fill="#1A1A1A">Evaluator-optimizer</text>
+    <text x="1100" y="310" font-family="Inter" font-size="12" fill="#3A3A3A">Bounded iterations</text>
+    <line x1="1220" y1="220" x2="1220" y2="240" stroke="#737373" marker-end="url(#arrTree)"/>
+  </svg>
+</section>
+
+<!-- ============ SLIDE 35 · TEN ANTI-PATTERNS ============ -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="ch13b.eyebrow">The ten cataloged anti-patterns</div>
+  <h2 class="title title--medium" data-i18n="ch13b.title">If your team is doing two of these, the bill is already 2× what it should be.</h2>
+  <div class="card-grid-4 stagger" style="gap:12px;">
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">01</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a1">The agent graveyard</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">02</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a2">Everything is an agent</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">03</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a3">Opus as default</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">04</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a4">Monolithic system prompt</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">05</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a5">Tool result blowup</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">06</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a6">No stop criteria</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">07</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a7">Cache that never caches</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">08</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a8">Long context misuse</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">09</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a9">Multi-agent without coordination</h3></div>
+    <div class="ps-card" style="--card-color:var(--c-red-500);padding:16px 18px;"><span class="ps-card__kicker">10</span><h3 class="ps-card__title" style="font-size:15px;" data-i18n="ch13b.a10">No instrumentation</h3></div>
+  </div>
+  <p class="caption" data-i18n="ch13b.caption">Self-audit: pick today the two most expensive ones for your team and fix them this sprint.</p>
+</section>
+
+<!-- ============ SLIDE 36 · APPENDIX A ============ -->
+<section class="slide slide--paper" style="--chapter-color: var(--c-yellow-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">A</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="appA.tag">Appendix A · Optimized prompts</div>
+      <h2 class="chapter-cover__title" data-i18n="appA.title">A library of compact system prompts and lean tool definitions.</h2>
+      <p class="chapter-cover__sub" data-i18n="appA.sub">Code reviewer, test writer, doc writer · plus tool definitions for read, search, run-tests · plus three custom .github/prompts/ files. Copy, paste, ship.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 37 · APPENDIX B PRICING CHART ============ -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="appB.eyebrow">Appendix B · Pricing reference card</div>
+  <h2 class="title title--medium" data-i18n="appB.title">USD per million tokens · the bar chart that ends every Opus-by-default debate.</h2>
+  <svg viewBox="0 0 1400 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:1400px;height:auto;margin-top:8px;">
+    <text x="40" y="40" font-family="JetBrains Mono" font-size="11" letter-spacing="1.6" fill="#737373">USD / M TOKENS · INPUT (LIGHT) · OUTPUT (DARK) · POST-JUNE 2026 LIST</text>
+    <!-- Y axis labels -->
+    <text x="40" y="100" font-family="JetBrains Mono" font-size="11" fill="#737373">$80</text>
+    <text x="40" y="170" font-family="JetBrains Mono" font-size="11" fill="#737373">$40</text>
+    <text x="40" y="240" font-family="JetBrains Mono" font-size="11" fill="#737373">$15</text>
+    <text x="40" y="310" font-family="JetBrains Mono" font-size="11" fill="#737373">$0</text>
+    <line x1="80" y1="310" x2="1360" y2="310" stroke="#1A1A1A"/>
+    <line x1="80" y1="240" x2="1360" y2="240" stroke="#E5E5E0" stroke-dasharray="2 3"/>
+    <line x1="80" y1="170" x2="1360" y2="170" stroke="#E5E5E0" stroke-dasharray="2 3"/>
+    <line x1="80" y1="100" x2="1360" y2="100" stroke="#E5E5E0" stroke-dasharray="2 3"/>
+
+    <!-- Bars · 7 models · each pair ~160px wide -->
+    <!-- Opus 4.7: $15 in, $75 out -->
+    <rect x="120" y="240" width="50" height="70" fill="#F25022" opacity=".4"/>
+    <rect x="170" y="105" width="50" height="205" fill="#F25022"/>
+    <text x="170" y="332" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="middle">Opus 4.7</text>
+    <text x="170" y="350" font-family="JetBrains Mono" font-size="10" fill="#737373" text-anchor="middle">$15 / $75</text>
+
+    <!-- GPT-5: $10/$40 -->
+    <rect x="290" y="263" width="50" height="47" fill="#7FBA00" opacity=".4"/>
+    <rect x="340" y="170" width="50" height="140" fill="#7FBA00"/>
+    <text x="340" y="332" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="middle">GPT-5</text>
+    <text x="340" y="350" font-family="JetBrains Mono" font-size="10" fill="#737373" text-anchor="middle">$10 / $40</text>
+
+    <!-- Gemini 3.1 Pro: $7/$21 -->
+    <rect x="460" y="278" width="50" height="32" fill="#00A4EF" opacity=".4"/>
+    <rect x="510" y="237" width="50" height="73" fill="#00A4EF"/>
+    <text x="510" y="332" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="middle">Gemini 3.1 Pro</text>
+    <text x="510" y="350" font-family="JetBrains Mono" font-size="10" fill="#737373" text-anchor="middle">$7 / $21</text>
+
+    <!-- Sonnet 4.6: $3/$15 -->
+    <rect x="630" y="296" width="50" height="14" fill="#7FBA00" opacity=".4"/>
+    <rect x="680" y="240" width="50" height="70" fill="#7FBA00"/>
+    <text x="680" y="332" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="middle">Sonnet 4.6</text>
+    <text x="680" y="350" font-family="JetBrains Mono" font-size="10" fill="#737373" text-anchor="middle">$3 / $15</text>
+
+    <!-- GPT-5 mini: $1.5/$8 -->
+    <rect x="800" y="303" width="50" height="7" fill="#7FBA00" opacity=".4"/>
+    <rect x="850" y="273" width="50" height="37" fill="#7FBA00"/>
+    <text x="850" y="332" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="middle">GPT-5 mini</text>
+    <text x="850" y="350" font-family="JetBrains Mono" font-size="10" fill="#737373" text-anchor="middle">$1.5 / $8</text>
+
+    <!-- Haiku 4.5: $1/$5 -->
+    <rect x="970" y="305" width="50" height="5" fill="#FFB900" opacity=".4"/>
+    <rect x="1020" y="287" width="50" height="23" fill="#FFB900"/>
+    <text x="1020" y="332" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="middle">Haiku 4.5</text>
+    <text x="1020" y="350" font-family="JetBrains Mono" font-size="10" fill="#737373" text-anchor="middle">$1 / $5</text>
+
+    <!-- Grok Code Fast: $0.5/$1.5 -->
+    <rect x="1140" y="307" width="50" height="3" fill="#1A1A1A" opacity=".4"/>
+    <rect x="1190" y="303" width="50" height="7" fill="#1A1A1A"/>
+    <text x="1190" y="332" font-family="Inter" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="middle">Grok Code</text>
+    <text x="1190" y="350" font-family="JetBrains Mono" font-size="10" fill="#737373" text-anchor="middle">$0.5 / $1.5</text>
+  </svg>
+  <p class="caption" data-i18n="appB.caption">Cached input is 10% of these numbers. Cache writes carry a +25% (5 min) or +100% (1 h) one-time surcharge.</p>
+</section>
+
+<!-- ============ SLIDE 38 · APPLIED EXAMPLE ============ -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="applied.eyebrow">Applied · 50-developer org · before / after 90 days</div>
+  <h2 class="title title--medium" data-i18n="applied.title">Real numbers, not slideware. The same workload, half the bill.</h2>
+  <div class="split">
+    <div class="split__side split__side--left">
+      <span class="split__eyebrow" data-i18n="applied.lk">Before · day 0</span>
+      <h3 class="split__title" data-i18n="applied.lt">$48K / month · 50 devs · Opus default · no caching</h3>
+      <ul class="split__points">
+        <li data-i18n="applied.lp1">~70% of agent calls hit Opus, even on routine tasks.</li>
+        <li data-i18n="applied.lp2">Cache hit rate: 4%. Prefix not stable.</li>
+        <li data-i18n="applied.lp3">Top 10% of users absorb 52% of total spend.</li>
+        <li data-i18n="applied.lp4">No cost-per-feature, no anomaly alerts.</li>
+      </ul>
+    </div>
+    <div class="split__side split__side--right">
+      <span class="split__eyebrow" data-i18n="applied.rk">After · day 90</span>
+      <h3 class="split__title" data-i18n="applied.rt">$22K / month · 50 devs · same throughput, more agentic features shipped</h3>
+      <ul class="split__points">
+        <li data-i18n="applied.rp1">Sonnet handles 80% of agent traffic. Opus scoped to plan-only.</li>
+        <li data-i18n="applied.rp2">Cache hit rate: 71%. Stable prefix · cache_control · 5 min TTL.</li>
+        <li data-i18n="applied.rp3">Top 10% rebalanced via routing. Outliers actioned weekly.</li>
+        <li data-i18n="applied.rp4">Cost-per-feature dashboard live. 3σ anomaly alerts on.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 39 · CHECKLIST 90 DAYS ============ -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="checklist.eyebrow">First 90 days · the operator&rsquo;s checklist</div>
+  <h2 class="title title--medium" data-i18n="checklist.title">Twelve concrete actions, in order. If you skip step 1, the rest is wasted.</h2>
+  <div class="list-numbered stagger" style="max-width:1500px;">
+    <div class="list-numbered__item"><span class="list-numbered__num">DAY 0–7</span><span class="list-numbered__text" data-i18n="checklist.i1">Inventory PRU spend per persona. Tag every agent call with cost-center and feature.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">DAY 8–14</span><span class="list-numbered__text" data-i18n="checklist.i2">Set Sonnet 4.6 as the workspace default. Allowlist Opus per repo with justification.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">DAY 15–30</span><span class="list-numbered__text" data-i18n="checklist.i3">Roll out cache_control on the three biggest stable blocks: system prompt, tool defs, AGENTS.md.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">DAY 31–60</span><span class="list-numbered__text" data-i18n="checklist.i4">Compaction + tool result clearing in the agent loop. Lean prompt rewrite of top-3 templates.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">DAY 61–90</span><span class="list-numbered__text" data-i18n="checklist.i5">Model routing in the pipeline. Plan/Execute split for Opus. Anomaly alerts at 3σ over rolling baseline.</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 40 · CLOSING ============ -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="closing.eyebrow">Microsoft · Token Management &amp; Agent Design · 2026-05-06</div>
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:120px;height:auto;margin-top:10px;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <h1 class="section-title" style="font-size:clamp(40px,5.4vw,82px);"><span data-i18n="closing.line1">The model is one lever.</span> <span class="accent-blue" data-i18n="closing.line2">The architecture is the other four.</span></h1>
+  <p class="subtitle" style="font-style:italic;color:var(--dark-ink-2);max-width:1100px;margin-top:4px;" data-i18n="closing.tagline">Building the future of software development with AI and Agentic DevOps.</p>
+  <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dark-ink-3); margin: 22px 0 14px;">
+    Paula Silva | Software Global Black Belt
+  </div>
+  <a href="mailto:paulasilva@microsoft.com" style="display:inline-flex;align-items:center;gap:12px;padding:14px 20px;border:1px solid rgba(240,240,240,.2);border-radius:8px;text-decoration:none;color:var(--dark-ink);width:fit-content;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;color:var(--dark-ink-2);flex-shrink:0;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+    <span style="font-size:15px;">paulasilva@microsoft.com</span>
+  </a>
+</section>
+
+</div><!-- /deck -->
+
+<div class="kbd-hint" id="kbdHint">
+  Use <kbd>←</kbd> <kbd>→</kbd> to navigate · <kbd>O</kbd> or <kbd>Esc</kbd> for overview
+</div>
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title" id="overviewTitle">Overview</div>
+    <div class="overview__hint" id="overviewHint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+<div class="deck-controls">
+  <button class="deck-controls__btn" onclick="prevSlide()" title="Previous">←</button>
+  <span class="deck-controls__counter" id="counter">1 / 50</span>
+  <button class="deck-controls__btn" onclick="nextSlide()" title="Next">→</button>
+</div>
+
+<script>
+const I18N = {
+  "en": {
+    "meta": {
+      "title": "Token Management & Agent Design"
+    },
+    "labels": {
+      "author": "Author",
+      "role": "Role",
+      "contact": "Contact",
+      "date": "Date"
+    },
+    "cover": {
+      "eyebrow": "Token management & agent design",
+      "part1": "Where the tokens go.",
+      "keyword1": "Where the cost lives.",
+      "part2": "And how to",
+      "keyword2": "redesign agents",
+      "part3": "to spend less and ship more.",
+      "subtitle": "A field guide for engineering leaders who run real agentic workloads in GitHub Copilot, Anthropic API, and Azure AI Foundry, with the June 2026 GitHub AI Credits change as the inflection point."
+    },
+    "agenda": {
+      "eyebrow": "Agenda",
+      "title": "What we cover, in five parts.",
+      "item1": "Foundations · what a token is, where it goes, which model multiplier you pay.",
+      "item2": "Technical disciplines · context engineering, prompt caching, agent design, less-is-more.",
+      "item3": "The June 2026 change · GitHub AI Credits, the 16-week migration, decisions per persona.",
+      "item4": "Governance and operations · FinOps for AI, Azure AI Foundry as the control plane.",
+      "item5": "Practical application · five optimization patterns, ten anti-patterns, three decision frameworks."
+    },
+    "who": {
+      "eyebrow": "Who is speaking",
+      "title": "Paula Silva, <span class=\"accent-blue\">Software Global Black Belt</span>.",
+      "tagline": "Building the future of software development with AI and Agentic DevOps.",
+      "body": "I work with enterprise customers running real agentic workloads on GitHub Copilot, the Anthropic API, and Azure AI Foundry."
+    },
+    "prov": {
+      "eyebrow": "The fact",
+      "title": "On June 1, 2026, GitHub Copilot retires PRUs and switches every paid SKU to AI Credits.",
+      "sub": "If your team still treats Copilot as one undifferentiated commodity, your spend is about to triple silently."
+    },
+    "part1": {
+      "eyebrow": "Part I",
+      "title": "Foundations.",
+      "subtitle": "What a token is, where it goes, which model multiplier you pay. Three chapters."
+    },
+    "part2": {
+      "eyebrow": "Part II",
+      "title": "Technical disciplines.",
+      "subtitle": "Context engineering. Prompt caching. Agent design. Token-efficient strategies. Four chapters."
+    },
+    "part3": {
+      "eyebrow": "Part III",
+      "title": "The change.",
+      "subtitle": "June 1, 2026 · GitHub AI Credits replace PRUs. The 16-week migration."
+    },
+    "part4": {
+      "eyebrow": "Part IV",
+      "title": "Governance and operations.",
+      "subtitle": "FinOps for AI · Inform, Optimize, Operate. Azure AI Foundry as the enterprise control plane."
+    },
+    "ch01": {
+      "tag": "Chapter 01 · Foundations",
+      "title": "Token fundamentals.",
+      "sub": "The model never sees your text. It operates on integers indexed into a vocabulary of 32K to 200K entries."
+    },
+    "ch01eq": {
+      "eyebrow": "Practical equivalences",
+      "title": "A token is not a word. It is a sub-word unit discovered by BPE on a training corpus.",
+      "col1": "Content type",
+      "col2": "Words per token",
+      "col3": "Why",
+      "r1c1": "English prose",
+      "r1c3": "Common words map to single tokens",
+      "r2c1": "Brazilian Portuguese",
+      "r2c3": "Accents and cedillas split into multiple sub-words",
+      "r3c1": "Spanish",
+      "r3c3": "Slightly denser than Portuguese",
+      "r4c1": "Python source",
+      "r4c3": "Symbols, indentation, identifiers are token-heavy",
+      "r5c1": "TypeScript / JSX",
+      "r5c3": "Generics and JSX symbols inflate further",
+      "r6c1": "Structured JSON",
+      "r6c3": "Quotes, braces, separators dominate",
+      "caption": "Rule of thumb: 1,000-line Python ≈ 12,000 tokens."
+    },
+    "ch02": {
+      "tag": "Chapter 02 · Foundations",
+      "title": "Anatomy of consumption.",
+      "sub": "Tokens are not consumed uniformly. Three phases: input, output, cache."
+    },
+    "ch02b": {
+      "eyebrow": "Where the tokens go · empirical distribution",
+      "title": "In real agentic SDLC workloads, input dominates and output is a rounding error."
+    },
+    "ch02c": {
+      "eyebrow": "The agentic multiplier",
+      "title": "A 10-turn agent loop does not cost 10× a single call. It costs <span class=\"accent-red\">~55×</span>, input grows quadratically.",
+      "s1e": "Turn 1",
+      "s1d": "Baseline input.",
+      "s2e": "Turn 5",
+      "s2d": "Conversation history accumulated four times over.",
+      "s3e": "Turn 10",
+      "s3d": "Without compaction or caching, the loop re-sends everything every turn.",
+      "caption": "Caching and compaction collapse this curve back toward linear."
+    },
+    "ch03": {
+      "tag": "Chapter 03 · Foundations",
+      "title": "Models and multipliers.",
+      "sub": "Model is the first-order cost lever. Sonnet vs. Opus on the same task can be 5× without 5× more quality."
+    },
+    "ch03b": {
+      "eyebrow": "Anthropic family · cost spread on identical workloads",
+      "title": "Picking Sonnet over Opus by default is the single biggest lever most teams never pull."
+    },
+    "ch03c": {
+      "eyebrow": "Five-level heuristic",
+      "title": "Default Sonnet. Step up to Opus only on demonstrable hard reasoning.",
+      "l1k": "Level 1 · Trivial",
+      "l1t": "Bundled or Haiku",
+      "l1b": "Code completions, format fixes, doc lookups.",
+      "l2k": "Level 2 · Routine",
+      "l2t": "Bundled (GPT-4.1, GPT-5 mini)",
+      "l2b": "Edit mode, single-file refactors, test stubs.",
+      "l3k": "Level 3 · Default",
+      "l3t": "Sonnet 4.6",
+      "l3b": "Deep code review, agent mode, multi-file work.",
+      "l4k": "Level 4 · Hard",
+      "l4t": "Opus 4.7 · scoped",
+      "l4b": "Architecture, distributed debugging, security review.",
+      "l5k": "Level 5 · Long context",
+      "l5t": "Gemini 3.1 Pro",
+      "l5b": "Whole-codebase analysis, log forensics, >200K context.",
+      "l6k": "Anti-pattern",
+      "l6t": "Opus as default",
+      "l6b": "Most expensive failure mode. 5× the bill, <1.1× the quality on routine tasks."
+    },
+    "ch04": {
+      "tag": "Chapter 04 · Context engineering",
+      "title": "Context rot. The marginal-utility curve.",
+      "sub": "More context is not better. After a threshold, every extra token adds cost without adding signal."
+    },
+    "ch04b": {
+      "eyebrow": "Context rot · measured",
+      "title": "Cost climbs linearly with noise. Quality holds, until it cliffs.",
+      "col1": "Noise level",
+      "col2": "Quality score",
+      "col3": "Cost / session",
+      "col4": "Verdict",
+      "r1": "Optimal",
+      "r2": "Cost doubles, quality flat, already losing money",
+      "r3": "Quality starts dropping",
+      "r4": "Visible degradation",
+      "r5": "Severe rot",
+      "caption": "Levers: compaction, tool-result clearing, retrieval-on-demand."
+    },
+    "ch05": {
+      "tag": "Chapter 05 · Technical disciplines",
+      "title": "Prompt caching. The 90% lever.",
+      "sub": "In conversational workloads, prefix caching cuts input cost by up to 90% without changing one line of prompt."
+    },
+    "ch05b": {
+      "eyebrow": "Cold · warm · the prefix-hash mechanic",
+      "title": "A single byte change in the prefix invalidates the whole cache. Stable first, dynamic last."
+    },
+    "ch06": {
+      "tag": "Chapter 06 · Technical disciplines",
+      "title": "Agent design.",
+      "sub": "There is a hype bias: agents for everything. Workflows solve 70% of enterprise cases at a fraction of the cost."
+    },
+    "ch06b": {
+      "eyebrow": "The distinction that matters",
+      "title": "Workflow vs. agent. The choice changes cost, latency, and operational risk.",
+      "lk": "Workflow · deterministic",
+      "lt": "LLMs and tools orchestrated by code paths.",
+      "lp1": "Known, stable sequence.",
+      "lp2": "Cost is predictable.",
+      "lp3": "Easy to instrument, debug, audit step by step.",
+      "lp4": "Low and stable latency. Fits 70% of enterprise cases.",
+      "rk": "Agent · dynamic",
+      "rt": "LLM decides which tools, in which order, based on intermediate results.",
+      "rp1": "Sequence varies per input. Cost is a distribution.",
+      "rp2": "Pays for the open exploration.",
+      "rp3": "Worth it when the problem is genuinely open-ended.",
+      "rp4": "Demands stop criteria, budgets, telemetry.",
+      "caption": "If you can sketch the steps on paper, use a workflow."
+    },
+    "ch06c": {
+      "eyebrow": "Reference architecture · 5 layers",
+      "title": "The augmented LLM, the orchestration plane, and four token-cost levers, one per layer."
+    },
+    "ch06d": {
+      "eyebrow": "The five Anthropic patterns",
+      "title": "Compose these. Do not invent. Each has a known cost and risk profile.",
+      "p1t": "Prompt chaining",
+      "p1b": "Decompose into ordered steps. Cheapest, most auditable.",
+      "p2t": "Routing",
+      "p2b": "A cheap classifier sends each request to the right specialist.",
+      "p3t": "Parallelization",
+      "p3b": "Fan out independent subtasks, reduce latency.",
+      "p4t": "Orchestrator-workers",
+      "p4b": "Plan with Opus, execute with Sonnet/Haiku.",
+      "p5t": "Evaluator-optimizer",
+      "p5b": "Loop with a critic. Bounded iterations.",
+      "p6k": "Anti-pattern",
+      "p6t": "Multi-agent without coordination",
+      "p6b": "N agents, no shared memory, no contracts."
+    },
+    "ch07": {
+      "eyebrow": "Chapter 07 · Token-efficient strategies",
+      "title": "Less is more. The 700-token review prompt and the 50-token review prompt produce equivalent reviews.",
+      "lk": "Verbose · 700 tokens",
+      "lt": "\"Review this code carefully, considering security, performance, architecture, style, naming, error handling, edge cases, and please be thorough...\"",
+      "lb": "Pays $700 / M tokens just on instructions.",
+      "rk": "Compact · 50 tokens",
+      "rt": "\"Senior reviewer. Flag security, perf, correctness. JSON: {issues:[...]}\"",
+      "rb": "93% reduction. Quality equivalent or better.",
+      "caption": "Pair with progressive disclosure."
+    },
+    "ch08": {
+      "eyebrow": "Chapter 08 · The seven changes",
+      "title": "Seven changes ship together on June 1. Four are silent. Two double your bill if you do nothing.",
+      "col1": "#",
+      "col2": "Change",
+      "col3": "Effect",
+      "r1c2": "PRUs retired in monthly plans",
+      "r1c3": "Old budgets stop applying.",
+      "r2c2": "GitHub AI Credits replace PRUs",
+      "r2c3": "$1 of credits ≈ 1 USD at list price.",
+      "r3c2": "Plan base price unchanged",
+      "r3c3": "$10 / $19 / $39 / $99.",
+      "r4c2": "Completions and NES included",
+      "r4c3": "Code completions and NES do not consume credits.",
+      "r5c2": "Fallback experiences removed",
+      "r5c3": "No more silent downgrade to a free tier.",
+      "r6c2": "Code review doubles in billing",
+      "r6c3": "Each review now bills as two interactions.",
+      "r7c2": "Pro/Pro+ annual stays in PRUs",
+      "r7c3": "Until renewal."
+    },
+    "ch09": {
+      "eyebrow": "Chapter 09 · The 16-week timeline",
+      "title": "May to August · discovery, D-Day, stabilization, optimization, maturation."
+    },
+    "ch09b": {
+      "eyebrow": "Decision per persona · Pro / Pro+ annual",
+      "title": "Three paths. Pick by usage, not by inertia.",
+      "ak": "Path A",
+      "at": "Stay on annual PRUs until expiration",
+      "ab": "Best for steady, predictable usage.",
+      "bk": "Path B",
+      "bt": "Convert to monthly with AI Credits",
+      "bb": "Best for power users who want premium models on demand.",
+      "ck": "Path C",
+      "ct": "Cancel · prorated refund · move to API",
+      "cb": "Best for teams already running mostly direct Anthropic API."
+    },
+    "ch10": {
+      "eyebrow": "Chapter 10 · FinOps for AI",
+      "title": "Inform, Optimize, Operate. The FinOps Foundation phases applied to token spend.",
+      "p1k": "Phase 1 · Inform",
+      "p1t": "Visibility before action",
+      "p1a": "Cost-per-token, per-feature, per-user dashboards.",
+      "p1b": "Tag every call with cost-center and feature.",
+      "p1c": "Surface the top-10 outliers daily.",
+      "p2k": "Phase 2 · Optimize",
+      "p2t": "Pull each lever in ROI order",
+      "p2a": "Model routing first, biggest delta.",
+      "p2b": "Prompt caching second, silent 60–90%.",
+      "p2c": "Compaction and lean tools third.",
+      "p3k": "Phase 3 · Operate",
+      "p3t": "FinOps as a habit",
+      "p3a": "Weekly operational, monthly executive.",
+      "p3b": "Anomaly alerts (3σ).",
+      "p3c": "Quarterly tariff review."
+    },
+    "ch10b": {
+      "eyebrow": "FinOps waterfall · cumulative savings",
+      "title": "In sequence, the four levers compound from $1.00 to <span class=\"accent-green\">$0.18</span> per equivalent session.",
+      "caption": "Order matters. Each lever stacks on the previous one."
+    },
+    "ch11": {
+      "tag": "Chapter 11 · Governance",
+      "title": "Azure AI Foundry · the enterprise control plane.",
+      "sub": "Where Foundry fits next to Copilot and direct API."
+    },
+    "ch11b": {
+      "eyebrow": "Where Foundry fits",
+      "title": "Three lanes, one control plane. Use them in combination, not in opposition."
+    },
+    "ch12": {
+      "eyebrow": "Chapter 12 · Five applied patterns",
+      "title": "Five patterns you can paste into production this week.",
+      "p1t": "Dynamic routing by complexity",
+      "p1b": "Static keyword heuristic dispatches to Haiku / Sonnet / Opus.",
+      "p2t": "Hierarchical cache · 3 layers",
+      "p2b": "In-process LRU → Redis → Anthropic prefix cache.",
+      "p3t": "Subagent fan-out",
+      "p3b": "Independent subtasks parallel on Haiku, synthesis on Sonnet.",
+      "p4t": "Plan / Execute",
+      "p4b": "Opus designs the plan once. Sonnet/Haiku execute.",
+      "p5t": "Semantic cache with fallback",
+      "p5b": "Embedding-similarity hits return canned answers.",
+      "p6k": "Reference",
+      "p6t": "Code · Appendix D",
+      "p6b": "Production-ready router, cache helpers, OpenTelemetry."
+    },
+    "ch13": {
+      "eyebrow": "Chapter 13 · Anti-patterns and decision frameworks",
+      "title": "The decision tree · which optimization to pull, in which order."
+    },
+    "ch13b": {
+      "eyebrow": "The ten cataloged anti-patterns",
+      "title": "If your team is doing two of these, the bill is already 2× what it should be.",
+      "a1": "The agent graveyard",
+      "a2": "Everything is an agent",
+      "a3": "Opus as default",
+      "a4": "Monolithic system prompt",
+      "a5": "Tool result blowup",
+      "a6": "No stop criteria",
+      "a7": "Cache that never caches",
+      "a8": "Long context misuse",
+      "a9": "Multi-agent without coordination",
+      "a10": "No instrumentation",
+      "caption": "Self-audit: pick the two most expensive ones for your team and fix them this sprint."
+    },
+    "appA": {
+      "tag": "Appendix A · Optimized prompts",
+      "title": "A library of compact system prompts and lean tool definitions.",
+      "sub": "Code reviewer, test writer, doc writer · plus tool definitions for read, search, run-tests."
+    },
+    "appB": {
+      "eyebrow": "Appendix B · Pricing reference card",
+      "title": "USD per million tokens · the bar chart that ends every Opus-by-default debate.",
+      "caption": "Cached input is 10% of these numbers."
+    },
+    "applied": {
+      "eyebrow": "Applied · 50-developer org · before / after 90 days",
+      "title": "Real numbers, not slideware. The same workload, half the bill.",
+      "lk": "Before · day 0",
+      "lt": "$48K / month · 50 devs · Opus default · no caching",
+      "lp1": "~70% of agent calls hit Opus.",
+      "lp2": "Cache hit rate: 4%.",
+      "lp3": "Top 10% of users absorb 52% of total spend.",
+      "lp4": "No cost-per-feature, no anomaly alerts.",
+      "rk": "After · day 90",
+      "rt": "$22K / month · 50 devs · same throughput, more agentic features shipped",
+      "rp1": "Sonnet handles 80% of agent traffic.",
+      "rp2": "Cache hit rate: 71%.",
+      "rp3": "Top 10% rebalanced via routing.",
+      "rp4": "Cost-per-feature dashboard live."
+    },
+    "checklist": {
+      "eyebrow": "First 90 days · the operator's checklist",
+      "title": "Twelve concrete actions, in order. If you skip step 1, the rest is wasted.",
+      "i1": "Inventory PRU spend per persona. Tag every agent call with cost-center and feature.",
+      "i2": "Set Sonnet 4.6 as the workspace default. Allowlist Opus per repo with justification.",
+      "i3": "Roll out cache_control on the three biggest stable blocks.",
+      "i4": "Compaction + tool result clearing. Lean prompt rewrite of top-3 templates.",
+      "i5": "Model routing in the pipeline. Plan/Execute split for Opus. Anomaly alerts at 3σ."
+    },
+    "closing": {
+      "eyebrow": "Microsoft · Token Management & Agent Design · 2026-05-06",
+      "line1": "The model is one lever.",
+      "line2": "The architecture is the other four.",
+      "tagline": "Building the future of software development with AI and Agentic DevOps."
+    }
+  },
+  "pt-BR": {
+    "meta": {
+      "title": "Gestão de tokens e design de agentes"
+    },
+    "labels": {
+      "author": "Autora",
+      "role": "Papel",
+      "contact": "Contato",
+      "date": "Data"
+    },
+    "cover": {
+      "eyebrow": "Gestão de tokens e design de agentes",
+      "part1": "Para onde vão os tokens.",
+      "keyword1": "Onde mora o custo.",
+      "part2": "E como",
+      "keyword2": "redesenhar agentes",
+      "part3": "para gastar menos e entregar mais.",
+      "subtitle": "Um guia de campo para líderes de engenharia que rodam cargas agênticas reais em GitHub Copilot, Anthropic API e Azure AI Foundry."
+    },
+    "agenda": {
+      "eyebrow": "Agenda",
+      "title": "O que cobrimos, em cinco partes.",
+      "item1": "Fundamentos · o que é um token, para onde ele vai, qual multiplicador.",
+      "item2": "Disciplinas técnicas · context engineering, prompt caching, design de agentes.",
+      "item3": "A virada de junho de 2026 · GitHub AI Credits, migração de 16 semanas.",
+      "item4": "Governança e operação · FinOps para IA, Azure AI Foundry.",
+      "item5": "Aplicação prática · cinco padrões, dez anti-padrões, três frameworks."
+    },
+    "who": {
+      "eyebrow": "Quem fala",
+      "title": "Paula Silva, <span class=\"accent-blue\">Software Global Black Belt</span>.",
+      "tagline": "Building the future of software development with AI and Agentic DevOps.",
+      "body": "Trabalho com clientes enterprise rodando cargas agênticas reais em GitHub Copilot, Anthropic API e Azure AI Foundry."
+    },
+    "prov": {
+      "eyebrow": "O fato",
+      "title": "Em 1º de junho de 2026, o GitHub Copilot aposenta os PRUs e migra todo plano pago para AI Credits.",
+      "sub": "Se seu time ainda trata Copilot como uma commodity indiferenciada, seu gasto vai triplicar silenciosamente."
+    },
+    "part1": {
+      "eyebrow": "Parte I",
+      "title": "Fundamentos.",
+      "subtitle": "O que é um token, para onde ele vai, qual multiplicador você paga."
+    },
+    "part2": {
+      "eyebrow": "Parte II",
+      "title": "Disciplinas técnicas.",
+      "subtitle": "Context engineering. Prompt caching. Design de agentes. Estratégias token-efficient."
+    },
+    "part3": {
+      "eyebrow": "Parte III",
+      "title": "A virada.",
+      "subtitle": "1º de junho de 2026 · GitHub AI Credits substituem PRUs."
+    },
+    "part4": {
+      "eyebrow": "Parte IV",
+      "title": "Governança e operação.",
+      "subtitle": "FinOps para IA. Azure AI Foundry como plano de controle empresarial."
+    },
+    "ch01": {
+      "tag": "Capítulo 01 · Fundamentos",
+      "title": "Fundamentos de token.",
+      "sub": "O modelo nunca vê seu texto. Ele opera sobre inteiros indexados em um vocabulário de 32K a 200K entradas."
+    },
+    "ch01eq": {
+      "eyebrow": "Equivalências práticas",
+      "title": "Token não é palavra. É uma unidade sub-palavra descoberta por BPE em um corpus de treino.",
+      "col1": "Tipo de conteúdo",
+      "col2": "Palavras por token",
+      "col3": "Por quê",
+      "r1c1": "Texto em inglês",
+      "r1c3": "Palavras comuns mapeiam para um token",
+      "r2c1": "Português brasileiro",
+      "r2c3": "Acentos e cedilhas se quebram",
+      "r3c1": "Espanhol",
+      "r3c3": "Levemente mais denso que o português",
+      "r4c1": "Código Python",
+      "r4c3": "Símbolos e identificadores são caros",
+      "r5c1": "TypeScript / JSX",
+      "r5c3": "Genéricos inflam ainda mais",
+      "r6c1": "JSON estruturado",
+      "r6c3": "Aspas e separadores dominam",
+      "caption": "Regra: arquivo Python de 1.000 linhas ≈ 12.000 tokens."
+    },
+    "ch02": {
+      "tag": "Capítulo 02 · Fundamentos",
+      "title": "Anatomia do consumo.",
+      "sub": "Tokens não são consumidos uniformemente. Três fases: input, output, cache."
+    },
+    "ch02b": {
+      "eyebrow": "Para onde vão os tokens · distribuição empírica",
+      "title": "Em workloads agênticos reais de SDLC, input domina e output é arredondamento."
+    },
+    "ch02c": {
+      "eyebrow": "O multiplicador agêntico",
+      "title": "Um loop agêntico de 10 turnos não custa 10× uma chamada. Custa <span class=\"accent-red\">~55×</span>, input cresce quadraticamente.",
+      "s1e": "Turno 1",
+      "s1d": "Input baseline.",
+      "s2e": "Turno 5",
+      "s2d": "Histórico acumulado quatro vezes.",
+      "s3e": "Turno 10",
+      "s3d": "Sem compactação ou cache, o loop reenvia tudo a cada turno.",
+      "caption": "Cache e compactação trazem a curva de volta para o linear."
+    },
+    "ch03": {
+      "tag": "Capítulo 03 · Fundamentos",
+      "title": "Modelos e multiplicadores.",
+      "sub": "Modelo é a alavanca de custo de primeira ordem. Sonnet vs. Opus pode ser 5× sem 5× mais qualidade."
+    },
+    "ch03b": {
+      "eyebrow": "Família Anthropic · spread de custo",
+      "title": "Escolher Sonnet em vez de Opus por padrão é a maior alavanca que a maioria dos times nunca puxa."
+    },
+    "ch03c": {
+      "eyebrow": "Heurística de cinco níveis",
+      "title": "Sonnet por padrão. Sobe para Opus só em raciocínio difícil.",
+      "l1k": "Nível 1 · Trivial",
+      "l1t": "Bundled ou Haiku",
+      "l1b": "Completions, formatação, lookups.",
+      "l2k": "Nível 2 · Rotina",
+      "l2t": "Bundled (GPT-4.1, GPT-5 mini)",
+      "l2b": "Edit mode, refactors de arquivo único.",
+      "l3k": "Nível 3 · Padrão",
+      "l3t": "Sonnet 4.6",
+      "l3b": "Code review profundo, agent mode.",
+      "l4k": "Nível 4 · Difícil",
+      "l4t": "Opus 4.7 · escopado",
+      "l4b": "Arquitetura, debugging distribuído.",
+      "l5k": "Nível 5 · Long context",
+      "l5t": "Gemini 3.1 Pro",
+      "l5b": "Análise de codebase inteiro.",
+      "l6k": "Anti-padrão",
+      "l6t": "Opus por padrão",
+      "l6b": "Modo de falha mais caro. 5× a fatura."
+    },
+    "ch04": {
+      "tag": "Capítulo 04 · Context engineering",
+      "title": "Context rot. A curva de utilidade marginal.",
+      "sub": "Mais contexto não é melhor. Passado um limiar, cada token extra adiciona custo sem adicionar sinal."
+    },
+    "ch04b": {
+      "eyebrow": "Context rot · medido",
+      "title": "Custo sobe linearmente com ruído. Qualidade segura, até despencar.",
+      "col1": "Nível de ruído",
+      "col2": "Score de qualidade",
+      "col3": "Custo / sessão",
+      "col4": "Veredicto",
+      "r1": "Ótimo",
+      "r2": "Custo dobra, qualidade plana",
+      "r3": "Qualidade começa a cair",
+      "r4": "Degradação visível",
+      "r5": "Rot severo",
+      "caption": "Alavancas: compactação, tool-result clearing, retrieval-on-demand."
+    },
+    "ch05": {
+      "tag": "Capítulo 05 · Disciplinas técnicas",
+      "title": "Prompt caching. A alavanca dos 90%.",
+      "sub": "Em workloads conversacionais, o cache de prefixo corta o custo de input em até 90%."
+    },
+    "ch05b": {
+      "eyebrow": "Frio · quente · a mecânica do hash de prefixo",
+      "title": "Um único byte alterado no prefixo invalida o cache inteiro."
+    },
+    "ch06": {
+      "tag": "Capítulo 06 · Disciplinas técnicas",
+      "title": "Design de agentes.",
+      "sub": "Workflows resolvem 70% dos casos enterprise por uma fração do custo."
+    },
+    "ch06b": {
+      "eyebrow": "A distinção que importa",
+      "title": "Workflow vs. agente. A escolha muda custo, latência e risco operacional.",
+      "lk": "Workflow · determinístico",
+      "lt": "LLMs e tools orquestrados por código.",
+      "lp1": "Sequência conhecida e estável.",
+      "lp2": "Custo previsível.",
+      "lp3": "Fácil de instrumentar e auditar.",
+      "lp4": "Latência baixa e estável.",
+      "rk": "Agente · dinâmico",
+      "rt": "O LLM decide quais tools, em que ordem.",
+      "rp1": "Sequência varia por input.",
+      "rp2": "Paga pela exploração aberta.",
+      "rp3": "Vale quando o problema é genuinamente aberto.",
+      "rp4": "Exige stop criteria, orçamentos.",
+      "caption": "Se você consegue desenhar os passos no papel, use workflow."
+    },
+    "ch06c": {
+      "eyebrow": "Arquitetura de referência · 5 camadas",
+      "title": "O LLM aumentado, o plano de orquestração e quatro alavancas, uma por camada."
+    },
+    "ch06d": {
+      "eyebrow": "Os cinco padrões da Anthropic",
+      "title": "Componha estes. Não invente.",
+      "p1t": "Prompt chaining",
+      "p1b": "Decompõe em passos ordenados.",
+      "p2t": "Routing",
+      "p2b": "Classificador barato manda cada request ao especialista.",
+      "p3t": "Paralelização",
+      "p3b": "Fan-out de subtarefas independentes.",
+      "p4t": "Orchestrator-workers",
+      "p4b": "Planeja com Opus, executa com Sonnet/Haiku.",
+      "p5t": "Evaluator-optimizer",
+      "p5b": "Loop com crítico. Iterações limitadas.",
+      "p6k": "Anti-padrão",
+      "p6t": "Multi-agente sem coordenação",
+      "p6b": "N agentes sem memória compartilhada."
+    },
+    "ch07": {
+      "eyebrow": "Capítulo 07 · Estratégias token-efficient",
+      "title": "Less is more. Prompt de 700 e prompt de 50 tokens produzem reviews equivalentes.",
+      "lk": "Verboso · 700 tokens",
+      "lt": "Instruções longas e prolixas, repetidas a cada turno.",
+      "lb": "Paga $700 / M só em instruções.",
+      "rk": "Compacto · 50 tokens",
+      "rt": "\"Revisor sênior. Sinalize segurança, perf, correção. JSON.\"",
+      "rb": "Redução de 93%. Qualidade equivalente ou melhor.",
+      "caption": "Combine com progressive disclosure."
+    },
+    "ch08": {
+      "eyebrow": "Capítulo 08 · As sete mudanças",
+      "title": "Sete mudanças entram juntas em 1º de junho. Quatro silenciosas. Duas dobram sua fatura.",
+      "col1": "#",
+      "col2": "Mudança",
+      "col3": "Efeito",
+      "r1c2": "PRUs aposentados nos planos mensais",
+      "r1c3": "Orçamentos antigos param.",
+      "r2c2": "GitHub AI Credits substituem PRUs",
+      "r2c3": "$1 ≈ 1 USD em preço de tabela.",
+      "r3c2": "Preço base do plano não muda",
+      "r3c3": "$10 / $19 / $39 / $99.",
+      "r4c2": "Completions e NES inclusos",
+      "r4c3": "Não consomem credits.",
+      "r5c2": "Fallbacks removidos",
+      "r5c3": "Acabou downgrade silencioso.",
+      "r6c2": "Code review dobra no billing",
+      "r6c3": "Cobrado como duas interações.",
+      "r7c2": "Pro/Pro+ anual permanece em PRUs",
+      "r7c3": "Até a renovação."
+    },
+    "ch09": {
+      "eyebrow": "Capítulo 09 · O cronograma de 16 semanas",
+      "title": "De maio a agosto · descoberta, D-Day, estabilização, otimização, maturação."
+    },
+    "ch09b": {
+      "eyebrow": "Decisão por persona · Pro / Pro+ anual",
+      "title": "Três caminhos. Escolha por uso, não por inércia.",
+      "ak": "Path A",
+      "at": "Continuar no anual em PRUs até expirar",
+      "ab": "Bom para uso estável e previsível.",
+      "bk": "Path B",
+      "bt": "Converter para mensal com AI Credits",
+      "bb": "Bom para power users.",
+      "ck": "Path C",
+      "ct": "Cancelar · refund proporcional · API direta",
+      "cb": "Bom para times já em Anthropic API direto."
+    },
+    "ch10": {
+      "eyebrow": "Capítulo 10 · FinOps para IA",
+      "title": "Inform, Optimize, Operate. As fases do FinOps Foundation aplicadas ao gasto com tokens.",
+      "p1k": "Fase 1 · Inform",
+      "p1t": "Visibilidade antes de ação",
+      "p1a": "Dashboards de custo por token, feature, usuário.",
+      "p1b": "Tagueie cada chamada com cost-center.",
+      "p1c": "Top-10 outliers diários expostos.",
+      "p2k": "Fase 2 · Optimize",
+      "p2t": "Puxe cada alavanca em ordem de ROI",
+      "p2a": "Model routing primeiro, maior delta.",
+      "p2b": "Prompt caching segundo, 60–90%.",
+      "p2c": "Compactação e tools enxutas em terceiro.",
+      "p3k": "Fase 3 · Operate",
+      "p3t": "FinOps como hábito",
+      "p3a": "Relatório semanal e mensal.",
+      "p3b": "Alertas de anomalia 3σ.",
+      "p3c": "Revisão tarifária trimestral."
+    },
+    "ch10b": {
+      "eyebrow": "Cascata FinOps · economia cumulativa",
+      "title": "Em sequência, as quatro alavancas compõem de $1,00 para <span class=\"accent-green\">$0,18</span> por sessão.",
+      "caption": "Ordem importa. Cada alavanca empilha sobre a anterior."
+    },
+    "ch11": {
+      "tag": "Capítulo 11 · Governança",
+      "title": "Azure AI Foundry · o plano de controle empresarial.",
+      "sub": "Onde Foundry se encaixa ao lado do Copilot e da API direta."
+    },
+    "ch11b": {
+      "eyebrow": "Onde Foundry se encaixa",
+      "title": "Três pistas, um plano de controle. Use em combinação, não em oposição."
+    },
+    "ch12": {
+      "eyebrow": "Capítulo 12 · Cinco padrões aplicados",
+      "title": "Cinco padrões que você cola em produção esta semana.",
+      "p1t": "Roteamento dinâmico por complexidade",
+      "p1b": "Heurística estática por keywords.",
+      "p2t": "Cache hierárquico · 3 camadas",
+      "p2b": "LRU → Redis → cache de prefixo.",
+      "p3t": "Subagent fan-out",
+      "p3b": "Subtarefas paralelas no Haiku, síntese no Sonnet.",
+      "p4t": "Plan / Execute",
+      "p4b": "Opus desenha o plano, Sonnet executa.",
+      "p5t": "Cache semântico com fallback",
+      "p5b": "Hits por similaridade de embeddings.",
+      "p6k": "Referência",
+      "p6t": "Código · Apêndice D",
+      "p6b": "Router production-ready, helpers, OpenTelemetry."
+    },
+    "ch13": {
+      "eyebrow": "Capítulo 13 · Anti-padrões e frameworks de decisão",
+      "title": "A árvore de decisão · qual otimização puxar, em qual ordem."
+    },
+    "ch13b": {
+      "eyebrow": "Os dez anti-padrões catalogados",
+      "title": "Se seu time está fazendo dois destes, a fatura já é 2× do que devia ser.",
+      "a1": "O cemitério de agentes",
+      "a2": "Tudo é agente",
+      "a3": "Opus por padrão",
+      "a4": "System prompt monolítico",
+      "a5": "Tool result blowup",
+      "a6": "Sem stop criteria",
+      "a7": "Cache que nunca cacheia",
+      "a8": "Mau uso de long context",
+      "a9": "Multi-agente sem coordenação",
+      "a10": "Sem instrumentação",
+      "caption": "Auto-auditoria: corrija os dois mais caros nesta sprint."
+    },
+    "appA": {
+      "tag": "Apêndice A · Prompts otimizados",
+      "title": "Uma biblioteca de system prompts compactos e tool definitions enxutas.",
+      "sub": "Code reviewer, test writer, doc writer."
+    },
+    "appB": {
+      "eyebrow": "Apêndice B · Cartão de pricing",
+      "title": "USD por milhão de tokens · o gráfico que encerra o debate.",
+      "caption": "Input cacheado é 10% destes números."
+    },
+    "applied": {
+      "eyebrow": "Aplicado · org de 50 devs · antes / depois de 90 dias",
+      "title": "Números reais. Mesmo workload, metade da fatura.",
+      "lk": "Antes · dia 0",
+      "lt": "$48K / mês · 50 devs · Opus padrão",
+      "lp1": "~70% das chamadas batem em Opus.",
+      "lp2": "Cache hit rate: 4%.",
+      "lp3": "Top 10% absorvem 52% do gasto.",
+      "lp4": "Sem custo por feature.",
+      "rk": "Depois · dia 90",
+      "rt": "$22K / mês · 50 devs · mesmo throughput",
+      "rp1": "Sonnet atende 80%.",
+      "rp2": "Cache hit rate: 71%.",
+      "rp3": "Top 10% rebalanceado.",
+      "rp4": "Dashboards e alertas ativos."
+    },
+    "checklist": {
+      "eyebrow": "Primeiros 90 dias · checklist do operador",
+      "title": "Doze ações concretas, em ordem.",
+      "i1": "Inventarie o gasto de PRU por persona.",
+      "i2": "Defina Sonnet 4.6 como padrão do workspace.",
+      "i3": "Roll-out de cache_control nos blocos estáveis.",
+      "i4": "Compactação + tool result clearing no loop.",
+      "i5": "Model routing no pipeline. Plan/Execute split."
+    },
+    "closing": {
+      "eyebrow": "Microsoft · Token Management & Agent Design · 2026-05-06",
+      "line1": "O modelo é uma alavanca.",
+      "line2": "A arquitetura são as outras quatro.",
+      "tagline": "Building the future of software development with AI and Agentic DevOps."
+    }
+  },
+  "es": {
+    "meta": {
+      "title": "Gestión de tokens y diseño de agentes"
+    },
+    "labels": {
+      "author": "Autora",
+      "role": "Rol",
+      "contact": "Contacto",
+      "date": "Fecha"
+    },
+    "cover": {
+      "eyebrow": "Gestión de tokens y diseño de agentes",
+      "part1": "Adónde van los tokens.",
+      "keyword1": "Dónde vive el costo.",
+      "part2": "Y cómo",
+      "keyword2": "rediseñar agentes",
+      "part3": "para gastar menos y entregar más.",
+      "subtitle": "Una guía de campo para líderes de ingeniería que ejecutan cargas agénticas reales en GitHub Copilot, Anthropic API y Azure AI Foundry."
+    },
+    "agenda": {
+      "eyebrow": "Agenda",
+      "title": "Lo que cubrimos, en cinco partes.",
+      "item1": "Fundamentos · qué es un token, adónde va, qué multiplicador pagas.",
+      "item2": "Disciplinas técnicas · context engineering, prompt caching, diseño de agentes.",
+      "item3": "El cambio de junio de 2026 · GitHub AI Credits, migración de 16 semanas.",
+      "item4": "Gobernanza y operación · FinOps, Azure AI Foundry.",
+      "item5": "Aplicación práctica · cinco patrones, diez antipatrones, tres marcos."
+    },
+    "who": {
+      "eyebrow": "Quién habla",
+      "title": "Paula Silva, <span class=\"accent-blue\">Software Global Black Belt</span>.",
+      "tagline": "Building the future of software development with AI and Agentic DevOps.",
+      "body": "Trabajo con clientes enterprise que ejecutan cargas agénticas reales en GitHub Copilot, la API de Anthropic y Azure AI Foundry."
+    },
+    "prov": {
+      "eyebrow": "El hecho",
+      "title": "El 1 de junio de 2026, GitHub Copilot retira los PRUs y migra todo SKU pago a AI Credits.",
+      "sub": "Si tu equipo aún trata Copilot como una commodity indiferenciada, tu gasto va a triplicarse en silencio."
+    },
+    "part1": {
+      "eyebrow": "Parte I",
+      "title": "Fundamentos.",
+      "subtitle": "Qué es un token, adónde va, qué multiplicador pagas."
+    },
+    "part2": {
+      "eyebrow": "Parte II",
+      "title": "Disciplinas técnicas.",
+      "subtitle": "Context engineering. Prompt caching. Diseño de agentes. Estrategias token-efficient."
+    },
+    "part3": {
+      "eyebrow": "Parte III",
+      "title": "El cambio.",
+      "subtitle": "1 de junio de 2026 · GitHub AI Credits reemplazan los PRUs."
+    },
+    "part4": {
+      "eyebrow": "Parte IV",
+      "title": "Gobernanza y operación.",
+      "subtitle": "FinOps para IA. Azure AI Foundry como plano de control empresarial."
+    },
+    "ch01": {
+      "tag": "Capítulo 01 · Fundamentos",
+      "title": "Fundamentos del token.",
+      "sub": "El modelo nunca ve tu texto. Opera sobre enteros indexados en un vocabulario de 32K a 200K entradas."
+    },
+    "ch01eq": {
+      "eyebrow": "Equivalencias prácticas",
+      "title": "Un token no es una palabra. Es una sub-unidad descubierta por BPE.",
+      "col1": "Tipo de contenido",
+      "col2": "Palabras por token",
+      "col3": "Por qué",
+      "r1c1": "Prosa en inglés",
+      "r1c3": "Palabras comunes mapean a un token",
+      "r2c1": "Portugués brasileño",
+      "r2c3": "Acentos y cedillas se rompen",
+      "r3c1": "Español",
+      "r3c3": "Levemente más denso que el portugués",
+      "r4c1": "Código Python",
+      "r4c3": "Símbolos e identificadores son caros",
+      "r5c1": "TypeScript / JSX",
+      "r5c3": "Genéricos inflan aún más",
+      "r6c1": "JSON estructurado",
+      "r6c3": "Comillas y separadores dominan",
+      "caption": "Regla: archivo Python de 1.000 líneas ≈ 12.000 tokens."
+    },
+    "ch02": {
+      "tag": "Capítulo 02 · Fundamentos",
+      "title": "Anatomía del consumo.",
+      "sub": "Los tokens no se consumen uniformemente. Tres fases: input, output, cache."
+    },
+    "ch02b": {
+      "eyebrow": "Adónde van los tokens · distribución empírica",
+      "title": "En cargas agénticas reales de SDLC, el input domina y el output es casi un redondeo."
+    },
+    "ch02c": {
+      "eyebrow": "El multiplicador agéntico",
+      "title": "Un loop de 10 turnos no cuesta 10× una llamada. Cuesta <span class=\"accent-red\">~55×</span>.",
+      "s1e": "Turno 1",
+      "s1d": "Input baseline.",
+      "s2e": "Turno 5",
+      "s2d": "Historial acumulado cuatro veces.",
+      "s3e": "Turno 10",
+      "s3d": "Sin compactación ni cache, el loop reenvía todo.",
+      "caption": "Cache y compactación devuelven la curva a lineal."
+    },
+    "ch03": {
+      "tag": "Capítulo 03 · Fundamentos",
+      "title": "Modelos y multiplicadores.",
+      "sub": "El modelo es la palanca de costo de primer orden. Sonnet vs. Opus puede ser 5× sin 5× más calidad."
+    },
+    "ch03b": {
+      "eyebrow": "Familia Anthropic · spread de costo",
+      "title": "Elegir Sonnet en lugar de Opus por defecto es la mayor palanca."
+    },
+    "ch03c": {
+      "eyebrow": "Heurística de cinco niveles",
+      "title": "Sonnet por defecto. Sube a Opus solo en razonamiento difícil.",
+      "l1k": "Nivel 1 · Trivial",
+      "l1t": "Bundled o Haiku",
+      "l1b": "Completions, formato, lookups.",
+      "l2k": "Nivel 2 · Rutina",
+      "l2t": "Bundled (GPT-4.1, GPT-5 mini)",
+      "l2b": "Edit mode, refactors de un archivo.",
+      "l3k": "Nivel 3 · Por defecto",
+      "l3t": "Sonnet 4.6",
+      "l3b": "Code review profundo, agent mode.",
+      "l4k": "Nivel 4 · Difícil",
+      "l4t": "Opus 4.7 · acotado",
+      "l4b": "Arquitectura, debugging distribuido.",
+      "l5k": "Nivel 5 · Long context",
+      "l5t": "Gemini 3.1 Pro",
+      "l5b": "Análisis de codebase entero.",
+      "l6k": "Antipatrón",
+      "l6t": "Opus por defecto",
+      "l6b": "El modo de falla más caro."
+    },
+    "ch04": {
+      "tag": "Capítulo 04 · Context engineering",
+      "title": "Context rot. La curva de utilidad marginal.",
+      "sub": "Más contexto no es mejor. Pasado un umbral, cada token extra agrega costo sin agregar señal."
+    },
+    "ch04b": {
+      "eyebrow": "Context rot · medido",
+      "title": "El costo sube linealmente con el ruido. La calidad aguanta, hasta que cae.",
+      "col1": "Nivel de ruido",
+      "col2": "Score de calidad",
+      "col3": "Costo / sesión",
+      "col4": "Veredicto",
+      "r1": "Óptimo",
+      "r2": "Costo se duplica, calidad plana",
+      "r3": "La calidad empieza a bajar",
+      "r4": "Degradación visible",
+      "r5": "Rot severo",
+      "caption": "Palancas: compactación, tool-result clearing, retrieval-on-demand."
+    },
+    "ch05": {
+      "tag": "Capítulo 05 · Disciplinas técnicas",
+      "title": "Prompt caching. La palanca del 90%.",
+      "sub": "El cache de prefijo recorta el costo de input hasta un 90%."
+    },
+    "ch05b": {
+      "eyebrow": "Frío · cálido · la mecánica del hash de prefijo",
+      "title": "Un solo byte cambiado en el prefijo invalida todo el cache."
+    },
+    "ch06": {
+      "tag": "Capítulo 06 · Disciplinas técnicas",
+      "title": "Diseño de agentes.",
+      "sub": "Los workflows resuelven el 70% de los casos enterprise por una fracción del costo."
+    },
+    "ch06b": {
+      "eyebrow": "La distinción que importa",
+      "title": "Workflow vs. agente. La elección cambia costo, latencia y riesgo.",
+      "lk": "Workflow · determinístico",
+      "lt": "LLMs y tools orquestados por código.",
+      "lp1": "Secuencia conocida y estable.",
+      "lp2": "Costo predecible.",
+      "lp3": "Fácil de instrumentar y auditar.",
+      "lp4": "Latencia baja y estable.",
+      "rk": "Agente · dinámico",
+      "rt": "El LLM decide qué tools, en qué orden.",
+      "rp1": "La secuencia varía por input.",
+      "rp2": "Paga por la exploración abierta.",
+      "rp3": "Vale cuando el problema es genuinamente abierto.",
+      "rp4": "Exige stop criteria, presupuestos.",
+      "caption": "Si puedes esbozar los pasos en papel, usa workflow."
+    },
+    "ch06c": {
+      "eyebrow": "Arquitectura de referencia · 5 capas",
+      "title": "El LLM aumentado, el plano de orquestación y cuatro palancas, una por capa."
+    },
+    "ch06d": {
+      "eyebrow": "Los cinco patrones de Anthropic",
+      "title": "Combina estos. No inventes.",
+      "p1t": "Prompt chaining",
+      "p1b": "Descompone en pasos ordenados.",
+      "p2t": "Routing",
+      "p2b": "Clasificador barato envía cada request al especialista.",
+      "p3t": "Paralelización",
+      "p3b": "Fan-out de subtareas independientes.",
+      "p4t": "Orchestrator-workers",
+      "p4b": "Plan con Opus, ejecución con Sonnet/Haiku.",
+      "p5t": "Evaluator-optimizer",
+      "p5b": "Loop con crítico. Iteraciones limitadas.",
+      "p6k": "Antipatrón",
+      "p6t": "Multi-agente sin coordinación",
+      "p6b": "N agentes sin memoria compartida."
+    },
+    "ch07": {
+      "eyebrow": "Capítulo 07 · Estrategias token-efficient",
+      "title": "Less is more. Prompt de 700 y de 50 tokens producen reviews equivalentes.",
+      "lk": "Verboso · 700 tokens",
+      "lt": "Instrucciones largas, repetidas cada turno.",
+      "lb": "Paga $700 / M solo en instrucciones.",
+      "rk": "Compacto · 50 tokens",
+      "rt": "\"Revisor sénior. Marca seguridad, perf, corrección. JSON.\"",
+      "rb": "Reducción del 93%. Calidad equivalente o mejor.",
+      "caption": "Combina con progressive disclosure."
+    },
+    "ch08": {
+      "eyebrow": "Capítulo 08 · Los siete cambios",
+      "title": "Siete cambios entran juntos el 1 de junio. Cuatro silenciosos. Dos duplican tu factura.",
+      "col1": "#",
+      "col2": "Cambio",
+      "col3": "Efecto",
+      "r1c2": "PRUs retirados en planes mensuales",
+      "r1c3": "Los presupuestos viejos dejan de aplicar.",
+      "r2c2": "GitHub AI Credits reemplazan PRUs",
+      "r2c3": "$1 ≈ 1 USD al precio de lista.",
+      "r3c2": "Precio base no cambia",
+      "r3c3": "$10 / $19 / $39 / $99.",
+      "r4c2": "Completions y NES incluidos",
+      "r4c3": "No consumen credits.",
+      "r5c2": "Fallbacks removidos",
+      "r5c3": "Se acabó el downgrade silencioso.",
+      "r6c2": "Code review se duplica en billing",
+      "r6c3": "Cobrado como dos interacciones.",
+      "r7c2": "Pro/Pro+ anual sigue en PRUs",
+      "r7c3": "Hasta la renovación."
+    },
+    "ch09": {
+      "eyebrow": "Capítulo 09 · El cronograma de 16 semanas",
+      "title": "De mayo a agosto · descubrimiento, D-Day, estabilización, optimización, maduración."
+    },
+    "ch09b": {
+      "eyebrow": "Decisión por persona · Pro / Pro+ anual",
+      "title": "Tres caminos. Elige por uso, no por inercia.",
+      "ak": "Path A",
+      "at": "Quedarte en anual con PRUs hasta que expire",
+      "ab": "Bueno para uso estable y predecible.",
+      "bk": "Path B",
+      "bt": "Convertir a mensual con AI Credits",
+      "bb": "Bueno para power users.",
+      "ck": "Path C",
+      "ct": "Cancelar · reembolso · API directa",
+      "cb": "Bueno para equipos ya en API directa."
+    },
+    "ch10": {
+      "eyebrow": "Capítulo 10 · FinOps para IA",
+      "title": "Inform, Optimize, Operate. Las fases de FinOps Foundation aplicadas al gasto en tokens.",
+      "p1k": "Fase 1 · Inform",
+      "p1t": "Visibilidad antes de actuar",
+      "p1a": "Dashboards de costo por token, feature, usuario.",
+      "p1b": "Etiqueta cada llamada con cost-center.",
+      "p1c": "Top-10 outliers diarios visibles.",
+      "p2k": "Fase 2 · Optimize",
+      "p2t": "Tira cada palanca en orden de ROI",
+      "p2a": "Model routing primero, el mayor delta.",
+      "p2b": "Prompt caching segundo, 60–90%.",
+      "p2c": "Compactación y tools magras en tercero.",
+      "p3k": "Fase 3 · Operate",
+      "p3t": "FinOps como hábito",
+      "p3a": "Reporte semanal y mensual.",
+      "p3b": "Alertas de anomalía 3σ.",
+      "p3c": "Revisión tarifaria trimestral."
+    },
+    "ch10b": {
+      "eyebrow": "Cascada FinOps · ahorro acumulado",
+      "title": "En secuencia, las cuatro palancas componen de $1,00 a <span class=\"accent-green\">$0,18</span> por sesión.",
+      "caption": "El orden importa. Cada palanca apila sobre la anterior."
+    },
+    "ch11": {
+      "tag": "Capítulo 11 · Gobernanza",
+      "title": "Azure AI Foundry · el plano de control empresarial.",
+      "sub": "Dónde encaja Foundry junto a Copilot y la API directa."
+    },
+    "ch11b": {
+      "eyebrow": "Dónde encaja Foundry",
+      "title": "Tres carriles, un plano de control."
+    },
+    "ch12": {
+      "eyebrow": "Capítulo 12 · Cinco patrones aplicados",
+      "title": "Cinco patrones que pegas en producción esta semana.",
+      "p1t": "Routing dinámico por complejidad",
+      "p1b": "Heurística estática por keywords.",
+      "p2t": "Cache jerárquico · 3 capas",
+      "p2b": "LRU → Redis → cache de prefijo.",
+      "p3t": "Subagent fan-out",
+      "p3b": "Subtareas paralelas en Haiku, síntesis en Sonnet.",
+      "p4t": "Plan / Execute",
+      "p4b": "Opus diseña el plan, Sonnet ejecuta.",
+      "p5t": "Cache semántico con fallback",
+      "p5b": "Hits por similitud de embeddings.",
+      "p6k": "Referencia",
+      "p6t": "Código · Apéndice D",
+      "p6b": "Router, helpers, OpenTelemetry."
+    },
+    "ch13": {
+      "eyebrow": "Capítulo 13 · Antipatrones y marcos de decisión",
+      "title": "El árbol de decisión · qué optimización tirar, en qué orden."
+    },
+    "ch13b": {
+      "eyebrow": "Los diez antipatrones catalogados",
+      "title": "Si tu equipo está haciendo dos de estos, la factura ya es 2× la que debería ser.",
+      "a1": "El cementerio de agentes",
+      "a2": "Todo es agente",
+      "a3": "Opus por defecto",
+      "a4": "System prompt monolítico",
+      "a5": "Tool result blowup",
+      "a6": "Sin stop criteria",
+      "a7": "Cache que nunca cachea",
+      "a8": "Mal uso de long context",
+      "a9": "Multi-agente sin coordinación",
+      "a10": "Sin instrumentación",
+      "caption": "Auto-auditoría: arregla los dos más caros este sprint."
+    },
+    "appA": {
+      "tag": "Apéndice A · Prompts optimizados",
+      "title": "Una biblioteca de system prompts compactos y tool definitions magras.",
+      "sub": "Code reviewer, test writer, doc writer."
+    },
+    "appB": {
+      "eyebrow": "Apéndice B · Tarjeta de pricing",
+      "title": "USD por millón de tokens · el gráfico que cierra el debate.",
+      "caption": "El input cacheado es el 10% de estos números."
+    },
+    "applied": {
+      "eyebrow": "Aplicado · org de 50 devs · antes / después de 90 días",
+      "title": "Números reales. Misma carga, la mitad de la factura.",
+      "lk": "Antes · día 0",
+      "lt": "$48K / mes · 50 devs · Opus por defecto",
+      "lp1": "~70% pegan a Opus.",
+      "lp2": "Cache hit rate: 4%.",
+      "lp3": "Top 10% absorben 52% del gasto.",
+      "lp4": "Sin costo por feature.",
+      "rk": "Después · día 90",
+      "rt": "$22K / mes · 50 devs · mismo throughput",
+      "rp1": "Sonnet atiende el 80%.",
+      "rp2": "Cache hit rate: 71%.",
+      "rp3": "Top 10% rebalanceado.",
+      "rp4": "Dashboards y alertas activos."
+    },
+    "checklist": {
+      "eyebrow": "Primeros 90 días · checklist del operador",
+      "title": "Doce acciones concretas, en orden.",
+      "i1": "Inventaría el gasto de PRU por persona.",
+      "i2": "Establece Sonnet 4.6 como default del workspace.",
+      "i3": "Roll-out de cache_control en bloques estables.",
+      "i4": "Compactación + tool result clearing.",
+      "i5": "Model routing en el pipeline. Plan/Execute split."
+    },
+    "closing": {
+      "eyebrow": "Microsoft · Token Management & Agent Design · 2026-05-06",
+      "line1": "El modelo es una palanca.",
+      "line2": "La arquitectura son las otras cuatro.",
+      "tagline": "Building the future of software development with AI and Agentic DevOps."
+    }
+  }
+};
+function resolveKey(obj, path) { return path.split('.').reduce((o, k) => (o ? o[k] : undefined), obj); }
+function setLocale(locale) {
+  if (!I18N[locale]) return;
+  try { localStorage.setItem('ps-locale', locale); } catch (e) {}
+  document.documentElement.setAttribute('lang', locale);
+  document.querySelectorAll('.lang-switcher__btn').forEach(btn => {
+    btn.setAttribute('aria-current', btn.dataset.locale === locale ? 'true' : 'false');
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const value = resolveKey(I18N[locale], el.dataset.i18n);
+    if (value !== undefined && value !== null) {
+      if (el.tagName === 'TITLE') document.title = value;
+      else if (typeof value === 'string' && /<[a-z]/i.test(value)) {
+        // Trusted i18n strings with safe accent-span markup only
+        el.innerHTML = value;
+      }
+      else el.textContent = value;
+    }
+  });
+  const ui = {'pt-BR':{t:'Visao geral',h:'Clique em um slide - Esc para fechar'},'en':{t:'Overview',h:'Click a slide - Esc to close'},'es':{t:'Vista general',h:'Clic en un slide - Esc para cerrar'}}[locale]||{t:'Overview',h:'Click a slide'};
+  const ot = document.getElementById('overviewTitle'); if (ot) ot.textContent = ui.t;
+  const oh = document.getElementById('overviewHint'); if (oh) oh.textContent = ui.h;
+  const ovGrid = document.getElementById('overviewGrid');
+  if (ovGrid && ovGrid.children.length > 0) buildOverview();
+}
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+function syncSlideTheme(i) { document.body.dataset.slideTheme = slides[i].classList.contains('slide--dark') ? 'dark' : 'light'; }
+function goToSlide(i) {
+  if (i < 0 || i >= total) return;
+  slides.forEach(s => s.setAttribute('data-active', 'false'));
+  slides[i].setAttribute('data-active', 'true');
+  currentSlide = i;
+  document.getElementById('counter').textContent = (i + 1) + ' / ' + total;
+  document.getElementById('progress').style.width = (((i + 1) / total) * 100) + '%';
+  syncSlideTheme(i);
+  if (overviewOpen) closeOverview();
+}
+function nextSlide() { goToSlide(Math.min(currentSlide + 1, total - 1)); }
+function prevSlide() { goToSlide(Math.max(currentSlide - 1, 0)); }
+let overviewOpen = false;
+const overview = document.getElementById('overview');
+function buildOverview() {
+  const grid = document.getElementById('overviewGrid');
+  grid.textContent = '';
+  slides.forEach((slide, i) => {
+    const card = document.createElement('button');
+    card.className = 'overview-card';
+    if (slide.classList.contains('slide--dark')) card.classList.add('overview-card--dark');
+    const accent = slide.style.getPropertyValue('--accent') || 'var(--c-blue-500)';
+    card.style.setProperty('--card-accent', accent);
+    const eyebrow = slide.querySelector('.eyebrow');
+    const title = slide.querySelector('.title, .section-title, .chapter-cover__title');
+    const eyebrowText = eyebrow ? eyebrow.textContent.trim() : '';
+    const bigNum = slide.querySelector('.big-number');
+    const titleText = title ? title.textContent.trim() : (bigNum ? bigNum.textContent.trim() : '');
+    const accentDiv = document.createElement('div'); accentDiv.className = 'overview-card__accent';
+    const numSpan = document.createElement('span'); numSpan.className = 'overview-card__num'; numSpan.textContent = String(i + 1).padStart(2, '0');
+    card.append(accentDiv, numSpan);
+    if (eyebrowText) { const eb = document.createElement('span'); eb.className = 'overview-card__eyebrow'; eb.textContent = eyebrowText.slice(0, 40); card.appendChild(eb); }
+    const ttl = document.createElement('div'); ttl.className = 'overview-card__title'; ttl.textContent = titleText.slice(0, 100); card.appendChild(ttl);
+    card.addEventListener('click', () => goToSlide(i));
+    grid.appendChild(card);
+  });
+  updateOverviewCurrent();
+}
+function updateOverviewCurrent() {
+  document.querySelectorAll('.overview-card').forEach((c, i) => c.setAttribute('data-current', i === currentSlide ? 'true' : 'false'));
+}
+function openOverview() { updateOverviewCurrent(); overview.setAttribute('data-open', 'true'); overview.setAttribute('aria-hidden', 'false'); document.body.dataset.overviewOpen = 'true'; overviewOpen = true; }
+function closeOverview() { overview.setAttribute('data-open', 'false'); overview.setAttribute('aria-hidden', 'true'); document.body.dataset.overviewOpen = 'false'; overviewOpen = false; }
+function toggleOverview() { overviewOpen ? closeOverview() : openOverview(); }
+const kbdHint = document.getElementById('kbdHint');
+let hintShown = false;
+function showHintOnce() { if (hintShown) return; hintShown = true; kbdHint.setAttribute('data-visible', 'true'); setTimeout(() => kbdHint.setAttribute('data-visible', 'false'), 4200); }
+document.addEventListener('keydown', (e) => {
+  if (overviewOpen) { if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') closeOverview(); return; }
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); showHintOnce(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); showHintOnce(); }
+  if (e.key === 'Home') goToSlide(0);
+  if (e.key === 'End') goToSlide(total - 1);
+  if (e.key === 'o' || e.key === 'O' || e.key === 'Escape') toggleOverview();
+});
+overview.addEventListener('click', (e) => { if (e.target === overview) closeOverview(); });
+(function init() {
+  const saved = (() => { try { return localStorage.getItem('ps-locale'); } catch (e) { return null; }})();
+  const browser = (navigator.language && navigator.language.startsWith('pt')) ? 'pt-BR' : (navigator.language && navigator.language.startsWith('es')) ? 'es' : 'en';
+  setLocale(saved || browser);
+  goToSlide(0);
+  buildOverview();
+  setTimeout(() => { if (!hintShown) { kbdHint.setAttribute('data-visible', 'true'); hintShown = true; setTimeout(() => kbdHint.setAttribute('data-visible', 'false'), 4500); } }, 1500);
+})();
+</script>
+
+</body>
+</html>

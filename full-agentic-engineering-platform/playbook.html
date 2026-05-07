@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Full Agentic Engineering Platform · Playbook · Paula Silva</title>
+<meta name="description" content="Umbrella playbook covering the full Agentic DevOps Platform: cloud, platform engineering, context, intent, harness, integration, FinOps, Azure AI Foundry, and the token economy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Full Agentic Engineering Platform · Playbook · Paula Silva">
+<meta property="og:description" content="Umbrella playbook covering the full Agentic DevOps Platform: cloud, platform engineering, context, intent, harness, integration, FinOps, Azure AI Foundry, and the token economy.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Full Agentic Engineering Platform · Playbook · Paula Silva">
+<meta name="twitter:description" content="Umbrella playbook covering the full Agentic DevOps Platform: cloud, platform engineering, context, intent, harness, integration, FinOps, Azure AI Foundry, and the token economy.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/playbook.css">
+</head>
+<body class="acc-green">
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+
+<section class="doc-hero">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <div class="doc-hero__eyebrow">Playbook · v1.0.0 · 2026-05-07</div>
+    <h1 class="doc-hero__title"><span data-lang="en" class="lang-active">Full Agentic Engineering Platform.</span><span data-lang="pt-br">Plataforma de Engenharia Agêntica Completa.</span><span data-lang="es">Plataforma de Ingeniería Agéntica Completa.</span></h1>
+    <p class="doc-hero__lead"><span data-lang="en" class="lang-active">The umbrella playbook. Twenty-five source documents covering the six disciplines that turn an AI agent demo into a production platform: cloud foundation, platform engineering, context engineering, intent engineering, harness engineering, and the token economy that funds them.</span><span data-lang="pt-br">O playbook guarda-chuva. Vinte e cinco documentos fonte cobrindo as seis disciplinas que transformam um demo de agente de IA em plataforma de produção: fundação cloud, platform engineering, context engineering, intent engineering, harness engineering, e a economia de tokens que financia tudo.</span><span data-lang="es">El playbook paraguas. Veinticinco documentos fuente cubriendo las seis disciplinas que convierten un demo de agente de IA en plataforma de producción: fundación cloud, platform engineering, context engineering, intent engineering, harness engineering, y la economía de tokens que lo financia.</span></p>
+  </div>
+</section>
+
+<div class="doc">
+
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#fact" class="active">1. The fact</a>
+    <a href="#thesis">2. The thesis</a>
+    <a href="#numbers">3. The numbers</a>
+    <a href="#parts">4. Six disciplines</a>
+    <a href="#stack-chapters">5. Platform stack chapters</a>
+    <a href="#token-chapters">6. Token economy chapters</a>
+    <a href="#appendices">7. Appendices</a>
+    <a href="#personas">8. Reading by persona</a>
+  </aside>
+
+  <article class="article">
+
+    <section id="fact">
+      <h2>1. <span data-lang="en" class="lang-active">The fact</span><span data-lang="pt-br">O fato</span><span data-lang="es">El hecho</span></h2>
+      <p data-lang="en" class="lang-active">Gartner forecasts that <strong>40% of enterprise applications</strong> will feature task-specific AI agents by 2026, up from less than 5% in 2025. Deloitte surveyed 3,235 respondents across 24 countries: 75% of enterprises plan agentic AI deployment within two years, but only 34% report deep transformation. The gap is not luck. It is engineering debt, and it is predictable.</p>
+      <p data-lang="pt-br">A Gartner prevê que <strong>40% das aplicações corporativas</strong> terão agentes de IA específicos por tarefa até 2026, contra menos de 5% em 2025. A Deloitte pesquisou 3.235 respondentes em 24 países: 75% das empresas planejam IA agêntica em dois anos, mas apenas 34% relatam transformação profunda. A diferença não é sorte. É dívida de engenharia, e é previsível.</p>
+      <p data-lang="es">Gartner pronostica que <strong>el 40% de las aplicaciones corporativas</strong> tendrá agentes de IA específicos por tarea para 2026, frente a menos del 5% en 2025. Deloitte encuestó 3,235 respondentes en 24 países: 75% de las empresas planean IA agéntica en dos años, pero solo 34% reporta transformación profunda. La brecha no es suerte. Es deuda de ingeniería, y es predecible.</p>
+      <p data-lang="en" class="lang-active">CMU's analysis of the AIDev dataset quantified what ungoverned agents do: an <strong>18% increase in static-analysis warnings</strong> and a <strong>39% increase in cognitive complexity</strong>. The technical debt accumulates and does not self-correct. Adding agents on top of unchecked AI tools makes the debt problem worse, not better.</p>
+      <p data-lang="pt-br">A análise da CMU sobre o dataset AIDev quantificou o que agentes sem governança fazem: <strong>aumento de 18% em warnings de análise estática</strong> e <strong>aumento de 39% em complexidade cognitiva</strong>. A dívida técnica acumula e não se autocorrige. Adicionar agentes sobre ferramentas de IA sem governança piora o problema, não melhora.</p>
+      <p data-lang="es">El análisis de CMU sobre el dataset AIDev cuantificó lo que hacen los agentes sin gobernanza: <strong>aumento de 18% en warnings de análisis estático</strong> y <strong>aumento de 39% en complejidad cognitiva</strong>. La deuda técnica se acumula y no se autocorrige. Agregar agentes sobre herramientas de IA sin gobernanza empeora el problema, no lo mejora.</p>
+    </section>
+
+    <section id="thesis">
+      <h2>2. <span data-lang="en" class="lang-active">The thesis</span><span data-lang="pt-br">A tese</span><span data-lang="es">La tesis</span></h2>
+      <blockquote data-lang="en" class="lang-active">Agents that survive production are not built on a single layer. They sit on a stack of <strong>six disciplines</strong>: cloud infrastructure, platform engineering, context engineering, intent engineering, harness engineering, and a token economy. Skip one and the agent cemetery grows.</blockquote>
+      <blockquote data-lang="pt-br">Agentes que sobrevivem à produção não são construídos sobre uma única camada. Eles ficam sobre uma pilha de <strong>seis disciplinas</strong>: infraestrutura cloud, platform engineering, context engineering, intent engineering, harness engineering, e a economia de tokens. Pule uma e o cemitério de agentes cresce.</blockquote>
+      <blockquote data-lang="es">Los agentes que sobreviven a producción no se construyen sobre una sola capa. Se asientan sobre una pila de <strong>seis disciplinas</strong>: infraestructura cloud, platform engineering, context engineering, intent engineering, harness engineering, y la economía de tokens. Salta una y el cementerio de agentes crece.</blockquote>
+      <p data-lang="en" class="lang-active">Three types of debt compound when layers are skipped: technical debt (familiar), cognitive debt (developers accept code without understanding it), and intent debt (objectives and trade-offs never captured in artifacts). The harness engineering discipline is what binds the four layers into an operating model.</p>
+      <p data-lang="pt-br">Três tipos de dívida se acumulam quando camadas são puladas: dívida técnica (familiar), dívida cognitiva (devs aceitam código sem entender) e dívida de intenção (objetivos e trade-offs nunca capturados em artefatos). A disciplina de harness engineering é o que une as quatro camadas em modelo operacional.</p>
+      <p data-lang="es">Tres tipos de deuda se acumulan cuando se saltan capas: deuda técnica (familiar), deuda cognitiva (devs aceptan código sin entender) y deuda de intención (objetivos y trade-offs nunca capturados en artefactos). La disciplina de harness engineering es lo que une las cuatro capas en modelo operativo.</p>
+    </section>
+
+    <section id="numbers">
+      <h2>3. <span data-lang="en" class="lang-active">The numbers that justify the effort</span><span data-lang="pt-br">Os números que justificam o esforço</span><span data-lang="es">Los números que justifican el esfuerzo</span></h2>
+      <ul>
+        <li><strong>40% of enterprise apps</strong> with task-specific AI agents by 2026 (Gartner).</li>
+        <li><strong>75% of enterprises</strong> planning agentic AI deployment within two years (Deloitte 3,235 resp.).</li>
+        <li><strong>22 to 28%</strong> of 128,018 GitHub projects already using coding agents (Feb 2026).</li>
+        <li><strong>+39%</strong> cognitive complexity introduced by ungoverned agents (CMU AIDev).</li>
+        <li><strong>30 to 70%</strong> token cost reduction with the disciplines applied.</li>
+        <li><strong>Less than 60 days</strong> typical payback time for the discipline investment.</li>
+      </ul>
+    </section>
+
+    <section id="parts">
+      <h2>4. <span data-lang="en" class="lang-active">Six disciplines, one platform</span><span data-lang="pt-br">Seis disciplinas, uma plataforma</span><span data-lang="es">Seis disciplinas, una plataforma</span></h2>
+      <table>
+        <thead><tr><th>Discipline</th><th>Source</th><th>For whom</th></tr></thead>
+        <tbody>
+          <tr><td><strong>I. Cloud foundation</strong></td><td>Ch. 01 stack</td><td>Infra leads, SRE, security</td></tr>
+          <tr><td><strong>II. Platform engineering</strong></td><td>Ch. 02 stack</td><td>Platform engineers, IDP owners</td></tr>
+          <tr><td><strong>III. Context engineering</strong></td><td>Ch. 03 stack + Ch. 04 token</td><td>Architects, agent builders</td></tr>
+          <tr><td><strong>IV. Intent engineering</strong></td><td>Ch. 04 stack</td><td>Tech leads, product, governance</td></tr>
+          <tr><td><strong>V. Harness engineering</strong></td><td>Ch. 06 stack</td><td>Operating-model owners</td></tr>
+          <tr><td><strong>VI. Integration, FinOps, Foundry</strong></td><td>Ch. 05 stack + Ch. 10/11 token</td><td>FinOps, Azure architects, CIO</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="stack-chapters">
+      <h2>5. <span data-lang="en" class="lang-active">Context Platform Stack chapters</span><span data-lang="pt-br">Capítulos do Context Platform Stack</span><span data-lang="es">Capítulos del Context Platform Stack</span></h2>
+      <div class="chapter-grid">
+        <a class="chap-card" href="00_Introduction_Context_Platform_Stack_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 00</div><div class="chap-card__title">Introduction</div><div class="chap-card__desc">The agent cemetery, three types of debt, four-layer solution.</div></a>
+        <a class="chap-card" href="01_Cloud_Infra_Foundation_v1_1_0_2026-04-11.md"><div class="chap-card__num">CH 01</div><div class="chap-card__title">Cloud foundation</div><div class="chap-card__desc">Kubernetes, MCP protocol, autonomous infra, CPE 4-plane, IaC, supply-chain security.</div></a>
+        <a class="chap-card" href="02_Platform_Engineering_Governance_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 02</div><div class="chap-card__title">Platform engineering</div><div class="chap-card__desc">IDP, golden paths, guardrails, Backstage, MCP server registries, agent RBAC.</div></a>
+        <a class="chap-card" href="03_Context_Engineering_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 03</div><div class="chap-card__title">Context engineering</div><div class="chap-card__desc">Memory tiers, skills, MCP, AGENTS.md, RAG, token economics, ACE.</div></a>
+        <a class="chap-card" href="04_Intent_Engineering_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 04</div><div class="chap-card__title">Intent engineering</div><div class="chap-card__desc">Specification engineering, SDD, CONSTITUTION.md, governance hierarchies.</div></a>
+        <a class="chap-card" href="05_Integration_Playbook_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 05</div><div class="chap-card__title">Integration playbook</div><div class="chap-card__desc">Maturity model, model routing, ten principles, persona quick-starts.</div></a>
+        <a class="chap-card" href="06_Harness_Engineering_v1_2_0_2026-04-11.md"><div class="chap-card__num">CH 06</div><div class="chap-card__title">Harness engineering</div><div class="chap-card__desc">Three Horizons Accelerator, Open Horizons, agent operations.</div></a>
+      </div>
+    </section>
+
+    <section id="token-chapters">
+      <h2>6. <span data-lang="en" class="lang-active">Token economy chapters</span><span data-lang="pt-br">Capítulos da economia de tokens</span><span data-lang="es">Capítulos de la economía de tokens</span></h2>
+      <div class="chapter-grid">
+        <a class="chap-card" href="01_token_fundamentals.md"><div class="chap-card__num">TK 01</div><div class="chap-card__title">Token fundamentals</div><div class="chap-card__desc">BPE, input/output/cached, how tokens become money.</div></a>
+        <a class="chap-card" href="02_consumption_anatomy.md"><div class="chap-card__num">TK 02</div><div class="chap-card__title">Consumption anatomy</div><div class="chap-card__desc">Empirical Tokenomics, agentic multiplier math.</div></a>
+        <a class="chap-card" href="03_models_multipliers.md"><div class="chap-card__num">TK 03</div><div class="chap-card__title">Models and multipliers</div><div class="chap-card__desc">Pricing tables, decision tree, VS Code, GitHub Enterprise policies.</div></a>
+        <a class="chap-card" href="04_context_engineering.md"><div class="chap-card__num">TK 04</div><div class="chap-card__title">Context engineering</div><div class="chap-card__desc">Context rot, concave utility, 22.7% compaction.</div></a>
+        <a class="chap-card" href="05_prompt_caching.md"><div class="chap-card__num">TK 05</div><div class="chap-card__title">Prompt caching</div><div class="chap-card__desc">Prefix cache, TTLs, Anthropic API, Redis, semantic cache.</div></a>
+        <a class="chap-card" href="06_agent_design.md"><div class="chap-card__num">TK 06</div><div class="chap-card__title">Agent design</div><div class="chap-card__desc">Workflow vs agent, five Anthropic patterns, MCP, hooks.</div></a>
+        <a class="chap-card" href="07_token_efficient_strategies.md"><div class="chap-card__num">TK 07</div><div class="chap-card__title">Token-efficient strategies</div><div class="chap-card__desc">Progressive disclosure, lean tools, evaluator-optimizer.</div></a>
+        <a class="chap-card" href="08_github_copilot_june_change.md"><div class="chap-card__num">TK 08</div><div class="chap-card__title">June 2026 change</div><div class="chap-card__desc">PRU to AI Credits transition, multipliers, persona impacts.</div></a>
+        <a class="chap-card" href="09_migration_strategy.md"><div class="chap-card__num">TK 09</div><div class="chap-card__title">Migration strategy</div><div class="chap-card__desc">Critical timeline, CIO 4-phase playbook, communication plan.</div></a>
+        <a class="chap-card" href="10_finops_ai.md"><div class="chap-card__num">TK 10</div><div class="chap-card__title">FinOps for AI</div><div class="chap-card__desc">Inform/Optimize/Operate, FOCUS, FinOps Hub, Power BI, Grafana.</div></a>
+        <a class="chap-card" href="11_azure_ai_foundry.md"><div class="chap-card__num">TK 11</div><div class="chap-card__title">Azure AI Foundry</div><div class="chap-card__desc">Foundry vs Copilot, model catalog, PTU vs PAYG, AAD/RBAC.</div></a>
+        <a class="chap-card" href="12_applied_optimization_patterns.md"><div class="chap-card__num">TK 12</div><div class="chap-card__title">Applied patterns</div><div class="chap-card__desc">Eight patterns with code: routing, cache, fan-out, plan/execute.</div></a>
+        <a class="chap-card" href="13_anti_patterns_decision.md"><div class="chap-card__num">TK 13</div><div class="chap-card__title">Anti-patterns</div><div class="chap-card__desc">Ten anti-patterns, three decision frameworks, operational checklist.</div></a>
+      </div>
+    </section>
+
+    <section id="appendices">
+      <h2>7. <span data-lang="en" class="lang-active">Appendices</span><span data-lang="pt-br">Apêndices</span><span data-lang="es">Apéndices</span></h2>
+      <div class="chapter-grid">
+        <a class="chap-card" href="A_appendix_optimized_prompts.md"><div class="chap-card__num">APP A</div><div class="chap-card__title">Optimized prompts</div><div class="chap-card__desc">Reusable prompt library.</div></a>
+        <a class="chap-card" href="B_appendix_pricing_reference.md"><div class="chap-card__num">APP B</div><div class="chap-card__title">Pricing reference</div><div class="chap-card__desc">All current model rates, PRU converter.</div></a>
+        <a class="chap-card" href="C_appendix_finops_reports.md"><div class="chap-card__num">APP C</div><div class="chap-card__title">FinOps reports</div><div class="chap-card__desc">Templates for cost reporting, KQL, Grafana JSON.</div></a>
+        <a class="chap-card" href="D_appendix_complete_code.md"><div class="chap-card__num">APP D</div><div class="chap-card__title">Complete code</div><div class="chap-card__desc">Caching, MCP, observability code.</div></a>
+      </div>
+    </section>
+
+    <section id="personas">
+      <h2>8. <span data-lang="en" class="lang-active">Reading by persona</span><span data-lang="pt-br">Leitura por persona</span><span data-lang="es">Lectura por persona</span></h2>
+      <table>
+        <thead><tr><th>Persona</th><th>Priority</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td>CIO / VP Engineering</td><td>Stack 00, 05, 06; Token 03, 08, 10</td><td>2-3 h</td></tr>
+          <tr><td>CFO / FinOps</td><td>Token 08, 09, 10, App C</td><td>90 min</td></tr>
+          <tr><td>Platform Engineer</td><td>Stack 01, 02, 06; Token 06, 07, 11, 12</td><td>1 day</td></tr>
+          <tr><td>Architect</td><td>Stack 03, 04, 05; Token 03, 11, 12</td><td>6 h</td></tr>
+          <tr><td>Tech Lead / Staff Engineer</td><td>Stack 03, 04, 06; Token 01-07, 12, 13</td><td>1-2 days</td></tr>
+          <tr><td>Developer</td><td>Token 03, 04, 05, 07, 12, App A</td><td>3-4 h</td></tr>
+          <tr><td>Azure Architect</td><td>Stack 01, 05; Token 10, 11, 12</td><td>4 h</td></tr>
+          <tr><td>MCP server developer</td><td>Stack 01, 03; Token 06, 12, App D</td><td>3 h</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <nav class="pagenav">
+      <a href="landing.html">&larr; Landing</a>
+      <a href="../agentic-devops-platform/landing.html">Next: Agentic DevOps Platform &rarr;</a>
+    </nav>
+
+  </article>
+
+  <aside class="scrollspy">
+    <h4>Related</h4>
+    <a href="../agentic-devops-platform/landing.html">Agentic DevOps</a>
+    <a href="../context-engineering-platform/landing.html">Context Stack</a>
+    <a href="../semantic-context-layer/landing.html">Semantic Layer</a>
+    <a href="../token-best-practices/landing.html">Token Economy</a>
+    <a href="../index.html">Hub</a>
+  </aside>
+
+</div>
+
+<script>
+window.PLAYBOOK_DATA = {
+  topicLabel: 'Full Agentic Engineering Platform',
+  nextLabel: { en: 'Agentic DevOps Platform', "pt-br": 'Plataforma Agentic DevOps', es: 'Plataforma Agentic DevOps' },
+  nextHref: '../agentic-devops-platform/landing.html'
+};
+</script>
+<script src="../_shared/playbook.js"></script>
+</body>
+</html>

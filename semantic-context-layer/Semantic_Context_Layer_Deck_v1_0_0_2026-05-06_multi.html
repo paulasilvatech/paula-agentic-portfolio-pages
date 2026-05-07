@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Semantic Context Layer for Agentic DevOps">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Semantic Context Layer for Agentic DevOps">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<title data-i18n="meta.title">Semantic Context Layer for Agentic DevOps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --c-red-50:#FFF0EB; --c-red-100:#FFD6C7; --c-red-500:#F25022; --c-red-700:#B33816;
+  --c-green-50:#F1F8E3; --c-green-100:#D8EDA5; --c-green-500:#7FBA00; --c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD; --c-blue-100:#B8E5FA; --c-blue-500:#00A4EF; --c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0; --c-yellow-100:#FFE79C; --c-yellow-500:#FFB900; --c-yellow-700:#B88500;
+  --ink:#1A1A1A; --ink-2:#3A3A3A; --ink-3:#737373;
+  --paper:#FFFFFF; --bg:#F7F7F5; --bg-alt:#ECECE8; --rule:#E5E5E0; --rule-2:#CECEC7;
+  --dark-bg:#141414; --dark-surface:#1C1C1A; --dark-ink:#F0F0F0; --dark-ink-2:#C7C7C2; --dark-ink-3:#A8A8A4; --dark-rule:#2E2E2A;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+  --ease:cubic-bezier(0.2,0,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;}
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .18s ease-out;pointer-events:none;}
+.slide[data-active="true"]{visibility:visible;opacity:1;pointer-events:auto;}
+.slide--light{background:var(--bg);color:var(--ink);}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink);}
+.slide--paper{background:var(--paper);color:var(--ink);}
+
+.eyebrow{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--c-blue-500));margin-bottom:24px;}
+.slide--dark .eyebrow{color:var(--accent,var(--c-yellow-500));}
+.title{font-size:clamp(36px,4.4vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.025em;max-width:1500px;margin-bottom:22px;text-wrap:balance;}
+.title--medium{font-size:clamp(30px,3.4vw,50px);max-width:1400px;}
+.title--small{font-size:clamp(24px,2.6vw,36px);max-width:1280px;}
+.title .accent-red{color:var(--c-red-500);} .title .accent-green{color:var(--c-green-500);} .title .accent-blue{color:var(--c-blue-500);} .title .accent-yellow{color:var(--c-yellow-500);}
+.subtitle{font-size:clamp(16px,1.5vw,22px);line-height:1.4;color:var(--ink-2);max-width:1200px;font-weight:400;text-wrap:pretty;}
+.slide--dark .subtitle{color:var(--dark-ink-2);}
+.body-large{font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--ink);max-width:1200px;margin-top:22px;text-wrap:pretty;}
+.slide--dark .body-large{color:var(--dark-ink);}
+.caption{font-size:13px;color:var(--ink-3);font-style:italic;line-height:1.5;max-width:1100px;margin-top:18px;}
+
+.section-title{font-size:clamp(48px,5.6vw,90px);font-weight:500;line-height:.98;letter-spacing:-.035em;margin:20px 0 18px;max-width:1400px;text-wrap:balance;}
+.section-number{font-family:var(--font-sans);font-size:clamp(160px,22vw,340px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-blue-500));opacity:.92;}
+
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;padding-top:22px;border-top:1px solid var(--rule);margin-top:36px;max-width:1200px;}
+.meta-item{display:flex;flex-direction:column;gap:6px;}
+.meta-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);}
+.meta-value{font-size:15px;font-weight:500;line-height:1.35;}
+
+.big-number{font-family:var(--font-sans);font-size:clamp(120px,18vw,260px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-red-500));margin:14px 0 28px;}
+.big-number__unit{font-size:.4em;font-weight:400;color:var(--ink-2);margin-left:10px;}
+.slide--dark .big-number__unit{color:var(--dark-ink-2);}
+.big-number__sub{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:block;margin-top:10px;}
+
+.list-numbered{display:flex;flex-direction:column;gap:12px;margin-top:22px;max-width:1100px;}
+.list-numbered__item{display:grid;grid-template-columns:80px 1fr;gap:22px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule);}
+.list-numbered__num{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--ink-3);}
+.list-numbered__text{font-size:20px;font-weight:400;line-height:1.35;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1500px;margin-top:18px;}
+.split__col{display:flex;flex-direction:column;gap:14px;}
+.split__title{font-size:22px;font-weight:500;line-height:1.25;text-wrap:balance;}
+.split__kicker{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-blue-500));}
+.split__body{font-size:15px;line-height:1.55;color:var(--ink-2);}
+
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1500px;margin-top:22px;}
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1500px;margin-top:22px;}
+.card{padding:22px 22px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;gap:10px;}
+.slide--dark .card{background:var(--dark-surface);border-color:var(--dark-rule);}
+.card__kicker{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-blue-500));}
+.card__title{font-size:18px;font-weight:500;line-height:1.25;text-wrap:balance;}
+.card__body{font-size:14px;line-height:1.5;color:var(--ink-2);}
+.slide--dark .card__body{color:var(--dark-ink-2);}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.pill{padding:6px 12px;border:1px solid var(--rule-2);border-radius:999px;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);background:var(--paper);}
+
+.diagram-wrap{margin-top:18px;width:100%;max-width:1600px;}
+.diagram-wrap svg{width:100%;height:auto;display:block;}
+
+.chapter-cover{display:grid;grid-template-columns:auto 1fr;gap:50px;align-items:end;max-width:1500px;}
+
+.deck-progress{position:fixed;top:0;left:0;height:3px;background:var(--c-blue-500);transition:width .3s ease;z-index:200;}
+.deck-brand{position:fixed;top:22px;left:22px;display:flex;align-items:center;gap:10px;z-index:100;}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-2);}
+
+.lang-switcher{position:fixed;top:22px;right:22px;display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;font-family:var(--font-mono);z-index:100;}
+.lang-switcher__btn{padding:5px 10px;background:transparent;border:none;border-radius:3px;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer;}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-blue-500);color:#fff;}
+body[data-slide-theme="dark"] .lang-switcher{background:var(--dark-surface);border-color:var(--dark-rule);}
+body[data-slide-theme="dark"] .lang-switcher__btn{color:var(--dark-ink-3);}
+
+.deck-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:6px;z-index:100;font-family:var(--font-mono);}
+.deck-controls__btn{width:36px;height:36px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:15px;color:var(--ink);cursor:pointer;}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper);}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-controls__btn{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink);}
+body[data-slide-theme="dark"] .deck-controls__counter{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink-2);}
+
+.lang-switcher__btn:focus-visible,.deck-controls__btn:focus-visible{outline:2px solid var(--c-blue-500);outline-offset:2px;}
+
+/* Back-to-Hub link affordance (added by Wave 4) */
+a.deck-brand{text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+
+/* Overview modal (Wave 16 injection) */
+.overview { position:fixed; inset:0; background:var(--bg,#F7F7F5); z-index:500; display:none; overflow-y:auto; padding:80px 40px 40px; }
+.overview[data-open="true"] { display:block; }
+.overview__header { max-width:1600px; margin:0 auto 28px; display:flex; justify-content:space-between; align-items:baseline; padding-bottom:18px; border-bottom:1px solid var(--rule,#E5E5E0); }
+.overview__title { font-size:28px; font-weight:500; letter-spacing:-0.02em; color:var(--ink,#1A1A1A); }
+.overview__hint { font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview__grid { max-width:1600px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+.overview-card { position:relative; aspect-ratio:16/9; padding:14px 16px; border:1px solid var(--rule,#E5E5E0); border-radius:6px; background:var(--paper,#FFFFFF); text-align:left; cursor:pointer; overflow:hidden; transition:all 0.15s; font-family:inherit; }
+.overview-card:hover { border-color:var(--ink-2,#3A3A3A); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.06); }
+.overview-card__accent { position:absolute; top:0; left:0; right:0; height:3px; background:var(--card-accent,var(--c-blue-500,#00A4EF)); }
+.overview-card__num { position:absolute; top:10px; right:12px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:10px; letter-spacing:0.14em; color:var(--ink-3,#737373); }
+.overview-card__eyebrow { display:block; margin-top:10px; margin-bottom:8px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview-card__title { font-size:14px; line-height:1.25; font-weight:500; color:var(--ink,#1A1A1A); display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.overview-card[data-current="true"] { border-color:var(--c-blue-500,#00A4EF); box-shadow:0 0 0 2px var(--c-blue-500,#00A4EF); }
+body[data-overview-open="true"] .deck-brand,
+body[data-overview-open="true"] .deck-controls,
+body[data-overview-open="true"] .lang-switcher,
+body[data-overview-open="true"] .kbd-hint { display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="deck-progress" id="progress"></div>
+
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:22px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt</span>
+</a>
+
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en" onclick="setLocale('en')" aria-current="true">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+  <button class="lang-switcher__btn" data-locale="es" onclick="setLocale('es')">ES</button>
+</div>
+
+<div class="deck-controls">
+  <button class="deck-controls__btn" onclick="prevSlide()" aria-label="Previous">&lsaquo;</button>
+  <span class="deck-controls__counter" id="counter">1 / 1</span>
+  <button class="deck-controls__btn" onclick="nextSlide()" aria-label="Next">&rsaquo;</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: COVER -->
+<section class="slide slide--light" data-active="true" style="--accent: var(--c-blue-500); justify-content: center;">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="eyebrow" data-i18n="cover.eyebrow">Semantic Context Layer for Agentic DevOps</div>
+    <h1 class="title">
+      <span data-i18n="cover.part1">A semantic context layer between</span>
+      <span class="accent-blue" data-i18n="cover.kw1">agents</span>
+      <span data-i18n="cover.part2">and your</span>
+      <span class="accent-green" data-i18n="cover.kw2">enterprise code.</span>
+    </h1>
+    <p class="subtitle" data-i18n="cover.subtitle">A reference architecture for compiler-grade context that turns agentic coding from a demo into a platform.</p>
+  </div>
+  <div class="meta-grid" style="flex-shrink:0;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-06</span></div>
+  </div>
+</section>
+
+<!-- SLIDE 2: AGENDA -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="agenda.eyebrow">Agenda</div>
+  <h2 class="title title--medium" data-i18n="agenda.title">Nine parts. From the problem to the platform.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="agenda.i1">The context problem in enterprise agentic coding.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="agenda.i2">Architecture &mdash; four layers and their contracts.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="agenda.i3">Code intelligence &mdash; the compiler-grade foundation.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="agenda.i4">Context recipes &mdash; the composable units.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="agenda.i5">Registry and distribution &mdash; how context travels.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">06</span><span class="list-numbered__text" data-i18n="agenda.i6">Agent integration patterns &mdash; static, MCP, hybrid.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">07</span><span class="list-numbered__text" data-i18n="agenda.i7">Governance, compliance, and audit.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">08</span><span class="list-numbered__text" data-i18n="agenda.i8">Adoption roadmap and success metrics.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">09</span><span class="list-numbered__text" data-i18n="agenda.i9">Build, buy, or hybrid &mdash; competitive positioning.</span></div>
+  </div>
+</section>
+
+<!-- SLIDE 3: PART I COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part1.eyebrow">Part I</div>
+  <div class="section-number">I</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">01</div>
+  <h2 class="section-title" data-i18n="part1.title">The context problem.</h2>
+  <p class="subtitle" data-i18n="part1.subtitle">Why agentic coding stalls at enterprise scale &mdash; and what is actually missing.</p>
+</section>
+
+<!-- SLIDE 4: BIG STAT -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="problem.eyebrow">Problem &middot; Symptom</div>
+  <h2 class="title title--medium"><span data-i18n="problem.t1">A single agent task on a real monorepo can read</span> <span class="accent-red" data-i18n="problem.t2">millions</span> <span data-i18n="problem.t3">of tokens to answer one question.</span></h2>
+  <div class="big-number" style="--accent: var(--c-red-500);">10&times;<span class="big-number__sub" data-i18n="problem.sub">cost vs. compiler-grade context per task</span></div>
+  <p class="caption" data-i18n="problem.caption">Naive retrieval over raw source code does not scale. Vector search alone cannot resolve symbols, types, or call graphs. The agent guesses; the bill grows; the team loses trust.</p>
+</section>
+
+<!-- SLIDE 5: WHY EXISTING APPROACHES FAIL -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="fail.eyebrow">Problem &middot; Why today's stack falls short</div>
+  <h2 class="title title--medium" data-i18n="fail.title">Three approaches, three failure modes.</h2>
+  <div class="cards-3">
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="fail.c1.k">01 &middot; Raw retrieval</div>
+      <div class="card__title" data-i18n="fail.c1.t">Embedding search over source files.</div>
+      <div class="card__body" data-i18n="fail.c1.b">No symbol resolution, no type information, no awareness of call graphs. The agent retrieves text that looks related, not code that is related.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="fail.c2.k">02 &middot; Hand-curated prompts</div>
+      <div class="card__title" data-i18n="fail.c2.t">Wikis, AGENTS.md, README pasted in.</div>
+      <div class="card__body" data-i18n="fail.c2.b">Stale within weeks. No tie to the build. No way to verify that conventions described in the prompt match what the compiler enforces.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="fail.c3.k">03 &middot; Whole-repo dumps</div>
+      <div class="card__title" data-i18n="fail.c3.t">Tree of files, no curation.</div>
+      <div class="card__body" data-i18n="fail.c3.b">Token budget collapses. Context window saturates with boilerplate. Signal-to-noise ratio drops below the threshold where the agent can act safely.</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="fail.caption">All three share a root cause: there is no semantic layer between agents and the code they operate on.</p>
+</section>
+
+<!-- SLIDE 6: WHAT SEMANTIC CONTEXT MEANS -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-blue-500);" data-i18n="semantic.eyebrow">Problem &middot; Definition</div>
+  <h2 class="title title--medium"><span data-i18n="semantic.t1">Semantic context is what the</span> <span class="accent-blue" data-i18n="semantic.t2">compiler knows</span><span data-i18n="semantic.t3">,</span> <span data-i18n="semantic.t4">made available to</span> <span class="accent-green" data-i18n="semantic.t5">agents</span><span data-i18n="semantic.t6">.</span></h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-red-500);" data-i18n="semantic.l.k">Lexical</div>
+      <div class="split__title" data-i18n="semantic.l.t">Tokens, files, lines.</div>
+      <div class="split__body" data-i18n="semantic.l.b">What grep returns. What embedding search ranks. Useful, but not enough to reason about behavior or invariants.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-green-500);" data-i18n="semantic.s.k">Semantic</div>
+      <div class="split__title" data-i18n="semantic.s.t">Symbols, types, calls, configs.</div>
+      <div class="split__body" data-i18n="semantic.s.b">What the build resolves. Resolved references, generic instantiations, inheritance graphs, configuration bound at runtime, dependency provenance.</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="semantic.caption">SCL-AD makes the second column queryable, versioned, and policy-bound &mdash; without making every agent a compiler.</p>
+</section>
+
+<!-- SLIDE 7: SCL-AD DEFINITION -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="scl.eyebrow">Problem &middot; Working definition</div>
+  <h2 class="title title--small" data-i18n="scl.title">A reference architecture for a layer that delivers compiler-grade context to agents at scale.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="scl.p1.k">Pillar 01</div><div class="card__title" data-i18n="scl.p1.t">Precompute</div><div class="card__body" data-i18n="scl.p1.b">Build symbol, type, and dependency graphs once, refresh on commit. Pay the compiler cost in CI, not per task.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="scl.p2.k">Pillar 02</div><div class="card__title" data-i18n="scl.p2.t">Target</div><div class="card__body" data-i18n="scl.p2.b">Deliver only the slice the task needs. A recipe per intent, not a dump per repo.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="scl.p3.k">Pillar 03</div><div class="card__title" data-i18n="scl.p3.t">Execute</div><div class="card__body" data-i18n="scl.p3.b">Surface context to agents through stable contracts: static files, MCP tools, or hybrid distribution.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="scl.p4.k">Pillar 04</div><div class="card__title" data-i18n="scl.p4.t">Coordinate</div><div class="card__body" data-i18n="scl.p4.b">Govern lifecycle, identity, classification, and audit across recipes, registries, and agents.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 8: PART II COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part2.eyebrow">Part II</div>
+  <div class="section-number">II</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">02</div>
+  <h2 class="section-title" data-i18n="part2.title">Architecture and components.</h2>
+  <p class="subtitle" data-i18n="part2.subtitle">Four layers, explicit contracts, and the cross-cutting concerns that hold them together.</p>
+</section>
+
+<!-- SLIDE 9: 4-LAYER ARCHITECTURE DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-blue-500);" data-i18n="arch.eyebrow">Architecture &middot; Reference stack</div>
+  <h2 class="title title--small" data-i18n="arch.title">The four layers of a Semantic Context Layer.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 470" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="30" width="1420" height="86" rx="6" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="64" y="62" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#00A4EF">LAYER 04 &middot; INTEGRATION</text>
+      <text x="64" y="92" font-size="20" font-weight="500" fill="#1A1A1A">Agent Integration</text>
+      <text x="900" y="78" font-size="13" fill="#3A3A3A"><tspan x="900">Static files, MCP servers, custom configs.</tspan><tspan x="900" dy="18">How agents actually receive context.</tspan></text>
+      <rect x="40" y="130" width="1420" height="86" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="64" y="162" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">LAYER 03 &middot; DISTRIBUTION</text>
+      <text x="64" y="192" font-size="20" font-weight="500" fill="#1A1A1A">Context Registry</text>
+      <text x="900" y="178" font-size="13" fill="#3A3A3A"><tspan x="900">Storage, discovery, versioning, refresh.</tspan><tspan x="900" dy="18">Stable URIs and content addressing.</tspan></text>
+      <rect x="40" y="230" width="1420" height="86" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="64" y="262" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">LAYER 02 &middot; COMPOSITION</text>
+      <text x="64" y="292" font-size="20" font-weight="500" fill="#1A1A1A">Context Recipes</text>
+      <text x="900" y="278" font-size="13" fill="#3A3A3A"><tspan x="900">Composable units of intent-shaped context.</tspan><tspan x="900" dy="18">Manifest plus implementation plus tests.</tspan></text>
+      <rect x="40" y="330" width="1420" height="86" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="64" y="362" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">LAYER 01 &middot; FOUNDATION</text>
+      <text x="64" y="392" font-size="20" font-weight="500" fill="#1A1A1A">Code Intelligence</text>
+      <text x="900" y="378" font-size="13" fill="#3A3A3A"><tspan x="900">Compiler-grade symbol, type, call graphs.</tspan><tspan x="900" dy="18">The semantic foundation everything depends on.</tspan></text>
+      <line x1="40" y1="438" x2="1460" y2="438" stroke="#E5E5E0" stroke-width="1"/>
+      <text x="40" y="458" font-size="12" font-style="italic" fill="#737373">Each layer exposes a stable contract to the layer above. Agents see only Layer 04.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 10: COMPONENTS DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-blue-500);" data-i18n="comp.eyebrow">Architecture &middot; Components</div>
+  <h2 class="title title--small" data-i18n="comp.title">Inside the layer: store, retrieval, governance.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 420" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="40" width="450" height="320" rx="8" fill="#FFFFFF" stroke="#00A4EF" stroke-width="1.5"/>
+      <rect x="40" y="40" width="450" height="56" rx="8" fill="#00A4EF"/>
+      <text x="60" y="72" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">CONTEXT STORE</text>
+      <text x="60" y="92" font-size="18" font-weight="500" fill="#FFFFFF">Where context lives</text>
+      <text x="60" y="130" font-size="13" font-weight="600" fill="#00A4EF">Persistent + addressable.</text>
+      <text x="60" y="160" font-size="12" fill="#3A3A3A"><tspan x="60">Co-located, central, or</tspan><tspan x="60" dy="16">federated storage. Each</tspan><tspan x="60" dy="16">artifact has a stable URI</tspan><tspan x="60" dy="16">and a content hash.</tspan></text>
+      <line x1="60" y1="240" x2="470" y2="240" stroke="#E5E5E0" stroke-width="1"/>
+      <text x="60" y="266" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5" fill="#737373">FORMATS</text>
+      <text x="60" y="290" font-size="13" fill="#1A1A1A">Markdown &middot; JSON &middot; SARIF</text>
+      <text x="60" y="312" font-size="13" fill="#1A1A1A">Graph snapshots &middot; manifests</text>
+      <text x="60" y="346" font-size="11" font-style="italic" fill="#737373">Refresh on commit, schedule, or event.</text>
+      <rect x="525" y="40" width="450" height="320" rx="8" fill="#FFFFFF" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="525" y="40" width="450" height="56" rx="8" fill="#7FBA00"/>
+      <text x="545" y="72" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">RETRIEVAL</text>
+      <text x="545" y="92" font-size="18" font-weight="500" fill="#FFFFFF">How agents find it</text>
+      <text x="545" y="130" font-size="13" font-weight="600" fill="#5A8500">Discovery + resolution.</text>
+      <text x="545" y="160" font-size="12" fill="#3A3A3A"><tspan x="545">Discovery by repository, by</tspan><tspan x="545" dy="16">capability, by content. Stable</tspan><tspan x="545" dy="16">URIs resolve to immutable</tspan><tspan x="545" dy="16">artifacts; aliases track latest.</tspan></text>
+      <line x1="545" y1="240" x2="955" y2="240" stroke="#E5E5E0" stroke-width="1"/>
+      <text x="545" y="266" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5" fill="#737373">SURFACES</text>
+      <text x="545" y="290" font-size="13" fill="#1A1A1A">Static injection &middot; MCP tools</text>
+      <text x="545" y="312" font-size="13" fill="#1A1A1A">Custom agent configs</text>
+      <text x="545" y="346" font-size="11" font-style="italic" fill="#737373">One contract, many delivery modes.</text>
+      <rect x="1010" y="40" width="450" height="320" rx="8" fill="#FFFFFF" stroke="#F25022" stroke-width="1.5"/>
+      <rect x="1010" y="40" width="450" height="56" rx="8" fill="#F25022"/>
+      <text x="1030" y="72" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">GOVERNANCE</text>
+      <text x="1030" y="92" font-size="18" font-weight="500" fill="#FFFFFF">Who can use it</text>
+      <text x="1030" y="130" font-size="13" font-weight="600" fill="#B33816">Identity + classification.</text>
+      <text x="1030" y="160" font-size="12" fill="#3A3A3A"><tspan x="1030">Identity propagation, scope</tspan><tspan x="1030" dy="16">labels, access policy, audit</tspan><tspan x="1030" dy="16">trail. Recipes are signed and</tspan><tspan x="1030" dy="16">versioned like any artifact.</tspan></text>
+      <line x1="1030" y1="240" x2="1440" y2="240" stroke="#E5E5E0" stroke-width="1"/>
+      <text x="1030" y="266" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5" fill="#737373">CONTROLS</text>
+      <text x="1030" y="290" font-size="13" fill="#1A1A1A">RBAC &middot; classification labels</text>
+      <text x="1030" y="312" font-size="13" fill="#1A1A1A">Audit log &middot; retention policy</text>
+      <text x="1030" y="346" font-size="11" font-style="italic" fill="#737373">Same controls as the source code itself.</text>
+      <line x1="40" y1="392" x2="1460" y2="392" stroke="#E5E5E0" stroke-width="1"/>
+      <text x="40" y="412" font-size="12" font-style="italic" fill="#737373">Three components, one platform: store, retrieval, and governance always travel together.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 11: CROSS-CUTTING CONCERNS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="cross.eyebrow">Architecture &middot; Cross-cutting</div>
+  <h2 class="title title--medium" data-i18n="cross.title">Four concerns cut every layer.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="cross.c1.k">Identity</div><div class="card__title" data-i18n="cross.c1.t">Who is asking.</div><div class="card__body" data-i18n="cross.c1.b">Identity propagates from agent to recipe to registry to source. RBAC is per recipe and per artifact, not per platform.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="cross.c2.k">Observability</div><div class="card__title" data-i18n="cross.c2.t">What was used.</div><div class="card__body" data-i18n="cross.c2.b">Every retrieval emits an OTel span: agent, recipe, artifact version, classification, latency, tokens.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="cross.c3.k">Security</div><div class="card__title" data-i18n="cross.c3.t">What is allowed.</div><div class="card__body" data-i18n="cross.c3.b">Classification labels travel with the artifact. Recipes that read regulated data require explicit policy approval.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="cross.c4.k">Lifecycle</div><div class="card__title" data-i18n="cross.c4.t">When it expires.</div><div class="card__body" data-i18n="cross.c4.b">Manifest versioning, content hashes, refresh policies, deprecation aliases. Stale context is the silent failure mode.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 12: REFERENCE TOPOLOGY -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="topo.eyebrow">Architecture &middot; Reference topology</div>
+  <h2 class="title title--medium" data-i18n="topo.title">A topology that survives audit.</h2>
+  <p class="subtitle" data-i18n="topo.subtitle">Per-repository recipe authoring, central registry for distribution, MCP gateway for runtime delivery, with identity and audit threaded through every hop.</p>
+  <div class="pill-row">
+    <span class="pill" data-i18n="topo.p1">Code intelligence in CI</span>
+    <span class="pill" data-i18n="topo.p2">Recipes in repo</span>
+    <span class="pill" data-i18n="topo.p3">Registry as a service</span>
+    <span class="pill" data-i18n="topo.p4">MCP gateway runtime</span>
+    <span class="pill" data-i18n="topo.p5">OTel + audit log</span>
+    <span class="pill" data-i18n="topo.p6">SPIFFE identity per agent</span>
+  </div>
+</section>
+
+<!-- SLIDE 13: PART III COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part3.eyebrow">Part III</div>
+  <div class="section-number">III</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">03</div>
+  <h2 class="section-title" data-i18n="part3.title">Code intelligence layer.</h2>
+  <p class="subtitle" data-i18n="part3.subtitle">The compiler-grade foundation everything else depends on.</p>
+</section>
+
+<!-- SLIDE 14: WHY COMPILER ACCURACY -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="ci.eyebrow">Code intelligence &middot; Why it matters</div>
+  <h2 class="title title--medium" data-i18n="ci.title">Approximate context produces approximate code.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-red-500);" data-i18n="ci.l.k">Without compiler-grade</div>
+      <div class="split__title" data-i18n="ci.l.t">Hallucinated symbols, wrong types, broken refactors.</div>
+      <div class="split__body" data-i18n="ci.l.b">The agent invents a method that looks plausible but does not exist. Cross-module changes miss callers. Generic instantiations fail at build.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" style="--accent: var(--c-green-500);" data-i18n="ci.r.k">With compiler-grade</div>
+      <div class="split__title" data-i18n="ci.r.t">Resolved symbols, typed signatures, complete call graphs.</div>
+      <div class="split__body" data-i18n="ci.r.b">The agent knows which calls cross a module boundary, which generics are bound, which configuration keys are read at runtime, and where each definition lives.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 15: REQUIRED CAPABILITIES -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-blue-500);" data-i18n="caps.eyebrow">Code intelligence &middot; Required capabilities</div>
+  <h2 class="title title--small" data-i18n="caps.title">Seven capabilities define the layer.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker">01</div><div class="card__title" data-i18n="caps.c1.t">Symbol resolution</div><div class="card__body" data-i18n="caps.c1.b">Each reference points to its unique definition across files and modules.</div></div>
+    <div class="card"><div class="card__kicker">02</div><div class="card__title" data-i18n="caps.c2.t">Type resolution</div><div class="card__body" data-i18n="caps.c2.b">Generics, inferred types, and overloads resolved with full fidelity.</div></div>
+    <div class="card"><div class="card__kicker">03</div><div class="card__title" data-i18n="caps.c3.t">Inheritance graph</div><div class="card__body" data-i18n="caps.c3.b">Classes, interfaces, traits, and their implementers across the workspace.</div></div>
+    <div class="card"><div class="card__kicker">04</div><div class="card__title" data-i18n="caps.c4.t">Call graphs</div><div class="card__body" data-i18n="caps.c4.b">Static and virtual calls, intra- and inter-module, with cardinality.</div></div>
+    <div class="card"><div class="card__kicker">05</div><div class="card__title" data-i18n="caps.c5.t">Dependency resolution</div><div class="card__body" data-i18n="caps.c5.b">Direct, transitive, and provenance for every external package.</div></div>
+    <div class="card"><div class="card__kicker">06</div><div class="card__title" data-i18n="caps.c6.t">Configuration mapping</div><div class="card__body" data-i18n="caps.c6.b">Which keys are read where, with defaults and validation rules.</div></div>
+    <div class="card"><div class="card__kicker">07</div><div class="card__title" data-i18n="caps.c7.t">Source ranges</div><div class="card__body" data-i18n="caps.c7.b">Every fact carries file plus line plus column for round-trip evidence.</div></div>
+    <div class="card" style="background:var(--bg-alt);"><div class="card__kicker" data-i18n="caps.c8.k">All seven</div><div class="card__title" data-i18n="caps.c8.t">No partial credit.</div><div class="card__body" data-i18n="caps.c8.b">Missing one capability collapses recipe quality. Plan for all seven from day one.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 16: CODE INTELLIGENCE PIPELINE DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-blue-500);" data-i18n="pipe.eyebrow">Code intelligence &middot; Pipeline</div>
+  <h2 class="title title--small" data-i18n="pipe.title">From source to a graph an agent can query.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 380" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="80" width="280" height="200" rx="8" fill="#FFFFFF" stroke="#737373" stroke-width="1.5"/>
+      <text x="60" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">STAGE 01</text>
+      <text x="60" y="140" font-size="20" font-weight="500" fill="#1A1A1A">Source</text>
+      <text x="60" y="170" font-size="13" font-weight="600" fill="#737373">Repos under build.</text>
+      <text x="60" y="198" font-size="12" fill="#3A3A3A"><tspan x="60">Multi-language code,</tspan><tspan x="60" dy="16">build files, manifests,</tspan><tspan x="60" dy="16">infra config.</tspan></text>
+      <line x1="60" y1="244" x2="300" y2="244" stroke="#E5E5E0"/>
+      <text x="60" y="266" font-size="11" font-style="italic" fill="#737373">Trigger: every commit.</text>
+      <line x1="320" y1="180" x2="370" y2="180" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="370,176 380,180 370,184" fill="#1A1A1A"/>
+      <rect x="390" y="80" width="280" height="200" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="410" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">STAGE 02</text>
+      <text x="410" y="140" font-size="20" font-weight="500" fill="#1A1A1A">Compiler / AST</text>
+      <text x="410" y="170" font-size="13" font-weight="600" fill="#B33816">Parse and resolve.</text>
+      <text x="410" y="198" font-size="12" fill="#3A3A3A"><tspan x="410">Language-native or</tspan><tspan x="410" dy="16">unified analysis</tspan><tspan x="410" dy="16">platform.</tspan></text>
+      <line x1="410" y1="244" x2="650" y2="244" stroke="#E5E5E0"/>
+      <text x="410" y="266" font-size="11" font-style="italic" fill="#737373">Output: typed AST.</text>
+      <line x1="670" y1="180" x2="720" y2="180" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="720,176 730,180 720,184" fill="#1A1A1A"/>
+      <rect x="740" y="80" width="280" height="200" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="760" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">STAGE 03</text>
+      <text x="760" y="140" font-size="20" font-weight="500" fill="#1A1A1A">Graphs</text>
+      <text x="760" y="170" font-size="13" font-weight="600" fill="#B88500">Symbols, types, calls.</text>
+      <text x="760" y="198" font-size="12" fill="#3A3A3A"><tspan x="760">Inheritance, deps,</tspan><tspan x="760" dy="16">configuration map,</tspan><tspan x="760" dy="16">source ranges.</tspan></text>
+      <line x1="760" y1="244" x2="1000" y2="244" stroke="#E5E5E0"/>
+      <text x="760" y="266" font-size="11" font-style="italic" fill="#737373">Snapshot per commit.</text>
+      <line x1="1020" y1="180" x2="1070" y2="180" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="1070,176 1080,180 1070,184" fill="#1A1A1A"/>
+      <rect x="1090" y="80" width="280" height="200" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="1110" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">STAGE 04</text>
+      <text x="1110" y="140" font-size="20" font-weight="500" fill="#1A1A1A">Recipe-ready</text>
+      <text x="1110" y="170" font-size="13" font-weight="600" fill="#5A8500">Queryable artifacts.</text>
+      <text x="1110" y="198" font-size="12" fill="#3A3A3A"><tspan x="1110">Indexed graph and</tspan><tspan x="1110" dy="16">structured artifacts</tspan><tspan x="1110" dy="16">for recipe authors.</tspan></text>
+      <line x1="1110" y1="244" x2="1350" y2="244" stroke="#E5E5E0"/>
+      <text x="1110" y="266" font-size="11" font-style="italic" fill="#737373">Consumed by Layer 02.</text>
+      <line x1="40" y1="330" x2="1460" y2="330" stroke="#E5E5E0"/>
+      <text x="40" y="354" font-size="12" font-style="italic" fill="#737373">Pay the compiler cost in CI &mdash; once per commit &mdash; not per agent task.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 17: PER-LANGUAGE GUIDANCE -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="lang.eyebrow">Code intelligence &middot; Per-language</div>
+  <h2 class="title title--medium" data-i18n="lang.title">Different languages, same contract.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="lang.c1.k">JVM &middot; .NET</div><div class="card__title" data-i18n="lang.c1.t">Native compilers + LSP.</div><div class="card__body" data-i18n="lang.c1.b">Use javac, kotlinc, Roslyn through LSP servers. Mature symbol and type resolution out of the box.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="lang.c2.k">TypeScript &middot; Python</div><div class="card__title" data-i18n="lang.c2.t">Compiler API + type stubs.</div><div class="card__body" data-i18n="lang.c2.b">tsc compiler API for TS, Pyright or Pyre for Python. Tree-sitter for fast lexical, then layered type analysis.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="lang.c3.k">Go &middot; Rust</div><div class="card__title" data-i18n="lang.c3.t">Toolchain-native indexers.</div><div class="card__body" data-i18n="lang.c3.b">gopls and rust-analyzer expose call graphs and type info via LSP. Both feed the same recipe contract.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="lang.c4.k">Mainframe</div><div class="card__title" data-i18n="lang.c4.t">COBOL, PL/I.</div><div class="card__body" data-i18n="lang.c4.b">Specialized parsers (Cobol Programming Tooling, OpenLegacy) plus copybook and JCL resolution.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="lang.c5.k">Polyglot</div><div class="card__title" data-i18n="lang.c5.t">Cross-language refs.</div><div class="card__body" data-i18n="lang.c5.b">REST schemas, OpenAPI, gRPC IDL, Avro &mdash; resolve calls that cross language boundaries.</div></div>
+    <div class="card" style="background:var(--bg-alt);"><div class="card__kicker" data-i18n="lang.c6.k">Rule</div><div class="card__title" data-i18n="lang.c6.t">One contract, many engines.</div><div class="card__body" data-i18n="lang.c6.b">Layer 02 should not know which compiler produced the graph. Hide language-specific tooling behind the recipe API.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 18: PART IV COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part4.eyebrow">Part IV</div>
+  <div class="section-number">IV</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">04</div>
+  <h2 class="section-title" data-i18n="part4.title">Context recipes.</h2>
+  <p class="subtitle" data-i18n="part4.subtitle">Composable, intent-shaped units of context that turn graphs into agent-ready artifacts.</p>
+</section>
+
+<!-- SLIDE 19: WHAT A RECIPE IS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="recipe.eyebrow">Recipes &middot; Definition</div>
+  <h2 class="title title--medium"><span data-i18n="recipe.t1">A recipe is a</span> <span class="accent-green" data-i18n="recipe.t2">contract</span> <span data-i18n="recipe.t3">between intent and context.</span></h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="recipe.l.k">Inputs</div>
+      <div class="split__title" data-i18n="recipe.l.t">Source plus graphs.</div>
+      <div class="split__body" data-i18n="recipe.l.b">A recipe consumes Layer 01 artifacts (symbol graph, type info, call graph, dependency tree, configuration map) and project-local conventions.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="recipe.r.k">Outputs</div>
+      <div class="split__title" data-i18n="recipe.r.t">A targeted, versioned artifact.</div>
+      <div class="split__body" data-i18n="recipe.r.b">Markdown, JSON, or structured graph snippet sized for the agent task. Manifest, implementation, and tests, like any code module.</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="recipe.caption">A recipe answers one question well. Six recipes compose. Sixty recipes describe a platform.</p>
+</section>
+
+<!-- SLIDE 20: RECIPE CATEGORIES DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-green-500);" data-i18n="cats.eyebrow">Recipes &middot; Categories</div>
+  <h2 class="title title--small" data-i18n="cats.title">Six categories cover most enterprise tasks.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 400" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="40" width="460" height="150" rx="8" fill="#FFFFFF" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="40" y="40" width="460" height="42" rx="8" fill="#7FBA00"/>
+      <text x="60" y="68" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">CATEGORY 01</text>
+      <text x="60" y="108" font-size="18" font-weight="500" fill="#1A1A1A">Structural Inventory</text>
+      <text x="60" y="134" font-size="13" fill="#3A3A3A"><tspan x="60">Modules, packages, classes,</tspan><tspan x="60" dy="16">public API surface, ownership.</tspan></text>
+      <text x="60" y="180" font-size="11" font-style="italic" fill="#737373">"What is in this repo?"</text>
+      <rect x="520" y="40" width="460" height="150" rx="8" fill="#FFFFFF" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="520" y="40" width="460" height="42" rx="8" fill="#7FBA00"/>
+      <text x="540" y="68" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">CATEGORY 02</text>
+      <text x="540" y="108" font-size="18" font-weight="500" fill="#1A1A1A">Dependency Intelligence</text>
+      <text x="540" y="134" font-size="13" fill="#3A3A3A"><tspan x="540">Direct, transitive, provenance,</tspan><tspan x="540" dy="16">vulnerabilities, license posture.</tspan></text>
+      <text x="540" y="180" font-size="11" font-style="italic" fill="#737373">"What does it depend on?"</text>
+      <rect x="1000" y="40" width="460" height="150" rx="8" fill="#FFFFFF" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="1000" y="40" width="460" height="42" rx="8" fill="#7FBA00"/>
+      <text x="1020" y="68" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">CATEGORY 03</text>
+      <text x="1020" y="108" font-size="18" font-weight="500" fill="#1A1A1A">Service Topology</text>
+      <text x="1020" y="134" font-size="13" fill="#3A3A3A"><tspan x="1020">Endpoints, queues, datastores,</tspan><tspan x="1020" dy="16">and the calls that connect them.</tspan></text>
+      <text x="1020" y="180" font-size="11" font-style="italic" fill="#737373">"How does it talk to others?"</text>
+      <rect x="40" y="210" width="460" height="150" rx="8" fill="#FFFFFF" stroke="#00A4EF" stroke-width="1.5"/>
+      <rect x="40" y="210" width="460" height="42" rx="8" fill="#00A4EF"/>
+      <text x="60" y="238" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">CATEGORY 04</text>
+      <text x="60" y="278" font-size="18" font-weight="500" fill="#1A1A1A">Convention Extraction</text>
+      <text x="60" y="304" font-size="13" fill="#3A3A3A"><tspan x="60">Logging, error handling, naming,</tspan><tspan x="60" dy="16">layering rules, observed in code.</tspan></text>
+      <text x="60" y="350" font-size="11" font-style="italic" fill="#737373">"What patterns does it follow?"</text>
+      <rect x="520" y="210" width="460" height="150" rx="8" fill="#FFFFFF" stroke="#00A4EF" stroke-width="1.5"/>
+      <rect x="520" y="210" width="460" height="42" rx="8" fill="#00A4EF"/>
+      <text x="540" y="238" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">CATEGORY 05</text>
+      <text x="540" y="278" font-size="18" font-weight="500" fill="#1A1A1A">Test Intent Mapping</text>
+      <text x="540" y="304" font-size="13" fill="#3A3A3A"><tspan x="540">Tests grouped by intent and the</tspan><tspan x="540" dy="16">code paths each one exercises.</tspan></text>
+      <text x="540" y="350" font-size="11" font-style="italic" fill="#737373">"What does it actually verify?"</text>
+      <rect x="1000" y="210" width="460" height="150" rx="8" fill="#FFFFFF" stroke="#00A4EF" stroke-width="1.5"/>
+      <rect x="1000" y="210" width="460" height="42" rx="8" fill="#00A4EF"/>
+      <text x="1020" y="238" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">CATEGORY 06</text>
+      <text x="1020" y="278" font-size="18" font-weight="500" fill="#1A1A1A">Configuration Surface</text>
+      <text x="1020" y="304" font-size="13" fill="#3A3A3A"><tspan x="1020">Keys read at runtime, defaults,</tspan><tspan x="1020" dy="16">validation, environment binding.</tspan></text>
+      <text x="1020" y="350" font-size="11" font-style="italic" fill="#737373">"What can change at deploy?"</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 21: RECIPE ANATOMY -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="anat.eyebrow">Recipes &middot; Anatomy</div>
+  <h2 class="title title--medium" data-i18n="anat.title">Manifest, implementation, tests, docs.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="anat.c1.k">Manifest</div><div class="card__title" data-i18n="anat.c1.t">recipe.yaml</div><div class="card__body" data-i18n="anat.c1.b">Identity, version, inputs, outputs, classification, refresh policy. The contract layer reads.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="anat.c2.k">Implementation</div><div class="card__title" data-i18n="anat.c2.t">Pure function over graphs.</div><div class="card__body" data-i18n="anat.c2.b">Code that turns Layer 01 facts into a targeted artifact. Reproducible, deterministic, free of side effects.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="anat.c3.k">Tests</div><div class="card__title" data-i18n="anat.c3.t">Golden fixtures.</div><div class="card__body" data-i18n="anat.c3.b">Snapshot tests over a fixed graph. CI fails if a recipe changes its output without an explicit version bump.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="anat.c4.k">Docs</div><div class="card__title" data-i18n="anat.c4.t">Intent + sample output.</div><div class="card__body" data-i18n="anat.c4.b">One paragraph of intent, one example output. Recipe consumers should never have to read the implementation.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 22: AUTHORING GUIDELINES -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="auth.eyebrow">Recipes &middot; Authoring</div>
+  <h2 class="title title--medium" data-i18n="auth.title">Five rules for recipe authors.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="auth.i1">One question per recipe. If the title needs an "and", split it into two recipes.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="auth.i2">Token budget per output. Declare it in the manifest. Fail the build when exceeded.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="auth.i3">Stable shape. Output schema is part of the contract; breaking changes require a major version.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="auth.i4">No secret leaks. Classification labels propagate from inputs to outputs. Recipes cannot widen scope.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="auth.i5">Provenance always. Every fact in the output cites its source range from Layer 01.</span></div>
+  </div>
+</section>
+
+<!-- SLIDE 23: PART V COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="part5.eyebrow">Part V</div>
+  <div class="section-number">V</div>
+  <div class="section-number" style="--accent: var(--c-yellow-500);">05</div>
+  <h2 class="section-title" data-i18n="part5.title">Registry and distribution.</h2>
+  <p class="subtitle" data-i18n="part5.subtitle">Where recipes live, how they version, how they reach the agent at runtime.</p>
+</section>
+
+<!-- SLIDE 24: REGISTRY RESPONSIBILITIES -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="reg.eyebrow">Registry &middot; Responsibilities</div>
+  <h2 class="title title--medium" data-i18n="reg.title">A registry is a package manager for context.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="reg.c1.k">Storage</div><div class="card__title" data-i18n="reg.c1.t">Co-located, central, federated.</div><div class="card__body" data-i18n="reg.c1.b">Same repository, central object store, or per-domain federation. Pick one and document the trade-offs.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="reg.c2.k">Discovery</div><div class="card__title" data-i18n="reg.c2.t">By repo, capability, content.</div><div class="card__body" data-i18n="reg.c2.b">Stable URIs and content addressing. Aliases for "latest stable" track moving versions safely.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="reg.c3.k">Refresh</div><div class="card__title" data-i18n="reg.c3.t">Commit, schedule, event.</div><div class="card__body" data-i18n="reg.c3.b">Three triggers cover most needs. Staleness policy declares when a stale artifact must be refused.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 25: DISTRIBUTION FLOW DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-yellow-500);" data-i18n="dist.eyebrow">Registry &middot; Distribution flow</div>
+  <h2 class="title title--small" data-i18n="dist.title">From a commit to an agent in three hops.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 380" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="60" width="280" height="220" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="60" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">HOP 01</text>
+      <text x="60" y="120" font-size="20" font-weight="500" fill="#1A1A1A">Author + Build</text>
+      <text x="60" y="150" font-size="13" font-weight="600" fill="#B33816">Recipe runs in CI.</text>
+      <text x="60" y="180" font-size="12" fill="#3A3A3A"><tspan x="60">Commit triggers Layer 01</tspan><tspan x="60" dy="16">refresh, recipe execution,</tspan><tspan x="60" dy="16">test snapshot, sign and</tspan><tspan x="60" dy="16">tag artifact.</tspan></text>
+      <line x1="60" y1="246" x2="300" y2="246" stroke="#E5E5E0"/>
+      <text x="60" y="266" font-size="11" font-style="italic" fill="#737373">Where: developer repo + CI.</text>
+      <line x1="320" y1="170" x2="420" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="420,166 432,170 420,174" fill="#1A1A1A"/>
+      <rect x="445" y="60" width="280" height="220" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="465" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">HOP 02</text>
+      <text x="465" y="120" font-size="20" font-weight="500" fill="#1A1A1A">Registry</text>
+      <text x="465" y="150" font-size="13" font-weight="600" fill="#B88500">Store + index + alias.</text>
+      <text x="465" y="180" font-size="12" fill="#3A3A3A"><tspan x="465">Content-addressed storage,</tspan><tspan x="465" dy="16">stable URIs, version aliases,</tspan><tspan x="465" dy="16">classification labels,</tspan><tspan x="465" dy="16">retention policy.</tspan></text>
+      <line x1="465" y1="246" x2="705" y2="246" stroke="#E5E5E0"/>
+      <text x="465" y="266" font-size="11" font-style="italic" fill="#737373">Where: registry as a service.</text>
+      <line x1="725" y1="170" x2="825" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="825,166 837,170 825,174" fill="#1A1A1A"/>
+      <rect x="850" y="60" width="280" height="220" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="870" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#00A4EF">HOP 03</text>
+      <text x="870" y="120" font-size="20" font-weight="500" fill="#1A1A1A">Gateway</text>
+      <text x="870" y="150" font-size="13" font-weight="600" fill="#00A4EF">MCP or static fetch.</text>
+      <text x="870" y="180" font-size="12" fill="#3A3A3A"><tspan x="870">Resolves identity, applies</tspan><tspan x="870" dy="16">RBAC, fetches artifact, emits</tspan><tspan x="870" dy="16">audit span, returns context</tspan><tspan x="870" dy="16">to the agent.</tspan></text>
+      <line x1="870" y1="246" x2="1110" y2="246" stroke="#E5E5E0"/>
+      <text x="870" y="266" font-size="11" font-style="italic" fill="#737373">Where: agent-side runtime.</text>
+      <line x1="1130" y1="170" x2="1230" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="1230,166 1242,170 1230,174" fill="#1A1A1A"/>
+      <rect x="1255" y="60" width="205" height="220" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="1275" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">CONSUMER</text>
+      <text x="1275" y="120" font-size="20" font-weight="500" fill="#1A1A1A">Agent</text>
+      <text x="1275" y="150" font-size="13" font-weight="600" fill="#5A8500">Receives context.</text>
+      <text x="1275" y="180" font-size="12" fill="#3A3A3A"><tspan x="1275">Targeted, signed,</tspan><tspan x="1275" dy="16">classified context.</tspan><tspan x="1275" dy="16">Within token budget.</tspan></text>
+      <text x="1275" y="266" font-size="11" font-style="italic" fill="#737373">Acts on the task.</text>
+      <line x1="40" y1="330" x2="1460" y2="330" stroke="#E5E5E0"/>
+      <text x="40" y="354" font-size="12" font-style="italic" fill="#737373">Identity and audit thread through every hop. Stale or unauthorized artifacts are refused at the gateway.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 26: VERSIONING + REFRESH -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="ver.eyebrow">Registry &middot; Versioning + refresh</div>
+  <h2 class="title title--medium" data-i18n="ver.title">Content addressing keeps history honest.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="ver.l.k">Versioning</div>
+      <div class="split__title" data-i18n="ver.l.t">Hash + manifest + alias.</div>
+      <div class="split__body" data-i18n="ver.l.b">Each artifact is addressed by its content hash. Manifest carries semantic version. Aliases like "stable" or "preview" track moving heads without breaking pinned consumers.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="ver.r.k">Refresh</div>
+      <div class="split__title" data-i18n="ver.r.t">Commit-driven, scheduled, event-driven.</div>
+      <div class="split__body" data-i18n="ver.r.b">Most recipes refresh on commit. Some run nightly (e.g., dependency advisories). Some are event-driven (new endpoint published, schema changed). Staleness policy decides when stale is unacceptable.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 27: PART VI COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part6.eyebrow">Part VI</div>
+  <div class="section-number">VI</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">06</div>
+  <h2 class="section-title" data-i18n="part6.title">Agent integration patterns.</h2>
+  <p class="subtitle" data-i18n="part6.subtitle">Static, MCP, custom configuration, hybrid &mdash; pick the right contract for the agent.</p>
+</section>
+
+<!-- SLIDE 28: INTEGRATION PATTERNS DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-blue-500);" data-i18n="int.eyebrow">Integration &middot; Patterns</div>
+  <h2 class="title title--small" data-i18n="int.title">Three patterns, one stack.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 410" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="40" width="460" height="320" rx="8" fill="#FFFFFF" stroke="#00A4EF" stroke-width="1.5"/>
+      <rect x="40" y="40" width="460" height="56" rx="8" fill="#00A4EF"/>
+      <text x="60" y="72" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">PATTERN 01</text>
+      <text x="60" y="92" font-size="18" font-weight="500" fill="#FFFFFF">Static File Injection</text>
+      <text x="60" y="130" font-size="13" font-weight="600" fill="#00A4EF">Pre-rendered context, in repo.</text>
+      <text x="60" y="160" font-size="12" fill="#3A3A3A"><tspan x="60">AGENTS.md, .cursor/rules,</tspan><tspan x="60" dy="16">.copilot-instructions.md, etc.</tspan><tspan x="60" dy="16">Recipes generate the file at</tspan><tspan x="60" dy="16">CI; agent reads on every task.</tspan></text>
+      <line x1="60" y1="246" x2="470" y2="246" stroke="#E5E5E0"/>
+      <text x="60" y="270" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5" fill="#737373">BEST FOR</text>
+      <text x="60" y="294" font-size="13" fill="#1A1A1A">Stable conventions, low churn.</text>
+      <text x="60" y="316" font-size="13" fill="#1A1A1A">No infra to deploy.</text>
+      <text x="60" y="346" font-size="11" font-style="italic" fill="#737373">Simplest start. Rebuild on commit.</text>
+      <rect x="520" y="40" width="460" height="320" rx="8" fill="#FFFFFF" stroke="#FFB900" stroke-width="1.5"/>
+      <rect x="520" y="40" width="460" height="56" rx="8" fill="#FFB900"/>
+      <text x="540" y="72" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">PATTERN 02</text>
+      <text x="540" y="92" font-size="18" font-weight="500" fill="#FFFFFF">MCP Server</text>
+      <text x="540" y="130" font-size="13" font-weight="600" fill="#B88500">On-demand context, via tools.</text>
+      <text x="540" y="160" font-size="12" fill="#3A3A3A"><tspan x="540">Recipes exposed as MCP tool</tspan><tspan x="540" dy="16">calls. Agent fetches only what</tspan><tspan x="540" dy="16">it needs, when it needs it.</tspan><tspan x="540" dy="16">Identity and audit per call.</tspan></text>
+      <line x1="540" y1="246" x2="950" y2="246" stroke="#E5E5E0"/>
+      <text x="540" y="270" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5" fill="#737373">BEST FOR</text>
+      <text x="540" y="294" font-size="13" fill="#1A1A1A">Large repos, dynamic queries.</text>
+      <text x="540" y="316" font-size="13" fill="#1A1A1A">Token budget under control.</text>
+      <text x="540" y="346" font-size="11" font-style="italic" fill="#737373">Most powerful. Requires gateway.</text>
+      <rect x="1000" y="40" width="460" height="320" rx="8" fill="#FFFFFF" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="1000" y="40" width="460" height="56" rx="8" fill="#7FBA00"/>
+      <text x="1020" y="72" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#FFFFFF">PATTERN 03</text>
+      <text x="1020" y="92" font-size="18" font-weight="500" fill="#FFFFFF">Hybrid Distribution</text>
+      <text x="1020" y="130" font-size="13" font-weight="600" fill="#5A8500">Static base + MCP for specifics.</text>
+      <text x="1020" y="160" font-size="12" fill="#3A3A3A"><tspan x="1020">Stable conventions injected</tspan><tspan x="1020" dy="16">statically; deep queries served</tspan><tspan x="1020" dy="16">via MCP. Best of both, with</tspan><tspan x="1020" dy="16">careful contract design.</tspan></text>
+      <line x1="1020" y1="246" x2="1430" y2="246" stroke="#E5E5E0"/>
+      <text x="1020" y="270" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5" fill="#737373">BEST FOR</text>
+      <text x="1020" y="294" font-size="13" fill="#1A1A1A">Mature platforms.</text>
+      <text x="1020" y="316" font-size="13" fill="#1A1A1A">Mixed agent surfaces.</text>
+      <text x="1020" y="346" font-size="11" font-style="italic" fill="#737373">Recommended at scale.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 29: PER-AGENT REFERENCE -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="agents.eyebrow">Integration &middot; Per-agent reference</div>
+  <h2 class="title title--medium" data-i18n="agents.title">Where context lands in each agent.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="agents.c1.k">GitHub Copilot</div><div class="card__title" data-i18n="agents.c1.t">.github/copilot-instructions.md</div><div class="card__body" data-i18n="agents.c1.b">Plus repository custom instructions. Static injection is the primary surface; MCP is emerging.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="agents.c2.k">Cursor / Windsurf</div><div class="card__title" data-i18n="agents.c2.t">.cursor/rules &middot; .windsurfrules</div><div class="card__body" data-i18n="agents.c2.b">File-based rules with scope. Both editors support MCP servers for richer queries.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="agents.c3.k">Claude Code</div><div class="card__title" data-i18n="agents.c3.t">CLAUDE.md + skills + MCP</div><div class="card__body" data-i18n="agents.c3.b">Layered model: static base, on-demand skills, MCP tools. Hybrid distribution maps cleanly.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="agents.c4.k">Custom agents</div><div class="card__title" data-i18n="agents.c4.t">SDK + recipe API.</div><div class="card__body" data-i18n="agents.c4.b">Internal agents call recipe APIs directly. Same contract, no parsing of static files required.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 30: PART VII COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part7.eyebrow">Part VII</div>
+  <div class="section-number">VII</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">07</div>
+  <h2 class="section-title" data-i18n="part7.title">Governance and compliance.</h2>
+  <p class="subtitle" data-i18n="part7.subtitle">Same controls as the source code. No exceptions for "AI context."</p>
+</section>
+
+<!-- SLIDE 31: GOVERNANCE FLOW DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-red-500);" data-i18n="gov.eyebrow">Governance &middot; Policy flow</div>
+  <h2 class="title title--small" data-i18n="gov.title">Policy enforcement on every retrieval.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 380" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <rect x="40" y="60" width="240" height="200" rx="8" fill="#FFFFFF" stroke="#737373" stroke-width="1.5"/>
+      <text x="60" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">REQUEST</text>
+      <text x="60" y="120" font-size="18" font-weight="500" fill="#1A1A1A">Agent asks</text>
+      <text x="60" y="156" font-size="12" fill="#3A3A3A"><tspan x="60">Identity, recipe URI,</tspan><tspan x="60" dy="16">task context, target</tspan><tspan x="60" dy="16">repository.</tspan></text>
+      <text x="60" y="234" font-size="11" font-style="italic" fill="#737373">Span starts.</text>
+      <line x1="280" y1="160" x2="340" y2="160" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="340,156 352,160 340,164" fill="#1A1A1A"/>
+      <rect x="365" y="60" width="240" height="200" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="385" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">CHECK 01</text>
+      <text x="385" y="120" font-size="18" font-weight="500" fill="#1A1A1A">Identity + RBAC</text>
+      <text x="385" y="156" font-size="12" fill="#3A3A3A"><tspan x="385">Agent identity matches</tspan><tspan x="385" dy="16">a role allowed to read</tspan><tspan x="385" dy="16">this recipe?</tspan></text>
+      <text x="385" y="234" font-size="11" font-style="italic" fill="#737373">Reject if not.</text>
+      <line x1="605" y1="160" x2="665" y2="160" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="665,156 677,160 665,164" fill="#1A1A1A"/>
+      <rect x="690" y="60" width="240" height="200" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="710" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">CHECK 02</text>
+      <text x="710" y="120" font-size="18" font-weight="500" fill="#1A1A1A">Classification</text>
+      <text x="710" y="156" font-size="12" fill="#3A3A3A"><tspan x="710">Artifact label fits the</tspan><tspan x="710" dy="16">agent runtime trust</tspan><tspan x="710" dy="16">boundary?</tspan></text>
+      <text x="710" y="234" font-size="11" font-style="italic" fill="#737373">Block on mismatch.</text>
+      <line x1="930" y1="160" x2="990" y2="160" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="990,156 1002,160 990,164" fill="#1A1A1A"/>
+      <rect x="1015" y="60" width="240" height="200" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="1035" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">CHECK 03</text>
+      <text x="1035" y="120" font-size="18" font-weight="500" fill="#1A1A1A">Freshness</text>
+      <text x="1035" y="156" font-size="12" fill="#3A3A3A"><tspan x="1035">Artifact within the</tspan><tspan x="1035" dy="16">recipe's staleness</tspan><tspan x="1035" dy="16">policy window?</tspan></text>
+      <text x="1035" y="234" font-size="11" font-style="italic" fill="#737373">Refresh or fail.</text>
+      <line x1="1255" y1="160" x2="1315" y2="160" stroke="#1A1A1A" stroke-width="1.5"/>
+      <polygon points="1315,156 1327,160 1315,164" fill="#1A1A1A"/>
+      <rect x="1340" y="60" width="120" height="200" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="1356" y="92" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#00A4EF">RESULT</text>
+      <text x="1356" y="120" font-size="16" font-weight="500" fill="#1A1A1A">Serve</text>
+      <text x="1356" y="156" font-size="12" fill="#3A3A3A"><tspan x="1356">Audit span</tspan><tspan x="1356" dy="16">closed.</tspan></text>
+      <text x="1356" y="234" font-size="11" font-style="italic" fill="#737373">Token-budget OK.</text>
+      <line x1="40" y1="320" x2="1460" y2="320" stroke="#E5E5E0"/>
+      <text x="40" y="346" font-size="12" font-style="italic" fill="#737373">Three checks, every retrieval. Audit span captures decision and reason regardless of outcome.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 32: ROLES + POLICIES -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="roles.eyebrow">Governance &middot; Roles + policies</div>
+  <h2 class="title title--medium" data-i18n="roles.title">Five roles. Six policy domains.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="roles.l.k">Roles</div>
+      <div class="split__title" data-i18n="roles.l.t">Platform owner, recipe steward, repo owner, security reviewer, auditor.</div>
+      <div class="split__body" data-i18n="roles.l.b">Each role has explicit responsibilities and a named owner. The auditor is independent of platform and repository teams.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="roles.r.k">Policy domains</div>
+      <div class="split__title" data-i18n="roles.r.t">Scope, classification, access, refresh, retention, integration.</div>
+      <div class="split__body" data-i18n="roles.r.b">Each domain has a written policy, a control mapped to it, and an audit query that proves enforcement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 33: AUDIT + CONTROLS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="audit.eyebrow">Governance &middot; Audit + controls</div>
+  <h2 class="title title--medium" data-i18n="audit.title">Four control families. One audit log.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="audit.c1.k">Identity + access</div><div class="card__title" data-i18n="audit.c1.t">Who can do what.</div><div class="card__body" data-i18n="audit.c1.b">Per-recipe RBAC, identity propagation, scoped tokens. SPIFFE for inter-service identity where required.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="audit.c2.k">Integrity</div><div class="card__title" data-i18n="audit.c2.t">Proof of provenance.</div><div class="card__body" data-i18n="audit.c2.b">Signed artifacts, content hashes, build attestation. Tampering detected at retrieval time.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="audit.c3.k">Lifecycle</div><div class="card__title" data-i18n="audit.c3.t">Birth to deprecation.</div><div class="card__body" data-i18n="audit.c3.b">Versioning, refresh, deprecation, deletion. No orphan artifacts; every URI resolves or returns a tombstone.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="audit.c4.k">Observability</div><div class="card__title" data-i18n="audit.c4.t">Evidence on demand.</div><div class="card__body" data-i18n="audit.c4.b">OTel spans, audit log, classification labels, and policy decisions queryable by auditor without engineering help.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 34: PART VIII COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part8.eyebrow">Part VIII</div>
+  <div class="section-number">VIII</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">08</div>
+  <h2 class="section-title" data-i18n="part8.title">Adoption roadmap and metrics.</h2>
+  <p class="subtitle" data-i18n="part8.subtitle">Five phases. Measurable exit criteria. The metrics that prove the layer is paying off.</p>
+</section>
+
+<!-- SLIDE 35: ROADMAP TIMELINE DIAGRAM -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-green-500);" data-i18n="road.eyebrow">Adoption &middot; Roadmap</div>
+  <h2 class="title title--small" data-i18n="road.title">Five phases over twelve months.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 380" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <line x1="60" y1="280" x2="1440" y2="280" stroke="#CECEC7" stroke-width="2"/>
+      <circle cx="160" cy="280" r="8" fill="#737373"/>
+      <circle cx="420" cy="280" r="8" fill="#F25022"/>
+      <circle cx="700" cy="280" r="8" fill="#FFB900"/>
+      <circle cx="980" cy="280" r="8" fill="#00A4EF"/>
+      <circle cx="1300" cy="280" r="8" fill="#7FBA00"/>
+      <text x="160" y="316" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#737373">MONTH 0</text>
+      <text x="420" y="316" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#737373">M 1-2</text>
+      <text x="700" y="316" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#737373">M 3-5</text>
+      <text x="980" y="316" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#737373">M 6-9</text>
+      <text x="1300" y="316" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#737373">M 10-12+</text>
+      <rect x="60" y="60" width="200" height="190" rx="8" fill="#FFFFFF" stroke="#737373" stroke-width="1.5"/>
+      <text x="80" y="90" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#737373">PHASE 00</text>
+      <text x="80" y="118" font-size="16" font-weight="500" fill="#1A1A1A">Discovery</text>
+      <text x="80" y="148" font-size="12" fill="#3A3A3A"><tspan x="80">Inventory agents,</tspan><tspan x="80" dy="16">map repos, baseline</tspan><tspan x="80" dy="16">token spend.</tspan></text>
+      <text x="80" y="222" font-size="10" font-style="italic" fill="#737373">Exit: baseline doc.</text>
+      <rect x="320" y="60" width="200" height="190" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="340" y="90" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#B33816">PHASE 01</text>
+      <text x="340" y="118" font-size="16" font-weight="500" fill="#1A1A1A">Pilot</text>
+      <text x="340" y="148" font-size="12" fill="#3A3A3A"><tspan x="340">One repo, three</tspan><tspan x="340" dy="16">recipes, one agent.</tspan><tspan x="340" dy="16">Static injection.</tspan></text>
+      <text x="340" y="222" font-size="10" font-style="italic" fill="#737373">Exit: token cut 30%.</text>
+      <rect x="600" y="60" width="200" height="190" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="620" y="90" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#B88500">PHASE 02</text>
+      <text x="620" y="118" font-size="16" font-weight="500" fill="#1A1A1A">Expansion</text>
+      <text x="620" y="148" font-size="12" fill="#3A3A3A"><tspan x="620">Five repos, registry</tspan><tspan x="620" dy="16">deployed, MCP for</tspan><tspan x="620" dy="16">deep queries.</tspan></text>
+      <text x="620" y="222" font-size="10" font-style="italic" fill="#737373">Exit: governance live.</text>
+      <rect x="880" y="60" width="200" height="190" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <text x="900" y="90" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#00A4EF">PHASE 03</text>
+      <text x="900" y="118" font-size="16" font-weight="500" fill="#1A1A1A">Platform</text>
+      <text x="900" y="148" font-size="12" fill="#3A3A3A"><tspan x="900">Self-service for new</tspan><tspan x="900" dy="16">repos. Hybrid is the</tspan><tspan x="900" dy="16">default pattern.</tspan></text>
+      <text x="900" y="222" font-size="10" font-style="italic" fill="#737373">Exit: SLA met.</text>
+      <rect x="1180" y="60" width="220" height="190" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="1200" y="90" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="1.5" fill="#5A8500">PHASE 04</text>
+      <text x="1200" y="118" font-size="16" font-weight="500" fill="#1A1A1A">Optimization</text>
+      <text x="1200" y="148" font-size="12" fill="#3A3A3A"><tspan x="1200">Continuous tuning.</tspan><tspan x="1200" dy="16">Recipes deprecate.</tspan><tspan x="1200" dy="16">Metrics drive ROI.</tspan></text>
+      <text x="1200" y="222" font-size="10" font-style="italic" fill="#737373">Exit: never &mdash; ongoing.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 36: SUCCESS METRICS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="metrics.eyebrow">Adoption &middot; Success metrics</div>
+  <h2 class="title title--medium" data-i18n="metrics.title">Six metrics. Measured every release.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="metrics.c1.k">Token spend</div><div class="card__title" data-i18n="metrics.c1.t">Tokens per task.</div><div class="card__body" data-i18n="metrics.c1.b">Median tokens consumed per agent task. Target: 30-60% reduction vs baseline within two phases.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="metrics.c2.k">Hallucination</div><div class="card__title" data-i18n="metrics.c2.t">Hallucination rate.</div><div class="card__body" data-i18n="metrics.c2.b">Frequency of references to non-existent symbols. Target: trending to zero with compiler-grade context.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="metrics.c3.k">Convention</div><div class="card__title" data-i18n="metrics.c3.t">Convention adherence.</div><div class="card__body" data-i18n="metrics.c3.b">Generated code that matches repo conventions on the first pass. Target: above 80%.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="metrics.c4.k">Time to value</div><div class="card__title" data-i18n="metrics.c4.t">Time to first useful suggestion.</div><div class="card__body" data-i18n="metrics.c4.b">Seconds from task start to a suggestion the developer accepts. Target: under 8 seconds.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="metrics.c5.k">Satisfaction</div><div class="card__title" data-i18n="metrics.c5.t">Developer satisfaction.</div><div class="card__body" data-i18n="metrics.c5.b">Quarterly NPS or equivalent. Should track upward as recipes mature.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="metrics.c6.k">Throughput</div><div class="card__title" data-i18n="metrics.c6.t">PR throughput.</div><div class="card__body" data-i18n="metrics.c6.b">PRs merged per developer per week, controlled for repo. Lagging signal but the one that pays the bill.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 37: PART IX COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="part9.eyebrow">Part IX</div>
+  <div class="section-number">IX</div>
+  <div class="section-number" style="--accent: var(--c-yellow-500);">09</div>
+  <h2 class="section-title" data-i18n="part9.title">Build, buy, or hybrid.</h2>
+  <p class="subtitle" data-i18n="part9.subtitle">Three paths to a Semantic Context Layer &mdash; and how to choose.</p>
+</section>
+
+<!-- SLIDE 38: THREE PATHS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="paths.eyebrow">Build vs Buy &middot; Three paths</div>
+  <h2 class="title title--medium" data-i18n="paths.title">Same architecture. Three implementation choices.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="paths.c1.k">Path A &middot; Build</div><div class="card__title" data-i18n="paths.c1.t">GitHub + Microsoft stack.</div><div class="card__body" data-i18n="paths.c1.b">Build on Roslyn, LSP, GitHub Actions, Azure object storage, and an MCP gateway you operate. Highest control, highest commitment.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="paths.c2.k">Path B &middot; Buy</div><div class="card__title" data-i18n="paths.c2.t">Commercial platform.</div><div class="card__body" data-i18n="paths.c2.b">Adopt a vendor that ships compiler-grade context as a product (e.g., Moderne). Fastest time to value; vendor lock-in trade-off.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="paths.c3.k">Path C &middot; Hybrid</div><div class="card__title" data-i18n="paths.c3.t">Build the contract, buy the engine.</div><div class="card__body" data-i18n="paths.c3.b">Own recipes, registry, and gateway; rent code intelligence from a vendor. Decouples the durable contract from the engine.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 39: BUILD VS BUY 2x2 MATRIX -->
+<section class="slide slide--paper">
+  <div class="eyebrow" style="--accent: var(--c-yellow-500);" data-i18n="matrix.eyebrow">Build vs Buy &middot; Decision matrix</div>
+  <h2 class="title title--small" data-i18n="matrix.title">Where each path wins.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 480" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+      <line x1="200" y1="60" x2="200" y2="420" stroke="#CECEC7" stroke-width="1.5"/>
+      <line x1="200" y1="240" x2="1400" y2="240" stroke="#CECEC7" stroke-width="1.5"/>
+      <text x="60" y="150" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373"><tspan x="60">CONTROL</tspan><tspan x="60" dy="16">High</tspan></text>
+      <text x="60" y="340" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373"><tspan x="60">CONTROL</tspan><tspan x="60" dy="16">Low</tspan></text>
+      <text x="500" y="450" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">TIME TO VALUE &middot; SLOW</text>
+      <text x="1100" y="450" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">TIME TO VALUE &middot; FAST</text>
+      <rect x="240" y="80" width="540" height="140" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <text x="260" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B33816">QUADRANT &middot; BUILD</text>
+      <text x="260" y="140" font-size="18" font-weight="500" fill="#1A1A1A">Path A &middot; Build on the stack</text>
+      <text x="260" y="172" font-size="13" fill="#3A3A3A"><tspan x="260">Maximum control over recipes, registry, gateway.</tspan><tspan x="260" dy="18">Slowest path; highest in-house expertise required.</tspan></text>
+      <text x="260" y="208" font-size="11" font-style="italic" fill="#737373">Wins: regulated industries, deep customization, mainframe footprints.</text>
+      <rect x="820" y="80" width="540" height="140" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <text x="840" y="112" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#5A8500">QUADRANT &middot; HYBRID</text>
+      <text x="840" y="140" font-size="18" font-weight="500" fill="#1A1A1A">Path C &middot; Hybrid</text>
+      <text x="840" y="172" font-size="13" fill="#3A3A3A"><tspan x="840">Own the durable contract; rent the heavy engine.</tspan><tspan x="840" dy="18">Best of both for most enterprises today.</tspan></text>
+      <text x="840" y="208" font-size="11" font-style="italic" fill="#737373">Wins: portfolios mixing greenfield and legacy.</text>
+      <rect x="240" y="260" width="540" height="140" rx="8" fill="#F7F7F5" stroke="#737373" stroke-width="1.5"/>
+      <text x="260" y="292" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#737373">QUADRANT &middot; AVOID</text>
+      <text x="260" y="320" font-size="18" font-weight="500" fill="#1A1A1A">Slow + low control</text>
+      <text x="260" y="352" font-size="13" fill="#3A3A3A"><tspan x="260">Custom build with no real ownership of the contract.</tspan><tspan x="260" dy="18">All the cost of build with none of the strategic value.</tspan></text>
+      <text x="260" y="388" font-size="11" font-style="italic" fill="#737373">Avoid: unfocused PoCs, departmental scripts that never harden.</text>
+      <rect x="820" y="260" width="540" height="140" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <text x="840" y="292" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#B88500">QUADRANT &middot; BUY</text>
+      <text x="840" y="320" font-size="18" font-weight="500" fill="#1A1A1A">Path B &middot; Buy</text>
+      <text x="840" y="352" font-size="13" fill="#3A3A3A"><tspan x="840">Fastest path. Vendor owns the engine and the upgrades.</tspan><tspan x="840" dy="18">Less control over recipes and lock-in to a single vendor.</tspan></text>
+      <text x="840" y="388" font-size="11" font-style="italic" fill="#737373">Wins: aggressive timelines, large legacy modernization at scale.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 40: CLOSING -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500); justify-content: center; align-items: flex-start;">
+  <div class="eyebrow" data-i18n="end.eyebrow">Closing thought</div>
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:120px;height:auto;margin:14px 0 28px;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <h1 class="section-title"><span data-i18n="end.t1">Context is the platform.</span> <span class="accent-blue" data-i18n="end.t2">Build it like one.</span></h1>
+  <p class="subtitle" style="font-style: italic;">Building the future of software development with AI and Agentic DevOps.</p>
+  <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dark-ink-3); margin: 18px 0 14px;">Paula Silva | Software Global Black Belt</div>
+  <a href="mailto:paulasilva@microsoft.com" style="display:inline-flex; align-items:center; gap:12px; padding:14px 20px; border:1px solid rgba(240,240,240,.2); border-radius:8px; text-decoration:none; color:var(--dark-ink);">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;color:var(--dark-ink-2);flex-shrink:0;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+    <span style="font-size:15px;">paulasilva@microsoft.com</span>
+  </a>
+</section>
+
+</div>
+
+<script>
+const I18N = {
+  "en": {
+    "meta": {"title": "Semantic Context Layer for Agentic DevOps"},
+    "labels": {"author": "Author", "role": "Role", "contact": "Contact", "date": "Date"},
+    "cover": {"eyebrow": "Semantic Context Layer for Agentic DevOps", "part1": "A semantic context layer between", "kw1": "agents", "part2": "and your", "kw2": "enterprise code.", "subtitle": "A reference architecture for compiler-grade context that turns agentic coding from a demo into a platform."},
+    "agenda": {"eyebrow": "Agenda", "title": "Nine parts. From the problem to the platform.", "i1": "The context problem in enterprise agentic coding.", "i2": "Architecture, four layers and their contracts.", "i3": "Code intelligence, the compiler-grade foundation.", "i4": "Context recipes, the composable units.", "i5": "Registry and distribution, how context travels.", "i6": "Agent integration patterns, static, MCP, hybrid.", "i7": "Governance, compliance, and audit.", "i8": "Adoption roadmap and success metrics.", "i9": "Build, buy, or hybrid, competitive positioning."},
+    "part1": {"eyebrow": "Part I", "title": "The context problem.", "subtitle": "Why agentic coding stalls at enterprise scale, and what is actually missing."},
+    "problem": {"eyebrow": "Problem · Symptom", "t1": "A single agent task on a real monorepo can read", "t2": "millions", "t3": "of tokens to answer one question.", "sub": "cost vs. compiler-grade context per task", "caption": "Naive retrieval over raw source code does not scale. Vector search alone cannot resolve symbols, types, or call graphs. The agent guesses; the bill grows; the team loses trust."},
+    "fail": {"eyebrow": "Problem · Why today's stack falls short", "title": "Three approaches, three failure modes.", "c1": {"k": "01 · Raw retrieval", "t": "Embedding search over source files.", "b": "No symbol resolution, no type information, no awareness of call graphs. The agent retrieves text that looks related, not code that is related."}, "c2": {"k": "02 · Hand-curated prompts", "t": "Wikis, AGENTS.md, README pasted in.", "b": "Stale within weeks. No tie to the build. No way to verify that conventions described in the prompt match what the compiler enforces."}, "c3": {"k": "03 · Whole-repo dumps", "t": "Tree of files, no curation.", "b": "Token budget collapses. Context window saturates with boilerplate. Signal-to-noise ratio drops below the threshold where the agent can act safely."}, "caption": "All three share a root cause: there is no semantic layer between agents and the code they operate on."},
+    "semantic": {"eyebrow": "Problem · Definition", "t1": "Semantic context is what the", "t2": "compiler knows", "t3": ",", "t4": "made available to", "t5": "agents", "t6": ".", "l": {"k": "Lexical", "t": "Tokens, files, lines.", "b": "What grep returns. What embedding search ranks. Useful, but not enough to reason about behavior or invariants."}, "s": {"k": "Semantic", "t": "Symbols, types, calls, configs.", "b": "What the build resolves. Resolved references, generic instantiations, inheritance graphs, configuration bound at runtime, dependency provenance."}, "caption": "SCL-AD makes the second column queryable, versioned, and policy-bound, without making every agent a compiler."},
+    "scl": {"eyebrow": "Problem · Working definition", "title": "A reference architecture for a layer that delivers compiler-grade context to agents at scale.", "p1": {"k": "Pillar 01", "t": "Precompute", "b": "Build symbol, type, and dependency graphs once, refresh on commit. Pay the compiler cost in CI, not per task."}, "p2": {"k": "Pillar 02", "t": "Target", "b": "Deliver only the slice the task needs. A recipe per intent, not a dump per repo."}, "p3": {"k": "Pillar 03", "t": "Execute", "b": "Surface context to agents through stable contracts: static files, MCP tools, or hybrid distribution."}, "p4": {"k": "Pillar 04", "t": "Coordinate", "b": "Govern lifecycle, identity, classification, and audit across recipes, registries, and agents."}},
+    "part2": {"eyebrow": "Part II", "title": "Architecture and components.", "subtitle": "Four layers, explicit contracts, and the cross-cutting concerns that hold them together."},
+    "arch": {"eyebrow": "Architecture · Reference stack", "title": "The four layers of a Semantic Context Layer."},
+    "comp": {"eyebrow": "Architecture · Components", "title": "Inside the layer: store, retrieval, governance."},
+    "cross": {"eyebrow": "Architecture · Cross-cutting", "title": "Four concerns cut every layer.", "c1": {"k": "Identity", "t": "Who is asking.", "b": "Identity propagates from agent to recipe to registry to source. RBAC is per recipe and per artifact, not per platform."}, "c2": {"k": "Observability", "t": "What was used.", "b": "Every retrieval emits an OTel span: agent, recipe, artifact version, classification, latency, tokens."}, "c3": {"k": "Security", "t": "What is allowed.", "b": "Classification labels travel with the artifact. Recipes that read regulated data require explicit policy approval."}, "c4": {"k": "Lifecycle", "t": "When it expires.", "b": "Manifest versioning, content hashes, refresh policies, deprecation aliases. Stale context is the silent failure mode."}},
+    "topo": {"eyebrow": "Architecture · Reference topology", "title": "A topology that survives audit.", "subtitle": "Per-repository recipe authoring, central registry for distribution, MCP gateway for runtime delivery, with identity and audit threaded through every hop.", "p1": "Code intelligence in CI", "p2": "Recipes in repo", "p3": "Registry as a service", "p4": "MCP gateway runtime", "p5": "OTel + audit log", "p6": "SPIFFE identity per agent"},
+    "part3": {"eyebrow": "Part III", "title": "Code intelligence layer.", "subtitle": "The compiler-grade foundation everything else depends on."},
+    "ci": {"eyebrow": "Code intelligence · Why it matters", "title": "Approximate context produces approximate code.", "l": {"k": "Without compiler-grade", "t": "Hallucinated symbols, wrong types, broken refactors.", "b": "The agent invents a method that looks plausible but does not exist. Cross-module changes miss callers. Generic instantiations fail at build."}, "r": {"k": "With compiler-grade", "t": "Resolved symbols, typed signatures, complete call graphs.", "b": "The agent knows which calls cross a module boundary, which generics are bound, which configuration keys are read at runtime, and where each definition lives."}},
+    "caps": {"eyebrow": "Code intelligence · Required capabilities", "title": "Seven capabilities define the layer.", "c1": {"t": "Symbol resolution", "b": "Each reference points to its unique definition across files and modules."}, "c2": {"t": "Type resolution", "b": "Generics, inferred types, and overloads resolved with full fidelity."}, "c3": {"t": "Inheritance graph", "b": "Classes, interfaces, traits, and their implementers across the workspace."}, "c4": {"t": "Call graphs", "b": "Static and virtual calls, intra- and inter-module, with cardinality."}, "c5": {"t": "Dependency resolution", "b": "Direct, transitive, and provenance for every external package."}, "c6": {"t": "Configuration mapping", "b": "Which keys are read where, with defaults and validation rules."}, "c7": {"t": "Source ranges", "b": "Every fact carries file plus line plus column for round-trip evidence."}, "c8": {"k": "All seven", "t": "No partial credit.", "b": "Missing one capability collapses recipe quality. Plan for all seven from day one."}},
+    "pipe": {"eyebrow": "Code intelligence · Pipeline", "title": "From source to a graph an agent can query."},
+    "lang": {"eyebrow": "Code intelligence · Per-language", "title": "Different languages, same contract.", "c1": {"k": "JVM · .NET", "t": "Native compilers + LSP.", "b": "Use javac, kotlinc, Roslyn through LSP servers. Mature symbol and type resolution out of the box."}, "c2": {"k": "TypeScript · Python", "t": "Compiler API + type stubs.", "b": "tsc compiler API for TS, Pyright or Pyre for Python. Tree-sitter for fast lexical, then layered type analysis."}, "c3": {"k": "Go · Rust", "t": "Toolchain-native indexers.", "b": "gopls and rust-analyzer expose call graphs and type info via LSP. Both feed the same recipe contract."}, "c4": {"k": "Mainframe", "t": "COBOL, PL/I.", "b": "Specialized parsers (Cobol Programming Tooling, OpenLegacy) plus copybook and JCL resolution."}, "c5": {"k": "Polyglot", "t": "Cross-language refs.", "b": "REST schemas, OpenAPI, gRPC IDL, Avro, resolve calls that cross language boundaries."}, "c6": {"k": "Rule", "t": "One contract, many engines.", "b": "Layer 02 should not know which compiler produced the graph. Hide language-specific tooling behind the recipe API."}},
+    "part4": {"eyebrow": "Part IV", "title": "Context recipes.", "subtitle": "Composable, intent-shaped units of context that turn graphs into agent-ready artifacts."},
+    "recipe": {"eyebrow": "Recipes · Definition", "t1": "A recipe is a", "t2": "contract", "t3": "between intent and context.", "l": {"k": "Inputs", "t": "Source plus graphs.", "b": "A recipe consumes Layer 01 artifacts (symbol graph, type info, call graph, dependency tree, configuration map) and project-local conventions."}, "r": {"k": "Outputs", "t": "A targeted, versioned artifact.", "b": "Markdown, JSON, or structured graph snippet sized for the agent task. Manifest, implementation, and tests, like any code module."}, "caption": "A recipe answers one question well. Six recipes compose. Sixty recipes describe a platform."},
+    "cats": {"eyebrow": "Recipes · Categories", "title": "Six categories cover most enterprise tasks."},
+    "anat": {"eyebrow": "Recipes · Anatomy", "title": "Manifest, implementation, tests, docs.", "c1": {"k": "Manifest", "t": "recipe.yaml", "b": "Identity, version, inputs, outputs, classification, refresh policy. The contract layer reads."}, "c2": {"k": "Implementation", "t": "Pure function over graphs.", "b": "Code that turns Layer 01 facts into a targeted artifact. Reproducible, deterministic, free of side effects."}, "c3": {"k": "Tests", "t": "Golden fixtures.", "b": "Snapshot tests over a fixed graph. CI fails if a recipe changes its output without an explicit version bump."}, "c4": {"k": "Docs", "t": "Intent + sample output.", "b": "One paragraph of intent, one example output. Recipe consumers should never have to read the implementation."}},
+    "auth": {"eyebrow": "Recipes · Authoring", "title": "Five rules for recipe authors.", "i1": "One question per recipe. If the title needs an \"and\", split it into two recipes.", "i2": "Token budget per output. Declare it in the manifest. Fail the build when exceeded.", "i3": "Stable shape. Output schema is part of the contract; breaking changes require a major version.", "i4": "No secret leaks. Classification labels propagate from inputs to outputs. Recipes cannot widen scope.", "i5": "Provenance always. Every fact in the output cites its source range from Layer 01."},
+    "part5": {"eyebrow": "Part V", "title": "Registry and distribution.", "subtitle": "Where recipes live, how they version, how they reach the agent at runtime."},
+    "reg": {"eyebrow": "Registry · Responsibilities", "title": "A registry is a package manager for context.", "c1": {"k": "Storage", "t": "Co-located, central, federated.", "b": "Same repository, central object store, or per-domain federation. Pick one and document the trade-offs."}, "c2": {"k": "Discovery", "t": "By repo, capability, content.", "b": "Stable URIs and content addressing. Aliases for \"latest stable\" track moving versions safely."}, "c3": {"k": "Refresh", "t": "Commit, schedule, event.", "b": "Three triggers cover most needs. Staleness policy declares when a stale artifact must be refused."}},
+    "dist": {"eyebrow": "Registry · Distribution flow", "title": "From a commit to an agent in three hops."},
+    "ver": {"eyebrow": "Registry · Versioning + refresh", "title": "Content addressing keeps history honest.", "l": {"k": "Versioning", "t": "Hash + manifest + alias.", "b": "Each artifact is addressed by its content hash. Manifest carries semantic version. Aliases like \"stable\" or \"preview\" track moving heads without breaking pinned consumers."}, "r": {"k": "Refresh", "t": "Commit-driven, scheduled, event-driven.", "b": "Most recipes refresh on commit. Some run nightly (e.g., dependency advisories). Some are event-driven (new endpoint published, schema changed). Staleness policy decides when stale is unacceptable."}},
+    "part6": {"eyebrow": "Part VI", "title": "Agent integration patterns.", "subtitle": "Static, MCP, custom configuration, hybrid, pick the right contract for the agent."},
+    "int": {"eyebrow": "Integration · Patterns", "title": "Three patterns, one stack."},
+    "agents": {"eyebrow": "Integration · Per-agent reference", "title": "Where context lands in each agent.", "c1": {"k": "GitHub Copilot", "t": ".github/copilot-instructions.md", "b": "Plus repository custom instructions. Static injection is the primary surface; MCP is emerging."}, "c2": {"k": "Cursor / Windsurf", "t": ".cursor/rules · .windsurfrules", "b": "File-based rules with scope. Both editors support MCP servers for richer queries."}, "c3": {"k": "Claude Code", "t": "CLAUDE.md + skills + MCP", "b": "Layered model: static base, on-demand skills, MCP tools. Hybrid distribution maps cleanly."}, "c4": {"k": "Custom agents", "t": "SDK + recipe API.", "b": "Internal agents call recipe APIs directly. Same contract, no parsing of static files required."}},
+    "part7": {"eyebrow": "Part VII", "title": "Governance and compliance.", "subtitle": "Same controls as the source code. No exceptions for \"AI context.\""},
+    "gov": {"eyebrow": "Governance · Policy flow", "title": "Policy enforcement on every retrieval."},
+    "roles": {"eyebrow": "Governance · Roles + policies", "title": "Five roles. Six policy domains.", "l": {"k": "Roles", "t": "Platform owner, recipe steward, repo owner, security reviewer, auditor.", "b": "Each role has explicit responsibilities and a named owner. The auditor is independent of platform and repository teams."}, "r": {"k": "Policy domains", "t": "Scope, classification, access, refresh, retention, integration.", "b": "Each domain has a written policy, a control mapped to it, and an audit query that proves enforcement."}},
+    "audit": {"eyebrow": "Governance · Audit + controls", "title": "Four control families. One audit log.", "c1": {"k": "Identity + access", "t": "Who can do what.", "b": "Per-recipe RBAC, identity propagation, scoped tokens. SPIFFE for inter-service identity where required."}, "c2": {"k": "Integrity", "t": "Proof of provenance.", "b": "Signed artifacts, content hashes, build attestation. Tampering detected at retrieval time."}, "c3": {"k": "Lifecycle", "t": "Birth to deprecation.", "b": "Versioning, refresh, deprecation, deletion. No orphan artifacts; every URI resolves or returns a tombstone."}, "c4": {"k": "Observability", "t": "Evidence on demand.", "b": "OTel spans, audit log, classification labels, and policy decisions queryable by auditor without engineering help."}},
+    "part8": {"eyebrow": "Part VIII", "title": "Adoption roadmap and metrics.", "subtitle": "Five phases. Measurable exit criteria. The metrics that prove the layer is paying off."},
+    "road": {"eyebrow": "Adoption · Roadmap", "title": "Five phases over twelve months."},
+    "metrics": {"eyebrow": "Adoption · Success metrics", "title": "Six metrics. Measured every release.", "c1": {"k": "Token spend", "t": "Tokens per task.", "b": "Median tokens consumed per agent task. Target: 30-60% reduction vs baseline within two phases."}, "c2": {"k": "Hallucination", "t": "Hallucination rate.", "b": "Frequency of references to non-existent symbols. Target: trending to zero with compiler-grade context."}, "c3": {"k": "Convention", "t": "Convention adherence.", "b": "Generated code that matches repo conventions on the first pass. Target: above 80%."}, "c4": {"k": "Time to value", "t": "Time to first useful suggestion.", "b": "Seconds from task start to a suggestion the developer accepts. Target: under 8 seconds."}, "c5": {"k": "Satisfaction", "t": "Developer satisfaction.", "b": "Quarterly NPS or equivalent. Should track upward as recipes mature."}, "c6": {"k": "Throughput", "t": "PR throughput.", "b": "PRs merged per developer per week, controlled for repo. Lagging signal but the one that pays the bill."}},
+    "part9": {"eyebrow": "Part IX", "title": "Build, buy, or hybrid.", "subtitle": "Three paths to a Semantic Context Layer, and how to choose."},
+    "paths": {"eyebrow": "Build vs Buy · Three paths", "title": "Same architecture. Three implementation choices.", "c1": {"k": "Path A · Build", "t": "GitHub + Microsoft stack.", "b": "Build on Roslyn, LSP, GitHub Actions, Azure object storage, and an MCP gateway you operate. Highest control, highest commitment."}, "c2": {"k": "Path B · Buy", "t": "Commercial platform.", "b": "Adopt a vendor that ships compiler-grade context as a product (e.g., Moderne). Fastest time to value; vendor lock-in trade-off."}, "c3": {"k": "Path C · Hybrid", "t": "Build the contract, buy the engine.", "b": "Own recipes, registry, and gateway; rent code intelligence from a vendor. Decouples the durable contract from the engine."}},
+    "matrix": {"eyebrow": "Build vs Buy · Decision matrix", "title": "Where each path wins."},
+    "end": {"eyebrow": "Closing thought", "t1": "Context is the platform.", "t2": "Build it like one."}
+  },
+  "pt-BR": {
+    "meta": {"title": "Camada de Contexto Semântico para DevOps Agêntico"},
+    "labels": {"author": "Autora", "role": "Papel", "contact": "Contato", "date": "Data"},
+    "cover": {"eyebrow": "Camada de Contexto Semântico para DevOps Agêntico", "part1": "Uma camada de contexto semântico entre", "kw1": "agentes", "part2": "e seu", "kw2": "código corporativo.", "subtitle": "Uma arquitetura de referência para contexto com qualidade de compilador, que transforma codificação agêntica de demo em plataforma."},
+    "agenda": {"eyebrow": "Agenda", "title": "Nove partes. Do problema à plataforma.", "i1": "O problema de contexto na codificação agêntica corporativa.", "i2": "Arquitetura, quatro camadas e seus contratos.", "i3": "Inteligência de código, a base com qualidade de compilador.", "i4": "Receitas de contexto, as unidades componíveis.", "i5": "Registro e distribuição, como o contexto viaja.", "i6": "Padrões de integração de agentes, estático, MCP, híbrido.", "i7": "Governança, conformidade e auditoria.", "i8": "Roadmap de adoção e métricas de sucesso.", "i9": "Construir, comprar ou híbrido, posicionamento competitivo."},
+    "part1": {"eyebrow": "Parte I", "title": "O problema de contexto.", "subtitle": "Por que a codificação agêntica trava em escala corporativa, e o que de fato falta."},
+    "problem": {"eyebrow": "Problema · Sintoma", "t1": "Uma única tarefa de agente em um monorepo real pode ler", "t2": "milhões", "t3": "de tokens para responder a uma pergunta.", "sub": "custo vs. contexto com qualidade de compilador por tarefa", "caption": "Recuperação ingênua sobre código-fonte não escala. Busca vetorial sozinha não resolve símbolos, tipos ou grafos de chamada. O agente adivinha; a conta cresce; o time perde confiança."},
+    "fail": {"eyebrow": "Problema · Por que o stack atual falha", "title": "Três abordagens, três modos de falha.", "c1": {"k": "01 · Recuperação crua", "t": "Busca por embedding sobre arquivos.", "b": "Sem resolução de símbolos, sem informação de tipo, sem grafo de chamadas. O agente recupera texto que parece relacionado, não código realmente relacionado."}, "c2": {"k": "02 · Prompts curados à mão", "t": "Wikis, AGENTS.md, README colados.", "b": "Desatualizados em semanas. Sem vínculo com o build. Não há como verificar se as convenções do prompt batem com o que o compilador impõe."}, "c3": {"k": "03 · Despejos do repo inteiro", "t": "Árvore de arquivos, sem curadoria.", "b": "Orçamento de tokens estoura. A janela de contexto satura de boilerplate. Sinal-ruído cai abaixo do nível em que o agente age com segurança."}, "caption": "As três compartilham a mesma raiz: não existe uma camada semântica entre os agentes e o código."},
+    "semantic": {"eyebrow": "Problema · Definição", "t1": "Contexto semântico é o que o", "t2": "compilador sabe", "t3": ",", "t4": "tornado disponível para", "t5": "agentes", "t6": ".", "l": {"k": "Léxico", "t": "Tokens, arquivos, linhas.", "b": "O que o grep retorna. O que a busca por embedding ranqueia. Útil, mas insuficiente para raciocinar sobre comportamento ou invariantes."}, "s": {"k": "Semântico", "t": "Símbolos, tipos, chamadas, configs.", "b": "O que o build resolve. Referências resolvidas, instanciações genéricas, grafos de herança, configuração lida em tempo de execução, proveniência de dependências."}, "caption": "SCL-AD torna a segunda coluna consultável, versionada e regida por política, sem fazer cada agente virar compilador."},
+    "scl": {"eyebrow": "Problema · Definição de trabalho", "title": "Uma arquitetura de referência para uma camada que entrega contexto com qualidade de compilador a agentes em escala.", "p1": {"k": "Pilar 01", "t": "Pré-computar", "b": "Construa grafos de símbolos, tipos e dependências uma vez, atualize a cada commit. Pague o custo do compilador no CI, não por tarefa."}, "p2": {"k": "Pilar 02", "t": "Direcionar", "b": "Entregue apenas o recorte que a tarefa precisa. Uma receita por intenção, não um despejo por repo."}, "p3": {"k": "Pilar 03", "t": "Executar", "b": "Exponha contexto aos agentes via contratos estáveis: arquivos estáticos, ferramentas MCP ou distribuição híbrida."}, "p4": {"k": "Pilar 04", "t": "Coordenar", "b": "Governe ciclo de vida, identidade, classificação e auditoria entre receitas, registros e agentes."}},
+    "part2": {"eyebrow": "Parte II", "title": "Arquitetura e componentes.", "subtitle": "Quatro camadas, contratos explícitos e as preocupações transversais que sustentam tudo."},
+    "arch": {"eyebrow": "Arquitetura · Stack de referência", "title": "As quatro camadas de uma Camada de Contexto Semântico."},
+    "comp": {"eyebrow": "Arquitetura · Componentes", "title": "Dentro da camada: store, recuperação, governança."},
+    "cross": {"eyebrow": "Arquitetura · Transversal", "title": "Quatro preocupações atravessam toda camada.", "c1": {"k": "Identidade", "t": "Quem está perguntando.", "b": "Identidade propaga do agente à receita, ao registro, à fonte. RBAC é por receita e por artefato, não por plataforma."}, "c2": {"k": "Observabilidade", "t": "O que foi usado.", "b": "Cada recuperação emite um span OTel: agente, receita, versão, classificação, latência, tokens."}, "c3": {"k": "Segurança", "t": "O que é permitido.", "b": "Rótulos de classificação viajam com o artefato. Receitas que leem dados regulados exigem aprovação de política explícita."}, "c4": {"k": "Ciclo de vida", "t": "Quando expira.", "b": "Versionamento de manifesto, hashes, políticas de refresh, aliases de depreciação. Contexto stale é a falha silenciosa."}},
+    "topo": {"eyebrow": "Arquitetura · Topologia de referência", "title": "Uma topologia que sobrevive à auditoria.", "subtitle": "Autoria de receitas por repositório, registro central para distribuição, gateway MCP em runtime, com identidade e auditoria fios em cada hop.", "p1": "Inteligência de código no CI", "p2": "Receitas no repo", "p3": "Registro como serviço", "p4": "Gateway MCP em runtime", "p5": "OTel + log de auditoria", "p6": "Identidade SPIFFE por agente"},
+    "part3": {"eyebrow": "Parte III", "title": "Camada de inteligência de código.", "subtitle": "A base com qualidade de compilador da qual tudo depende."},
+    "ci": {"eyebrow": "Inteligência de código · Por que importa", "title": "Contexto aproximado produz código aproximado.", "l": {"k": "Sem qualidade de compilador", "t": "Símbolos alucinados, tipos errados, refactors quebrados.", "b": "O agente inventa um método plausível mas inexistente. Mudanças cross-módulo perdem chamadores. Instanciações genéricas falham no build."}, "r": {"k": "Com qualidade de compilador", "t": "Símbolos resolvidos, assinaturas tipadas, grafos completos.", "b": "O agente sabe quais chamadas cruzam fronteiras, quais genéricos estão vinculados, quais chaves de configuração são lidas em runtime e onde cada definição vive."}},
+    "caps": {"eyebrow": "Inteligência de código · Capacidades necessárias", "title": "Sete capacidades definem a camada.", "c1": {"t": "Resolução de símbolos", "b": "Cada referência aponta para sua única definição entre arquivos e módulos."}, "c2": {"t": "Resolução de tipos", "b": "Genéricos, tipos inferidos e overloads resolvidos com fidelidade total."}, "c3": {"t": "Grafo de herança", "b": "Classes, interfaces, traits e seus implementadores em todo o workspace."}, "c4": {"t": "Grafos de chamada", "b": "Chamadas estáticas e virtuais, intra e inter-módulo, com cardinalidade."}, "c5": {"t": "Resolução de dependências", "b": "Diretas, transitivas e proveniência para cada pacote externo."}, "c6": {"t": "Mapa de configuração", "b": "Quais chaves são lidas onde, com defaults e regras de validação."}, "c7": {"t": "Faixas de origem", "b": "Cada fato carrega arquivo + linha + coluna para evidência round-trip."}, "c8": {"k": "Todas as sete", "t": "Sem crédito parcial.", "b": "Faltar uma capacidade derruba a qualidade da receita. Planeje as sete desde o dia um."}},
+    "pipe": {"eyebrow": "Inteligência de código · Pipeline", "title": "Da fonte a um grafo que o agente pode consultar."},
+    "lang": {"eyebrow": "Inteligência de código · Por linguagem", "title": "Linguagens diferentes, mesmo contrato.", "c1": {"k": "JVM · .NET", "t": "Compiladores nativos + LSP.", "b": "Use javac, kotlinc, Roslyn via servidores LSP. Resolução madura de símbolos e tipos já disponível."}, "c2": {"k": "TypeScript · Python", "t": "API do compilador + stubs de tipo.", "b": "API do tsc para TS, Pyright ou Pyre para Python. Tree-sitter para léxico rápido, depois análise de tipo em camadas."}, "c3": {"k": "Go · Rust", "t": "Indexadores nativos do toolchain.", "b": "gopls e rust-analyzer expõem grafos de chamada e tipos via LSP. Os dois alimentam o mesmo contrato."}, "c4": {"k": "Mainframe", "t": "COBOL, PL/I.", "b": "Parsers especializados (Cobol Programming Tooling, OpenLegacy) com resolução de copybook e JCL."}, "c5": {"k": "Políglota", "t": "Referências entre linguagens.", "b": "Schemas REST, OpenAPI, gRPC IDL, Avro, resolvendo chamadas que cruzam linguagens."}, "c6": {"k": "Regra", "t": "Um contrato, muitos motores.", "b": "A camada 02 não deve saber qual compilador gerou o grafo. Esconda o tooling específico atrás da API de receita."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Receitas de contexto.", "subtitle": "Unidades componíveis, moldadas por intenção, que transformam grafos em artefatos prontos para o agente."},
+    "recipe": {"eyebrow": "Receitas · Definição", "t1": "Uma receita é um", "t2": "contrato", "t3": "entre intenção e contexto.", "l": {"k": "Entradas", "t": "Fonte mais grafos.", "b": "Uma receita consome artefatos da Camada 01 (grafo de símbolos, tipos, chamadas, dependências, configuração) e convenções locais."}, "r": {"k": "Saídas", "t": "Um artefato direcionado e versionado.", "b": "Markdown, JSON ou snippet de grafo dimensionado para a tarefa. Manifesto, implementação e testes, como qualquer módulo."}, "caption": "Uma receita responde bem a uma pergunta. Seis receitas compõem. Sessenta receitas descrevem uma plataforma."},
+    "cats": {"eyebrow": "Receitas · Categorias", "title": "Seis categorias cobrem a maioria das tarefas corporativas."},
+    "anat": {"eyebrow": "Receitas · Anatomia", "title": "Manifesto, implementação, testes, docs.", "c1": {"k": "Manifesto", "t": "recipe.yaml", "b": "Identidade, versão, entradas, saídas, classificação, política de refresh. O contrato que a camada lê."}, "c2": {"k": "Implementação", "t": "Função pura sobre grafos.", "b": "Código que transforma fatos da Camada 01 em artefato direcionado. Reproduzível, determinístico, sem efeitos colaterais."}, "c3": {"k": "Testes", "t": "Fixtures golden.", "b": "Snapshots sobre grafo fixo. CI falha se a receita muda saída sem bump explícito de versão."}, "c4": {"k": "Docs", "t": "Intenção + saída exemplo.", "b": "Um parágrafo de intenção, uma saída exemplo. Quem consome não deveria precisar ler a implementação."}},
+    "auth": {"eyebrow": "Receitas · Autoria", "title": "Cinco regras para autores.", "i1": "Uma pergunta por receita. Se o título precisa de \"e\", divida em duas.", "i2": "Orçamento de tokens por saída. Declare no manifesto. Falhe o build se exceder.", "i3": "Forma estável. O schema de saída é contrato; mudanças quebrantes exigem versão major.", "i4": "Sem vazamento de segredos. Rótulos de classificação propagam entrada-saída. Receitas não ampliam escopo.", "i5": "Proveniência sempre. Cada fato cita sua faixa de origem na Camada 01."},
+    "part5": {"eyebrow": "Parte V", "title": "Registro e distribuição.", "subtitle": "Onde as receitas vivem, como versionam, como chegam ao agente em runtime."},
+    "reg": {"eyebrow": "Registro · Responsabilidades", "title": "Um registro é um package manager para contexto.", "c1": {"k": "Armazenamento", "t": "Co-localizado, central, federado.", "b": "Mesmo repositório, object store central ou federação por domínio. Escolha uma e documente os trade-offs."}, "c2": {"k": "Descoberta", "t": "Por repo, capacidade, conteúdo.", "b": "URIs estáveis e endereçamento por conteúdo. Aliases para \"latest stable\" rastreiam versões móveis com segurança."}, "c3": {"k": "Refresh", "t": "Commit, agendado, evento.", "b": "Três gatilhos cobrem a maioria das necessidades. Política de staleness diz quando recusar artefato vencido."}},
+    "dist": {"eyebrow": "Registro · Fluxo de distribuição", "title": "Do commit ao agente em três hops."},
+    "ver": {"eyebrow": "Registro · Versionamento + refresh", "title": "Endereçamento por conteúdo mantém a história honesta.", "l": {"k": "Versionamento", "t": "Hash + manifesto + alias.", "b": "Cada artefato é endereçado por hash de conteúdo. Manifesto carrega versão semântica. Aliases como \"stable\" ou \"preview\" rastreiam HEADs sem quebrar consumidores fixados."}, "r": {"k": "Refresh", "t": "Por commit, agendado, por evento.", "b": "A maioria das receitas atualiza no commit. Algumas rodam à noite (advisories de dependência). Outras são por evento (novo endpoint, schema mudou). A política decide o que é inaceitável."}},
+    "part6": {"eyebrow": "Parte VI", "title": "Padrões de integração de agentes.", "subtitle": "Estático, MCP, configuração customizada, híbrido, escolha o contrato certo para o agente."},
+    "int": {"eyebrow": "Integração · Padrões", "title": "Três padrões, um stack."},
+    "agents": {"eyebrow": "Integração · Referência por agente", "title": "Onde o contexto pousa em cada agente.", "c1": {"k": "GitHub Copilot", "t": ".github/copilot-instructions.md", "b": "Mais instruções customizadas por repositório. Injeção estática é a superfície principal; MCP está emergindo."}, "c2": {"k": "Cursor / Windsurf", "t": ".cursor/rules · .windsurfrules", "b": "Regras em arquivo com escopo. Os dois suportam servidores MCP para consultas mais ricas."}, "c3": {"k": "Claude Code", "t": "CLAUDE.md + skills + MCP", "b": "Modelo em camadas: base estática, skills sob demanda, ferramentas MCP. Distribuição híbrida mapeia bem."}, "c4": {"k": "Agentes customizados", "t": "SDK + API de receita.", "b": "Agentes internos chamam APIs diretamente. Mesmo contrato, sem parsear arquivos estáticos."}},
+    "part7": {"eyebrow": "Parte VII", "title": "Governança e conformidade.", "subtitle": "Mesmos controles do código. Sem exceções para \"contexto de IA.\""},
+    "gov": {"eyebrow": "Governança · Fluxo de política", "title": "Aplicação de política em cada recuperação."},
+    "roles": {"eyebrow": "Governança · Papéis + políticas", "title": "Cinco papéis. Seis domínios de política.", "l": {"k": "Papéis", "t": "Dono de plataforma, steward de receita, dono de repo, revisor de segurança, auditor.", "b": "Cada papel tem responsabilidades explícitas e dono nomeado. O auditor é independente das equipes de plataforma e repo."}, "r": {"k": "Domínios de política", "t": "Escopo, classificação, acesso, refresh, retenção, integração.", "b": "Cada domínio tem política escrita, controle mapeado e consulta de auditoria que prova a aplicação."}},
+    "audit": {"eyebrow": "Governança · Auditoria + controles", "title": "Quatro famílias de controle. Um log de auditoria.", "c1": {"k": "Identidade + acesso", "t": "Quem pode o quê.", "b": "RBAC por receita, propagação de identidade, tokens com escopo. SPIFFE para identidade entre serviços onde for necessário."}, "c2": {"k": "Integridade", "t": "Prova de proveniência.", "b": "Artefatos assinados, hashes de conteúdo, atestação de build. Adulteração detectada na recuperação."}, "c3": {"k": "Ciclo de vida", "t": "Do nascimento à depreciação.", "b": "Versionamento, refresh, depreciação, exclusão. Sem artefatos órfãos; cada URI resolve ou retorna um tombstone."}, "c4": {"k": "Observabilidade", "t": "Evidência sob demanda.", "b": "Spans OTel, log de auditoria, rótulos de classificação e decisões de política consultáveis pelo auditor sem ajuda de engenharia."}},
+    "part8": {"eyebrow": "Parte VIII", "title": "Roadmap de adoção e métricas.", "subtitle": "Cinco fases. Critérios de saída mensuráveis. As métricas que provam que a camada compensa."},
+    "road": {"eyebrow": "Adoção · Roadmap", "title": "Cinco fases em doze meses."},
+    "metrics": {"eyebrow": "Adoção · Métricas de sucesso", "title": "Seis métricas. Medidas a cada release.", "c1": {"k": "Gasto de tokens", "t": "Tokens por tarefa.", "b": "Mediana de tokens por tarefa do agente. Meta: redução de 30-60% vs baseline em duas fases."}, "c2": {"k": "Alucinação", "t": "Taxa de alucinação.", "b": "Frequência de referências a símbolos inexistentes. Meta: tendendo a zero com contexto qualidade-compilador."}, "c3": {"k": "Convenção", "t": "Aderência a convenções.", "b": "Código gerado que casa com convenções do repo de primeira. Meta: acima de 80%."}, "c4": {"k": "Tempo de valor", "t": "Tempo até a primeira sugestão útil.", "b": "Segundos do início da tarefa até sugestão aceita pelo dev. Meta: abaixo de 8 segundos."}, "c5": {"k": "Satisfação", "t": "Satisfação do dev.", "b": "NPS trimestral ou equivalente. Deve subir conforme as receitas amadurecem."}, "c6": {"k": "Throughput", "t": "Throughput de PRs.", "b": "PRs mergeados por dev por semana, controlado por repo. Sinal lagging mas o que paga a conta."}},
+    "part9": {"eyebrow": "Parte IX", "title": "Construir, comprar ou híbrido.", "subtitle": "Três caminhos para uma Camada de Contexto Semântico, e como escolher."},
+    "paths": {"eyebrow": "Build vs Buy · Três caminhos", "title": "Mesma arquitetura. Três escolhas de implementação.", "c1": {"k": "Caminho A · Build", "t": "Stack GitHub + Microsoft.", "b": "Construir sobre Roslyn, LSP, GitHub Actions, Azure object storage e gateway MCP que você opera. Máximo controle, máximo compromisso."}, "c2": {"k": "Caminho B · Buy", "t": "Plataforma comercial.", "b": "Adotar fornecedor que entrega contexto qualidade-compilador como produto (ex.: Moderne). Tempo até valor mais rápido; trade-off de lock-in."}, "c3": {"k": "Caminho C · Híbrido", "t": "Construir o contrato, comprar o motor.", "b": "Possuir receitas, registro e gateway; alugar inteligência de código de fornecedor. Desacopla contrato durável do motor."}},
+    "matrix": {"eyebrow": "Build vs Buy · Matriz de decisão", "title": "Onde cada caminho ganha."},
+    "end": {"eyebrow": "Reflexão final", "t1": "Contexto é a plataforma.", "t2": "Construa como uma."}
+  },
+  "es": {
+    "meta": {"title": "Capa de Contexto Semántico para DevOps Agéntico"},
+    "labels": {"author": "Autora", "role": "Rol", "contact": "Contacto", "date": "Fecha"},
+    "cover": {"eyebrow": "Capa de Contexto Semántico para DevOps Agéntico", "part1": "Una capa de contexto semántico entre", "kw1": "agentes", "part2": "y tu", "kw2": "código empresarial.", "subtitle": "Una arquitectura de referencia para contexto con calidad de compilador, que convierte la programación agéntica de demo en plataforma."},
+    "agenda": {"eyebrow": "Agenda", "title": "Nueve partes. Del problema a la plataforma.", "i1": "El problema de contexto en programación agéntica empresarial.", "i2": "Arquitectura, cuatro capas y sus contratos.", "i3": "Inteligencia de código, la base con calidad de compilador.", "i4": "Recetas de contexto, las unidades componibles.", "i5": "Registro y distribución, cómo viaja el contexto.", "i6": "Patrones de integración de agentes, estático, MCP, híbrido.", "i7": "Gobernanza, cumplimiento y auditoría.", "i8": "Hoja de ruta de adopción y métricas de éxito.", "i9": "Construir, comprar o híbrido, posicionamiento competitivo."},
+    "part1": {"eyebrow": "Parte I", "title": "El problema de contexto.", "subtitle": "Por qué la programación agéntica se atasca a escala empresarial, y qué falta de verdad."},
+    "problem": {"eyebrow": "Problema · Síntoma", "t1": "Una sola tarea de agente en un monorepo real puede leer", "t2": "millones", "t3": "de tokens para responder una pregunta.", "sub": "costo vs. contexto con calidad de compilador por tarea", "caption": "La recuperación ingenua sobre código fuente no escala. La búsqueda vectorial sola no resuelve símbolos, tipos ni grafos de llamada. El agente adivina; la factura crece; el equipo pierde confianza."},
+    "fail": {"eyebrow": "Problema · Por qué falla el stack actual", "title": "Tres enfoques, tres modos de falla.", "c1": {"k": "01 · Recuperación cruda", "t": "Búsqueda por embedding sobre archivos.", "b": "Sin resolución de símbolos, sin información de tipos, sin grafo de llamadas. El agente recupera texto que parece relacionado, no código verdaderamente relacionado."}, "c2": {"k": "02 · Prompts curados a mano", "t": "Wikis, AGENTS.md, README pegados.", "b": "Obsoletos en semanas. Sin vínculo al build. Sin forma de verificar que las convenciones del prompt coincidan con lo que impone el compilador."}, "c3": {"k": "03 · Volcado del repo entero", "t": "Árbol de archivos, sin curación.", "b": "Presupuesto de tokens colapsa. La ventana de contexto se satura de boilerplate. La señal-ruido cae bajo el umbral seguro."}, "caption": "Las tres comparten la misma raíz: no hay capa semántica entre los agentes y el código."},
+    "semantic": {"eyebrow": "Problema · Definición", "t1": "Contexto semántico es lo que el", "t2": "compilador sabe", "t3": ",", "t4": "puesto a disposición de", "t5": "agentes", "t6": ".", "l": {"k": "Léxico", "t": "Tokens, archivos, líneas.", "b": "Lo que devuelve grep. Lo que ranquea la búsqueda por embedding. Útil, pero insuficiente para razonar sobre comportamiento o invariantes."}, "s": {"k": "Semántico", "t": "Símbolos, tipos, llamadas, configs.", "b": "Lo que el build resuelve. Referencias resueltas, instanciaciones genéricas, grafos de herencia, configuración vinculada en runtime, procedencia de dependencias."}, "caption": "SCL-AD hace la segunda columna consultable, versionada y regida por política, sin convertir cada agente en compilador."},
+    "scl": {"eyebrow": "Problema · Definición de trabajo", "title": "Una arquitectura de referencia para una capa que entrega contexto con calidad de compilador a agentes a escala.", "p1": {"k": "Pilar 01", "t": "Precomputar", "b": "Construye grafos de símbolos, tipos y dependencias una vez, refresca por commit. Paga el costo del compilador en CI, no por tarea."}, "p2": {"k": "Pilar 02", "t": "Apuntar", "b": "Entrega solo la rebanada que la tarea necesita. Una receta por intención, no un volcado por repo."}, "p3": {"k": "Pilar 03", "t": "Ejecutar", "b": "Expone contexto a agentes vía contratos estables: archivos estáticos, herramientas MCP o distribución híbrida."}, "p4": {"k": "Pilar 04", "t": "Coordinar", "b": "Gobierna ciclo de vida, identidad, clasificación y auditoría entre recetas, registros y agentes."}},
+    "part2": {"eyebrow": "Parte II", "title": "Arquitectura y componentes.", "subtitle": "Cuatro capas, contratos explícitos y las preocupaciones transversales que lo sostienen todo."},
+    "arch": {"eyebrow": "Arquitectura · Stack de referencia", "title": "Las cuatro capas de una Capa de Contexto Semántico."},
+    "comp": {"eyebrow": "Arquitectura · Componentes", "title": "Dentro de la capa: store, recuperación, gobernanza."},
+    "cross": {"eyebrow": "Arquitectura · Transversal", "title": "Cuatro preocupaciones cruzan toda capa.", "c1": {"k": "Identidad", "t": "Quién pregunta.", "b": "La identidad propaga del agente a la receta, al registro, a la fuente. RBAC es por receta y por artefacto, no por plataforma."}, "c2": {"k": "Observabilidad", "t": "Qué se usó.", "b": "Cada recuperación emite un span OTel: agente, receta, versión, clasificación, latencia, tokens."}, "c3": {"k": "Seguridad", "t": "Qué está permitido.", "b": "Etiquetas de clasificación viajan con el artefacto. Recetas que leen datos regulados requieren aprobación de política explícita."}, "c4": {"k": "Ciclo de vida", "t": "Cuándo expira.", "b": "Versionado de manifiesto, hashes, políticas de refresh, alias de obsolescencia. Contexto stale es la falla silenciosa."}},
+    "topo": {"eyebrow": "Arquitectura · Topología de referencia", "title": "Una topología que sobrevive a auditoría.", "subtitle": "Autoría de recetas por repositorio, registro central para distribución, gateway MCP en runtime, con identidad y auditoría hilvanados en cada salto.", "p1": "Inteligencia de código en CI", "p2": "Recetas en repo", "p3": "Registro como servicio", "p4": "Gateway MCP en runtime", "p5": "OTel + log de auditoría", "p6": "Identidad SPIFFE por agente"},
+    "part3": {"eyebrow": "Parte III", "title": "Capa de inteligencia de código.", "subtitle": "La base con calidad de compilador de la que todo lo demás depende."},
+    "ci": {"eyebrow": "Inteligencia de código · Por qué importa", "title": "Contexto aproximado produce código aproximado.", "l": {"k": "Sin calidad de compilador", "t": "Símbolos alucinados, tipos erróneos, refactors rotos.", "b": "El agente inventa un método plausible pero inexistente. Cambios cross-módulo pierden llamadores. Instanciaciones genéricas fallan en build."}, "r": {"k": "Con calidad de compilador", "t": "Símbolos resueltos, firmas tipadas, grafos completos.", "b": "El agente sabe qué llamadas cruzan fronteras, qué genéricos están vinculados, qué claves de configuración se leen en runtime y dónde vive cada definición."}},
+    "caps": {"eyebrow": "Inteligencia de código · Capacidades requeridas", "title": "Siete capacidades definen la capa.", "c1": {"t": "Resolución de símbolos", "b": "Cada referencia apunta a su definición única entre archivos y módulos."}, "c2": {"t": "Resolución de tipos", "b": "Genéricos, tipos inferidos y sobrecargas resueltos con fidelidad total."}, "c3": {"t": "Grafo de herencia", "b": "Clases, interfaces, traits y sus implementadores en todo el workspace."}, "c4": {"t": "Grafos de llamada", "b": "Llamadas estáticas y virtuales, intra e inter-módulo, con cardinalidad."}, "c5": {"t": "Resolución de dependencias", "b": "Directas, transitivas y procedencia para cada paquete externo."}, "c6": {"t": "Mapa de configuración", "b": "Qué claves se leen dónde, con defaults y reglas de validación."}, "c7": {"t": "Rangos de origen", "b": "Cada hecho lleva archivo + línea + columna para evidencia ida y vuelta."}, "c8": {"k": "Las siete", "t": "Sin crédito parcial.", "b": "Faltar una capacidad colapsa la calidad de la receta. Planifica las siete desde el día uno."}},
+    "pipe": {"eyebrow": "Inteligencia de código · Pipeline", "title": "De la fuente a un grafo que el agente puede consultar."},
+    "lang": {"eyebrow": "Inteligencia de código · Por lenguaje", "title": "Lenguajes distintos, mismo contrato.", "c1": {"k": "JVM · .NET", "t": "Compiladores nativos + LSP.", "b": "Usa javac, kotlinc, Roslyn vía servidores LSP. Resolución madura de símbolos y tipos lista."}, "c2": {"k": "TypeScript · Python", "t": "API del compilador + stubs de tipo.", "b": "API de tsc para TS, Pyright o Pyre para Python. Tree-sitter para léxico rápido, después análisis por capas."}, "c3": {"k": "Go · Rust", "t": "Indexadores nativos del toolchain.", "b": "gopls y rust-analyzer exponen grafos de llamada y tipos vía LSP. Ambos alimentan el mismo contrato."}, "c4": {"k": "Mainframe", "t": "COBOL, PL/I.", "b": "Parsers especializados (Cobol Programming Tooling, OpenLegacy) con resolución de copybook y JCL."}, "c5": {"k": "Políglota", "t": "Refs entre lenguajes.", "b": "Schemas REST, OpenAPI, gRPC IDL, Avro, resolviendo llamadas que cruzan lenguajes."}, "c6": {"k": "Regla", "t": "Un contrato, muchos motores.", "b": "La capa 02 no debe saber qué compilador generó el grafo. Esconde el tooling específico tras la API de receta."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Recetas de contexto.", "subtitle": "Unidades componibles, moldeadas por intención, que convierten grafos en artefactos listos para el agente."},
+    "recipe": {"eyebrow": "Recetas · Definición", "t1": "Una receta es un", "t2": "contrato", "t3": "entre intención y contexto.", "l": {"k": "Entradas", "t": "Fuente más grafos.", "b": "Una receta consume artefactos de Capa 01 (grafo de símbolos, tipos, llamadas, dependencias, configuración) y convenciones locales."}, "r": {"k": "Salidas", "t": "Artefacto dirigido y versionado.", "b": "Markdown, JSON o snippet de grafo dimensionado para la tarea. Manifiesto, implementación y tests, como cualquier módulo."}, "caption": "Una receta responde bien una pregunta. Seis recetas componen. Sesenta recetas describen una plataforma."},
+    "cats": {"eyebrow": "Recetas · Categorías", "title": "Seis categorías cubren la mayoría de tareas empresariales."},
+    "anat": {"eyebrow": "Recetas · Anatomía", "title": "Manifiesto, implementación, tests, docs.", "c1": {"k": "Manifiesto", "t": "recipe.yaml", "b": "Identidad, versión, entradas, salidas, clasificación, política de refresh. El contrato que la capa lee."}, "c2": {"k": "Implementación", "t": "Función pura sobre grafos.", "b": "Código que convierte hechos de Capa 01 en artefacto dirigido. Reproducible, determinista, sin efectos secundarios."}, "c3": {"k": "Tests", "t": "Fixtures golden.", "b": "Snapshots sobre grafo fijo. CI falla si la receta cambia salida sin bump explícito de versión."}, "c4": {"k": "Docs", "t": "Intención + salida ejemplo.", "b": "Un párrafo de intención, una salida ejemplo. Quien consume no debería tener que leer la implementación."}},
+    "auth": {"eyebrow": "Recetas · Autoría", "title": "Cinco reglas para autores.", "i1": "Una pregunta por receta. Si el título necesita \"y\", divídela en dos.", "i2": "Presupuesto de tokens por salida. Decláralo en el manifiesto. Falla el build si excede.", "i3": "Forma estable. El schema de salida es contrato; cambios disruptivos requieren versión mayor.", "i4": "Sin fuga de secretos. Etiquetas de clasificación propagan entrada-salida. Las recetas no amplían alcance.", "i5": "Procedencia siempre. Cada hecho cita su rango de origen en Capa 01."},
+    "part5": {"eyebrow": "Parte V", "title": "Registro y distribución.", "subtitle": "Dónde viven las recetas, cómo versionan, cómo llegan al agente en runtime."},
+    "reg": {"eyebrow": "Registro · Responsabilidades", "title": "Un registro es un package manager para contexto.", "c1": {"k": "Almacenamiento", "t": "Co-localizado, central, federado.", "b": "Mismo repositorio, object store central o federación por dominio. Elige una y documenta los trade-offs."}, "c2": {"k": "Descubrimiento", "t": "Por repo, capacidad, contenido.", "b": "URIs estables y direccionamiento por contenido. Aliases para \"latest stable\" siguen versiones móviles con seguridad."}, "c3": {"k": "Refresh", "t": "Commit, programado, evento.", "b": "Tres disparadores cubren la mayoría de necesidades. La política de staleness dice cuándo rechazar artefacto vencido."}},
+    "dist": {"eyebrow": "Registro · Flujo de distribución", "title": "Del commit al agente en tres saltos."},
+    "ver": {"eyebrow": "Registro · Versionado + refresh", "title": "El direccionamiento por contenido mantiene la historia honesta.", "l": {"k": "Versionado", "t": "Hash + manifiesto + alias.", "b": "Cada artefacto se direcciona por hash. El manifiesto lleva versión semántica. Alias como \"stable\" o \"preview\" siguen HEADs sin romper consumidores fijados."}, "r": {"k": "Refresh", "t": "Por commit, programado, por evento.", "b": "La mayoría refresca por commit. Algunas corren de noche (advisories). Otras por evento (nuevo endpoint, schema cambió). La política decide qué es inaceptable."}},
+    "part6": {"eyebrow": "Parte VI", "title": "Patrones de integración de agentes.", "subtitle": "Estático, MCP, configuración custom, híbrido, elige el contrato correcto para el agente."},
+    "int": {"eyebrow": "Integración · Patrones", "title": "Tres patrones, un stack."},
+    "agents": {"eyebrow": "Integración · Referencia por agente", "title": "Dónde aterriza el contexto en cada agente.", "c1": {"k": "GitHub Copilot", "t": ".github/copilot-instructions.md", "b": "Más instrucciones custom por repositorio. La inyección estática es la superficie principal; MCP está emergiendo."}, "c2": {"k": "Cursor / Windsurf", "t": ".cursor/rules · .windsurfrules", "b": "Reglas en archivo con alcance. Ambos editores soportan servidores MCP para consultas más ricas."}, "c3": {"k": "Claude Code", "t": "CLAUDE.md + skills + MCP", "b": "Modelo en capas: base estática, skills bajo demanda, herramientas MCP. La distribución híbrida mapea bien."}, "c4": {"k": "Agentes custom", "t": "SDK + API de receta.", "b": "Los agentes internos llaman APIs directamente. Mismo contrato, sin parsear archivos estáticos."}},
+    "part7": {"eyebrow": "Parte VII", "title": "Gobernanza y cumplimiento.", "subtitle": "Mismos controles que el código. Sin excepciones para \"contexto de IA.\""},
+    "gov": {"eyebrow": "Gobernanza · Flujo de política", "title": "Aplicación de política en cada recuperación."},
+    "roles": {"eyebrow": "Gobernanza · Roles + políticas", "title": "Cinco roles. Seis dominios de política.", "l": {"k": "Roles", "t": "Dueño de plataforma, steward de receta, dueño de repo, revisor de seguridad, auditor.", "b": "Cada rol tiene responsabilidades explícitas y dueño nombrado. El auditor es independiente de plataforma y repo."}, "r": {"k": "Dominios de política", "t": "Alcance, clasificación, acceso, refresh, retención, integración.", "b": "Cada dominio tiene política escrita, control mapeado y consulta de auditoría que prueba la aplicación."}},
+    "audit": {"eyebrow": "Gobernanza · Auditoría + controles", "title": "Cuatro familias de control. Un log de auditoría.", "c1": {"k": "Identidad + acceso", "t": "Quién puede qué.", "b": "RBAC por receta, propagación de identidad, tokens con alcance. SPIFFE para identidad inter-servicio cuando se requiera."}, "c2": {"k": "Integridad", "t": "Prueba de procedencia.", "b": "Artefactos firmados, hashes de contenido, atestación de build. Manipulación detectada en recuperación."}, "c3": {"k": "Ciclo de vida", "t": "Del nacimiento a la obsolescencia.", "b": "Versionado, refresh, obsolescencia, borrado. Sin artefactos huérfanos; cada URI resuelve o devuelve tombstone."}, "c4": {"k": "Observabilidad", "t": "Evidencia bajo demanda.", "b": "Spans OTel, log de auditoría, etiquetas de clasificación y decisiones de política consultables por el auditor sin ayuda de ingeniería."}},
+    "part8": {"eyebrow": "Parte VIII", "title": "Hoja de ruta de adopción y métricas.", "subtitle": "Cinco fases. Criterios de salida medibles. Las métricas que prueban que la capa rinde."},
+    "road": {"eyebrow": "Adopción · Hoja de ruta", "title": "Cinco fases en doce meses."},
+    "metrics": {"eyebrow": "Adopción · Métricas de éxito", "title": "Seis métricas. Medidas en cada release.", "c1": {"k": "Gasto de tokens", "t": "Tokens por tarea.", "b": "Mediana de tokens por tarea de agente. Meta: reducción 30-60% vs baseline en dos fases."}, "c2": {"k": "Alucinación", "t": "Tasa de alucinación.", "b": "Frecuencia de referencias a símbolos inexistentes. Meta: tendiendo a cero con contexto calidad-compilador."}, "c3": {"k": "Convención", "t": "Adherencia a convenciones.", "b": "Código generado que coincide con convenciones del repo a la primera. Meta: por encima del 80%."}, "c4": {"k": "Tiempo a valor", "t": "Tiempo a la primera sugerencia útil.", "b": "Segundos desde inicio de tarea a sugerencia aceptada por el dev. Meta: bajo 8 segundos."}, "c5": {"k": "Satisfacción", "t": "Satisfacción del dev.", "b": "NPS trimestral o equivalente. Debe subir conforme maduran las recetas."}, "c6": {"k": "Throughput", "t": "Throughput de PRs.", "b": "PRs mergeados por dev por semana, controlado por repo. Señal lagging pero la que paga la cuenta."}},
+    "part9": {"eyebrow": "Parte IX", "title": "Construir, comprar o híbrido.", "subtitle": "Tres caminos hacia una Capa de Contexto Semántico, y cómo elegir."},
+    "paths": {"eyebrow": "Build vs Buy · Tres caminos", "title": "Misma arquitectura. Tres opciones de implementación.", "c1": {"k": "Camino A · Build", "t": "Stack GitHub + Microsoft.", "b": "Construir sobre Roslyn, LSP, GitHub Actions, Azure object storage y gateway MCP que tú operas. Máximo control, máximo compromiso."}, "c2": {"k": "Camino B · Buy", "t": "Plataforma comercial.", "b": "Adoptar proveedor que entrega contexto calidad-compilador como producto (ej.: Moderne). Tiempo a valor más rápido; trade-off de lock-in."}, "c3": {"k": "Camino C · Híbrido", "t": "Construir el contrato, comprar el motor.", "b": "Posee recetas, registro y gateway; alquila inteligencia de código de proveedor. Desacopla contrato durable del motor."}},
+    "matrix": {"eyebrow": "Build vs Buy · Matriz de decisión", "title": "Dónde gana cada camino."},
+    "end": {"eyebrow": "Reflexión final", "t1": "El contexto es la plataforma.", "t2": "Constrúyelo como tal."}
+  }
+};
+function resolveKey(o,p){return p.split('.').reduce((a,k)=>(a?a[k]:undefined),o);}
+function applyTextSafely(el, value){
+  el.textContent = value;
+}
+function setLocale(locale){
+  if(!I18N[locale])return;
+  try{localStorage.setItem('ps-locale',locale);}catch(e){}
+  document.documentElement.setAttribute('lang',locale);
+  document.querySelectorAll('.lang-switcher__btn').forEach(b=>b.setAttribute('aria-current',b.dataset.locale===locale?'true':'false'));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v=resolveKey(I18N[locale],el.dataset.i18n);
+    if(v!==undefined && v!==null){
+      if(el.tagName==='TITLE') document.title = v;
+      else applyTextSafely(el, v);
+    }
+  });
+}
+let currentSlide=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+function syncTheme(i){document.body.dataset.slideTheme=slides[i].classList.contains('slide--dark')?'dark':'light';}
+function goToSlide(i){
+  if(i<0||i>=total)return;
+  slides.forEach(s=>s.setAttribute('data-active','false'));
+  slides[i].setAttribute('data-active','true');
+  currentSlide=i;
+  document.getElementById('counter').textContent=(i+1)+' / '+total;
+  document.getElementById('progress').style.width=(((i+1)/total)*100)+'%';
+  syncTheme(i);
+}
+function nextSlide(){goToSlide(Math.min(currentSlide+1,total-1));}
+function prevSlide(){goToSlide(Math.max(currentSlide-1,0));}
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide();}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide();}
+  if(e.key==='Home')goToSlide(0);
+  if(e.key==='End')goToSlide(total-1);
+});
+(function init(){
+  const saved=(()=>{try{return localStorage.getItem('ps-locale');}catch(e){return null;}})();
+  const browser=navigator.language && navigator.language.indexOf('pt')===0?'pt-BR':navigator.language && navigator.language.indexOf('es')===0?'es':'en';
+  setLocale(saved||browser);
+  goToSlide(0);
+})();
+
+/* Overview modal mechanism (Wave 16 injection) */
+(function() {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  if (slides.length === 0) return;
+  const overview = document.getElementById('overview');
+  if (!overview) return;
+  const overviewGrid = document.getElementById('overviewGrid');
+
+  function buildOverview() {
+    if (!overviewGrid) return;
+    while (overviewGrid.firstChild) overviewGrid.removeChild(overviewGrid.firstChild);
+    slides.forEach((s, idx) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'overview-card';
+      const accent = s.style.getPropertyValue('--accent') || '#00A4EF';
+      card.style.setProperty('--card-accent', accent);
+      card.dataset.idx = String(idx);
+
+      const accentBar = document.createElement('div');
+      accentBar.className = 'overview-card__accent';
+      card.appendChild(accentBar);
+
+      const num = document.createElement('span');
+      num.className = 'overview-card__num';
+      num.textContent = String(idx+1).padStart(2,'0');
+      card.appendChild(num);
+
+      const eyebrowEl = s.querySelector('.eyebrow');
+      if (eyebrowEl) {
+        const eb = document.createElement('span');
+        eb.className = 'overview-card__eyebrow';
+        eb.textContent = eyebrowEl.textContent.trim();
+        card.appendChild(eb);
+      }
+      const titleEl = s.querySelector('.title, .section-title, h1, h2');
+      if (titleEl) {
+        const t = document.createElement('div');
+        t.className = 'overview-card__title';
+        t.textContent = titleEl.textContent.trim();
+        card.appendChild(t);
+      }
+
+      card.addEventListener('click', () => {
+        if (typeof goToSlide === 'function') goToSlide(idx);
+        else if (typeof show === 'function') show(idx);
+        else {
+          slides.forEach(sl => sl.dataset.active = 'false');
+          slides[idx].dataset.active = 'true';
+        }
+        closeOverview();
+      });
+      overviewGrid.appendChild(card);
+    });
+    updateOverviewCurrent();
+  }
+
+  function updateOverviewCurrent() {
+    if (!overviewGrid) return;
+    const current = slides.findIndex(s => s.dataset.active === 'true');
+    overviewGrid.querySelectorAll('.overview-card').forEach((c, i) => {
+      c.dataset.current = (i === current) ? 'true' : 'false';
+    });
+  }
+
+  function openOverview() {
+    overview.dataset.open = 'true';
+    overview.setAttribute('aria-hidden', 'false');
+    document.body.dataset.overviewOpen = 'true';
+    updateOverviewCurrent();
+  }
+
+  function closeOverview() {
+    overview.dataset.open = 'false';
+    overview.setAttribute('aria-hidden', 'true');
+    document.body.dataset.overviewOpen = 'false';
+  }
+
+  function toggleOverview() {
+    if (overview.dataset.open === 'true') closeOverview();
+    else openOverview();
+  }
+
+  window.toggleOverview = toggleOverview;
+  window.openOverview = openOverview;
+  window.closeOverview = closeOverview;
+
+  document.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') {
+      if (overview.dataset.open === 'true') {
+        e.preventDefault();
+        closeOverview();
+      } else if (e.key === 'o' || e.key === 'O') {
+        e.preventDefault();
+        openOverview();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        openOverview();
+      }
+    }
+  });
+
+  buildOverview();
+})();
+</script>
+
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title" id="overviewTitle">Overview</div>
+    <div class="overview__hint" id="overviewHint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+</body>
+</html>

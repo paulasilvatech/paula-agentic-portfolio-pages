@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Agentic DevOps Platform · Playbook · Paula Silva</title>
+<meta name="description" content="Consolidated playbook for the Agentic DevOps Platform: thesis, four pillars, Open Horizons accelerator, three horizons maturity path.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Agentic DevOps Platform · Playbook · Paula Silva">
+<meta property="og:description" content="Consolidated playbook for the Agentic DevOps Platform: thesis, four pillars, Open Horizons accelerator, three horizons maturity path.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agentic DevOps Platform · Playbook · Paula Silva">
+<meta name="twitter:description" content="Consolidated playbook for the Agentic DevOps Platform: thesis, four pillars, Open Horizons accelerator, three horizons maturity path.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/playbook.css">
+</head>
+<body class="acc-green">
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+
+<section class="doc-hero">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <div class="doc-hero__eyebrow">Playbook · v1.0.0 · 2026-05-06</div>
+    <h1 class="doc-hero__title">
+      <span data-lang="en" class="lang-active">Agentic DevOps Platform: a consolidated playbook.</span>
+      <span data-lang="pt-br">Plataforma Agentic DevOps: um playbook consolidado.</span>
+      <span data-lang="es">Plataforma Agentic DevOps: un playbook consolidado.</span>
+    </h1>
+    <p class="doc-hero__lead">
+      <span data-lang="en" class="lang-active">The body of work explained in one read. Strategic thesis, the four CNCF pillars, the Open Horizons accelerator, and the three-horizons maturity path. Linked to all source documents.</span>
+      <span data-lang="pt-br">O corpo de trabalho explicado em uma leitura só. Tese estratégica, os quatro pilares CNCF, o acelerador Open Horizons e a jornada de maturidade em três horizontes. Linkado aos documentos fonte.</span>
+      <span data-lang="es">El cuerpo de trabajo explicado en una sola lectura. Tesis estratégica, los cuatro pilares CNCF, el acelerador Open Horizons y el camino de madurez en tres horizontes. Enlazado a los documentos fuente.</span>
+    </p>
+  </div>
+</section>
+
+<div class="doc">
+
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#thesis" class="active">1. Thesis</a>
+    <a href="#three-artifacts">2. Three artifacts</a>
+    <a href="#crosswalk">3. Master crosswalk</a>
+    <a href="#four-pillars">4. Four pillars</a>
+    <a href="#three-horizons">5. Three horizons</a>
+    <a href="#how-to-adopt">6. How to adopt</a>
+    <a href="#sources">7. Source documents</a>
+  </aside>
+
+  <article class="article">
+
+    <section id="thesis">
+      <h2><span data-lang="en" class="lang-active">1. The thesis</span><span data-lang="pt-br">1. A tese</span><span data-lang="es">1. La tesis</span></h2>
+      <div data-lang="en" class="lang-active">
+        <p>Platform engineering is the foundation layer of the AI-native enterprise. Without it, AI agents reach production as one-off heroics. With it, they reach production as a default. The case is structural, not aesthetic.</p>
+        <p>By 2026 the average enterprise will have agents executing real work across multiple SDLC stages: plan, code, review, test, deploy, observe, remediate. The bottleneck is no longer model capability. It is the surrounding system that lets agents act safely at scale: where they run, how they are governed, what context they can read, what intent they encode.</p>
+        <blockquote>An agent without a platform is a demo. An agent on a platform is a product.</blockquote>
+      </div>
+      <div data-lang="pt-br">
+        <p>Platform engineering é a camada base da empresa AI-native. Sem ela, agentes de IA chegam à produção como heroísmo individual. Com ela, chegam como default. O argumento é estrutural, não estético.</p>
+        <p>Em 2026 a empresa típica terá agentes executando trabalho real em múltiplos estágios do SDLC: planejar, codar, revisar, testar, fazer deploy, observar, remediar. O gargalo não é mais a capacidade do modelo. É o sistema ao redor que permite ao agente agir com segurança em escala: onde ele roda, como é governado, que contexto pode ler, que intenção ele codifica.</p>
+        <blockquote>Um agente sem plataforma é uma demo. Um agente em uma plataforma é um produto.</blockquote>
+      </div>
+      <div data-lang="es">
+        <p>Platform engineering es la capa base de la empresa AI-native. Sin ella, los agentes de IA llegan a producción como heroísmo individual. Con ella, llegan como default. El argumento es estructural, no estético.</p>
+        <p>En 2026 la empresa promedio tendrá agentes ejecutando trabajo real a lo largo de múltiples etapas del SDLC: planificar, codear, revisar, testear, desplegar, observar, remediar. El cuello de botella ya no es la capacidad del modelo. Es el sistema circundante que permite al agente actuar con seguridad a escala: dónde corre, cómo se gobierna, qué contexto puede leer, qué intención codifica.</p>
+        <blockquote>Un agente sin plataforma es una demo. Un agente en una plataforma es un producto.</blockquote>
+      </div>
+    </section>
+
+    <section id="three-artifacts">
+      <h2><span data-lang="en" class="lang-active">2. Three artifacts at three altitudes</span><span data-lang="pt-br">2. Três artefatos em três altitudes</span><span data-lang="es">2. Tres artefactos en tres altitudes</span></h2>
+      <p data-lang="en" class="lang-active">The body of work consists of three artifacts. Each sits at a different altitude. Together, they form the full stack for selling, teaching, and delivering Agentic DevOps.</p>
+      <p data-lang="pt-br">O corpo de trabalho consiste em três artefatos. Cada um em uma altitude diferente. Juntos, formam o stack completo para vender, ensinar e entregar Agentic DevOps.</p>
+      <p data-lang="es">El cuerpo de trabajo consiste en tres artefactos. Cada uno en una altitud diferente. Juntos forman el stack completo para vender, enseñar y entregar Agentic DevOps.</p>
+      <table>
+        <thead><tr><th>Altitude</th><th>Artifact</th><th>Audience</th></tr></thead>
+        <tbody>
+          <tr><td>Strategic</td><td>Canonical white paper</td><td>CxO, VP Eng, Platform Director</td></tr>
+          <tr><td>Operational</td><td>Context Platform Stack playbook</td><td>Platform Lead, Tech Lead, Staff Engineer</td></tr>
+          <tr><td>Executable</td><td>Open Horizons accelerator</td><td>Platform team, DevOps engineer</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="crosswalk">
+      <h2><span data-lang="en" class="lang-active">3. The master crosswalk</span><span data-lang="pt-br">3. O crosswalk mestre</span><span data-lang="es">3. El crosswalk maestro</span></h2>
+      <p data-lang="en" class="lang-active">Read left to right: stack layer (playbook), CNCF pillar that governs it, Open Horizons component that materializes it. Three points become undeniable once the mapping is laid out.</p>
+      <p data-lang="pt-br">Leia da esquerda para direita: camada do stack (playbook), pilar CNCF que governa, componente Open Horizons que materializa. Três pontos ficam inegáveis com o mapeamento na mesa.</p>
+      <p data-lang="es">Lee de izquierda a derecha: capa del stack (playbook), pilar CNCF que la gobierna, componente Open Horizons que la materializa. Tres puntos se vuelven innegables una vez expuesto el mapeo.</p>
+      <table>
+        <thead><tr><th>Stack layer</th><th>CNCF pillar</th><th>Open Horizons component</th></tr></thead>
+        <tbody>
+          <tr><td>L1 Cloud &amp; Infra</td><td>Enabling foundation</td><td>AKS, ACR, Key Vault, VNet, PostgreSQL, Redis (16 Terraform modules)</td></tr>
+          <tr><td>L2 Platform</td><td>Golden Paths</td><td>22 Backstage scaffolder templates (6 H1, 9 H2, 7 H3)</td></tr>
+          <tr><td>L2 Platform</td><td>Guardrails</td><td>OPA Gatekeeper, Azure Policy, Workload Identity, signed-image admission</td></tr>
+          <tr><td>L2 Platform</td><td>Safety Nets</td><td>ArgoCD self-heal, Prometheus + Grafana + Alertmanager, Velero</td></tr>
+          <tr><td>L2 Platform</td><td>Manual Review</td><td>ArgoCD env-specific sync, CAB via GitHub Issues, agent promotion gates</td></tr>
+          <tr><td>L3 Context</td><td>Enabled by L2</td><td>15 MCP servers, Backstage TechDocs, RAG and AI eval pipelines</td></tr>
+          <tr><td>L4 Intent</td><td>Governs Safety Nets &amp; Manual Review</td><td>foundry-agent, multi-agent-system, copilot-extension H3 templates; 28 GitHub Issues templates encoding workflows; 14 automation scripts enforcing policy</td></tr>
+          <tr><td>L5 Agentic exec</td><td>Governed by all four</td><td>17 Copilot Chat agents, MS Agent Governance Toolkit, sre-agent</td></tr>
+        </tbody>
+      </table>
+      <h3>Three undeniable points</h3>
+      <ol>
+        <li><strong>Open Horizons is not an alternative to the stack; it is the stack's executable form.</strong> Every component answers a "how do I actually do this?" question the playbook raises.</li>
+        <li><strong>The four pillars are not a layer of their own; they are the governance semantics of L2.</strong> Golden Paths, Guardrails, Safety Nets, Manual Review are the operational vocabulary by which Platform Engineering governs every layer above.</li>
+        <li><strong>Layers 3 and 4 depend on L2's governance primitives.</strong> A context graph without Guardrails produces hallucination at enterprise scale. Intent captured without Manual Review produces agents that escape their scope.</li>
+      </ol>
+    </section>
+
+    <section id="four-pillars">
+      <h2><span data-lang="en" class="lang-active">4. The four pillars in operational detail</span><span data-lang="pt-br">4. Os quatro pilares em detalhe operacional</span><span data-lang="es">4. Los cuatro pilares en detalle operativo</span></h2>
+      <h3>Pillar 1 · Golden Paths</h3>
+      <p data-lang="en" class="lang-active">The paved road. Backstage scaffolder templates that make the right way to build also the easiest way. Open Horizons ships 22 templates organized by horizon: 6 H1 foundation (web apps, services, data pipelines), 9 H2 enhancement (observability, FinOps, SRE), 7 H3 innovation (RAG, foundry-agent, multi-agent-system).</p>
+      <p data-lang="pt-br">A via pavimentada. Templates do Backstage que fazem do jeito certo também o mais fácil. Open Horizons traz 22 templates organizados por horizonte: 6 H1 fundação, 9 H2 enhancement, 7 H3 inovação.</p>
+      <p data-lang="es">El camino pavimentado. Templates de Backstage que hacen que la forma correcta sea también la más fácil. Open Horizons trae 22 templates organizados por horizonte: 6 H1 fundación, 9 H2 enhancement, 7 H3 innovación.</p>
+
+      <h3>Pillar 2 · Guardrails</h3>
+      <p data-lang="en" class="lang-active">Policy as code. OPA Gatekeeper for Kubernetes admission, Azure Policy bundles for cloud resource compliance, Workload Identity for human-free auth, signed-image admission via cosign. The platform refuses to deploy what does not meet policy. Bypass requires a documented exception.</p>
+      <p data-lang="pt-br">Política como código. OPA Gatekeeper para admissão Kubernetes, bundles Azure Policy para compliance de recursos cloud, Workload Identity para auth sem humano, admissão de imagem assinada via cosign. A plataforma se recusa a fazer deploy do que não cumpre política. Bypass exige exceção documentada.</p>
+      <p data-lang="es">Política como código. OPA Gatekeeper para admisión Kubernetes, bundles Azure Policy para compliance de recursos cloud, Workload Identity para auth sin humano, admisión de imagen firmada vía cosign. La plataforma se niega a desplegar lo que no cumple política. Bypass requiere excepción documentada.</p>
+
+      <h3>Pillar 3 · Safety Nets</h3>
+      <p data-lang="en" class="lang-active">Detect drift early, recover fast. ArgoCD self-heal sync, Prometheus + Grafana + Alertmanager (4 default dashboards), Velero backups, progressive delivery defaults. The platform assumes failure and rehearses recovery.</p>
+      <p data-lang="pt-br">Detecta drift cedo, recupera rápido. ArgoCD self-heal sync, Prometheus + Grafana + Alertmanager (4 dashboards default), backups Velero, defaults de progressive delivery. A plataforma assume falha e ensaia recuperação.</p>
+      <p data-lang="es">Detecta drift temprano, recupera rápido. ArgoCD self-heal sync, Prometheus + Grafana + Alertmanager (4 dashboards default), backups Velero, defaults de progressive delivery. La plataforma asume falla y ensaya recuperación.</p>
+
+      <h3>Pillar 4 · Manual Review</h3>
+      <p data-lang="en" class="lang-active">Accountability, not bottleneck. ArgoCD env-specific sync (dev auto, staging gated, prod manual), Change Advisory Board via GitHub Issues templates, AI agent promotion gates. The platform records who approved what, when, and why.</p>
+      <p data-lang="pt-br">Responsabilidade, não gargalo. ArgoCD sync por ambiente (dev auto, staging gated, prod manual), Change Advisory Board via templates de GitHub Issues, gates de promoção de agentes. A plataforma registra quem aprovou o quê, quando e por quê.</p>
+      <p data-lang="es">Responsabilidad, no cuello de botella. ArgoCD sync por entorno (dev auto, staging gated, prod manual), Change Advisory Board vía templates de GitHub Issues, gates de promoción de agentes. La plataforma registra quién aprobó qué, cuándo y por qué.</p>
+    </section>
+
+    <section id="three-horizons">
+      <h2><span data-lang="en" class="lang-active">5. Three horizons as a maturity path</span><span data-lang="pt-br">5. Três horizontes como jornada de maturidade</span><span data-lang="es">5. Tres horizontes como camino de madurez</span></h2>
+      <table>
+        <thead><tr><th>Horizon</th><th>Stack coverage</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td><strong>H1 Foundation</strong></td><td>L1 + L2 Golden Paths and Guardrails</td><td>Platform usable by 3 teams in 90 days</td></tr>
+          <tr><td><strong>H2 Enhancement</strong></td><td>L2 full + L3 Context starter</td><td>Observability, FinOps, SRE, RAG</td></tr>
+          <tr><td><strong>H3 Innovation</strong></td><td>L3 + L4 Intent + L5 Agentic execution</td><td>Multi-agent systems in production</td></tr>
+        </tbody>
+      </table>
+      <p data-lang="en" class="lang-active">Horizons are not phases; they are layers of capability. H1 must be solid before H2 adds value, and H2 must be solid before H3 is anything other than risk.</p>
+      <p data-lang="pt-br">Horizontes não são fases; são camadas de capacidade. H1 precisa estar sólido antes que H2 some valor, e H2 precisa estar sólido antes que H3 seja qualquer coisa que não seja risco.</p>
+      <p data-lang="es">Los horizontes no son fases; son capas de capacidad. H1 debe estar sólido antes de que H2 sume valor, y H2 debe estar sólido antes de que H3 sea otra cosa que riesgo.</p>
+    </section>
+
+    <section id="how-to-adopt">
+      <h2><span data-lang="en" class="lang-active">6. How to adopt this in 90 days</span><span data-lang="pt-br">6. Como adotar isto em 90 dias</span><span data-lang="es">6. Cómo adoptar esto en 90 días</span></h2>
+      <ol>
+        <li data-lang="en" class="lang-active"><strong>Days 1-15.</strong> Stand up Open Horizons in a dev cluster. Provision 1 H1 Golden Path. Bring 1 pilot team.</li>
+        <li data-lang="pt-br"><strong>Dias 1-15.</strong> Suba Open Horizons em um cluster dev. Provisione 1 Golden Path H1. Traga 1 time piloto.</li>
+        <li data-lang="es"><strong>Días 1-15.</strong> Levanta Open Horizons en un cluster dev. Provisiona 1 Golden Path H1. Trae 1 equipo piloto.</li>
+        <li data-lang="en" class="lang-active"><strong>Days 16-45.</strong> Add Guardrails (OPA, signed images). Onboard team #2 and #3. Wire Prometheus + Grafana.</li>
+        <li data-lang="pt-br"><strong>Dias 16-45.</strong> Adicione Guardrails (OPA, imagens assinadas). Onboarding do time 2 e 3. Conecte Prometheus + Grafana.</li>
+        <li data-lang="es"><strong>Días 16-45.</strong> Agrega Guardrails (OPA, imágenes firmadas). Onboarding del equipo 2 y 3. Conecta Prometheus + Grafana.</li>
+        <li data-lang="en" class="lang-active"><strong>Days 46-75.</strong> Switch on Safety Nets (ArgoCD self-heal, Velero). Set Manual Review for prod.</li>
+        <li data-lang="pt-br"><strong>Dias 46-75.</strong> Ligue Safety Nets (ArgoCD self-heal, Velero). Configure Manual Review para prod.</li>
+        <li data-lang="es"><strong>Días 46-75.</strong> Activa Safety Nets (ArgoCD self-heal, Velero). Configura Manual Review para prod.</li>
+        <li data-lang="en" class="lang-active"><strong>Days 76-90.</strong> Run a tabletop incident. Measure DORA metrics. Document the gaps. Plan H2.</li>
+        <li data-lang="pt-br"><strong>Dias 76-90.</strong> Rode um incidente de mesa. Meça métricas DORA. Documente gaps. Planeje H2.</li>
+        <li data-lang="es"><strong>Días 76-90.</strong> Realiza un incidente de mesa. Mide métricas DORA. Documenta gaps. Planea H2.</li>
+      </ol>
+    </section>
+
+    <section id="sources">
+      <h2><span data-lang="en" class="lang-active">7. Source documents</span><span data-lang="pt-br">7. Documentos fonte</span><span data-lang="es">7. Documentos fuente</span></h2>
+      <div class="chapter-grid">
+        <a class="chap-card" href="Agentic_DevOps_Platform_Bridge_v1_0_0_2026-04-22_en.md">
+          <div class="chap-card__num">DOC 01</div>
+          <div class="chap-card__title">Bridge document v1.0.0</div>
+          <div class="chap-card__desc">The full bridge tying canonical white paper, Context Stack and Open Horizons.</div>
+        </a>
+        <a class="chap-card" href="Platform_Engineering_The_Foundation_Layer_for_AI_Native_Enterprise_v1_0_0_2026-04-22_en.md">
+          <div class="chap-card__num">DOC 02</div>
+          <div class="chap-card__title">Canonical white paper</div>
+          <div class="chap-card__desc">Strategic thesis. 2025-2026 evidence. Why platform decides AI outcomes.</div>
+        </a>
+        <a class="chap-card" href="Agentic_DevOps_Platform_Deck_v5_0_0_2026-04-27_multi.html" target="_blank" rel="noopener noreferrer">
+          <div class="chap-card__num">DECK</div>
+          <div class="chap-card__title">Trilingual deck v5.0.0</div>
+          <div class="chap-card__desc">Slide-based presentation, 60-90 minute format.</div>
+        </a>
+        <a class="chap-card" href="../context-engineering-platform/landing.html">
+          <div class="chap-card__num">RELATED</div>
+          <div class="chap-card__title">Context Platform Stack</div>
+          <div class="chap-card__desc">The four-layer playbook this platform implements.</div>
+        </a>
+      </div>
+    </section>
+
+    <nav class="pagenav">
+      <a href="landing.html">← <span data-lang="en" class="lang-active">Landing</span><span data-lang="pt-br">Landing</span><span data-lang="es">Landing</span></a>
+      <a href="../context-engineering-platform/landing.html"><span data-lang="en" class="lang-active">Next: Context Platform Stack</span><span data-lang="pt-br">Próximo: Context Platform Stack</span><span data-lang="es">Siguiente: Context Platform Stack</span> →</a>
+    </nav>
+
+  </article>
+
+  <aside class="scrollspy">
+    <h4>Related</h4>
+    <a href="../context-engineering-platform/landing.html">Context Stack</a>
+    <a href="../semantic-context-layer/landing.html">Semantic Layer</a>
+    <a href="../token-best-practices/landing.html">Token Mgmt</a>
+    <a href="../legacy-modernization-framework/landing.html">Modernization</a>
+    <a href="../index.html">Hub</a>
+  </aside>
+
+</div>
+
+<script>
+window.PLAYBOOK_DATA = {
+  topicLabel: 'Agentic DevOps Platform',
+  nextLabel: { en: 'Context Platform Stack', "pt-br": 'Context Platform Stack', es: 'Context Platform Stack' },
+  nextHref: '../context-engineering-platform/landing.html'
+};
+</script>
+<script src="../_shared/playbook.js"></script>
+</body>
+</html>

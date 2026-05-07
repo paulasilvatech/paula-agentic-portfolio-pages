@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Agents, Skills, Plugins, Customization Masterclass · Paula Silva</title>
+<meta name="description" content="Agents, Skills, Plugins, Customization Masterclass: trilingual landing for the Microsoft identity work.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Agents, Skills, Plugins, Customization Masterclass · Paula Silva">
+<meta property="og:description" content="Agents, Skills, Plugins, Customization Masterclass: trilingual landing for the Microsoft identity work.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agents, Skills, Plugins, Customization Masterclass · Paula Silva">
+<meta name="twitter:description" content="Agents, Skills, Plugins, Customization Masterclass: trilingual landing for the Microsoft identity work.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/landing.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+<div id="landing-root"></div>
+<script>
+window.PAGE_DATA = {
+  topicNumber: '06b',
+  topicLabel: 'Agents, Skills, Plugins, Customization Masterclass',
+  accent: 'green',
+  existingDeck: 'Agents_Skills_Plugins_Customization_Masterclass_v2_0_0_2026-05-06_multi.html',
+  existingPlaybook: 'playbook.html',
+  heroArt: `<svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Microsoft AI Agents Masterclass">
+    <rect x="20" y="20" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-blue-500)" stroke-width="0.6"/>
+    <text x="40" y="42" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-blue-700)">DEFINITION</text>
+    <text x="40" y="62" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Perceive, decide, act. Bounded autonomy.</text>
+    <rect x="20" y="92" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-yellow-500)" stroke-width="0.6"/>
+    <text x="40" y="114" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-yellow-700)">3 PLATFORMS</text>
+    <text x="40" y="134" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Studio, Copilot Agents, Foundry.</text>
+    <rect x="20" y="164" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-green-500)" stroke-width="0.6"/>
+    <text x="40" y="186" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-green-700)">CASE STUDY</text>
+    <text x="40" y="206" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Vehicle leasing. NF-e compliance.</text>
+    <rect x="20" y="236" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-red-500)" stroke-width="0.6"/>
+    <text x="40" y="258" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-red-700)">HUMAN-IN-THE-LOOP</text>
+    <text x="40" y="278" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">When humans review.</text>
+    <rect x="20" y="288" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="310" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">5 PRINCIPLES</text>
+    <text x="40" y="330" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Architecture rules.</text>
+  </svg>`,
+  hero: {
+    eyebrow: { 'en': '06b · Microsoft AI Agents · Masterclass', 'pt-br': '06b · Agentes IA Microsoft · Masterclass', 'es': '06b · Agentes IA Microsoft · Masterclass' },
+    title: {
+      'en': 'Three platforms, one decision framework for enterprise AI agents.',
+      'pt-br': 'Três plataformas, uma estrutura de decisão para agentes de IA enterprise.',
+      'es': 'Tres plataformas, un marco de decisión para agentes de IA empresariales.'
+    },
+    subtitle: {
+      'en': 'When to use Copilot Studio, GitHub Copilot Agents, and Azure AI Foundry, with real industry use cases and Human-in-the-Loop guardrails.',
+      'pt-br': 'Quando usar Copilot Studio, GitHub Copilot Agents e Azure AI Foundry, com casos reais e guardrails Human-in-the-Loop.',
+      'es': 'Cuándo usar Copilot Studio, GitHub Copilot Agents y Azure AI Foundry, con casos reales y guardrails Human-in-the-Loop.'
+    }
+  },
+  stats: [
+    { num:'3', label:{ 'en': 'Microsoft platforms', 'pt-br': 'Plataformas Microsoft', 'es': 'Plataformas Microsoft' } },
+    { num:'8', label:{ 'en': 'Parts in the masterclass', 'pt-br': 'Partes na masterclass', 'es': 'Partes en la masterclass' } },
+    { num:'4', label:{ 'en': 'Verticals (finance, health, retail, mfg)', 'pt-br': 'Verticais (finance, saúde, varejo, manufatura)', 'es': 'Verticales (finance, salud, retail, manufactura)' } },
+    { num:'HITL', label:{ 'en': 'Quadrants of autonomy', 'pt-br': 'Quadrantes de autonomia', 'es': 'Cuadrantes de autonomía' } }
+  ],
+  pillarsTitle: { 'en': 'Eight parts, from definition to deployment.', 'pt-br': 'Oito partes, da definição ao deploy.', 'es': 'Ocho partes, de la definición al despliegue.' },
+  pillarsLead: {
+    'en': 'Build a working mental model, then act on it. Verticals + governance throughout.',
+    'pt-br': 'Construa um modelo mental funcional, depois atue. Verticais + governança em tudo.',
+    'es': 'Construye un modelo mental funcional, luego actúa. Verticales + gobernanza en todo.'
+  },
+  pillars: [
+    { num:'PART I', accent:'blue',
+      title:{ 'en': 'Definition and anatomy', 'pt-br': 'Definição e anatomia', 'es': 'Definición y anatomía' },
+      desc:{ 'en': 'Chatbot vs agent. Perceive, decide, act.', 'pt-br': 'Chatbot vs agente. Perceber, decidir, agir.', 'es': 'Chatbot vs agente. Percibir, decidir, actuar.' } },
+    { num:'PART II', accent:'yellow',
+      title:{ 'en': 'The three platforms', 'pt-br': 'As três plataformas', 'es': 'Las tres plataformas' },
+      desc:{ 'en': 'Copilot Studio, GitHub Copilot Agents, Azure AI Foundry.', 'pt-br': 'Copilot Studio, GitHub Copilot Agents, Azure AI Foundry.', 'es': 'Copilot Studio, GitHub Copilot Agents, Azure AI Foundry.' } },
+    { num:'PART III', accent:'green',
+      title:{ 'en': 'Agent types', 'pt-br': 'Tipos de agentes', 'es': 'Tipos de agentes' },
+      desc:{ 'en': 'Dev, productivity, business, data.', 'pt-br': 'Dev, produtividade, negócios, dados.', 'es': 'Dev, productividad, negocio, datos.' } },
+    { num:'PART IV', accent:'red',
+      title:{ 'en': 'Human-in-the-Loop', 'pt-br': 'Human-in-the-Loop', 'es': 'Human-in-the-Loop' },
+      desc:{ 'en': 'When humans review. How to scale review without becoming the bottleneck.', 'pt-br': 'Quando humanos revisam. Como escalar revisão sem virar gargalo.', 'es': 'Cuándo revisan humanos. Cómo escalar revisión sin convertirse en cuello de botella.' } },
+    { num:'PART V', accent:'blue',
+      title:{ 'en': 'Vehicle leasing case study', 'pt-br': 'Caso de uso locação de veículos', 'es': 'Caso leasing de vehículos' },
+      desc:{ 'en': 'Four-agent flow with NF-e compliance.', 'pt-br': 'Fluxo de quatro agentes com conformidade NF-e.', 'es': 'Flujo de cuatro agentes con conformidad NF-e.' } },
+    { num:'PART VI', accent:'yellow',
+      title:{ 'en': 'Vertical examples', 'pt-br': 'Exemplos por vertical', 'es': 'Ejemplos por vertical' },
+      desc:{ 'en': 'Finance, healthcare, retail, manufacturing.', 'pt-br': 'Finance, saúde, varejo, manufatura.', 'es': 'Finance, salud, retail, manufactura.' } }
+  ],
+  formats: [
+    { kicker:'LANDING · YOU ARE HERE', accent:'ink',
+      title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
+      desc:{ en:'10-second hook for the topic, with the thesis and the formats.', 'pt-br':'Hook de 10 segundos para o tema, com a tese e os formatos.', es:'Hook de 10 segundos para el tema, con la tesis y los formatos.' },
+      meta:{ en:'HTML · 5 min', 'pt-br':'HTML · 5 min', es:'HTML · 5 min' },
+      href:'#' },
+    { kicker:'DECK · Masterclass v2.0', accent:'ink',
+      title:{ en:'Masterclass v2.0', 'pt-br':'Masterclass v2.0', es:'Masterclass v2.0' },
+      desc:{ en:'Eight-part masterclass deck. Definition, three platforms, agent types, HITL quadrants, vehicle leasing case study, verticals.', 'pt-br':'Deck masterclass em oito partes. Definição, três plataformas, tipos de agentes, quadrantes HITL, caso locação, verticais.', es:'Deck masterclass en ocho partes. Definición, tres plataformas, tipos de agentes, cuadrantes HITL, caso leasing, verticales.' },
+      meta:{ en:'HTML · ~30 min', 'pt-br':'HTML · ~30 min', es:'HTML · ~30 min' },
+      href:'Agents_Skills_Plugins_Customization_Masterclass_v2_0_0_2026-05-06_multi.html' },
+    { kicker:'PLAYBOOK · v1.0.0', accent:'ink',
+      title:{ en:'Long-form playbook', 'pt-br':'Playbook completo', es:'Playbook completo' },
+      desc:{ en:'Reference documentation. Read in order or jump by section. Trilingual.', 'pt-br':'Documentação de referência. Leia em ordem ou pule por seção. Trilíngue.', es:'Documentación de referencia. Lee en orden o salta por sección. Trilingüe.' },
+      meta:{ en:'HTML · ~15 min', 'pt-br':'HTML · ~15 min', es:'HTML · ~15 min' },
+      href:'playbook.html' }
+  ],
+  crosslinks: [
+    { accent:'green', kicker:'Runtime',
+      title:{ 'en': 'Agentic DevOps Platform', 'pt-br': 'Plataforma Agentic DevOps', 'es': 'Plataforma Agentic DevOps' },
+      hint:{ 'en': 'Where agents run, observe, govern.', 'pt-br': 'Onde agentes rodam, observam, governam.', 'es': 'Donde los agentes corren, observan, gobiernan.' },
+      href:'../agentic-devops-platform/landing.html' },
+    { accent:'yellow', kicker:'Stack model',
+      title:{ 'en': 'Context Platform Stack', 'pt-br': 'Context Platform Stack', 'es': 'Context Platform Stack' },
+      hint:{ 'en': 'The four-layer model that organizes everything.', 'pt-br': 'O modelo de quatro camadas que organiza tudo.', 'es': 'El modelo de cuatro capas que organiza todo.' },
+      href:'../context-engineering-platform/landing.html' },
+    { accent:'red', kicker:'Pre-shaped context',
+      title:{ 'en': 'Semantic Context Layer', 'pt-br': 'Semantic Context Layer', 'es': 'Semantic Context Layer' },
+      hint:{ 'en': 'Compiler-grade context, made queryable.', 'pt-br': 'Contexto qualidade-compilador, consultável.', 'es': 'Contexto calidad-compilador, consultable.' },
+      href:'../semantic-context-layer/landing.html' },
+    { accent:'ink', kicker:'Token economy',
+      title:{ 'en': 'Token Management & Agent Design', 'pt-br': 'Gestão de Tokens e Design de Agentes', 'es': 'Gestión de Tokens y Diseño de Agentes' },
+      hint:{ 'en': 'Treat tokens as a finite resource.', 'pt-br': 'Trate tokens como recurso finito.', 'es': 'Trata los tokens como recurso finito.' },
+      href:'../token-best-practices/landing.html' }
+  ]
+};
+</script>
+<script src="../_shared/landing-template.js"></script>
+</body>
+</html>

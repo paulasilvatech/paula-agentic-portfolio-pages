@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GitHub Copilot Onboarding &amp; Agentic SDLC Letramento">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GitHub Copilot Onboarding &amp; Agentic SDLC Letramento">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<title data-i18n="meta.title">GitHub Copilot Onboarding &amp; Agentic SDLC Letramento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --c-red-50:#FFF0EB; --c-red-100:#FFD6C7; --c-red-500:#F25022; --c-red-700:#B33816;
+  --c-green-50:#F1F8E3; --c-green-100:#D8EDA5; --c-green-500:#7FBA00; --c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD; --c-blue-100:#B8E5FA; --c-blue-500:#00A4EF; --c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0; --c-yellow-100:#FFE79C; --c-yellow-500:#FFB900; --c-yellow-700:#B88500;
+  --ink:#1A1A1A; --ink-2:#3A3A3A; --ink-3:#737373;
+  --paper:#FFFFFF; --bg:#F7F7F5; --bg-alt:#ECECE8; --rule:#E5E5E0; --rule-2:#CECEC7;
+  --dark-bg:#141414; --dark-surface:#1C1C1A; --dark-ink:#F0F0F0; --dark-ink-2:#C7C7C2; --dark-ink-3:#A8A8A4; --dark-rule:#2E2E2A;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+  --ease:cubic-bezier(0.2,0,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;}
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .18s ease-out;pointer-events:none;}
+.slide[data-active="true"]{visibility:visible;opacity:1;pointer-events:auto;}
+.slide--light{background:var(--bg);color:var(--ink);}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink);}
+.slide--paper{background:var(--paper);color:var(--ink);}
+
+.eyebrow{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--c-green-500));margin-bottom:24px;}
+.slide--dark .eyebrow{color:var(--accent,var(--c-green-500));}
+.title{font-size:clamp(36px,4.4vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.025em;max-width:1500px;margin-bottom:22px;text-wrap:balance;}
+.title--medium{font-size:clamp(30px,3.4vw,50px);max-width:1400px;}
+.title--small{font-size:clamp(24px,2.6vw,36px);max-width:1280px;}
+.title .accent-red{color:var(--c-red-500);} .title .accent-green{color:var(--c-green-500);} .title .accent-blue{color:var(--c-blue-500);} .title .accent-yellow{color:var(--c-yellow-500);}
+.subtitle{font-size:clamp(16px,1.5vw,22px);line-height:1.4;color:var(--ink-2);max-width:1200px;font-weight:400;text-wrap:pretty;}
+.slide--dark .subtitle{color:var(--dark-ink-2);}
+.body-large{font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--ink);max-width:1200px;margin-top:22px;text-wrap:pretty;}
+.slide--dark .body-large{color:var(--dark-ink);}
+.caption{font-size:13px;color:var(--ink-3);font-style:italic;line-height:1.5;max-width:1100px;margin-top:18px;}
+
+.section-title{font-size:clamp(48px,5.6vw,90px);font-weight:500;line-height:.98;letter-spacing:-.035em;margin:20px 0 18px;max-width:1400px;text-wrap:balance;}
+.section-number{font-family:var(--font-sans);font-size:clamp(160px,22vw,340px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-green-500));opacity:.92;}
+
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;padding-top:22px;border-top:1px solid var(--rule);margin-top:36px;max-width:1200px;}
+.meta-item{display:flex;flex-direction:column;gap:6px;}
+.meta-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);}
+.meta-value{font-size:15px;font-weight:500;line-height:1.35;}
+
+.big-number{font-family:var(--font-sans);font-size:clamp(120px,18vw,260px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-green-500));margin:14px 0 28px;}
+.big-number__unit{font-size:.4em;font-weight:400;color:var(--ink-2);margin-left:10px;}
+.slide--dark .big-number__unit{color:var(--dark-ink-2);}
+.big-number__sub{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:block;margin-top:10px;}
+
+.list-numbered{display:flex;flex-direction:column;gap:12px;margin-top:22px;max-width:1100px;}
+.list-numbered__item{display:grid;grid-template-columns:80px 1fr;gap:22px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule);}
+.list-numbered__num{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--ink-3);}
+.list-numbered__text{font-size:20px;font-weight:400;line-height:1.35;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1500px;margin-top:18px;}
+.split__col{display:flex;flex-direction:column;gap:14px;}
+.split__title{font-size:22px;font-weight:500;line-height:1.25;text-wrap:balance;}
+.split__kicker{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-green-500));}
+.split__body{font-size:15px;line-height:1.55;color:var(--ink-2);}
+
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1500px;margin-top:22px;}
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1500px;margin-top:22px;}
+.card{padding:22px 22px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;gap:10px;}
+.slide--dark .card{background:var(--dark-surface);border-color:var(--dark-rule);}
+.card__kicker{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-green-500));}
+.card__title{font-size:18px;font-weight:500;line-height:1.25;text-wrap:balance;}
+.card__body{font-size:14px;line-height:1.5;color:var(--ink-2);}
+.slide--dark .card__body{color:var(--dark-ink-2);}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.pill{padding:6px 12px;border:1px solid var(--rule-2);border-radius:999px;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);background:var(--paper);}
+
+.diagram-wrap{margin-top:18px;width:100%;max-width:1600px;}
+.diagram-wrap svg{width:100%;height:auto;display:block;}
+
+.deck-progress{position:fixed;top:0;left:0;height:3px;background:var(--c-green-500);transition:width .3s ease;z-index:200;}
+.deck-brand{position:fixed;top:22px;left:22px;display:flex;align-items:center;gap:10px;z-index:100;}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-2);}
+
+.lang-switcher{position:fixed;top:22px;right:22px;display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;font-family:var(--font-mono);z-index:100;}
+.lang-switcher__btn{padding:5px 10px;background:transparent;border:none;border-radius:3px;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer;}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-green-500);color:#fff;}
+body[data-slide-theme="dark"] .lang-switcher{background:var(--dark-surface);border-color:var(--dark-rule);}
+body[data-slide-theme="dark"] .lang-switcher__btn{color:var(--dark-ink-3);}
+
+.deck-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:6px;z-index:100;font-family:var(--font-mono);}
+.deck-controls__btn{width:36px;height:36px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:15px;color:var(--ink);cursor:pointer;}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper);}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-controls__btn{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink);}
+body[data-slide-theme="dark"] .deck-controls__counter{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink-2);}
+
+a.deck-brand{text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+
+/* Overview modal (Wave 16 injection) */
+.overview { position:fixed; inset:0; background:var(--bg,#F7F7F5); z-index:500; display:none; overflow-y:auto; padding:80px 40px 40px; }
+.overview[data-open="true"] { display:block; }
+.overview__header { max-width:1600px; margin:0 auto 28px; display:flex; justify-content:space-between; align-items:baseline; padding-bottom:18px; border-bottom:1px solid var(--rule,#E5E5E0); }
+.overview__title { font-size:28px; font-weight:500; letter-spacing:-0.02em; color:var(--ink,#1A1A1A); }
+.overview__hint { font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview__grid { max-width:1600px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+.overview-card { position:relative; aspect-ratio:16/9; padding:14px 16px; border:1px solid var(--rule,#E5E5E0); border-radius:6px; background:var(--paper,#FFFFFF); text-align:left; cursor:pointer; overflow:hidden; transition:all 0.15s; font-family:inherit; }
+.overview-card:hover { border-color:var(--ink-2,#3A3A3A); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.06); }
+.overview-card__accent { position:absolute; top:0; left:0; right:0; height:3px; background:var(--card-accent,var(--c-blue-500,#00A4EF)); }
+.overview-card__num { position:absolute; top:10px; right:12px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:10px; letter-spacing:0.14em; color:var(--ink-3,#737373); }
+.overview-card__eyebrow { display:block; margin-top:10px; margin-bottom:8px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview-card__title { font-size:14px; line-height:1.25; font-weight:500; color:var(--ink,#1A1A1A); display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.overview-card[data-current="true"] { border-color:var(--c-blue-500,#00A4EF); box-shadow:0 0 0 2px var(--c-blue-500,#00A4EF); }
+body[data-overview-open="true"] .deck-brand,
+body[data-overview-open="true"] .deck-controls,
+body[data-overview-open="true"] .lang-switcher,
+body[data-overview-open="true"] .kbd-hint { display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="deck-progress" id="progress"></div>
+
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:22px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt</span>
+</a>
+
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en" onclick="setLocale('en')" aria-current="true">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+  <button class="lang-switcher__btn" data-locale="es" onclick="setLocale('es')">ES</button>
+</div>
+
+<div class="deck-controls">
+  <button class="deck-controls__btn" onclick="prevSlide()" aria-label="Previous">&lsaquo;</button>
+  <span class="deck-controls__counter" id="counter">1 / 1</span>
+  <button class="deck-controls__btn" onclick="nextSlide()" aria-label="Next">&rsaquo;</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: COVER -->
+<section class="slide slide--light" data-active="true" style="--accent: var(--c-green-500); justify-content: center;">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="eyebrow" data-i18n="cover.eyebrow">GitHub Copilot Onboarding &amp; Agentic SDLC Literacy</div>
+    <h1 class="title">
+      <span data-i18n="cover.part1">Structured onboarding is the difference between</span>
+      <span class="accent-red" data-i18n="cover.kw1">paying for AI</span>
+      <span data-i18n="cover.part2">and</span>
+      <span class="accent-green" data-i18n="cover.kw2">getting value from it.</span>
+    </h1>
+    <p class="subtitle" data-i18n="cover.subtitle">A persona-first program for the 24 SDLC roles adopting agentic AI on GitHub, Microsoft, and Azure.</p>
+  </div>
+  <div class="meta-grid" style="flex-shrink:0;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-07</span></div>
+  </div>
+</section>
+
+<!-- SLIDE 2: AGENDA -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="agenda.eyebrow">Agenda</div>
+  <h2 class="title title--medium" data-i18n="agenda.title">Six parts. From the gap to the platform.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="agenda.i1">The unequal-literacy gap and the cost of inaction.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="agenda.i2">The 24 SDLC personas and seven clusters.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="agenda.i3">A five-stage onboarding framework.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="agenda.i4">Six-month roadmap and tool tracks.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="agenda.i5">Pitfalls, resistance, and KPIs.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">06</span><span class="list-numbered__text" data-i18n="agenda.i6">Center of Excellence and what to do Monday.</span></div>
+  </div>
+</section>
+
+<!-- SLIDE 3: PART I COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part1.eyebrow">Part I</div>
+  <div class="section-number">I</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">01</div>
+  <h2 class="section-title" data-i18n="part1.title">The literacy gap.</h2>
+  <p class="subtitle" data-i18n="part1.subtitle">Why most agentic AI rollouts stall and what the evidence says about fixing it.</p>
+</section>
+
+<!-- SLIDE 4: BIG STAT -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="problem.eyebrow">Problem &middot; Adoption gap</div>
+  <h2 class="title title--medium"><span data-i18n="problem.t1">Teams with formal onboarding hit</span> <span class="accent-green" data-i18n="problem.t2">80%</span> <span data-i18n="problem.t3">active adoption in 90 days. Teams without hit 23%.</span></h2>
+  <div class="big-number" style="--accent: var(--c-red-500);">3.5x<span class="big-number__sub" data-i18n="problem.sub">gap between structured and unstructured rollouts</span></div>
+  <p class="caption" data-i18n="problem.caption">Source: GitHub Octoverse 2025. Active adoption defined as Copilot use on at least five workdays per week. The differentiator is not budget, not seniority, not stack. It is the program around the tool.</p>
+</section>
+
+<!-- SLIDE 5: WHY IT FAILS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="fail.eyebrow">Problem &middot; Why rollouts stall</div>
+  <h2 class="title title--medium" data-i18n="fail.title">Three patterns, three failure modes.</h2>
+  <div class="cards-3">
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="fail.c1.k">01 &middot; Tool-only rollout</div>
+      <div class="card__title" data-i18n="fail.c1.t">License first, learning later.</div>
+      <div class="card__body" data-i18n="fail.c1.b">Provision Copilot Enterprise, send the welcome email, hope for the best. Active adoption peaks at week two and falls to 12% by day sixty (Forrester 2025).</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="fail.c2.k">02 &middot; Engineer-only program</div>
+      <div class="card__title" data-i18n="fail.c2.t">Devs trained, the rest left out.</div>
+      <div class="card__body" data-i18n="fail.c2.b">QA never opens it. The PM does not see the connection. Security blocks the rollout for lack of clarity. ROI flattens because the SDLC is multi-persona.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="fail.c3.k">03 &middot; One-shot training</div>
+      <div class="card__title" data-i18n="fail.c3.t">A workshop instead of a journey.</div>
+      <div class="card__body" data-i18n="fail.c3.b">Three hours of slides, no follow-up. Kirkpatrick level 1 is satisfied (people liked it); level 3 (behavior change) never happens.</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="fail.caption">All three share a root: they treat onboarding as an event, not a program.</p>
+</section>
+
+<!-- SLIDE 6: PART II COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part2.eyebrow">Part II</div>
+  <div class="section-number">II</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">02</div>
+  <h2 class="section-title" data-i18n="part2.title">The 24 SDLC personas.</h2>
+  <p class="subtitle" data-i18n="part2.subtitle">Seven clusters. One program that speaks each cluster's language.</p>
+</section>
+
+<!-- SLIDE 7: PERSONA CLUSTERS DIAGRAM -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="clusters.eyebrow">Personas &middot; Seven clusters</div>
+  <h2 class="title title--small" data-i18n="clusters.title">Twenty-four roles, organized for the program.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SDLC persona clusters">
+      <defs>
+        <style>
+          .cl-box{fill:var(--paper);stroke:var(--rule-2);stroke-width:1;}
+          .cl-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;fill:var(--ink-3);}
+          .cl-title{font-family:'Inter',sans-serif;font-size:16px;font-weight:600;fill:var(--ink);}
+          .cl-count{font-family:'Inter',sans-serif;font-size:34px;font-weight:300;fill:var(--c-green-700);}
+          .cl-list{font-family:'Inter',sans-serif;font-size:12px;fill:var(--ink-2);}
+        </style>
+      </defs>
+      <rect x="20" y="40" width="200" height="160" rx="6" class="cl-box" stroke="#F25022"/>
+      <text x="34" y="64" class="cl-num">CLUSTER 01</text>
+      <text x="34" y="88" class="cl-title">Engineering</text>
+      <text x="34" y="132" class="cl-count">6</text>
+      <text x="34" y="158" class="cl-list">Backend, Frontend, Full Stack,</text>
+      <text x="34" y="174" class="cl-list">Junior, Mobile, Architect</text>
+      <rect x="240" y="40" width="200" height="160" rx="6" class="cl-box" stroke="#FFB900"/>
+      <text x="254" y="64" class="cl-num">CLUSTER 02</text>
+      <text x="254" y="88" class="cl-title">Quality &amp; SRE</text>
+      <text x="254" y="132" class="cl-count">3</text>
+      <text x="254" y="158" class="cl-list">QA Engineer, SRE,</text>
+      <text x="254" y="174" class="cl-list">Performance Specialist</text>
+      <rect x="460" y="40" width="200" height="160" rx="6" class="cl-box" stroke="#7FBA00"/>
+      <text x="474" y="64" class="cl-num">CLUSTER 03</text>
+      <text x="474" y="88" class="cl-title">Platform</text>
+      <text x="474" y="132" class="cl-count">4</text>
+      <text x="474" y="158" class="cl-list">DevOps, Cloud, DBA,</text>
+      <text x="474" y="174" class="cl-list">Infrastructure</text>
+      <rect x="680" y="40" width="200" height="160" rx="6" class="cl-box" stroke="#00A4EF"/>
+      <text x="694" y="64" class="cl-num">CLUSTER 04</text>
+      <text x="694" y="88" class="cl-title">Product &amp; Design</text>
+      <text x="694" y="132" class="cl-count">3</text>
+      <text x="694" y="158" class="cl-list">PM, UX Designer,</text>
+      <text x="694" y="174" class="cl-list">Business Analyst</text>
+      <rect x="900" y="40" width="200" height="160" rx="6" class="cl-box" stroke="#7FBA00"/>
+      <text x="914" y="64" class="cl-num">CLUSTER 05</text>
+      <text x="914" y="88" class="cl-title">Data &amp; AI</text>
+      <text x="914" y="132" class="cl-count">3</text>
+      <text x="914" y="158" class="cl-list">Data Engineer, Data</text>
+      <text x="914" y="174" class="cl-list">Scientist, BI Analyst</text>
+      <rect x="1120" y="40" width="200" height="160" rx="6" class="cl-box" stroke="#F25022"/>
+      <text x="1134" y="64" class="cl-num">CLUSTER 06</text>
+      <text x="1134" y="88" class="cl-title">Security &amp; GRC</text>
+      <text x="1134" y="132" class="cl-count">2</text>
+      <text x="1134" y="158" class="cl-list">DevSecOps,</text>
+      <text x="1134" y="174" class="cl-list">Compliance / GRC</text>
+      <rect x="460" y="220" width="640" height="160" rx="6" class="cl-box" stroke="#FFB900"/>
+      <text x="474" y="244" class="cl-num">CLUSTER 07</text>
+      <text x="474" y="268" class="cl-title">Leadership &amp; Strategy</text>
+      <text x="474" y="312" class="cl-count">3</text>
+      <text x="474" y="338" class="cl-list">Engineering Manager / Tech Lead, CTO / VP Eng., CISO / Security Lead</text>
+      <text x="474" y="358" class="cl-list">Different vocabulary, same dashboards.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 8: PERSONA-TOOL MATRIX -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="matrix.eyebrow">Personas &middot; Tool matrix</div>
+  <h2 class="title title--small" data-i18n="matrix.title">Each cluster has a primary tool, a secondary, and a governance plane.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="matrix.c1.k">Engineering &middot; Quality</div><div class="card__title" data-i18n="matrix.c1.t">Copilot Agent Mode</div><div class="card__body" data-i18n="matrix.c1.b">Primary: GitHub Copilot Agent Mode and Chat. Secondary: GitHub Actions. Governance: GitHub Advanced Security with Security Autofix.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="matrix.c2.k">Platform &middot; Cloud</div><div class="card__title" data-i18n="matrix.c2.t">Copilot for IaC</div><div class="card__body" data-i18n="matrix.c2.b">Primary: Copilot for Bicep, Terraform, Bash, PowerShell. Secondary: Azure Developer CLI (azd). Governance: Defender for Cloud.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="matrix.c3.k">Product &middot; Design</div><div class="card__title" data-i18n="matrix.c3.t">Copilot Studio</div><div class="card__body" data-i18n="matrix.c3.b">Primary: Microsoft Copilot Studio for backlog and feedback agents. Secondary: Microsoft 365 Copilot. Governance: Purview labels for research data.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="matrix.c4.k">Data &middot; AI &middot; Security</div><div class="card__title" data-i18n="matrix.c4.t">Foundry &amp; GHAS</div><div class="card__body" data-i18n="matrix.c4.b">Primary: Azure AI Foundry for orchestration; GitHub Advanced Security for code. Secondary: Microsoft Fabric. Governance: Purview, Compliance Manager.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 9: PART III COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part3.eyebrow">Part III</div>
+  <div class="section-number">III</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">03</div>
+  <h2 class="section-title" data-i18n="part3.title">The five-stage framework.</h2>
+  <p class="subtitle" data-i18n="part3.subtitle">From preparation to autonomy. ADKAR meets the four stages of competence.</p>
+</section>
+
+<!-- SLIDE 10: STAGES DIAGRAM -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="stages.eyebrow">Stages &middot; Six-month flow</div>
+  <h2 class="title title--small" data-i18n="stages.title">Five stages, twenty-four weeks, explicit exit criteria.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1500 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five-stage onboarding flow">
+      <defs>
+        <style>
+          .st-box{stroke-width:1;}
+          .st-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;fill:#fff;}
+          .st-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;fill:#fff;}
+          .st-week{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.10em;fill:#fff;opacity:0.85;}
+          .st-list{font-family:'Inter',sans-serif;font-size:12px;fill:var(--ink-2);}
+          .st-arrow{fill:none;stroke:var(--ink-3);stroke-width:1.2;marker-end:url(#arr);}
+        </style>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink-3)"/></marker>
+      </defs>
+      <rect x="20" y="30" width="270" height="120" rx="6" class="st-box" fill="#D8EDA5" stroke="#5A8500"/>
+      <text x="40" y="56" class="st-num" style="fill:#5A8500">STAGE 0</text>
+      <text x="40" y="84" class="st-title" style="fill:#1A1A1A">Preparation</text>
+      <text x="40" y="108" class="st-week" style="fill:#3A3A3A">Week -2 to 0</text>
+      <text x="40" y="134" class="st-list">Policy, licenses, champions, sandboxes.</text>
+      <path d="M 295 90 L 315 90" class="st-arrow"/>
+      <rect x="320" y="30" width="270" height="120" rx="6" class="st-box" fill="#7FBA00" stroke="#5A8500"/>
+      <text x="340" y="56" class="st-num">STAGE 1</text>
+      <text x="340" y="84" class="st-title">Awareness</text>
+      <text x="340" y="108" class="st-week">Week 1-2</text>
+      <text x="340" y="134" class="st-list" style="fill:#1A1A1A">Persona-specific demos. Augmentation framing.</text>
+      <path d="M 595 90 L 615 90" class="st-arrow"/>
+      <rect x="620" y="30" width="270" height="120" rx="6" class="st-box" fill="#5A8500" stroke="#3D5C00"/>
+      <text x="640" y="56" class="st-num">STAGE 2</text>
+      <text x="640" y="84" class="st-title">Quick wins</text>
+      <text x="640" y="108" class="st-week">Week 3-6</text>
+      <text x="640" y="134" class="st-list" style="fill:#F0F0F0">First success in 72 h. Real PR, real test, real pipeline.</text>
+      <path d="M 895 90 L 915 90" class="st-arrow"/>
+      <rect x="920" y="30" width="270" height="120" rx="6" class="st-box" fill="#3D5C00" stroke="#243800"/>
+      <text x="940" y="56" class="st-num">STAGE 3</text>
+      <text x="940" y="84" class="st-title">Operational fluency</text>
+      <text x="940" y="108" class="st-week">Week 7-14</text>
+      <text x="940" y="134" class="st-list" style="fill:#F0F0F0">Pair programming, prompt dojos, monthly showcase.</text>
+      <path d="M 1195 90 L 1215 90" class="st-arrow"/>
+      <rect x="1220" y="30" width="260" height="120" rx="6" class="st-box" fill="#243800" stroke="#0E1700"/>
+      <text x="1240" y="56" class="st-num">STAGE 4</text>
+      <text x="1240" y="84" class="st-title">Autonomy</text>
+      <text x="1240" y="108" class="st-week">Week 15-24</text>
+      <text x="1240" y="134" class="st-list" style="fill:#F0F0F0">Custom agents, MCP extensions, OKRs include AI metrics.</text>
+      <text x="20" y="200" class="st-list" style="font-size:13px;font-weight:600;fill:#1A1A1A">Exit criteria per stage:</text>
+      <text x="20" y="222" class="st-list">Stage 0: policy published, champions trained, sandboxes ready.</text>
+      <text x="20" y="240" class="st-list">Stage 1: 100% of personas attended a demo with their own backlog.</text>
+      <text x="20" y="258" class="st-list">Stage 2: every persona logged at least one quick-win artifact.</text>
+      <text x="20" y="276" class="st-list">Stage 3: 60% active weekly use, prompt library curated, showcase running.</text>
+      <text x="20" y="294" class="st-list">Stage 4: champion retiring formal program; community of practice owns cadence.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 11: STAGE 0 + 1 DETAIL -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="stage01.eyebrow">Stages 0-1 &middot; Set up and frame</div>
+  <h2 class="title title--small" data-i18n="stage01.title">Lay the rails before the first prompt is typed.</h2>
+  <div class="split">
+    <div class="split__col">
+      <span class="split__kicker" data-i18n="stage01.l.k">Stage 0 &middot; Preparation</span>
+      <h3 class="split__title" data-i18n="stage01.l.t">Nine pre-requisites, no exceptions.</h3>
+      <p class="split__body" data-i18n="stage01.l.b">Publish the AI usage policy. Provision Copilot Enterprise, Foundry workspaces, Copilot Studio, GitHub Advanced Security, Defender for Cloud, Fabric, and Purview. Identify champions and put them through two weeks of advanced training before the broad kickoff. Define the program KPIs in writing.</p>
+    </div>
+    <div class="split__col">
+      <span class="split__kicker" data-i18n="stage01.r.k">Stage 1 &middot; Awareness</span>
+      <h3 class="split__title" data-i18n="stage01.r.t">Demos with the team's own backlog.</h3>
+      <p class="split__body" data-i18n="stage01.r.b">Frame the program as augmentation, not automation. MIT Sloan 2024 finds augmentation framing produces 2.8x the engagement of automation framing. Run 60 to 90 minute live demos, one per cluster, using a real artifact from the team's current sprint. Generic tutorials fail.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 12: STAGE 2 QUICK WINS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="stage2.eyebrow">Stage 2 &middot; First 72 hours</div>
+  <h2 class="title title--small" data-i18n="stage2.title">One concrete quick win per cluster, designed for the BJ Fogg habit window.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c1.k">Engineering</div><div class="card__title" data-i18n="stage2.c1.t">Backlog item, end-to-end.</div><div class="card__body" data-i18n="stage2.c1.b">Use Copilot Agent Mode to take one low-complexity backlog item from branch to PR without leaving the editor.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c2.k">QA &middot; SRE</div><div class="card__title" data-i18n="stage2.c2.t">Full unit test suite.</div><div class="card__body" data-i18n="stage2.c2.b">Generate the unit-test suite for an uncovered class. Typically 15 minutes versus 3 to 4 hours manual.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c3.k">Platform</div><div class="card__title" data-i18n="stage2.c3.t">CI/CD for a new service.</div><div class="card__body" data-i18n="stage2.c3.b">Generate the GitHub Actions pipeline for a new service, with the project config file as Copilot context.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c4.k">Product &middot; Data</div><div class="card__title" data-i18n="stage2.c4.t">Backlog Q&amp;A agent.</div><div class="card__body" data-i18n="stage2.c4.b">Build a Copilot Studio agent that answers questions about the roadmap from a SharePoint sheet.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c5.k">Security</div><div class="card__title" data-i18n="stage2.c5.t">Top-three CVE autofix.</div><div class="card__body" data-i18n="stage2.c5.b">Use GHAS plus Security Autofix to triage and propose fixes for the three highest-severity findings on a low-risk repo.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c6.k">Data &amp; AI</div><div class="card__title" data-i18n="stage2.c6.t">Notebook in 15 minutes.</div><div class="card__body" data-i18n="stage2.c6.b">Generate an exploratory analysis notebook for an existing dataset, with Copilot guiding feature checks.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c7.k">Leadership</div><div class="card__title" data-i18n="stage2.c7.t">Retro summary.</div><div class="card__body" data-i18n="stage2.c7.b">Use Microsoft 365 Copilot to generate the executive summary of a recent retro from Teams or OneNote.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="stage2.c8.k">Champion</div><div class="card__title" data-i18n="stage2.c8.t">Pattern catalog v0.</div><div class="card__body" data-i18n="stage2.c8.b">Capture every quick win as a one-page pattern card. Becomes the seed of the prompt and recipe library.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 13: PART IV COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part4.eyebrow">Part IV</div>
+  <div class="section-number">IV</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">04</div>
+  <h2 class="section-title" data-i18n="part4.title">Pitfalls, resistance, and KPIs.</h2>
+  <p class="subtitle" data-i18n="part4.subtitle">What goes wrong, why it goes wrong, and how to know whether the program is working.</p>
+</section>
+
+<!-- SLIDE 14: SEVEN PITFALLS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="pitfalls.eyebrow">Pitfalls &middot; Field evidence</div>
+  <h2 class="title title--small" data-i18n="pitfalls.title">Seven pitfalls account for most failed rollouts.</h2>
+  <div class="list-numbered" style="max-width:1300px;">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="pitfalls.p1">One-shot training, no follow-up. Adoption falls to 12% in 60 days.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="pitfalls.p2">Engineer-only program. Silos of adoption, half the ROI.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="pitfalls.p3">No real use cases. Generic tutorials kill motivation in week one.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="pitfalls.p4">No clear AI usage policy. CISO blocks; teams freeze.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="pitfalls.p5">No internal champions. No social diffusion of practice.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">06</span><span class="list-numbered__text" data-i18n="pitfalls.p6">No or wrong metrics. Budget is cut at the first review.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">07</span><span class="list-numbered__text" data-i18n="pitfalls.p7">One-size-fits-all curriculum. High dropout, low relevance.</span></div>
+  </div>
+  <p class="caption" data-i18n="pitfalls.caption">Sources: McKinsey Global Survey on AI 2024; Forrester AI Adoption Pitfalls 2025.</p>
+</section>
+
+<!-- SLIDE 15: KPI DASHBOARD -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="kpis.eyebrow">KPIs &middot; What to measure</div>
+  <h2 class="title title--small" data-i18n="kpis.title">Six KPIs, measured every fortnight.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="kpis.k1.k">01 &middot; Reach</div><div class="card__title" data-i18n="kpis.k1.t">Active user rate.</div><div class="card__body" data-i18n="kpis.k1.b">Percent of licensed users active at least five days per week. Target: 80% by day 90.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="kpis.k2.k">02 &middot; Depth</div><div class="card__title" data-i18n="kpis.k2.t">Agentic actions per week.</div><div class="card__body" data-i18n="kpis.k2.b">Count of multi-step Agent Mode sessions per developer per week. Distinguishes autocomplete from orchestration.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="kpis.k3.k">03 &middot; Quality</div><div class="card__title" data-i18n="kpis.k3.t">Acceptance &amp; revert rate.</div><div class="card__body" data-i18n="kpis.k3.b">Suggestion acceptance rate, plus rate of rollback within 7 days. Together they reveal over-reliance.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="kpis.k4.k">04 &middot; Throughput</div><div class="card__title" data-i18n="kpis.k4.t">DORA quartet.</div><div class="card__body" data-i18n="kpis.k4.b">Lead time, deployment frequency, change failure, MTTR. Lagging signals, but the ones that pay the bill.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="kpis.k5.k">05 &middot; DevEx</div><div class="card__title" data-i18n="kpis.k5.t">Satisfaction &amp; flow.</div><div class="card__body" data-i18n="kpis.k5.b">SPACE-aligned quarterly survey. Includes psychological safety question for skeptics and juniors.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="kpis.k6.k">06 &middot; Risk</div><div class="card__title" data-i18n="kpis.k6.t">Security findings closed.</div><div class="card__body" data-i18n="kpis.k6.b">GHAS findings auto-fixed and merged per week. Defender for Cloud recommendations actioned.</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 16: CLOSING + WHAT TO DO MONDAY -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="end.eyebrow">Closing &middot; Monday morning</div>
+  <h2 class="title"><span data-i18n="end.t1">Onboarding is not an event.</span> <span class="accent-green" data-i18n="end.t2">Run it like a platform.</span></h2>
+  <p class="body-large" data-i18n="end.body">Three actions before the next sprint. Publish the AI usage policy in writing. Name two champions per team and book their two-week advanced training. Schedule the first cluster-specific demo using a real artifact from the current backlog. Then come back for Stage 2.</p>
+  <div class="meta-grid" style="margin-top:auto;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-07</span></div>
+  </div>
+
+  <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:24px;">
+    <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:96px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+    <p style="font-style:italic;font-size:15px;color:var(--ink-2);margin:0;text-align:center;">Building the future of software development with AI and Agentic DevOps.</p>
+    <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);">Paula Silva | Software Global Black Belt</div>
+    <a href="mailto:paulasilva@microsoft.com" style="display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--rule-2);border-radius:6px;text-decoration:none;color:var(--ink);font-size:14px;background:var(--paper);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;color:var(--ink-2);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+      paulasilva@microsoft.com
+    </a>
+  </div>
+</section>
+
+</div>
+
+<script>
+const I18N = {
+  "en": {
+    "meta": {"title": "GitHub Copilot Onboarding & Agentic SDLC Literacy"},
+    "labels": {"author": "Author", "role": "Role", "contact": "Contact", "date": "Date"},
+    "cover": {"eyebrow": "GitHub Copilot Onboarding & Agentic SDLC Literacy", "part1": "Structured onboarding is the difference between", "kw1": "paying for AI", "part2": "and", "kw2": "getting value from it.", "subtitle": "A persona-first program for the 24 SDLC roles adopting agentic AI on GitHub, Microsoft, and Azure."},
+    "agenda": {"eyebrow": "Agenda", "title": "Six parts. From the gap to the platform.", "i1": "The unequal-literacy gap and the cost of inaction.", "i2": "The 24 SDLC personas and seven clusters.", "i3": "A five-stage onboarding framework.", "i4": "Six-month roadmap and tool tracks.", "i5": "Pitfalls, resistance, and KPIs.", "i6": "Center of Excellence and what to do Monday."},
+    "part1": {"eyebrow": "Part I", "title": "The literacy gap.", "subtitle": "Why most agentic AI rollouts stall and what the evidence says about fixing it."},
+    "problem": {"eyebrow": "Problem · Adoption gap", "t1": "Teams with formal onboarding hit", "t2": "80%", "t3": "active adoption in 90 days. Teams without hit 23%.", "sub": "gap between structured and unstructured rollouts", "caption": "Source: GitHub Octoverse 2025. Active adoption defined as Copilot use on at least five workdays per week. The differentiator is not budget, not seniority, not stack. It is the program around the tool."},
+    "fail": {"eyebrow": "Problem · Why rollouts stall", "title": "Three patterns, three failure modes.", "c1": {"k": "01 · Tool-only rollout", "t": "License first, learning later.", "b": "Provision Copilot Enterprise, send the welcome email, hope for the best. Active adoption peaks at week two and falls to 12% by day sixty (Forrester 2025)."}, "c2": {"k": "02 · Engineer-only program", "t": "Devs trained, the rest left out.", "b": "QA never opens it. The PM does not see the connection. Security blocks the rollout for lack of clarity. ROI flattens because the SDLC is multi-persona."}, "c3": {"k": "03 · One-shot training", "t": "A workshop instead of a journey.", "b": "Three hours of slides, no follow-up. Kirkpatrick level 1 is satisfied (people liked it); level 3 (behavior change) never happens."}, "caption": "All three share a root: they treat onboarding as an event, not a program."},
+    "part2": {"eyebrow": "Part II", "title": "The 24 SDLC personas.", "subtitle": "Seven clusters. One program that speaks each cluster's language."},
+    "clusters": {"eyebrow": "Personas · Seven clusters", "title": "Twenty-four roles, organized for the program."},
+    "matrix": {"eyebrow": "Personas · Tool matrix", "title": "Each cluster has a primary tool, a secondary, and a governance plane.", "c1": {"k": "Engineering · Quality", "t": "Copilot Agent Mode", "b": "Primary: GitHub Copilot Agent Mode and Chat. Secondary: GitHub Actions. Governance: GitHub Advanced Security with Security Autofix."}, "c2": {"k": "Platform · Cloud", "t": "Copilot for IaC", "b": "Primary: Copilot for Bicep, Terraform, Bash, PowerShell. Secondary: Azure Developer CLI (azd). Governance: Defender for Cloud."}, "c3": {"k": "Product · Design", "t": "Copilot Studio", "b": "Primary: Microsoft Copilot Studio for backlog and feedback agents. Secondary: Microsoft 365 Copilot. Governance: Purview labels for research data."}, "c4": {"k": "Data · AI · Security", "t": "Foundry & GHAS", "b": "Primary: Azure AI Foundry for orchestration; GitHub Advanced Security for code. Secondary: Microsoft Fabric. Governance: Purview, Compliance Manager."}},
+    "part3": {"eyebrow": "Part III", "title": "The five-stage framework.", "subtitle": "From preparation to autonomy. ADKAR meets the four stages of competence."},
+    "stages": {"eyebrow": "Stages · Six-month flow", "title": "Five stages, twenty-four weeks, explicit exit criteria."},
+    "stage01": {"eyebrow": "Stages 0-1 · Set up and frame", "title": "Lay the rails before the first prompt is typed.", "l": {"k": "Stage 0 · Preparation", "t": "Nine pre-requisites, no exceptions.", "b": "Publish the AI usage policy. Provision Copilot Enterprise, Foundry workspaces, Copilot Studio, GitHub Advanced Security, Defender for Cloud, Fabric, and Purview. Identify champions and put them through two weeks of advanced training before the broad kickoff. Define the program KPIs in writing."}, "r": {"k": "Stage 1 · Awareness", "t": "Demos with the team's own backlog.", "b": "Frame the program as augmentation, not automation. MIT Sloan 2024 finds augmentation framing produces 2.8x the engagement of automation framing. Run 60 to 90 minute live demos, one per cluster, using a real artifact from the team's current sprint. Generic tutorials fail."}},
+    "stage2": {"eyebrow": "Stage 2 · First 72 hours", "title": "One concrete quick win per cluster, designed for the BJ Fogg habit window.", "c1": {"k": "Engineering", "t": "Backlog item, end-to-end.", "b": "Use Copilot Agent Mode to take one low-complexity backlog item from branch to PR without leaving the editor."}, "c2": {"k": "QA · SRE", "t": "Full unit test suite.", "b": "Generate the unit-test suite for an uncovered class. Typically 15 minutes versus 3 to 4 hours manual."}, "c3": {"k": "Platform", "t": "CI/CD for a new service.", "b": "Generate the GitHub Actions pipeline for a new service, with the project config file as Copilot context."}, "c4": {"k": "Product · Data", "t": "Backlog Q&A agent.", "b": "Build a Copilot Studio agent that answers questions about the roadmap from a SharePoint sheet."}, "c5": {"k": "Security", "t": "Top-three CVE autofix.", "b": "Use GHAS plus Security Autofix to triage and propose fixes for the three highest-severity findings on a low-risk repo."}, "c6": {"k": "Data & AI", "t": "Notebook in 15 minutes.", "b": "Generate an exploratory analysis notebook for an existing dataset, with Copilot guiding feature checks."}, "c7": {"k": "Leadership", "t": "Retro summary.", "b": "Use Microsoft 365 Copilot to generate the executive summary of a recent retro from Teams or OneNote."}, "c8": {"k": "Champion", "t": "Pattern catalog v0.", "b": "Capture every quick win as a one-page pattern card. Becomes the seed of the prompt and recipe library."}},
+    "part4": {"eyebrow": "Part IV", "title": "Pitfalls, resistance, and KPIs.", "subtitle": "What goes wrong, why it goes wrong, and how to know whether the program is working."},
+    "pitfalls": {"eyebrow": "Pitfalls · Field evidence", "title": "Seven pitfalls account for most failed rollouts.", "p1": "One-shot training, no follow-up. Adoption falls to 12% in 60 days.", "p2": "Engineer-only program. Silos of adoption, half the ROI.", "p3": "No real use cases. Generic tutorials kill motivation in week one.", "p4": "No clear AI usage policy. CISO blocks; teams freeze.", "p5": "No internal champions. No social diffusion of practice.", "p6": "No or wrong metrics. Budget is cut at the first review.", "p7": "One-size-fits-all curriculum. High dropout, low relevance.", "caption": "Sources: McKinsey Global Survey on AI 2024; Forrester AI Adoption Pitfalls 2025."},
+    "kpis": {"eyebrow": "KPIs · What to measure", "title": "Six KPIs, measured every fortnight.", "k1": {"k": "01 · Reach", "t": "Active user rate.", "b": "Percent of licensed users active at least five days per week. Target: 80% by day 90."}, "k2": {"k": "02 · Depth", "t": "Agentic actions per week.", "b": "Count of multi-step Agent Mode sessions per developer per week. Distinguishes autocomplete from orchestration."}, "k3": {"k": "03 · Quality", "t": "Acceptance & revert rate.", "b": "Suggestion acceptance rate, plus rate of rollback within 7 days. Together they reveal over-reliance."}, "k4": {"k": "04 · Throughput", "t": "DORA quartet.", "b": "Lead time, deployment frequency, change failure, MTTR. Lagging signals, but the ones that pay the bill."}, "k5": {"k": "05 · DevEx", "t": "Satisfaction & flow.", "b": "SPACE-aligned quarterly survey. Includes psychological safety question for skeptics and juniors."}, "k6": {"k": "06 · Risk", "t": "Security findings closed.", "b": "GHAS findings auto-fixed and merged per week. Defender for Cloud recommendations actioned."}},
+    "end": {"eyebrow": "Closing · Monday morning", "t1": "Onboarding is not an event.", "t2": "Run it like a platform.", "body": "Three actions before the next sprint. Publish the AI usage policy in writing. Name two champions per team and book their two-week advanced training. Schedule the first cluster-specific demo using a real artifact from the current backlog. Then come back for Stage 2."}
+  },
+  "pt-BR": {
+    "meta": {"title": "Onboarding GitHub Copilot & Letramento em SDLC Agêntico"},
+    "labels": {"author": "Autora", "role": "Papel", "contact": "Contato", "date": "Data"},
+    "cover": {"eyebrow": "Onboarding GitHub Copilot & Letramento em SDLC Agêntico", "part1": "Onboarding estruturado é a diferença entre", "kw1": "pagar por IA", "part2": "e", "kw2": "obter valor dela.", "subtitle": "Um programa persona-first para os 24 papéis do SDLC adotando IA agêntica em GitHub, Microsoft e Azure."},
+    "agenda": {"eyebrow": "Agenda", "title": "Seis partes. Do gap à plataforma.", "i1": "O gap de letramento desigual e o custo de não agir.", "i2": "As 24 personas do SDLC e sete clusters.", "i3": "Um framework de onboarding em cinco estágios.", "i4": "Roadmap de seis meses e trilhas por ferramenta.", "i5": "Armadilhas, resistência e KPIs.", "i6": "Centro de Excelência e o que fazer na segunda."},
+    "part1": {"eyebrow": "Parte I", "title": "O gap de letramento.", "subtitle": "Por que a maioria dos rollouts de IA agêntica empaca e o que a evidência diz sobre como corrigir."},
+    "problem": {"eyebrow": "Problema · Gap de adoção", "t1": "Times com onboarding formal atingem", "t2": "80%", "t3": "de adoção ativa em 90 dias. Times sem programa, 23%.", "sub": "diferença entre rollouts estruturados e não estruturados", "caption": "Fonte: GitHub Octoverse 2025. Adoção ativa: uso do Copilot em ao menos cinco dias úteis por semana. O diferenciador não é orçamento, senioridade ou stack. É o programa em torno da ferramenta."},
+    "fail": {"eyebrow": "Problema · Por que os rollouts empacam", "title": "Três padrões, três modos de falha.", "c1": {"k": "01 · Rollout só de ferramenta", "t": "Licença primeiro, aprendizado depois.", "b": "Provisione Copilot Enterprise, mande o e-mail de boas-vindas, espere o melhor. Adoção ativa pico na semana dois e cai para 12% no dia sessenta (Forrester 2025)."}, "c2": {"k": "02 · Programa só de devs", "t": "Devs treinados, o resto fora.", "b": "QA nunca abre. PM não vê a conexão. Segurança bloqueia por falta de clareza. ROI achata porque o SDLC é multi-persona."}, "c3": {"k": "03 · Treinamento de uma vez só", "t": "Workshop em vez de jornada.", "b": "Três horas de slides, sem follow-up. Kirkpatrick nível 1 satisfeito (gostaram); nível 3 (mudança de comportamento) não acontece."}, "caption": "Os três compartilham uma raiz: tratam onboarding como evento, não programa."},
+    "part2": {"eyebrow": "Parte II", "title": "As 24 personas do SDLC.", "subtitle": "Sete clusters. Um programa que fala a língua de cada cluster."},
+    "clusters": {"eyebrow": "Personas · Sete clusters", "title": "Vinte e quatro papéis, organizados para o programa."},
+    "matrix": {"eyebrow": "Personas · Matriz de ferramentas", "title": "Cada cluster tem uma ferramenta primária, uma secundária e um plano de governança.", "c1": {"k": "Engenharia · Qualidade", "t": "Copilot Agent Mode", "b": "Primária: GitHub Copilot Agent Mode e Chat. Secundária: GitHub Actions. Governança: GitHub Advanced Security com Security Autofix."}, "c2": {"k": "Plataforma · Cloud", "t": "Copilot para IaC", "b": "Primária: Copilot para Bicep, Terraform, Bash, PowerShell. Secundária: Azure Developer CLI (azd). Governança: Defender for Cloud."}, "c3": {"k": "Produto · Design", "t": "Copilot Studio", "b": "Primária: Microsoft Copilot Studio para agentes de backlog e feedback. Secundária: Microsoft 365 Copilot. Governança: rótulos do Purview para dados de pesquisa."}, "c4": {"k": "Dados · IA · Segurança", "t": "Foundry & GHAS", "b": "Primária: Azure AI Foundry para orquestração; GitHub Advanced Security para código. Secundária: Microsoft Fabric. Governança: Purview, Compliance Manager."}},
+    "part3": {"eyebrow": "Parte III", "title": "O framework de cinco estágios.", "subtitle": "Da preparação à autonomia. ADKAR encontra os quatro estágios de competência."},
+    "stages": {"eyebrow": "Estágios · Fluxo de seis meses", "title": "Cinco estágios, vinte e quatro semanas, critérios explícitos de saída."},
+    "stage01": {"eyebrow": "Estágios 0-1 · Preparar e enquadrar", "title": "Estabeleça os trilhos antes do primeiro prompt.", "l": {"k": "Estágio 0 · Preparação", "t": "Nove pré-requisitos, sem exceções.", "b": "Publique a política de uso de IA. Provisione Copilot Enterprise, workspaces Foundry, Copilot Studio, GitHub Advanced Security, Defender for Cloud, Fabric e Purview. Identifique champions e dê duas semanas de treinamento avançado antes do kickoff amplo. Defina os KPIs do programa por escrito."}, "r": {"k": "Estágio 1 · Consciência", "t": "Demos com o backlog do próprio time.", "b": "Enquadre o programa como augmentation, não automation. MIT Sloan 2024 mostra que augmentation gera 2,8x mais engajamento que automation. Faça demos ao vivo de 60 a 90 minutos, uma por cluster, usando um artefato real do sprint atual. Tutoriais genéricos falham."}},
+    "stage2": {"eyebrow": "Estágio 2 · Primeiras 72 horas", "title": "Uma vitória rápida concreta por cluster, desenhada para a janela de hábito de BJ Fogg.", "c1": {"k": "Engenharia", "t": "Item de backlog ponta a ponta.", "b": "Use Copilot Agent Mode para levar um item de baixa complexidade do branch ao PR sem sair do editor."}, "c2": {"k": "QA · SRE", "t": "Suíte completa de unitários.", "b": "Gere a suíte de testes unitários para uma classe sem cobertura. Tipicamente 15 minutos vs. 3 a 4 horas manuais."}, "c3": {"k": "Plataforma", "t": "CI/CD para um novo serviço.", "b": "Gere o pipeline GitHub Actions para um novo serviço, com o arquivo de config do projeto como contexto do Copilot."}, "c4": {"k": "Produto · Dados", "t": "Agente de Q&A do backlog.", "b": "Construa um agente Copilot Studio que responde perguntas sobre o roadmap a partir de uma planilha no SharePoint."}, "c5": {"k": "Segurança", "t": "Autofix dos três principais CVEs.", "b": "Use GHAS + Security Autofix para triar e propor correções dos três achados mais críticos em um repo de baixo risco."}, "c6": {"k": "Dados & IA", "t": "Notebook em 15 minutos.", "b": "Gere um notebook de análise exploratória para um dataset existente, com Copilot guiando checks de features."}, "c7": {"k": "Liderança", "t": "Resumo de retrospectiva.", "b": "Use Microsoft 365 Copilot para gerar o resumo executivo de uma retro recente a partir de Teams ou OneNote."}, "c8": {"k": "Champion", "t": "Catálogo de padrões v0.", "b": "Capture cada quick win como uma página de padrão. Vira a semente da biblioteca de prompts e receitas."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Armadilhas, resistência e KPIs.", "subtitle": "O que dá errado, por que dá errado, e como saber se o programa está funcionando."},
+    "pitfalls": {"eyebrow": "Armadilhas · Evidência de campo", "title": "Sete armadilhas explicam a maioria dos rollouts falhos.", "p1": "Treinamento único, sem follow-up. Adoção cai para 12% em 60 dias.", "p2": "Programa só de devs. Silos de adoção, metade do ROI.", "p3": "Sem casos de uso reais. Tutoriais genéricos matam a motivação na semana um.", "p4": "Sem política clara de uso de IA. CISO bloqueia; times congelam.", "p5": "Sem champions internos. Sem difusão social da prática.", "p6": "Sem métricas ou métricas erradas. Orçamento é cortado na primeira revisão.", "p7": "Currículo único para todos. Alta evasão, baixa relevância.", "caption": "Fontes: McKinsey Global Survey on AI 2024; Forrester AI Adoption Pitfalls 2025."},
+    "kpis": {"eyebrow": "KPIs · O que medir", "title": "Seis KPIs, medidos a cada quinzena.", "k1": {"k": "01 · Alcance", "t": "Taxa de usuários ativos.", "b": "Percentual de licenciados ativos em ao menos cinco dias por semana. Meta: 80% no dia 90."}, "k2": {"k": "02 · Profundidade", "t": "Ações agênticas por semana.", "b": "Contagem de sessões Agent Mode multi-step por dev por semana. Distingue autocomplete de orquestração."}, "k3": {"k": "03 · Qualidade", "t": "Aceitação & rollback.", "b": "Taxa de aceitação de sugestão, mais taxa de rollback em 7 dias. Juntas revelam over-reliance."}, "k4": {"k": "04 · Throughput", "t": "Quarteto DORA.", "b": "Lead time, frequência de deploy, change failure, MTTR. Sinais lagging, mas os que pagam a conta."}, "k5": {"k": "05 · DevEx", "t": "Satisfação & flow.", "b": "Pesquisa trimestral alinhada ao SPACE. Inclui pergunta de segurança psicológica para céticos e juniors."}, "k6": {"k": "06 · Risco", "t": "Achados de segurança fechados.", "b": "Achados GHAS auto-corrigidos e mergeados por semana. Recomendações Defender for Cloud aplicadas."}},
+    "end": {"eyebrow": "Encerramento · Segunda de manhã", "t1": "Onboarding não é evento.", "t2": "Opere como plataforma.", "body": "Três ações antes do próximo sprint. Publique a política de uso de IA por escrito. Nomeie dois champions por time e agende as duas semanas de treinamento avançado. Marque a primeira demo por cluster usando um artefato real do backlog atual. Depois volte para o Estágio 2."}
+  },
+  "es": {
+    "meta": {"title": "Onboarding GitHub Copilot & Alfabetización en SDLC Agéntico"},
+    "labels": {"author": "Autora", "role": "Rol", "contact": "Contacto", "date": "Fecha"},
+    "cover": {"eyebrow": "Onboarding GitHub Copilot & Alfabetización en SDLC Agéntico", "part1": "El onboarding estructurado es la diferencia entre", "kw1": "pagar por IA", "part2": "y", "kw2": "obtener valor de ella.", "subtitle": "Un programa persona-first para los 24 roles del SDLC adoptando IA agéntica en GitHub, Microsoft y Azure."},
+    "agenda": {"eyebrow": "Agenda", "title": "Seis partes. Del gap a la plataforma.", "i1": "El gap de alfabetización desigual y el costo de no actuar.", "i2": "Las 24 personas del SDLC y siete clusters.", "i3": "Un framework de onboarding en cinco etapas.", "i4": "Hoja de ruta de seis meses y pistas por herramienta.", "i5": "Errores, resistencia y KPIs.", "i6": "Centro de Excelencia y qué hacer el lunes."},
+    "part1": {"eyebrow": "Parte I", "title": "El gap de alfabetización.", "subtitle": "Por qué la mayoría de despliegues de IA agéntica se atasca y qué dice la evidencia sobre cómo corregirlo."},
+    "problem": {"eyebrow": "Problema · Gap de adopción", "t1": "Los equipos con onboarding formal alcanzan", "t2": "80%", "t3": "de adopción activa en 90 días. Los equipos sin programa, 23%.", "sub": "diferencia entre despliegues estructurados y no estructurados", "caption": "Fuente: GitHub Octoverse 2025. Adopción activa: uso del Copilot en al menos cinco días laborables por semana. El diferenciador no es presupuesto, senioridad o stack. Es el programa alrededor de la herramienta."},
+    "fail": {"eyebrow": "Problema · Por qué los despliegues se atascan", "title": "Tres patrones, tres modos de falla.", "c1": {"k": "01 · Solo herramienta", "t": "Licencia primero, aprendizaje después.", "b": "Provisiona Copilot Enterprise, manda el correo de bienvenida, espera lo mejor. La adopción activa pico en la semana dos y cae a 12% al día sesenta (Forrester 2025)."}, "c2": {"k": "02 · Programa solo de devs", "t": "Devs entrenados, el resto fuera.", "b": "QA nunca lo abre. El PM no ve la conexión. Seguridad bloquea por falta de claridad. El ROI se aplana porque el SDLC es multi-persona."}, "c3": {"k": "03 · Entrenamiento de una vez", "t": "Taller en vez de jornada.", "b": "Tres horas de slides, sin seguimiento. Kirkpatrick nivel 1 satisfecho (les gustó); nivel 3 (cambio de conducta) no ocurre."}, "caption": "Los tres comparten una raíz: tratan el onboarding como evento, no como programa."},
+    "part2": {"eyebrow": "Parte II", "title": "Las 24 personas del SDLC.", "subtitle": "Siete clusters. Un programa que habla el idioma de cada cluster."},
+    "clusters": {"eyebrow": "Personas · Siete clusters", "title": "Veinticuatro roles, organizados para el programa."},
+    "matrix": {"eyebrow": "Personas · Matriz de herramientas", "title": "Cada cluster tiene una herramienta primaria, una secundaria y un plano de gobernanza.", "c1": {"k": "Ingeniería · Calidad", "t": "Copilot Agent Mode", "b": "Primaria: GitHub Copilot Agent Mode y Chat. Secundaria: GitHub Actions. Gobernanza: GitHub Advanced Security con Security Autofix."}, "c2": {"k": "Plataforma · Cloud", "t": "Copilot para IaC", "b": "Primaria: Copilot para Bicep, Terraform, Bash, PowerShell. Secundaria: Azure Developer CLI (azd). Gobernanza: Defender for Cloud."}, "c3": {"k": "Producto · Diseño", "t": "Copilot Studio", "b": "Primaria: Microsoft Copilot Studio para agentes de backlog y feedback. Secundaria: Microsoft 365 Copilot. Gobernanza: etiquetas de Purview para datos de investigación."}, "c4": {"k": "Datos · IA · Seguridad", "t": "Foundry & GHAS", "b": "Primaria: Azure AI Foundry para orquestación; GitHub Advanced Security para código. Secundaria: Microsoft Fabric. Gobernanza: Purview, Compliance Manager."}},
+    "part3": {"eyebrow": "Parte III", "title": "El framework de cinco etapas.", "subtitle": "De la preparación a la autonomía. ADKAR encuentra las cuatro etapas de competencia."},
+    "stages": {"eyebrow": "Etapas · Flujo de seis meses", "title": "Cinco etapas, veinticuatro semanas, criterios explícitos de salida."},
+    "stage01": {"eyebrow": "Etapas 0-1 · Preparar y enmarcar", "title": "Coloca los rieles antes del primer prompt.", "l": {"k": "Etapa 0 · Preparación", "t": "Nueve prerrequisitos, sin excepciones.", "b": "Publica la política de uso de IA. Provisiona Copilot Enterprise, workspaces Foundry, Copilot Studio, GitHub Advanced Security, Defender for Cloud, Fabric y Purview. Identifica champions y dales dos semanas de formación avanzada antes del kickoff amplio. Define los KPIs del programa por escrito."}, "r": {"k": "Etapa 1 · Conciencia", "t": "Demos con el backlog del propio equipo.", "b": "Enmarca el programa como augmentation, no automation. MIT Sloan 2024 muestra que augmentation genera 2.8x más engagement que automation. Haz demos en vivo de 60 a 90 minutos, una por cluster, usando un artefacto real del sprint actual. Los tutoriales genéricos fracasan."}},
+    "stage2": {"eyebrow": "Etapa 2 · Primeras 72 horas", "title": "Una victoria rápida concreta por cluster, diseñada para la ventana de hábito de BJ Fogg.", "c1": {"k": "Ingeniería", "t": "Ítem de backlog end-to-end.", "b": "Usa Copilot Agent Mode para llevar un ítem de baja complejidad de la rama al PR sin salir del editor."}, "c2": {"k": "QA · SRE", "t": "Suite completa de unit tests.", "b": "Genera la suite de tests unitarios para una clase sin cobertura. Típicamente 15 minutos vs. 3 a 4 horas manuales."}, "c3": {"k": "Plataforma", "t": "CI/CD para un nuevo servicio.", "b": "Genera el pipeline de GitHub Actions para un nuevo servicio, con el archivo de configuración del proyecto como contexto del Copilot."}, "c4": {"k": "Producto · Datos", "t": "Agente de Q&A del backlog.", "b": "Construye un agente Copilot Studio que responde preguntas sobre el roadmap desde una hoja en SharePoint."}, "c5": {"k": "Seguridad", "t": "Autofix de los tres CVEs principales.", "b": "Usa GHAS + Security Autofix para triar y proponer correcciones a los tres hallazgos más críticos en un repo de bajo riesgo."}, "c6": {"k": "Datos & IA", "t": "Notebook en 15 minutos.", "b": "Genera un notebook de análisis exploratorio para un dataset existente, con Copilot guiando los checks de features."}, "c7": {"k": "Liderazgo", "t": "Resumen de retrospectiva.", "b": "Usa Microsoft 365 Copilot para generar el resumen ejecutivo de una retro reciente desde Teams u OneNote."}, "c8": {"k": "Champion", "t": "Catálogo de patrones v0.", "b": "Captura cada victoria rápida como una página de patrón. Se convierte en la semilla de la biblioteca de prompts y recetas."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Errores, resistencia y KPIs.", "subtitle": "Qué sale mal, por qué sale mal, y cómo saber si el programa está funcionando."},
+    "pitfalls": {"eyebrow": "Errores · Evidencia de campo", "title": "Siete errores explican la mayoría de los despliegues fallidos.", "p1": "Entrenamiento único, sin seguimiento. La adopción cae al 12% en 60 días.", "p2": "Programa solo de devs. Silos de adopción, la mitad del ROI.", "p3": "Sin casos de uso reales. Los tutoriales genéricos matan la motivación en la semana uno.", "p4": "Sin política clara de uso de IA. El CISO bloquea; los equipos se congelan.", "p5": "Sin champions internos. Sin difusión social de la práctica.", "p6": "Sin métricas o métricas equivocadas. El presupuesto se corta en la primera revisión.", "p7": "Currículo único para todos. Alto abandono, baja relevancia.", "caption": "Fuentes: McKinsey Global Survey on AI 2024; Forrester AI Adoption Pitfalls 2025."},
+    "kpis": {"eyebrow": "KPIs · Qué medir", "title": "Seis KPIs, medidos cada quincena.", "k1": {"k": "01 · Alcance", "t": "Tasa de usuarios activos.", "b": "Porcentaje de licenciados activos al menos cinco días por semana. Meta: 80% al día 90."}, "k2": {"k": "02 · Profundidad", "t": "Acciones agénticas por semana.", "b": "Conteo de sesiones Agent Mode multi-paso por dev por semana. Distingue autocompletar de orquestación."}, "k3": {"k": "03 · Calidad", "t": "Aceptación & rollback.", "b": "Tasa de aceptación de sugerencia, más tasa de rollback en 7 días. Juntas revelan over-reliance."}, "k4": {"k": "04 · Throughput", "t": "Cuarteto DORA.", "b": "Lead time, frecuencia de deploy, change failure, MTTR. Señales lagging, pero las que pagan la cuenta."}, "k5": {"k": "05 · DevEx", "t": "Satisfacción & flow.", "b": "Encuesta trimestral alineada a SPACE. Incluye pregunta de seguridad psicológica para escépticos y juniors."}, "k6": {"k": "06 · Riesgo", "t": "Hallazgos de seguridad cerrados.", "b": "Hallazgos GHAS auto-corregidos y mergeados por semana. Recomendaciones Defender for Cloud aplicadas."}},
+    "end": {"eyebrow": "Cierre · Lunes por la mañana", "t1": "El onboarding no es un evento.", "t2": "Opéralo como plataforma.", "body": "Tres acciones antes del próximo sprint. Publica la política de uso de IA por escrito. Nombra dos champions por equipo y agenda sus dos semanas de formación avanzada. Programa la primera demo por cluster usando un artefacto real del backlog actual. Después vuelve para la Etapa 2."}
+  }
+};
+function resolveKey(o,p){return p.split('.').reduce((a,k)=>(a?a[k]:undefined),o);}
+function applyTextSafely(el, value){ el.textContent = value; }
+function setLocale(locale){
+  if(!I18N[locale])return;
+  try{localStorage.setItem('ps-locale',locale);}catch(e){}
+  document.documentElement.setAttribute('lang',locale);
+  document.querySelectorAll('.lang-switcher__btn').forEach(b=>b.setAttribute('aria-current',b.dataset.locale===locale?'true':'false'));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v=resolveKey(I18N[locale],el.dataset.i18n);
+    if(v!==undefined && v!==null){
+      if(el.tagName==='TITLE') document.title = v;
+      else applyTextSafely(el, v);
+    }
+  });
+}
+let currentSlide=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+function syncTheme(i){document.body.dataset.slideTheme=slides[i].classList.contains('slide--dark')?'dark':'light';}
+function goToSlide(i){
+  if(i<0||i>=total)return;
+  slides.forEach(s=>s.setAttribute('data-active','false'));
+  slides[i].setAttribute('data-active','true');
+  currentSlide=i;
+  document.getElementById('counter').textContent=(i+1)+' / '+total;
+  document.getElementById('progress').style.width=(((i+1)/total)*100)+'%';
+  syncTheme(i);
+}
+function nextSlide(){goToSlide(Math.min(currentSlide+1,total-1));}
+function prevSlide(){goToSlide(Math.max(currentSlide-1,0));}
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide();}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide();}
+  if(e.key==='Home')goToSlide(0);
+  if(e.key==='End')goToSlide(total-1);
+});
+(function init(){
+  const saved=(()=>{try{return localStorage.getItem('ps-locale');}catch(e){return null;}})();
+  const browser=navigator.language && navigator.language.indexOf('pt')===0?'pt-BR':navigator.language && navigator.language.indexOf('es')===0?'es':'en';
+  setLocale(saved||browser);
+  goToSlide(0);
+})();
+
+/* Overview modal mechanism (Wave 16 injection) */
+(function() {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  if (slides.length === 0) return;
+  const overview = document.getElementById('overview');
+  if (!overview) return;
+  const overviewGrid = document.getElementById('overviewGrid');
+
+  function buildOverview() {
+    if (!overviewGrid) return;
+    while (overviewGrid.firstChild) overviewGrid.removeChild(overviewGrid.firstChild);
+    slides.forEach((s, idx) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'overview-card';
+      const accent = s.style.getPropertyValue('--accent') || '#00A4EF';
+      card.style.setProperty('--card-accent', accent);
+      card.dataset.idx = String(idx);
+
+      const accentBar = document.createElement('div');
+      accentBar.className = 'overview-card__accent';
+      card.appendChild(accentBar);
+
+      const num = document.createElement('span');
+      num.className = 'overview-card__num';
+      num.textContent = String(idx+1).padStart(2,'0');
+      card.appendChild(num);
+
+      const eyebrowEl = s.querySelector('.eyebrow');
+      if (eyebrowEl) {
+        const eb = document.createElement('span');
+        eb.className = 'overview-card__eyebrow';
+        eb.textContent = eyebrowEl.textContent.trim();
+        card.appendChild(eb);
+      }
+      const titleEl = s.querySelector('.title, .section-title, h1, h2');
+      if (titleEl) {
+        const t = document.createElement('div');
+        t.className = 'overview-card__title';
+        t.textContent = titleEl.textContent.trim();
+        card.appendChild(t);
+      }
+
+      card.addEventListener('click', () => {
+        if (typeof goToSlide === 'function') goToSlide(idx);
+        else if (typeof show === 'function') show(idx);
+        else {
+          slides.forEach(sl => sl.dataset.active = 'false');
+          slides[idx].dataset.active = 'true';
+        }
+        closeOverview();
+      });
+      overviewGrid.appendChild(card);
+    });
+    updateOverviewCurrent();
+  }
+
+  function updateOverviewCurrent() {
+    if (!overviewGrid) return;
+    const current = slides.findIndex(s => s.dataset.active === 'true');
+    overviewGrid.querySelectorAll('.overview-card').forEach((c, i) => {
+      c.dataset.current = (i === current) ? 'true' : 'false';
+    });
+  }
+
+  function openOverview() {
+    overview.dataset.open = 'true';
+    overview.setAttribute('aria-hidden', 'false');
+    document.body.dataset.overviewOpen = 'true';
+    updateOverviewCurrent();
+  }
+
+  function closeOverview() {
+    overview.dataset.open = 'false';
+    overview.setAttribute('aria-hidden', 'true');
+    document.body.dataset.overviewOpen = 'false';
+  }
+
+  function toggleOverview() {
+    if (overview.dataset.open === 'true') closeOverview();
+    else openOverview();
+  }
+
+  window.toggleOverview = toggleOverview;
+  window.openOverview = openOverview;
+  window.closeOverview = closeOverview;
+
+  document.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') {
+      if (overview.dataset.open === 'true') {
+        e.preventDefault();
+        closeOverview();
+      } else if (e.key === 'o' || e.key === 'O') {
+        e.preventDefault();
+        openOverview();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        openOverview();
+      }
+    }
+  });
+
+  buildOverview();
+})();
+</script>
+
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title" id="overviewTitle">Overview</div>
+    <div class="overview__hint" id="overviewHint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+</body>
+</html>

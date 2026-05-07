@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Enterprise API Marketplace and Governance, Paula Silva</title>
+<meta name="description" content="Unified governance for APIs, VS Code extensions, MCP servers, and Copilot agents through Azure API Center and the VS Code Private Marketplace.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Enterprise API Marketplace and Governance, Paula Silva">
+<meta property="og:description" content="Unified governance for APIs, VS Code extensions, MCP servers, and Copilot agents through Azure API Center and the VS Code Private Marketplace.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Enterprise API Marketplace and Governance, Paula Silva">
+<meta name="twitter:description" content="Unified governance for APIs, VS Code extensions, MCP servers, and Copilot agents through Azure API Center and the VS Code Private Marketplace.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/landing.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+<div id="landing-root"></div>
+<script>
+window.PAGE_DATA = {
+  topicNumber: '07',
+  topicLabel: 'Enterprise API Marketplace & Governance',
+  accent: 'yellow',
+  existingDeck: 'Enterprise_API_Marketplace_Deck_v1_0_0_2026-05-07_multi.html',
+  existingPlaybook: 'playbook.html',
+  heroArt: `<svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Enterprise API Marketplace">
+    <rect x="20" y="20" width="460" height="60" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="0.8"/>
+    <text x="40" y="42" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#B33816">AZURE API CENTER</text>
+    <text x="40" y="62" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A">One inventory for every enterprise API.</text>
+    <rect x="20" y="92" width="460" height="60" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="0.8"/>
+    <text x="40" y="114" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#5A8500">VS CODE PRIVATE MARKETPLACE</text>
+    <text x="40" y="134" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A">Curated extensions, internal hosting, air-gap.</text>
+    <rect x="20" y="164" width="460" height="60" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="0.8"/>
+    <text x="40" y="186" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#B88500">MCP + COPILOT GOVERNANCE</text>
+    <text x="40" y="206" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A">Approved tools and agents reach the IDE.</text>
+    <rect x="20" y="236" width="460" height="60" rx="6" fill="#E5F6FD" stroke="#00A4EF" stroke-width="0.8"/>
+    <text x="40" y="258" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#00A4EF">ALLOWEDEXTENSIONS POLICY</text>
+    <text x="40" y="278" font-family="Inter,sans-serif" font-size="13" fill="#1A1A1A">Policy-bound install on every workstation.</text>
+    <rect x="20" y="288" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="310" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">UNIFIED CONTROL PLANE</text>
+    <text x="40" y="330" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Nothing reaches a developer unvetted.</text>
+  </svg>`,
+  hero: {
+    eyebrow: { en:'07 · Platform · Enterprise governance', 'pt-br':'07 · Plataforma · Governança corporativa', es:'07 · Plataforma · Gobernanza corporativa' },
+    title: {
+      en: 'APIs as products. Extensions as a marketplace. Governance as the control plane.',
+      'pt-br': 'APIs como produto. Extensões como marketplace. Governança como plano de controle.',
+      es: 'APIs como producto. Extensiones como marketplace. Gobernanza como plano de control.'
+    },
+    subtitle: {
+      en: 'Modern enterprise development sprawls across APIs, VS Code extensions, MCP servers, Copilot agents, and prompt files. Without a unified control plane the result is shadow APIs, unvetted tools, and compliance gaps. Azure API Center plus the VS Code Private Marketplace plus Copilot governance close the loop. One inventory of APIs. One curated catalog of tools. One policy that decides what reaches the developer workstation.',
+      'pt-br': 'O ambiente corporativo moderno se espalha entre APIs, extensões VS Code, servidores MCP, agentes Copilot e prompts. Sem um plano de controle único, o resultado é shadow API, ferramenta sem vetting e gap de compliance. Azure API Center, VS Code Private Marketplace e governança Copilot fecham o ciclo. Um inventário de APIs. Um catálogo curado de ferramentas. Uma política que decide o que chega na workstation.',
+      es: 'El entorno empresarial moderno se dispersa entre APIs, extensiones VS Code, servidores MCP, agentes Copilot y prompts. Sin un plano de control unificado el resultado es shadow API, herramientas sin revisión y brechas de cumplimiento. Azure API Center más el VS Code Private Marketplace más la gobernanza Copilot cierran el ciclo. Un inventario de APIs. Un catálogo curado de herramientas. Una política que decide qué llega a la estación de trabajo.'
+    }
+  },
+  stats: [
+    { num:'3 hubs', label:{ en:'API Center, Private Marketplace, Copilot', 'pt-br':'API Center, Private Marketplace, Copilot', es:'API Center, Private Marketplace, Copilot' } },
+    { num:'12 ch.', label:{ en:'Sections from sprawl to governance', 'pt-br':'Seções, da dispersão à governança', es:'Secciones, de la dispersión a la gobernanza' } },
+    { num:'6 personas', label:{ en:'Platform, IT, security, dev, architect, PM', 'pt-br':'Plataforma, TI, segurança, dev, arquiteto, PM', es:'Plataforma, TI, seguridad, dev, arquitecto, PM' } },
+    { num:'Air-gap ready', label:{ en:'Regulated and disconnected scenarios', 'pt-br':'Cenários regulados e desconectados', es:'Escenarios regulados y desconectados' } }
+  ],
+  pillarsTitle: {
+    en: 'Five pillars, twelve sections.',
+    'pt-br': 'Cinco pilares, doze seções.',
+    es: 'Cinco pilares, doce secciones.'
+  },
+  pillarsLead: {
+    en: 'The runbook is organized in five pillars. Inventory grounds the API catalog. Marketplace governs every extension. AI tooling controls MCP, Copilot extensions, and agents. Security threads identity and audit through every hop. Operations turns it into Day 0, Day 1, Day 2 sequences.',
+    'pt-br': 'O runbook está em cinco pilares. Inventário ancora o catálogo de API. Marketplace governa cada extensão. AI tooling controla MCP, extensões Copilot e agentes. Segurança costura identidade e auditoria. Operações vira sequência Dia 0, Dia 1, Dia 2.',
+    es: 'El runbook está en cinco pilares. Inventario ancla el catálogo de API. Marketplace gobierna cada extensión. AI tooling controla MCP, extensiones Copilot y agentes. Seguridad atraviesa identidad y auditoría. Operaciones lo convierte en secuencia Día 0, Día 1, Día 2.'
+  },
+  pillars: [
+    { num:'PILLAR I', accent:'red',
+      title:{ en:'API inventory', 'pt-br':'Inventário de APIs', es:'Inventario de APIs' },
+      desc:{ en:'Sections 3 and 4. Azure API Center as the single organizational register. Versions, definitions, environments, custom metadata, linting, shadow API discovery, APIM sync, and the VS Code extension that brings it into the IDE.',
+             'pt-br':'Seções 3 e 4. Azure API Center como registro organizacional único. Versões, definições, ambientes, metadata, linting, descoberta de shadow API, sync APIM, e extensão VS Code que traz para o IDE.',
+             es:'Secciones 3 y 4. Azure API Center como registro organizacional único. Versiones, definiciones, entornos, metadata, linting, descubrimiento de shadow API, sync APIM, y extensión VS Code que lo lleva al IDE.' } },
+    { num:'PILLAR II', accent:'green',
+      title:{ en:'Internal marketplace', 'pt-br':'Marketplace interno', es:'Marketplace interno' },
+      desc:{ en:'Sections 5 and 6. The VS Code Private Marketplace deployed as a stateless container. Internal extension publishing. Public extension rehosting. AllowedExtensions policy via Group Policy and Intune. Recommended enterprise catalog.',
+             'pt-br':'Seções 5 e 6. VS Code Private Marketplace como container stateless. Publicação de extensão interna. Rehosting de extensões públicas. Policy AllowedExtensions via GPO e Intune. Catálogo enterprise recomendado.',
+             es:'Secciones 5 y 6. El VS Code Private Marketplace como contenedor sin estado. Publicación de extensión interna. Rehosting de extensiones públicas. Policy AllowedExtensions via GPO e Intune. Catálogo enterprise recomendado.' } },
+    { num:'PILLAR III', accent:'yellow',
+      title:{ en:'AI tooling layer', 'pt-br':'Camada de tooling IA', es:'Capa de tooling IA' },
+      desc:{ en:'Sections 7 and 8. MCP servers, GitHub Copilot extensions, custom agents, prompt files, and skills. Distribution at scale via .vscode/mcp.json and .github/agents/. Approval process, scope, and the AI artifact governance loop.',
+             'pt-br':'Seções 7 e 8. Servidores MCP, extensões Copilot, agentes customizados, prompts e skills. Distribuição em escala via .vscode/mcp.json e .github/agents/. Processo de aprovação, escopo, governança de artefato IA.',
+             es:'Secciones 7 y 8. Servidores MCP, extensiones Copilot, agentes custom, prompts y skills. Distribución a escala vía .vscode/mcp.json y .github/agents/. Proceso de aprobación, alcance, gobernanza del artefacto IA.' } },
+    { num:'PILLAR IV', accent:'blue',
+      title:{ en:'Security architecture', 'pt-br':'Arquitetura de segurança', es:'Arquitectura de seguridad' },
+      desc:{ en:'Section 9. Threat model for the integrated platform. Extension supply chain. API security in API Center. MCP trust model. Copilot data privacy. Audit and compliance logging that satisfies regulated industries.',
+             'pt-br':'Seção 9. Modelo de ameaça da plataforma integrada. Supply chain de extensão. Segurança de API no API Center. Modelo de confiança MCP. Privacidade de dados Copilot. Auditoria e logging de compliance.',
+             es:'Sección 9. Modelo de amenaza de la plataforma integrada. Supply chain de extensión. Seguridad de API en API Center. Modelo de confianza MCP. Privacidad de datos Copilot. Auditoría y logging de cumplimiento.' } },
+    { num:'PILLAR V', accent:'ink',
+      title:{ en:'Operations and governance', 'pt-br':'Operações e governança', es:'Operaciones y gobernanza' },
+      desc:{ en:'Sections 10 to 12. Integration scenarios for full flow, air-gapped, and regulated industries. Day 0, Day 1, Day 2 runbook. Ownership matrix, artifact approval process, review cadence. The complete governance framework.',
+             'pt-br':'Seções 10 a 12. Cenários integrados, air-gapped e regulados. Runbook Dia 0, Dia 1, Dia 2. Matriz de responsabilidades, processo de aprovação de artefato, cadência de revisão. Framework completo.',
+             es:'Secciones 10 a 12. Escenarios integrados, air-gapped y regulados. Runbook Día 0, Día 1, Día 2. Matriz de responsabilidades, proceso de aprobación de artefacto, cadencia de revisión. Framework completo.' } }
+  ],
+  formats: [
+    { kicker:'LANDING · YOU ARE HERE', accent:'yellow',
+      title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
+      desc:{ en:'10-second hook. The sprawl, the three hubs, and the formats available.', 'pt-br':'Hook de 10 segundos. A dispersão, os três hubs, e os formatos.', es:'Hook de 10 segundos. La dispersión, los tres hubs, y los formatos.' },
+      meta:{ en:'HTML · 5 min', 'pt-br':'HTML · 5 min', es:'HTML · 5 min' },
+      href:'#' },
+    { kicker:'DECK · v1.0.0', accent:'yellow',
+      title:{ en:'Enterprise API Marketplace deck', 'pt-br':'Deck Enterprise API Marketplace', es:'Deck Enterprise API Marketplace' },
+      desc:{ en:'Trilingual deck. The integrated control plane diagram, the three hubs side by side, governance flow, and the Day 0 to Day 2 sequence.', 'pt-br':'Deck trilíngue. Diagrama do plano de controle integrado, os três hubs lado a lado, fluxo de governança e a sequência Dia 0 a Dia 2.', es:'Deck trilingüe. Diagrama del plano de control integrado, los tres hubs lado a lado, flujo de gobernanza y la secuencia Día 0 a Día 2.' },
+      meta:{ en:'HTML · 60 min', 'pt-br':'HTML · 60 min', es:'HTML · 60 min' },
+      href:'Enterprise_API_Marketplace_Deck_v1_0_0_2026-05-07_multi.html' },
+    { kicker:'PLAYBOOK · 12 SECTIONS', accent:'yellow',
+      title:{ en:'API and Tooling Governance runbook', 'pt-br':'Runbook de Governança de APIs e Tooling', es:'Runbook de Gobernanza de APIs y Tooling' },
+      desc:{ en:'Full runbook, twelve sections. Read by persona: platform engineer, IT admin, security, developer enablement, architect, API program manager.', 'pt-br':'Runbook completo, doze seções. Leia por persona: platform engineer, admin TI, segurança, dev enablement, arquiteto, PM de API.', es:'Runbook completo, doce secciones. Lee por persona: platform engineer, admin TI, seguridad, dev enablement, arquitecto, PM de API.' },
+      meta:{ en:'HTML · ~40K words', 'pt-br':'HTML · ~40K palavras', es:'HTML · ~40K palabras' },
+      href:'playbook.html' }
+  ],
+  crosslinks: [
+    { accent:'green', kicker:'Runtime',
+      title:{ en:'Agentic DevOps Platform', 'pt-br':'Plataforma Agentic DevOps', es:'Plataforma Agentic DevOps' },
+      hint:{ en:'Where APIs are consumed.', 'pt-br':'Onde APIs são consumidas.', es:'Donde se consumen las APIs.' },
+      href:'../agentic-devops-platform/landing.html' },
+    { accent:'yellow', kicker:'Stack model',
+      title:{ en:'Context Platform Stack', 'pt-br':'Context Platform Stack', es:'Context Platform Stack' },
+      hint:{ en:'Where APIs fit in the layer model.', 'pt-br':'Onde APIs encaixam no modelo.', es:'Dónde encajan las APIs en el modelo.' },
+      href:'../context-engineering-platform/landing.html' },
+    { accent:'blue', kicker:'Migration',
+      title:{ en:'Legacy Modernization', 'pt-br':'Modernização de Legado', es:'Modernización de Legado' },
+      hint:{ en:'Wrap legacy with APIs en route to cloud.', 'pt-br':'Envelope legacy com APIs ao migrar.', es:'Envuelve legacy con APIs al migrar.' },
+      href:'../legacy-modernization-framework/landing.html' },
+    { accent:'ink', kicker:'Token economy',
+      title:{ en:'Token Management', 'pt-br':'Gestão de Tokens', es:'Gestión de Tokens' },
+      hint:{ en:'API tokens consumed by AI agents.', 'pt-br':'Tokens de API consumidos por agentes.', es:'Tokens de API consumidos por agentes.' },
+      href:'../token-best-practices/landing.html' }
+  ]
+};
+</script>
+<script src="../_shared/landing-template.js"></script>
+</body>
+</html>

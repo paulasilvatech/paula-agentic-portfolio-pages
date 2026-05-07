@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GitHub Copilot Mastery · Deck 03: Skills &amp; Agents">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GitHub Copilot Mastery · Deck 03: Skills &amp; Agents">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<title data-i18n="meta.title">GitHub Copilot Mastery · Deck 03: Skills &amp; Agents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --c-red-50:#FFF0EB;  --c-red-100:#FFD6C7; --c-red-500:#F25022;  --c-red-700:#B33816;
+  --c-green-50:#F1F8E3;--c-green-100:#D8EDA5;--c-green-500:#7FBA00;--c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD; --c-blue-100:#B8E5FA;--c-blue-500:#00A4EF; --c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0;--c-yellow-100:#FFE79C;--c-yellow-500:#FFB900;--c-yellow-700:#B88500;
+  --ink:#1A1A1A; --ink-2:#3A3A3A; --ink-3:#737373;
+  --paper:#FFFFFF; --bg:#F7F7F5; --bg-alt:#ECECE8;
+  --rule:#E5E5E0;  --rule-2:#CECEC7;
+  --dark-bg:#141414; --dark-surf:#1C1C1A; --dark-ink:#F0F0F0;
+  --dark-ink-2:#C7C7C2; --dark-ink-3:#A8A8A4; --dark-rule:#2E2E2A;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+  --ease:cubic-bezier(0.2,0,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── SLIDE ENGINE ───────────────────────────────── */
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;opacity:0;transition:opacity .18s ease-out;pointer-events:none}
+.slide[data-active="true"]{opacity:1;pointer-events:auto}
+.slide--light{background:var(--bg);color:var(--ink)}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink)}
+.slide--paper{background:var(--paper);color:var(--ink)}
+
+/* ── ANIMATIONS ─────────────────────────────────── */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes scaleInX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes drawPath{from{stroke-dashoffset:var(--pl,600)}to{stroke-dashoffset:0}}
+  @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.7}}
+  @keyframes slideInRight{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes bounceIn{0%{opacity:0;transform:scale(.8)}60%{transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+  @keyframes typeWrite{from{width:0}to{width:100%}}
+  @keyframes flowPulse{0%,100%{opacity:.5;r:4}50%{opacity:1;r:6}}
+
+  .slide[data-active="true"] .eyebrow     {animation:fadeUp .5s var(--ease) 0ms   both}
+  .slide[data-active="true"] .title       {animation:fadeUp .6s var(--ease) 80ms  both}
+  .slide[data-active="true"] .subtitle    {animation:fadeUp .5s var(--ease) 180ms both}
+  .slide[data-active="true"] .meta-grid   {animation:fadeUp .5s var(--ease) 260ms both}
+  .slide[data-active="true"] .big-number  {animation:bounceIn .7s var(--ease) 150ms both}
+  .slide[data-active="true"] .section-number{animation:fadeIn .8s var(--ease) 50ms both}
+  .slide[data-active="true"] .section-title{animation:fadeUp .6s var(--ease) 250ms both}
+  .slide[data-active="true"] .chapter-cover__num{animation:fadeIn .8s var(--ease) 50ms both}
+  .slide[data-active="true"] .chapter-cover__content{animation:fadeUp .6s var(--ease) 200ms both}
+
+  .slide[data-active="true"] .stagger>*{opacity:0;animation:fadeUp .5s var(--ease) both}
+  .slide[data-active="true"] .stagger>*:nth-child(1){animation-delay:280ms}
+  .slide[data-active="true"] .stagger>*:nth-child(2){animation-delay:360ms}
+  .slide[data-active="true"] .stagger>*:nth-child(3){animation-delay:440ms}
+  .slide[data-active="true"] .stagger>*:nth-child(4){animation-delay:520ms}
+  .slide[data-active="true"] .stagger>*:nth-child(5){animation-delay:600ms}
+  .slide[data-active="true"] .stagger>*:nth-child(6){animation-delay:680ms}
+  .slide[data-active="true"] .stagger>*:nth-child(7){animation-delay:760ms}
+
+  .slide[data-active="true"] .bar-fill{transform-origin:left center;animation:scaleInX .9s var(--ease) 400ms both}
+  .slide[data-active="true"] .bar-fill-2{transform-origin:left center;animation:scaleInX .9s var(--ease) 550ms both}
+  .slide[data-active="true"] .bar-fill-3{transform-origin:left center;animation:scaleInX .9s var(--ease) 700ms both}
+
+  .slide[data-active="true"] .draw-path{animation:drawPath 1.4s var(--ease) 300ms both}
+  .slide[data-active="true"] .draw-path-2{animation:drawPath 1.4s var(--ease) 700ms both}
+  .slide[data-active="true"] .draw-path-3{animation:drawPath 1.4s var(--ease) 1100ms both}
+  .slide[data-active="true"] .draw-path-4{animation:drawPath 1.4s var(--ease) 1500ms both}
+
+  .slide[data-active="true"] .flow-node{opacity:0;animation:fadeIn .4s var(--ease) both}
+  .slide[data-active="true"] .flow-node:nth-child(1){animation-delay:200ms}
+  .slide[data-active="true"] .flow-node:nth-child(2){animation-delay:600ms}
+  .slide[data-active="true"] .flow-node:nth-child(3){animation-delay:1000ms}
+  .slide[data-active="true"] .flow-node:nth-child(4){animation-delay:1400ms}
+  .slide[data-active="true"] .flow-node:nth-child(5){animation-delay:1800ms}
+  .slide[data-active="true"] .flow-node:nth-child(6){animation-delay:2200ms}
+
+  .pulse-dot{animation:pulseDot 2s ease-in-out infinite}
+}
+
+/* ── TYPOGRAPHY ─────────────────────────────────── */
+.eyebrow{font-family:var(--font-mono);font-size:16px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--c-green-500));margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.slide--dark .eyebrow{color:var(--accent,var(--c-yellow-500))}
+.title{font-size:clamp(40px,5vw,80px);font-weight:500;line-height:1.05;letter-spacing:-.025em;max-width:1500px;margin-bottom:24px;text-wrap:balance}
+.title.title--medium{font-size:clamp(32px,3.6vw,54px);max-width:1400px}
+.title.title--small{font-size:clamp(26px,2.8vw,40px);max-width:1280px}
+.title .accent-red{color:var(--c-red-500)}
+.title .accent-green{color:var(--c-green-500)}
+.title .accent-blue{color:var(--c-blue-500)}
+.title .accent-yellow{color:var(--c-yellow-500)}
+.subtitle{font-size:clamp(17px,1.6vw,24px);line-height:1.4;color:var(--ink-2);max-width:1200px;font-weight:400;text-wrap:pretty}
+.slide--dark .subtitle{color:var(--dark-ink-2)}
+.body-large{font-size:clamp(18px,1.7vw,24px);line-height:1.5;color:var(--ink);max-width:1200px;margin-top:24px;text-wrap:pretty}
+.slide--dark .body-large{color:var(--dark-ink)}
+.caption{font-size:13px;color:var(--ink-3);font-style:italic;line-height:1.5;max-width:1100px;margin-top:20px;text-wrap:pretty}
+.slide--dark .caption{color:var(--dark-ink-3)}
+
+/* ── BADGE LIVE ─────────────────────────────────── */
+.badge-live{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:20px;background:var(--c-green-50);border:1px solid var(--c-green-500);font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--c-green-700)}
+.badge-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--c-green-500);animation:pulseDot 1.5s ease-in-out infinite}
+
+/* ── META GRID ──────────────────────────────────── */
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-top:24px;border-top:1px solid var(--rule);margin-top:40px;max-width:1200px}
+.meta-item{display:flex;flex-direction:column;gap:6px}
+.meta-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.meta-value{font-size:15px;font-weight:500;line-height:1.35}
+
+/* ── SECTION COVER ──────────────────────────────── */
+.section-number{font-family:var(--font-sans);font-size:clamp(180px,26vw,400px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-green-500));opacity:.9}
+.section-title{font-size:clamp(52px,6vw,100px);font-weight:500;line-height:.98;letter-spacing:-.035em;margin:24px 0 20px;max-width:1400px}
+.chapter-cover{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:end;max-width:1500px}
+.chapter-cover__num{font-size:clamp(160px,20vw,280px);font-weight:300;line-height:.85;letter-spacing:-.045em;color:var(--chapter-color);opacity:.88}
+.chapter-cover__content{padding-bottom:40px}
+.chapter-cover__tag{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--chapter-color);margin-bottom:18px}
+.chapter-cover__title{font-size:clamp(40px,4.6vw,70px);font-weight:500;line-height:1.02;letter-spacing:-.025em;margin-bottom:18px;text-wrap:balance}
+.chapter-cover__sub{font-size:clamp(17px,1.6vw,22px);line-height:1.45;color:var(--ink-2);max-width:900px}
+
+/* ── BIG NUMBER ─────────────────────────────────── */
+.big-number{font-family:var(--font-sans);font-size:clamp(130px,20vw,280px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-green-500));margin:16px 0 32px}
+
+/* ── SPLIT ──────────────────────────────────────── */
+.split{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--paper);margin-top:24px}
+.split__side{padding:32px;position:relative}
+.split__side::before{content:'';position:absolute;top:0;left:0;right:0;height:6px}
+.split__side--left::before{background:var(--c-red-500)}
+.split__side--right::before{background:var(--c-green-500)}
+.split__side--left{border-right:1px solid var(--rule)}
+.split__eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:10px}
+.split__side--left .split__eyebrow{color:var(--c-red-700)}
+.split__side--right .split__eyebrow{color:var(--c-green-700)}
+.split__title{font-size:24px;font-weight:500;line-height:1.15;margin:0 0 16px;text-wrap:balance}
+.split__points{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}
+.split__points li{font-size:14px;line-height:1.5;color:var(--ink-2)}
+.split__points li::before{content:'+ ';color:var(--c-green-700);font-weight:600}
+.split__side--left .split__points li::before{content:'- ';color:var(--c-red-700)}
+
+/* ── STANDARDS ROW ──────────────────────────────── */
+.std-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;max-width:1400px}
+.std-row{display:grid;grid-template-columns:170px 220px 1fr;gap:24px;align-items:start;padding:16px 22px;border:1px solid var(--rule);border-left:4px solid var(--s-color);border-radius:0 6px 6px 0;background:var(--paper)}
+.std-row__name{font-family:var(--font-mono);font-size:14px;font-weight:600;color:var(--s-color);letter-spacing:.04em}
+.std-row__purpose{font-size:13px;font-weight:500;color:var(--ink)}
+.std-row__desc{font-size:12px;color:var(--ink-2);line-height:1.45}
+
+/* ── CODE BLOCK ─────────────────────────────────── */
+.code-block{background:var(--dark-bg);color:var(--dark-ink);padding:22px 26px;border-radius:8px;font-family:var(--font-mono);font-size:13px;line-height:1.6;margin-top:18px;overflow-x:auto}
+.code-block__header{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dark-ink-3);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--dark-rule)}
+.code-block__header::before{content:'';width:10px;height:10px;background:var(--c-green-500);border-radius:50%}
+.code-kw{color:var(--c-blue-500)}.code-str{color:var(--c-green-500)}.code-com{color:var(--dark-ink-3);font-style:italic}.code-hl{color:var(--c-yellow-500)}.code-red{color:var(--c-red-500)}
+
+/* ── BAR CHART ──────────────────────────────────── */
+.bar-chart{display:flex;flex-direction:column;gap:12px;margin-top:24px;max-width:1400px}
+.bar-row{display:grid;grid-template-columns:220px 1fr 80px;gap:16px;align-items:center}
+.bar-row__label{font-size:13px;font-weight:500;color:var(--ink-2);text-align:right}
+.bar-track{height:36px;background:var(--bg-alt);border-radius:4px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:14px;transform-origin:left center}
+.bar-row__val{font-family:var(--font-mono);font-size:16px;font-weight:600;letter-spacing:-.01em}
+
+/* ── STAT TRIO ──────────────────────────────────── */
+.stat-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px;max-width:1500px}
+.stat-card{padding:26px 28px;border-left:4px solid var(--stat-color);border-radius:0 6px 6px 0;background:var(--stat-bg)}
+.stat-card__eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--stat-color-ink);margin-bottom:10px}
+.stat-card__value{font-size:clamp(40px,4vw,60px);font-weight:300;line-height:.9;letter-spacing:-.035em;color:var(--stat-color-ink);margin-bottom:8px}
+.stat-card__desc{font-size:13px;color:var(--ink-2);line-height:1.5}
+
+/* ── LIST NUMBERED ──────────────────────────────── */
+.list-num{display:flex;flex-direction:column;gap:14px;margin-top:24px;max-width:1200px}
+.list-num__item{display:grid;grid-template-columns:90px 1fr;gap:24px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--rule)}
+.list-num__n{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--ink-3)}
+.list-num__t{font-size:22px;font-weight:400;line-height:1.35}
+
+/* ── OUTCOME GRID ───────────────────────────────── */
+.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px;max-width:1500px}
+.outcome-card{padding:26px 28px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.outcome-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--outcome-color)}
+.outcome-card__tag{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--outcome-color);margin-bottom:12px;display:block}
+.outcome-card__title{font-size:20px;font-weight:500;margin-bottom:10px;line-height:1.2}
+.outcome-card__desc{font-size:13px;color:var(--ink-2);line-height:1.55}
+
+/* ── DECISION TREE ──────────────────────────────── */
+.decision-flow{display:flex;flex-direction:column;gap:0;margin-top:20px;max-width:1500px}
+.decision-row{display:grid;grid-template-columns:280px 1fr 1fr;gap:20px;align-items:stretch;padding:16px 0;border-bottom:1px solid var(--rule)}
+.decision-row:last-child{border-bottom:none}
+.decision-q{font-size:15px;font-weight:500;color:var(--ink);padding:16px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:6px;display:flex;align-items:center}
+.decision-yes,.decision-no{font-size:13px;color:var(--ink-2);padding:14px 18px;border-radius:6px;line-height:1.5;display:flex;flex-direction:column;gap:6px}
+.decision-yes{background:var(--c-green-50);border-left:4px solid var(--c-green-500)}
+.decision-no{background:var(--c-red-50);border-left:4px solid var(--c-red-500)}
+.decision-label{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+.decision-yes .decision-label{color:var(--c-green-700)}
+.decision-no .decision-label{color:var(--c-red-700)}
+
+/* ── MATURITY BAR ───────────────────────────────── */
+.maturity-bar{display:flex;gap:0;margin-top:28px;max-width:1500px;border-radius:10px;overflow:hidden;border:1px solid var(--rule)}
+.maturity-level{flex:1;padding:22px 18px;background:var(--paper);border-right:1px solid var(--rule);position:relative}
+.maturity-level:last-child{border-right:none}
+.maturity-level::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--ml-color)}
+.maturity-level__num{font-family:var(--font-mono);font-size:24px;font-weight:300;color:var(--ml-color);letter-spacing:-.02em;margin-bottom:8px;display:block}
+.maturity-level__title{font-size:16px;font-weight:500;margin-bottom:8px}
+.maturity-level__desc{font-size:12px;color:var(--ink-2);line-height:1.5}
+
+/* ── INTERACTIVE PANEL ──────────────────────────── */
+.interactive-panel{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:22px 26px}
+.interactive-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;display:block}
+.ps-slider-row{display:grid;grid-template-columns:1fr 60px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
+.ps-slider-row:last-child{border-bottom:none}
+.ps-slider-row__title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.ps-slider-row__sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.ps-slider-row__val{font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--slider-accent,var(--c-green-500));text-align:right;letter-spacing:-.015em}
+input[type="range"].ps-slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:var(--bg-alt);border-radius:2px;outline:none;margin:0}
+input[type="range"].ps-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--slider-accent,var(--c-green-500));cursor:pointer;border:3px solid var(--paper);box-shadow:0 0 0 1px var(--rule-2);transition:transform .1s}
+input[type="range"].ps-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.ps-live-result{padding:18px 22px;background:var(--bg-alt);border-radius:8px;margin-top:18px;display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.ps-live-result__label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.ps-live-result__value{font-size:28px;font-weight:500;letter-spacing:-.02em;color:var(--live-color,var(--c-yellow-700));font-variant-numeric:tabular-nums}
+
+/* ── LIFECYCLE ──────────────────────────────────── */
+.lifecycle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;max-width:1500px}
+.lifecycle-phase{border-radius:10px;border:1px solid var(--rule);overflow:hidden;background:var(--paper)}
+.lifecycle-phase__header{padding:18px 20px 14px;border-bottom:1px solid var(--rule)}
+.lifecycle-phase__tag{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--phase-color);margin-bottom:6px;display:block}
+.lifecycle-phase__title{font-size:18px;font-weight:500}
+.lifecycle-phase__body{padding:16px 20px;display:flex;flex-direction:column}
+.lifecycle-step{display:grid;grid-template-columns:24px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.lifecycle-step:last-child{border-bottom:none}
+.lifecycle-step__num{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--phase-color);letter-spacing:.08em}
+.lifecycle-step__text{font-size:13px;color:var(--ink-2);line-height:1.45}
+
+/* ── SKILL SECTION ROWS ─────────────────────────── */
+.skill-sections{display:flex;flex-direction:column;gap:10px}
+.skill-section-row{display:grid;grid-template-columns:32px 1fr;gap:16px;align-items:start;padding:14px 18px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);border-left:4px solid var(--section-color,var(--ink-3))}
+.skill-section-num{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--section-color,var(--ink-3))}
+.skill-section-title{font-size:15px;font-weight:500;margin-bottom:3px}
+.skill-section-desc{font-size:12px;color:var(--ink-2);line-height:1.5}
+
+/* ── ORCH FLOW ──────────────────────────────────── */
+.orch-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:24px;max-width:1600px;border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.orch-phase{padding:24px 22px;border-right:1px solid var(--rule);background:var(--paper);position:relative}
+.orch-phase:last-child{border-right:none}
+.orch-phase::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--orch-color)}
+.orch-phase__num{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--orch-color);margin-bottom:8px}
+.orch-phase__title{font-size:17px;font-weight:500;margin-bottom:14px;line-height:1.2}
+.orch-phase__steps{list-style:none;display:flex;flex-direction:column;gap:8px}
+.orch-phase__steps li{font-size:12px;color:var(--ink-2);line-height:1.45;padding-left:14px;position:relative}
+.orch-phase__steps li::before{content:'·';position:absolute;left:0;color:var(--orch-color);font-weight:700}
+.orch-phase__tag{display:inline-block;margin-top:16px;padding:4px 10px;border-radius:4px;background:var(--orch-bg);font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orch-color)}
+
+/* ── CHROME ─────────────────────────────────────── */
+.deck-progress{position:fixed;top:0;left:0;height:3px;background:var(--c-green-500);transition:width .3s ease;z-index:200}
+.deck-brand{position:fixed;top:22px;left:22px;display:flex;align-items:center;gap:10px;z-index:100}
+.deck-brand__squares{display:grid;grid-template-columns:10px 10px;gap:2px}
+.deck-brand__squares span{width:10px;height:10px;display:block}
+.deck-brand__squares span:nth-child(1){background:var(--c-red-500)}
+.deck-brand__squares span:nth-child(2){background:var(--c-green-500)}
+.deck-brand__squares span:nth-child(3){background:var(--c-blue-500)}
+.deck-brand__squares span:nth-child(4){background:var(--c-yellow-500)}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.lang-switcher{position:fixed;top:22px;right:22px;display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;z-index:100}
+.lang-switcher__btn{padding:5px 10px;background:transparent;border:none;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-green-500);color:#fff}
+.deck-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:6px;z-index:100}
+.deck-controls__btn{width:38px;height:38px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:16px;color:var(--ink);cursor:pointer;transition:all .15s}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper)}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--ink-2)}
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-2)}
+body[data-slide-theme="dark"] .lang-switcher{background:var(--dark-surf);border-color:var(--dark-rule)}
+body[data-slide-theme="dark"] .lang-switcher__btn{color:var(--dark-ink-3)}
+body[data-slide-theme="dark"] .deck-controls__btn{background:var(--dark-surf);border-color:var(--dark-rule);color:var(--dark-ink)}
+body[data-slide-theme="dark"] .deck-controls__counter{background:var(--dark-surf);border-color:var(--dark-rule);color:var(--dark-ink-2)}
+.kbd-hint{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--dark-surf);color:var(--dark-ink-2);border:1px solid var(--dark-rule);padding:8px 18px;border-radius:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;z-index:100;opacity:0;pointer-events:none;transition:opacity .3s}
+.kbd-hint[data-visible="true"]{opacity:1}
+.kbd-hint kbd{background:var(--dark-rule);padding:1px 6px;border-radius:3px}
+.overview{position:fixed;inset:0;z-index:300;background:rgba(20,20,20,.96);display:none;flex-direction:column;padding:40px;overflow-y:auto}
+.overview.active{display:flex}
+.overview__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--dark-rule)}
+.overview__title{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--dark-ink-2)}
+.overview__hint{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--dark-ink-3)}
+.overview__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.overview-card{background:var(--dark-surf);border:1px solid var(--dark-rule);border-radius:6px;padding:18px 14px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:8px}
+.overview-card:hover,.overview-card.active{border-color:var(--c-green-500)}
+.overview-card.active{background:rgba(127,186,0,.08)}
+.overview-card__num{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.18em;color:var(--dark-ink-3);text-transform:uppercase}
+.overview-card__label{font-size:12px;font-weight:500;color:var(--dark-ink-2);line-height:1.35}
+
+/* Back-to-Hub link affordance (added by Wave 4) */
+a.deck-brand{text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+</style>
+</head>
+<body>
+<div class="deck-progress" id="deckProgress"></div>
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <div class="deck-brand__squares"><span></span><span></span><span></span><span></span></a>
+  <span class="deck-brand__text">Skills &amp; Agents · Deck 03</span>
+</div>
+<div class="lang-switcher">
+  <button class="lang-switcher__btn" data-locale="en" aria-current="false">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" aria-current="false">PT</button>
+  <button class="lang-switcher__btn" data-locale="es" aria-current="false">ES</button>
+</div>
+<div class="deck-controls">
+  <button class="deck-controls__btn" id="btnPrev">&#8592;</button>
+  <div class="deck-controls__counter" id="counter">1 / 35</div>
+  <button class="deck-controls__btn" id="btnNext">&#8594;</button>
+</div>
+<div class="kbd-hint" id="kbdHint">Use <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> to navigate · <kbd>O</kbd> for overview</div>
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title" id="overviewTitle">Overview</div>
+    <div class="overview__hint" id="overviewHint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+<div class="deck">
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 01 · COVER
+═══════════════════════════════════════════════ -->
+<section class="slide slide--dark" data-active="true" data-label="Cover" data-theme="dark">
+  <div class="eyebrow" data-i18n="cover.eyebrow">GitHub Copilot Mastery · Deck 03</div>
+  <h1 class="title">
+    <span class="accent-green" data-i18n="cover.kw1">Skills</span>
+    <span data-i18n="cover.amp"> &amp; </span>
+    <span class="accent-green" data-i18n="cover.kw2">Agents.</span><br>
+    <span style="font-weight:300;color:var(--dark-ink-3);font-size:0.62em;" data-i18n="cover.tagline">Routing work inside GitHub Copilot.</span>
+  </h1>
+  <p class="subtitle" data-i18n="cover.subtitle">How custom agents, generalist agents, and skills compose to handle any engineering task with the right tool at the right scope.</p>
+  <div class="meta-grid" style="border-top-color:var(--dark-rule);max-width:1100px;">
+    <div class="meta-item">
+      <span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="lbl.series">Series</span>
+      <span class="meta-value" style="color:var(--dark-ink);" data-i18n="cover.series">Copilot Mastery</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="lbl.deck">Deck</span>
+      <span class="meta-value" style="color:var(--dark-ink);">03 / 06</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="lbl.next">Next</span>
+      <span class="meta-value" style="color:var(--dark-ink);" data-i18n="cover.next">Hooks, CLI &amp; SDK</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="lbl.author">Author</span>
+      <span class="meta-value" style="color:var(--dark-ink);">@paulasilvatech</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 02 · AGENDA
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Agenda">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="agenda.eyebrow">Agenda · Deck 03</div>
+  <h2 class="title title--medium" data-i18n="agenda.title">Five parts. One through-line: the right agent for the right task.</h2>
+  <div class="list-num stagger">
+    <div class="list-num__item"><span class="list-num__n">PART I</span><span class="list-num__t" data-i18n="agenda.i1">Why routing matters: the cost of always using the same hammer</span></div>
+    <div class="list-num__item"><span class="list-num__n">PART II</span><span class="list-num__t" data-i18n="agenda.i2">Skills: anatomy, lifecycle, and the five-section structure</span></div>
+    <div class="list-num__item"><span class="list-num__n">PART III</span><span class="list-num__t" data-i18n="agenda.i3">Custom agents: identity, tools, scope, .agent.md</span></div>
+    <div class="list-num__item"><span class="list-num__n">PART IV</span><span class="list-num__t" data-i18n="agenda.i4">Orchestration: how agents and skills compose into pipelines</span></div>
+    <div class="list-num__item"><span class="list-num__n">PART V</span><span class="list-num__t" data-i18n="agenda.i5">Diagnostics, anti-patterns, and Monday checklist</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 03 · WHO
+═══════════════════════════════════════════════ -->
+<section class="slide slide--dark" data-label="Speaker" data-theme="dark">
+  <div class="eyebrow" data-i18n="who.eyebrow">Who is speaking</div>
+  <h2 class="title title--medium" data-i18n="who.title">Paula Silva, <span class="accent-green">AI-Native Software Engineer</span>.</h2>
+  <p class="body-large" data-i18n="who.body">I work with enterprise engineering teams across Brazil and Latin America on agentic AI, platform engineering and software modernization. This deck distills a pattern I have seen across dozens of clients: teams that adopt Copilot as a single chat box get stuck. Teams that route work through the right agent-skill combination scale.</p>
+  <p class="subtitle" style="margin-top:24px;" data-i18n="who.sub">Pioneering software development with Agentic DevOps Platform.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 04 · PART I DIVIDER
+═══════════════════════════════════════════════ -->
+<section class="slide slide--dark" data-label="Part I" data-theme="dark" style="align-items:flex-start;justify-content:flex-end;padding-bottom:80px;">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="p1.eyebrow">Part I</div>
+  <div class="section-number">I</div>
+  <div class="section-title" data-i18n="p1.title" style="color:var(--dark-ink);">Why routing matters.</div>
+  <p class="subtitle" style="max-width:900px;" data-i18n="p1.sub">Every task has a shape. Matching that shape to the right agent-skill combination is the first engineering decision that determines whether Copilot helps or halts.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 05 · 3× TOKEN STAT
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="3× token cost">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="stat1.eyebrow">The routing problem</div>
+  <div class="big-number" style="--accent:var(--c-green-500);" data-i18n="stat1.value">3×</div>
+  <p class="subtitle" data-i18n="stat1.desc">more context tokens consumed per task when a generalist agent handles a task that a specialized skill could answer directly. Production telemetry, GitHub Copilot Enterprise, Q1 2026.</p>
+  <p class="caption" data-i18n="stat1.src">Source: GitHub Copilot Enterprise usage telemetry, enterprise sample Q1 2026. Context window growth is the primary driver of inference cost increase at scale.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 06 · BENCHMARK BARS (animated)
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Benchmark bars">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="bench.eyebrow">The capability gap</div>
+  <h2 class="title title--small" data-i18n="bench.title">Task difficulty scales 7× from bug fix to feature. Skills close part of this gap.</h2>
+  <div class="bar-chart" style="margin-top:32px;max-width:1400px;">
+    <div class="bar-row stagger">
+      <span class="bar-row__label" style="text-align:right;" data-i18n="bench.b1.label">Bug fixes, clear scope</span>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:74%;background:var(--c-green-500);">
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:#fff;">Claude Opus 4.5 · 74.4%</span>
+        </div>
+      </div>
+      <span class="bar-row__val" style="color:var(--c-green-700);">74.4%</span>
+    </div>
+    <div class="bar-row stagger">
+      <span class="bar-row__label" style="text-align:right;" data-i18n="bench.b2.label">Features, with skill context</span>
+      <div class="bar-track">
+        <div class="bar-fill bar-fill-2" style="width:38%;background:var(--c-yellow-500);">
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink);">+skill context · ~38%</span>
+        </div>
+      </div>
+      <span class="bar-row__val" style="color:var(--c-yellow-700);">~38%</span>
+    </div>
+    <div class="bar-row stagger">
+      <span class="bar-row__label" style="text-align:right;" data-i18n="bench.b3.label">Features, zero context</span>
+      <div class="bar-track">
+        <div class="bar-fill bar-fill-3" style="width:11%;background:var(--c-red-500);">
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:#fff;white-space:nowrap;">no context · 11%</span>
+        </div>
+      </div>
+      <span class="bar-row__val" style="color:var(--c-red-700);">11.0%</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;max-width:1400px;" class="stagger">
+    <div style="padding:16px 18px;border-left:4px solid var(--c-green-500);background:var(--c-green-50);border-radius:0 6px 6px 0;">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c-green-700);margin-bottom:4px;" data-i18n="bench.t1.tag">SWE-bench · bugs</div>
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="bench.t1.desc">Well-scoped, isolated. Skill context has marginal effect because requirements are already precise.</div>
+    </div>
+    <div style="padding:16px 18px;border-left:4px solid var(--c-yellow-500);background:var(--c-yellow-50);border-radius:0 6px 6px 0;">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c-yellow-700);margin-bottom:4px;" data-i18n="bench.t2.tag">FeatureBench + skill</div>
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="bench.t2.desc">Skill context closes ~27 percentage points of the gap by providing architecture patterns, coding conventions, and domain vocabulary.</div>
+    </div>
+    <div style="padding:16px 18px;border-left:4px solid var(--c-red-500);background:var(--c-red-50);border-radius:0 6px 6px 0;">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c-red-700);margin-bottom:4px;" data-i18n="bench.t3.tag">FeatureBench · no context</div>
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="bench.t3.desc">POCs on bug fixes overestimate capability 7× when extrapolated to feature work with no domain context loaded.</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="bench.src">Source: FeatureBench, accepted ICLR 2026. Claude Opus 4.5 scores. Skills close part of the feature gap; the rest requires custom agents with domain tool access.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 07 · TWO AGENT TYPES SPLIT
+═══════════════════════════════════════════════ -->
+<section class="slide slide--paper" data-label="Generalist vs Custom">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="split1.eyebrow">Part I · Two agent types</div>
+  <h2 class="title title--small" data-i18n="split1.title">Two types of agent. One fundamental difference in tool access and identity.</h2>
+  <div class="split stagger" style="max-width:1400px;">
+    <div class="split__side split__side--left">
+      <span class="split__eyebrow" data-i18n="split1.l.tag">Generalist agent</span>
+      <h3 class="split__title" data-i18n="split1.l.title">Workspace tools, loaded skills</h3>
+      <ul class="split__points">
+        <li data-i18n="split1.l.p1">Default orchestrator, handles 70-80% of tasks</li>
+        <li data-i18n="split1.l.p2">No dedicated .agent.md identity file</li>
+        <li data-i18n="split1.l.p3">Augmented by SKILL.md when domain knowledge needed</li>
+        <li data-i18n="split1.l.p4">Tools are workspace-level and shared</li>
+        <li data-i18n="split1.l.p5">Appropriate for domain knowledge tasks (Shape A)</li>
+      </ul>
+    </div>
+    <div class="split__side split__side--right">
+      <span class="split__eyebrow" data-i18n="split1.r.tag">Custom agent</span>
+      <h3 class="split__title" data-i18n="split1.r.title">Exclusive tools, defined identity, bounded scope</h3>
+      <ul class="split__points">
+        <li data-i18n="split1.r.p1">Defined by .agent.md: identity, tone, tool list, scope</li>
+        <li data-i18n="split1.r.p2">Dedicated MCP server connections, not shared</li>
+        <li data-i18n="split1.r.p3">Bounded domain: security, testing, infra, docs</li>
+        <li data-i18n="split1.r.p4">Receives tasks via handoff, returns typed artifacts</li>
+        <li data-i18n="split1.r.p5">Appropriate for specialized identity tasks (Shape B)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption" data-i18n="split1.body">The generalist handles 70-80% of tasks in a mature workspace. Custom agents handle the 20-30% requiring exclusive tool access, distinct identity, or multi-stage handoffs.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 08 · PART II CHAPTER COVER
+═══════════════════════════════════════════════ -->
+<section class="slide slide--paper" data-label="Part II: Skills" style="--chapter-color:var(--c-blue-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">02</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="p2.tag">Part II · Skills</div>
+      <h2 class="chapter-cover__title" data-i18n="p2.title">Anatomy, lifecycle, and the five-section structure.</h2>
+      <p class="chapter-cover__sub" data-i18n="p2.sub">A SKILL.md is not a prompt, not a config, not a script. It is a domain-specific knowledge artifact with a lifecycle, a maturity model, and three activation modes. This part covers everything needed to build, ship, and maintain a skill that actually holds quality over time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 09 · SKILL ANATOMY + CODE
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Skill anatomy">
+  <div class="eyebrow" style="--accent:var(--c-blue-500);" data-i18n="skilanat.eyebrow">Part II · SKILL.md anatomy</div>
+  <h2 class="title title--small" data-i18n="skilanat.title">Five sections. Every skill has all five. No exceptions.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:32px;margin-top:20px;max-width:1600px;align-items:start;">
+    <div class="skill-sections stagger">
+      <div class="skill-section-row" style="--section-color:var(--c-blue-500);"><div class="skill-section-num">01</div><div><div class="skill-section-title" data-i18n="skilanat.s1.title">Description + SFA test</div><div class="skill-section-desc" data-i18n="skilanat.s1.desc">YAML frontmatter: name, description, globs, alwaysApply. Scope, Format, Audience must be explicit.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--c-green-500);"><div class="skill-section-num">02</div><div><div class="skill-section-title" data-i18n="skilanat.s2.title">Domain rules</div><div class="skill-section-desc" data-i18n="skilanat.s2.desc">Non-negotiable constraints, conventions, naming, anti-patterns. The hard knowledge of the domain.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--c-yellow-500);"><div class="skill-section-num">03</div><div><div class="skill-section-title" data-i18n="skilanat.s3.title">Step-by-step workflow</div><div class="skill-section-desc" data-i18n="skilanat.s3.desc">Numbered sequential steps explicit enough to be reproducible. References to tools and scripts.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--c-red-500);"><div class="skill-section-num">04</div><div><div class="skill-section-title" data-i18n="skilanat.s4.title">Output templates</div><div class="skill-section-desc" data-i18n="skilanat.s4.desc">Concrete examples: format, structure, file naming. The agent matches templates, not imagination.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--ink-3);"><div class="skill-section-num">05</div><div><div class="skill-section-title" data-i18n="skilanat.s5.title">Validation checklist</div><div class="skill-section-desc" data-i18n="skilanat.s5.desc">Pass/fail criteria applied before delivery. If any item fails, the agent revises. Quality gate built into the skill.</div></div></div>
+    </div>
+    <div class="code-block" style="height:100%;min-height:420px;">
+      <div class="code-block__header">SKILL.md · docx skill example</div>
+      <pre style="margin:0;font-family:inherit;white-space:pre-wrap;line-height:1.65;font-size:12px;"><span class="code-com">---</span>
+<span class="code-kw">name</span>: <span class="code-str">docx</span>
+<span class="code-kw">description</span>: <span class="code-str">|
+  Create Word documents (.docx) with
+  professional formatting. Triggers on:
+  Word doc, .docx, report, memo.</span>
+<span class="code-kw">globs</span>: [<span class="code-str">"**/*.docx"</span>]
+<span class="code-kw">alwaysApply</span>: <span class="code-hl">false</span>
+<span class="code-com">---</span>
+
+<span class="code-com"># 01 · Description</span>
+<span class="code-com">## SFA: Scope / Format / Audience</span>
+Scope: create .docx files...
+Format: python-docx output...
+Audience: generalist agent...
+
+<span class="code-com"># 02 · Domain rules</span>
+<span class="code-red">NEVER</span> use Arial for body text.
+<span class="code-hl">ALWAYS</span> version files with date.
+
+<span class="code-com"># 03 · Workflow</span>
+1. Read skill file via view tool
+2. Install python-docx if missing
+3. Run the generation script...
+
+<span class="code-com"># 04 · Output templates</span>
+{Title}_v{version}_{date}_{locale}.docx
+
+<span class="code-com"># 05 · Validation checklist</span>
+- [ ] File opens without error
+- [ ] All headings use correct style
+- [ ] File copied to /outputs/</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 10 · SKILL LIFECYCLE
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Skill lifecycle">
+  <div class="eyebrow" style="--accent:var(--c-blue-500);" data-i18n="lifecycle.eyebrow">Part II · Skill lifecycle</div>
+  <h2 class="title title--small" data-i18n="lifecycle.title">Three phases, seven steps. From idea to distributed, production-ready skill.</h2>
+  <div class="lifecycle-grid stagger">
+    <div class="lifecycle-phase" style="--phase-color:var(--c-yellow-500);">
+      <div class="lifecycle-phase__header"><span class="lifecycle-phase__tag" data-i18n="lc.p1.tag">Phase 01 · Essential</span><div class="lifecycle-phase__title" data-i18n="lc.p1.title">Every skill needs these three</div></div>
+      <div class="lifecycle-phase__body">
+        <div class="lifecycle-step"><span class="lifecycle-step__num">01</span><span class="lifecycle-step__text" data-i18n="lc.s1">Identify: purpose, SFA test, naming convention, folder structure.</span></div>
+        <div class="lifecycle-step"><span class="lifecycle-step__num">02</span><span class="lifecycle-step__text" data-i18n="lc.s2">Create SKILL.md: YAML frontmatter, all five sections, concrete output examples.</span></div>
+        <div class="lifecycle-step"><span class="lifecycle-step__num">03</span><span class="lifecycle-step__text" data-i18n="lc.s3">Distribution scope: workspace-wide, folder-scoped, or project-specific. Configure applyTo and globs.</span></div>
+      </div>
+    </div>
+    <div class="lifecycle-phase" style="--phase-color:var(--c-blue-500);">
+      <div class="lifecycle-phase__header"><span class="lifecycle-phase__tag" data-i18n="lc.p2.tag">Phase 02 · Optional</span><div class="lifecycle-phase__title" data-i18n="lc.p2.title">Add power and references</div></div>
+      <div class="lifecycle-phase__body">
+        <div class="lifecycle-step"><span class="lifecycle-step__num">04</span><span class="lifecycle-step__text" data-i18n="lc.s4">Automation scripts: Python, Bash, or Node.js. Shebangs, arg validation, error handling.</span></div>
+        <div class="lifecycle-step"><span class="lifecycle-step__num">05</span><span class="lifecycle-step__text" data-i18n="lc.s5">Enrich: external docs, API links, example outputs, pre-built templates, data files.</span></div>
+      </div>
+    </div>
+    <div class="lifecycle-phase" style="--phase-color:var(--c-green-500);">
+      <div class="lifecycle-phase__header"><span class="lifecycle-phase__tag" data-i18n="lc.p3.tag">Phase 03 · Quality</span><div class="lifecycle-phase__title" data-i18n="lc.p3.title">Validate before distribution</div></div>
+      <div class="lifecycle-phase__body">
+        <div class="lifecycle-step"><span class="lifecycle-step__num">06</span><span class="lifecycle-step__text" data-i18n="lc.s6">Test end-to-end with real prompts. Every section must produce expected output. Run all five checklist items.</span></div>
+        <div class="lifecycle-step"><span class="lifecycle-step__num">07</span><span class="lifecycle-step__text" data-i18n="lc.s7">Distribute: publish to scope, validate glob match discovery, confirm another agent can invoke it.</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="lifecycle.body">Level 1 is ~40 lines. Level 5 includes scripts, CI validation, and automated tests. Most enterprise skills operate well at level 3.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 11 · SKILL MATURITY MODEL
+═══════════════════════════════════════════════ -->
+<section class="slide slide--paper" data-label="Skill maturity">
+  <div class="eyebrow" style="--accent:var(--c-blue-500);" data-i18n="skillmat.eyebrow">Part II · Skill maturity model</div>
+  <h2 class="title title--small" data-i18n="skillmat.title">Five levels. Start at 1. Ship at 3. Automate to 5.</h2>
+  <div class="maturity-bar stagger">
+    <div class="maturity-level" style="--ml-color:var(--ink-3);"><span class="maturity-level__num">01</span><div class="maturity-level__title" data-i18n="sm.l1.title">Basic</div><div class="maturity-level__desc" data-i18n="sm.l1.desc">SKILL.md body only. ~40 lines. Covers description and workflow. No templates, no checklist. Usable but fragile.</div></div>
+    <div class="maturity-level" style="--ml-color:var(--c-blue-500);"><span class="maturity-level__num">02</span><div class="maturity-level__title" data-i18n="sm.l2.title">Structured</div><div class="maturity-level__desc" data-i18n="sm.l2.desc">All five sections. References and output templates complete. Checklist operational. Ready for single-user production.</div></div>
+    <div class="maturity-level" style="--ml-color:var(--c-yellow-500);"><span class="maturity-level__num">03</span><div class="maturity-level__title" data-i18n="sm.l3.title">Enriched</div><div class="maturity-level__desc" data-i18n="sm.l3.desc">Scripts, portal references, enriched content. Multiple examples. Glob patterns tuned. Team distribution ready. Most enterprise skills live here.</div></div>
+    <div class="maturity-level" style="--ml-color:var(--c-green-500);"><span class="maturity-level__num">04</span><div class="maturity-level__title" data-i18n="sm.l4.title">Validated</div><div class="maturity-level__desc" data-i18n="sm.l4.desc">Automated tests, CI gate. Cannot ship unless tests pass. Intent debt tracked weekly. Quality regression detectable.</div></div>
+    <div class="maturity-level" style="--ml-color:var(--c-red-500);"><span class="maturity-level__num">05</span><div class="maturity-level__title" data-i18n="sm.l5.title">Production</div><div class="maturity-level__desc" data-i18n="sm.l5.desc">Full pipeline. Version-pinned releases. Cross-workspace registry. Automated promotion via CI. The skill as first-class asset.</div></div>
+  </div>
+  <p class="caption" data-i18n="skillmat.body">Most teams start with level 1 skills that work. The cost comes when level 1 skills proliferate without promotion: inconsistent outputs, duplicate domain knowledge, no quality gate.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 12 · SKILL ACTIVATION MODES (animated SVG)
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Activation modes">
+  <div class="eyebrow" style="--accent:var(--c-blue-500);" data-i18n="activ.eyebrow">Part II · Three activation modes</div>
+  <h2 class="title title--small" data-i18n="activ.title">The agent does not guess. It matches one of three modes.</h2>
+  <svg viewBox="0 0 1500 340" style="width:100%;max-width:1600px;height:auto;margin-top:24px;" role="img">
+    <title>Skill activation: glob match, alwaysApply, explicit invoke</title>
+    <!-- GLOB MODE -->
+    <g class="flow-node">
+      <rect x="40" y="40" width="400" height="260" rx="12" fill="var(--c-blue-50)" stroke="var(--c-blue-500)" stroke-width="1"/>
+      <rect x="40" y="40" width="400" height="5" rx="12" fill="var(--c-blue-500)"/>
+      <text x="60" y="76" style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;fill:var(--c-blue-700);">Mode 01 · Glob match</text>
+      <text x="60" y="108" style="font-size:18px;font-weight:500;fill:var(--c-blue-700);">File type trigger</text>
+      <text x="60" y="136" style="font-size:12px;fill:var(--ink-2);">File enters context → glob matches</text>
+      <text x="60" y="156" style="font-size:12px;fill:var(--ink-2);">→ skill loads automatically.</text>
+      <rect x="60" y="172" width="360" height="64" rx="6" fill="var(--dark-bg)"/>
+      <text x="76" y="196" style="font-family:var(--font-mono);font-size:11px;fill:var(--c-blue-500);">globs</text><text x="116" y="196" style="font-family:var(--font-mono);font-size:11px;fill:var(--dark-ink);">:</text>
+      <text x="76" y="214" style="font-family:var(--font-mono);font-size:11px;fill:var(--dark-ink);">  - </text><text x="108" y="214" style="font-family:var(--font-mono);font-size:11px;fill:var(--c-green-500);">"**/*.docx"</text>
+      <text x="76" y="232" style="font-family:var(--font-mono);font-size:11px;fill:var(--dark-ink);">  - </text><text x="108" y="232" style="font-family:var(--font-mono);font-size:11px;fill:var(--c-green-500);">"**/*.pptx"</text>
+      <text x="60" y="272" style="font-size:12px;color:var(--ink-2);fill:var(--ink-2);">Best for: file-type specialization.</text>
+      <text x="60" y="290" style="font-size:12px;fill:var(--ink-3);">No human action needed.</text>
+    </g>
+    <!-- ALWAYSAPPLY MODE -->
+    <g class="flow-node">
+      <rect x="550" y="40" width="400" height="260" rx="12" fill="var(--c-green-50)" stroke="var(--c-green-500)" stroke-width="1"/>
+      <rect x="550" y="40" width="400" height="5" rx="12" fill="var(--c-green-500)"/>
+      <text x="570" y="76" style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;fill:var(--c-green-700);">Mode 02 · alwaysApply</text>
+      <text x="570" y="108" style="font-size:18px;font-weight:500;fill:var(--c-green-700);">Every interaction</text>
+      <text x="570" y="136" style="font-size:12px;fill:var(--ink-2);">Loaded regardless of context. Use for</text>
+      <text x="570" y="156" style="font-size:12px;fill:var(--ink-2);">brand rules, security, coding standards.</text>
+      <rect x="570" y="172" width="360" height="64" rx="6" fill="var(--dark-bg)"/>
+      <text x="586" y="196" style="font-family:var(--font-mono);font-size:11px;fill:var(--c-blue-500);">alwaysApply</text><text x="716" y="196" style="font-family:var(--font-mono);font-size:11px;fill:var(--dark-ink);">: </text><text x="730" y="196" style="font-family:var(--font-mono);font-size:11px;fill:var(--c-yellow-500);">true</text>
+      <text x="586" y="220" style="font-family:var(--font-mono);font-size:10px;fill:var(--dark-ink-3);font-style:italic;"># brand guidelines, security</text>
+      <text x="570" y="272" style="font-size:12px;fill:var(--ink-2);">Best for: cross-cutting concerns.</text>
+      <text x="570" y="290" style="font-size:12px;fill:var(--c-red-700);">⚠ High power, high token cost. Use sparingly.</text>
+    </g>
+    <!-- EXPLICIT MODE -->
+    <g class="flow-node">
+      <rect x="1060" y="40" width="400" height="260" rx="12" fill="var(--c-yellow-50)" stroke="var(--c-yellow-500)" stroke-width="1"/>
+      <rect x="1060" y="40" width="400" height="5" rx="12" fill="var(--c-yellow-500)"/>
+      <text x="1080" y="76" style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;fill:var(--c-yellow-700);">Mode 03 · Explicit invoke</text>
+      <text x="1080" y="108" style="font-size:18px;font-weight:500;fill:var(--c-yellow-700);">Orchestrator names it</text>
+      <text x="1080" y="136" style="font-size:12px;fill:var(--ink-2);">Orchestrator or user references skill</text>
+      <text x="1080" y="156" style="font-size:12px;fill:var(--ink-2);">by name on-demand.</text>
+      <rect x="1080" y="172" width="360" height="64" rx="6" fill="var(--dark-bg)"/>
+      <text x="1096" y="196" style="font-family:var(--font-mono);font-size:11px;fill:var(--dark-ink-3);font-style:italic;"># User or orchestrator:</text>
+      <text x="1096" y="214" style="font-family:var(--font-mono);font-size:11px;fill:var(--c-green-500);">"Use the docx skill</text>
+      <text x="1096" y="232" style="font-family:var(--font-mono);font-size:11px;fill:var(--c-green-500);">to create this report."</text>
+      <text x="1080" y="272" style="font-size:12px;fill:var(--ink-2);">Best for: composite tasks, multiple skills.</text>
+      <text x="1080" y="290" style="font-size:12px;fill:var(--ink-3);">Requires orchestrator to know skill exists.</text>
+    </g>
+  </svg>
+  <p class="caption" data-i18n="activ.body">Three modes, three trade-offs. Glob match is efficient. alwaysApply is powerful but costs tokens on every call. Explicit invoke is precise but requires routing awareness. Most skills use one mode only.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 13 · PART III CHAPTER COVER
+═══════════════════════════════════════════════ -->
+<section class="slide slide--paper" data-label="Part III: Agents" style="--chapter-color:var(--c-red-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">03</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="p3.tag">Part III · Custom agents</div>
+      <h2 class="chapter-cover__title" data-i18n="p3.title">Identity, tools, scope, and the .agent.md contract.</h2>
+      <p class="chapter-cover__sub" data-i18n="p3.sub">A custom agent is not a named chatbot. It is a software component with a defined identity, exclusive tool access, a bounded scope, and a structured handoff protocol. This part covers the .agent.md file, four concrete agent examples, and when to build versus when to use a skill.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 14 · AGENT.MD ANATOMY + CODE
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label=".agent.md anatomy">
+  <div class="eyebrow" style="--accent:var(--c-red-500);" data-i18n="agentmd.eyebrow">Part III · .agent.md anatomy</div>
+  <h2 class="title title--small" data-i18n="agentmd.title">Six sections define a custom agent. The .agent.md is the contract with the orchestrator.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:32px;margin-top:20px;max-width:1600px;align-items:start;">
+    <div class="skill-sections stagger">
+      <div class="skill-section-row" style="--section-color:var(--c-red-500);"><div class="skill-section-num">01</div><div><div class="skill-section-title" data-i18n="amd.s1.title">Identity and persona</div><div class="skill-section-desc" data-i18n="amd.s1.desc">Name, role, tone, domain. Who this agent is, not just what it does.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--c-blue-500);"><div class="skill-section-num">02</div><div><div class="skill-section-title" data-i18n="amd.s2.title">Tool manifest</div><div class="skill-section-desc" data-i18n="amd.s2.desc">Which MCP servers, CLIs, and APIs this agent has exclusive access to. No shared-by-default.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--c-green-500);"><div class="skill-section-num">03</div><div><div class="skill-section-title" data-i18n="amd.s3.title">Scope and boundaries</div><div class="skill-section-desc" data-i18n="amd.s3.desc">What this agent handles. What it explicitly refuses. Prevents scope creep.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--c-yellow-500);"><div class="skill-section-num">04</div><div><div class="skill-section-title" data-i18n="amd.s4.title">Input / output contracts</div><div class="skill-section-desc" data-i18n="amd.s4.desc">What handoff payload the agent accepts. What typed artifact it returns.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--ink-3);"><div class="skill-section-num">05</div><div><div class="skill-section-title" data-i18n="amd.s5.title">Skills loaded</div><div class="skill-section-desc" data-i18n="amd.s5.desc">Which SKILL.md files this agent loads. Custom agents also use skills for domain knowledge.</div></div></div>
+      <div class="skill-section-row" style="--section-color:var(--c-red-700);"><div class="skill-section-num">06</div><div><div class="skill-section-title" data-i18n="amd.s6.title">Escalation rules</div><div class="skill-section-desc" data-i18n="amd.s6.desc">When to return to orchestrator without completing. Which conditions require human review.</div></div></div>
+    </div>
+    <div class="code-block" style="min-height:500px;">
+      <div class="code-block__header">.agent.md · security-agent</div>
+      <pre style="margin:0;font-family:inherit;white-space:pre-wrap;line-height:1.65;font-size:12px;"><span class="code-com">---</span>
+<span class="code-kw">name</span>: <span class="code-str">security-agent</span>
+<span class="code-kw">version</span>: <span class="code-str">1.0.0</span>
+
+<span class="code-com"># 01 Identity</span>
+<span class="code-kw">identity</span>:
+  <span class="code-kw">role</span>: <span class="code-str">Security reviewer</span>
+  <span class="code-kw">tone</span>: <span class="code-str">rigorous, evidence-based</span>
+  <span class="code-kw">domain</span>: <span class="code-str">application security</span>
+
+<span class="code-com"># 02 Tool manifest (exclusive)</span>
+<span class="code-kw">tools</span>:
+  - <span class="code-str">vault-mcp</span>      <span class="code-com"># secrets access</span>
+  - <span class="code-str">semgrep-cli</span>    <span class="code-com"># static analysis</span>
+  - <span class="code-str">snyk-api</span>       <span class="code-com"># dependency scan</span>
+
+<span class="code-com"># 03 Scope</span>
+<span class="code-kw">handles</span>: [<span class="code-str">security review</span>, <span class="code-str">secrets audit</span>]
+<span class="code-red">refuses</span>: [<span class="code-str">feature implementation</span>]
+
+<span class="code-com"># 04 I/O contracts</span>
+<span class="code-kw">input</span>: <span class="code-str">code + tests + plan</span>
+<span class="code-kw">output</span>: <span class="code-str">security-report.md (CVSS scores)</span>
+
+<span class="code-com"># 05 Skills</span>
+<span class="code-kw">skills</span>: [<span class="code-str">security/SKILL.md</span>]
+
+<span class="code-com"># 06 Escalation</span>
+<span class="code-kw">escalate_on</span>:
+  - <span class="code-str">critical CVE found</span>
+  - <span class="code-str">credential exposure detected</span>
+<span class="code-com">---</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 15 · FOUR AGENT EXAMPLES
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Four agents">
+  <div class="eyebrow" style="--accent:var(--c-red-500);" data-i18n="agentex.eyebrow">Part III · Four real agents</div>
+  <h2 class="title title--small" data-i18n="agentex.title">Four agents. Each one exists because no skill alone was enough.</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px;max-width:1600px;" class="stagger">
+    <div style="padding:22px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);border-top:5px solid var(--c-red-500);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-red-700);margin-bottom:10px;" data-i18n="ae.a1.tag">Security agent</div>
+      <div style="font-size:17px;font-weight:500;margin-bottom:10px;" data-i18n="ae.a1.title">Vault + SAST</div>
+      <p style="font-size:12px;color:var(--ink-2);line-height:1.5;margin-bottom:14px;" data-i18n="ae.a1.desc">Exclusive: HashiCorp Vault MCP, Semgrep CLI, Snyk API. Rigorous, evidence-based tone. Produces security-report.md with CVSS scores. Escalates on critical CVE.</p>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--c-red-700);letter-spacing:.10em;text-transform:uppercase;" data-i18n="ae.a1.tools">vault-mcp · semgrep · snyk</div>
+    </div>
+    <div style="padding:22px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);border-top:5px solid var(--c-blue-500);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-blue-700);margin-bottom:10px;" data-i18n="ae.a2.tag">Test agent</div>
+      <div style="font-size:17px;font-weight:500;margin-bottom:10px;" data-i18n="ae.a2.title">CI/CD integration</div>
+      <p style="font-size:12px;color:var(--ink-2);line-height:1.5;margin-bottom:14px;" data-i18n="ae.a2.desc">Exclusive: GitHub Actions MCP, Jest runner, coverage tool. Generates test suites from acceptance criteria. Executes them, returns results. Escalates on flaky tests.</p>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--c-blue-700);letter-spacing:.10em;text-transform:uppercase;" data-i18n="ae.a2.tools">actions-mcp · jest · coverage</div>
+    </div>
+    <div style="padding:22px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);border-top:5px solid var(--c-green-500);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-green-700);margin-bottom:10px;" data-i18n="ae.a3.tag">Modernization agent</div>
+      <div style="font-size:17px;font-weight:500;margin-bottom:10px;" data-i18n="ae.a3.title">IaC + migration</div>
+      <p style="font-size:12px;color:var(--ink-2);line-height:1.5;margin-bottom:14px;" data-i18n="ae.a3.desc">Exclusive: Terraform MCP, Azure SDK. Transforms legacy infra to IaC. Produces migration plan and diff. Escalates on data loss risk. No security audit.</p>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--c-green-700);letter-spacing:.10em;text-transform:uppercase;" data-i18n="ae.a3.tools">terraform-mcp · azure-sdk</div>
+    </div>
+    <div style="padding:22px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);border-top:5px solid var(--c-yellow-500);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-yellow-700);margin-bottom:10px;" data-i18n="ae.a4.tag">Documentation agent</div>
+      <div style="font-size:17px;font-weight:500;margin-bottom:10px;" data-i18n="ae.a4.title">Docs + publishing</div>
+      <p style="font-size:12px;color:var(--ink-2);line-height:1.5;margin-bottom:14px;" data-i18n="ae.a4.desc">Exclusive: Confluence MCP, brand style guide. Friendly, clear tone. Generates and publishes structured documentation. No code review, no security gates.</p>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--c-yellow-700);letter-spacing:.10em;text-transform:uppercase;" data-i18n="ae.a4.tools">confluence-mcp · brand-skill</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="agentex.body">Each agent handles one bounded domain. The orchestrator knows which to call based on the task type detected in routing. Boundaries are explicit, not emergent. The ratio in a healthy workspace: ~1 custom agent per 8-12 skills.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 16 · PART IV CHAPTER COVER
+═══════════════════════════════════════════════ -->
+<section class="slide slide--paper" data-label="Part IV: Orchestration" style="--chapter-color:var(--c-yellow-500);">
+  <div class="chapter-cover">
+    <div class="chapter-cover__num">04</div>
+    <div class="chapter-cover__content">
+      <div class="chapter-cover__tag" data-i18n="p4.tag">Part IV · Orchestration</div>
+      <h2 class="chapter-cover__title" data-i18n="p4.title">Four-phase flow, decision tree, handoff sequence.</h2>
+      <p class="chapter-cover__sub" data-i18n="p4.sub">Orchestration is the runtime implementation. Every request passes four phases. The routing decision is made once, in Phase 2, by applying the four-question decision tree. Handoffs follow a structured protocol: the orchestrator is always the hub.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 17 · ORCHESTRATION FLOW
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Orchestration flow">
+  <div class="eyebrow" style="--accent:var(--c-yellow-500);" data-i18n="orch.eyebrow">Part IV · Four-phase orchestration</div>
+  <h2 class="title title--small" data-i18n="orch.title">Every request passes four phases. Routing decided once, in Phase 2.</h2>
+  <div class="orch-flow stagger" style="max-width:1600px;">
+    <div class="orch-phase" style="--orch-color:var(--c-blue-500);--orch-bg:var(--c-blue-50);">
+      <div class="orch-phase__num" data-i18n="orch.p1.num">Phase 01</div>
+      <div class="orch-phase__title" data-i18n="orch.p1.title">Entry</div>
+      <ul class="orch-phase__steps">
+        <li data-i18n="orch.p1.s1">User request received by orchestrator</li>
+        <li data-i18n="orch.p1.s2">Orchestrator loads its own .agent.md identity</li>
+        <li data-i18n="orch.p1.s3">Request classified: task type detected</li>
+      </ul>
+      <span class="orch-phase__tag">Input</span>
+    </div>
+    <div class="orch-phase" style="--orch-color:var(--c-yellow-500);--orch-bg:var(--c-yellow-50);">
+      <div class="orch-phase__num" data-i18n="orch.p2.num">Phase 02</div>
+      <div class="orch-phase__title" data-i18n="orch.p2.title">Analysis + routing</div>
+      <ul class="orch-phase__steps">
+        <li data-i18n="orch.p2.s1">Decision tree evaluated against task type</li>
+        <li data-i18n="orch.p2.s2">Skill search: does SKILL.md exist?</li>
+        <li data-i18n="orch.p2.s3">Path A: custom agent + skill, or Path B: generalist + skill</li>
+      </ul>
+      <span class="orch-phase__tag">Routing</span>
+    </div>
+    <div class="orch-phase" style="--orch-color:var(--c-green-500);--orch-bg:var(--c-green-50);">
+      <div class="orch-phase__num" data-i18n="orch.p3.num">Phase 03</div>
+      <div class="orch-phase__title" data-i18n="orch.p3.title">Execution</div>
+      <ul class="orch-phase__steps">
+        <li data-i18n="orch.p3.s1">Skills loaded, domain knowledge injected</li>
+        <li data-i18n="orch.p3.s2">.instructions.md applied automatically</li>
+        <li data-i18n="orch.p3.s3">Task executed with full context</li>
+      </ul>
+      <span class="orch-phase__tag">Execute</span>
+    </div>
+    <div class="orch-phase" style="--orch-color:var(--c-red-500);--orch-bg:var(--c-red-50);">
+      <div class="orch-phase__num" data-i18n="orch.p4.num">Phase 04</div>
+      <div class="orch-phase__title" data-i18n="orch.p4.title">Validation + delivery</div>
+      <ul class="orch-phase__steps">
+        <li data-i18n="orch.p4.s1">Output validated against skill checklist</li>
+        <li data-i18n="orch.p4.s2">Quality gate: format, content, conventions</li>
+        <li data-i18n="orch.p4.s3">Final response delivered to user</li>
+      </ul>
+      <span class="orch-phase__tag">Output</span>
+    </div>
+  </div>
+  <p class="caption" data-i18n="orch.body">The orchestrator is the only agent the user interacts with directly. All sub-agents operate behind it. Every handoff returns to orchestrator. Agents never communicate directly with each other.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 18 · DECISION TREE
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Decision tree">
+  <div class="eyebrow" style="--accent:var(--c-yellow-500);" data-i18n="dtree.eyebrow">Part IV · Decision tree</div>
+  <h2 class="title title--small" data-i18n="dtree.title">Four yes/no questions. One of three outcomes. No ambiguity.</h2>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:32px;margin-top:20px;max-width:1600px;align-items:start;">
+    <div class="decision-flow stagger">
+      <div class="decision-row">
+        <div class="decision-q" data-i18n="dt.q1">Does the task require exclusive tool access? (MCP, API, CLI)</div>
+        <div class="decision-yes"><span class="decision-label">YES</span><span data-i18n="dt.q1.yes">Custom agent + skill. No generalist agent has exclusive tool access.</span></div>
+        <div class="decision-no"><span class="decision-label">NO</span><span data-i18n="dt.q1.no">Continue to next question.</span></div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-q" data-i18n="dt.q2">Does the task require a distinct identity or tone? (e.g. rigorous security)</div>
+        <div class="decision-yes"><span class="decision-label">YES</span><span data-i18n="dt.q2.yes">Custom agent + skill. Identity is in .agent.md, not improvised per call.</span></div>
+        <div class="decision-no"><span class="decision-label">NO</span><span data-i18n="dt.q2.no">Continue to next question.</span></div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-q" data-i18n="dt.q3">Is this a multi-stage pipeline with handoffs between agents?</div>
+        <div class="decision-yes"><span class="decision-label">YES</span><span data-i18n="dt.q3.yes">Custom agent pipeline. Each stage needs a bounded agent to maintain output contract.</span></div>
+        <div class="decision-no"><span class="decision-label">NO</span><span data-i18n="dt.q3.no">Continue to final question.</span></div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-q" data-i18n="dt.q4">Does a SKILL.md exist that covers this domain?</div>
+        <div class="decision-yes"><span class="decision-label">YES</span><span data-i18n="dt.q4.yes">Generalist agent + skill. Load it and proceed.</span></div>
+        <div class="decision-no"><span class="decision-label">NO</span><span data-i18n="dt.q4.no">Generalist only. Or: create the skill first.</span></div>
+      </div>
+    </div>
+    <div class="outcome-grid" style="grid-template-columns:1fr;gap:12px;margin-top:0;max-width:300px;">
+      <div class="outcome-card" style="--outcome-color:var(--c-red-500);"><span class="outcome-card__tag" data-i18n="dt.o1.tag">Custom agent + skill</span><div class="outcome-card__title" data-i18n="dt.o1.title">Specialized pipeline</div><div class="outcome-card__desc" data-i18n="dt.o1.desc">Has .agent.md, own tools, bounded scope.</div></div>
+      <div class="outcome-card" style="--outcome-color:var(--c-green-500);"><span class="outcome-card__tag" data-i18n="dt.o2.tag">Generalist + skill</span><div class="outcome-card__title" data-i18n="dt.o2.title">Domain-augmented</div><div class="outcome-card__desc" data-i18n="dt.o2.desc">No .agent.md. 70-80% of tasks.</div></div>
+      <div class="outcome-card" style="--outcome-color:var(--c-blue-500);"><span class="outcome-card__tag" data-i18n="dt.o3.tag">Generalist only</span><div class="outcome-card__title" data-i18n="dt.o3.title">General task</div><div class="outcome-card__desc" data-i18n="dt.o3.desc">Simple task. Or: signal to create the skill.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 19 · HANDOFF SEQUENCE SVG (animated paths)
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Handoff sequence">
+  <div class="eyebrow" style="--accent:var(--c-yellow-500);" data-i18n="handoff.eyebrow">Part IV · Multi-agent handoff · How work flows from agent to agent</div>
+  <h2 class="title title--small" data-i18n="handoff.title">Four handoffs. One orchestrator. Zero direct agent-to-agent calls.</h2>
+  <div style="background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:20px 26px;margin-top:18px;max-width:1600px;">
+    <svg viewBox="0 0 1500 360" style="width:100%;height:auto;" role="img">
+      <title>Multi-agent handoff: Plan → Code → Test → Security</title>
+      <defs>
+        <marker id="hArr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--ink)"/></marker>
+        <marker id="hArrB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--c-blue-500)"/></marker>
+        <marker id="hArrG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--c-green-500)"/></marker>
+        <marker id="hArrY" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--c-yellow-500)"/></marker>
+        <marker id="hArrR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--c-red-500)"/></marker>
+        <marker id="hArrDash" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--ink-3)"/></marker>
+      </defs>
+      <!-- Swimlane labels -->
+      <text x="82"  y="32" style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:var(--ink-3);">User</text>
+      <text x="278" y="32" style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:var(--ink);">Orchestrator</text>
+      <text x="530" y="32" style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:var(--c-blue-700);">Planning</text>
+      <text x="770" y="32" style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:var(--c-green-700);">Coding</text>
+      <text x="1010" y="32" style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:var(--c-yellow-700);">Testing</text>
+      <text x="1220" y="32" style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:var(--c-red-700);">Security</text>
+      <!-- Lifelines -->
+      <line x1="100" y1="42" x2="100" y2="360" stroke="var(--rule-2)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="340" y1="42" x2="340" y2="360" stroke="var(--rule-2)" stroke-width="1.5"/>
+      <line x1="570" y1="42" x2="570" y2="360" stroke="var(--c-blue-100)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="800" y1="42" x2="800" y2="360" stroke="var(--c-green-100)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="1040" y1="42" x2="1040" y2="360" stroke="var(--c-yellow-100)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="1260" y1="42" x2="1260" y2="360" stroke="var(--c-red-100)" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- USER → ORCH trigger -->
+      <line class="draw-path" x1="100" y1="68" x2="330" y2="68" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#hArr)" style="--pl:230;stroke-dasharray:230;stroke-dashoffset:230;"/>
+      <text x="170" y="62" style="font-size:10px;fill:var(--ink-2);font-family:var(--font-mono);">login feature + tests + security</text>
+      <!-- HANDOFF 1: orch → planning -->
+      <rect x="352" y="85" width="195" height="18" rx="3" fill="var(--c-blue-50)" stroke="var(--c-blue-200)"/>
+      <text x="360" y="97" style="font-family:var(--font-mono);font-size:9px;font-weight:600;fill:var(--c-blue-700);">HANDOFF 1 · plan request + context</text>
+      <line class="draw-path-2" x1="340" y1="93" x2="560" y2="93" stroke="var(--c-blue-500)" stroke-width="1.5" marker-end="url(#hArrB)" style="--pl:220;stroke-dasharray:220;stroke-dashoffset:220;"/>
+      <!-- Planning return (dashed) -->
+      <line x1="570" y1="128" x2="350" y2="128" stroke="var(--c-blue-300)" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#hArrDash)"/>
+      <text x="380" y="122" style="font-size:9px;fill:var(--c-blue-500);font-family:var(--font-mono);">structured plan + acceptance criteria</text>
+      <!-- HANDOFF 2: orch → coding -->
+      <rect x="352" y="145" width="180" height="18" rx="3" fill="var(--c-green-50)" stroke="var(--c-green-200)"/>
+      <text x="360" y="157" style="font-family:var(--font-mono);font-size:9px;font-weight:600;fill:var(--c-green-700);">HANDOFF 2 · plan + context</text>
+      <line class="draw-path-3" x1="340" y1="153" x2="790" y2="153" stroke="var(--c-green-500)" stroke-width="1.5" marker-end="url(#hArrG)" style="--pl:450;stroke-dasharray:450;stroke-dashoffset:450;"/>
+      <!-- Coding return -->
+      <line x1="800" y1="190" x2="350" y2="190" stroke="var(--c-green-300)" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#hArrDash)"/>
+      <text x="400" y="184" style="font-size:9px;fill:var(--c-green-600);font-family:var(--font-mono);">implemented code + file list</text>
+      <!-- HANDOFF 3: orch → testing -->
+      <rect x="352" y="207" width="200" height="18" rx="3" fill="var(--c-yellow-50)" stroke="var(--c-yellow-200)"/>
+      <text x="360" y="219" style="font-family:var(--font-mono);font-size:9px;font-weight:600;fill:var(--c-yellow-700);">HANDOFF 3 · code + plan + criteria</text>
+      <line class="draw-path-4" x1="340" y1="215" x2="1030" y2="215" stroke="var(--c-yellow-500)" stroke-width="1.5" marker-end="url(#hArrY)" style="--pl:690;stroke-dasharray:690;stroke-dashoffset:690;"/>
+      <!-- Testing return -->
+      <line x1="1040" y1="250" x2="350" y2="250" stroke="var(--c-yellow-300)" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#hArrDash)"/>
+      <text x="450" y="244" style="font-size:9px;fill:var(--c-yellow-600);font-family:var(--font-mono);">test suite + execution results</text>
+      <!-- HANDOFF 4: orch → security -->
+      <rect x="352" y="268" width="210" height="18" rx="3" fill="var(--c-red-50)" stroke="var(--c-red-100)"/>
+      <text x="360" y="280" style="font-family:var(--font-mono);font-size:9px;font-weight:600;fill:var(--c-red-700);">HANDOFF 4 · code + tests + results</text>
+      <line x1="340" y1="276" x2="1250" y2="276" stroke="var(--c-red-500)" stroke-width="1.5" marker-end="url(#hArrR)" stroke-dasharray="910" stroke-dashoffset="910" style="animation:drawPath 1.6s var(--ease) 2s both;--pl:910"/>
+      <!-- Security return -->
+      <line x1="1260" y1="310" x2="350" y2="310" stroke="var(--c-red-300)" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#hArrDash)"/>
+      <text x="480" y="304" style="font-size:9px;fill:var(--c-red-600);font-family:var(--font-mono);">security report + findings + CVSS scores</text>
+      <!-- Final delivery -->
+      <line x1="340" y1="340" x2="110" y2="340" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#hArrDash)"/>
+      <text x="148" y="334" style="font-size:9px;fill:var(--ink-2);font-family:var(--font-mono);">assembled result</text>
+    </svg>
+  </div>
+  <p class="caption" data-i18n="handoff.body">Context accumulates at every handoff. Security receives code + tests + plan. No handoff loses prior work. The orchestrator is hub; no agent shortcuts to another.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 20 · SKILL ROUTING SIMULATOR (interactive)
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Routing simulator">
+  <div class="eyebrow" style="--accent:var(--c-yellow-500);">Part IV · Routing simulator <span class="badge-live" data-i18n="lbl.interactive">interactive</span></div>
+  <h2 class="title title--small" data-i18n="sim.title">Adjust task parameters. See which path the decision tree picks.</h2>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:28px;margin-top:16px;max-width:1500px;">
+    <!-- LEFT: sliders -->
+    <div class="interactive-panel">
+      <span class="interactive-label" data-i18n="sim.label">Task configurator · adjust for your task</span>
+      <div class="ps-slider-row" style="--slider-accent:var(--c-red-500);">
+        <div>
+          <div class="ps-slider-row__title" data-i18n="sim.s1.title">Exclusive tool access needed?</div>
+          <div class="ps-slider-row__sub" data-i18n="sim.s1.sub">0 = none · 5 = critical (vault, CI/CD, infra)</div>
+          <input type="range" class="ps-slider" id="slTool" min="0" max="5" value="1" step="1"/>
+        </div>
+        <div class="ps-slider-row__val" id="slToolVal">1</div>
+      </div>
+      <div class="ps-slider-row" style="--slider-accent:var(--c-yellow-500);">
+        <div>
+          <div class="ps-slider-row__title" data-i18n="sim.s2.title">Distinct identity or tone required?</div>
+          <div class="ps-slider-row__sub" data-i18n="sim.s2.sub">0 = generic · 5 = specialized (security, legal)</div>
+          <input type="range" class="ps-slider" id="slTone" min="0" max="5" value="1" step="1"/>
+        </div>
+        <div class="ps-slider-row__val" id="slToneVal" style="color:var(--c-yellow-700);">1</div>
+      </div>
+      <div class="ps-slider-row" style="--slider-accent:var(--c-blue-500);">
+        <div>
+          <div class="ps-slider-row__title" data-i18n="sim.s3.title">Multi-stage pipeline with handoffs?</div>
+          <div class="ps-slider-row__sub" data-i18n="sim.s3.sub">0 = single step · 5 = 4+ agents in sequence</div>
+          <input type="range" class="ps-slider" id="slPipe" min="0" max="5" value="0" step="1"/>
+        </div>
+        <div class="ps-slider-row__val" id="slPipeVal" style="color:var(--c-blue-700);">0</div>
+      </div>
+      <div class="ps-slider-row" style="--slider-accent:var(--c-green-500);">
+        <div>
+          <div class="ps-slider-row__title" data-i18n="sim.s4.title">Relevant SKILL.md exists?</div>
+          <div class="ps-slider-row__sub" data-i18n="sim.s4.sub">0 = no skill · 5 = mature level 3+ skill</div>
+          <input type="range" class="ps-slider" id="slSkill" min="0" max="5" value="3" step="1"/>
+        </div>
+        <div class="ps-slider-row__val" id="slSkillVal" style="color:var(--c-green-700);">3</div>
+      </div>
+    </div>
+    <!-- RIGHT: result -->
+    <div>
+      <div class="interactive-panel" id="simResult" style="margin-bottom:16px;border-left:6px solid var(--c-green-500);">
+        <span class="interactive-label" data-i18n="sim.result.label">Recommended path</span>
+        <div style="font-size:28px;font-weight:500;margin:8px 0;" id="simPath" data-i18n="sim.default.path">Generalist agent + skill</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" id="simReason" data-i18n="sim.default.reason">Task has a relevant skill and no exclusive tool requirements. Path B is most efficient.</div>
+      </div>
+      <div id="simDecisions" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 21 · CONTEXT ACCUMULATION
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Context accumulation">
+  <div class="eyebrow" style="--accent:var(--c-yellow-500);" data-i18n="ctxacc.eyebrow">Part IV · Context accumulation</div>
+  <h2 class="title title--small" data-i18n="ctxacc.title">Each handoff carries more. Downstream agents know everything upstream produced.</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:28px;max-width:1600px;border:1px solid var(--rule);border-radius:10px;overflow:hidden;" class="stagger">
+    <div style="padding:22px 20px;border-right:1px solid var(--rule);background:var(--c-blue-50);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-blue-700);margin-bottom:10px;" data-i18n="ca.a1.tag">Planning receives</div>
+      <div style="font-size:16px;font-weight:500;color:var(--c-blue-700);margin-bottom:12px;" data-i18n="ca.a1.title">Request context</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="padding:6px 10px;background:var(--c-blue-100);border-radius:4px;font-size:12px;color:var(--c-blue-700);">User request</div>
+        <div style="padding:6px 10px;background:var(--c-blue-100);border-radius:4px;font-size:12px;color:var(--c-blue-700);">Task classification</div>
+      </div>
+      <div style="margin-top:14px;font-family:var(--font-mono);font-size:10px;color:var(--c-blue-700);font-weight:600;">Returns: plan.md</div>
+    </div>
+    <div style="padding:22px 20px;border-right:1px solid var(--rule);background:var(--c-green-50);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-green-700);margin-bottom:10px;" data-i18n="ca.a2.tag">Coding receives</div>
+      <div style="font-size:16px;font-weight:500;color:var(--c-green-700);margin-bottom:12px;" data-i18n="ca.a2.title">Plan + request</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="padding:6px 10px;background:var(--c-blue-100);border-radius:4px;font-size:12px;color:var(--c-blue-700);">User request</div>
+        <div style="padding:6px 10px;background:var(--c-blue-100);border-radius:4px;font-size:12px;color:var(--c-blue-700);">Task classification</div>
+        <div style="padding:6px 10px;background:var(--c-green-100);border-radius:4px;font-size:12px;color:var(--c-green-700);font-weight:500;">plan.md ← new</div>
+      </div>
+      <div style="margin-top:14px;font-family:var(--font-mono);font-size:10px;color:var(--c-green-700);font-weight:600;">Returns: code + files</div>
+    </div>
+    <div style="padding:22px 20px;border-right:1px solid var(--rule);background:var(--c-yellow-50);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-yellow-700);margin-bottom:10px;" data-i18n="ca.a3.tag">Testing receives</div>
+      <div style="font-size:16px;font-weight:500;color:var(--c-yellow-700);margin-bottom:12px;" data-i18n="ca.a3.title">All previous + code</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="padding:6px 10px;background:var(--c-blue-100);border-radius:4px;font-size:12px;color:var(--c-blue-700);">User request</div>
+        <div style="padding:6px 10px;background:var(--c-green-100);border-radius:4px;font-size:12px;color:var(--c-green-700);">plan.md</div>
+        <div style="padding:6px 10px;background:var(--c-yellow-100);border-radius:4px;font-size:12px;color:var(--c-yellow-700);font-weight:500;">code + files ← new</div>
+      </div>
+      <div style="margin-top:14px;font-family:var(--font-mono);font-size:10px;color:var(--c-yellow-700);font-weight:600;">Returns: tests + results</div>
+    </div>
+    <div style="padding:22px 20px;background:var(--c-red-50);">
+      <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-red-700);margin-bottom:10px;" data-i18n="ca.a4.tag">Security receives</div>
+      <div style="font-size:16px;font-weight:500;color:var(--c-red-700);margin-bottom:12px;" data-i18n="ca.a4.title">Complete picture</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="padding:6px 10px;background:var(--c-blue-100);border-radius:4px;font-size:12px;color:var(--c-blue-700);">User request</div>
+        <div style="padding:6px 10px;background:var(--c-green-100);border-radius:4px;font-size:12px;color:var(--c-green-700);">plan.md</div>
+        <div style="padding:6px 10px;background:var(--c-yellow-100);border-radius:4px;font-size:12px;color:var(--c-yellow-700);">code + test results</div>
+        <div style="padding:6px 10px;background:var(--c-red-100);border-radius:4px;font-size:12px;color:var(--c-red-700);font-weight:500;">security ctx ← new</div>
+      </div>
+      <div style="margin-top:14px;font-family:var(--font-mono);font-size:10px;color:var(--c-red-700);font-weight:600;">Returns: security report</div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="ctxacc.body">Context accumulation is design, not side effect. Each agent receives more because it needs to produce a higher-level artifact. The security agent can only do its job if it sees the full picture.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 22 · PART V DIVIDER
+═══════════════════════════════════════════════ -->
+<section class="slide slide--dark" data-label="Part V" data-theme="dark" style="align-items:flex-start;justify-content:flex-end;padding-bottom:80px;">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="p5.eyebrow">Part V</div>
+  <div class="section-number">V</div>
+  <div class="section-title" style="color:var(--dark-ink);" data-i18n="p5.title">Decisions and diagnostics.</div>
+  <p class="subtitle" style="max-width:900px;" data-i18n="p5.sub">Anti-patterns you will meet before any best practice. Workspace diagnostic. Monday checklist.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 23 · ANTI-PATTERNS
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Anti-patterns">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="anti.eyebrow">Part V · Anti-patterns</div>
+  <h2 class="title title--small" data-i18n="anti.title">Four anti-patterns you will meet before any best practice.</h2>
+  <div class="outcome-grid stagger" style="max-width:1600px;">
+    <div class="outcome-card" style="--outcome-color:var(--c-red-500);"><span class="outcome-card__tag" data-i18n="ap.a1.tag">Anti-pattern 01</span><div class="outcome-card__title" data-i18n="ap.a1.title">Skill-as-megaprompt</div><div class="outcome-card__desc" data-i18n="ap.a1.desc">A 2,000-line SKILL.md covering everything. No clear scope. Activates on every glob. Token overhead per call exceeds the value of the knowledge. Fix: split into three targeted skills, each passing the SFA test.</div></div>
+    <div class="outcome-card" style="--outcome-color:var(--c-red-500);"><span class="outcome-card__tag" data-i18n="ap.a2.tag">Anti-pattern 02</span><div class="outcome-card__title" data-i18n="ap.a2.title">Agent-for-everything</div><div class="outcome-card__desc" data-i18n="ap.a2.desc">A single custom agent with all permissions. No bounded scope. No exclusive tool rationale. First incident compromises the entire workspace. RBAC and scope boundaries are non-negotiable.</div></div>
+    <div class="outcome-card" style="--outcome-color:var(--c-yellow-500);"><span class="outcome-card__tag" data-i18n="ap.a3.tag">Anti-pattern 03</span><div class="outcome-card__title" data-i18n="ap.a3.title">Skills never versioned</div><div class="outcome-card__desc" data-i18n="ap.a3.desc">SKILL.md files edited in place without version control. Output quality changes silently. No rollback. No change log. Treat every SKILL.md as code: version, review, test, promote through the maturity levels.</div></div>
+    <div class="outcome-card" style="--outcome-color:var(--c-yellow-500);"><span class="outcome-card__tag" data-i18n="ap.a4.tag">Anti-pattern 04</span><div class="outcome-card__title" data-i18n="ap.a4.title">Routing by intuition</div><div class="outcome-card__desc" data-i18n="ap.a4.desc">Per-call decisions based on feel. No decision tree, no routing logic. Inconsistent results, inconsistent cost. No measurement baseline. One hour to implement the four-question tree; no budget needed.</div></div>
+  </div>
+  <p class="caption" data-i18n="anti.body">Anti-patterns 01 and 02 are the most costly. Megaprompt skills inflate token spend silently. Agent-for-everything creates security surface risk. Both are solved by the SFA test and decision tree applied early.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 24 · WORKSPACE DIAGNOSTIC
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Workspace diagnostic">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="diag.eyebrow">Part V · Workspace diagnostic</div>
+  <h2 class="title title--small" data-i18n="diag.title">Six diagnostic questions. Any "no" is a gap worth closing.</h2>
+  <div class="std-list stagger" style="max-width:1400px;">
+    <div class="std-row" style="--s-color:var(--c-blue-500);"><div class="std-row__name" data-i18n="dq.q1.tag">Q01</div><div class="std-row__purpose" data-i18n="dq.q1.q">Do you know every skill active in your workspace right now?</div><div class="std-row__desc" data-i18n="dq.q1.hint">If no: run a skills inventory. Unknown skills with alwaysApply true are a silent token drain and a quality risk.</div></div>
+    <div class="std-row" style="--s-color:var(--c-green-500);"><div class="std-row__name" data-i18n="dq.q2.tag">Q02</div><div class="std-row__purpose" data-i18n="dq.q2.q">Do all custom agents have a .agent.md with an explicit tool list?</div><div class="std-row__desc" data-i18n="dq.q2.hint">If no: any agent using shared tools is a custom agent in name only. The tool manifest is the contract. Without it, scope is undefined.</div></div>
+    <div class="std-row" style="--s-color:var(--c-yellow-500);"><div class="std-row__name" data-i18n="dq.q3.tag">Q03</div><div class="std-row__purpose" data-i18n="dq.q3.q">Can you trace which skill was loaded for any given task output?</div><div class="std-row__desc" data-i18n="dq.q3.hint">If no: you cannot debug quality regressions. Skill activation must be logged. No observability means no quality control.</div></div>
+    <div class="std-row" style="--s-color:var(--c-red-500);"><div class="std-row__name" data-i18n="dq.q4.tag">Q04</div><div class="std-row__purpose" data-i18n="dq.q4.q">Is there a routing decision tree, or does each team member decide ad hoc?</div><div class="std-row__desc" data-i18n="dq.q4.hint">If ad hoc: the four-question tree takes one hour to implement. Without it, agent and skill usage is inconsistent and unmeasurable.</div></div>
+    <div class="std-row" style="--s-color:var(--c-blue-700);"><div class="std-row__name" data-i18n="dq.q5.tag">Q05</div><div class="std-row__purpose" data-i18n="dq.q5.q">Are all skills version-controlled and reviewed before distribution?</div><div class="std-row__desc" data-i18n="dq.q5.hint">If no: treat every SKILL.md as code. The lifecycle in Part II defines the promotion path from draft to production.</div></div>
+    <div class="std-row" style="--s-color:var(--c-green-700);"><div class="std-row__name" data-i18n="dq.q6.tag">Q06</div><div class="std-row__purpose" data-i18n="dq.q6.q">Is the ratio of custom agents to skills in a healthy range (1:8 or better)?</div><div class="std-row__desc" data-i18n="dq.q6.hint">If no: you are either over-engineering (too many agents) or under-specializing (too few skills). Both signal misrouting patterns.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 25 · MONDAY CHECKLIST
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="Monday checklist">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="mon.eyebrow">Start · Monday</div>
+  <h2 class="title title--small" data-i18n="mon.title">Five things you can do Monday with no new budget.</h2>
+  <div class="list-num stagger" style="max-width:1300px;">
+    <div class="list-num__item"><span class="list-num__n">01 · AUDIT</span><span class="list-num__t" data-i18n="mon.m1">Inventory every skill in your workspace. Note which have alwaysApply true, their line counts, and whether they have a validation checklist.</span></div>
+    <div class="list-num__item"><span class="list-num__n">02 · DEFINE</span><span class="list-num__t" data-i18n="mon.m2">Apply the SFA test to your three most-used skills. Scope, Format, Audience. Document any gap before the next team session.</span></div>
+    <div class="list-num__item"><span class="list-num__n">03 · ROUTE</span><span class="list-num__t" data-i18n="mon.m3">Print the four-question decision tree. Apply it explicitly to the next five task requests your team receives. Track routing decision and actual outcome.</span></div>
+    <div class="list-num__item"><span class="list-num__n">04 · CONTRACT</span><span class="list-num__t" data-i18n="mon.m4">Review your custom agents' .agent.md files. Does each have an explicit tool list, a scope boundary, and an escalation rule? If not, add what is missing this week.</span></div>
+    <div class="list-num__item"><span class="list-num__n">05 · MEASURE</span><span class="list-num__t" data-i18n="mon.m5">Schedule a 30-day review. One metric: what percentage of tasks were routed through the decision tree? Any number above zero is progress.</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 26 · 90-DAY ROADMAP
+═══════════════════════════════════════════════ -->
+<section class="slide slide--light" data-label="90-day roadmap">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="road.eyebrow">Start · First 90 days</div>
+  <h2 class="title title--small" data-i18n="road.title">30 / 60 / 90 days. One measurable outcome per period.</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px;max-width:1500px;" class="stagger">
+    <div style="border-radius:10px;border:1px solid var(--rule);overflow:hidden;background:var(--paper);">
+      <div style="padding:18px 22px;background:var(--c-blue-50);border-bottom:1px solid var(--rule);"><div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-blue-700);margin-bottom:6px;" data-i18n="road.p1.tag">Days 1-30 · Foundation</div><div style="font-size:20px;font-weight:500;" data-i18n="road.p1.title">Inventory + routing</div></div>
+      <div style="padding:18px 22px;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p1.i1">· Full skill inventory with SFA scores</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p1.i2">· Decision tree adopted by team</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p1.i3">· All custom agents have .agent.md reviewed</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p1.i4">· Skill activation logging enabled</div>
+        <div style="margin-top:14px;padding:10px 14px;background:var(--c-blue-50);border-radius:6px;font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--c-blue-700);letter-spacing:.12em;text-transform:uppercase;" data-i18n="road.p1.out">Outcome · Routing baseline established</div>
+      </div>
+    </div>
+    <div style="border-radius:10px;border:1px solid var(--rule);overflow:hidden;background:var(--paper);">
+      <div style="padding:18px 22px;background:var(--c-yellow-50);border-bottom:1px solid var(--rule);"><div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-yellow-700);margin-bottom:6px;" data-i18n="road.p2.tag">Days 31-60 · Contract</div><div style="font-size:20px;font-weight:500;" data-i18n="road.p2.title">Skills to level 3</div></div>
+      <div style="padding:18px 22px;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p2.i1">· Top 5 skills promoted to maturity level 3</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p2.i2">· Scripts added to automation-eligible skills</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p2.i3">· First pipeline: plan + code + test handoff live</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p2.i4">· Token consumption per task baseline measured</div>
+        <div style="margin-top:14px;padding:10px 14px;background:var(--c-yellow-50);border-radius:6px;font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--c-yellow-700);letter-spacing:.12em;text-transform:uppercase;" data-i18n="road.p2.out">Outcome · First pipeline delivering typed artifacts</div>
+      </div>
+    </div>
+    <div style="border-radius:10px;border:1px solid var(--rule);overflow:hidden;background:var(--paper);">
+      <div style="padding:18px 22px;background:var(--c-green-50);border-bottom:1px solid var(--rule);"><div style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-green-700);margin-bottom:6px;" data-i18n="road.p3.tag">Days 61-90 · Measure</div><div style="font-size:20px;font-weight:500;" data-i18n="road.p3.title">Skills library live</div></div>
+      <div style="padding:18px 22px;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p3.i1">· Shared skill library published and discoverable</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p3.i2">· Decision tree applied to 80%+ of tasks</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p3.i3">· Token efficiency tracked weekly per skill</div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.5;" data-i18n="road.p3.i4">· Replicable playbook for adding new skills</div>
+        <div style="margin-top:14px;padding:10px 14px;background:var(--c-green-50);border-radius:6px;font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--c-green-700);letter-spacing:.12em;text-transform:uppercase;" data-i18n="road.p3.out">Outcome · Skill library operational, quality measurable</div>
+      </div>
+    </div>
+  </div>
+  <p class="caption" data-i18n="road.body">The goal of 90 days is not perfect skills. It is a repeatable process for making skills better. The playbook from day 90 is what scales to the rest of the organization.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 27 · CLOSING
+═══════════════════════════════════════════════ -->
+<section class="slide slide--dark" data-label="Thank you" data-theme="dark">
+  <div class="eyebrow" style="--accent:var(--c-green-500);" data-i18n="end.eyebrow">Thank you</div>
+  <h2 class="title" data-i18n="end.title">Let us talk.</h2>
+  <p class="body-large" data-i18n="end.body">If your team is using GitHub Copilot but routing all tasks to the same generalist agent, the conversation starts by mapping your task shapes to the decision tree. One hour of routing design can reduce average token spend by 30% and improve output consistency across the team.</p>
+  <div class="meta-grid" style="border-top-color:var(--dark-rule);margin-top:48px;max-width:1100px;">
+    <div class="meta-item"><span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="end.lbl.contact">Contact</span><span class="meta-value" style="color:var(--dark-ink);">@paulasilvatech</span></div>
+    <div class="meta-item"><span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="end.lbl.role">Role</span><span class="meta-value" style="color:var(--dark-ink);">AI-Native Software Engineer</span></div>
+    <div class="meta-item"><span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="end.lbl.playbook">Playbook</span><span class="meta-value" style="color:var(--dark-ink);">agenticdevops.platform.com</span></div>
+    <div class="meta-item"><span class="meta-label" style="color:var(--dark-ink-3);" data-i18n="end.lbl.next">Next</span><span class="meta-value" style="color:var(--dark-ink);" data-i18n="end.next">Deck 04: Hooks, CLI &amp; SDK</span></div>
+  </div>
+</section>
+
+</div><!-- .deck -->
+
+<script>
+/* ═══════════════ I18N DATA ═══════════════ */
+const I18N = {
+  en: {
+    "meta.title":"GitHub Copilot Mastery · Deck 03: Skills & Agents",
+    "lbl.series":"Series","lbl.deck":"Deck","lbl.next":"Next","lbl.author":"Author","lbl.interactive":"interactive",
+    "cover.eyebrow":"GitHub Copilot Mastery · Deck 03","cover.kw1":"Skills","cover.amp":"&","cover.kw2":"Agents.",
+    "cover.tagline":"Routing work inside GitHub Copilot.",
+    "cover.subtitle":"How custom agents, generalist agents, and skills compose to handle any engineering task with the right tool at the right scope.",
+    "cover.series":"Copilot Mastery","cover.next":"Hooks, CLI & SDK",
+    "agenda.eyebrow":"Agenda · Deck 03","agenda.title":"Five parts. One through-line: the right agent for the right task.",
+    "agenda.i1":"Why routing matters: the cost of always using the same hammer",
+    "agenda.i2":"Skills: anatomy, lifecycle, and the five-section structure",
+    "agenda.i3":"Custom agents: identity, tools, scope, .agent.md",
+    "agenda.i4":"Orchestration: how agents and skills compose into pipelines",
+    "agenda.i5":"Diagnostics, anti-patterns, and Monday checklist",
+    "who.eyebrow":"Who is speaking","who.title":"Paula Silva, <span class=\"accent-green\">AI-Native Software Engineer</span>.",
+    "who.body":"I work with enterprise engineering teams across Brazil and Latin America on agentic AI, platform engineering and software modernization. This deck distills a pattern seen across dozens of clients: teams routing all work to the same generalist agent get stuck. Teams that route through the right agent-skill combination scale.",
+    "who.sub":"Pioneering software development with Agentic DevOps Platform.",
+    "p1.eyebrow":"Part I","p1.title":"Why routing matters.","p1.sub":"Every task has a shape. Matching that shape to the right agent-skill combination is the first engineering decision that determines whether Copilot helps or halts.",
+    "stat1.eyebrow":"The routing problem","stat1.value":"3×","stat1.desc":"more context tokens consumed per task when a generalist agent handles a task that a specialized skill could answer directly. Production telemetry, GitHub Copilot Enterprise, Q1 2026.","stat1.src":"Source: GitHub Copilot Enterprise usage telemetry, enterprise sample Q1 2026.",
+    "bench.eyebrow":"The capability gap","bench.title":"Task difficulty scales 7× from bug fix to feature. Skills close part of this gap.",
+    "bench.b1.label":"Bug fixes, clear scope","bench.b2.label":"Features, with skill context","bench.b3.label":"Features, zero context",
+    "bench.t1.tag":"SWE-bench · bugs","bench.t1.desc":"Well-scoped, isolated. Skill context has marginal effect because requirements are already precise.",
+    "bench.t2.tag":"FeatureBench + skill","bench.t2.desc":"Skill context closes ~27 percentage points of the gap by providing architecture patterns, coding conventions, and domain vocabulary.",
+    "bench.t3.tag":"FeatureBench · no context","bench.t3.desc":"POCs on bug fixes overestimate capability 7× when extrapolated to feature work with no domain context loaded.",
+    "bench.src":"Source: FeatureBench, accepted ICLR 2026. Claude Opus 4.5 scores.",
+    "split1.eyebrow":"Part I · Two agent types","split1.title":"Two types of agent. One fundamental difference in tool access and identity.",
+    "split1.l.tag":"Generalist agent","split1.l.title":"Workspace tools, loaded skills",
+    "split1.l.p1":"Default orchestrator, handles 70-80% of tasks","split1.l.p2":"No dedicated .agent.md identity file","split1.l.p3":"Augmented by SKILL.md when domain knowledge needed","split1.l.p4":"Tools are workspace-level and shared","split1.l.p5":"Appropriate for domain knowledge tasks (Shape A)",
+    "split1.r.tag":"Custom agent","split1.r.title":"Exclusive tools, defined identity, bounded scope",
+    "split1.r.p1":"Defined by .agent.md: identity, tone, tool list, scope","split1.r.p2":"Dedicated MCP server connections, not shared","split1.r.p3":"Bounded domain: security, testing, infra, docs","split1.r.p4":"Receives tasks via handoff, returns typed artifacts","split1.r.p5":"Appropriate for specialized identity tasks (Shape B)",
+    "split1.body":"The generalist handles 70-80% of tasks in a mature workspace. Custom agents handle the 20-30% requiring exclusive tool access, distinct identity, or multi-stage handoffs.",
+    "p2.tag":"Part II · Skills","p2.title":"Anatomy, lifecycle, and the five-section structure.","p2.sub":"A SKILL.md is not a prompt, not a config, not a script. It is a domain-specific knowledge artifact with a lifecycle, a maturity model, and three activation modes.",
+    "skilanat.eyebrow":"Part II · SKILL.md anatomy","skilanat.title":"Five sections. Every skill has all five. No exceptions.",
+    "skilanat.s1.title":"Description + SFA test","skilanat.s1.desc":"YAML frontmatter: name, description, globs, alwaysApply. Scope, Format, Audience must be explicit.",
+    "skilanat.s2.title":"Domain rules","skilanat.s2.desc":"Non-negotiable constraints, conventions, naming, anti-patterns. The hard knowledge of the domain.",
+    "skilanat.s3.title":"Step-by-step workflow","skilanat.s3.desc":"Numbered sequential steps explicit enough to be reproducible. References to tools and scripts.",
+    "skilanat.s4.title":"Output templates","skilanat.s4.desc":"Concrete examples: format, structure, file naming. The agent matches templates, not imagination.",
+    "skilanat.s5.title":"Validation checklist","skilanat.s5.desc":"Pass/fail criteria applied before delivery. If any item fails, the agent revises. Quality gate built into the skill.",
+    "lifecycle.eyebrow":"Part II · Skill lifecycle","lifecycle.title":"Three phases, seven steps. From idea to distributed, production-ready skill.",
+    "lc.p1.tag":"Phase 01 · Essential","lc.p1.title":"Every skill needs these three",
+    "lc.p2.tag":"Phase 02 · Optional","lc.p2.title":"Add power and references",
+    "lc.p3.tag":"Phase 03 · Quality","lc.p3.title":"Validate before distribution",
+    "lc.s1":"Identify: purpose, SFA test, naming convention, folder structure.","lc.s2":"Create SKILL.md: YAML frontmatter, all five sections, concrete output examples.","lc.s3":"Distribution scope: workspace-wide, folder-scoped, or project-specific. Configure applyTo and globs.","lc.s4":"Automation scripts: Python, Bash, or Node.js. Shebangs, arg validation, error handling.","lc.s5":"Enrich: external docs, API links, example outputs, pre-built templates, data files.","lc.s6":"Test end-to-end with real prompts. Every section must produce expected output. Run all checklist items.","lc.s7":"Distribute: publish to scope, validate glob match discovery, confirm another agent can invoke it.",
+    "lifecycle.body":"Level 1 is ~40 lines. Level 5 includes scripts, CI validation, and automated tests. Most enterprise skills operate well at level 3.",
+    "skillmat.eyebrow":"Part II · Skill maturity model","skillmat.title":"Five levels. Start at 1. Ship at 3. Automate to 5.",
+    "sm.l1.title":"Basic","sm.l1.desc":"SKILL.md body only. ~40 lines. Covers description and workflow. No templates, no checklist. Usable but fragile.",
+    "sm.l2.title":"Structured","sm.l2.desc":"All five sections. References and output templates complete. Checklist operational. Single-user production ready.",
+    "sm.l3.title":"Enriched","sm.l3.desc":"Scripts, portal references, enriched content. Multiple examples. Glob patterns tuned. Team distribution ready.",
+    "sm.l4.title":"Validated","sm.l4.desc":"Automated tests, CI gate. Cannot ship unless tests pass. Intent debt tracked weekly.",
+    "sm.l5.title":"Production","sm.l5.desc":"Full pipeline. Version-pinned releases. Cross-workspace registry. Automated promotion via CI.",
+    "skillmat.body":"Most teams start with level 1 skills that work. The cost comes when level 1 skills proliferate without promotion.",
+    "activ.eyebrow":"Part II · Three activation modes","activ.title":"The agent does not guess. It matches one of three modes.","activ.body":"Three modes, three trade-offs. Glob match is efficient. alwaysApply costs tokens on every call. Explicit invoke requires routing awareness.",
+    "p3.tag":"Part III · Custom agents","p3.title":"Identity, tools, scope, and the .agent.md contract.","p3.sub":"A custom agent is a software component with a defined identity, exclusive tool access, a bounded scope, and a structured handoff protocol.",
+    "agentmd.eyebrow":"Part III · .agent.md anatomy","agentmd.title":"Six sections define a custom agent. The .agent.md is the contract with the orchestrator.",
+    "amd.s1.title":"Identity and persona","amd.s1.desc":"Name, role, tone, domain. Who this agent is, not just what it does.",
+    "amd.s2.title":"Tool manifest","amd.s2.desc":"Which MCP servers, CLIs, and APIs this agent has exclusive access to. No shared-by-default.",
+    "amd.s3.title":"Scope and boundaries","amd.s3.desc":"What this agent handles. What it explicitly refuses. Prevents scope creep.",
+    "amd.s4.title":"Input / output contracts","amd.s4.desc":"What handoff payload the agent accepts. What typed artifact it returns.",
+    "amd.s5.title":"Skills loaded","amd.s5.desc":"Which SKILL.md files this agent loads. Custom agents also use skills for domain knowledge.",
+    "amd.s6.title":"Escalation rules","amd.s6.desc":"When to return to orchestrator without completing. Which conditions require human review.",
+    "agentex.eyebrow":"Part III · Four real agents","agentex.title":"Four agents. Each one exists because no skill alone was enough.",
+    "ae.a1.tag":"Security agent","ae.a1.title":"Vault + SAST","ae.a1.desc":"Exclusive: HashiCorp Vault MCP, Semgrep CLI, Snyk API. Rigorous, evidence-based tone. Produces security-report.md with CVSS scores. Escalates on critical CVE.","ae.a1.tools":"vault-mcp · semgrep · snyk",
+    "ae.a2.tag":"Test agent","ae.a2.title":"CI/CD integration","ae.a2.desc":"Exclusive: GitHub Actions MCP, Jest runner, coverage tool. Generates test suites from acceptance criteria. Executes them, returns results. Escalates on flaky tests.","ae.a2.tools":"actions-mcp · jest · coverage",
+    "ae.a3.tag":"Modernization agent","ae.a3.title":"IaC + migration","ae.a3.desc":"Exclusive: Terraform MCP, Azure SDK. Transforms legacy infra to IaC. Produces migration plan and diff. Escalates on data loss risk.","ae.a3.tools":"terraform-mcp · azure-sdk",
+    "ae.a4.tag":"Documentation agent","ae.a4.title":"Docs + publishing","ae.a4.desc":"Exclusive: Confluence MCP, brand style guide. Friendly, clear tone. Generates and publishes structured documentation. No code review.","ae.a4.tools":"confluence-mcp · brand-skill",
+    "agentex.body":"Each agent handles one bounded domain. The ratio in a healthy workspace: ~1 custom agent per 8-12 skills.",
+    "p4.tag":"Part IV · Orchestration","p4.title":"Four-phase flow, decision tree, handoff sequence.","p4.sub":"Every request passes four phases. The routing decision is made once, in Phase 2, by applying the four-question decision tree. The orchestrator is always the hub.",
+    "orch.eyebrow":"Part IV · Four-phase orchestration","orch.title":"Every request passes four phases. Routing decided once, in Phase 2.",
+    "orch.p1.num":"Phase 01","orch.p1.title":"Entry","orch.p1.s1":"User request received by orchestrator","orch.p1.s2":"Orchestrator loads its own .agent.md identity","orch.p1.s3":"Request classified: task type detected",
+    "orch.p2.num":"Phase 02","orch.p2.title":"Analysis + routing","orch.p2.s1":"Decision tree evaluated against task type","orch.p2.s2":"Skill search: does SKILL.md exist?","orch.p2.s3":"Path A: custom agent + skill, or Path B: generalist + skill",
+    "orch.p3.num":"Phase 03","orch.p3.title":"Execution","orch.p3.s1":"Skills loaded, domain knowledge injected","orch.p3.s2":".instructions.md applied automatically","orch.p3.s3":"Task executed with full context",
+    "orch.p4.num":"Phase 04","orch.p4.title":"Validation + delivery","orch.p4.s1":"Output validated against skill checklist","orch.p4.s2":"Quality gate: format, content, conventions","orch.p4.s3":"Final response delivered to user",
+    "orch.body":"The orchestrator is the only agent the user interacts with directly. Agents never communicate directly with each other.",
+    "dtree.eyebrow":"Part IV · Decision tree","dtree.title":"Four yes/no questions. One of three outcomes. No ambiguity.",
+    "dt.q1":"Does the task require exclusive tool access? (MCP, API, CLI)","dt.q1.yes":"Custom agent + skill. No generalist agent has exclusive tool access.","dt.q1.no":"Continue to next question.",
+    "dt.q2":"Does the task require a distinct identity or tone? (e.g. rigorous security)","dt.q2.yes":"Custom agent + skill. Identity is in .agent.md, not improvised per call.","dt.q2.no":"Continue to next question.",
+    "dt.q3":"Is this a multi-stage pipeline with handoffs between agents?","dt.q3.yes":"Custom agent pipeline. Each stage needs a bounded agent to maintain output contract.","dt.q3.no":"Continue to final question.",
+    "dt.q4":"Does a SKILL.md exist that covers this domain?","dt.q4.yes":"Generalist agent + skill. Load it and proceed.","dt.q4.no":"Generalist only. Or: create the skill first.",
+    "dt.o1.tag":"Custom agent + skill","dt.o1.title":"Specialized pipeline","dt.o1.desc":"Has .agent.md, own tools, bounded scope.",
+    "dt.o2.tag":"Generalist + skill","dt.o2.title":"Domain-augmented","dt.o2.desc":"No .agent.md. 70-80% of tasks.",
+    "dt.o3.tag":"Generalist only","dt.o3.title":"General task","dt.o3.desc":"Simple task. Or: signal to create the skill.",
+    "handoff.eyebrow":"Part IV · Multi-agent handoff · How work flows from agent to agent","handoff.title":"Four handoffs. One orchestrator. Zero direct agent-to-agent calls.","handoff.body":"Context accumulates at every handoff. Security receives code + tests + plan. No handoff loses prior work. The orchestrator is hub.",
+    "sim.title":"Adjust task parameters. See which path the decision tree picks.","sim.label":"Task configurator · adjust for your task",
+    "sim.s1.title":"Exclusive tool access needed?","sim.s1.sub":"0 = none · 5 = critical (vault, CI/CD, infra)",
+    "sim.s2.title":"Distinct identity or tone required?","sim.s2.sub":"0 = generic · 5 = specialized (security, legal)",
+    "sim.s3.title":"Multi-stage pipeline with handoffs?","sim.s3.sub":"0 = single step · 5 = 4+ agents in sequence",
+    "sim.s4.title":"Relevant SKILL.md exists?","sim.s4.sub":"0 = no skill · 5 = mature level 3+ skill",
+    "sim.result.label":"Recommended path",
+    "sim.default.path":"Generalist agent + skill","sim.default.reason":"Task has a relevant skill and no exclusive tool requirements. Path B is most efficient.",
+    "ctxacc.eyebrow":"Part IV · Context accumulation","ctxacc.title":"Each handoff carries more. Downstream agents know everything upstream produced.",
+    "ca.a1.tag":"Planning receives","ca.a1.title":"Request context","ca.a2.tag":"Coding receives","ca.a2.title":"Plan + request","ca.a3.tag":"Testing receives","ca.a3.title":"All previous + code","ca.a4.tag":"Security receives","ca.a4.title":"Complete picture",
+    "ctxacc.body":"Context accumulation is design, not side effect. Each agent receives more because it needs to produce a higher-level artifact.",
+    "p5.eyebrow":"Part V","p5.title":"Decisions and diagnostics.","p5.sub":"Anti-patterns you will meet before any best practice. Workspace diagnostic. Monday checklist.",
+    "anti.eyebrow":"Part V · Anti-patterns","anti.title":"Four anti-patterns you will meet before any best practice.",
+    "ap.a1.tag":"Anti-pattern 01","ap.a1.title":"Skill-as-megaprompt","ap.a1.desc":"A 2,000-line SKILL.md covering everything. No clear scope. Activates on every glob. Fix: split into three targeted skills, each passing the SFA test.",
+    "ap.a2.tag":"Anti-pattern 02","ap.a2.title":"Agent-for-everything","ap.a2.desc":"A single custom agent with all permissions. No bounded scope. First incident compromises the entire workspace. RBAC and scope boundaries are non-negotiable.",
+    "ap.a3.tag":"Anti-pattern 03","ap.a3.title":"Skills never versioned","ap.a3.desc":"SKILL.md files edited in place. Output quality changes silently. No rollback. Treat every SKILL.md as code: version, review, test, promote.",
+    "ap.a4.tag":"Anti-pattern 04","ap.a4.title":"Routing by intuition","ap.a4.desc":"Per-call decisions based on feel. No decision tree, no routing logic. One hour to implement the four-question tree; no budget needed.",
+    "anti.body":"Anti-patterns 01 and 02 are the most costly. Both are solved by the SFA test and decision tree applied early.",
+    "diag.eyebrow":"Part V · Workspace diagnostic","diag.title":"Six diagnostic questions. Any 'no' is a gap worth closing.",
+    "dq.q1.tag":"Q01","dq.q1.q":"Do you know every skill active in your workspace right now?","dq.q1.hint":"If no: run a skills inventory. Unknown skills with alwaysApply true are a silent token drain.",
+    "dq.q2.tag":"Q02","dq.q2.q":"Do all custom agents have a .agent.md with an explicit tool list?","dq.q2.hint":"If no: any agent using shared tools is a custom agent in name only. The tool manifest is the contract.",
+    "dq.q3.tag":"Q03","dq.q3.q":"Can you trace which skill was loaded for any given task output?","dq.q3.hint":"If no: you cannot debug quality regressions. Skill activation must be logged.",
+    "dq.q4.tag":"Q04","dq.q4.q":"Is there a routing decision tree, or does each team member decide ad hoc?","dq.q4.hint":"If ad hoc: the four-question tree takes one hour to implement.",
+    "dq.q5.tag":"Q05","dq.q5.q":"Are all skills version-controlled and reviewed before distribution?","dq.q5.hint":"If no: treat every SKILL.md as code. The lifecycle defines the promotion path.",
+    "dq.q6.tag":"Q06","dq.q6.q":"Is the ratio of custom agents to skills healthy (1:8 or better)?","dq.q6.hint":"If no: you are either over-engineering (too many agents) or under-specializing (too few skills).",
+    "mon.eyebrow":"Start · Monday","mon.title":"Five things you can do Monday with no new budget.",
+    "mon.m1":"Inventory every skill in your workspace. Note which have alwaysApply true, their line counts, and whether they have a validation checklist.",
+    "mon.m2":"Apply the SFA test to your three most-used skills. Scope, Format, Audience. Document any gap before the next team session.",
+    "mon.m3":"Print the four-question decision tree. Apply it explicitly to the next five task requests your team receives.",
+    "mon.m4":"Review your custom agents' .agent.md files. Does each have an explicit tool list, a scope boundary, and an escalation rule?",
+    "mon.m5":"Schedule a 30-day review. One metric: what percentage of tasks were routed through the decision tree?",
+    "road.eyebrow":"Start · First 90 days","road.title":"30 / 60 / 90 days. One measurable outcome per period.",
+    "road.p1.tag":"Days 1-30 · Foundation","road.p1.title":"Inventory + routing","road.p1.i1":"· Full skill inventory with SFA scores","road.p1.i2":"· Decision tree adopted by team","road.p1.i3":"· All custom agents have .agent.md reviewed","road.p1.i4":"· Skill activation logging enabled","road.p1.out":"Outcome · Routing baseline established",
+    "road.p2.tag":"Days 31-60 · Contract","road.p2.title":"Skills to level 3","road.p2.i1":"· Top 5 skills promoted to maturity level 3","road.p2.i2":"· Scripts added to automation-eligible skills","road.p2.i3":"· First pipeline: plan + code + test handoff live","road.p2.i4":"· Token consumption per task baseline measured","road.p2.out":"Outcome · First pipeline delivering typed artifacts",
+    "road.p3.tag":"Days 61-90 · Measure","road.p3.title":"Skills library live","road.p3.i1":"· Shared skill library published and discoverable","road.p3.i2":"· Decision tree applied to 80%+ of tasks","road.p3.i3":"· Token efficiency tracked weekly per skill","road.p3.i4":"· Replicable playbook for adding new skills","road.p3.out":"Outcome · Skill library operational, quality measurable",
+    "road.body":"The goal of 90 days is not perfect skills. It is a repeatable process for making skills better.",
+    "end.eyebrow":"Thank you","end.title":"Let us talk.",
+    "end.body":"If your team is using GitHub Copilot but routing all tasks to the same generalist agent, the conversation starts by mapping your task shapes to the decision tree. One hour of routing design can reduce average token spend by 30%.",
+    "end.lbl.contact":"Contact","end.lbl.role":"Role","end.lbl.playbook":"Playbook","end.lbl.next":"Next deck","end.next":"Deck 04: Hooks, CLI & SDK"
+  },
+  "pt-BR": {
+    "meta.title":"GitHub Copilot Mastery · Deck 03: Skills e Agentes",
+    "lbl.series":"Série","lbl.deck":"Deck","lbl.next":"Próximo","lbl.author":"Autora","lbl.interactive":"interativo",
+    "cover.eyebrow":"GitHub Copilot Mastery · Deck 03","cover.kw1":"Skills","cover.amp":"e","cover.kw2":"Agentes.",
+    "cover.tagline":"Roteando trabalho dentro do GitHub Copilot.",
+    "cover.subtitle":"Como agentes customizados, agentes generalistas e skills se compõem para lidar com qualquer tarefa de engenharia com a ferramenta certa no escopo certo.",
+    "cover.series":"Copilot Mastery","cover.next":"Hooks, CLI e SDK",
+    "p1.eyebrow":"Parte I","p1.title":"Por que roteamento importa.","p1.sub":"Toda tarefa tem uma forma. Casar essa forma com a combinação certa de agente e skill é a primeira decisão de engenharia que determina se o Copilot ajuda ou trava.",
+    "stat1.eyebrow":"O problema de roteamento","stat1.value":"3×","stat1.desc":"mais tokens de contexto consumidos por tarefa quando um agente generalista lida com uma tarefa que uma skill especializada poderia responder diretamente.","stat1.src":"Fonte: Telemetria de uso do GitHub Copilot Enterprise, Q1 2026.",
+    "end.eyebrow":"Obrigada","end.title":"Vamos conversar.",
+    "end.body":"Se seu time usa o GitHub Copilot mas roteia todas as tarefas para o mesmo agente generalista, a conversa começa mapeando as formas de tarefa para a árvore de decisão.",
+    "end.lbl.contact":"Contato","end.lbl.role":"Papel","end.lbl.playbook":"Playbook","end.lbl.next":"Próximo deck","end.next":"Deck 04: Hooks, CLI e SDK",
+    "who.eyebrow":"Quem está apresentando","who.title":"Paula Silva, <span class=\"accent-green\">AI-Native Software Engineer</span>.",
+    "who.body":"Trabalho com times de engenharia enterprise no Brasil e América Latina em IA agêntica, platform engineering e modernização de software. Este deck destila um padrão visto em dezenas de clientes: times que roteiam tudo para o mesmo agente generalista travam. Times que usam a combinação certa de agente e skill escalam.",
+    "who.sub":"Pioneira em desenvolvimento de software com Agentic DevOps Platform.",
+    "p5.eyebrow":"Parte V","p5.title":"Decisões e diagnósticos.","p5.sub":"Anti-padrões que você vai encontrar antes de qualquer boa prática. Diagnóstico do workspace. Checklist da segunda-feira."
+  },
+  "es": {
+    "meta.title":"GitHub Copilot Mastery · Deck 03: Skills y Agentes",
+    "lbl.series":"Serie","lbl.deck":"Deck","lbl.next":"Siguiente","lbl.author":"Autora","lbl.interactive":"interactivo",
+    "cover.eyebrow":"GitHub Copilot Mastery · Deck 03","cover.kw1":"Skills","cover.amp":"y","cover.kw2":"Agentes.",
+    "cover.tagline":"Enrutando trabajo dentro de GitHub Copilot.",
+    "cover.subtitle":"Cómo los agentes personalizados, los agentes generalistas y las skills se componen para manejar cualquier tarea de ingeniería con la herramienta correcta en el alcance correcto.",
+    "cover.series":"Copilot Mastery","cover.next":"Hooks, CLI y SDK",
+    "p1.eyebrow":"Parte I","p1.title":"Por qué importa el enrutamiento.","p1.sub":"Cada tarea tiene una forma. Hacer coincidir esa forma con la combinación correcta de agente y skill es la primera decisión de ingeniería.",
+    "stat1.eyebrow":"El problema de enrutamiento","stat1.value":"3×","stat1.desc":"más tokens de contexto consumidos por tarea cuando un agente generalista maneja una tarea que una skill especializada podría responder directamente.","stat1.src":"Fuente: Telemetría de uso de GitHub Copilot Enterprise, Q1 2026.",
+    "end.eyebrow":"Gracias","end.title":"Hablemos.",
+    "end.body":"Si tu equipo usa GitHub Copilot pero enruta todas las tareas al mismo agente generalista, la conversación empieza mapeando las formas de tarea al árbol de decisiones.",
+    "end.lbl.contact":"Contacto","end.lbl.role":"Rol","end.lbl.playbook":"Playbook","end.lbl.next":"Siguiente deck","end.next":"Deck 04: Hooks, CLI y SDK",
+    "who.eyebrow":"Quién presenta","who.title":"Paula Silva, <span class=\"accent-green\">AI-Native Software Engineer</span>.",
+    "who.body":"Trabajo con equipos de ingeniería enterprise en Brasil y América Latina en IA agéntica, platform engineering y modernización de software. Este deck destila un patrón visto en docenas de clientes.",
+    "who.sub":"Pionera en desarrollo de software con Agentic DevOps Platform.",
+    "p5.eyebrow":"Parte V","p5.title":"Decisiones y diagnósticos.","p5.sub":"Antipatrones que encontrarás antes que cualquier buena práctica. Diagnóstico del workspace. Lista de verificación del lunes."
+  }
+};
+
+/* ═══════════════ I18N ENGINE ═══════════════ */
+function t(key, locale) {
+  return I18N[locale]?.[key] ?? I18N['en']?.[key] ?? key;
+}
+
+let currentLocale = 'en';
+
+function setLocale(locale) {
+  if (!I18N[locale]) return;
+  currentLocale = locale;
+  try { localStorage.setItem('ps-locale', locale); } catch(e){}
+  document.documentElement.setAttribute('lang', locale);
+  document.querySelectorAll('.lang-switcher__btn').forEach(b => b.setAttribute('aria-current', b.dataset.locale === locale ? 'true' : 'false'));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const val = t(el.dataset.i18n, locale);
+    if (el.tagName === 'TITLE') document.title = val;
+    else if (typeof val === 'string' && /<[a-z]/i.test(val)) el.innerHTML = val;
+    else el.textContent = val;
+  });
+  const ui = {
+    'pt-BR': {title:'Visão geral',hint:'Clique num slide · Esc para fechar',kbd:'Use <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> para navegar · <kbd>O</kbd> para visão geral'},
+    'en':    {title:'Overview',   hint:'Click a slide · Esc to close',        kbd:'Use <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> to navigate · <kbd>O</kbd> for overview'},
+    'es':    {title:'Vista general',hint:'Clic en slide · Esc para cerrar',   kbd:'Usa <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> para navegar · <kbd>O</kbd> para vista general'}
+  }[locale] || {};
+  document.getElementById('overviewTitle').textContent = ui.title || '';
+  document.getElementById('overviewHint').textContent  = ui.hint  || '';
+  const kbdEl = document.getElementById('kbdHint');
+  if (kbdEl && ui.kbd) kbdEl.innerHTML = ui.kbd;
+  if (document.getElementById('overviewGrid').children.length > 0) buildOverview();
+  updateSimLabels();
+}
+
+/* ═══════════════ SLIDE ENGINE ═══════════════ */
+let currentSlide = 0;
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total   = slides.length;
+
+function goToSlide(n) {
+  if (n < 0 || n >= total) return;
+  if (slides[currentSlide]) slides[currentSlide].removeAttribute('data-active');
+  currentSlide = n;
+  const s = slides[currentSlide];
+  s.setAttribute('data-active', 'true');
+  const pct = ((currentSlide + 1) / total) * 100;
+  document.getElementById('deckProgress').style.width = pct + '%';
+  document.getElementById('counter').textContent = `${currentSlide + 1} / ${total}`;
+  document.body.setAttribute('data-slide-theme', s.dataset.theme === 'dark' ? 'dark' : 'light');
+  document.querySelectorAll('.overview-card').forEach((c, i) => c.classList.toggle('active', i === currentSlide));
+}
+
+/* ═══════════════ OVERVIEW ═══════════════ */
+const overviewEl = document.getElementById('overview');
+function buildOverview() {
+  const grid = document.getElementById('overviewGrid');
+  grid.innerHTML = '';
+  slides.forEach((s, i) => {
+    const c = document.createElement('div');
+    c.className = 'overview-card' + (i === currentSlide ? ' active' : '');
+    c.tabIndex = 0;
+    c.innerHTML = `<div class="overview-card__num">Slide ${String(i+1).padStart(2,'0')}</div><div class="overview-card__label">${s.dataset.label||''}</div>`;
+    c.onclick = () => { goToSlide(i); toggleOverview(); };
+    c.onkeydown = e => { if (e.key==='Enter'||e.key===' ') { goToSlide(i); toggleOverview(); } };
+    grid.appendChild(c);
+  });
+}
+function toggleOverview() {
+  const open = overviewEl.classList.contains('active');
+  if (open) { overviewEl.classList.remove('active'); overviewEl.setAttribute('aria-hidden','true'); }
+  else { buildOverview(); overviewEl.classList.add('active'); overviewEl.setAttribute('aria-hidden','false'); }
+}
+
+/* ═══════════════ KEYBOARD ═══════════════ */
+document.addEventListener('keydown', e => {
+  if (overviewEl.classList.contains('active')) {
+    if (e.key==='Escape'||e.key==='o') { toggleOverview(); e.preventDefault(); }
+    return;
+  }
+  if (e.key==='ArrowRight'||e.key===' ') { goToSlide(currentSlide+1); e.preventDefault(); }
+  if (e.key==='ArrowLeft') { goToSlide(currentSlide-1); e.preventDefault(); }
+  if (e.key==='Home') { goToSlide(0); e.preventDefault(); }
+  if (e.key==='End')  { goToSlide(total-1); e.preventDefault(); }
+  if (e.key==='o'||e.key==='Escape') { toggleOverview(); e.preventDefault(); }
+});
+document.getElementById('btnPrev').onclick = () => goToSlide(currentSlide-1);
+document.getElementById('btnNext').onclick = () => goToSlide(currentSlide+1);
+document.querySelectorAll('.lang-switcher__btn').forEach(b => b.onclick = () => setLocale(b.dataset.locale));
+
+/* ═══════════════ ROUTING SIMULATOR ═══════════════ */
+function initRoutingSim() {
+  const slTool  = document.getElementById('slTool');
+  const slTone  = document.getElementById('slTone');
+  const slPipe  = document.getElementById('slPipe');
+  const slSkill = document.getElementById('slSkill');
+  if (!slTool) return;
+
+  function update() {
+    const tool  = parseInt(slTool.value);
+    const tone  = parseInt(slTone.value);
+    const pipe  = parseInt(slPipe.value);
+    const skill = parseInt(slSkill.value);
+
+    document.getElementById('slToolVal').textContent  = tool;
+    document.getElementById('slToneVal').textContent  = tone;
+    document.getElementById('slPipeVal').textContent  = pipe;
+    document.getElementById('slSkillVal').textContent = skill;
+
+    const panel = document.getElementById('simResult');
+    const pathEl = document.getElementById('simPath');
+    const reasonEl = document.getElementById('simReason');
+    const decsEl = document.getElementById('simDecisions');
+
+    const decisions = [];
+    let path, color, borderColor;
+
+    if (tool >= 3) {
+      path = 'Custom agent + skill';
+      color = '#B33816';
+      borderColor = 'var(--c-red-500)';
+      decisions.push({q:'Q1: Exclusive tool access?', a:'YES → Custom agent required', ok:true});
+    } else if (tone >= 3) {
+      path = 'Custom agent + skill';
+      color = '#B33816';
+      borderColor = 'var(--c-red-500)';
+      decisions.push({q:'Q1: Exclusive tool access?', a:'No, continue', ok:false});
+      decisions.push({q:'Q2: Distinct identity/tone?', a:'YES → Custom agent required', ok:true});
+    } else if (pipe >= 3) {
+      path = 'Custom agent pipeline';
+      color = '#B88500';
+      borderColor = 'var(--c-yellow-500)';
+      decisions.push({q:'Q1: Exclusive tool access?', a:'No, continue', ok:false});
+      decisions.push({q:'Q2: Distinct identity/tone?', a:'No, continue', ok:false});
+      decisions.push({q:'Q3: Multi-stage pipeline?', a:'YES → Orchestrated pipeline', ok:true});
+    } else if (skill >= 2) {
+      path = 'Generalist agent + skill';
+      color = '#5A8500';
+      borderColor = 'var(--c-green-500)';
+      decisions.push({q:'Q1: Exclusive tool access?', a:'No, continue', ok:false});
+      decisions.push({q:'Q2: Distinct identity/tone?', a:'No, continue', ok:false});
+      decisions.push({q:'Q3: Multi-stage pipeline?', a:'No, continue', ok:false});
+      decisions.push({q:'Q4: Relevant SKILL.md exists?', a:'YES → Load skill and proceed', ok:true});
+    } else {
+      path = 'Generalist only (or create a skill)';
+      color = '#0076AC';
+      borderColor = 'var(--c-blue-500)';
+      decisions.push({q:'Q1: Exclusive tool access?', a:'No', ok:false});
+      decisions.push({q:'Q2: Distinct identity/tone?', a:'No', ok:false});
+      decisions.push({q:'Q3: Multi-stage pipeline?', a:'No', ok:false});
+      decisions.push({q:'Q4: Relevant SKILL.md exists?', a:'No → Generalist only. Consider creating the skill.', ok:false});
+    }
+
+    pathEl.textContent = path;
+    pathEl.style.color = color;
+    panel.style.borderLeftColor = borderColor;
+
+    const reasons = {
+      'Custom agent + skill': 'Task requires exclusive tool access or specialized identity. Path A: delegate to named sub-agent with its own .agent.md and tools.',
+      'Custom agent pipeline': 'Multi-stage task requiring sequential handoffs between specialized agents. Each stage produces typed artifacts for the next.',
+      'Generalist agent + skill': 'Task has a relevant skill and no exclusive tool requirements. Path B is most token-efficient: load skill, execute, validate.',
+      'Generalist only (or create a skill)': 'No special requirements found. Handle directly with generalist agent. If this task type recurs, invest in creating a SKILL.md for it.'
+    };
+    reasonEl.textContent = reasons[path] || '';
+
+    decsEl.innerHTML = decisions.map(d =>
+      `<div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;border-radius:6px;background:${d.ok?'var(--c-green-50)':'var(--bg-alt)'};">
+        <span style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:${d.ok?'var(--c-green-700)':'var(--ink-3)'};text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;">${d.ok?'✓':'→'}</span>
+        <span style="font-size:12px;color:var(--ink-2);line-height:1.4;"><strong style="color:var(--ink);">${d.q}</strong> ${d.a}</span>
+      </div>`
+    ).join('');
+  }
+
+  slTool.addEventListener('input', update);
+  slTone.addEventListener('input', update);
+  slPipe.addEventListener('input', update);
+  slSkill.addEventListener('input', update);
+  update();
+}
+
+function updateSimLabels() {
+  // re-run to update language if needed
+}
+
+/* ═══════════════ INIT ═══════════════ */
+(function init() {
+  const saved = (() => { try { return localStorage.getItem('ps-locale'); } catch { return null; }})();
+  const browser = navigator.language?.startsWith('pt') ? 'pt-BR' : navigator.language?.startsWith('es') ? 'es' : 'en';
+  setLocale(saved || browser);
+  goToSlide(0);
+  buildOverview();
+  initRoutingSim();
+  const kbdEl = document.getElementById('kbdHint');
+  let shown = false;
+  setTimeout(() => {
+    if (!shown) {
+      kbdEl.setAttribute('data-visible','true'); shown = true;
+      setTimeout(() => kbdEl.setAttribute('data-visible','false'), 4500);
+    }
+  }, 1500);
+})();
+</script>
+</body>
+</html>

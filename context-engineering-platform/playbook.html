@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Context Platform Stack · Playbook · Paula Silva</title>
+<meta name="description" content="Seven-chapter consolidated playbook for the Context Platform Stack.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Context Platform Stack · Playbook · Paula Silva">
+<meta property="og:description" content="Seven-chapter consolidated playbook for the Context Platform Stack.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Context Platform Stack · Playbook · Paula Silva">
+<meta name="twitter:description" content="Seven-chapter consolidated playbook for the Context Platform Stack.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/playbook.css">
+</head>
+<body class="acc-yellow">
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+
+<section class="doc-hero">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <div class="doc-hero__eyebrow">Playbook · v1.3.0 · 2026-04-11</div>
+    <h1 class="doc-hero__title">
+      <span data-lang="en" class="lang-active">The Context Platform Stack: a four-layer playbook.</span>
+      <span data-lang="pt-br">The Context Platform Stack: um playbook de quatro camadas.</span>
+      <span data-lang="es">The Context Platform Stack: un playbook de cuatro capas.</span>
+    </h1>
+    <p class="doc-hero__lead">
+      <span data-lang="en" class="lang-active">Seven chapters that explain the engineering disciplines AI-native systems require. Read in order, or jump to the layer you are wrestling with today.</span>
+      <span data-lang="pt-br">Sete capítulos que explicam as disciplinas de engenharia que sistemas AI-native exigem. Leia em ordem, ou pule para a camada onde você está hoje.</span>
+      <span data-lang="es">Siete capítulos que explican las disciplinas de ingeniería que los sistemas AI-native exigen. Lee en orden, o salta a la capa con la que estás lidiando hoy.</span>
+    </p>
+  </div>
+</section>
+
+<div class="doc">
+
+  <aside class="toc">
+    <h4>Chapters</h4>
+    <a href="#ch00" class="active">00. Introduction</a>
+    <a href="#ch01">01. Cloud &amp; Infra</a>
+    <a href="#ch02">02. Platform Engineering</a>
+    <a href="#ch03">03. Context Engineering</a>
+    <a href="#ch04">04. Intent Engineering</a>
+    <a href="#ch05">05. Integration Playbook</a>
+    <a href="#ch06">06. Harness Engineering</a>
+  </aside>
+
+  <article class="article">
+
+    <section id="ch00">
+      <h2>00. <span data-lang="en" class="lang-active">The agent cemetery problem</span><span data-lang="pt-br">O problema do cemitério de agentes</span><span data-lang="es">El problema del cementerio de agentes</span></h2>
+      <div data-lang="en" class="lang-active">
+        <p>I have watched it happen at dozens of LATAM enterprises. A team builds an agent, it works in the proof-of-concept, then it dies in production. Gartner forecasts that 40% of enterprise applications will feature task-specific AI agents by 2026, up from less than 5% in 2025. That is growth. But there is a darker story underneath the optimism.</p>
+        <p>Deloitte surveyed 3,235 respondents across 24 countries in 2026 and found that 75% of enterprises plan agentic AI deployment within two years. Only 34% report using AI to deeply transform their business. The gap between intention and transformation is not luck. It is engineering debt. And it is predictable.</p>
+        <p>This playbook exists because that pattern is not inevitable. It is engineered.</p>
+        <h3>Three types of debt in AI-native development</h3>
+        <ul>
+          <li><strong>Technical debt.</strong> Familiar. Fragile dependencies, brittle tests, accumulated patches.</li>
+          <li><strong>Cognitive debt.</strong> When developers accept AI-generated code without understanding it. The codebase becomes orphaned knowledge.</li>
+          <li><strong>Intent debt.</strong> When objectives, constraints, and decision rationale are never captured in artifacts. The agent optimizes for the wrong thing when context shifts.</li>
+        </ul>
+      </div>
+      <div data-lang="pt-br">
+        <p>Eu vi isso acontecer em dezenas de empresas LATAM. Um time constrói um agente, ele funciona no PoC, e morre em produção. Gartner prevê que 40% das aplicações corporativas terão agentes task-specific até 2026, acima de menos de 5% em 2025. Isso é crescimento. Mas há uma história mais escura embaixo do otimismo.</p>
+        <p>A Deloitte pesquisou 3.235 respondentes em 24 países em 2026 e descobriu que 75% das empresas planejam deploy de IA agêntica em dois anos. Apenas 34% relatam usar IA para transformar profundamente o negócio. O gap entre intenção e transformação não é sorte. É dívida de engenharia. E é previsível.</p>
+        <p>Este playbook existe porque esse padrão não é inevitável. Ele é engenheirado.</p>
+        <h3>Três tipos de dívida no desenvolvimento AI-native</h3>
+        <ul>
+          <li><strong>Dívida técnica.</strong> Familiar. Dependências frágeis, testes quebradiços, patches acumulados.</li>
+          <li><strong>Dívida cognitiva.</strong> Quando devs aceitam código gerado por IA sem entender. A base vira conhecimento órfão.</li>
+          <li><strong>Dívida de intenção.</strong> Quando objetivos, restrições e racional de decisão nunca são capturados. O agente otimiza para a coisa errada quando o contexto muda.</li>
+        </ul>
+      </div>
+      <div data-lang="es">
+        <p>Lo he visto pasar en decenas de empresas de LATAM. Un equipo construye un agente, funciona en el PoC, y muere en producción. Gartner pronostica que el 40% de las aplicaciones corporativas tendrán agentes task-specific en 2026, frente a menos del 5% en 2025. Eso es crecimiento. Pero hay una historia más oscura debajo del optimismo.</p>
+        <p>Deloitte encuestó a 3,235 respondedores en 24 países en 2026 y encontró que el 75% de las empresas planean despliegue de IA agéntica en dos años. Solo el 34% reportan usar IA para transformar profundamente el negocio. El gap entre intención y transformación no es suerte. Es deuda de ingeniería. Y es predecible.</p>
+        <p>Este playbook existe porque ese patrón no es inevitable. Está ingenierizado.</p>
+      </div>
+    </section>
+
+    <section id="ch01">
+      <h2>01. <span data-lang="en" class="lang-active">Cloud &amp; infrastructure</span><span data-lang="pt-br">Cloud &amp; infraestrutura</span><span data-lang="es">Cloud &amp; infraestructura</span></h2>
+      <p data-lang="en" class="lang-active">Layer 01 answers a simple question: where do agents run, and at what cost? GPU, Kubernetes, networking, storage, and the CNCF service mesh. The patterns are mature. The discipline is to keep this layer boring so the layers above can change fast.</p>
+      <p data-lang="pt-br">A camada 01 responde uma pergunta simples: onde os agentes rodam, e a que custo? GPU, Kubernetes, networking, storage e o service mesh CNCF. Os padrões são maduros. A disciplina é manter essa camada chata para que as camadas acima possam mudar rápido.</p>
+      <p data-lang="es">La capa 01 responde a una pregunta simple: ¿dónde corren los agentes, y a qué costo? GPU, Kubernetes, networking, storage y el service mesh CNCF. Los patrones son maduros. La disciplina es mantener esta capa aburrida para que las capas de arriba puedan cambiar rápido.</p>
+      <p><a href="01_Cloud_Infra_Foundation_v1_1_0_2026-04-11.md">→ Full chapter (Markdown source)</a></p>
+    </section>
+
+    <section id="ch02">
+      <h2>02. <span data-lang="en" class="lang-active">Platform engineering &amp; governance</span><span data-lang="pt-br">Platform engineering &amp; governança</span><span data-lang="es">Platform engineering &amp; gobernanza</span></h2>
+      <p data-lang="en" class="lang-active">Layer 02 answers: what can agents do, and who governs them? Internal Developer Platform, golden paths, guardrails, RBAC, secrets, audit. The four CNCF pillars (Golden Paths, Guardrails, Safety Nets, Manual Review) are the operational vocabulary of this layer.</p>
+      <p data-lang="pt-br">A camada 02 responde: o que os agentes podem fazer, e quem os governa? IDP, golden paths, guardrails, RBAC, secrets, auditoria. Os quatro pilares CNCF são o vocabulário operacional desta camada.</p>
+      <p data-lang="es">La capa 02 responde: ¿qué pueden hacer los agentes, y quién los gobierna? IDP, golden paths, guardrails, RBAC, secrets, auditoría. Los cuatro pilares CNCF son el vocabulario operacional de esta capa.</p>
+      <p><a href="02_Platform_Engineering_Governance_v1_3_0_2026-04-11.md">→ Full chapter (Markdown source)</a> · <a href="../agentic-devops-platform/landing.html">→ Related: Agentic DevOps Platform</a></p>
+    </section>
+
+    <section id="ch03">
+      <h2>03. <span data-lang="en" class="lang-active">Context engineering</span><span data-lang="pt-br">Context engineering</span><span data-lang="es">Context engineering</span></h2>
+      <p data-lang="en" class="lang-active">Layer 03 answers: what can the agent know? Four memory tiers (working, episodic, semantic, procedural), skills, MCP servers, retrieval, golden context. Source 03 formalizes this as Contextual Memory Intelligence (CMI), per Wedel (2026). The discipline is treating context as a finite resource that has cost (tokens) and decay (staleness).</p>
+      <p data-lang="pt-br">A camada 03 responde: o que o agente pode saber? Quatro camadas de memória (working, episódica, semântica, procedural), skills, servidores MCP, recuperação, golden context. A fonte 03 formaliza isso como Contextual Memory Intelligence (CMI), por Wedel (2026). A disciplina é tratar contexto como recurso finito que tem custo (tokens) e decaimento (staleness).</p>
+      <p data-lang="es">La capa 03 responde: ¿qué puede saber el agente? Cuatro capas de memoria (working, episódica, semántica, procedural), skills, servidores MCP, retrieval, golden context. La fuente 03 formaliza esto como Contextual Memory Intelligence (CMI), según Wedel (2026). La disciplina es tratar el contexto como recurso finito con costo (tokens) y decaimiento (staleness).</p>
+      <p><a href="03_Context_Engineering_v1_3_0_2026-04-11.md">→ Full chapter (Markdown source)</a> · <a href="../semantic-context-layer/landing.html">→ Related: Semantic Context Layer</a> · <a href="../token-best-practices/landing.html">→ Related: Token Management</a></p>
+    </section>
+
+    <section id="ch04">
+      <h2>04. <span data-lang="en" class="lang-active">Intent engineering</span><span data-lang="pt-br">Intent engineering</span><span data-lang="es">Intent engineering</span></h2>
+      <p data-lang="en" class="lang-active">Layer 04 answers: what should the agent optimize for? Constitutions, specifications, decision logs, policies expressed as code. Intent is the layer most teams skip first, and it is the cause of most production failures: the agent optimized for surface-level success, not actual business need.</p>
+      <p data-lang="pt-br">A camada 04 responde: para que o agente deve otimizar? Constituições, especificações, logs de decisão, políticas como código. Intent é a camada que a maioria dos times pula primeiro, e é a causa da maioria das falhas em produção: o agente otimizou para sucesso superficial, não para a necessidade real do negócio.</p>
+      <p data-lang="es">La capa 04 responde: ¿para qué debe optimizar el agente? Constituciones, especificaciones, logs de decisión, políticas como código. Intent es la capa que la mayoría de los equipos saltan primero, y es la causa de la mayoría de fallos en producción: el agente optimizó para éxito superficial, no para la necesidad real del negocio.</p>
+      <p><a href="04_Intent_Engineering_v1_3_0_2026-04-11.md">→ Full chapter (Markdown source)</a></p>
+    </section>
+
+    <section id="ch05">
+      <h2>05. <span data-lang="en" class="lang-active">Integration playbook</span><span data-lang="pt-br">Integration playbook</span><span data-lang="es">Integration playbook</span></h2>
+      <p data-lang="en" class="lang-active">How to wire the four layers together. Adoption sequence, anti-patterns, the conversations to have with security and legal before production. Rollback paths.</p>
+      <p data-lang="pt-br">Como conectar as quatro camadas. Sequência de adoção, anti-padrões, as conversas a ter com segurança e jurídico antes de produção. Caminhos de rollback.</p>
+      <p data-lang="es">Cómo conectar las cuatro capas. Secuencia de adopción, anti-patrones, las conversaciones a tener con seguridad y legal antes de producción. Rutas de rollback.</p>
+      <p><a href="05_Integration_Playbook_v1_3_0_2026-04-11.md">→ Full chapter (Markdown source)</a></p>
+    </section>
+
+    <section id="ch06">
+      <h2>06. <span data-lang="en" class="lang-active">Harness engineering</span><span data-lang="pt-br">Harness engineering</span><span data-lang="es">Harness engineering</span></h2>
+      <p data-lang="en" class="lang-active">Added in v1.3.0 as the operational pattern around the four-layer stack (not a fifth or sixth architectural layer). The evaluation harness around agents: regression suites, golden traces, canary prompts, drift detection. Without harnesses, "the agent is fine" is opinion. With them, it is data.</p>
+      <p data-lang="pt-br">Adicionado na v1.3.0 como o padrão operacional ao redor do stack de quatro camadas (não uma quinta ou sexta camada arquitetural). O arnês de avaliação dos agentes: suítes de regressão, traces dourados, prompts canário, detecção de drift. Sem arnês, "o agente está bem" é opinião. Com ele, é dado.</p>
+      <p data-lang="es">Añadido en la v1.3.0 como el patrón operativo alrededor del stack de cuatro capas (no una quinta o sexta capa arquitectónica). El arnés de evaluación de los agentes: suites de regresión, traces dorados, prompts canary, detección de drift. Sin arnés, "el agente está bien" es opinión. Con él, es dato.</p>
+      <p><a href="06_Harness_Engineering_v1_2_0_2026-04-11.md">→ Full chapter (Markdown source)</a></p>
+    </section>
+
+    <h2><span data-lang="en" class="lang-active">All chapter sources</span><span data-lang="pt-br">Todas as fontes dos capítulos</span><span data-lang="es">Todas las fuentes de los capítulos</span></h2>
+    <div class="chapter-grid">
+      <a class="chap-card" href="00_Introduction_Context_Platform_Stack_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 00</div><div class="chap-card__title">Introduction</div><div class="chap-card__desc">Agent cemetery; technical, cognitive and intent debt; four layers.</div></a>
+      <a class="chap-card" href="01_Cloud_Infra_Foundation_v1_1_0_2026-04-11.md"><div class="chap-card__num">CH 01</div><div class="chap-card__title">Cloud &amp; Infra</div><div class="chap-card__desc">Where agents run, at what cost.</div></a>
+      <a class="chap-card" href="02_Platform_Engineering_Governance_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 02</div><div class="chap-card__title">Platform &amp; Governance</div><div class="chap-card__desc">Golden paths, guardrails, IDP.</div></a>
+      <a class="chap-card" href="03_Context_Engineering_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 03</div><div class="chap-card__title">Context Engineering</div><div class="chap-card__desc">Memory, skills, MCP, golden context.</div></a>
+      <a class="chap-card" href="04_Intent_Engineering_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 04</div><div class="chap-card__title">Intent Engineering</div><div class="chap-card__desc">Constitutions, specs, decision logs.</div></a>
+      <a class="chap-card" href="05_Integration_Playbook_v1_3_0_2026-04-11.md"><div class="chap-card__num">CH 05</div><div class="chap-card__title">Integration</div><div class="chap-card__desc">Wiring it all together.</div></a>
+      <a class="chap-card" href="06_Harness_Engineering_v1_2_0_2026-04-11.md"><div class="chap-card__num">CH 06</div><div class="chap-card__title">Harness Engineering</div><div class="chap-card__desc">Eval suites, golden traces, drift.</div></a>
+    </div>
+
+    <nav class="pagenav">
+      <a href="landing.html">← Landing</a>
+      <a href="../semantic-context-layer/landing.html">Next: Semantic Context Layer →</a>
+    </nav>
+
+  </article>
+
+  <aside class="scrollspy">
+    <h4>Related</h4>
+    <a href="../agentic-devops-platform/landing.html">Agentic DevOps</a>
+    <a href="../semantic-context-layer/landing.html">Semantic Layer</a>
+    <a href="../token-best-practices/landing.html">Token Mgmt</a>
+    <a href="../legacy-modernization-framework/landing.html">Modernization</a>
+    <a href="../index.html">Hub</a>
+  </aside>
+
+</div>
+
+<script>
+window.PLAYBOOK_DATA = {
+  topicLabel: 'Context Platform Stack',
+  nextLabel: { en: 'Semantic Context Layer', "pt-br": 'Semantic Context Layer', es: 'Semantic Context Layer' },
+  nextHref: '../semantic-context-layer/landing.html'
+};
+</script>
+<script src="../_shared/playbook.js"></script>
+</body>
+</html>

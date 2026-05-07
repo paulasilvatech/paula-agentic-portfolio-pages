@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Full Agentic Engineering Platform">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Full Agentic Engineering Platform">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<title data-i18n="meta.title">Full Agentic Engineering Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --c-red-50:#FFF0EB; --c-red-100:#FFD6C7; --c-red-500:#F25022; --c-red-700:#B33816;
+  --c-green-50:#F1F8E3; --c-green-100:#D8EDA5; --c-green-500:#7FBA00; --c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD; --c-blue-100:#B8E5FA; --c-blue-500:#00A4EF; --c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0; --c-yellow-100:#FFE79C; --c-yellow-500:#FFB900; --c-yellow-700:#B88500;
+  --ink:#1A1A1A; --ink-2:#3A3A3A; --ink-3:#737373;
+  --paper:#FFFFFF; --bg:#F7F7F5; --bg-alt:#ECECE8; --rule:#E5E5E0; --rule-2:#CECEC7;
+  --dark-bg:#141414; --dark-surface:#1C1C1A; --dark-ink:#F0F0F0; --dark-ink-2:#C7C7C2; --dark-ink-3:#A8A8A4; --dark-rule:#2E2E2A;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+  --ease:cubic-bezier(0.2,0,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;}
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .18s ease-out;pointer-events:none;}
+.slide[data-active="true"]{visibility:visible;opacity:1;pointer-events:auto;}
+.slide--light{background:var(--bg);color:var(--ink);}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink);}
+.slide--paper{background:var(--paper);color:var(--ink);}
+
+.eyebrow{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--c-green-500));margin-bottom:24px;}
+.slide--dark .eyebrow{color:var(--accent,var(--c-yellow-500));}
+.title{font-size:clamp(36px,4.4vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.025em;max-width:1500px;margin-bottom:22px;text-wrap:balance;}
+.title--medium{font-size:clamp(30px,3.4vw,50px);max-width:1400px;}
+.title--small{font-size:clamp(24px,2.6vw,36px);max-width:1280px;}
+.title .accent-red{color:var(--c-red-500);} .title .accent-green{color:var(--c-green-500);} .title .accent-blue{color:var(--c-blue-500);} .title .accent-yellow{color:var(--c-yellow-500);}
+.subtitle{font-size:clamp(16px,1.5vw,22px);line-height:1.4;color:var(--ink-2);max-width:1200px;font-weight:400;text-wrap:pretty;}
+.slide--dark .subtitle{color:var(--dark-ink-2);}
+.body-large{font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--ink);max-width:1200px;margin-top:22px;text-wrap:pretty;}
+.slide--dark .body-large{color:var(--dark-ink);}
+.caption{font-size:13px;color:var(--ink-3);font-style:italic;line-height:1.5;max-width:1100px;margin-top:18px;}
+
+.section-title{font-size:clamp(48px,5.6vw,90px);font-weight:500;line-height:.98;letter-spacing:-.035em;margin:20px 0 18px;max-width:1400px;text-wrap:balance;}
+.section-number{font-family:var(--font-sans);font-size:clamp(160px,22vw,340px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-green-500));opacity:.92;}
+
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;padding-top:22px;border-top:1px solid var(--rule);margin-top:36px;max-width:1200px;}
+.meta-item{display:flex;flex-direction:column;gap:6px;}
+.meta-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);}
+.meta-value{font-size:15px;font-weight:500;line-height:1.35;}
+
+.big-number{font-family:var(--font-sans);font-size:clamp(120px,18vw,260px);font-weight:300;line-height:.85;letter-spacing:-.05em;color:var(--accent,var(--c-red-500));margin:14px 0 28px;}
+.big-number__unit{font-size:.4em;font-weight:400;color:var(--ink-2);margin-left:10px;}
+.slide--dark .big-number__unit{color:var(--dark-ink-2);}
+.big-number__sub{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:block;margin-top:10px;}
+
+.list-numbered{display:flex;flex-direction:column;gap:12px;margin-top:22px;max-width:1100px;}
+.list-numbered__item{display:grid;grid-template-columns:80px 1fr;gap:22px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule);}
+.list-numbered__num{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--ink-3);}
+.list-numbered__text{font-size:20px;font-weight:400;line-height:1.35;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1500px;margin-top:18px;}
+.split__col{display:flex;flex-direction:column;gap:14px;}
+.split__title{font-size:22px;font-weight:500;line-height:1.25;text-wrap:balance;}
+.split__kicker{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-green-500));}
+.split__body{font-size:15px;line-height:1.55;color:var(--ink-2);}
+
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1500px;margin-top:22px;}
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1500px;margin-top:22px;}
+.cards-6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1500px;margin-top:18px;}
+.card{padding:22px 22px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;gap:10px;}
+.slide--dark .card{background:var(--dark-surface);border-color:var(--dark-rule);}
+.card__kicker{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--c-green-500));}
+.card__title{font-size:18px;font-weight:500;line-height:1.25;text-wrap:balance;}
+.card__body{font-size:14px;line-height:1.5;color:var(--ink-2);}
+.slide--dark .card__body{color:var(--dark-ink-2);}
+
+.diagram-wrap{margin-top:18px;width:100%;max-width:1600px;}
+.diagram-wrap svg{width:100%;height:auto;display:block;}
+
+.deck-progress{position:fixed;top:0;left:0;height:3px;background:var(--c-green-500);transition:width .3s ease;z-index:200;}
+.deck-brand{position:fixed;top:22px;left:22px;display:flex;align-items:center;gap:10px;z-index:100;}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-2);}
+
+.lang-switcher{position:fixed;top:22px;right:22px;display:inline-flex;gap:2px;padding:3px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;font-family:var(--font-mono);z-index:100;}
+.lang-switcher__btn{padding:5px 10px;background:transparent;border:none;border-radius:3px;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);cursor:pointer;}
+.lang-switcher__btn[aria-current="true"]{background:var(--c-green-500);color:#fff;}
+body[data-slide-theme="dark"] .lang-switcher{background:var(--dark-surface);border-color:var(--dark-rule);}
+body[data-slide-theme="dark"] .lang-switcher__btn{color:var(--dark-ink-3);}
+
+.deck-controls{position:fixed;bottom:22px;right:22px;display:flex;gap:6px;z-index:100;font-family:var(--font-mono);}
+.deck-controls__btn{width:36px;height:36px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:15px;color:var(--ink);cursor:pointer;}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper);}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;background:var(--paper);border:1px solid var(--rule-2);border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--ink-2);}
+body[data-slide-theme="dark"] .deck-controls__btn{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink);}
+body[data-slide-theme="dark"] .deck-controls__counter{background:var(--dark-surface);border-color:var(--dark-rule);color:var(--dark-ink-2);}
+
+.lang-switcher__btn:focus-visible,.deck-controls__btn:focus-visible{outline:2px solid var(--c-green-500);outline-offset:2px;}
+
+a.deck-brand{text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+
+/* Overview modal (Wave 16 injection) */
+.overview { position:fixed; inset:0; background:var(--bg,#F7F7F5); z-index:500; display:none; overflow-y:auto; padding:80px 40px 40px; }
+.overview[data-open="true"] { display:block; }
+.overview__header { max-width:1600px; margin:0 auto 28px; display:flex; justify-content:space-between; align-items:baseline; padding-bottom:18px; border-bottom:1px solid var(--rule,#E5E5E0); }
+.overview__title { font-size:28px; font-weight:500; letter-spacing:-0.02em; color:var(--ink,#1A1A1A); }
+.overview__hint { font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview__grid { max-width:1600px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+.overview-card { position:relative; aspect-ratio:16/9; padding:14px 16px; border:1px solid var(--rule,#E5E5E0); border-radius:6px; background:var(--paper,#FFFFFF); text-align:left; cursor:pointer; overflow:hidden; transition:all 0.15s; font-family:inherit; }
+.overview-card:hover { border-color:var(--ink-2,#3A3A3A); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.06); }
+.overview-card__accent { position:absolute; top:0; left:0; right:0; height:3px; background:var(--card-accent,var(--c-blue-500,#00A4EF)); }
+.overview-card__num { position:absolute; top:10px; right:12px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:10px; letter-spacing:0.14em; color:var(--ink-3,#737373); }
+.overview-card__eyebrow { display:block; margin-top:10px; margin-bottom:8px; font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3,#737373); }
+.overview-card__title { font-size:14px; line-height:1.25; font-weight:500; color:var(--ink,#1A1A1A); display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.overview-card[data-current="true"] { border-color:var(--c-blue-500,#00A4EF); box-shadow:0 0 0 2px var(--c-blue-500,#00A4EF); }
+body[data-overview-open="true"] .deck-brand,
+body[data-overview-open="true"] .deck-controls,
+body[data-overview-open="true"] .lang-switcher,
+body[data-overview-open="true"] .kbd-hint { display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="deck-progress" id="progress"></div>
+
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:22px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt</span>
+</a>
+
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en" onclick="setLocale('en')" aria-current="true">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+  <button class="lang-switcher__btn" data-locale="es" onclick="setLocale('es')">ES</button>
+</div>
+
+<div class="deck-controls">
+  <button class="deck-controls__btn" onclick="prevSlide()" aria-label="Previous">&lsaquo;</button>
+  <span class="deck-controls__counter" id="counter">1 / 1</span>
+  <button class="deck-controls__btn" onclick="nextSlide()" aria-label="Next">&rsaquo;</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- 1: COVER -->
+<section class="slide slide--light" data-active="true" style="--accent: var(--c-green-500); justify-content: center;">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="eyebrow" data-i18n="cover.eyebrow">Full Agentic Engineering Platform</div>
+    <h1 class="title">
+      <span data-i18n="cover.part1">Six disciplines.</span>
+      <span class="accent-green" data-i18n="cover.kw1">One platform.</span>
+      <span data-i18n="cover.part2">Production agents that survive.</span>
+    </h1>
+    <p class="subtitle" data-i18n="cover.subtitle">Building the future of software development with AI and Agentic DevOps.</p>
+  </div>
+  <div class="meta-grid" style="flex-shrink:0;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-07</span></div>
+  </div>
+</section>
+
+<!-- 2: AGENDA -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="agenda.eyebrow">Agenda</div>
+  <h2 class="title title--medium" data-i18n="agenda.title">Six parts. From cemetery to platform.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="agenda.i1">The agent cemetery problem and three types of debt.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="agenda.i2">Cloud and infrastructure foundation.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="agenda.i3">Platform engineering as governance layer.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="agenda.i4">Context engineering and intent engineering.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="agenda.i5">Harness engineering: the operating model.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">06</span><span class="list-numbered__text" data-i18n="agenda.i6">Token economy, FinOps, and Azure AI Foundry.</span></div>
+  </div>
+</section>
+
+<!-- 3: PART I COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part1.eyebrow">Part I</div>
+  <div class="section-number">I</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">01</div>
+  <h2 class="section-title" data-i18n="part1.title">The cemetery.</h2>
+  <p class="subtitle" data-i18n="part1.subtitle">Why pilots die in production, and what is actually missing.</p>
+</section>
+
+<!-- 4: BIG STAT -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="stat.eyebrow">Problem · The gap</div>
+  <h2 class="title title--medium"><span data-i18n="stat.t1">75% of enterprises plan agentic AI. Only</span> <span class="accent-red" data-i18n="stat.t2">34%</span> <span data-i18n="stat.t3">report deep transformation.</span></h2>
+  <div class="big-number" style="--accent: var(--c-red-500);">+39%<span class="big-number__sub" data-i18n="stat.sub">cognitive complexity from ungoverned agents (CMU AIDev)</span></div>
+  <p class="caption" data-i18n="stat.caption">Pilot agents fail to reach production for one consistent reason: they lack a coherent multi-layer engineering foundation. The cemetery grows because layers get skipped.</p>
+</section>
+
+<!-- 5: THREE DEBTS -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="debts.eyebrow">Problem · Three debts</div>
+  <h2 class="title title--medium" data-i18n="debts.title">Technical debt is familiar. Two new forms make it worse.</h2>
+  <div class="cards-3">
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="debts.c1.k">01 · Technical debt</div>
+      <div class="card__title" data-i18n="debts.c1.t">Familiar accumulation.</div>
+      <div class="card__body" data-i18n="debts.c1.b">Patches, fragile dependencies, brittle tests. Liu et al. analyzed 304,362 AI-generated commits across 6,275 repos and found higher shares of requirement and test debt vs human-written code.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="debts.c2.k">02 · Cognitive debt</div>
+      <div class="card__title" data-i18n="debts.c2.t">Cognitive surrender.</div>
+      <div class="card__body" data-i18n="debts.c2.b">Developers accept AI-generated code without understanding it. Storey calls it cognitive surrender. The codebase becomes orphaned knowledge: nobody can modify it safely because nobody understands why it works.</div>
+    </div>
+    <div class="card" style="--accent: var(--c-red-500);">
+      <div class="card__kicker" data-i18n="debts.c3.k">03 · Intent debt</div>
+      <div class="card__title" data-i18n="debts.c3.t">Objectives never captured.</div>
+      <div class="card__body" data-i18n="debts.c3.b">The agent was built for metric X under constraint Y with hidden assumption Z. When production conditions shift, the agent optimizes for the wrong thing. Not broken, just unspecified.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6: THE STACK DIAGRAM -->
+<section class="slide slide--light">
+  <div class="eyebrow" data-i18n="stack.eyebrow">Solution · Six disciplines</div>
+  <h2 class="title title--medium" data-i18n="stack.title">A stack that survives production.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="220" height="360" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1.4"/>
+      <text x="130" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#B33816">01 · CLOUD</text>
+      <text x="130" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="500" fill="#1A1A1A">Infrastructure</text>
+      <text x="130" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Foundation</text>
+      <text x="130" y="350" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">K8s, MCP, IaC</text>
+
+      <rect x="250" y="20" width="220" height="360" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.4"/>
+      <text x="360" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#5A8500">02 · PLATFORM</text>
+      <text x="360" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="500" fill="#1A1A1A">Engineering</text>
+      <text x="360" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Governance</text>
+      <text x="360" y="350" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">IDP, golden paths</text>
+
+      <rect x="480" y="20" width="220" height="360" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.4"/>
+      <text x="590" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#B88500">03 · CONTEXT</text>
+      <text x="590" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="500" fill="#1A1A1A">What the</text>
+      <text x="590" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">agent knows</text>
+      <text x="590" y="350" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Memory, MCP, RAG</text>
+
+      <rect x="710" y="20" width="220" height="360" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.4"/>
+      <text x="820" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#0076AC">04 · INTENT</text>
+      <text x="820" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="500" fill="#1A1A1A">What the</text>
+      <text x="820" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">agent should do</text>
+      <text x="820" y="350" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">SDD, CONSTITUTION</text>
+
+      <rect x="940" y="20" width="220" height="360" rx="8" fill="#ECECE8" stroke="#1A1A1A" stroke-width="1.4"/>
+      <text x="1050" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#1A1A1A">05 · HARNESS</text>
+      <text x="1050" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="500" fill="#1A1A1A">Operating</text>
+      <text x="1050" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">model</text>
+      <text x="1050" y="350" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Three Horizons</text>
+
+      <rect x="1170" y="20" width="210" height="360" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.4"/>
+      <text x="1275" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#5A8500">06 · TOKEN</text>
+      <text x="1275" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="500" fill="#1A1A1A">Economy</text>
+      <text x="1275" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">FinOps, Foundry</text>
+      <text x="1275" y="350" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Pays the bill</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 7: PART II COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="part2.eyebrow">Part II</div>
+  <div class="section-number">II</div>
+  <div class="section-number" style="--accent: var(--c-red-500);">02</div>
+  <h2 class="section-title" data-i18n="part2.title">Cloud foundation.</h2>
+  <p class="subtitle" data-i18n="part2.subtitle">Kubernetes, MCP, autonomous infrastructure, the CPE 4-plane reference.</p>
+</section>
+
+<!-- 8: K8S AI -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="k8s.eyebrow">Cloud · Kubernetes</div>
+  <h2 class="title title--medium" data-i18n="k8s.title">Kubernetes is the standard AI platform.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="k8s.l.k">Why K8s wins for AI</div>
+      <div class="split__title" data-i18n="k8s.l.t">GPU scheduling, autoscaling, multi-tenancy.</div>
+      <div class="split__body" data-i18n="k8s.l.b">CNCF survey shows Kubernetes hosting AI workloads grew from niche to default. GPU operators, KServe, KubeRay, vLLM operators, all converge on K8s as the substrate.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="k8s.r.k">What changes for agents</div>
+      <div class="split__title" data-i18n="k8s.r.t">Long-running, stateful, bursty.</div>
+      <div class="split__body" data-i18n="k8s.r.b">Agentic workloads are not stateless web requests. Sessions live for hours, hold KV cache, fan out to subagents. Pod design, network policies, and autoscaling need redesign.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9: CPE 4-PLANE DIAGRAM -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="cpe.eyebrow">Cloud · Reference architecture</div>
+  <h2 class="title title--medium" data-i18n="cpe.title">Cognitive Platform Engineering: four planes.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1400 380" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="20" width="320" height="320" rx="10" fill="#FFF0EB" stroke="#F25022" stroke-width="1.2"/>
+      <text x="200" y="56" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600" letter-spacing="0.16em" fill="#B33816">DATA PLANE</text>
+      <text x="200" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="500" fill="#1A1A1A">Workload runtime</text>
+      <text x="200" y="206" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Agents, models, MCP servers</text>
+      <text x="200" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Pods, GPUs, network policies</text>
+
+      <rect x="380" y="20" width="320" height="320" rx="10" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.2"/>
+      <text x="540" y="56" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600" letter-spacing="0.16em" fill="#5A8500">CONTROL PLANE</text>
+      <text x="540" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="500" fill="#1A1A1A">Orchestration</text>
+      <text x="540" y="206" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Schedulers, operators</text>
+      <text x="540" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">K8s API, GitOps, Argo</text>
+
+      <rect x="720" y="20" width="320" height="320" rx="10" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.2"/>
+      <text x="880" y="56" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600" letter-spacing="0.16em" fill="#B88500">COGNITION PLANE</text>
+      <text x="880" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="500" fill="#1A1A1A">Decisions</text>
+      <text x="880" y="206" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Routing, policy, intent</text>
+      <text x="880" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Spec-Kit, CONSTITUTION</text>
+
+      <rect x="1060" y="20" width="320" height="320" rx="10" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.2"/>
+      <text x="1220" y="56" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600" letter-spacing="0.16em" fill="#0076AC">OBSERVABILITY</text>
+      <text x="1220" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="500" fill="#1A1A1A">Evidence</text>
+      <text x="1220" y="206" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Spans, logs, FOCUS</text>
+      <text x="1220" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">OTel, App Insights</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 10: MCP PROTOCOL -->
+<section class="slide slide--light" style="--accent: var(--c-red-500);">
+  <div class="eyebrow" data-i18n="mcp.eyebrow">Cloud · Protocol layer</div>
+  <h2 class="title title--medium" data-i18n="mcp.title">MCP is the infrastructure protocol layer.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="mcp.c1.k">Why a protocol</div><div class="card__title" data-i18n="mcp.c1.t">N-by-M becomes N-plus-M.</div><div class="card__body" data-i18n="mcp.c1.b">Without a standard, every agent integrates every tool bilaterally. MCP collapses N agents times M tools into N plus M integrations.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="mcp.c2.k">What it carries</div><div class="card__title" data-i18n="mcp.c2.t">Tools, resources, prompts.</div><div class="card__body" data-i18n="mcp.c2.b">Three primitives. Tools execute side effects, resources expose data, prompts shape interaction. Identity and audit thread through every call.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="mcp.c3.k">Where it runs</div><div class="card__title" data-i18n="mcp.c3.t">Gateway pattern.</div><div class="card__body" data-i18n="mcp.c3.b">A platform-owned MCP gateway centralizes auth, scope, telemetry. Servers behind it carry policy, rate limits, and content classification.</div></div>
+  </div>
+</section>
+
+<!-- 11: PART III COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part3.eyebrow">Part III</div>
+  <div class="section-number">III</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">03</div>
+  <h2 class="section-title" data-i18n="part3.title">Platform engineering.</h2>
+  <p class="subtitle" data-i18n="part3.subtitle">Golden paths, guardrails, MCP server registries, agent RBAC.</p>
+</section>
+
+<!-- 12: GOLDEN PATHS -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="gp.eyebrow">Platform · Golden paths</div>
+  <h2 class="title title--medium" data-i18n="gp.title">The path of least resistance is the safe path.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="gp.l.k">Without golden paths</div>
+      <div class="split__title" data-i18n="gp.l.t">Every team rebuilds the same controls.</div>
+      <div class="split__body" data-i18n="gp.l.b">Each agent ships with its own auth, telemetry, secret handling. Inconsistent quality, audit holes, and governance becomes a paper exercise.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="gp.r.k">With golden paths</div>
+      <div class="split__title" data-i18n="gp.r.t">Compliant by default, custom by exception.</div>
+      <div class="split__body" data-i18n="gp.r.b">Backstage templates, IDP scaffolds, MCP server registries. Security and FinOps controls baked in. Teams opt out only when they need to.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 13: AGENT RBAC -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="rbac.eyebrow">Platform · Identity</div>
+  <h2 class="title title--medium" data-i18n="rbac.title">Agents need identity, not service accounts.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="rbac.c1.k">SPIFFE</div><div class="card__title" data-i18n="rbac.c1.t">Workload identity.</div><div class="card__body" data-i18n="rbac.c1.b">Every agent gets a SPIFFE ID. Identity propagates from caller to MCP server to data source.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="rbac.c2.k">Scoped tokens</div><div class="card__title" data-i18n="rbac.c2.t">Least privilege per task.</div><div class="card__body" data-i18n="rbac.c2.b">Tokens minted per session, narrow scope, short TTL. The agent cannot exceed what the user could do.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="rbac.c3.k">Audit log</div><div class="card__title" data-i18n="rbac.c3.t">Independent of platform.</div><div class="card__body" data-i18n="rbac.c3.b">The auditor queries without engineering help. Decisions, identities, payloads classified, all traceable.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="rbac.c4.k">Policy</div><div class="card__title" data-i18n="rbac.c4.t">As code.</div><div class="card__body" data-i18n="rbac.c4.b">OPA, Cedar. Policies live in repos, version with the code, get peer review like infrastructure.</div></div>
+  </div>
+</section>
+
+<!-- 14: PART IV COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="part4.eyebrow">Part IV</div>
+  <div class="section-number">IV</div>
+  <div class="section-number" style="--accent: var(--c-yellow-500);">04</div>
+  <h2 class="section-title" data-i18n="part4.title">Context and intent.</h2>
+  <p class="subtitle" data-i18n="part4.subtitle">What the agent knows, and what the agent should do.</p>
+</section>
+
+<!-- 15: CONTEXT VS INTENT -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="ctxint.eyebrow">Context vs Intent</div>
+  <h2 class="title title--medium" data-i18n="ctxint.title">Context alone is insufficient.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="ctxint.l.k">Context engineering</div>
+      <div class="split__title" data-i18n="ctxint.l.t">Smallest set of high-signal tokens.</div>
+      <div class="split__body" data-i18n="ctxint.l.b">Memory tiers, skills, MCP, AGENTS.md, RAG. Concave utility curve: more tokens degrade output past the peak. Compaction recovers 22.7%.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="ctxint.r.k">Intent engineering</div>
+      <div class="split__title" data-i18n="ctxint.r.t">Goals, values, trade-offs.</div>
+      <div class="split__body" data-i18n="ctxint.r.b">CONSTITUTION.md, Spec-Driven Development, written hierarchies of trade-offs. Without it, a well-contextualized agent optimizes for the wrong outcome.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 16: CONTEXT ROT CURVE -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="rot.eyebrow">Context · Concave utility</div>
+  <h2 class="title title--medium" data-i18n="rot.title">More tokens is not more value.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
+      <line x1="80" y1="320" x2="1140" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+      <line x1="80" y1="40" x2="80" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+      <text x="610" y="350" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em" fill="#737373">TOKENS IN CONTEXT</text>
+      <text x="40" y="180" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em" fill="#737373" transform="rotate(-90 40 180)">QUALITY</text>
+      <path d="M 80 280 Q 380 60 600 80 Q 820 100 1140 280" stroke="#FFB900" stroke-width="3" fill="none"/>
+      <circle cx="600" cy="80" r="6" fill="#FFB900"/>
+      <text x="600" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#B88500">PEAK</text>
+      <line x1="600" y1="80" x2="600" y2="320" stroke="#FFB900" stroke-width="0.6" stroke-dasharray="4 4"/>
+      <text x="220" y="200" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Underfilled: missing facts</text>
+      <text x="850" y="200" font-family="Inter,sans-serif" font-size="13" fill="#3A3A3A">Overfilled: context rot</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 17: CONTEXT TECHNIQUES -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="techs.eyebrow">Context · Techniques</div>
+  <h2 class="title title--medium" data-i18n="techs.title">Six techniques that compound.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="techs.c1.k">Compaction</div><div class="card__title" data-i18n="techs.c1.t">22.7% reduction.</div><div class="card__body" data-i18n="techs.c1.b">Structured compression of session history by the model itself. SWE-bench Lite paper, arXiv 2601.07190.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="techs.c2.k">Tool result clearing</div><div class="card__title" data-i18n="techs.c2.t">Stop paying twice.</div><div class="card__body" data-i18n="techs.c2.b">Old tool results stay in context unless explicitly cleared. Recurring payment for content the agent already used.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="techs.c3.k">E-mem subagents</div><div class="card__title" data-i18n="techs.c3.t">-70% tokens.</div><div class="card__body" data-i18n="techs.c3.b">Hierarchical memory across subagents. Parent keeps summaries, children carry detail. arXiv 2601.21714.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="techs.c4.k">Persistent memory</div><div class="card__title" data-i18n="techs.c4.t">11x compression.</div><div class="card__body" data-i18n="techs.c4.b">Long-lived memory store outside the window. Retrieval brings only the relevant slice. arXiv 2603.13017.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="techs.c5.k">SkillReducer</div><div class="card__title" data-i18n="techs.c5.t">39% body, 48% description.</div><div class="card__body" data-i18n="techs.c5.b">Programmatic reduction of skill files. Same behavior, smaller footprint. arXiv 2603.29919.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="techs.c6.k">Prompt caching</div><div class="card__title" data-i18n="techs.c6.t">Up to 90% input savings.</div><div class="card__body" data-i18n="techs.c6.b">Reuse of KV cache from a stable prefix between requests. The largest single lever in most workloads.</div></div>
+  </div>
+</section>
+
+<!-- 18: SDD CONSTITUTION -->
+<section class="slide slide--light" style="--accent: var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="sdd.eyebrow">Intent · Specification-driven</div>
+  <h2 class="title title--medium" data-i18n="sdd.title">Spec-Kit makes intent legible.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="sdd.c1.k">CONSTITUTION.md</div><div class="card__title" data-i18n="sdd.c1.t">Non-negotiables.</div><div class="card__body" data-i18n="sdd.c1.b">Values and trade-off hierarchies the agent must respect across sessions. Not advice. Constraints.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="sdd.c2.k">SPECIFICATION.md</div><div class="card__title" data-i18n="sdd.c2.t">What to build.</div><div class="card__body" data-i18n="sdd.c2.b">Goals, success criteria, anti-goals. Reviewed before code is written. The agent reads it as input, not interpretation.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="sdd.c3.k">IMPLEMENTATION_PLAN.md</div><div class="card__title" data-i18n="sdd.c3.t">How.</div><div class="card__body" data-i18n="sdd.c3.b">The plan is artifact, not transient. Reviewable, version-controlled, replayable. Agents do not freelance the plan.</div></div>
+  </div>
+</section>
+
+<!-- 19: PART V COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="part5.eyebrow">Part V</div>
+  <div class="section-number">V</div>
+  <div class="section-number" style="--accent: var(--c-blue-500);">05</div>
+  <h2 class="section-title" data-i18n="part5.title">Harness engineering.</h2>
+  <p class="subtitle" data-i18n="part5.subtitle">Where the four layers become a production system.</p>
+</section>
+
+<!-- 20: WHY HARNESS -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="why.eyebrow">Harness · Why</div>
+  <h2 class="title title--medium" data-i18n="why.title">A framework is not an operating model.</h2>
+  <p class="body-large" data-i18n="why.body">The four layers, infrastructure, platform, context, intent, describe what to build. The harness wraps them in cadence, ownership, evidence, and review. Without it, the framework lives in slides; with it, it ships.</p>
+</section>
+
+<!-- 21: TWO PATHS -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="paths.eyebrow">Harness · Two paths</div>
+  <h2 class="title title--medium" data-i18n="paths.title">Three Horizons or Open Horizons.</h2>
+  <div class="split">
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="paths.l.k">Path A · Three Horizons Accelerator</div>
+      <div class="split__title" data-i18n="paths.l.t">Microsoft-aligned, opinionated.</div>
+      <div class="split__body" data-i18n="paths.l.b">Azure AI Foundry, GitHub Copilot Enterprise, Microsoft 365 Copilot, Teams. Pre-wired observability, FinOps, and identity. Faster start, narrower path.</div>
+    </div>
+    <div class="split__col">
+      <div class="split__kicker" data-i18n="paths.r.k">Path B · Open Horizons</div>
+      <div class="split__title" data-i18n="paths.r.t">Open-source, multi-vendor.</div>
+      <div class="split__body" data-i18n="paths.r.b">CNCF stack, multi-model gateway, OpenTelemetry, FOCUS. More integration work, more sovereignty, more model flexibility. Same harness disciplines apply.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 22: MATURITY MODEL -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="mat.eyebrow">Integration · Maturity</div>
+  <h2 class="title title--medium" data-i18n="mat.title">Five maturity stages, exit criteria, real metrics.</h2>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="60" width="260" height="180" rx="8" fill="#FFF0EB" stroke="#F25022" stroke-width="1"/>
+      <text x="150" y="90" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#B33816">L1 · CHAOS</text>
+      <text x="150" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">Pilots, no stack</text>
+      <text x="150" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">No FinOps, no SDD</text>
+
+      <rect x="295" y="60" width="260" height="180" rx="8" fill="#FFF7E0" stroke="#FFB900" stroke-width="1"/>
+      <text x="425" y="90" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#B88500">L2 · GUARDED</text>
+      <text x="425" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">First IDP, basic policy</text>
+      <text x="425" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Showback, MCP gateway</text>
+
+      <rect x="570" y="60" width="260" height="180" rx="8" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1"/>
+      <text x="700" y="90" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#5A8500">L3 · CONTEXTUAL</text>
+      <text x="700" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">Skills, MCP, RAG</text>
+      <text x="700" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Caching, AGENTS.md</text>
+
+      <rect x="845" y="60" width="260" height="180" rx="8" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1"/>
+      <text x="975" y="90" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#0076AC">L4 · INTENTIONAL</text>
+      <text x="975" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">Spec-Kit, audits</text>
+      <text x="975" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Chargeback, evidence</text>
+
+      <rect x="1120" y="60" width="260" height="180" rx="8" fill="#ECECE8" stroke="#1A1A1A" stroke-width="1"/>
+      <text x="1250" y="90" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="#1A1A1A">L5 · HARNESSED</text>
+      <text x="1250" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">Operating model</text>
+      <text x="1250" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#737373">Three Horizons live</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 23: TEN PRINCIPLES -->
+<section class="slide slide--light" style="--accent: var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="ten.eyebrow">Integration · Ten principles</div>
+  <h2 class="title title--medium" data-i18n="ten.title">Ten principles that bind the layers.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="ten.i1">Treat tokens as a finite resource. Budgets per session, agent, repo.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="ten.i2">Pre-compute compiler-grade context in CI, not per task.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="ten.i3">Identity propagates from caller to data source. No service accounts.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="ten.i4">Spec before code. CONSTITUTION before SPECIFICATION before plan.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="ten.i5">Audit logs are queryable without engineering help.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">06</span><span class="list-numbered__text" data-i18n="ten.i6">Cache aggressively. Prefix, semantic, hierarchical, all three.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">07</span><span class="list-numbered__text" data-i18n="ten.i7">Pick the smallest model that passes the eval, not the largest available.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">08</span><span class="list-numbered__text" data-i18n="ten.i8">Workflow before agent. Agent only when adaptive control adds value.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">09</span><span class="list-numbered__text" data-i18n="ten.i9">Observability is for the auditor, not just the engineer.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">10</span><span class="list-numbered__text" data-i18n="ten.i10">Harness rituals: weekly cost review, monthly intent review, quarterly maturity exit.</span></div>
+  </div>
+</section>
+
+<!-- 24: PART VI COVER -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="part6.eyebrow">Part VI</div>
+  <div class="section-number">VI</div>
+  <div class="section-number" style="--accent: var(--c-green-500);">06</div>
+  <h2 class="section-title" data-i18n="part6.title">Token economy.</h2>
+  <p class="subtitle" data-i18n="part6.subtitle">FinOps for AI, Azure AI Foundry, the June 2026 transition.</p>
+</section>
+
+<!-- 25: JUNE 2026 -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="june.eyebrow">Token · The fact</div>
+  <h2 class="title title--medium"><span data-i18n="june.t1">On</span> <span class="accent-green" data-i18n="june.t2">June 1, 2026</span><span data-i18n="june.t3">, GitHub Copilot stops charging per request.</span></h2>
+  <p class="body-large" data-i18n="june.body">Premium Request Units retire. GitHub AI Credits take over. 1 AI Credit equals US$ 0.01. Input, output, and cached tokens are accounted at the published API rate of each model. Cost stops being per user intent and becomes per work performed.</p>
+</section>
+
+<!-- 26: FINOPS PHASES -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="finops.eyebrow">FinOps for AI · Three phases</div>
+  <h2 class="title title--medium" data-i18n="finops.title">Inform, Optimize, Operate.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="finops.c1.k">Inform</div><div class="card__title" data-i18n="finops.c1.t">Visibility first.</div><div class="card__body" data-i18n="finops.c1.b">Showback per session, agent, repo, team. FOCUS export. Power BI or Grafana dashboards. The team that cannot see the bill cannot reduce it.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="finops.c2.k">Optimize</div><div class="card__title" data-i18n="finops.c2.t">The disciplines compound.</div><div class="card__body" data-i18n="finops.c2.b">Prompt caching, model routing, lean MCP, semantic cache, plan/execute. Eight applied patterns deliver 40 to 70% reduction in agentic workloads.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="finops.c3.k">Operate</div><div class="card__title" data-i18n="finops.c3.t">Budgets, alerts, anomaly detection.</div><div class="card__body" data-i18n="finops.c3.b">Chargeback to teams. Anomaly detection on session cost. Quarterly review of budget vs actual. The harness ritual.</div></div>
+  </div>
+</section>
+
+<!-- 27: AZURE AI FOUNDRY -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="foundry.eyebrow">Foundry · When to use</div>
+  <h2 class="title title--medium" data-i18n="foundry.title">Foundry, Copilot, or direct API.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="foundry.c1.k">Azure AI Foundry</div><div class="card__title" data-i18n="foundry.c1.t">Enterprise governance.</div><div class="card__body" data-i18n="foundry.c1.b">Model catalog, prompt flow, content safety, AAD/RBAC, PTU vs PAYG, private networking. Where regulated workloads live.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="foundry.c2.k">GitHub Copilot</div><div class="card__title" data-i18n="foundry.c2.t">Developer-facing surface.</div><div class="card__body" data-i18n="foundry.c2.b">VS Code Copilot, Coding Agent, custom prompts. AI Credits billing post-June. Where dev productivity lives.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="foundry.c3.k">Direct API</div><div class="card__title" data-i18n="foundry.c3.t">Custom agents.</div><div class="card__body" data-i18n="foundry.c3.b">Anthropic, OpenAI, vLLM via gateway. For agents the org builds, not the agents the org buys.</div></div>
+  </div>
+</section>
+
+<!-- 28: APPLIED PATTERNS -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="apps.eyebrow">Token · Eight applied patterns</div>
+  <h2 class="title title--medium" data-i18n="apps.title">Eight patterns. 40 to 70% reduction.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker">01</div><div class="card__title" data-i18n="apps.c1.t">Dynamic routing</div><div class="card__body" data-i18n="apps.c1.b">Route by complexity. Haiku for trivia, Sonnet for code, Opus for plans.</div></div>
+    <div class="card"><div class="card__kicker">02</div><div class="card__title" data-i18n="apps.c2.t">Hierarchical cache</div><div class="card__body" data-i18n="apps.c2.b">Prefix at provider, semantic at gateway, exact at app. Three layers compound.</div></div>
+    <div class="card"><div class="card__kicker">03</div><div class="card__title" data-i18n="apps.c3.t">Subagent fan-out</div><div class="card__body" data-i18n="apps.c3.b">Parent keeps summary, children carry detail. E-mem hierarchy.</div></div>
+    <div class="card"><div class="card__kicker">04</div><div class="card__title" data-i18n="apps.c4.t">Plan-then-execute</div><div class="card__body" data-i18n="apps.c4.b">Cheap model plans, capable model executes only the plan.</div></div>
+    <div class="card"><div class="card__kicker">05</div><div class="card__title" data-i18n="apps.c5.t">Semantic cache</div><div class="card__body" data-i18n="apps.c5.b">Embedding similarity, not hash. Reuse near-duplicate queries safely.</div></div>
+    <div class="card"><div class="card__kicker">06</div><div class="card__title" data-i18n="apps.c6.t">Tool composition</div><div class="card__body" data-i18n="apps.c6.b">Compose primitives instead of growing the tool catalog.</div></div>
+    <div class="card"><div class="card__kicker">07</div><div class="card__title" data-i18n="apps.c7.t">Lean MCP</div><div class="card__body" data-i18n="apps.c7.b">Progressive disclosure. Tool schemas are billable; trim them.</div></div>
+    <div class="card"><div class="card__kicker">08</div><div class="card__title" data-i18n="apps.c8.t">Custom agent SDD</div><div class="card__body" data-i18n="apps.c8.b">Spec-Kit driven. The plan is artifact, not transient.</div></div>
+  </div>
+</section>
+
+<!-- 29: ANTI-PATTERNS -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="anti.eyebrow">Token · Anti-patterns</div>
+  <h2 class="title title--medium" data-i18n="anti.title">Five anti-patterns to stop today.</h2>
+  <div class="list-numbered">
+    <div class="list-numbered__item"><span class="list-numbered__num">01</span><span class="list-numbered__text" data-i18n="anti.i1">Always picking the largest model. Pay 6x for output a smaller model would deliver.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">02</span><span class="list-numbered__text" data-i18n="anti.i2">Treating an agent as a workflow. Adaptive control where deterministic control suffices.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">03</span><span class="list-numbered__text" data-i18n="anti.i3">Pasting the whole repo. Token budget collapses; signal-to-noise drops below safe threshold.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">04</span><span class="list-numbered__text" data-i18n="anti.i4">No prompt caching. The single largest lever, frequently the last one applied.</span></div>
+    <div class="list-numbered__item"><span class="list-numbered__num">05</span><span class="list-numbered__text" data-i18n="anti.i5">Skipping the harness. Layers without cadence become slides, not systems.</span></div>
+  </div>
+</section>
+
+<!-- 30: PERSONA QUICK STARTS -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="persona.eyebrow">Adoption · Quick start</div>
+  <h2 class="title title--medium" data-i18n="persona.title">First sixty days, by persona.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="persona.c1.k">CIO / VP Eng</div><div class="card__title" data-i18n="persona.c1.t">Maturity scan + harness ritual.</div><div class="card__body" data-i18n="persona.c1.b">Score the org L1-L5. Pick one harness ritual. Set a 90-day exit target. Sponsor the FinOps dashboard.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="persona.c2.k">Platform engineer</div><div class="card__title" data-i18n="persona.c2.t">Gateway + golden path.</div><div class="card__body" data-i18n="persona.c2.b">MCP gateway with auth and audit. One golden path template in Backstage. Showback per team within 30 days.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="persona.c3.k">Tech lead</div><div class="card__title" data-i18n="persona.c3.t">Spec-Kit + caching.</div><div class="card__body" data-i18n="persona.c3.b">CONSTITUTION.md and SPECIFICATION.md in the repo. Prompt caching enabled in the agent. Measure tokens per task.</div></div>
+  </div>
+</section>
+
+<!-- 31: NUMBERS THAT JUSTIFY -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="num.eyebrow">Outcomes · The numbers</div>
+  <h2 class="title title--medium" data-i18n="num.title">The numbers that justify the effort.</h2>
+  <div class="cards-4">
+    <div class="card"><div class="card__kicker" data-i18n="num.c1.k">Baseline</div><div class="card__title">US$ 9,500/mo</div><div class="card__body" data-i18n="num.c1.b">500 devs at US$ 19 each. The starting point before overage and discipline.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="num.c2.k">Without discipline</div><div class="card__title">+50 to 100%</div><div class="card__body" data-i18n="num.c2.b">Average overage observed in pilots after PRU retirement. Black-box use of Copilot.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="num.c3.k">With discipline</div><div class="card__title">-25 to 45%</div><div class="card__body" data-i18n="num.c3.b">Reduction over baseline within 60 to 90 days. Compounds to 40 to 70% on agentic workloads.</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="num.c4.k">Payback</div><div class="card__title">&lt; 60 days</div><div class="card__body" data-i18n="num.c4.b">For 5,000+ dev orgs, annual savings exceed US$ 1 million. Difference is not talent. It is practice.</div></div>
+  </div>
+</section>
+
+<!-- 32: REFERENCES -->
+<section class="slide slide--light" style="--accent: var(--c-green-500);">
+  <div class="eyebrow" data-i18n="refs.eyebrow">References</div>
+  <h2 class="title title--medium" data-i18n="refs.title">Sources behind the numbers.</h2>
+  <div class="cards-3">
+    <div class="card"><div class="card__kicker" data-i18n="refs.c1.k">Industry</div><div class="card__title" data-i18n="refs.c1.t">Gartner, Deloitte, KPMG, GitHub.</div><div class="card__body" data-i18n="refs.c1.b">Gartner agent forecast, Deloitte 3,235 respondents, KPMG quarterly tracking, GitHub adoption study (128,018 projects).</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="refs.c2.k">Academic</div><div class="card__title" data-i18n="refs.c2.t">arXiv research, CMU AIDev.</div><div class="card__body" data-i18n="refs.c2.b">Compaction (2601.07190), Tokenomics (2601.14470), E-mem (2601.21714), persistent memory (2603.13017), SkillReducer (2603.29919), overthinking (2502.08235).</div></div>
+    <div class="card"><div class="card__kicker" data-i18n="refs.c3.k">Official</div><div class="card__title" data-i18n="refs.c3.t">Microsoft, GitHub, Anthropic, FinOps.</div><div class="card__body" data-i18n="refs.c3.b">Azure Cost Management, AI Foundry, Application Insights OTel, Anthropic prompt caching, FinOps Framework v2, FOCUS spec.</div></div>
+  </div>
+</section>
+
+<!-- 33: CLOSING -->
+<section class="slide slide--dark" style="--accent: var(--c-green-500); justify-content: center;">
+  <div class="eyebrow" data-i18n="end.eyebrow">Closing thought</div>
+  <h2 class="title" style="font-size: clamp(48px,5.6vw,90px);">
+    <span data-i18n="end.t1">Six disciplines.</span><br/>
+    <span class="accent-green" data-i18n="end.t2">One platform.</span>
+  </h2>
+  <p class="subtitle" data-i18n="end.t3">The difference between the cemetery and the platform is not talent. It is applied discipline.</p>
+</section>
+
+</div>
+
+<script>
+const I18N = {
+  "en": {
+    "meta": {"title": "Full Agentic Engineering Platform"},
+    "labels": {"author": "Author", "role": "Role", "contact": "Contact", "date": "Date"},
+    "cover": {"eyebrow": "Full Agentic Engineering Platform", "part1": "Six disciplines.", "kw1": "One platform.", "part2": "Production agents that survive.", "subtitle": "Building the future of software development with AI and Agentic DevOps."},
+    "agenda": {"eyebrow": "Agenda", "title": "Six parts. From cemetery to platform.", "i1": "The agent cemetery problem and three types of debt.", "i2": "Cloud and infrastructure foundation.", "i3": "Platform engineering as governance layer.", "i4": "Context engineering and intent engineering.", "i5": "Harness engineering: the operating model.", "i6": "Token economy, FinOps, and Azure AI Foundry."},
+    "part1": {"eyebrow": "Part I", "title": "The cemetery.", "subtitle": "Why pilots die in production, and what is actually missing."},
+    "stat": {"eyebrow": "Problem · The gap", "t1": "75% of enterprises plan agentic AI. Only", "t2": "34%", "t3": "report deep transformation.", "sub": "cognitive complexity from ungoverned agents (CMU AIDev)", "caption": "Pilot agents fail to reach production for one consistent reason: they lack a coherent multi-layer engineering foundation. The cemetery grows because layers get skipped."},
+    "debts": {"eyebrow": "Problem · Three debts", "title": "Technical debt is familiar. Two new forms make it worse.", "c1": {"k": "01 · Technical debt", "t": "Familiar accumulation.", "b": "Patches, fragile dependencies, brittle tests. Liu et al. analyzed 304,362 AI-generated commits across 6,275 repos and found higher shares of requirement and test debt vs human-written code."}, "c2": {"k": "02 · Cognitive debt", "t": "Cognitive surrender.", "b": "Developers accept AI-generated code without understanding it. Storey calls it cognitive surrender. The codebase becomes orphaned knowledge: nobody can modify it safely because nobody understands why it works."}, "c3": {"k": "03 · Intent debt", "t": "Objectives never captured.", "b": "The agent was built for metric X under constraint Y with hidden assumption Z. When production conditions shift, the agent optimizes for the wrong thing. Not broken, just unspecified."}},
+    "stack": {"eyebrow": "Solution · Six disciplines", "title": "A stack that survives production."},
+    "part2": {"eyebrow": "Part II", "title": "Cloud foundation.", "subtitle": "Kubernetes, MCP, autonomous infrastructure, the CPE 4-plane reference."},
+    "k8s": {"eyebrow": "Cloud · Kubernetes", "title": "Kubernetes is the standard AI platform.", "l": {"k": "Why K8s wins for AI", "t": "GPU scheduling, autoscaling, multi-tenancy.", "b": "CNCF survey shows Kubernetes hosting AI workloads grew from niche to default. GPU operators, KServe, KubeRay, vLLM operators, all converge on K8s as the substrate."}, "r": {"k": "What changes for agents", "t": "Long-running, stateful, bursty.", "b": "Agentic workloads are not stateless web requests. Sessions live for hours, hold KV cache, fan out to subagents. Pod design, network policies, and autoscaling need redesign."}},
+    "cpe": {"eyebrow": "Cloud · Reference architecture", "title": "Cognitive Platform Engineering: four planes."},
+    "mcp": {"eyebrow": "Cloud · Protocol layer", "title": "MCP is the infrastructure protocol layer.", "c1": {"k": "Why a protocol", "t": "N-by-M becomes N-plus-M.", "b": "Without a standard, every agent integrates every tool bilaterally. MCP collapses N agents times M tools into N plus M integrations."}, "c2": {"k": "What it carries", "t": "Tools, resources, prompts.", "b": "Three primitives. Tools execute side effects, resources expose data, prompts shape interaction. Identity and audit thread through every call."}, "c3": {"k": "Where it runs", "t": "Gateway pattern.", "b": "A platform-owned MCP gateway centralizes auth, scope, telemetry. Servers behind it carry policy, rate limits, and content classification."}},
+    "part3": {"eyebrow": "Part III", "title": "Platform engineering.", "subtitle": "Golden paths, guardrails, MCP server registries, agent RBAC."},
+    "gp": {"eyebrow": "Platform · Golden paths", "title": "The path of least resistance is the safe path.", "l": {"k": "Without golden paths", "t": "Every team rebuilds the same controls.", "b": "Each agent ships with its own auth, telemetry, secret handling. Inconsistent quality, audit holes, and governance becomes a paper exercise."}, "r": {"k": "With golden paths", "t": "Compliant by default, custom by exception.", "b": "Backstage templates, IDP scaffolds, MCP server registries. Security and FinOps controls baked in. Teams opt out only when they need to."}},
+    "rbac": {"eyebrow": "Platform · Identity", "title": "Agents need identity, not service accounts.", "c1": {"k": "SPIFFE", "t": "Workload identity.", "b": "Every agent gets a SPIFFE ID. Identity propagates from caller to MCP server to data source."}, "c2": {"k": "Scoped tokens", "t": "Least privilege per task.", "b": "Tokens minted per session, narrow scope, short TTL. The agent cannot exceed what the user could do."}, "c3": {"k": "Audit log", "t": "Independent of platform.", "b": "The auditor queries without engineering help. Decisions, identities, payloads classified, all traceable."}, "c4": {"k": "Policy", "t": "As code.", "b": "OPA, Cedar. Policies live in repos, version with the code, get peer review like infrastructure."}},
+    "part4": {"eyebrow": "Part IV", "title": "Context and intent.", "subtitle": "What the agent knows, and what the agent should do."},
+    "ctxint": {"eyebrow": "Context vs Intent", "title": "Context alone is insufficient.", "l": {"k": "Context engineering", "t": "Smallest set of high-signal tokens.", "b": "Memory tiers, skills, MCP, AGENTS.md, RAG. Concave utility curve: more tokens degrade output past the peak. Compaction recovers 22.7%."}, "r": {"k": "Intent engineering", "t": "Goals, values, trade-offs.", "b": "CONSTITUTION.md, Spec-Driven Development, written hierarchies of trade-offs. Without it, a well-contextualized agent optimizes for the wrong outcome."}},
+    "rot": {"eyebrow": "Context · Concave utility", "title": "More tokens is not more value."},
+    "techs": {"eyebrow": "Context · Techniques", "title": "Six techniques that compound.", "c1": {"k": "Compaction", "t": "22.7% reduction.", "b": "Structured compression of session history by the model itself. SWE-bench Lite paper, arXiv 2601.07190."}, "c2": {"k": "Tool result clearing", "t": "Stop paying twice.", "b": "Old tool results stay in context unless explicitly cleared. Recurring payment for content the agent already used."}, "c3": {"k": "E-mem subagents", "t": "-70% tokens.", "b": "Hierarchical memory across subagents. Parent keeps summaries, children carry detail. arXiv 2601.21714."}, "c4": {"k": "Persistent memory", "t": "11x compression.", "b": "Long-lived memory store outside the window. Retrieval brings only the relevant slice. arXiv 2603.13017."}, "c5": {"k": "SkillReducer", "t": "39% body, 48% description.", "b": "Programmatic reduction of skill files. Same behavior, smaller footprint. arXiv 2603.29919."}, "c6": {"k": "Prompt caching", "t": "Up to 90% input savings.", "b": "Reuse of KV cache from a stable prefix between requests. The largest single lever in most workloads."}},
+    "sdd": {"eyebrow": "Intent · Specification-driven", "title": "Spec-Kit makes intent legible.", "c1": {"k": "CONSTITUTION.md", "t": "Non-negotiables.", "b": "Values and trade-off hierarchies the agent must respect across sessions. Not advice. Constraints."}, "c2": {"k": "SPECIFICATION.md", "t": "What to build.", "b": "Goals, success criteria, anti-goals. Reviewed before code is written. The agent reads it as input, not interpretation."}, "c3": {"k": "IMPLEMENTATION_PLAN.md", "t": "How.", "b": "The plan is artifact, not transient. Reviewable, version-controlled, replayable. Agents do not freelance the plan."}},
+    "part5": {"eyebrow": "Part V", "title": "Harness engineering.", "subtitle": "Where the four layers become a production system."},
+    "why": {"eyebrow": "Harness · Why", "title": "A framework is not an operating model.", "body": "The four layers, infrastructure, platform, context, intent, describe what to build. The harness wraps them in cadence, ownership, evidence, and review. Without it, the framework lives in slides; with it, it ships."},
+    "paths": {"eyebrow": "Harness · Two paths", "title": "Three Horizons or Open Horizons.", "l": {"k": "Path A · Three Horizons Accelerator", "t": "Microsoft-aligned, opinionated.", "b": "Azure AI Foundry, GitHub Copilot Enterprise, Microsoft 365 Copilot, Teams. Pre-wired observability, FinOps, and identity. Faster start, narrower path."}, "r": {"k": "Path B · Open Horizons", "t": "Open-source, multi-vendor.", "b": "CNCF stack, multi-model gateway, OpenTelemetry, FOCUS. More integration work, more sovereignty, more model flexibility. Same harness disciplines apply."}},
+    "mat": {"eyebrow": "Integration · Maturity", "title": "Five maturity stages, exit criteria, real metrics."},
+    "ten": {"eyebrow": "Integration · Ten principles", "title": "Ten principles that bind the layers.", "i1": "Treat tokens as a finite resource. Budgets per session, agent, repo.", "i2": "Pre-compute compiler-grade context in CI, not per task.", "i3": "Identity propagates from caller to data source. No service accounts.", "i4": "Spec before code. CONSTITUTION before SPECIFICATION before plan.", "i5": "Audit logs are queryable without engineering help.", "i6": "Cache aggressively. Prefix, semantic, hierarchical, all three.", "i7": "Pick the smallest model that passes the eval, not the largest available.", "i8": "Workflow before agent. Agent only when adaptive control adds value.", "i9": "Observability is for the auditor, not just the engineer.", "i10": "Harness rituals: weekly cost review, monthly intent review, quarterly maturity exit."},
+    "part6": {"eyebrow": "Part VI", "title": "Token economy.", "subtitle": "FinOps for AI, Azure AI Foundry, the June 2026 transition."},
+    "june": {"eyebrow": "Token · The fact", "t1": "On", "t2": "June 1, 2026", "t3": ", GitHub Copilot stops charging per request.", "body": "Premium Request Units retire. GitHub AI Credits take over. 1 AI Credit equals US$ 0.01. Input, output, and cached tokens are accounted at the published API rate of each model. Cost stops being per user intent and becomes per work performed."},
+    "finops": {"eyebrow": "FinOps for AI · Three phases", "title": "Inform, Optimize, Operate.", "c1": {"k": "Inform", "t": "Visibility first.", "b": "Showback per session, agent, repo, team. FOCUS export. Power BI or Grafana dashboards. The team that cannot see the bill cannot reduce it."}, "c2": {"k": "Optimize", "t": "The disciplines compound.", "b": "Prompt caching, model routing, lean MCP, semantic cache, plan/execute. Eight applied patterns deliver 40 to 70% reduction in agentic workloads."}, "c3": {"k": "Operate", "t": "Budgets, alerts, anomaly detection.", "b": "Chargeback to teams. Anomaly detection on session cost. Quarterly review of budget vs actual. The harness ritual."}},
+    "foundry": {"eyebrow": "Foundry · When to use", "title": "Foundry, Copilot, or direct API.", "c1": {"k": "Azure AI Foundry", "t": "Enterprise governance.", "b": "Model catalog, prompt flow, content safety, AAD/RBAC, PTU vs PAYG, private networking. Where regulated workloads live."}, "c2": {"k": "GitHub Copilot", "t": "Developer-facing surface.", "b": "VS Code Copilot, Coding Agent, custom prompts. AI Credits billing post-June. Where dev productivity lives."}, "c3": {"k": "Direct API", "t": "Custom agents.", "b": "Anthropic, OpenAI, vLLM via gateway. For agents the org builds, not the agents the org buys."}},
+    "apps": {"eyebrow": "Token · Eight applied patterns", "title": "Eight patterns. 40 to 70% reduction.", "c1": {"t": "Dynamic routing", "b": "Route by complexity. Haiku for trivia, Sonnet for code, Opus for plans."}, "c2": {"t": "Hierarchical cache", "b": "Prefix at provider, semantic at gateway, exact at app. Three layers compound."}, "c3": {"t": "Subagent fan-out", "b": "Parent keeps summary, children carry detail. E-mem hierarchy."}, "c4": {"t": "Plan-then-execute", "b": "Cheap model plans, capable model executes only the plan."}, "c5": {"t": "Semantic cache", "b": "Embedding similarity, not hash. Reuse near-duplicate queries safely."}, "c6": {"t": "Tool composition", "b": "Compose primitives instead of growing the tool catalog."}, "c7": {"t": "Lean MCP", "b": "Progressive disclosure. Tool schemas are billable; trim them."}, "c8": {"t": "Custom agent SDD", "b": "Spec-Kit driven. The plan is artifact, not transient."}},
+    "anti": {"eyebrow": "Token · Anti-patterns", "title": "Five anti-patterns to stop today.", "i1": "Always picking the largest model. Pay 6x for output a smaller model would deliver.", "i2": "Treating an agent as a workflow. Adaptive control where deterministic control suffices.", "i3": "Pasting the whole repo. Token budget collapses; signal-to-noise drops below safe threshold.", "i4": "No prompt caching. The single largest lever, frequently the last one applied.", "i5": "Skipping the harness. Layers without cadence become slides, not systems."},
+    "persona": {"eyebrow": "Adoption · Quick start", "title": "First sixty days, by persona.", "c1": {"k": "CIO / VP Eng", "t": "Maturity scan + harness ritual.", "b": "Score the org L1-L5. Pick one harness ritual. Set a 90-day exit target. Sponsor the FinOps dashboard."}, "c2": {"k": "Platform engineer", "t": "Gateway + golden path.", "b": "MCP gateway with auth and audit. One golden path template in Backstage. Showback per team within 30 days."}, "c3": {"k": "Tech lead", "t": "Spec-Kit + caching.", "b": "CONSTITUTION.md and SPECIFICATION.md in the repo. Prompt caching enabled in the agent. Measure tokens per task."}},
+    "num": {"eyebrow": "Outcomes · The numbers", "title": "The numbers that justify the effort.", "c1": {"k": "Baseline", "b": "500 devs at US$ 19 each. The starting point before overage and discipline."}, "c2": {"k": "Without discipline", "b": "Average overage observed in pilots after PRU retirement. Black-box use of Copilot."}, "c3": {"k": "With discipline", "b": "Reduction over baseline within 60 to 90 days. Compounds to 40 to 70% on agentic workloads."}, "c4": {"k": "Payback", "b": "For 5,000+ dev orgs, annual savings exceed US$ 1 million. Difference is not talent. It is practice."}},
+    "refs": {"eyebrow": "References", "title": "Sources behind the numbers.", "c1": {"k": "Industry", "t": "Gartner, Deloitte, KPMG, GitHub.", "b": "Gartner agent forecast, Deloitte 3,235 respondents, KPMG quarterly tracking, GitHub adoption study (128,018 projects)."}, "c2": {"k": "Academic", "t": "arXiv research, CMU AIDev.", "b": "Compaction (2601.07190), Tokenomics (2601.14470), E-mem (2601.21714), persistent memory (2603.13017), SkillReducer (2603.29919), overthinking (2502.08235)."}, "c3": {"k": "Official", "t": "Microsoft, GitHub, Anthropic, FinOps.", "b": "Azure Cost Management, AI Foundry, Application Insights OTel, Anthropic prompt caching, FinOps Framework v2, FOCUS spec."}},
+    "end": {"eyebrow": "Closing thought", "t1": "Six disciplines.", "t2": "One platform.", "t3": "The difference between the cemetery and the platform is not talent. It is applied discipline."}
+  },
+  "pt-BR": {
+    "meta": {"title": "Plataforma de Engenharia Agêntica Completa"},
+    "labels": {"author": "Autora", "role": "Papel", "contact": "Contato", "date": "Data"},
+    "cover": {"eyebrow": "Plataforma de Engenharia Agêntica Completa", "part1": "Seis disciplinas.", "kw1": "Uma plataforma.", "part2": "Agentes que sobrevivem em produção.", "subtitle": "Building the future of software development with AI and Agentic DevOps."},
+    "agenda": {"eyebrow": "Agenda", "title": "Seis partes. Do cemitério à plataforma.", "i1": "O problema do cemitério de agentes e os três tipos de dívida.", "i2": "Fundação cloud e infraestrutura.", "i3": "Platform engineering como camada de governança.", "i4": "Context engineering e intent engineering.", "i5": "Harness engineering: o modelo operacional.", "i6": "Economia de tokens, FinOps e Azure AI Foundry."},
+    "part1": {"eyebrow": "Parte I", "title": "O cemitério.", "subtitle": "Por que pilotos morrem em produção, e o que de fato falta."},
+    "stat": {"eyebrow": "Problema · A lacuna", "t1": "75% das empresas planejam IA agêntica. Apenas", "t2": "34%", "t3": "relatam transformação profunda.", "sub": "complexidade cognitiva por agentes sem governança (CMU AIDev)", "caption": "Pilotos de agente falham em chegar à produção por uma razão consistente: falta uma fundação de engenharia coerente em múltiplas camadas. O cemitério cresce porque camadas são puladas."},
+    "debts": {"eyebrow": "Problema · Três dívidas", "title": "Dívida técnica é familiar. Duas formas novas pioram tudo.", "c1": {"k": "01 · Dívida técnica", "t": "Acúmulo familiar.", "b": "Patches, dependências frágeis, testes quebradiços. Liu et al. analisaram 304.362 commits gerados por IA em 6.275 repos e encontraram maior proporção de dívida de requisitos e testes vs código humano."}, "c2": {"k": "02 · Dívida cognitiva", "t": "Rendição cognitiva.", "b": "Devs aceitam código gerado por IA sem entender. Storey chama de rendição cognitiva. A base de código vira conhecimento órfão: ninguém modifica com segurança porque ninguém entende por que funciona."}, "c3": {"k": "03 · Dívida de intenção", "t": "Objetivos nunca capturados.", "b": "O agente foi feito para métrica X sob restrição Y com premissa oculta Z. Quando produção muda, o agente otimiza para a coisa errada. Não está quebrado, só não foi especificado."}},
+    "stack": {"eyebrow": "Solução · Seis disciplinas", "title": "Uma pilha que sobrevive em produção."},
+    "part2": {"eyebrow": "Parte II", "title": "Fundação cloud.", "subtitle": "Kubernetes, MCP, infraestrutura autônoma, referência CPE de 4 planos."},
+    "k8s": {"eyebrow": "Cloud · Kubernetes", "title": "Kubernetes é a plataforma de IA padrão.", "l": {"k": "Por que K8s vence em IA", "t": "Escalonamento de GPU, autoscaling, multi-tenancy.", "b": "Pesquisa CNCF mostra Kubernetes hospedando cargas de IA passando de nicho para padrão. GPU operators, KServe, KubeRay, vLLM operators, todos convergem para K8s como substrato."}, "r": {"k": "O que muda para agentes", "t": "Longa duração, com estado, em rajadas.", "b": "Cargas agênticas não são requests web stateless. Sessões duram horas, mantêm KV cache, fan-out para subagentes. Design de pod, network policies e autoscaling precisam ser repensados."}},
+    "cpe": {"eyebrow": "Cloud · Arquitetura de referência", "title": "Cognitive Platform Engineering: quatro planos."},
+    "mcp": {"eyebrow": "Cloud · Camada de protocolo", "title": "MCP é a camada de protocolo da infraestrutura.", "c1": {"k": "Por que um protocolo", "t": "N por M vira N mais M.", "b": "Sem padrão, cada agente integra cada ferramenta bilateralmente. MCP colapsa N agentes vezes M ferramentas em N mais M integrações."}, "c2": {"k": "O que carrega", "t": "Ferramentas, recursos, prompts.", "b": "Três primitivas. Ferramentas executam efeitos colaterais, recursos expõem dados, prompts moldam interação. Identidade e auditoria atravessam toda chamada."}, "c3": {"k": "Onde roda", "t": "Padrão gateway.", "b": "Um gateway MCP de plataforma centraliza auth, escopo, telemetria. Servidores atrás dele carregam política, rate limits e classificação de conteúdo."}},
+    "part3": {"eyebrow": "Parte III", "title": "Platform engineering.", "subtitle": "Golden paths, guardrails, registros de servidor MCP, RBAC de agente."},
+    "gp": {"eyebrow": "Plataforma · Golden paths", "title": "O caminho de menor resistência é o caminho seguro.", "l": {"k": "Sem golden paths", "t": "Cada time reconstrói os mesmos controles.", "b": "Cada agente entrega com auth próprio, telemetria própria, manuseio de segredo próprio. Qualidade inconsistente, buracos de auditoria, e governança vira exercício de papel."}, "r": {"k": "Com golden paths", "t": "Compliant por padrão, custom por exceção.", "b": "Templates Backstage, scaffolds IDP, registros de servidor MCP. Controles de segurança e FinOps embutidos. Times só optam fora quando precisam."}},
+    "rbac": {"eyebrow": "Plataforma · Identidade", "title": "Agentes precisam de identidade, não service accounts.", "c1": {"k": "SPIFFE", "t": "Identidade de workload.", "b": "Cada agente recebe um SPIFFE ID. A identidade propaga do chamador ao servidor MCP à fonte de dados."}, "c2": {"k": "Tokens com escopo", "t": "Menor privilégio por tarefa.", "b": "Tokens criados por sessão, escopo estreito, TTL curto. O agente não pode exceder o que o usuário poderia fazer."}, "c3": {"k": "Log de auditoria", "t": "Independente da plataforma.", "b": "O auditor consulta sem ajuda de engenharia. Decisões, identidades, payloads classificados, tudo rastreável."}, "c4": {"k": "Política", "t": "Como código.", "b": "OPA, Cedar. Políticas vivem em repos, versionam com o código, recebem revisão de pares como infraestrutura."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Contexto e intenção.", "subtitle": "O que o agente sabe e o que o agente deve fazer."},
+    "ctxint": {"eyebrow": "Contexto vs Intenção", "title": "Contexto sozinho não basta.", "l": {"k": "Context engineering", "t": "Menor conjunto de tokens de alto sinal.", "b": "Tiers de memória, skills, MCP, AGENTS.md, RAG. Curva de utilidade côncava: mais tokens degradam saída após o pico. Compactação recupera 22.7%."}, "r": {"k": "Intent engineering", "t": "Objetivos, valores, trade-offs.", "b": "CONSTITUTION.md, Spec-Driven Development, hierarquias escritas de trade-off. Sem isso, um agente bem contextualizado otimiza para o resultado errado."}},
+    "rot": {"eyebrow": "Contexto · Utilidade côncava", "title": "Mais tokens não é mais valor."},
+    "techs": {"eyebrow": "Contexto · Técnicas", "title": "Seis técnicas que se acumulam.", "c1": {"k": "Compactação", "t": "Redução de 22.7%.", "b": "Compressão estruturada do histórico de sessão pelo próprio modelo. Paper SWE-bench Lite, arXiv 2601.07190."}, "c2": {"k": "Limpeza de tool result", "t": "Pare de pagar duas vezes.", "b": "Resultados antigos de tools ficam no contexto a menos que limpos. Pagamento recorrente por conteúdo que o agente já usou."}, "c3": {"k": "Subagentes E-mem", "t": "-70% tokens.", "b": "Memória hierárquica entre subagentes. Pai mantém resumos, filhos carregam detalhe. arXiv 2601.21714."}, "c4": {"k": "Memória persistente", "t": "Compressão 11x.", "b": "Store de memória de longa vida fora da janela. Recuperação traz só o slice relevante. arXiv 2603.13017."}, "c5": {"k": "SkillReducer", "t": "39% corpo, 48% descrição.", "b": "Redução programática de arquivos de skill. Mesmo comportamento, footprint menor. arXiv 2603.29919."}, "c6": {"k": "Prompt caching", "t": "Até 90% economia em input.", "b": "Reuso de KV cache de prefixo estável entre requests. A maior alavanca isolada na maioria das cargas."}},
+    "sdd": {"eyebrow": "Intenção · Spec-driven", "title": "Spec-Kit torna intenção legível.", "c1": {"k": "CONSTITUTION.md", "t": "Não-negociáveis.", "b": "Valores e hierarquias de trade-off que o agente deve respeitar entre sessões. Não conselho. Restrições."}, "c2": {"k": "SPECIFICATION.md", "t": "O que construir.", "b": "Objetivos, critérios de sucesso, anti-objetivos. Revisado antes de código. O agente lê como input, não interpretação."}, "c3": {"k": "IMPLEMENTATION_PLAN.md", "t": "Como.", "b": "O plano é artefato, não transitório. Revisável, versionado, replayable. Agentes não improvisam o plano."}},
+    "part5": {"eyebrow": "Parte V", "title": "Harness engineering.", "subtitle": "Onde as quatro camadas viram sistema de produção."},
+    "why": {"eyebrow": "Harness · Por quê", "title": "Um framework não é um modelo operacional.", "body": "As quatro camadas, infraestrutura, plataforma, contexto, intenção, descrevem o que construir. O harness as envolve em cadência, propriedade, evidência e revisão. Sem ele, o framework vive em slides; com ele, ele entra em produção."},
+    "paths": {"eyebrow": "Harness · Dois caminhos", "title": "Three Horizons ou Open Horizons.", "l": {"k": "Caminho A · Three Horizons Accelerator", "t": "Alinhado a Microsoft, opinativo.", "b": "Azure AI Foundry, GitHub Copilot Enterprise, Microsoft 365 Copilot, Teams. Observabilidade, FinOps e identidade pré-conectados. Início mais rápido, caminho mais estreito."}, "r": {"k": "Caminho B · Open Horizons", "t": "Open-source, multi-fornecedor.", "b": "Stack CNCF, gateway multi-modelo, OpenTelemetry, FOCUS. Mais trabalho de integração, mais soberania, mais flexibilidade de modelo. Mesmas disciplinas de harness."}},
+    "mat": {"eyebrow": "Integração · Maturidade", "title": "Cinco estágios de maturidade, critérios de saída, métricas reais."},
+    "ten": {"eyebrow": "Integração · Dez princípios", "title": "Dez princípios que unem as camadas.", "i1": "Trate tokens como recurso finito. Orçamentos por sessão, agente, repo.", "i2": "Pré-compute contexto qualidade-compilador no CI, não por tarefa.", "i3": "Identidade propaga do chamador à fonte de dados. Sem service accounts.", "i4": "Spec antes de código. CONSTITUTION antes de SPECIFICATION antes do plano.", "i5": "Logs de auditoria são consultáveis sem ajuda de engenharia.", "i6": "Cache agressivamente. Prefixo, semântico, hierárquico, os três.", "i7": "Escolha o menor modelo que passa no eval, não o maior disponível.", "i8": "Workflow antes de agente. Agente só quando controle adaptativo agrega valor.", "i9": "Observabilidade é para o auditor, não só para o engenheiro.", "i10": "Rituais de harness: revisão semanal de custo, revisão mensal de intenção, saída trimestral de maturidade."},
+    "part6": {"eyebrow": "Parte VI", "title": "Economia de tokens.", "subtitle": "FinOps para IA, Azure AI Foundry, a transição de junho 2026."},
+    "june": {"eyebrow": "Token · O fato", "t1": "Em", "t2": "1 de junho de 2026", "t3": ", o GitHub Copilot para de cobrar por request.", "body": "Premium Request Units se aposentam. GitHub AI Credits assumem. 1 AI Credit equivale a US$ 0.01. Tokens de input, output e cached são contabilizados na taxa de API publicada de cada modelo. O custo deixa de ser por intenção do usuário e passa a ser por trabalho executado."},
+    "finops": {"eyebrow": "FinOps para IA · Três fases", "title": "Inform, Optimize, Operate.", "c1": {"k": "Inform", "t": "Visibilidade primeiro.", "b": "Showback por sessão, agente, repo, time. Export FOCUS. Dashboards Power BI ou Grafana. O time que não vê a conta não consegue reduzir."}, "c2": {"k": "Optimize", "t": "As disciplinas se acumulam.", "b": "Prompt caching, roteamento de modelo, MCP enxuto, cache semântico, plan/execute. Oito padrões aplicados entregam 40 a 70% de redução em cargas agênticas."}, "c3": {"k": "Operate", "t": "Orçamentos, alertas, detecção de anomalia.", "b": "Chargeback para times. Detecção de anomalia em custo de sessão. Revisão trimestral de orçamento vs realizado. O ritual do harness."}},
+    "foundry": {"eyebrow": "Foundry · Quando usar", "title": "Foundry, Copilot ou API direta.", "c1": {"k": "Azure AI Foundry", "t": "Governança corporativa.", "b": "Catálogo de modelos, prompt flow, content safety, AAD/RBAC, PTU vs PAYG, rede privada. Onde cargas reguladas vivem."}, "c2": {"k": "GitHub Copilot", "t": "Superfície de dev.", "b": "VS Code Copilot, Coding Agent, prompts customizados. Cobrança em AI Credits pós-junho. Onde a produtividade do dev vive."}, "c3": {"k": "API direta", "t": "Agentes customizados.", "b": "Anthropic, OpenAI, vLLM via gateway. Para agentes que a org constrói, não os que a org compra."}},
+    "apps": {"eyebrow": "Token · Oito padrões aplicados", "title": "Oito padrões. 40 a 70% de redução.", "c1": {"t": "Roteamento dinâmico", "b": "Roteie por complexidade. Haiku para trivia, Sonnet para código, Opus para planos."}, "c2": {"t": "Cache hierárquico", "b": "Prefixo no provider, semântico no gateway, exato no app. Três camadas se acumulam."}, "c3": {"t": "Subagent fan-out", "b": "Pai mantém resumo, filhos carregam detalhe. Hierarquia E-mem."}, "c4": {"t": "Plan-then-execute", "b": "Modelo barato planeja, modelo capaz executa só o plano."}, "c5": {"t": "Cache semântico", "b": "Similaridade por embedding, não hash. Reuso seguro de queries quase duplicadas."}, "c6": {"t": "Composição de tools", "b": "Componha primitivas em vez de inflar o catálogo de tools."}, "c7": {"t": "MCP enxuto", "b": "Disclosure progressivo. Schemas de tool são bilhetáveis; corte-os."}, "c8": {"t": "Agente custom SDD", "b": "Spec-Kit driven. O plano é artefato, não transitório."}},
+    "anti": {"eyebrow": "Token · Anti-padrões", "title": "Cinco anti-padrões para parar hoje.", "i1": "Sempre escolher o maior modelo. Pague 6x por output que um menor entregaria.", "i2": "Tratar agente como workflow. Controle adaptativo onde determinístico bastava.", "i3": "Colar o repo inteiro. Orçamento de token estoura; sinal-ruído cai abaixo do limiar seguro.", "i4": "Sem prompt caching. A maior alavanca isolada, frequentemente a última aplicada.", "i5": "Pular o harness. Camadas sem cadência viram slides, não sistemas."},
+    "persona": {"eyebrow": "Adoção · Quick start", "title": "Primeiros sessenta dias, por persona.", "c1": {"k": "CIO / VP Eng", "t": "Scan de maturidade + ritual de harness.", "b": "Pontue a org L1-L5. Escolha um ritual de harness. Defina meta de saída em 90 dias. Patrocine o dashboard FinOps."}, "c2": {"k": "Platform engineer", "t": "Gateway + golden path.", "b": "Gateway MCP com auth e auditoria. Um template de golden path no Backstage. Showback por time em 30 dias."}, "c3": {"k": "Tech lead", "t": "Spec-Kit + caching.", "b": "CONSTITUTION.md e SPECIFICATION.md no repo. Prompt caching habilitado no agente. Meça tokens por tarefa."}},
+    "num": {"eyebrow": "Resultados · Os números", "title": "Os números que justificam o esforço.", "c1": {"k": "Baseline", "b": "500 devs a US$ 19 cada. Ponto de partida antes do overage e da disciplina."}, "c2": {"k": "Sem disciplina", "b": "Overage médio observado em pilotos pós-aposentadoria de PRU. Uso caixa-preta do Copilot."}, "c3": {"k": "Com disciplina", "b": "Redução vs baseline em 60 a 90 dias. Acumula até 40 a 70% em cargas agênticas."}, "c4": {"k": "Payback", "b": "Para orgs de 5.000+ devs, economia anual passa de US$ 1 milhão. Diferença não é talento. É prática."}},
+    "refs": {"eyebrow": "Referências", "title": "Fontes por trás dos números.", "c1": {"k": "Indústria", "t": "Gartner, Deloitte, KPMG, GitHub.", "b": "Previsão de agentes Gartner, Deloitte 3.235 respondentes, tracking trimestral KPMG, estudo de adoção GitHub (128.018 projetos)."}, "c2": {"k": "Acadêmico", "t": "Pesquisa arXiv, CMU AIDev.", "b": "Compactação (2601.07190), Tokenomics (2601.14470), E-mem (2601.21714), memória persistente (2603.13017), SkillReducer (2603.29919), overthinking (2502.08235)."}, "c3": {"k": "Oficial", "t": "Microsoft, GitHub, Anthropic, FinOps.", "b": "Azure Cost Management, AI Foundry, Application Insights OTel, Anthropic prompt caching, FinOps Framework v2, FOCUS spec."}},
+    "end": {"eyebrow": "Reflexão final", "t1": "Seis disciplinas.", "t2": "Uma plataforma.", "t3": "A diferença entre o cemitério e a plataforma não é talento. É disciplina aplicada."}
+  },
+  "es": {
+    "meta": {"title": "Plataforma de Ingeniería Agéntica Completa"},
+    "labels": {"author": "Autora", "role": "Rol", "contact": "Contacto", "date": "Fecha"},
+    "cover": {"eyebrow": "Plataforma de Ingeniería Agéntica Completa", "part1": "Seis disciplinas.", "kw1": "Una plataforma.", "part2": "Agentes que sobreviven en producción.", "subtitle": "Building the future of software development with AI and Agentic DevOps."},
+    "agenda": {"eyebrow": "Agenda", "title": "Seis partes. Del cementerio a la plataforma.", "i1": "El problema del cementerio de agentes y los tres tipos de deuda.", "i2": "Fundación cloud e infraestructura.", "i3": "Platform engineering como capa de gobernanza.", "i4": "Context engineering e intent engineering.", "i5": "Harness engineering: el modelo operativo.", "i6": "Economía de tokens, FinOps y Azure AI Foundry."},
+    "part1": {"eyebrow": "Parte I", "title": "El cementerio.", "subtitle": "Por qué los pilotos mueren en producción, y qué falta de verdad."},
+    "stat": {"eyebrow": "Problema · La brecha", "t1": "75% de empresas planea IA agéntica. Solo", "t2": "34%", "t3": "reporta transformación profunda.", "sub": "complejidad cognitiva por agentes sin gobernanza (CMU AIDev)", "caption": "Los pilotos de agente fallan en llegar a producción por una razón consistente: les falta una fundación de ingeniería coherente en múltiples capas. El cementerio crece porque se saltan capas."},
+    "debts": {"eyebrow": "Problema · Tres deudas", "title": "La deuda técnica es familiar. Dos formas nuevas la empeoran.", "c1": {"k": "01 · Deuda técnica", "t": "Acumulación familiar.", "b": "Parches, dependencias frágiles, tests quebradizos. Liu et al. analizaron 304,362 commits generados por IA en 6,275 repos y encontraron mayor proporción de deuda de requisitos y tests vs código humano."}, "c2": {"k": "02 · Deuda cognitiva", "t": "Rendición cognitiva.", "b": "Los devs aceptan código generado por IA sin entenderlo. Storey la llama rendición cognitiva. La base de código se vuelve conocimiento huérfano: nadie modifica con seguridad porque nadie entiende por qué funciona."}, "c3": {"k": "03 · Deuda de intención", "t": "Objetivos nunca capturados.", "b": "El agente fue construido para métrica X bajo restricción Y con premisa oculta Z. Cuando producción cambia, el agente optimiza para lo equivocado. No está roto, simplemente no está especificado."}},
+    "stack": {"eyebrow": "Solución · Seis disciplinas", "title": "Una pila que sobrevive en producción."},
+    "part2": {"eyebrow": "Parte II", "title": "Fundación cloud.", "subtitle": "Kubernetes, MCP, infraestructura autónoma, referencia CPE de 4 planos."},
+    "k8s": {"eyebrow": "Cloud · Kubernetes", "title": "Kubernetes es la plataforma de IA estándar.", "l": {"k": "Por qué K8s gana en IA", "t": "Scheduling de GPU, autoscaling, multi-tenancy.", "b": "La encuesta CNCF muestra a Kubernetes hospedando cargas de IA pasando de nicho a estándar. GPU operators, KServe, KubeRay, vLLM operators, todos convergen a K8s como sustrato."}, "r": {"k": "Qué cambia para agentes", "t": "Larga duración, con estado, en ráfagas.", "b": "Las cargas agénticas no son requests web stateless. Las sesiones duran horas, mantienen KV cache, hacen fan-out a subagentes. El diseño de pod, network policies y autoscaling necesita rediseño."}},
+    "cpe": {"eyebrow": "Cloud · Arquitectura de referencia", "title": "Cognitive Platform Engineering: cuatro planos."},
+    "mcp": {"eyebrow": "Cloud · Capa de protocolo", "title": "MCP es la capa de protocolo de la infraestructura.", "c1": {"k": "Por qué un protocolo", "t": "N por M se vuelve N más M.", "b": "Sin estándar, cada agente integra cada herramienta bilateralmente. MCP colapsa N agentes por M herramientas a N más M integraciones."}, "c2": {"k": "Qué transporta", "t": "Herramientas, recursos, prompts.", "b": "Tres primitivas. Las herramientas ejecutan efectos secundarios, los recursos exponen datos, los prompts moldean interacción. Identidad y auditoría atraviesan toda llamada."}, "c3": {"k": "Dónde corre", "t": "Patrón gateway.", "b": "Un gateway MCP de plataforma centraliza auth, scope, telemetría. Los servidores detrás llevan política, rate limits y clasificación de contenido."}},
+    "part3": {"eyebrow": "Parte III", "title": "Platform engineering.", "subtitle": "Golden paths, guardrails, registros de servidor MCP, RBAC de agente."},
+    "gp": {"eyebrow": "Plataforma · Golden paths", "title": "El camino de menor resistencia es el camino seguro.", "l": {"k": "Sin golden paths", "t": "Cada equipo reconstruye los mismos controles.", "b": "Cada agente entrega con auth propio, telemetría propia, manejo de secretos propio. Calidad inconsistente, agujeros de auditoría, y la gobernanza se vuelve ejercicio de papel."}, "r": {"k": "Con golden paths", "t": "Compliant por defecto, custom por excepción.", "b": "Templates Backstage, scaffolds IDP, registros de servidor MCP. Controles de seguridad y FinOps integrados. Los equipos optan fuera solo cuando lo necesitan."}},
+    "rbac": {"eyebrow": "Plataforma · Identidad", "title": "Los agentes necesitan identidad, no service accounts.", "c1": {"k": "SPIFFE", "t": "Identidad de workload.", "b": "Cada agente recibe un SPIFFE ID. La identidad propaga del llamador al servidor MCP a la fuente de datos."}, "c2": {"k": "Tokens con scope", "t": "Mínimo privilegio por tarea.", "b": "Tokens emitidos por sesión, scope estrecho, TTL corto. El agente no puede exceder lo que el usuario podría hacer."}, "c3": {"k": "Log de auditoría", "t": "Independiente de la plataforma.", "b": "El auditor consulta sin ayuda de ingeniería. Decisiones, identidades, payloads clasificados, todo trazable."}, "c4": {"k": "Política", "t": "Como código.", "b": "OPA, Cedar. Las políticas viven en repos, versionan con el código, reciben revisión de pares como infraestructura."}},
+    "part4": {"eyebrow": "Parte IV", "title": "Contexto e intención.", "subtitle": "Lo que el agente sabe y lo que el agente debe hacer."},
+    "ctxint": {"eyebrow": "Contexto vs Intención", "title": "El contexto solo no basta.", "l": {"k": "Context engineering", "t": "El menor conjunto de tokens de alta señal.", "b": "Tiers de memoria, skills, MCP, AGENTS.md, RAG. Curva de utilidad cóncava: más tokens degradan salida tras el pico. La compactación recupera 22.7%."}, "r": {"k": "Intent engineering", "t": "Objetivos, valores, trade-offs.", "b": "CONSTITUTION.md, Spec-Driven Development, jerarquías escritas de trade-off. Sin esto, un agente bien contextualizado optimiza para el resultado equivocado."}},
+    "rot": {"eyebrow": "Contexto · Utilidad cóncava", "title": "Más tokens no es más valor."},
+    "techs": {"eyebrow": "Contexto · Técnicas", "title": "Seis técnicas que se acumulan.", "c1": {"k": "Compactación", "t": "Reducción de 22.7%.", "b": "Compresión estructurada del historial de sesión por el propio modelo. Paper SWE-bench Lite, arXiv 2601.07190."}, "c2": {"k": "Limpieza de tool result", "t": "Deja de pagar dos veces.", "b": "Los resultados antiguos de tools quedan en contexto a menos que se limpien. Pago recurrente por contenido que el agente ya usó."}, "c3": {"k": "Subagentes E-mem", "t": "-70% tokens.", "b": "Memoria jerárquica entre subagentes. Padre mantiene resúmenes, hijos llevan detalle. arXiv 2601.21714."}, "c4": {"k": "Memoria persistente", "t": "Compresión 11x.", "b": "Store de memoria de larga vida fuera de la ventana. La recuperación trae solo el slice relevante. arXiv 2603.13017."}, "c5": {"k": "SkillReducer", "t": "39% cuerpo, 48% descripción.", "b": "Reducción programática de archivos de skill. Mismo comportamiento, footprint menor. arXiv 2603.29919."}, "c6": {"k": "Prompt caching", "t": "Hasta 90% de ahorro en input.", "b": "Reutilización de KV cache de prefijo estable entre requests. La mayor palanca aislada en la mayoría de cargas."}},
+    "sdd": {"eyebrow": "Intención · Spec-driven", "title": "Spec-Kit hace la intención legible.", "c1": {"k": "CONSTITUTION.md", "t": "No-negociables.", "b": "Valores y jerarquías de trade-off que el agente debe respetar entre sesiones. No consejos. Restricciones."}, "c2": {"k": "SPECIFICATION.md", "t": "Qué construir.", "b": "Objetivos, criterios de éxito, anti-objetivos. Revisado antes de escribir código. El agente lo lee como input, no interpretación."}, "c3": {"k": "IMPLEMENTATION_PLAN.md", "t": "Cómo.", "b": "El plan es artefacto, no transitorio. Revisable, versionado, replayable. Los agentes no improvisan el plan."}},
+    "part5": {"eyebrow": "Parte V", "title": "Harness engineering.", "subtitle": "Donde las cuatro capas se vuelven sistema en producción."},
+    "why": {"eyebrow": "Harness · Por qué", "title": "Un framework no es un modelo operativo.", "body": "Las cuatro capas, infraestructura, plataforma, contexto, intención, describen qué construir. El harness las envuelve en cadencia, propiedad, evidencia y revisión. Sin él, el framework vive en slides; con él, llega a producción."},
+    "paths": {"eyebrow": "Harness · Dos caminos", "title": "Three Horizons u Open Horizons.", "l": {"k": "Camino A · Three Horizons Accelerator", "t": "Alineado a Microsoft, opinionado.", "b": "Azure AI Foundry, GitHub Copilot Enterprise, Microsoft 365 Copilot, Teams. Observabilidad, FinOps e identidad pre-cableados. Inicio más rápido, camino más estrecho."}, "r": {"k": "Camino B · Open Horizons", "t": "Open-source, multi-vendor.", "b": "Stack CNCF, gateway multi-modelo, OpenTelemetry, FOCUS. Más trabajo de integración, más soberanía, más flexibilidad de modelo. Mismas disciplinas de harness."}},
+    "mat": {"eyebrow": "Integración · Madurez", "title": "Cinco etapas de madurez, criterios de salida, métricas reales."},
+    "ten": {"eyebrow": "Integración · Diez principios", "title": "Diez principios que unen las capas.", "i1": "Trata los tokens como recurso finito. Presupuestos por sesión, agente, repo.", "i2": "Pre-computa contexto calidad-compilador en CI, no por tarea.", "i3": "La identidad propaga del llamador a la fuente de datos. Sin service accounts.", "i4": "Spec antes de código. CONSTITUTION antes de SPECIFICATION antes del plan.", "i5": "Los logs de auditoría se consultan sin ayuda de ingeniería.", "i6": "Cachea agresivamente. Prefijo, semántico, jerárquico, los tres.", "i7": "Elige el menor modelo que pase el eval, no el mayor disponible.", "i8": "Workflow antes que agente. Agente solo cuando control adaptativo agrega valor.", "i9": "La observabilidad es para el auditor, no solo para el ingeniero.", "i10": "Rituales de harness: revisión semanal de costo, revisión mensual de intención, salida trimestral de madurez."},
+    "part6": {"eyebrow": "Parte VI", "title": "Economía de tokens.", "subtitle": "FinOps para IA, Azure AI Foundry, la transición de junio 2026."},
+    "june": {"eyebrow": "Token · El hecho", "t1": "El", "t2": "1 de junio de 2026", "t3": ", GitHub Copilot deja de cobrar por request.", "body": "Las Premium Request Units se retiran. GitHub AI Credits toman el control. 1 AI Credit equivale a US$ 0.01. Los tokens de input, output y cached se contabilizan a la tasa pública de API de cada modelo. El costo deja de ser por intención del usuario y pasa a ser por trabajo ejecutado."},
+    "finops": {"eyebrow": "FinOps para IA · Tres fases", "title": "Inform, Optimize, Operate.", "c1": {"k": "Inform", "t": "Visibilidad primero.", "b": "Showback por sesión, agente, repo, equipo. Export FOCUS. Dashboards Power BI o Grafana. El equipo que no ve la cuenta no la puede reducir."}, "c2": {"k": "Optimize", "t": "Las disciplinas se acumulan.", "b": "Prompt caching, ruteo de modelo, MCP esbelto, cache semántico, plan/execute. Ocho patrones aplicados entregan 40 a 70% de reducción en cargas agénticas."}, "c3": {"k": "Operate", "t": "Presupuestos, alertas, detección de anomalías.", "b": "Chargeback a equipos. Detección de anomalía en costo de sesión. Revisión trimestral de presupuesto vs realizado. El ritual del harness."}},
+    "foundry": {"eyebrow": "Foundry · Cuándo usar", "title": "Foundry, Copilot o API directa.", "c1": {"k": "Azure AI Foundry", "t": "Gobernanza corporativa.", "b": "Catálogo de modelos, prompt flow, content safety, AAD/RBAC, PTU vs PAYG, red privada. Donde viven las cargas reguladas."}, "c2": {"k": "GitHub Copilot", "t": "Superficie del dev.", "b": "VS Code Copilot, Coding Agent, prompts custom. Cobranza en AI Credits post-junio. Donde vive la productividad del dev."}, "c3": {"k": "API directa", "t": "Agentes custom.", "b": "Anthropic, OpenAI, vLLM vía gateway. Para agentes que la org construye, no los que la org compra."}},
+    "apps": {"eyebrow": "Token · Ocho patrones aplicados", "title": "Ocho patrones. 40 a 70% de reducción.", "c1": {"t": "Ruteo dinámico", "b": "Rutea por complejidad. Haiku para trivia, Sonnet para código, Opus para planes."}, "c2": {"t": "Cache jerárquico", "b": "Prefijo en provider, semántico en gateway, exacto en app. Tres capas se acumulan."}, "c3": {"t": "Subagent fan-out", "b": "Padre mantiene resumen, hijos llevan detalle. Jerarquía E-mem."}, "c4": {"t": "Plan-then-execute", "b": "Modelo barato planea, modelo capaz ejecuta solo el plan."}, "c5": {"t": "Cache semántico", "b": "Similitud por embedding, no hash. Reutilización segura de queries casi duplicadas."}, "c6": {"t": "Composición de tools", "b": "Compón primitivas en vez de inflar el catálogo de tools."}, "c7": {"t": "MCP esbelto", "b": "Disclosure progresivo. Los schemas de tool son facturables; recórtalos."}, "c8": {"t": "Agente custom SDD", "b": "Spec-Kit driven. El plan es artefacto, no transitorio."}},
+    "anti": {"eyebrow": "Token · Anti-patrones", "title": "Cinco anti-patrones para detener hoy.", "i1": "Elegir siempre el modelo más grande. Pagas 6x por output que uno menor entregaría.", "i2": "Tratar al agente como workflow. Control adaptativo donde el determinista basta.", "i3": "Pegar el repo entero. El presupuesto de tokens colapsa; señal-ruido cae bajo el umbral seguro.", "i4": "Sin prompt caching. La mayor palanca aislada, frecuentemente la última aplicada.", "i5": "Saltar el harness. Capas sin cadencia se vuelven slides, no sistemas."},
+    "persona": {"eyebrow": "Adopción · Quick start", "title": "Primeros sesenta días, por persona.", "c1": {"k": "CIO / VP Eng", "t": "Scan de madurez + ritual de harness.", "b": "Puntúa la org L1-L5. Elige un ritual de harness. Define meta de salida en 90 días. Patrocina el dashboard FinOps."}, "c2": {"k": "Platform engineer", "t": "Gateway + golden path.", "b": "Gateway MCP con auth y auditoría. Un template de golden path en Backstage. Showback por equipo en 30 días."}, "c3": {"k": "Tech lead", "t": "Spec-Kit + caching.", "b": "CONSTITUTION.md y SPECIFICATION.md en el repo. Prompt caching habilitado en el agente. Mide tokens por tarea."}},
+    "num": {"eyebrow": "Resultados · Los números", "title": "Los números que justifican el esfuerzo.", "c1": {"k": "Baseline", "b": "500 devs a US$ 19 cada uno. Punto de partida antes del overage y la disciplina."}, "c2": {"k": "Sin disciplina", "b": "Overage promedio observado en pilotos tras retiro de PRU. Uso caja-negra de Copilot."}, "c3": {"k": "Con disciplina", "b": "Reducción vs baseline en 60 a 90 días. Acumula a 40 a 70% en cargas agénticas."}, "c4": {"k": "Payback", "b": "Para orgs de 5,000+ devs, ahorro anual supera US$ 1 millón. La diferencia no es talento. Es práctica."}},
+    "refs": {"eyebrow": "Referencias", "title": "Fuentes detrás de los números.", "c1": {"k": "Industria", "t": "Gartner, Deloitte, KPMG, GitHub.", "b": "Pronóstico de agentes de Gartner, Deloitte 3,235 respondentes, tracking trimestral KPMG, estudio de adopción GitHub (128,018 proyectos)."}, "c2": {"k": "Académico", "t": "Investigación arXiv, CMU AIDev.", "b": "Compactación (2601.07190), Tokenomics (2601.14470), E-mem (2601.21714), memoria persistente (2603.13017), SkillReducer (2603.29919), overthinking (2502.08235)."}, "c3": {"k": "Oficial", "t": "Microsoft, GitHub, Anthropic, FinOps.", "b": "Azure Cost Management, AI Foundry, Application Insights OTel, Anthropic prompt caching, FinOps Framework v2, FOCUS spec."}},
+    "end": {"eyebrow": "Reflexión final", "t1": "Seis disciplinas.", "t2": "Una plataforma.", "t3": "La diferencia entre el cementerio y la plataforma no es talento. Es disciplina aplicada."}
+  }
+};
+function resolveKey(o,p){return p.split('.').reduce((a,k)=>(a?a[k]:undefined),o);}
+function applyTextSafely(el, value){ el.textContent = value; }
+function setLocale(locale){
+  if(!I18N[locale])return;
+  try{localStorage.setItem('ps-locale',locale);}catch(e){}
+  document.documentElement.setAttribute('lang',locale);
+  document.querySelectorAll('.lang-switcher__btn').forEach(b=>b.setAttribute('aria-current',b.dataset.locale===locale?'true':'false'));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v=resolveKey(I18N[locale],el.dataset.i18n);
+    if(v!==undefined && v!==null){
+      if(el.tagName==='TITLE') document.title = v;
+      else applyTextSafely(el, v);
+    }
+  });
+}
+let currentSlide=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+function syncTheme(i){document.body.dataset.slideTheme=slides[i].classList.contains('slide--dark')?'dark':'light';}
+function goToSlide(i){
+  if(i<0||i>=total)return;
+  slides.forEach(s=>s.setAttribute('data-active','false'));
+  slides[i].setAttribute('data-active','true');
+  currentSlide=i;
+  document.getElementById('counter').textContent=(i+1)+' / '+total;
+  document.getElementById('progress').style.width=(((i+1)/total)*100)+'%';
+  syncTheme(i);
+}
+function nextSlide(){goToSlide(Math.min(currentSlide+1,total-1));}
+function prevSlide(){goToSlide(Math.max(currentSlide-1,0));}
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide();}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide();}
+  if(e.key==='Home')goToSlide(0);
+  if(e.key==='End')goToSlide(total-1);
+});
+(function init(){
+  const saved=(()=>{try{return localStorage.getItem('ps-locale');}catch(e){return null;}})();
+  const browser=navigator.language && navigator.language.indexOf('pt')===0?'pt-BR':navigator.language && navigator.language.indexOf('es')===0?'es':'en';
+  setLocale(saved||browser);
+  goToSlide(0);
+})();
+
+/* Overview modal mechanism (Wave 16 injection) */
+(function() {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  if (slides.length === 0) return;
+  const overview = document.getElementById('overview');
+  if (!overview) return;
+  const overviewGrid = document.getElementById('overviewGrid');
+
+  function buildOverview() {
+    if (!overviewGrid) return;
+    while (overviewGrid.firstChild) overviewGrid.removeChild(overviewGrid.firstChild);
+    slides.forEach((s, idx) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'overview-card';
+      const accent = s.style.getPropertyValue('--accent') || '#00A4EF';
+      card.style.setProperty('--card-accent', accent);
+      card.dataset.idx = String(idx);
+
+      const accentBar = document.createElement('div');
+      accentBar.className = 'overview-card__accent';
+      card.appendChild(accentBar);
+
+      const num = document.createElement('span');
+      num.className = 'overview-card__num';
+      num.textContent = String(idx+1).padStart(2,'0');
+      card.appendChild(num);
+
+      const eyebrowEl = s.querySelector('.eyebrow');
+      if (eyebrowEl) {
+        const eb = document.createElement('span');
+        eb.className = 'overview-card__eyebrow';
+        eb.textContent = eyebrowEl.textContent.trim();
+        card.appendChild(eb);
+      }
+      const titleEl = s.querySelector('.title, .section-title, h1, h2');
+      if (titleEl) {
+        const t = document.createElement('div');
+        t.className = 'overview-card__title';
+        t.textContent = titleEl.textContent.trim();
+        card.appendChild(t);
+      }
+
+      card.addEventListener('click', () => {
+        if (typeof goToSlide === 'function') goToSlide(idx);
+        else if (typeof show === 'function') show(idx);
+        else {
+          slides.forEach(sl => sl.dataset.active = 'false');
+          slides[idx].dataset.active = 'true';
+        }
+        closeOverview();
+      });
+      overviewGrid.appendChild(card);
+    });
+    updateOverviewCurrent();
+  }
+
+  function updateOverviewCurrent() {
+    if (!overviewGrid) return;
+    const current = slides.findIndex(s => s.dataset.active === 'true');
+    overviewGrid.querySelectorAll('.overview-card').forEach((c, i) => {
+      c.dataset.current = (i === current) ? 'true' : 'false';
+    });
+  }
+
+  function openOverview() {
+    overview.dataset.open = 'true';
+    overview.setAttribute('aria-hidden', 'false');
+    document.body.dataset.overviewOpen = 'true';
+    updateOverviewCurrent();
+  }
+
+  function closeOverview() {
+    overview.dataset.open = 'false';
+    overview.setAttribute('aria-hidden', 'true');
+    document.body.dataset.overviewOpen = 'false';
+  }
+
+  function toggleOverview() {
+    if (overview.dataset.open === 'true') closeOverview();
+    else openOverview();
+  }
+
+  window.toggleOverview = toggleOverview;
+  window.openOverview = openOverview;
+  window.closeOverview = closeOverview;
+
+  document.addEventListener('keydown', (e) => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') {
+      if (overview.dataset.open === 'true') {
+        e.preventDefault();
+        closeOverview();
+      } else if (e.key === 'o' || e.key === 'O') {
+        e.preventDefault();
+        openOverview();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        openOverview();
+      }
+    }
+  });
+
+  buildOverview();
+})();
+</script>
+
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title" id="overviewTitle">Overview</div>
+    <div class="overview__hint" id="overviewHint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Spec-Driven Development (Spec Kit / Specky) · Playbook · Paula Silva</title>
+<meta name="description" content="Playbook for Spec-Driven Development (Spec Kit / Specky), trilingual reference under the Microsoft identity.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Spec-Driven Development (Spec Kit / Specky) · Playbook · Paula Silva">
+<meta property="og:description" content="Playbook for Spec-Driven Development (Spec Kit / Specky), trilingual reference under the Microsoft identity.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Spec-Driven Development (Spec Kit / Specky) · Playbook · Paula Silva">
+<meta name="twitter:description" content="Playbook for Spec-Driven Development (Spec Kit / Specky), trilingual reference under the Microsoft identity.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/playbook.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+
+<section class="doc-hero">
+  <div class="doc-hero__inner">
+    <div class="doc-hero__eyebrow">Playbook · v1.0.0 · 2026-05-06</div>
+    <h1 class="doc-hero__title">
+      <span data-lang="en" class="lang-active">Spec first, test second, code third. The agent way.</span><span data-lang="pt-br">Spec primeiro, teste segundo, código terceiro. O jeito agêntico.</span><span data-lang="es">Spec primero, prueba segundo, código tercero. El estilo agéntico.</span>
+    </h1>
+    <p class="doc-hero__lead">
+      <span data-lang="en" class="lang-active">Spec-Driven Development with Spec Kit and Specky. Why specifications upstream make AI agents reliable, testable, and reviewable. The contract that turns a chatbot prompt into engineering.</span><span data-lang="pt-br">Spec-Driven Development com Spec Kit e Specky. Por que especificações upstream tornam agentes IA confiáveis, testáveis e revisáveis. O contrato que transforma um prompt de chatbot em engenharia.</span><span data-lang="es">Spec-Driven Development con Spec Kit y Specky. Por qué las especificaciones upstream vuelven los agentes IA confiables, testables y revisables. El contrato que convierte un prompt de chatbot en ingeniería.</span>
+    </p>
+  </div>
+</section>
+
+<div class="layout">
+  <aside class="toc">
+    <h4>On this page</h4>
+    <ol class="toc-list">
+      <li><a href="#overview"><span data-lang="en" class="lang-active">Overview</span><span data-lang="pt-br">Visão geral</span><span data-lang="es">Visión general</span></a></li>
+      <li><a href="#thesis"><span data-lang="en" class="lang-active">Thesis</span><span data-lang="pt-br">Tese</span><span data-lang="es">Tesis</span></a></li>
+      <li><a href="#numbers"><span data-lang="en" class="lang-active">Numbers</span><span data-lang="pt-br">Números</span><span data-lang="es">Números</span></a></li>
+      <li><a href="#parts"><span data-lang="en" class="lang-active">Parts</span><span data-lang="pt-br">Partes</span><span data-lang="es">Partes</span></a></li>
+      <li><a href="#deck"><span data-lang="en" class="lang-active">Companion deck</span><span data-lang="pt-br">Deck complementar</span><span data-lang="es">Deck complementario</span></a></li>
+    </ol>
+  </aside>
+
+  <article class="article">
+
+    <section id="overview">
+      <h2>1. <span data-lang="en" class="lang-active">Overview</span><span data-lang="pt-br">Visão geral</span><span data-lang="es">Visión general</span></h2>
+      <p>
+        <span data-lang="en" class="lang-active">If you cannot spec it, you cannot delegate it. SDD makes the contract explicit and tested.</span><span data-lang="pt-br">Se você não consegue specificar, não consegue delegar. SDD torna o contrato explícito e testado.</span><span data-lang="es">Si no puedes especificarlo, no puedes delegarlo. SDD vuelve el contrato explícito y probado.</span>
+      </p>
+    </section>
+
+    
+    <section id="thesis">
+      <h2>2. <span data-lang="en" class="lang-active">The thesis</span><span data-lang="pt-br">A tese</span><span data-lang="es">La tesis</span></h2>
+      <p class="lead-quote">
+        <span data-lang="en" class="lang-active">If you cannot write the spec, you cannot delegate the work. Spec-Driven Development is the contract that makes agent output reviewable, testable, and shippable.</span><span data-lang="pt-br">Se você não consegue escrever a spec, não consegue delegar o trabalho. Spec-Driven Development é o contrato que torna a saída do agente revisável, testável e entregável.</span><span data-lang="es">Si no puedes escribir la spec, no puedes delegar el trabajo. Spec-Driven Development es el contrato que vuelve la salida del agente revisable, testable y entregable.</span>
+      </p>
+    </section>
+
+    <section id="numbers">
+      <h2>3. <span data-lang="en" class="lang-active">The numbers</span><span data-lang="pt-br">Os números</span><span data-lang="es">Los números</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th><span data-lang="en" class="lang-active">Stat</span><span data-lang="pt-br">Stat</span><span data-lang="es">Stat</span></th>
+            <th><span data-lang="en" class="lang-active">What it represents</span><span data-lang="pt-br">O que representa</span><span data-lang="es">Qué representa</span></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><strong>Spec</strong></td>
+          <td><span data-lang="en" class="lang-active">Upstream contract</span><span data-lang="pt-br">Contrato upstream</span><span data-lang="es">Contrato upstream</span></td>
+        </tr>
+        <tr>
+          <td><strong>TDD</strong></td>
+          <td><span data-lang="en" class="lang-active">Tests as agent input</span><span data-lang="pt-br">Testes como input</span><span data-lang="es">Pruebas como input</span></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><span data-lang="en" class="lang-active">Tools (Spec Kit + Specky)</span><span data-lang="pt-br">Ferramentas</span><span data-lang="es">Herramientas</span></td>
+        </tr>
+        <tr>
+          <td><strong>Prod</strong></td>
+          <td><span data-lang="en" class="lang-active">Production patterns</span><span data-lang="pt-br">Padrões prod</span><span data-lang="es">Patrones prod</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="parts">
+      <h2>4. <span data-lang="en" class="lang-active">Specs are the new code review.</span><span data-lang="pt-br">Specs são o novo code review.</span><span data-lang="es">Las specs son el nuevo code review.</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th><span data-lang="en" class="lang-active">Part</span><span data-lang="pt-br">Parte</span><span data-lang="es">Parte</span></th>
+            <th><span data-lang="en" class="lang-active">Title</span><span data-lang="pt-br">Título</span><span data-lang="es">Título</span></th>
+            <th><span data-lang="en" class="lang-active">Summary</span><span data-lang="pt-br">Resumo</span><span data-lang="es">Resumen</span></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><strong>PART I</strong></td>
+          <td><span data-lang="en" class="lang-active">Why spec-driven</span><span data-lang="pt-br">Por que spec-driven</span><span data-lang="es">Por qué spec-driven</span></td>
+          <td><span data-lang="en" class="lang-active">The cost of unclear specs in agent loops.</span><span data-lang="pt-br">O custo de specs nebulosas em loops de agente.</span><span data-lang="es">El costo de specs poco claras en loops de agente.</span></td>
+        </tr>
+        <tr>
+          <td><strong>PART II</strong></td>
+          <td><span data-lang="en" class="lang-active">Spec Kit</span><span data-lang="pt-br">Spec Kit</span><span data-lang="es">Spec Kit</span></td>
+          <td><span data-lang="en" class="lang-active">How to write specs that agents can execute.</span><span data-lang="pt-br">Como escrever specs que agentes conseguem executar.</span><span data-lang="es">Cómo escribir specs que los agentes puedan ejecutar.</span></td>
+        </tr>
+        <tr>
+          <td><strong>PART III</strong></td>
+          <td><span data-lang="en" class="lang-active">Specky</span><span data-lang="pt-br">Specky</span><span data-lang="es">Specky</span></td>
+          <td><span data-lang="en" class="lang-active">Validation harness for spec-driven outputs.</span><span data-lang="pt-br">Harness de validação para saídas spec-driven.</span><span data-lang="es">Harness de validación para salidas spec-driven.</span></td>
+        </tr>
+        <tr>
+          <td><strong>PART IV</strong></td>
+          <td><span data-lang="en" class="lang-active">TDD with agents</span><span data-lang="pt-br">TDD com agentes</span><span data-lang="es">TDD con agentes</span></td>
+          <td><span data-lang="en" class="lang-active">Tests as agent input. The red-green-refactor loop, redrawn.</span><span data-lang="pt-br">Testes como input do agente. O loop red-green-refactor, redesenhado.</span><span data-lang="es">Pruebas como input del agente. El loop red-green-refactor, redibujado.</span></td>
+        </tr>
+        <tr>
+          <td><strong>PART V</strong></td>
+          <td><span data-lang="en" class="lang-active">Production patterns</span><span data-lang="pt-br">Padrões de produção</span><span data-lang="es">Patrones de producción</span></td>
+          <td><span data-lang="en" class="lang-active">Decision gates, observability, rollback strategies.</span><span data-lang="pt-br">Gates de decisão, observabilidade, estratégias de rollback.</span><span data-lang="es">Decision gates, observabilidad, estrategias de rollback.</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="deck">
+      <h2>5. <span data-lang="en" class="lang-active">Companion deck</span><span data-lang="pt-br">Deck complementar</span><span data-lang="es">Deck complementario</span></h2>
+      <p>
+        <span data-lang="en" class="lang-active">For the full presentation with diagrams and animations, see the deck:</span>
+        <span data-lang="pt-br">Para a apresentação completa com diagramas e animações, veja o deck:</span>
+        <span data-lang="es">Para la presentación completa con diagramas y animaciones, ver el deck:</span>
+      </p>
+      <p>
+        <a href="SDD_TDD_Spec_Kit_Specky_Deck_v3_1_0_2026-04-27_multi.html" class="deck-link" target="_blank" rel="noopener noreferrer">Deck v3.1 →</a>
+      </p>
+    </section>
+
+    <nav class="pagenav">
+      <a href="landing.html">← Landing</a>
+      <a href="../index.html">Hub →</a>
+    </nav>
+
+  </article>
+
+  <aside class="scrollspy">
+    <h4>Related</h4>
+    <a href="../agentic-devops-platform/landing.html">Agentic DevOps</a>
+    <a href="../context-engineering-platform/landing.html">Context Stack</a>
+    <a href="../semantic-context-layer/landing.html">Semantic Layer</a>
+    <a href="../token-best-practices/landing.html">Token Economy</a>
+    <a href="../legacy-modernization-framework/landing.html">Modernization</a>
+    <a href="../index.html">Hub</a>
+  </aside>
+
+</div>
+
+<script>
+window.PLAYBOOK_DATA = {
+  topicLabel: 'Spec-Driven Development (Spec Kit / Specky)',
+  nextLabel: { en: 'Hub', "pt-br": 'Hub', es: 'Hub' },
+  nextHref: '../index.html'
+};
+</script>
+<script src="../_shared/playbook.js"></script>
+</body>
+</html>

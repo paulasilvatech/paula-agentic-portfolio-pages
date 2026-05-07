@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>GitHub Agents, Skills, Plugins, Hooks · Paula Silva</title>
+<meta name="description" content="Personal playbook on the agentic ecosystem: agents, skills, plugins, hooks, MCP and the configuration hierarchy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GitHub Agents, Skills, Plugins, Hooks · Paula Silva">
+<meta property="og:description" content="Personal playbook on the agentic ecosystem: agents, skills, plugins, hooks, MCP and the configuration hierarchy.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GitHub Agents, Skills, Plugins, Hooks · Paula Silva">
+<meta name="twitter:description" content="Personal playbook on the agentic ecosystem: agents, skills, plugins, hooks, MCP and the configuration hierarchy.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/landing.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+<div id="landing-root"></div>
+<script>
+window.PAGE_DATA = {
+  topicNumber: '09',
+  topicLabel: 'GitHub Agents, Skills, Plugins, Hooks',
+  accent: 'red',
+  role: 'AI-Native Software Engineer',
+  handle: '@paulasilvatech',
+  existingDeck: 'Skills_Agents_Deck_v2_0_0_2026-04-22_en.html',
+  existingPlaybook: 'playbook.html',
+  heroArt: `<svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agentic ecosystem stack">
+    <rect x="20" y="20" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-red-500)" stroke-width="0.6"/>
+    <text x="40" y="42" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-red-700)">AGENTS</text>
+    <text x="40" y="62" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Identity, tools, handoff.</text>
+    <rect x="20" y="92" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-yellow-500)" stroke-width="0.6"/>
+    <text x="40" y="114" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-yellow-700)">SKILLS</text>
+    <text x="40" y="134" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Domain knowledge, on demand.</text>
+    <rect x="20" y="164" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-green-500)" stroke-width="0.6"/>
+    <text x="40" y="186" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-green-700)">PLUGINS &amp; MCP</text>
+    <text x="40" y="206" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">External tools and servers.</text>
+    <rect x="20" y="236" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--c-blue-500)" stroke-width="0.6"/>
+    <text x="40" y="258" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--c-blue-700)">HOOKS</text>
+    <text x="40" y="278" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">Deterministic lifecycle gates.</text>
+    <rect x="20" y="288" width="460" height="60" rx="6" fill="var(--bg-alt)" stroke="var(--ink)" stroke-width="0.6"/>
+    <text x="40" y="310" font-family="JetBrains Mono,monospace" font-size="11" font-weight="600" letter-spacing="0.14em" fill="var(--ink)">CONFIG HIERARCHY</text>
+    <text x="40" y="330" font-family="Inter,sans-serif" font-size="13" fill="var(--ink-2)">User, project, enterprise.</text>
+  </svg>`,
+  hero: {
+    eyebrow: { en:'09 · Personal · Agentic ecosystem', 'pt-br':'09 · Pessoal · Ecossistema agêntico', es:'09 · Personal · Ecosistema agéntico' },
+    title: {
+      en: 'Agents pick the path. Skills pack the knowledge. Hooks keep the rails.',
+      'pt-br': 'Agentes escolhem o caminho. Skills empacotam o conhecimento. Hooks mantêm os trilhos.',
+      es: 'Los agentes eligen el camino. Las skills empaquetan el conocimiento. Los hooks mantienen los rieles.'
+    },
+    subtitle: {
+      en: 'Six concepts compose the modern coding assistant: agents, skills, plugins, MCP servers, hooks and the configuration hierarchy that orders them. Confuse them and your setup is fragile. Compose them on purpose and you ship a workspace that scales from a single developer to an entire engineering org. This page is the map.',
+      'pt-br': 'Seis conceitos compõem o assistente de código moderno: agentes, skills, plugins, servidores MCP, hooks e a hierarquia de configuração que os ordena. Misture-os e o setup vira frágil. Componha-os com intenção e você entrega um workspace que escala de um desenvolvedor único a uma organização inteira. Esta página é o mapa.',
+      es: 'Seis conceptos componen al asistente de código moderno: agentes, skills, plugins, servidores MCP, hooks y la jerarquía de configuración que los ordena. Confúndelos y tu setup es frágil. Componlos con intención y entregas un espacio de trabajo que escala de un único desarrollador a una organización entera. Esta página es el mapa.'
+    }
+  },
+  stats: [
+    { num:'6', label:{ en:'Concepts in the ecosystem map', 'pt-br':'Conceitos no mapa do ecossistema', es:'Conceptos en el mapa del ecosistema' } },
+    { num:'4', label:{ en:'Decision points: agent vs skill', 'pt-br':'Pontos de decisão: agente vs skill', es:'Puntos de decisión: agente vs skill' } },
+    { num:'6', label:{ en:'Layers in prompt integration', 'pt-br':'Camadas na integração de prompt', es:'Capas en la integración de prompt' } },
+    { num:'3', label:{ en:'Tiers in the config hierarchy', 'pt-br':'Tiers na hierarquia de config', es:'Tiers en la jerarquía de config' } }
+  ],
+  pillarsTitle: {
+    en: 'Six pillars of the agentic workspace.',
+    'pt-br': 'Seis pilares do workspace agêntico.',
+    es: 'Seis pilares del espacio agéntico.'
+  },
+  pillarsLead: {
+    en: 'Read this page in pillars. Each pillar maps to one source document in the playbook and to a section in the companion decks. The order matches how a task actually flows through the system: arrival, routing, knowledge, tools, gates, configuration.',
+    'pt-br': 'Leia esta página em pilares. Cada pilar mapeia para um documento-fonte no playbook e para uma seção nos decks companheiros. A ordem segue como uma tarefa realmente flui pelo sistema: chegada, roteamento, conhecimento, ferramentas, gates, configuração.',
+    es: 'Lee esta página por pilares. Cada pilar mapea a un documento fuente del playbook y a una sección de los decks acompañantes. El orden sigue el flujo real de una tarea por el sistema: llegada, ruteo, conocimiento, herramientas, gates, configuración.'
+  },
+  pillars: [
+    { num:'01', accent:'red',
+      title:{ en:'Skill anatomy and lifecycle', 'pt-br':'Anatomia e ciclo de vida de skill', es:'Anatomía y ciclo de vida de skill' },
+      desc:{ en:'A SKILL.md is more than a prompt. It is a versioned bundle: frontmatter, body, scripts, references. The lifecycle covers discovery, activation, execution, expiration. Get this right and skills compound.',
+             'pt-br':'Um SKILL.md é mais que um prompt. É um bundle versionado: frontmatter, corpo, scripts, referências. O ciclo cobre descoberta, ativação, execução, expiração. Acerte isso e skills compõem.',
+             es:'Un SKILL.md es más que un prompt. Es un bundle versionado: frontmatter, cuerpo, scripts, referencias. El ciclo cubre descubrimiento, activación, ejecución, expiración. Aciértalo y las skills componen.' } },
+    { num:'02', accent:'yellow',
+      title:{ en:'Agent vs skill decision tree', 'pt-br':'Árvore de decisão: agente vs skill', es:'Árbol de decisión: agente vs skill' },
+      desc:{ en:'Four sequential questions: specific tools, specific personality, multi-stage handoff, existing SKILL.md. Three terminal outcomes: custom agent + skill, generalist + skill, generalist alone. Stop over-engineering.',
+             'pt-br':'Quatro perguntas sequenciais: ferramentas específicas, personalidade específica, handoff multietapa, SKILL.md existente. Três saídas terminais: agente custom + skill, generalista + skill, generalista só. Pare de superengenheirar.',
+             es:'Cuatro preguntas secuenciales: herramientas específicas, personalidad específica, handoff multietapa, SKILL.md existente. Tres salidas terminales: agente custom + skill, generalista + skill, generalista solo. Deja de sobre-ingenierizar.' } },
+    { num:'03', accent:'green',
+      title:{ en:'Plugins and MCP servers', 'pt-br':'Plugins e servidores MCP', es:'Plugins y servidores MCP' },
+      desc:{ en:'Plugins extend the IDE. MCP servers expose external systems as typed tools. Together they are the bridge from the model to your real environment: repos, databases, dashboards, queues, secrets.',
+             'pt-br':'Plugins estendem o IDE. Servidores MCP expõem sistemas externos como ferramentas tipadas. Juntos são a ponte do modelo para seu ambiente real: repos, bancos, dashboards, filas, segredos.',
+             es:'Los plugins extienden el IDE. Los servidores MCP exponen sistemas externos como herramientas tipadas. Juntos son el puente del modelo a tu entorno real: repos, bases, dashboards, colas, secretos.' } },
+    { num:'04', accent:'blue',
+      title:{ en:'Hooks lifecycle', 'pt-br':'Ciclo de vida dos hooks', es:'Ciclo de vida de los hooks' },
+      desc:{ en:'PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. Hooks make the assistant deterministic where it must be: secrets blocking, formatters, audit logs, policy gates.',
+             'pt-br':'PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. Hooks tornam o assistente determinístico onde precisa ser: bloqueio de segredos, formatadores, logs de auditoria, gates de política.',
+             es:'PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. Los hooks hacen al asistente determinista donde debe serlo: bloqueo de secretos, formateadores, logs de auditoría, gates de política.' } },
+    { num:'05', accent:'ink',
+      title:{ en:'Orchestration flow and 6 prompt layers', 'pt-br':'Fluxo de orquestração e 6 camadas de prompt', es:'Flujo de orquestración y 6 capas de prompt' },
+      desc:{ en:'A task enters, the router selects an agent, the agent loads skills, MCP tools, and runs through six prompt-integration layers: system, project, user, session, skill, tool. Knowing the order is half the win.',
+             'pt-br':'Uma tarefa entra, o roteador seleciona um agente, o agente carrega skills, ferramentas MCP, e passa por seis camadas de integração de prompt: sistema, projeto, usuário, sessão, skill, ferramenta. Saber a ordem é metade da vitória.',
+             es:'Una tarea entra, el router selecciona un agente, el agente carga skills, herramientas MCP, y atraviesa seis capas de integración de prompt: sistema, proyecto, usuario, sesión, skill, herramienta. Saber el orden es media victoria.' } },
+    { num:'06', accent:'red',
+      title:{ en:'Configuration hierarchy', 'pt-br':'Hierarquia de configuração', es:'Jerarquía de configuración' },
+      desc:{ en:'Enterprise, project, user. Three tiers, last-write-wins with explicit precedence. Centralize policy at the top, ship developer freedom at the bottom, document the override rules in the middle.',
+             'pt-br':'Enterprise, projeto, usuário. Três tiers, com último escreve vence e precedência explícita. Centralize política no topo, libere o desenvolvedor na base, documente overrides no meio.',
+             es:'Enterprise, proyecto, usuario. Tres tiers, con último escribe gana y precedencia explícita. Centraliza política arriba, libera al desarrollador abajo, documenta los overrides en medio.' } }
+  ],
+  formats: [
+    { kicker:'LANDING · YOU ARE HERE', accent:'red',
+      title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
+      desc:{ en:'10-second hook. Six pillars, the formats available, the related topics in the hub.', 'pt-br':'Hook de 10 segundos. Seis pilares, formatos disponíveis, tópicos relacionados no hub.', es:'Hook de 10 segundos. Seis pilares, formatos disponibles, temas relacionados en el hub.' },
+      meta:{ en:'HTML · 5 min', 'pt-br':'HTML · 5 min', es:'HTML · 5 min' },
+      href:'#' },
+    { kicker:'DECK · v2.0.0', accent:'red',
+      title:{ en:'Skills &amp; Agents deck', 'pt-br':'Deck Skills &amp; Agents', es:'Deck Skills &amp; Agents' },
+      desc:{ en:'The walk-through deck for the decision tree, the orchestration flow and the six prompt layers, with side-by-side examples.', 'pt-br':'O deck-guia para a árvore de decisão, o fluxo de orquestração e as seis camadas de prompt, com exemplos lado a lado.', es:'El deck guía para el árbol de decisión, el flujo de orquestación y las seis capas de prompt, con ejemplos lado a lado.' },
+      meta:{ en:'HTML · 60 min', 'pt-br':'HTML · 60 min', es:'HTML · 60 min' },
+      href:'Skills_Agents_Deck_v2_0_0_2026-04-22_en.html' },
+    { kicker:'DECK · v1.0.2', accent:'yellow',
+      title:{ en:'GitHub Copilot in VS Code deck', 'pt-br':'Deck GitHub Copilot no VS Code', es:'Deck GitHub Copilot en VS Code' },
+      desc:{ en:'Trilingual deck on the day-to-day workspace: agents, skills, plugins, hooks all wired together inside VS Code with GitHub Copilot.', 'pt-br':'Deck trilíngue do workspace do dia a dia: agentes, skills, plugins, hooks integrados no VS Code com GitHub Copilot.', es:'Deck trilingüe del workspace diario: agentes, skills, plugins, hooks integrados en VS Code con GitHub Copilot.' },
+      meta:{ en:'HTML · 75 min', 'pt-br':'HTML · 75 min', es:'HTML · 75 min' },
+      href:'GitHub_Copilot_VS_Code_Deck_v1_0_2_2026-04-22_en-pt-es.html' },
+    { kicker:'PLAYBOOK · 7 PARTS', accent:'green',
+      title:{ en:'Agents &amp; Skills playbook', 'pt-br':'Playbook de Agents &amp; Skills', es:'Playbook de Agents &amp; Skills' },
+      desc:{ en:'Reference playbook covering skill lifecycle, ecosystem map, decision tree, orchestration flow, prompt integration layers, configuration hierarchy and hooks lifecycle.', 'pt-br':'Playbook de referência cobrindo ciclo de skill, mapa do ecossistema, árvore de decisão, fluxo de orquestração, camadas de integração de prompt, hierarquia de configuração e ciclo de hooks.', es:'Playbook de referencia que cubre ciclo de skill, mapa del ecosistema, árbol de decisión, flujo de orquestación, capas de integración de prompt, jerarquía de configuración y ciclo de hooks.' },
+      meta:{ en:'HTML · ~30K words', 'pt-br':'HTML · ~30K palavras', es:'HTML · ~30K palabras' },
+      href:'playbook.html' }
+  ],
+  crosslinks: [
+    { accent:'ink', kicker:'Cost discipline',
+      title:{ en:'Token Management &amp; Agent Design', 'pt-br':'Gestão de Tokens &amp; Design de Agentes', es:'Gestión de Tokens &amp; Diseño de Agentes' },
+      hint:{ en:'Pick the agent pattern, then size the token budget. Both decisions live in the same loop.', 'pt-br':'Escolha o padrão de agente, depois dimensione o orçamento de tokens. As duas decisões vivem no mesmo loop.', es:'Elige el patrón de agente, luego dimensiona el presupuesto de tokens. Ambas decisiones viven en el mismo bucle.' },
+      href:'../token-best-practices/landing.html' },
+    { accent:'yellow', kicker:'Stack model',
+      title:{ en:'Context Platform Stack', 'pt-br':'Context Platform Stack', es:'Context Platform Stack' },
+      hint:{ en:'Skills sit at the context layer. The stack model places them next to MCP, semantic context and prompt integration.', 'pt-br':'Skills moram na camada de contexto. O modelo de stack as posiciona ao lado de MCP, contexto semântico e integração de prompt.', es:'Las skills viven en la capa de contexto. El modelo de stack las posiciona junto a MCP, contexto semántico e integración de prompt.' },
+      href:'../context-engineering-platform/landing.html' },
+    { accent:'green', kicker:'Runtime',
+      title:{ en:'Agentic DevOps Platform', 'pt-br':'Plataforma Agentic DevOps', es:'Plataforma Agentic DevOps' },
+      hint:{ en:'Agents and hooks run on a platform. This topic covers the runtime, observability and policy plane.', 'pt-br':'Agentes e hooks rodam em uma plataforma. Este tópico cobre runtime, observabilidade e plano de política.', es:'Los agentes y hooks corren sobre una plataforma. Este tema cubre runtime, observabilidad y plano de política.' },
+      href:'../agentic-devops-platform/landing.html' },
+    { accent:'red', kicker:'Spec discipline',
+      title:{ en:'Spec-Driven Development', 'pt-br':'Spec-Driven Development', es:'Spec-Driven Development' },
+      hint:{ en:'Custom agents execute specs. The Spec Kit / Specky topic shows the upstream contract that agents read.', 'pt-br':'Agentes custom executam specs. O tópico Spec Kit / Specky mostra o contrato a montante que os agentes leem.', es:'Los agentes custom ejecutan specs. El tema Spec Kit / Specky muestra el contrato aguas arriba que los agentes leen.' },
+      href:'../sdd-tdd-spec-kit-specky/landing.html' }
+  ]
+};
+</script>
+<script src="../_shared/landing-template.js"></script>
+</body>
+</html>

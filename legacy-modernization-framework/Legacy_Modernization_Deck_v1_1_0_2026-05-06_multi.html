@@ -1,0 +1,1567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Paula Silva, Software Global Black Belt">
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<meta name="description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Legacy Modernization with Agentic AI · Paula Silva">
+<meta property="og:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Legacy Modernization with Agentic AI · Paula Silva">
+<meta name="twitter:description" content="Paula Silva, Software Global Black Belt at Microsoft. Trilingual hub for the Agentic DevOps body of work: platform engineering, context engineering, semantic context, token economy, and legacy modernization.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<title>Legacy Modernization with Agentic AI · Paula Silva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-red-50:#FFF0EB;--c-red-500:#F25022;--c-red-700:#B33816;
+  --c-green-50:#F1F8E3;--c-green-500:#7FBA00;--c-green-700:#5A8500;
+  --c-blue-50:#E5F6FD;--c-blue-500:#00A4EF;--c-blue-700:#0076AC;
+  --c-yellow-50:#FFF7E0;--c-yellow-500:#FFB900;--c-yellow-700:#B88500;
+  --ink:#1A1A1A;--ink-2:#3A3A3A;--ink-3:#737373;
+  --paper:#FFFFFF;--bg:#F7F7F5;--bg-alt:#ECECE8;
+  --rule:#E5E5E0;--rule-2:#CECEC7;
+  --dark-bg:#141414;--dark-ink:#F0F0F0;--dark-ink-2:#C7C7C2;--dark-ink-3:#A8A8A4;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --measure:680px;
+  --accent:var(--c-blue-500);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:var(--font-sans);color:var(--ink);background:#000;overflow:hidden}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide,.slide *{box-sizing:border-box}
+.slide{position:absolute;inset:0;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;background:var(--bg);overflow:hidden;opacity:0;visibility:hidden;transition:opacity 0.18s ease-out;pointer-events:none}
+.slide[data-active="true"]{opacity:1;visibility:visible;pointer-events:auto}
+
+/* ===== ENTRANCE ANIMATIONS - fadeUp + stagger ===== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: no-preference){
+  .slide[data-active="true"] .eyebrow { animation: fadeUp 0.55s ease-out both; animation-delay: 60ms; }
+  .slide[data-active="true"] .title,
+  .slide[data-active="true"] .section-title,
+  .slide[data-active="true"] h2.title { animation: fadeUp 0.6s ease-out both; animation-delay: 160ms; }
+  .slide[data-active="true"] .subtitle,
+  .slide[data-active="true"] .section-subtitle { animation: fadeUp 0.55s ease-out both; animation-delay: 280ms; }
+  .slide[data-active="true"] .section-number { animation: fadeUp 0.7s ease-out both; animation-delay: 100ms; }
+  .slide[data-active="true"] .meta-grid { animation: fadeUp 0.5s ease-out both; animation-delay: 380ms; }
+  .slide[data-active="true"] .numbered-list .numbered-item,
+  .slide[data-active="true"] .pillar-grid .pillar-card,
+  .slide[data-active="true"] .stat-grid .stat-card,
+  .slide[data-active="true"] .split .split__side { animation: fadeUp 0.5s ease-out both; }
+  .slide[data-active="true"] .numbered-list .numbered-item:nth-child(1){ animation-delay: 380ms; }
+  .slide[data-active="true"] .numbered-list .numbered-item:nth-child(2){ animation-delay: 460ms; }
+  .slide[data-active="true"] .numbered-list .numbered-item:nth-child(3){ animation-delay: 540ms; }
+  .slide[data-active="true"] .numbered-list .numbered-item:nth-child(4){ animation-delay: 620ms; }
+  .slide[data-active="true"] .numbered-list .numbered-item:nth-child(5){ animation-delay: 700ms; }
+  .slide[data-active="true"] .numbered-list .numbered-item:nth-child(6){ animation-delay: 780ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(1){ animation-delay: 360ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(2){ animation-delay: 440ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(3){ animation-delay: 520ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(4){ animation-delay: 600ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(5){ animation-delay: 680ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(6){ animation-delay: 760ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(7){ animation-delay: 840ms; }
+  .slide[data-active="true"] .pillar-grid .pillar-card:nth-child(8){ animation-delay: 920ms; }
+  .slide[data-active="true"] .stat-grid .stat-card:nth-child(1){ animation-delay: 380ms; }
+  .slide[data-active="true"] .stat-grid .stat-card:nth-child(2){ animation-delay: 460ms; }
+  .slide[data-active="true"] .stat-grid .stat-card:nth-child(3){ animation-delay: 540ms; }
+  .slide[data-active="true"] .stat-grid .stat-card:nth-child(4){ animation-delay: 620ms; }
+  .slide[data-active="true"] .split .split__side:nth-child(1){ animation-delay: 360ms; }
+  .slide[data-active="true"] .split .split__side:nth-child(2){ animation-delay: 460ms; }
+  .slide[data-active="true"] table { animation: fadeUp 0.55s ease-out both; animation-delay: 360ms; }
+  .slide[data-active="true"] .benchmark-card,
+  .slide[data-active="true"] .monday-morning,
+  .slide[data-active="true"] .decision-framework { animation: fadeUp 0.5s ease-out both; animation-delay: 720ms; }
+  .slide[data-active="true"] svg[viewBox] { animation: fadeUp 0.7s ease-out both; animation-delay: 320ms; }
+  .pillar-card, .stat-card { transition: transform 0.18s ease-out, box-shadow 0.2s ease-out; }
+  .pillar-card:hover, .stat-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+}
+@media (prefers-reduced-motion: reduce){
+  .slide *, .slide { animation: none !important; transition: none !important; }
+}
+
+.slide--paper{background:var(--paper)}
+.slide--light{background:var(--bg)}
+.slide--dark{background:var(--dark-bg);color:var(--dark-ink)}
+.slide--dark .eyebrow{color:var(--dark-ink-3)}
+.slide--dark .body-large,.slide--dark .subtitle,.slide--dark p{color:var(--dark-ink-2)}
+
+.deck-brand{position:fixed;top:18px;left:32px;z-index:50;display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;transition:opacity 0.15s}
+a.deck-brand:hover{opacity:0.7}
+.deck-brand__text{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3)}
+.slide--dark ~ .deck-brand .deck-brand__text{color:var(--dark-ink-3)}
+
+.deck-controls{position:fixed;bottom:22px;right:22px;z-index:100;display:flex;gap:6px;font-family:var(--font-mono)}
+.deck-controls__btn,.deck-controls__counter{height:38px;border:1px solid var(--rule-2);border-radius:4px;background:var(--paper);color:var(--ink-2)}
+.deck-controls__btn{width:38px;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all 0.15s}
+.deck-controls__btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.deck-controls__counter{display:inline-flex;align-items:center;padding:0 14px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase}
+body[data-slide-theme="dark"] .deck-controls__btn,body[data-slide-theme="dark"] .deck-controls__counter{background:rgba(28,28,26,0.92);border-color:rgba(255,255,255,0.18);color:var(--dark-ink)}
+
+.deck-progress{position:fixed;top:0;left:0;right:0;height:2px;background:var(--rule);z-index:60}
+.deck-progress__fill{height:100%;background:var(--accent);transition:width 0.25s}
+
+/* Lang switcher (visible, multi-locale per deck-engine-v5 spec) */
+.lang-switcher{position:fixed;top:20px;right:22px;z-index:100;display:inline-flex;gap:2px;padding:3px;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+.lang-switcher__btn{background:none;border:none;font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);padding:5px 9px;cursor:pointer;border-radius:3px;transition:all 0.15s}
+.lang-switcher__btn:hover{color:var(--ink)}
+.lang-switcher__btn[aria-current="true"]{background:var(--ink);color:var(--paper)}
+body[data-overview-open="true"] .lang-switcher{display:none}
+
+/* Keyboard hint */
+.kbd-hint{position:fixed;right:22px;bottom:74px;z-index:99;padding:8px 14px;border-radius:4px;background:rgba(26,26,26,0.92);color:var(--dark-ink);font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity 0.4s ease}
+.kbd-hint[data-visible="true"]{opacity:1}
+.kbd-hint kbd{display:inline-block;padding:1px 6px;margin:0 2px;border-radius:3px;border:1px solid rgba(255,255,255,0.24);background:rgba(255,255,255,0.12);font-family:inherit;font-size:10px}
+
+/* Overview modal */
+.overview{position:fixed;inset:0;z-index:500;display:none;overflow-y:auto;padding:80px 40px 40px;background:var(--bg)}
+.overview[data-open="true"]{display:block}
+.overview__header{max-width:1600px;margin:0 auto 28px;display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.overview__title{font-size:28px;font-weight:500;letter-spacing:-0.02em;color:var(--ink)}
+.overview__hint{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3)}
+.overview__grid{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.overview-card{position:relative;aspect-ratio:16 / 9;padding:14px 16px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);text-align:left;cursor:pointer;overflow:hidden;transition:all 0.15s}
+.overview-card:hover{border-color:var(--ink-2);transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,0.06)}
+.overview-card__accent{position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent,var(--c-blue-500))}
+.overview-card__num{position:absolute;top:10px;right:12px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;color:var(--ink-3)}
+.overview-card__eyebrow{display:block;margin-top:10px;margin-bottom:8px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3)}
+.overview-card__title{font-size:14px;line-height:1.25;font-weight:500;color:var(--ink);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.overview-card[data-current="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.overview-card[data-current="true"] .overview-card__num{color:var(--accent-ink,var(--c-blue-700));font-weight:600}
+
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;color:var(--ink-3);margin-bottom:18px;display:inline-flex;align-items:center;gap:10px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.title{font-size:clamp(34px,4.4vw,62px);font-weight:500;letter-spacing:-0.03em;line-height:1.08;margin:0 0 20px;text-wrap:balance;max-width:1200px}
+.title--medium{font-size:clamp(30px,3.2vw,46px);line-height:1.12}
+.section-title{font-size:clamp(50px,5.5vw,88px);font-weight:500;letter-spacing:-0.04em;line-height:1;margin:0 0 22px;max-width:1200px;color:var(--dark-ink)}
+.section-number{font-family:var(--font-sans);font-size:clamp(170px,20vw,310px);font-weight:300;line-height:0.82;letter-spacing:-0.06em;color:var(--accent,var(--c-red-500));opacity:0.92;margin:0 0 18px}
+.subtitle{font-size:21px;line-height:1.45;color:var(--ink-2);max-width:920px;margin:0 0 24px;font-weight:400}
+.section-subtitle{font-size:22px;line-height:1.4;color:var(--dark-ink-2);max-width:860px;margin:0}
+
+/* Brand bar inverts text color on dark slides */
+body[data-slide-theme="dark"] .deck-brand__text{color:var(--dark-ink-3)}
+.body-large{font-size:18px;line-height:1.6;color:var(--ink-2);max-width:880px;margin:0 0 16px}
+.accent-blue{color:var(--c-blue-500)}.accent-green{color:var(--c-green-500)}.accent-yellow{color:var(--c-yellow-500)}.accent-red{color:var(--c-red-500)}
+
+.meta-grid{margin-top:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:900px;border-top:1px solid var(--rule);padding-top:28px}
+.meta-item{display:flex;flex-direction:column;gap:6px}
+.meta-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3)}
+.meta-value{font-size:14px;color:var(--ink);font-weight:500}
+.meta-value a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-2)}
+
+.numbered-list{display:flex;flex-direction:column;gap:18px;max-width:1100px;margin:24px 0 0}
+.numbered-item{display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:baseline}
+.numbered-item__num{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:0.08em;padding-top:3px}
+.numbered-item__text{font-size:18px;line-height:1.55;color:var(--ink-2)}
+.numbered-item__text strong{color:var(--ink);font-weight:600}
+
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:1100px;margin-top:24px}
+.stat-card{background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:6px;padding:24px 28px}
+.stat-card__label{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.stat-card__value{font-size:42px;font-weight:500;letter-spacing:-0.02em;line-height:1;margin:8px 0 4px}
+.stat-card__value.accent-red{color:var(--c-red-500)}.stat-card__value.accent-green{color:var(--c-green-500)}.stat-card__value.accent-blue{color:var(--c-blue-500)}.stat-card__value.accent-yellow{color:var(--c-yellow-700)}
+.stat-card p{font-size:13px;line-height:1.45;color:var(--ink-2);margin:4px 0 14px}
+
+.benchmark-card{margin-top:28px;padding:18px 24px;background:var(--c-yellow-50);border-left:4px solid var(--c-yellow-500);border-radius:0 6px 6px 0;max-width:1100px}
+.benchmark-card p{margin:0 0 10px;font-size:14px;line-height:1.55;color:var(--ink-2)}
+.benchmark-card a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-yellow-700);text-decoration:none;border-bottom:1px solid var(--c-yellow-500);padding-bottom:1px}
+
+.monday-morning{margin-top:24px;padding:18px 24px;background:var(--c-blue-50);border-left:4px solid var(--c-blue-500);border-radius:0 6px 6px 0;max-width:1100px}
+.monday-morning p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.monday-morning strong{color:var(--c-blue-700)}
+
+.decision-framework{margin-top:24px;padding:18px 24px;background:var(--c-green-50);border-left:4px solid var(--c-green-500);border-radius:0 6px 6px 0;max-width:1100px}
+.decision-framework p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.decision-framework strong{color:var(--c-green-700)}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1300px;margin-top:24px}
+.split__side{padding:24px 28px;border-radius:8px;border:1px solid var(--rule)}
+.split__side--left{background:var(--c-red-50);border-color:var(--c-red-500)}
+.split__side--right{background:var(--c-green-50);border-color:var(--c-green-500)}
+.split__eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.split__side--left .split__eyebrow{color:var(--c-red-700)}
+.split__side--right .split__eyebrow{color:var(--c-green-700)}
+.split__title{font-size:18px;font-weight:600;margin-bottom:14px;color:var(--ink)}
+.split__points{margin:0;padding-left:20px;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.split__points li{margin-bottom:6px}
+
+.pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1300px;margin-top:24px}
+.pillar-card{padding:20px;background:var(--paper);border:1px solid var(--rule);border-top:3px solid var(--pi-color,var(--ink-3));border-radius:6px}
+.pillar-card__num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--pi-color,var(--ink-3));font-weight:500;margin-bottom:8px}
+.pillar-card__title{font-size:16px;font-weight:600;line-height:1.25;margin-bottom:6px;color:var(--ink)}
+.pillar-card__sub{font-size:13px;color:var(--ink-3);line-height:1.45}
+
+.speaker-photo{position:absolute;top:120px;right:96px;width:240px;height:240px;border-radius:50%;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.12);border:3px solid var(--paper);z-index:2;background:var(--bg)}
+.speaker-photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+table{border-collapse:collapse;margin-top:18px;width:100%;max-width:1200px;font-size:14px}
+th{text-align:left;font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500;padding:10px 14px;border-bottom:2px solid var(--rule-2)}
+td{padding:10px 14px;border-bottom:1px solid var(--rule);color:var(--ink-2);line-height:1.45;vertical-align:top}
+td strong{color:var(--ink)}
+
+code{font-family:var(--font-mono);font-size:0.92em;padding:1px 5px;background:var(--bg-alt);border-radius:3px;color:var(--ink)}
+
+.contact-card{display:inline-flex;align-items:center;gap:12px;padding:14px 20px;border:1px solid rgba(240,240,240,0.2);border-radius:8px;text-decoration:none;color:var(--dark-ink);margin-top:24px;font-size:15px}
+.contact-card svg{width:17px;height:17px;color:var(--dark-ink-2);flex-shrink:0}
+
+@media print{
+  html,body,.deck{overflow:visible;height:auto;background:#fff}
+  .slide{page-break-after:always;visibility:visible !important;position:relative;height:100vh;width:100vw}
+  .deck-brand,.deck-controls,.deck-progress{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-switcher__btn" data-locale="en" aria-current="true" onclick="setLocale('en')">EN</button>
+  <button class="lang-switcher__btn" data-locale="pt-BR" onclick="setLocale('pt-BR')">PT</button>
+  <button class="lang-switcher__btn" data-locale="es" onclick="setLocale('es')">ES</button>
+</div>
+
+<div class="deck-progress"><div class="deck-progress__fill" id="progressFill" style="width:0%"></div></div>
+
+<a class="deck-brand" href="../index.html" data-action="home" aria-label="Knowledge hub" title="Voltar ao Knowledge Hub">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:22px;height:auto;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <span class="deck-brand__text">Paula Silva | Software Global Black Belt · Legacy Modernization</span>
+</a>
+
+<div class="kbd-hint" id="kbdHint">
+  Use <kbd>←</kbd> <kbd>→</kbd> to navigate · <kbd>O</kbd> or <kbd>Esc</kbd> for overview
+</div>
+
+<div class="overview" id="overview" aria-hidden="true">
+  <div class="overview__header">
+    <div class="overview__title">Overview</div>
+    <div class="overview__hint">Click a slide · Esc to close</div>
+  </div>
+  <div class="overview__grid" id="overviewGrid"></div>
+</div>
+
+<div class="deck-controls">
+  <button class="deck-controls__btn" id="prevBtn" aria-label="Previous slide">←</button>
+  <span class="deck-controls__counter" id="slideCounter">01 / 36</span>
+  <button class="deck-controls__btn" id="nextBtn" aria-label="Next slide">→</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- ============== SLIDE 1: COVER ============== -->
+<section class="slide slide--light" data-active="true" style="--accent:var(--c-blue-500); justify-content: center; gap: 0;">
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+    <div class="eyebrow" data-i18n="s1.eyebrow">Legacy Modernization Framework · v1.1</div>
+    <h1 class="title" data-i18n="s1.title">Modernizing <span class="accent-blue">COBOL and mainframe estates</span> with <span class="accent-green">agentic AI</span>, without <span class="accent-red">big-bang risk</span>.</h1>
+    <p class="subtitle" data-i18n="s1.subtitle">A reference framework for enterprises navigating Gartner's 5R, Microsoft's four approaches, and Claude-powered agentic modernization on Azure AI Foundry and GitHub.</p>
+  </div>
+  <div class="meta-grid" style="flex-shrink: 0;">
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.author">Author</span><span class="meta-value">Paula Silva</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.role">Role</span><span class="meta-value" data-i18n="s1.role">Software Global Black Belt</span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.contact">Contact</span><span class="meta-value"><a href="mailto:paulasilva@microsoft.com" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2);">paulasilva@microsoft.com</a></span></div>
+    <div class="meta-item"><span class="meta-label" data-i18n="labels.date">Date</span><span class="meta-value">2026-05-06 · v1.1.0 · 36 slides</span></div>
+  </div>
+</section>
+
+<!-- ============== SLIDE 2: AGENDA ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s2.eyebrow">Agenda · 60 min</div>
+  <h2 class="title title--medium" data-i18n="s2.title">Five parts. One playbook for modernization that ships.</h2>
+  <div class="numbered-list">
+    <div class="numbered-item"><div class="numbered-item__num">I</div><div class="numbered-item__text"><strong>The forcing functions.</strong> Why mainframe modernization is no longer optional in 2026, and the 24-36 month window most enterprises are missing.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">II</div><div class="numbered-item__text"><strong>The framework.</strong> Gartner's 5R, Microsoft's four approaches, and how to land each application in the right pattern.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">III</div><div class="numbered-item__text"><strong>The AI advantage.</strong> Four capabilities that flip the cost equation, and three things AI does NOT replace.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">IV</div><div class="numbered-item__text"><strong>The architecture.</strong> Five-layer reference stack, six specialized agents, eight MCP servers, and the orchestration patterns that make it work.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">V</div><div class="numbered-item__text"><strong>The seven-phase journey.</strong> Assessment, carving, translation, performance, coexistence, testing, cutover. Decision gates at each phase.</div></div>
+  </div>
+</section>
+
+<!-- ============== SLIDE 3: WHO IS SPEAKING ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="speaker-photo">
+    <img src="data:image/jpeg;base64,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MpyQQR19Qfzrx6+x4snXz533uMZAzj9eldB8UNN8UfEfxDEnhnTrvUbh1VFitY3nkY9M7EBP6V9EfBP9gr9o3X3h1XUdIXw5GMPFNrEnkFT2JgUPKfoUFbptK1jxoRjGne+p8feJbLTfDOgEX1mLiWRiiyk4YccYX+tcV4R0TxZealZX3hS01K58SSSq+lW9hb/aDKM4wEQM27PU4x61+93g3/gmr4On1218VfGrxNd+Lru2IZdNtI1srAN6NjdNIP8AgSfSvvjwH8LPhz8L9POmfD3w5p2gW7HLiyhWNnJ6l3A3OfdiTSs2axxcaastT8CPhH/wS6+Ofxb1FfFvxkvYPAWnXjGZ7YqtxqT7uf8AUIRFDn/bcsO6V+yXwF/Y6+BH7O9vHN4H0FLnWgm2XXNSxcXznvtkYARA/wB2JUFfUdFEYJHPWxlWouVuy7BRRRVnKFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB/9L9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArkPFPw/8C+N7drbxj4f0zWo2XaRfW0UxA9i6kj8DXX0UAfIfj/8AYe/Z+8f6Cvh650m60q3jQRQnTrhlaKMciOLzvNEaZ/hQAV8rah/wS8isfDF54P8ABvxLv4NJvJC5ttSsopiqnookiePp67K/WWio9nHexrGvNKyZ+Ddj/wAE0v2hPh3bagvg3U/C+tzzArb3UlxcW8yoexR4WQH3D182eLv+CeH7ZBkkurrwxFqsjEnNlqFm2foHlQ/pX9O9FPkRtDGzi72R/InqH7EX7W2mXg8/4Wa/IOmbeOKcfnDI4qlJ+yP+1Db5aX4VeKwAccafM3/oINf180VHskdX9q1OsUfyFx/si/tRz4MXwq8VfNyN1hKv/oQFb2m/sP8A7WuqtttvhhrcfvciG3/9HSJX9a1FJUUJ5pU7I/lu0f8A4JqfthaqyiTwjaacjHl73UrNQPqI5JG/JTXs/h//AIJF/tA6jtfxD4m8L6OhxuVJLq6cDvwsMan/AL7r+iqiq9kiHmdZ7WPxZ8Jf8EbvB9vMl146+I+p37cb4dKs4bVfcCSZrg/+Oivs74df8E+f2YPhyEeDw5Pr1wmMTa3cyXPI7+UuyH/yHX2xRVKKWxy1MTVqfEzA0Dwr4Y8K2osvDGkWOk24GPLsoI4F/KNRW/RRVGAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//0/38ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9T9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//Z" alt="Paula Silva, Software Global Black Belt"/>
+  </div>
+  <div class="eyebrow" data-i18n="s3.eyebrow">Who is speaking</div>
+  <h2 class="title" style="max-width:920px;" data-i18n="s3.title">Paula Silva, <span class="accent-blue">Software Global Black Belt</span>.</h2>
+  <p class="subtitle" style="max-width:920px;" data-i18n="s3.subtitle">Building the future of software development with AI and Agentic DevOps.</p>
+  <p class="body-large" style="max-width:920px;">I work with enterprise customers across Brazil and Latin America on agentic AI, platform engineering, and software modernization. This deck distills two years of patterns from dozens of customer engagements where the question was never "does AI work for COBOL", it was "how do we run AI-driven modernization at the scale of a 1B-line code estate without big-bang risk".</p>
+  <p class="body-large" style="max-width:920px;">The answer is a portfolio approach: classify the estate, apply the right modernization pattern per tier, apply agentic AI to accelerate, keep humans in the loop at every decision gate.</p>
+</section>
+
+<!-- ============== SLIDE 4: THREE SIGNS ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s4.eyebrow">Three signs you need this deck</div>
+  <h2 class="title title--medium" data-i18n="s4.title">If any of these is your reality, the next 60 minutes will pay for themselves.</h2>
+  <div class="numbered-list">
+    <div class="numbered-item"><div class="numbered-item__num">01</div><div class="numbered-item__text"><strong>Your COBOL talent is retiring faster than you can hire.</strong> Brazil alone loses 15% of COBOL developers annually with no replacement pipeline. The runway is shorter than your current modernization plan assumes.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">02</div><div class="numbered-item__text"><strong>You have a regulatory deadline that legacy cannot meet.</strong> BACEN 2028, LGPD data governance, PCI-DSS modern controls. Your mainframe was not designed for any of this.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">03</div><div class="numbered-item__text"><strong>Your last modernization attempt stalled in the "understanding" phase.</strong> Reverse-engineering business rules consumed 40-60% of the budget and the project never reached translation. That is the bottleneck AI flips.</div></div>
+  </div>
+  <div class="monday-morning"><p><strong>Monday morning:</strong> if your modernization roadmap still treats AI as "we will pilot in 2027", the runway already expired. The teams compounding now are in production this quarter.</p></div>
+</section>
+
+<!-- ============== PART I DIVIDER ============== -->
+<section class="slide slide--dark" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s5.eyebrow">Part I · ~10 min</div>
+  <div class="section-number">I</div>
+  <h1 class="section-title" data-i18n="s5.title">The forcing functions.</h1>
+  <p class="section-subtitle" data-i18n="s5.subtitle">Why modernization is no longer optional in 2026, and what most enterprise plans are missing about the timeline.</p>
+</section>
+
+<!-- ============== SLIDE 6: BRAZIL LANDSCAPE ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s6.eyebrow">The Brazilian COBOL estate</div>
+  <h2 class="title title--medium" data-i18n="s6.title">1.25B to 2.1B lines of COBOL, concentrated in regulated industries.</h2>
+  <table>
+    <thead><tr><th>Industry segment</th><th>COBOL LOC</th><th>Key systems</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Commercial banks</strong></td><td>500M, 1B</td><td>Core banking, payments, clearing</td></tr>
+      <tr><td><strong>Development banks</strong></td><td>100M, 300M</td><td>Credit, treasury, regulatory reporting</td></tr>
+      <tr><td><strong>Insurance</strong></td><td>50M, 200M</td><td>Policy admin, claims, actuarial</td></tr>
+      <tr><td><strong>Government</strong></td><td>200M, 500M</td><td>Tax, social services, payroll</td></tr>
+      <tr><td><strong>Retail</strong></td><td>50M, 100M</td><td>Supply chain, POS, ERP integrations</td></tr>
+    </tbody>
+  </table>
+  <div class="benchmark-card"><p><strong>Workforce demographics.</strong> 15% annual COBOL developer loss in Brazil. AI-assisted modernization is not optional, it is workforce-critical. Most enterprises are at organizational maturity Level 0-1 (no agentic AI adoption).</p></div>
+</section>
+
+<!-- ============== SLIDE 7: REGULATORY FORCING ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s7.eyebrow">Regulatory forcing functions</div>
+  <h2 class="title title--medium" data-i18n="s7.title">Three deadlines that make modernization a <span class="accent-red">compliance requirement</span>, not a strategic option.</h2>
+  <div class="numbered-list">
+    <div class="numbered-item"><div class="numbered-item__num">01</div><div class="numbered-item__text"><strong>BACEN 2028.</strong> The Brazilian Central Bank requires modern controls, API-based open banking interfaces, and enhanced cybersecurity by 2028. Mainframe platforms cannot deliver these natively.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">02</div><div class="numbered-item__text"><strong>LGPD (Lei Geral de Proteção de Dados).</strong> Data governance capabilities (consent, lineage, right to erasure) that mainframe architectures were never designed to support.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">03</div><div class="numbered-item__text"><strong>SOX, ISAE 3402, PCI-DSS.</strong> Modern security controls, encryption practices, and audit mechanisms that legacy struggles to provide.</div></div>
+  </div>
+  <div class="decision-framework"><p><strong>The window:</strong> 24-36 months. Agentic AI acceleration is essential to meet these compliance targets without big-bang risk.</p></div>
+</section>
+
+<!-- ============== SLIDE 8: COST EQUATION FLIP (DIAGRAM) ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s8.eyebrow">How AI flips the cost equation</div>
+  <h2 class="title title--medium" data-i18n="s8.title">The understanding phase consumed 40-60% of budgets. AI inverts the equation.</h2>
+  <svg viewBox="0 0 1400 400" style="width:100%;max-width:1400px;height:auto;display:block;margin:8px auto 0;" role="img" aria-labelledby="cost-eq-title" font-family="Inter, sans-serif">
+    <title id="cost-eq-title">Traditional vs AI-driven modernization cost structure</title>
+    <text x="40" y="28" font-family="JetBrains Mono" font-size="11" font-weight="500" letter-spacing="1.8" fill="#737373">COST DISTRIBUTION · FOUR MODERNIZATION PHASES · BAR LENGTH = % OF BUDGET</text>
+
+    <!-- LEFT panel header -->
+    <text x="40" y="64" font-family="JetBrains Mono" font-size="11" font-weight="500" letter-spacing="1.8" fill="#B33816">TRADITIONAL · UNDERSTANDING DOMINATES</text>
+
+    <!-- Phase column at left (label area, 110px wide) -->
+    <text x="40" y="105" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">UNDERSTAND</text>
+    <text x="40" y="163" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">TRANSLATE</text>
+    <text x="40" y="221" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">TEST</text>
+    <text x="40" y="279" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">CUTOVER</text>
+
+    <!-- Traditional bars (width represents % out of 600 baseline) -->
+    <!-- Understanding: 50% → 300px -->
+    <rect x="160" y="86" width="300" height="40" rx="4" fill="#F25022"/>
+    <text x="174" y="111" fill="white" font-size="13" font-weight="600">Reverse engineering</text>
+    <text x="470" y="111" fill="#B33816" font-family="JetBrains Mono" font-size="12" font-weight="600">50%</text>
+    <!-- Translation: 20% → 120px -->
+    <rect x="160" y="144" width="120" height="40" rx="4" fill="#FFB900"/>
+    <text x="174" y="169" fill="#1A1A1A" font-size="13" font-weight="600">Code conversion</text>
+    <text x="290" y="169" fill="#B88500" font-family="JetBrains Mono" font-size="12" font-weight="600">20%</text>
+    <!-- Testing: 15% → 90px -->
+    <rect x="160" y="202" width="90" height="40" rx="4" fill="#7FBA00"/>
+    <text x="174" y="227" fill="white" font-size="13" font-weight="600">Manual QA</text>
+    <text x="260" y="227" fill="#5A8500" font-family="JetBrains Mono" font-size="12" font-weight="600">15%</text>
+    <!-- Cutover: 15% → 90px -->
+    <rect x="160" y="260" width="90" height="40" rx="4" fill="#00A4EF"/>
+    <text x="174" y="285" fill="white" font-size="13" font-weight="600">Big-bang plan</text>
+    <text x="260" y="285" fill="#0076AC" font-family="JetBrains Mono" font-size="12" font-weight="600">15%</text>
+
+    <!-- Result line for left -->
+    <line x1="40" y1="324" x2="640" y2="324" stroke="#E5E5E0" stroke-width="1"/>
+    <text x="40" y="350" font-size="13" fill="#1A1A1A" font-style="italic">Outcome: projects stall in</text>
+    <text x="40" y="370" font-size="13" fill="#1A1A1A" font-style="italic">understanding. Many never ship.</text>
+
+    <!-- DIVIDER -->
+    <line x1="700" y1="60" x2="700" y2="380" stroke="#CECEC7" stroke-width="1" stroke-dasharray="4 6"/>
+    <circle cx="700" cy="200" r="22" fill="#1A1A1A"/>
+    <text x="700" y="206" text-anchor="middle" fill="white" font-family="JetBrains Mono" font-size="11" font-weight="600">AI</text>
+
+    <!-- RIGHT panel header -->
+    <text x="760" y="64" font-family="JetBrains Mono" font-size="11" font-weight="500" letter-spacing="1.8" fill="#5A8500">AI DRIVEN · BUDGET SHIFTS TO VALIDATION</text>
+
+    <!-- Phase labels right -->
+    <text x="760" y="105" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">UNDERSTAND</text>
+    <text x="760" y="163" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">TRANSLATE</text>
+    <text x="760" y="221" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">TEST</text>
+    <text x="760" y="279" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">CUTOVER</text>
+
+    <!-- AI bars (same 600px baseline) -->
+    <!-- Understand: 10% → 60px -->
+    <rect x="880" y="86" width="60" height="40" rx="4" fill="#F25022"/>
+    <text x="894" y="111" fill="white" font-size="13" font-weight="600">AI scan</text>
+    <text x="950" y="111" fill="#B33816" font-family="JetBrains Mono" font-size="12" font-weight="600">10%</text>
+    <!-- Translate: 20% → 120px -->
+    <rect x="880" y="144" width="120" height="40" rx="4" fill="#FFB900"/>
+    <text x="894" y="169" fill="#1A1A1A" font-size="13" font-weight="600">AI-assisted</text>
+    <text x="1010" y="169" fill="#B88500" font-family="JetBrains Mono" font-size="12" font-weight="600">20%</text>
+    <!-- Test: 35% → 210px -->
+    <rect x="880" y="202" width="210" height="40" rx="4" fill="#7FBA00"/>
+    <text x="894" y="227" fill="white" font-size="13" font-weight="600">Behavioral equivalence</text>
+    <text x="1100" y="227" fill="#5A8500" font-family="JetBrains Mono" font-size="12" font-weight="600">35%</text>
+    <!-- Cutover: 35% → 210px -->
+    <rect x="880" y="260" width="210" height="40" rx="4" fill="#00A4EF"/>
+    <text x="894" y="285" fill="white" font-size="13" font-weight="600">Coexistence + governance</text>
+    <text x="1100" y="285" fill="#0076AC" font-family="JetBrains Mono" font-size="12" font-weight="600">35%</text>
+
+    <line x1="760" y1="324" x2="1360" y2="324" stroke="#E5E5E0" stroke-width="1"/>
+    <text x="760" y="350" font-size="13" fill="#1A1A1A" font-style="italic">Outcome: budget shifts to</text>
+    <text x="760" y="370" font-size="13" fill="#1A1A1A" font-style="italic">validation. Projects ship.</text>
+  </svg>
+  <div class="benchmark-card"><p><strong>Claude Opus 4.6</strong> processes up to 1M tokens, an entire COBOL application with copybooks, JCL, and data definitions in one context. <strong>Gartner G00833880</strong> identifies 5-20% of operational cost addressable via AI optimization. <strong>Gartner G00842103</strong> projects agentic AI will reduce the cost-to-value gap by 50% by 2027.</p><a href="https://www.gartner.com/en/documents/5769515">Gartner G00833880, G00842103</a></div>
+</section>
+
+<!-- ============== PART II DIVIDER ============== -->
+<section class="slide slide--dark" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s9.eyebrow">Part II · ~12 min</div>
+  <div class="section-number">II</div>
+  <h1 class="section-title" data-i18n="s9.title">The framework.</h1>
+  <p class="section-subtitle" data-i18n="s9.subtitle">Gartner's 5R, Microsoft's four approaches, and a portfolio approach that lands each application in the right pattern.</p>
+</section>
+
+<!-- ============== SLIDE 10: GARTNER 5R (DIAGRAM) ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s10.eyebrow">Gartner's 5R modernization framework</div>
+  <h2 class="title title--medium" data-i18n="s10.title">Five strategies, ranked by transformation depth and risk.</h2>
+  <svg viewBox="0 0 1400 420" style="width:100%;max-width:1400px;height:auto;display:block;margin:8px auto 0;" role="img" aria-labelledby="gartner5r-title" font-family="Inter, sans-serif">
+    <title id="gartner5r-title">Gartner 5R framework: Retain, Rehost, Refactor, Rearchitect, Replace</title>
+    <text x="40" y="28" font-family="JetBrains Mono" font-size="11" font-weight="500" letter-spacing="1.8" fill="#737373">5R FRAMEWORK · LEFT TO RIGHT: LOW EFFORT/VALUE → HIGH EFFORT/VALUE</text>
+
+    <!-- Card width = 256, gap = 16, total 5 cards = 5*256 + 4*16 = 1344 + start at 28 -->
+    <!-- R01 Retain (gray) -->
+    <g>
+      <rect x="28" y="60" width="256" height="320" rx="6" fill="#ECECE8" stroke="#737373" stroke-width="1"/>
+      <rect x="28" y="60" width="256" height="56" rx="6" fill="#737373"/>
+      <text x="48" y="84" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">R01</text>
+      <text x="48" y="105" font-size="22" font-weight="500" fill="white">Retain</text>
+      <text x="48" y="148" font-size="13" font-weight="600" fill="#1A1A1A">Keep as is.</text>
+      <text x="48" y="172" font-size="12" fill="#3A3A3A"><tspan x="48">No code change.</tspan><tspan x="48" dy="16">Stable systems</tspan><tspan x="48" dy="16">near end of life.</tspan></text>
+      <line x1="44" y1="234" x2="268" y2="234" stroke="#CECEC7" stroke-width="1"/>
+      <text x="48" y="256" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">EFFORT</text>
+      <text x="48" y="276" font-size="14" font-weight="500" fill="#1A1A1A">Low</text>
+      <text x="48" y="306" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">VALUE</text>
+      <text x="48" y="326" font-size="14" font-weight="500" fill="#1A1A1A">Low</text>
+      <text x="48" y="362" font-size="11" fill="#737373" font-style="italic">Defend and extend.</text>
+    </g>
+
+    <!-- R02 Rehost (blue) -->
+    <g>
+      <rect x="300" y="60" width="256" height="320" rx="6" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <rect x="300" y="60" width="256" height="56" rx="6" fill="#00A4EF"/>
+      <text x="320" y="84" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">R02</text>
+      <text x="320" y="105" font-size="22" font-weight="500" fill="white">Rehost</text>
+      <text x="320" y="148" font-size="13" font-weight="600" fill="#0076AC">Lift and shift.</text>
+      <text x="320" y="172" font-size="12" fill="#3A3A3A"><tspan x="320">Move to cloud,</tspan><tspan x="320" dy="16">keep code as is.</tspan><tspan x="320" dy="16">Quick infra wins.</tspan></text>
+      <line x1="316" y1="234" x2="540" y2="234" stroke="#CECEC7" stroke-width="1"/>
+      <text x="320" y="256" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#0076AC" font-weight="500">EFFORT</text>
+      <text x="320" y="276" font-size="14" font-weight="500" fill="#1A1A1A">Low to medium</text>
+      <text x="320" y="306" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#0076AC" font-weight="500">VALUE</text>
+      <text x="320" y="326" font-size="14" font-weight="500" fill="#1A1A1A">Medium</text>
+      <text x="320" y="362" font-size="11" fill="#737373" font-style="italic">Cloud cost play.</text>
+    </g>
+
+    <!-- R03 Refactor (green) -->
+    <g>
+      <rect x="572" y="60" width="256" height="320" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="572" y="60" width="256" height="56" rx="6" fill="#7FBA00"/>
+      <text x="592" y="84" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">R03</text>
+      <text x="592" y="105" font-size="22" font-weight="500" fill="white">Refactor</text>
+      <text x="592" y="148" font-size="13" font-weight="600" fill="#5A8500">Translate language.</text>
+      <text x="592" y="172" font-size="12" fill="#3A3A3A"><tspan x="592">COBOL to Java,</tspan><tspan x="592" dy="16">.NET, or Python.</tspan><tspan x="592" dy="16">Keep architecture.</tspan></text>
+      <line x1="588" y1="234" x2="812" y2="234" stroke="#CECEC7" stroke-width="1"/>
+      <text x="592" y="256" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#5A8500" font-weight="500">EFFORT</text>
+      <text x="592" y="276" font-size="14" font-weight="500" fill="#1A1A1A">Medium</text>
+      <text x="592" y="306" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#5A8500" font-weight="500">VALUE</text>
+      <text x="592" y="326" font-size="14" font-weight="500" fill="#1A1A1A">Medium to high</text>
+      <text x="592" y="362" font-size="11" fill="#737373" font-style="italic">Sweet spot for AI.</text>
+    </g>
+
+    <!-- R04 Rearchitect (yellow) -->
+    <g>
+      <rect x="844" y="60" width="256" height="320" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <rect x="844" y="60" width="256" height="56" rx="6" fill="#FFB900"/>
+      <text x="864" y="84" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(26,26,26,0.7)" font-weight="500">R04</text>
+      <text x="864" y="105" font-size="22" font-weight="500" fill="#1A1A1A">Rearchitect</text>
+      <text x="864" y="148" font-size="13" font-weight="600" fill="#B88500">Redesign shape.</text>
+      <text x="864" y="172" font-size="12" fill="#3A3A3A"><tspan x="864">Microservices,</tspan><tspan x="864" dy="16">events, modern</tspan><tspan x="864" dy="16">data. New shape.</tspan></text>
+      <line x1="860" y1="234" x2="1084" y2="234" stroke="#CECEC7" stroke-width="1"/>
+      <text x="864" y="256" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#B88500" font-weight="500">EFFORT</text>
+      <text x="864" y="276" font-size="14" font-weight="500" fill="#1A1A1A">High</text>
+      <text x="864" y="306" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#B88500" font-weight="500">VALUE</text>
+      <text x="864" y="326" font-size="14" font-weight="500" fill="#1A1A1A">High</text>
+      <text x="864" y="362" font-size="11" fill="#737373" font-style="italic">Strategic transform.</text>
+    </g>
+
+    <!-- R05 Replace (red) -->
+    <g>
+      <rect x="1116" y="60" width="256" height="320" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <rect x="1116" y="60" width="256" height="56" rx="6" fill="#F25022"/>
+      <text x="1136" y="84" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">R05</text>
+      <text x="1136" y="105" font-size="22" font-weight="500" fill="white">Replace</text>
+      <text x="1136" y="148" font-size="13" font-weight="600" fill="#B33816">Buy SaaS or rebuild.</text>
+      <text x="1136" y="172" font-size="12" fill="#3A3A3A"><tspan x="1136">Retire legacy.</tspan><tspan x="1136" dy="16">Adopt vendor</tspan><tspan x="1136" dy="16">or new build.</tspan></text>
+      <line x1="1132" y1="234" x2="1356" y2="234" stroke="#CECEC7" stroke-width="1"/>
+      <text x="1136" y="256" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#B33816" font-weight="500">EFFORT</text>
+      <text x="1136" y="276" font-size="14" font-weight="500" fill="#1A1A1A">Very high</text>
+      <text x="1136" y="306" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#B33816" font-weight="500">VALUE</text>
+      <text x="1136" y="326" font-size="14" font-weight="500" fill="#1A1A1A">Very high</text>
+      <text x="1136" y="362" font-size="11" fill="#737373" font-style="italic">Or strategic exit.</text>
+    </g>
+  </svg>
+  <div class="decision-framework"><p><strong>Portfolio approach:</strong> no single R fits all workloads. Classify the estate, apply the right pattern per tier. <strong>Gartner predicts</strong> 75%+ of enterprises will choose incremental over big-bang by 2030.</p></div>
+</section>
+
+<!-- ============== SLIDE 11: MICROSOFT 4 APPROACHES ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s11.eyebrow">Microsoft's four modernization approaches</div>
+  <h2 class="title title--medium" data-i18n="s11.title">Each maps to a Gartner R, with concrete Azure tooling.</h2>
+  <table>
+    <thead><tr><th>Microsoft approach</th><th>Maps to</th><th>Tooling</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Migrate</strong></td><td>R02 Rehost</td><td>Azure Migrate, Azure VM, mainframe emulation</td><td>Stable systems, infra cost driver</td></tr>
+      <tr><td><strong>Modernize</strong></td><td>R03 Refactor</td><td>Mainframe Modernization Agent, Azure AI Foundry, Claude on Foundry</td><td>COBOL → Java/.NET, AI-accelerated</td></tr>
+      <tr><td><strong>Rearchitect</strong></td><td>R04 Rearchitect</td><td>Azure Functions, AKS, Service Bus, Event Grid, Cosmos DB</td><td>Strategic capability, event-driven</td></tr>
+      <tr><td><strong>Replace</strong></td><td>R05 Replace</td><td>Dynamics 365, Power Platform, ISV solutions, Microsoft Fabric</td><td>Commodity processes, vendor solutions exist</td></tr>
+    </tbody>
+  </table>
+  <div class="benchmark-card"><p><strong>Critical insight on GenAI scope (Gartner G00822567).</strong> Current GenAI tools excel at code translation but explicitly exclude architecture modernization from their scope. Simple translation creates <strong>"JOBOL"</strong> - COBOL logic implemented in Java, which represents insufficient modernization. Effective GenAI-assisted modernization requires combining LLMs with domain tools and rule-based systems.</p></div>
+</section>
+
+<!-- ============== SLIDE 12: DECISION MATRIX ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s12.eyebrow">The decision matrix</div>
+  <h2 class="title title--medium" data-i18n="s12.title">Where each application lands depends on <span class="accent-yellow">two axes</span>: business criticality and technical complexity.</h2>
+  <div class="split">
+    <div class="split__side split__side--left">
+      <div class="split__eyebrow">High business criticality</div>
+      <div class="split__title">Refactor or Rearchitect with AI</div>
+      <ul class="split__points">
+        <li><strong>R03 Refactor</strong> if architecture is sound: AI-driven COBOL → modern language</li>
+        <li><strong>R04 Rearchitect</strong> if architecture is the bottleneck: redesign boundaries first, then translate</li>
+        <li>AI accelerates discovery and translation; humans approve target architecture</li>
+        <li>Coexistence period 12-24 months mandatory</li>
+      </ul>
+    </div>
+    <div class="split__side split__side--right">
+      <div class="split__eyebrow">Lower business criticality</div>
+      <div class="split__title">Retain, Rehost, or Replace</div>
+      <ul class="split__points">
+        <li><strong>R01 Retain</strong> if system is stable and end-of-life is near</li>
+        <li><strong>R02 Rehost</strong> if cloud cost optimization is the only goal</li>
+        <li><strong>R05 Replace</strong> if commodity SaaS exists (HR, finance, CRM)</li>
+        <li>Reserve AI investment for the high-criticality estate</li>
+      </ul>
+    </div>
+  </div>
+  <div class="monday-morning"><p><strong>Anti-pattern:</strong> applying R03 Refactor uniformly across the estate. The goal is not "modernize everything", it is "land each application in the right pattern".</p></div>
+</section>
+
+<!-- ============== PART III DIVIDER ============== -->
+<section class="slide slide--dark" style="--accent:var(--c-green-500);">
+  <div class="eyebrow" data-i18n="s13.eyebrow">Part III · ~10 min</div>
+  <div class="section-number">III</div>
+  <h1 class="section-title" data-i18n="s13.title">The AI advantage.</h1>
+  <p class="section-subtitle" data-i18n="s13.subtitle">Four capabilities that flip the cost equation, three things AI does NOT replace, and the 70/30 operating model.</p>
+</section>
+
+<!-- ============== SLIDE 14: 4 AI CAPABILITIES (DIAGRAM) ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-green-500);">
+  <div class="eyebrow" data-i18n="s14.eyebrow">Four AI capabilities that change the game</div>
+  <h2 class="title title--medium" data-i18n="s14.title">Each replaces a previously manual, expensive bottleneck.</h2>
+  <div class="pillar-grid">
+    <div class="pillar-card" style="--pi-color:var(--c-blue-500);">
+      <div class="pillar-card__num">CAPABILITY 01</div>
+      <div class="pillar-card__title">Automated discovery</div>
+      <div class="pillar-card__sub">Claude Code maps dependencies across thousands of files, identifies entry points, traces execution paths, surfaces couplings even experienced developers may miss.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-yellow-500);">
+      <div class="pillar-card__num">CAPABILITY 02</div>
+      <div class="pillar-card__title">Risk and opportunity mapping</div>
+      <div class="pillar-card__sub">AI scores each component on complexity, coupling, test coverage, business criticality. Replaces subjective expert judgment with data-driven assessment.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-green-500);">
+      <div class="pillar-card__num">CAPABILITY 03</div>
+      <div class="pillar-card__title">Strategic planning + oversight</div>
+      <div class="pillar-card__sub">AI generates target architectures, migration sequences, resource estimates. Human architects review and approve. Strategic decisions stay under expert control.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-red-500);">
+      <div class="pillar-card__num">CAPABILITY 04</div>
+      <div class="pillar-card__title">Incremental implementation</div>
+      <div class="pillar-card__sub">AI translates one module at a time, with validation at every step. Not a black-box conversion. Every output is reviewable and reversible.</div>
+    </div>
+  </div>
+  <div class="benchmark-card"><p><strong>Cost risk warning (Gartner G00827372, "When to Use or Not to Use AI Agents", June 2025):</strong> agent costs on pay-per-use can scale rapidly with unknown benefits, potentially producing negative business cases if unbounded. Iterative validation gates and human oversight are mandatory.</p></div>
+</section>
+
+<!-- ============== SLIDE 15: WHAT AI DOES NOT REPLACE ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s15.eyebrow">What AI does NOT replace</div>
+  <h2 class="title title--medium" data-i18n="s15.title">Six decisions where human judgment is non-negotiable.</h2>
+  <div class="numbered-list">
+    <div class="numbered-item"><div class="numbered-item__num">01</div><div class="numbered-item__text"><strong>Final approval of target architecture decisions.</strong> AI proposes; humans choose.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">02</div><div class="numbered-item__text"><strong>Validation of business rule preservation.</strong> Subject matter experts certify the new code reproduces the legacy behavior.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">03</div><div class="numbered-item__text"><strong>Performance tuning for specific workload patterns.</strong> Production telemetry beats AI projection.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">04</div><div class="numbered-item__text"><strong>Production cutover decisions.</strong> A human signs the go-live, accepts the rollback plan.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">05</div><div class="numbered-item__text"><strong>Regulatory compliance sign-off.</strong> The accountable executive owns the audit trail.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">06</div><div class="numbered-item__text"><strong>Escalation handling for edge cases.</strong> When AI cannot resolve, route to a domain expert.</div></div>
+  </div>
+  <div class="benchmark-card"><p><strong>Target operating model:</strong> 70-80% AI-executed, 20-30% human oversight. Consistent with Gartner's AI-assisted productivity estimates. <strong>IDC US54300026:</strong> only 45% of AI projects deliver measurable business value, ROI framework and governance gates are the difference.</p></div>
+</section>
+
+<!-- ============== SLIDE 16: THREE-WAVE PILOT ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-green-500);">
+  <div class="eyebrow" data-i18n="s16.eyebrow">The three-wave pilot</div>
+  <h2 class="title title--medium" data-i18n="s16.title">12 weeks. Three waves. Each one validates the next.</h2>
+  <table>
+    <thead><tr><th>Wave</th><th>Timeline</th><th>Platform</th><th>Key metric</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Wave 1, Quick Win</strong></td><td>Weeks 1-2</td><td>GitHub Copilot + Claude</td><td>Reduce triage from 4-8h to 30min</td></tr>
+      <tr><td><strong>Wave 2, Deep Analysis</strong></td><td>Weeks 3-6</td><td>Azure AI Foundry + Claude Code</td><td>50K-100K LOC analyzed (vs 500-1K manual)</td></tr>
+      <tr><td><strong>Wave 3, Scale</strong></td><td>Weeks 7-12</td><td>Multi-agent pipeline + Semantic Kernel</td><td>200K-500K LOC, automatic triage</td></tr>
+    </tbody>
+  </table>
+  <div class="decision-framework"><p><strong>Why three waves:</strong> each wave proves a capability under controlled scope before unlocking the next investment. Wave 1 builds trust; Wave 2 proves analytical depth; Wave 3 proves scale economics.</p></div>
+</section>
+
+<!-- ============== SLIDE 17: CLAUDE MULTI-MODEL ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-green-500);">
+  <div class="eyebrow" data-i18n="s17.eyebrow">Claude multi-model orchestration</div>
+  <h2 class="title title--medium" data-i18n="s17.title">Three models. One pipeline. Cost-optimized by design.</h2>
+  <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr);">
+    <div class="pillar-card" style="--pi-color:var(--c-red-500);">
+      <div class="pillar-card__num">CLAUDE OPUS 4.6</div>
+      <div class="pillar-card__title">Orchestrator + deep analysis</div>
+      <div class="pillar-card__sub">Primary reasoning engine. Receives high-level tasks, decomposes them, assigns to workers, consolidates results. Uses full <strong>1M token</strong> context. Architectural recommendations.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-yellow-500);">
+      <div class="pillar-card__num">CLAUDE SONNET 4.6</div>
+      <div class="pillar-card__title">Worker · translate, test, document</div>
+      <div class="pillar-card__sub">Executes specific tasks: code translation, test generation, documentation, PR creation. Focused scope, clear input/output contract. Cost-balanced.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-blue-500);">
+      <div class="pillar-card__num">CLAUDE HAIKU 4.5</div>
+      <div class="pillar-card__title">Scanner · high-volume tasks</div>
+      <div class="pillar-card__sub">Syntax validation, pattern matching, triage classification, CI/CD checks. Optimized for speed and cost. The first pass on every artifact.</div>
+    </div>
+  </div>
+  <div class="monday-morning"><p><strong>Routing rule:</strong> Haiku scans, Sonnet translates, Opus analyzes. The Foundry Model Router optimizes cost automatically. Validated by Gartner research [G00822558].</p></div>
+</section>
+
+<!-- ============== PART IV DIVIDER ============== -->
+<section class="slide slide--dark" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s18.eyebrow">Part IV · ~14 min</div>
+  <div class="section-number">IV</div>
+  <h1 class="section-title" data-i18n="s18.title">The architecture.</h1>
+  <p class="section-subtitle" data-i18n="s18.subtitle">Five-layer reference stack, six specialized agents, eight MCP servers, and the orchestration patterns that make it work.</p>
+</section>
+
+<!-- ============== SLIDE 19: 5-LAYER ARCHITECTURE (DIAGRAM) ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s19.eyebrow">Five-layer reference architecture</div>
+  <h2 class="title title--medium" data-i18n="s19.title">Each layer builds on the one below it.</h2>
+  <svg viewBox="0 0 1400 480" style="width:100%;max-width:1400px;height:auto;display:block;margin:8px auto 0;" role="img" aria-labelledby="five-layer-title" font-family="Inter, sans-serif">
+    <title id="five-layer-title">Five-layer reference architecture for agentic modernization</title>
+    <text x="40" y="28" font-family="JetBrains Mono" font-size="11" font-weight="500" letter-spacing="1.8" fill="#737373">REFERENCE ARCHITECTURE · TOP DOWN: INTERFACE → AGENTS → TOOLS → PLATFORM → PERIMETER</text>
+
+    <!-- Layer 1: Core (top, blue) - height 70 -->
+    <rect x="40" y="56" width="1320" height="70" rx="6" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+    <rect x="40" y="56" width="220" height="70" rx="6" fill="#00A4EF"/>
+    <text x="60" y="82" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">LAYER 01</text>
+    <text x="60" y="108" font-size="20" font-weight="500" fill="white">Core</text>
+    <text x="280" y="82" font-size="14" font-weight="600" fill="#0076AC">Developer interface</text>
+    <text x="280" y="103" font-size="13" fill="#3A3A3A">Where humans drive agents.</text>
+    <text x="280" y="120" font-family="JetBrains Mono" font-size="11" fill="#737373">GitHub Copilot · Claude Code CLI · AGENTS.md · CLAUDE.md</text>
+
+    <!-- Layer 2: Agents (yellow) -->
+    <rect x="40" y="138" width="1320" height="70" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+    <rect x="40" y="138" width="220" height="70" rx="6" fill="#FFB900"/>
+    <text x="60" y="164" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(26,26,26,0.7)" font-weight="500">LAYER 02</text>
+    <text x="60" y="190" font-size="20" font-weight="500" fill="#1A1A1A">Agents</text>
+    <text x="280" y="164" font-size="14" font-weight="600" fill="#B88500">Multi-model orchestration</text>
+    <text x="280" y="185" font-size="13" fill="#3A3A3A">The intelligence of the pipeline.</text>
+    <text x="280" y="202" font-family="JetBrains Mono" font-size="11" fill="#737373">Orchestrator (Opus) · Workers (Sonnet) · Scanners (Haiku) · Semantic Kernel</text>
+
+    <!-- Layer 3: MCP (green) -->
+    <rect x="40" y="220" width="1320" height="70" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+    <rect x="40" y="220" width="220" height="70" rx="6" fill="#7FBA00"/>
+    <text x="60" y="246" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">LAYER 03</text>
+    <text x="60" y="272" font-size="20" font-weight="500" fill="white">MCP tools</text>
+    <text x="280" y="246" font-size="14" font-weight="600" fill="#5A8500">Enterprise connectors</text>
+    <text x="280" y="267" font-size="13" font-weight="400" fill="#3A3A3A">USB for AI agents.</text>
+    <text x="280" y="284" font-family="JetBrains Mono" font-size="11" fill="#737373">github · azure-devops · backstage · database · observability · vault · jira · cmdb</text>
+
+    <!-- Layer 4: Platform & Security (red) -->
+    <rect x="40" y="302" width="1320" height="70" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+    <rect x="40" y="302" width="220" height="70" rx="6" fill="#F25022"/>
+    <text x="60" y="328" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">LAYER 04</text>
+    <text x="60" y="354" font-size="20" font-weight="500" fill="white">Platform</text>
+    <text x="280" y="328" font-size="14" font-weight="600" fill="#B33816">Azure foundation + security</text>
+    <text x="280" y="349" font-size="13" fill="#3A3A3A">Where governance lives.</text>
+    <text x="280" y="366" font-family="JetBrains Mono" font-size="11" fill="#737373">Azure AI Foundry · Entra ID · Key Vault · Azure Monitor · Defender</text>
+
+    <!-- Layer 5: Perimeter (gray, dashed) -->
+    <rect x="40" y="384" width="1320" height="70" rx="6" fill="#ECECE8" stroke="#737373" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <rect x="40" y="384" width="220" height="70" rx="6" fill="#737373"/>
+    <text x="60" y="410" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">LAYER 05</text>
+    <text x="60" y="436" font-size="20" font-weight="500" fill="white">Perimeter</text>
+    <text x="280" y="410" font-size="14" font-weight="600" fill="#1A1A1A">External interfaces</text>
+    <text x="280" y="431" font-size="13" fill="#3A3A3A">Systems we depend on.</text>
+    <text x="280" y="448" font-family="JetBrains Mono" font-size="11" fill="#737373">Customer mainframe · target Azure services · external APIs</text>
+  </svg>
+</section>
+
+<!-- ============== SLIDE 20: 6 SPECIALIZED AGENTS ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s20.eyebrow">Six specialized agents</div>
+  <h2 class="title title--medium" data-i18n="s20.title">Each implements Gartner's agent anatomy: perceive, decide, act, plan.</h2>
+  <table>
+    <thead><tr><th>Agent</th><th>Model</th><th>Outputs</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Discovery</strong></td><td>Haiku → Opus</td><td>Application inventory, dependency graph, complexity scores, business rule catalog</td></tr>
+      <tr><td><strong>Analysis</strong></td><td>Opus 4.6</td><td>Modernization priority matrix, risk assessment, target architecture recommendation</td></tr>
+      <tr><td><strong>Translation</strong></td><td>Sonnet 4.6</td><td>Translated code (Java/.NET/Python), mapping documentation, PR</td></tr>
+      <tr><td><strong>Test generation</strong></td><td>Sonnet 4.6</td><td>Unit + integration + behavioral equivalence tests, 85%+ coverage target</td></tr>
+      <tr><td><strong>Review</strong></td><td>Sonnet 4.6</td><td>Code review comments, security findings, compliance flags</td></tr>
+      <tr><td><strong>Migration</strong></td><td>Opus 4.6</td><td>Coexistence plan, traffic migration sequence, rollback procedures</td></tr>
+    </tbody>
+  </table>
+  <div class="decision-framework"><p><strong>Validated by Gartner G00822558:</strong> five-agent workflow pattern (Specification → Architecture → Code Generation → Verification → Deployment) is the canonical reference. Each agent has its own LLM and clear contract.</p></div>
+</section>
+
+<!-- ============== SLIDE 21: 8 MCP SERVERS ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s21.eyebrow">Eight MCP servers · the integration backbone</div>
+  <h2 class="title title--medium" data-i18n="s21.title">"USB for AI agents", a universal connector for enterprise systems.</h2>
+  <div class="pillar-grid">
+    <div class="pillar-card" style="--pi-color:var(--c-blue-500);">
+      <div class="pillar-card__num">MCP 01</div>
+      <div class="pillar-card__title">GitHub API</div>
+      <div class="pillar-card__sub">Read source, search code, create branches, open PRs, comment on issues, merge.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-blue-500);">
+      <div class="pillar-card__num">MCP 02</div>
+      <div class="pillar-card__title">Azure DevOps</div>
+      <div class="pillar-card__sub">Trigger pipelines, get build logs, create and update work items.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-green-500);">
+      <div class="pillar-card__num">MCP 03</div>
+      <div class="pillar-card__title">Backstage</div>
+      <div class="pillar-card__sub">Service discovery, ownership, dependencies, API specs.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-green-500);">
+      <div class="pillar-card__num">MCP 04</div>
+      <div class="pillar-card__title">Database</div>
+      <div class="pillar-card__sub">Schema introspection, sample data, read-only queries, relationships.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-yellow-500);">
+      <div class="pillar-card__num">MCP 05</div>
+      <div class="pillar-card__title">Observability</div>
+      <div class="pillar-card__sub">Production metrics, traces, error rates, capacity baselines.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-red-500);">
+      <div class="pillar-card__num">MCP 06</div>
+      <div class="pillar-card__title">Key Vault</div>
+      <div class="pillar-card__sub">Secrets, API keys, certificates. No agent stores credentials directly.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-yellow-500);">
+      <div class="pillar-card__num">MCP 07</div>
+      <div class="pillar-card__title">Jira / Work Items</div>
+      <div class="pillar-card__sub">Read tickets, link agent activity to project management.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-red-500);">
+      <div class="pillar-card__num">MCP 08</div>
+      <div class="pillar-card__title">CMDB</div>
+      <div class="pillar-card__sub">Asset inventory, configuration baselines, change records.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SLIDE 22: ORCHESTRATION PATTERNS ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s22.eyebrow">Three orchestration patterns</div>
+  <h2 class="title title--medium" data-i18n="s22.title">Pick the pattern by task shape, not by team preference.</h2>
+  <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr);">
+    <div class="pillar-card" style="--pi-color:var(--c-blue-500);">
+      <div class="pillar-card__num">PATTERN 01</div>
+      <div class="pillar-card__title">Sequential</div>
+      <div class="pillar-card__sub"><strong>Step-by-step with handoff.</strong> Discovery → Analysis → Translation → Tests → PR. Each step's output feeds the next. Use when stages are well-defined and dependencies linear.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-yellow-500);">
+      <div class="pillar-card__num">PATTERN 02</div>
+      <div class="pillar-card__title">Handoff</div>
+      <div class="pillar-card__sub"><strong>Agent-to-agent delegation.</strong> Translation agent escalates ambiguity to Analysis agent, returns. Use when an agent meets a decision it cannot resolve.</div>
+    </div>
+    <div class="pillar-card" style="--pi-color:var(--c-green-500);">
+      <div class="pillar-card__num">PATTERN 03</div>
+      <div class="pillar-card__title">Group chat</div>
+      <div class="pillar-card__sub"><strong>Collaborative reasoning.</strong> Multiple agents debate target architecture options. Orchestrator consolidates. Use for high-stakes design decisions.</div>
+    </div>
+  </div>
+  <div class="benchmark-card"><p><strong>Microsoft Semantic Kernel</strong> implements all three patterns natively. Dual orchestration (Temporal for durability + LangGraph for branching) is the production pattern for long-running modernization workflows.</p></div>
+</section>
+
+<!-- ============== PART V DIVIDER ============== -->
+<section class="slide slide--dark" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s23.eyebrow">Part V · ~14 min</div>
+  <div class="section-number">V</div>
+  <h1 class="section-title" data-i18n="s23.title">The seven-phase journey.</h1>
+  <p class="section-subtitle" data-i18n="s23.subtitle">From assessment to factory model. Decision gates at every phase. Reversibility at every step.</p>
+</section>
+
+<!-- ============== SLIDE 24: 7-PHASE OVERVIEW (DIAGRAM) ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s24.eyebrow">The seven-phase journey</div>
+  <h2 class="title title--medium" data-i18n="s24.title">Linear when it works. Iterative when it does not.</h2>
+  <svg viewBox="0 0 1400 380" style="width:100%;max-width:1400px;height:auto;display:block;margin:8px auto 0;" role="img" aria-labelledby="seven-phase-title" font-family="Inter, sans-serif">
+    <title id="seven-phase-title">Seven-phase modernization journey timeline</title>
+    <text x="40" y="28" font-family="JetBrains Mono" font-size="11" font-weight="500" letter-spacing="1.8" fill="#737373">SEVEN PHASES · LEFT TO RIGHT · DECISION GATE BETWEEN EACH</text>
+
+    <!-- Single horizontal row: 7 cards of 180w each, 8px gap = 7*180 + 6*8 = 1308 -->
+    <!-- Phase 01: Assessment (blue) -->
+    <g>
+      <rect x="40" y="58" width="180" height="240" rx="6" fill="#E5F6FD" stroke="#00A4EF" stroke-width="1.5"/>
+      <rect x="40" y="58" width="180" height="56" rx="6" fill="#00A4EF"/>
+      <text x="56" y="80" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">PHASE 01</text>
+      <text x="56" y="103" font-size="18" font-weight="500" fill="white">Assess</text>
+      <text x="56" y="142" font-size="13" font-weight="600" fill="#0076AC">Code archaeology</text>
+      <text x="56" y="166" font-size="12" fill="#3A3A3A"><tspan x="56">Map every program,</tspan><tspan x="56" dy="16">copybook, JCL job.</tspan></text>
+      <line x1="52" y1="208" x2="208" y2="208" stroke="#CECEC7" stroke-width="1"/>
+      <text x="56" y="230" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DURATION</text>
+      <text x="56" y="248" font-size="13" font-weight="500" fill="#1A1A1A">Weeks 1-2</text>
+      <text x="56" y="278" font-family="JetBrains Mono" font-size="11" fill="#0076AC">Discovery agent</text>
+    </g>
+    <line x1="225" y1="178" x2="240" y2="178" stroke="#737373" stroke-width="1.5"/>
+    <polygon points="237,174 245,178 237,182" fill="#737373"/>
+
+    <!-- Phase 02: Carving (yellow) -->
+    <g>
+      <rect x="228" y="58" width="180" height="240" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <rect x="228" y="58" width="180" height="56" rx="6" fill="#FFB900"/>
+      <text x="244" y="80" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(26,26,26,0.7)" font-weight="500">PHASE 02</text>
+      <text x="244" y="103" font-size="18" font-weight="500" fill="#1A1A1A">Carve</text>
+      <text x="244" y="142" font-size="13" font-weight="600" fill="#B88500">Slice monolith</text>
+      <text x="244" y="166" font-size="12" fill="#3A3A3A"><tspan x="244">Tier 1 leaves first.</tspan><tspan x="244" dy="16">Tier 3 core last.</tspan></text>
+      <line x1="240" y1="208" x2="396" y2="208" stroke="#CECEC7" stroke-width="1"/>
+      <text x="244" y="230" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DURATION</text>
+      <text x="244" y="248" font-size="13" font-weight="500" fill="#1A1A1A">Weeks 2-4</text>
+      <text x="244" y="278" font-family="JetBrains Mono" font-size="11" fill="#B88500">Analysis agent</text>
+    </g>
+    <line x1="413" y1="178" x2="428" y2="178" stroke="#737373" stroke-width="1.5"/>
+    <polygon points="425,174 433,178 425,182" fill="#737373"/>
+
+    <!-- Phase 03: Translate (green) -->
+    <g>
+      <rect x="416" y="58" width="180" height="240" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="416" y="58" width="180" height="56" rx="6" fill="#7FBA00"/>
+      <text x="432" y="80" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">PHASE 03</text>
+      <text x="432" y="103" font-size="18" font-weight="500" fill="white">Translate</text>
+      <text x="432" y="142" font-size="13" font-weight="600" fill="#5A8500">Code + tests</text>
+      <text x="432" y="166" font-size="12" fill="#3A3A3A"><tspan x="432">Module by module.</tspan><tspan x="432" dy="16">Never big bang.</tspan></text>
+      <line x1="428" y1="208" x2="584" y2="208" stroke="#CECEC7" stroke-width="1"/>
+      <text x="432" y="230" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DURATION</text>
+      <text x="432" y="248" font-size="13" font-weight="500" fill="#1A1A1A">Weeks 3-8</text>
+      <text x="432" y="278" font-family="JetBrains Mono" font-size="11" fill="#5A8500">Sonnet workers</text>
+    </g>
+    <line x1="601" y1="178" x2="616" y2="178" stroke="#737373" stroke-width="1.5"/>
+    <polygon points="613,174 621,178 613,182" fill="#737373"/>
+
+    <!-- Phase 04: Performance (red) -->
+    <g>
+      <rect x="604" y="58" width="180" height="240" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <rect x="604" y="58" width="180" height="56" rx="6" fill="#F25022"/>
+      <text x="620" y="80" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">PHASE 04</text>
+      <text x="620" y="103" font-size="18" font-weight="500" fill="white">Perform</text>
+      <text x="620" y="142" font-size="13" font-weight="600" fill="#B33816">Match mainframe</text>
+      <text x="620" y="166" font-size="12" fill="#3A3A3A"><tspan x="620">SMF baseline.</tspan><tspan x="620" dy="16">Tail latency wins.</tspan></text>
+      <line x1="616" y1="208" x2="772" y2="208" stroke="#CECEC7" stroke-width="1"/>
+      <text x="620" y="230" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DURATION</text>
+      <text x="620" y="248" font-size="13" font-weight="500" fill="#1A1A1A">Ongoing</text>
+      <text x="620" y="278" font-family="JetBrains Mono" font-size="11" fill="#B33816">SRE + telemetry</text>
+    </g>
+    <line x1="789" y1="178" x2="804" y2="178" stroke="#737373" stroke-width="1.5"/>
+    <polygon points="801,174 809,178 801,182" fill="#737373"/>
+
+    <!-- Phase 05: Coexist (yellow) -->
+    <g>
+      <rect x="792" y="58" width="180" height="240" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="1.5"/>
+      <rect x="792" y="58" width="180" height="56" rx="6" fill="#FFB900"/>
+      <text x="808" y="80" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(26,26,26,0.7)" font-weight="500">PHASE 05</text>
+      <text x="808" y="103" font-size="18" font-weight="500" fill="#1A1A1A">Coexist</text>
+      <text x="808" y="142" font-size="13" font-weight="600" fill="#B88500">Strangler fig</text>
+      <text x="808" y="166" font-size="12" fill="#3A3A3A"><tspan x="808">CDC sync, gradual</tspan><tspan x="808" dy="16">traffic migration.</tspan></text>
+      <line x1="804" y1="208" x2="960" y2="208" stroke="#CECEC7" stroke-width="1"/>
+      <text x="808" y="230" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DURATION</text>
+      <text x="808" y="248" font-size="13" font-weight="500" fill="#1A1A1A">12-24 months</text>
+      <text x="808" y="278" font-family="JetBrains Mono" font-size="11" fill="#B88500">Migration agent</text>
+    </g>
+    <line x1="977" y1="178" x2="992" y2="178" stroke="#737373" stroke-width="1.5"/>
+    <polygon points="989,174 997,178 989,182" fill="#737373"/>
+
+    <!-- Phase 06: Test (green) -->
+    <g>
+      <rect x="980" y="58" width="180" height="240" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="980" y="58" width="180" height="56" rx="6" fill="#7FBA00"/>
+      <text x="996" y="80" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">PHASE 06</text>
+      <text x="996" y="103" font-size="18" font-weight="500" fill="white">Test</text>
+      <text x="996" y="142" font-size="13" font-weight="600" fill="#5A8500">Shadow traffic</text>
+      <text x="996" y="166" font-size="12" fill="#3A3A3A"><tspan x="996">Behavioral parity.</tspan><tspan x="996" dy="16">Mutation testing.</tspan></text>
+      <line x1="992" y1="208" x2="1148" y2="208" stroke="#CECEC7" stroke-width="1"/>
+      <text x="996" y="230" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DURATION</text>
+      <text x="996" y="248" font-size="13" font-weight="500" fill="#1A1A1A">Continuous</text>
+      <text x="996" y="278" font-family="JetBrains Mono" font-size="11" fill="#5A8500">Test agents</text>
+    </g>
+    <line x1="1165" y1="178" x2="1180" y2="178" stroke="#737373" stroke-width="1.5"/>
+    <polygon points="1177,174 1185,178 1177,182" fill="#737373"/>
+
+    <!-- Phase 07: Cutover (red) -->
+    <g>
+      <rect x="1168" y="58" width="180" height="240" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <rect x="1168" y="58" width="180" height="56" rx="6" fill="#F25022"/>
+      <text x="1184" y="80" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" font-weight="500">PHASE 07</text>
+      <text x="1184" y="103" font-size="18" font-weight="500" fill="white">Cutover</text>
+      <text x="1184" y="142" font-size="13" font-weight="600" fill="#B33816">Factory model</text>
+      <text x="1184" y="166" font-size="12" fill="#3A3A3A"><tspan x="1184">Human gate signs.</tspan><tspan x="1184" dy="16">Next 100 repeat.</tspan></text>
+      <line x1="1180" y1="208" x2="1336" y2="208" stroke="#CECEC7" stroke-width="1"/>
+      <text x="1184" y="230" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DURATION</text>
+      <text x="1184" y="248" font-size="13" font-weight="500" fill="#1A1A1A">Per module</text>
+      <text x="1184" y="278" font-family="JetBrains Mono" font-size="11" fill="#B33816">Human + SRE</text>
+    </g>
+
+    <!-- Footer note (below the row) -->
+    <line x1="40" y1="324" x2="1360" y2="324" stroke="#E5E5E0" stroke-width="1"/>
+    <text x="40" y="350" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">DECISION GATES</text>
+    <text x="180" y="350" font-size="13" fill="#1A1A1A">Human approval after each phase before next budget commitment.</text>
+    <text x="900" y="350" font-family="JetBrains Mono" font-size="10" letter-spacing="1.2" fill="#737373" font-weight="500">REVERSIBILITY</text>
+    <text x="1040" y="350" font-size="13" fill="#1A1A1A">Every step ships an artifact you can roll back.</text>
+  </svg>
+</section>
+
+<!-- ============== SLIDE 25: PHASE 1-2 ASSESSMENT + CARVING ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s25.eyebrow">Phase 1 + 2 · Weeks 1-4</div>
+  <h2 class="title title--medium" data-i18n="s25.title">Assessment and carving. Slicing the monolith into modernizable units.</h2>
+  <div class="split">
+    <div class="split__side" style="background:var(--c-blue-50);border-color:var(--c-blue-500);">
+      <div class="split__eyebrow" style="color:var(--c-blue-700);">Phase 1: Assessment</div>
+      <div class="split__title">Code archaeology with Discovery agent</div>
+      <ul class="split__points">
+        <li>Scan entire codebase: programs, copybooks, JCL, data structures</li>
+        <li>Build dependency graph, trace CALL relationships</li>
+        <li>Map JCL job flows, catalog business rules</li>
+        <li>Output: JSON inventory + Markdown report + Mermaid diagrams</li>
+        <li><strong>Decision gate:</strong> portfolio classified into 5R buckets</li>
+      </ul>
+    </div>
+    <div class="split__side" style="background:var(--c-yellow-50);border-color:var(--c-yellow-500);">
+      <div class="split__eyebrow" style="color:var(--c-yellow-700);">Phase 2: Carving</div>
+      <div class="split__title">Tiered dependency difficulty model</div>
+      <ul class="split__points">
+        <li><strong>Tier 1, leaf modules:</strong> low coupling, easy to carve first</li>
+        <li><strong>Tier 2, intermediate:</strong> some shared state, moderate difficulty</li>
+        <li><strong>Tier 3, core:</strong> high coupling, save for last</li>
+        <li>SMF runtime behavior analysis informs the slicing order</li>
+        <li><strong>Decision gate:</strong> approved modernization sequence</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SLIDE 26: PHASE 3-4 TRANSLATION + PERFORMANCE ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-green-500);">
+  <div class="eyebrow" data-i18n="s26.eyebrow">Phase 3 + 4 · Weeks 3-8 · Ongoing</div>
+  <h2 class="title title--medium" data-i18n="s26.title">Translation and performance assurance. Match mainframe speed before cutover.</h2>
+  <div class="split">
+    <div class="split__side" style="background:var(--c-green-50);border-color:var(--c-green-500);">
+      <div class="split__eyebrow" style="color:var(--c-green-700);">Phase 3: Translation</div>
+      <div class="split__title">Module-by-module, never big bang</div>
+      <ul class="split__points">
+        <li>Sonnet 4.6 translates COBOL → Java/.NET/Python idiomatically</li>
+        <li>Preserve business semantics, NOT syntactic structure (avoid JOBOL)</li>
+        <li>Generate behavioral equivalence tests in parallel</li>
+        <li>Each module → PR with mapping documentation</li>
+        <li><strong>Decision gate:</strong> human review of every PR</li>
+      </ul>
+    </div>
+    <div class="split__side" style="background:var(--c-red-50);border-color:var(--c-red-500);">
+      <div class="split__eyebrow" style="color:var(--c-red-700);">Phase 4: Performance</div>
+      <div class="split__title">Match mainframe speed parity</div>
+      <ul class="split__points">
+        <li>SMF data establishes baseline (CPU, I/O, response times)</li>
+        <li>Load tests with production-like volume on the modernized service</li>
+        <li>Profile hot paths, optimize critical sections</li>
+        <li>Benchmark vs mainframe, no regression beyond defined SLOs</li>
+        <li><strong>Decision gate:</strong> performance sign-off by SRE team</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SLIDE 27: PHASE 5 STRANGLER FIG (DIAGRAM) ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s27.eyebrow">Phase 5 · Coexistence · 12-24 months</div>
+  <h2 class="title title--medium" data-i18n="s27.title">The strangler fig pattern. Mainframe and modern systems run in parallel during transition.</h2>
+  <svg viewBox="0 0 1400 420" style="width:100%;max-width:1400px;height:auto;display:block;margin:8px auto 0;" role="img" aria-labelledby="strangler-title" font-family="Inter, sans-serif">
+    <title id="strangler-title">Strangler fig coexistence architecture: gradual traffic migration</title>
+    <text x="40" y="28" font-family="JetBrains Mono" font-size="11" font-weight="500" letter-spacing="1.8" fill="#737373">STRANGLER FIG · TRAFFIC SHIFTS FROM LEGACY TO MODERN OVER 12-24 MONTHS</text>
+
+    <!-- Top: External clients -->
+    <g>
+      <rect x="580" y="58" width="240" height="56" rx="6" fill="#1A1A1A"/>
+      <text x="700" y="80" text-anchor="middle" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.7)" font-weight="500">REQUESTS</text>
+      <text x="700" y="102" text-anchor="middle" font-size="15" font-weight="500" fill="white">External clients</text>
+    </g>
+    <line x1="700" y1="114" x2="700" y2="146" stroke="#737373" stroke-width="2"/>
+    <polygon points="694,144 706,144 700,154" fill="#737373"/>
+
+    <!-- Router -->
+    <g>
+      <rect x="460" y="158" width="480" height="76" rx="6" fill="#FFF7E0" stroke="#FFB900" stroke-width="2"/>
+      <text x="700" y="184" text-anchor="middle" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="#B88500" font-weight="500">ROUTER · CDC + FEATURE FLAGS</text>
+      <text x="700" y="208" text-anchor="middle" font-size="15" font-weight="600" fill="#1A1A1A">Splits traffic by % rollout, customer ID, region</text>
+      <text x="700" y="226" text-anchor="middle" font-size="12" fill="#3A3A3A" font-style="italic">Decisions are reversible at every step.</text>
+    </g>
+
+    <!-- Arrows from router to legacy / modern -->
+    <!-- LEFT arrow: router → legacy -->
+    <line x1="540" y1="234" x2="320" y2="276" stroke="#F25022" stroke-width="2"/>
+    <polygon points="328,272 320,276 326,268" fill="#F25022"/>
+    <rect x="378" y="240" width="184" height="22" rx="11" fill="white" stroke="#F25022" stroke-width="1"/>
+    <text x="470" y="256" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#B33816" font-weight="600">90% → 50% → 0%</text>
+
+    <!-- RIGHT arrow: router → modern -->
+    <line x1="860" y1="234" x2="1080" y2="276" stroke="#7FBA00" stroke-width="2"/>
+    <polygon points="1072,272 1080,276 1074,268" fill="#7FBA00"/>
+    <rect x="838" y="240" width="184" height="22" rx="11" fill="white" stroke="#7FBA00" stroke-width="1"/>
+    <text x="930" y="256" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#5A8500" font-weight="600">10% → 50% → 100%</text>
+
+    <!-- Legacy mainframe (left) -->
+    <g>
+      <rect x="120" y="280" width="320" height="92" rx="6" fill="#FFF0EB" stroke="#F25022" stroke-width="1.5"/>
+      <rect x="120" y="280" width="6" height="92" fill="#F25022"/>
+      <text x="140" y="306" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="#B33816" font-weight="500">LEGACY · MAINFRAME COBOL</text>
+      <text x="140" y="330" font-size="15" font-weight="600" fill="#1A1A1A">Source of truth during transition</text>
+      <text x="140" y="350" font-size="12" fill="#3A3A3A" font-style="italic">Read-write authority. Stays canonical until</text>
+      <text x="140" y="366" font-size="12" fill="#3A3A3A" font-style="italic">cutover gate is signed by accountable executive.</text>
+    </g>
+
+    <!-- Modern services (right) -->
+    <g>
+      <rect x="960" y="280" width="320" height="92" rx="6" fill="#F1F8E3" stroke="#7FBA00" stroke-width="1.5"/>
+      <rect x="960" y="280" width="6" height="92" fill="#7FBA00"/>
+      <text x="980" y="306" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="#5A8500" font-weight="500">MODERN · AZURE SERVICES</text>
+      <text x="980" y="330" font-size="15" font-weight="600" fill="#1A1A1A">Java / .NET microservices, AKS</text>
+      <text x="980" y="350" font-size="12" fill="#3A3A3A" font-style="italic">Idempotent and observable. Every operation</text>
+      <text x="980" y="366" font-size="12" fill="#3A3A3A" font-style="italic">retryable. State changes reversible.</text>
+    </g>
+
+    <!-- CDC bridge -->
+    <line x1="280" y1="372" x2="280" y2="394" stroke="#737373" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <line x1="280" y1="394" x2="1120" y2="394" stroke="#737373" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <line x1="1120" y1="394" x2="1120" y2="372" stroke="#737373" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="540" y="382" width="320" height="24" rx="12" fill="white" stroke="#737373" stroke-width="1"/>
+    <text x="700" y="399" text-anchor="middle" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="#737373" font-weight="500">CDC · BIDIRECTIONAL SYNC · NO DOUBLE WRITES</text>
+  </svg>
+</section>
+
+<!-- ============== SLIDE 28: PHASE 6 TESTING ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-green-500);">
+  <div class="eyebrow" data-i18n="s28.eyebrow">Phase 6 · Testing · Continuous</div>
+  <h2 class="title title--medium" data-i18n="s28.title">Shadow traffic and behavioral equivalence. Prove parity before flipping the switch.</h2>
+  <div class="numbered-list">
+    <div class="numbered-item"><div class="numbered-item__num">01</div><div class="numbered-item__text"><strong>Shadow traffic.</strong> Production requests are duplicated to the modern service in read-only mode. Responses compared, not used. Identifies divergences before they hit users.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">02</div><div class="numbered-item__text"><strong>Behavioral equivalence tests.</strong> Generated by Test agent during translation. Validate that the modernized code produces identical outputs to the original COBOL across thousands of input fixtures.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">03</div><div class="numbered-item__text"><strong>Mutation testing.</strong> Inject defects into the modernized code, confirm tests fail. Validates test suite quality, not just code correctness.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">04</div><div class="numbered-item__text"><strong>Edge case mining.</strong> Discovery agent reads decades of audit logs, surfaces rare scenarios. Generated test fixtures cover them explicitly.</div></div>
+  </div>
+  <div class="benchmark-card"><p><strong>Coverage target:</strong> 85%+ minimum, with 100% on critical business rule paths. <strong>Gartner:</strong> AgentOps maturity correlates strongly with successful production cutovers.</p></div>
+</section>
+
+<!-- ============== SLIDE 29: PHASE 7 CUTOVER ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s29.eyebrow">Phase 7 · Production cutover + factory model</div>
+  <h2 class="title title--medium" data-i18n="s29.title">The human gate. After this, the next 100 modules are factory work.</h2>
+  <div class="split">
+    <div class="split__side" style="background:var(--c-red-50);border-color:var(--c-red-500);">
+      <div class="split__eyebrow" style="color:var(--c-red-700);">Cutover decision gate</div>
+      <div class="split__title">What must be true before flipping</div>
+      <ul class="split__points">
+        <li>Shadow traffic divergence rate below SLO threshold</li>
+        <li>Performance parity confirmed by SRE team</li>
+        <li>Rollback procedure tested in production-like environment</li>
+        <li>Incident response runbook in place</li>
+        <li>Compliance sign-off from accountable executive</li>
+      </ul>
+    </div>
+    <div class="split__side" style="background:var(--c-green-50);border-color:var(--c-green-500);">
+      <div class="split__eyebrow" style="color:var(--c-green-700);">Factory model</div>
+      <div class="split__title">After Module 1, the next 100 are repeatable</div>
+      <ul class="split__points">
+        <li>Reusable carving rules, agent prompts, test fixtures</li>
+        <li>Standardized PR template, review checklist</li>
+        <li>Pre-built CI/CD pipeline per target language</li>
+        <li>Cost predictability: token spend per LOC measured</li>
+        <li>Throughput: 50K-500K LOC per quarter sustained</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SLIDE 30: COMMON PITFALLS ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-red-500);">
+  <div class="eyebrow" data-i18n="s30.eyebrow">Common pitfalls and mitigations</div>
+  <h2 class="title title--medium" data-i18n="s30.title">Six failure modes I have seen in the field, and how to avoid each.</h2>
+  <table>
+    <thead><tr><th>Pitfall</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>JOBOL.</strong> COBOL syntax translated to Java without architectural rethinking.</td><td>Run a rearchitect pass before translation. AI proposes target boundaries; humans approve.</td></tr>
+      <tr><td><strong>Big bang cutover.</strong> Single switch from legacy to modern.</td><td>Strangler fig with CDC. 12-24 month coexistence period. Gradual traffic migration.</td></tr>
+      <tr><td><strong>Test rot.</strong> Tests pass but code is wrong because tests inherit the same bugs as the translation.</td><td>Generate tests from original COBOL behavior, NOT from the translated code. Mutation test the suite.</td></tr>
+      <tr><td><strong>Agent anarchy.</strong> Many agents, no orchestrator, no governance.</td><td>Single Orchestrator (Opus). Every agent action logged. Approval gates at decision points.</td></tr>
+      <tr><td><strong>Cost runaway.</strong> Token spend exceeds budget before value is delivered.</td><td>Per-module cost ceiling. Wave 1 → Wave 2 → Wave 3 with cost gates between.</td></tr>
+      <tr><td><strong>Vendor lock-in.</strong> The modernized code only runs on one cloud or with one model provider.</td><td>Standard, idiomatic target language. No proprietary SDK injection. Multi-model routing.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== SLIDE 31: GOVERNANCE ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s31.eyebrow">Governance framework</div>
+  <h2 class="title title--medium" data-i18n="s31.title">Auditability is not a feature. It is the difference between a pilot and production.</h2>
+  <div class="numbered-list">
+    <div class="numbered-item"><div class="numbered-item__num">01</div><div class="numbered-item__text"><strong>Every agent action logged with structured metadata.</strong> Azure Monitor captures who, when, what, why, what changed.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">02</div><div class="numbered-item__text"><strong>Approval gates at decision points.</strong> Architecture decisions, production deployments, schema changes pause for human sign-off.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">03</div><div class="numbered-item__text"><strong>RBAC at every layer.</strong> Entra ID controls which agents can read which resources. Key Vault holds all secrets.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">04</div><div class="numbered-item__text"><strong>Cost ceilings per workflow.</strong> Token spend capped per agent invocation. Runaways trigger circuit breakers.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">05</div><div class="numbered-item__text"><strong>Compliance evidence generated automatically.</strong> SOX, ISAE 3402, LGPD, PCI-DSS audit trails as a side effect of normal operation.</div></div>
+  </div>
+</section>
+
+<!-- ============== CLOSING DIVIDER ============== -->
+<section class="slide slide--dark" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s32.eyebrow">Closing</div>
+  <div class="section-number">→</div>
+  <h1 class="section-title" data-i18n="s32.title">Monday morning.</h1>
+  <p class="section-subtitle" data-i18n="s32.subtitle">Five things you can do in the next two weeks to start this journey.</p>
+</section>
+
+<!-- ============== SLIDE 33: MONDAY MORNING ACTION PLAN ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-yellow-500);">
+  <div class="eyebrow" data-i18n="s33.eyebrow">Monday morning · the next two weeks</div>
+  <h2 class="title title--medium" data-i18n="s33.title">Five concrete actions, ranked by sequence.</h2>
+  <div class="numbered-list">
+    <div class="numbered-item"><div class="numbered-item__num">01</div><div class="numbered-item__text"><strong>Pick one COBOL module under 5K LOC with low business criticality.</strong> Not the most important system. The most learnable. This is your Wave 1 quick win.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">02</div><div class="numbered-item__text"><strong>Stand up GitHub Copilot + Claude on Azure AI Foundry.</strong> Provision the Foundry workspace, deploy Claude Opus 4.6 and Sonnet 4.6, connect via Model Router.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">03</div><div class="numbered-item__text"><strong>Run the Discovery agent on the chosen module.</strong> Output: dependency graph, business rule catalog, complexity score. Compare against your team's mental model.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">04</div><div class="numbered-item__text"><strong>Generate translation + tests for one leaf module.</strong> Sonnet 4.6 with behavioral equivalence test generation. Review the PR with senior engineers.</div></div>
+    <div class="numbered-item"><div class="numbered-item__num">05</div><div class="numbered-item__text"><strong>Establish governance baseline.</strong> Approval gates, cost ceilings, audit logging. Wave 2 cannot start without this.</div></div>
+  </div>
+  <div class="decision-framework"><p><strong>Two-week target:</strong> at the end of Wave 1, you have a translated module with passing behavioral tests, a documented governance plan, and a credible Wave 2 budget. That is what you bring to the steering committee.</p></div>
+</section>
+
+<!-- ============== SLIDE 34: WHAT SUCCESS LOOKS LIKE ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-green-500);">
+  <div class="eyebrow" data-i18n="s34.eyebrow">What success looks like at 12 months</div>
+  <h2 class="title title--medium" data-i18n="s34.title">Six measurable outcomes that prove the framework worked.</h2>
+  <div class="stat-grid">
+    <div class="stat-card" style="border-left-color:var(--c-blue-500);">
+      <div class="stat-card__label">Throughput</div>
+      <div class="stat-card__value accent-blue">200K-500K</div>
+      <p>LOC modernized per quarter at steady state.</p>
+    </div>
+    <div class="stat-card" style="border-left-color:var(--c-green-500);">
+      <div class="stat-card__label">Time to first production</div>
+      <div class="stat-card__value accent-green">90-180 days</div>
+      <p>Vs industry median of 9-18 months for first AI workload in production.</p>
+    </div>
+    <div class="stat-card" style="border-left-color:var(--c-yellow-500);">
+      <div class="stat-card__label">Test coverage</div>
+      <div class="stat-card__value accent-yellow">85%+</div>
+      <p>Minimum on translated modules, with 100% on critical business rule paths.</p>
+    </div>
+    <div class="stat-card" style="border-left-color:var(--c-red-500);">
+      <div class="stat-card__label">Cost predictability</div>
+      <div class="stat-card__value accent-red">±15%</div>
+      <p>Token cost per LOC variance band. Outside this range triggers re-estimation.</p>
+    </div>
+  </div>
+  <div class="benchmark-card"><p><strong>Gartner G00842103:</strong> agentic AI projected to reduce cost-to-value gap by 50% by 2027. <strong>IDC US54300026:</strong> only 45% of AI projects deliver measurable business value, the framework you have just walked through is what gets you into that 45%.</p></div>
+</section>
+
+<!-- ============== SLIDE 35: REFERENCES ============== -->
+<section class="slide slide--paper" style="--accent:var(--c-blue-500);">
+  <div class="eyebrow" data-i18n="s35.eyebrow">References and source documents</div>
+  <h2 class="title title--medium" data-i18n="s35.title">The full framework lives in ten companion documents.</h2>
+  <table>
+    <thead><tr><th>Doc</th><th>Title</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>02</td><td>Legacy Modernization Strategy Guide</td><td>Gartner 5R, Microsoft 4 approaches, partner ecosystem</td></tr>
+      <tr><td>03</td><td>AI-Driven Modernization, Claude Opus Analysis</td><td>GenAI capabilities, model deep dive, agentic paradigm</td></tr>
+      <tr><td>04</td><td>Comprehensive Assessment Framework</td><td>Ten-dimension assessment before any engagement starts</td></tr>
+      <tr><td>06</td><td>Technical Architecture, Agentic Framework</td><td>Five-layer reference architecture, governance, A2A protocol</td></tr>
+      <tr><td>07</td><td>Operational Playbook, Carving + Performance + Coexistence</td><td>The three challenges that determine success or failure</td></tr>
+      <tr><td>12</td><td>Technical Implementation Runbook</td><td>The HOW: every phase, every agent, every decision gate</td></tr>
+    </tbody>
+  </table>
+  <div class="benchmark-card"><p><strong>Industry sources cited:</strong> Gartner G00822558, G00822567, G00827372, G00833880, G00835157, G00842103, G00844741, G00825163. IDC US54300026 ("2026 Ushers in Deeper Maturity in the Agentic Era"). Anthropic Claude model documentation. Microsoft Learn (Azure AI Foundry, Semantic Kernel, Mainframe Modernization Agent).</p></div>
+</section>
+
+<!-- ============== FINAL SLIDE ============== -->
+<section class="slide slide--dark" style="--accent: var(--c-blue-500); justify-content: center;">
+  <svg viewBox="0 0 1914 1062" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="paulasilva" style="width:120px;height:auto;margin-bottom:32px;flex-shrink:0;"><title>paulasilva</title><path fill="#FF3133" d="M532 131 L36 462 L13 497 L13 560 L23 582 L48 604 L521 923 L539 926 L539 699 L547 680 L314 530 L527 395 L551 371 L558 347 L558 155 L547 135 Z"/><path fill="#7ED956" d="M551 681 L542 693 L540 700 L540 917 L546 930 L558 940 L571 943 L778 943 L788 941 L798 935 L809 910 L809 702 L807 694 L799 682 L784 674 L566 674 Z"/><path fill="#FFDE59" d="M1390 16 L1208 13 L1184 23 L1171 38 L768 1009 L768 1026 L778 1038 L957 1042 L975 1037 L995 1017 L1346 179 L1349 145 L1367 129 L1401 47 L1402 31 Z"/><path fill="#39B8FF" d="M1369 131 L1350 149 L1349 355 L1354 369 L1385 399 L1592 528 L1373 667 L1354 688 L1349 703 L1349 907 L1361 924 L1377 926 L1871 595 L1893 563 L1894 501 L1885 477 L1863 456 L1398 142 Z"/></svg>
+  <h1 class="title" style="font-size: clamp(32px, 4vw, 52px); line-height: 1.1; margin-bottom: 18px;" data-i18n="end.title">Modernization that ships. <span class="accent-blue">Without big-bang risk.</span></h1>
+  <p style="font-style: italic; font-size: clamp(17px, 1.6vw, 22px); color: var(--dark-ink-2); max-width: 780px; line-height: 1.45; margin-bottom: 36px;" data-i18n="end.tagline">Building the future of software development with AI and Agentic DevOps.</p>
+  <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dark-ink-3); margin-bottom: 22px;">Paula Silva | Software Global Black Belt</div>
+  <a href="mailto:paulasilva@microsoft.com" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;border:1px solid rgba(240,240,240,0.2);border-radius:10px;text-decoration:none;color:var(--dark-ink);transition:all 0.2s;max-width:400px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0;color:var(--dark-ink-2);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+    <div style="display:flex;flex-direction:column;gap:3px;">
+      <span style="font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--dark-ink-3);" data-i18n="labels.contact">Contact</span>
+      <span style="font-size:15px;color:var(--dark-ink);font-weight:400;">paulasilva@microsoft.com</span>
+    </div>
+  </a>
+  <div style="position:absolute;bottom:32px;left:80px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dark-ink-3);">paulasilva · 2026-04-29</div>
+</section>
+
+</div>
+
+<script>
+/* ===========================================================
+   I18N - Trilingual content for chrome + selected slides.
+   Slides without entries here keep their default HTML (EN).
+   =========================================================== */
+const I18N = {
+  'en': {
+    labels: { author: 'Author', role: 'Role', contact: 'Contact', date: 'Date' },
+    chrome: {
+      brand: 'Paula Silva | Software Global Black Belt · Legacy Modernization',
+      kbdHintHTML: 'Use <kbd>←</kbd> <kbd>→</kbd> to navigate · <kbd>O</kbd> or <kbd>Esc</kbd> for overview',
+      overviewTitle: 'Overview',
+      overviewHint: 'Click a slide · Esc to close'
+    },
+    s1: { eyebrow: 'Legacy Modernization Framework · v1.1', titleHTML: 'Modernizing <span class="accent-blue">COBOL and mainframe estates</span> with <span class="accent-green">agentic AI</span>, without <span class="accent-red">big-bang risk</span>.', subtitle: 'A reference framework for enterprises navigating the Gartner 5R, Microsoft four approaches, and Claude-powered agentic modernization on Azure AI Foundry and GitHub.', role: 'Software Global Black Belt' },
+    s2: { eyebrow: 'Agenda · 60 min', title: 'Five parts. One playbook for modernization that ships.' },
+    s3: { eyebrow: 'Who is speaking', titleHTML: 'Paula Silva, <span class="accent-blue">Software Global Black Belt</span>.', subtitle: 'Building the future of software development with AI and Agentic DevOps.' },
+    s4: { eyebrow: 'Three signs you need this deck', title: 'If any of these is your reality, the next 60 minutes will pay for themselves.' },
+    s5: { eyebrow: 'Part I · ~10 min', title: 'The forcing functions.', subtitle: 'Why modernization is no longer optional in 2026, and what most enterprise plans are missing about the timeline.' },
+    s6: { eyebrow: 'The Brazilian COBOL estate', title: '1.25B to 2.1B lines of COBOL, concentrated in regulated industries.' },
+    s7: { eyebrow: 'Regulatory forcing functions', titleHTML: 'Three deadlines that make modernization a <span class="accent-red">compliance requirement</span>, not a strategic option.' },
+    s8: { eyebrow: 'How AI flips the cost equation', title: 'The understanding phase consumed 40-60% of budgets. AI inverts the equation.' },
+    s9: { eyebrow: 'Part II · ~12 min', title: 'The framework.', subtitle: 'The Gartner 5R, the Microsoft four approaches, and a portfolio approach that lands each application in the right pattern.' },
+    s10: { eyebrow: 'The Gartner 5R modernization framework', title: 'Five strategies, ranked by transformation depth and risk.' },
+    s11: { eyebrow: 'The Microsoft four modernization approaches', title: 'Each maps to a Gartner R, with concrete Azure tooling.' },
+    s12: { eyebrow: 'The decision matrix', titleHTML: 'Where each application lands depends on <span class="accent-yellow">two axes</span>: business criticality and technical complexity.' },
+    s13: { eyebrow: 'Part III · ~10 min', title: 'The AI advantage.', subtitle: 'Four capabilities that flip the cost equation, three things AI does NOT replace, and the 70/30 operating model.' },
+    s14: { eyebrow: 'Four AI capabilities that change the game', title: 'Each replaces a previously manual, expensive bottleneck.' },
+    s15: { eyebrow: 'What AI does NOT replace', title: 'Six decisions where human judgment is non-negotiable.' },
+    s16: { eyebrow: 'The three-wave pilot', title: '12 weeks. Three waves. Each one validates the next.' },
+    s17: { eyebrow: 'Claude multi-model orchestration', title: 'Three models. One pipeline. Cost-optimized by design.' },
+    s18: { eyebrow: 'Part IV · ~14 min', title: 'The architecture.', subtitle: 'Five-layer reference stack, six specialized agents, eight MCP servers, and the orchestration patterns that make it work.' },
+    s19: { eyebrow: 'Five-layer reference architecture', title: 'Each layer builds on the one below it.' },
+    s20: { eyebrow: 'Six specialized agents', title: 'Each implements the Gartner agent anatomy: perceive, decide, act, plan.' },
+    s21: { eyebrow: 'Eight MCP servers · the integration backbone', title: '\"USB for AI agents\", a universal connector for enterprise systems.' },
+    s22: { eyebrow: 'Three orchestration patterns', title: 'Pick the pattern by task shape, not by team preference.' },
+    s23: { eyebrow: 'Part V · ~14 min', title: 'The seven-phase journey.', subtitle: 'From assessment to factory model. Decision gates at every phase. Reversibility at every step.' },
+    s24: { eyebrow: 'The seven-phase journey', title: 'Linear when it works. Iterative when it does not.' },
+    s25: { eyebrow: 'Phase 1 + 2 · Weeks 1-4', title: 'Assessment and carving. Slicing the monolith into modernizable units.' },
+    s26: { eyebrow: 'Phase 3 + 4 · Weeks 3-8 · Ongoing', title: 'Translation and performance assurance. Match mainframe speed before cutover.' },
+    s27: { eyebrow: 'Phase 5 · Coexistence · 12-24 months', title: 'The strangler fig pattern. Mainframe and modern systems run in parallel during transition.' },
+    s28: { eyebrow: 'Phase 6 · Testing · Continuous', title: 'Shadow traffic and behavioral equivalence. Prove parity before flipping the switch.' },
+    s29: { eyebrow: 'Phase 7 · Production cutover + factory model', title: 'The human gate. After this, the next 100 modules are factory work.' },
+    s30: { eyebrow: 'Common pitfalls and mitigations', title: 'Six failure modes I have seen in the field, and how to avoid each.' },
+    s31: { eyebrow: 'Governance framework', title: 'Auditability is not a feature. It is the difference between a pilot and production.' },
+    s32: { eyebrow: 'Closing', title: 'Monday morning.', subtitle: 'Five things you can do in the next two weeks to start this journey.' },
+    s33: { eyebrow: 'Monday morning · the next two weeks', title: 'Five concrete actions, ranked by sequence.' },
+    s34: { eyebrow: 'What success looks like at 12 months', title: 'Six measurable outcomes that prove the framework worked.' },
+    s35: { eyebrow: 'References and source documents', title: 'The full framework lives in ten companion documents.' },
+    end: { titleHTML: 'Modernization that ships. <span class="accent-blue">Without big-bang risk.</span>', tagline: 'Building the future of software development with AI and Agentic DevOps.' }
+  },
+  'pt-BR': {
+    labels: { author: 'Autora', role: 'Papel', contact: 'Contato', date: 'Data' },
+    chrome: {
+      brand: 'Paula Silva | Software Global Black Belt · Modernização de Legados',
+      kbdHintHTML: 'Use <kbd>←</kbd> <kbd>→</kbd> para navegar · <kbd>O</kbd> ou <kbd>Esc</kbd> para overview',
+      overviewTitle: 'Visão geral',
+      overviewHint: 'Clique em um slide · Esc para fechar'
+    },
+    s1: { eyebrow: 'Framework de Modernização de Legados · v1.0', titleHTML: 'Modernizando <span class="accent-blue">estates COBOL e mainframe</span> com <span class="accent-green">IA agêntica</span>, sem <span class="accent-red">risco de big-bang</span>.', subtitle: 'Um framework de referência para empresas navegando o 5R do Gartner, as quatro abordagens da Microsoft e modernização agêntica com Claude no Azure AI Foundry e GitHub.', role: 'Software Global Black Belt' },
+    s2: { eyebrow: 'Agenda · 60 min', title: 'Cinco partes. Um playbook de modernização que sai do papel.' },
+    s3: { eyebrow: 'Quem está falando', titleHTML: 'Paula Silva, <span class="accent-blue">Software Global Black Belt</span>.', subtitle: 'Building the future of software development with AI and Agentic DevOps.' },
+    s4: { eyebrow: 'Três sinais de que você precisa deste deck', title: 'Se algum desses é a sua realidade, os próximos 60 minutos pagam por si mesmos.' },
+    s5: { eyebrow: 'Parte I · ~10 min', title: 'As forças que obrigam.', subtitle: 'Por que modernização não é mais opcional em 2026, e o que a maioria dos planos enterprise está deixando de ver sobre o cronograma.' },
+    s6: { eyebrow: 'O parque COBOL brasileiro', title: '1,25B a 2,1B linhas de COBOL, concentradas em indústrias reguladas.' },
+    s7: { eyebrow: 'Forças regulatórias', titleHTML: 'Três prazos que transformam modernização em <span class="accent-red">requisito de compliance</span>, não escolha estratégica.' },
+    s8: { eyebrow: 'Como a IA inverte a equação de custo', title: 'A fase de entendimento consumia 40-60% dos orçamentos. A IA inverte essa equação.' },
+    s9: { eyebrow: 'Parte II · ~12 min', title: 'O framework.', subtitle: 'O 5R do Gartner, as quatro abordagens da Microsoft e uma visão de portfólio que coloca cada aplicação no padrão certo.' },
+    s10: { eyebrow: 'Framework de modernização 5R do Gartner', title: 'Cinco estratégias, ordenadas por profundidade de transformação e risco.' },
+    s11: { eyebrow: 'As quatro abordagens de modernização da Microsoft', title: 'Cada uma mapeia para um R do Gartner, com tooling concreto no Azure.' },
+    s12: { eyebrow: 'A matriz de decisão', titleHTML: 'Onde cada aplicação aterrissa depende de <span class="accent-yellow">dois eixos</span>: criticidade de negócio e complexidade técnica.' },
+    s13: { eyebrow: 'Parte III · ~10 min', title: 'A vantagem da IA.', subtitle: 'Quatro capacidades que invertem a equação de custo, três coisas que a IA NÃO substitui e o modelo operacional 70/30.' },
+    s14: { eyebrow: 'Quatro capacidades de IA que mudam o jogo', title: 'Cada uma substitui um gargalo manual e caro.' },
+    s15: { eyebrow: 'O que a IA NÃO substitui', title: 'Seis decisões em que o julgamento humano é não-negociável.' },
+    s16: { eyebrow: 'O piloto em três ondas', title: '12 semanas. Três ondas. Cada uma valida a próxima.' },
+    s17: { eyebrow: 'Orquestração multi-modelo Claude', title: 'Três modelos. Um pipeline. Otimizado para custo por design.' },
+    s18: { eyebrow: 'Parte IV · ~14 min', title: 'A arquitetura.', subtitle: 'Stack de referência de cinco camadas, seis agentes especializados, oito servidores MCP e os padrões de orquestração que fazem funcionar.' },
+    s19: { eyebrow: 'Arquitetura de referência de cinco camadas', title: 'Cada camada se apoia na de baixo.' },
+    s20: { eyebrow: 'Seis agentes especializados', title: 'Cada um implementa a anatomia de agente do Gartner: perceber, decidir, agir, planejar.' },
+    s21: { eyebrow: 'Oito servidores MCP · a espinha de integração', title: '\"USB para agentes de IA\", um conector universal para sistemas enterprise.' },
+    s22: { eyebrow: 'Três padrões de orquestração', title: 'Escolha o padrão pela forma da tarefa, não pela preferência do time.' },
+    s23: { eyebrow: 'Parte V · ~14 min', title: 'A jornada de sete fases.', subtitle: 'Do assessment ao modelo de fábrica. Portões de decisão em cada fase. Reversibilidade em cada passo.' },
+    s24: { eyebrow: 'A jornada de sete fases', title: 'Linear quando funciona. Iterativa quando não.' },
+    s25: { eyebrow: 'Fases 1 + 2 · Semanas 1-4', title: 'Assessment e carving. Fatiando o monolito em unidades modernizáveis.' },
+    s26: { eyebrow: 'Fases 3 + 4 · Semanas 3-8 · Contínuo', title: 'Tradução e garantia de performance. Casar a velocidade do mainframe antes do cutover.' },
+    s27: { eyebrow: 'Fase 5 · Coexistência · 12-24 meses', title: 'O padrão strangler fig. Mainframe e sistemas modernos rodam em paralelo na transição.' },
+    s28: { eyebrow: 'Fase 6 · Testes · Contínuo', title: 'Shadow traffic e equivalência comportamental. Provar paridade antes de virar a chave.' },
+    s29: { eyebrow: 'Fase 7 · Cutover de produção + modelo de fábrica', title: 'O portão humano. Depois daqui, os próximos 100 módulos são trabalho de fábrica.' },
+    s30: { eyebrow: 'Armadilhas comuns e mitigações', title: 'Seis modos de falha que vi em campo, e como evitar cada um.' },
+    s31: { eyebrow: 'Framework de governança', title: 'Auditabilidade não é uma feature. É a diferença entre piloto e produção.' },
+    s32: { eyebrow: 'Fechamento', title: 'Segunda-feira de manhã.', subtitle: 'Cinco coisas que você pode fazer nas próximas duas semanas para começar essa jornada.' },
+    s33: { eyebrow: 'Segunda-feira · as próximas duas semanas', title: 'Cinco ações concretas, em sequência.' },
+    s34: { eyebrow: 'Como o sucesso parece em 12 meses', title: 'Seis resultados mensuráveis que provam que o framework funcionou.' },
+    s35: { eyebrow: 'Referências e documentos-fonte', title: 'O framework completo vive em dez documentos companheiros.' },
+    end: { titleHTML: 'Modernização que entrega. <span class="accent-blue">Sem risco de big-bang.</span>', tagline: 'Building the future of software development with AI and Agentic DevOps.' }
+  },
+  'es': {
+    labels: { author: 'Autora', role: 'Rol', contact: 'Contacto', date: 'Fecha' },
+    chrome: {
+      brand: 'Paula Silva | Software Global Black Belt · Modernización de Legados',
+      kbdHintHTML: 'Usa <kbd>←</kbd> <kbd>→</kbd> para navegar · <kbd>O</kbd> o <kbd>Esc</kbd> para overview',
+      overviewTitle: 'Vista general',
+      overviewHint: 'Haz clic en un slide · Esc para cerrar'
+    },
+    s1: { eyebrow: 'Framework de Modernización de Legados · v1.0', titleHTML: 'Modernizando <span class="accent-blue">estates COBOL y mainframe</span> con <span class="accent-green">IA agéntica</span>, sin <span class="accent-red">riesgo de big-bang</span>.', subtitle: 'Un framework de referencia para empresas navegando el 5R de Gartner, los cuatro enfoques de Microsoft y modernización agéntica con Claude en Azure AI Foundry y GitHub.', role: 'Software Global Black Belt' },
+    s2: { eyebrow: 'Agenda · 60 min', title: 'Cinco partes. Un playbook de modernización que llega a producción.' },
+    s3: { eyebrow: 'Quien habla', titleHTML: 'Paula Silva, <span class="accent-blue">Software Global Black Belt</span>.', subtitle: 'Building the future of software development with AI and Agentic DevOps.' },
+    s4: { eyebrow: 'Tres señales de que necesitas este deck', title: 'Si alguna de estas es tu realidad, los próximos 60 minutos se pagan solos.' },
+    s5: { eyebrow: 'Parte I · ~10 min', title: 'Las fuerzas que obligan.', subtitle: 'Por qué modernización ya no es opcional en 2026, y lo que la mayoría de los planes enterprise está pasando por alto sobre el cronograma.' },
+    s6: { eyebrow: 'El parque COBOL brasileño', title: '1,25B a 2,1B líneas de COBOL, concentradas en industrias reguladas.' },
+    s7: { eyebrow: 'Fuerzas regulatorias', titleHTML: 'Tres plazos que convierten modernización en <span class="accent-red">requisito de compliance</span>, no en elección estratégica.' },
+    s8: { eyebrow: 'Cómo la IA invierte la ecuación de costo', title: 'La fase de entendimiento consumía 40-60% de los presupuestos. La IA invierte esa ecuación.' },
+    s9: { eyebrow: 'Parte II · ~12 min', title: 'El framework.', subtitle: 'El 5R de Gartner, los cuatro enfoques de Microsoft y una visión de portafolio que aterriza cada aplicación en el patrón correcto.' },
+    s10: { eyebrow: 'Framework de modernización 5R de Gartner', title: 'Cinco estrategias, ordenadas por profundidad de transformación y riesgo.' },
+    s11: { eyebrow: 'Los cuatro enfoques de modernización de Microsoft', title: 'Cada uno mapea a una R de Gartner, con tooling concreto en Azure.' },
+    s12: { eyebrow: 'La matriz de decisión', titleHTML: 'Dónde aterriza cada aplicación depende de <span class="accent-yellow">dos ejes</span>: criticidad de negocio y complejidad técnica.' },
+    s13: { eyebrow: 'Parte III · ~10 min', title: 'La ventaja de la IA.', subtitle: 'Cuatro capacidades que invierten la ecuación de costo, tres cosas que la IA NO reemplaza y el modelo operativo 70/30.' },
+    s14: { eyebrow: 'Cuatro capacidades de IA que cambian el juego', title: 'Cada una reemplaza un cuello de botella manual y caro.' },
+    s15: { eyebrow: 'Lo que la IA NO reemplaza', title: 'Seis decisiones donde el juicio humano es no-negociable.' },
+    s16: { eyebrow: 'El piloto de tres olas', title: '12 semanas. Tres olas. Cada una valida la siguiente.' },
+    s17: { eyebrow: 'Orquestación multi-modelo Claude', title: 'Tres modelos. Un pipeline. Optimizado para costo por diseño.' },
+    s18: { eyebrow: 'Parte IV · ~14 min', title: 'La arquitectura.', subtitle: 'Stack de referencia de cinco capas, seis agentes especializados, ocho servidores MCP y los patrones de orquestación que hacen que funcione.' },
+    s19: { eyebrow: 'Arquitectura de referencia de cinco capas', title: 'Cada capa se apoya en la de abajo.' },
+    s20: { eyebrow: 'Seis agentes especializados', title: 'Cada uno implementa la anatomía de agente de Gartner: percibir, decidir, actuar, planificar.' },
+    s21: { eyebrow: 'Ocho servidores MCP · la columna vertebral de integración', title: '\"USB para agentes de IA\", un conector universal para sistemas enterprise.' },
+    s22: { eyebrow: 'Tres patrones de orquestación', title: 'Elige el patrón por la forma de la tarea, no por la preferencia del equipo.' },
+    s23: { eyebrow: 'Parte V · ~14 min', title: 'La jornada de siete fases.', subtitle: 'Del assessment al modelo de fábrica. Puertas de decisión en cada fase. Reversibilidad en cada paso.' },
+    s24: { eyebrow: 'La jornada de siete fases', title: 'Lineal cuando funciona. Iterativa cuando no.' },
+    s25: { eyebrow: 'Fases 1 + 2 · Semanas 1-4', title: 'Assessment y carving. Cortando el monolito en unidades modernizables.' },
+    s26: { eyebrow: 'Fases 3 + 4 · Semanas 3-8 · Continuo', title: 'Traducción y garantía de performance. Igualar la velocidad del mainframe antes del cutover.' },
+    s27: { eyebrow: 'Fase 5 · Coexistencia · 12-24 meses', title: 'El patrón strangler fig. Mainframe y sistemas modernos corren en paralelo durante la transición.' },
+    s28: { eyebrow: 'Fase 6 · Pruebas · Continuo', title: 'Shadow traffic y equivalencia conductual. Probar paridad antes de girar la llave.' },
+    s29: { eyebrow: 'Fase 7 · Cutover de producción + modelo de fábrica', title: 'La puerta humana. Después de aquí, los siguientes 100 módulos son trabajo de fábrica.' },
+    s30: { eyebrow: 'Trampas comunes y mitigaciones', title: 'Seis modos de falla que he visto en campo, y cómo evitar cada uno.' },
+    s31: { eyebrow: 'Framework de gobernanza', title: 'La auditabilidad no es una feature. Es la diferencia entre piloto y producción.' },
+    s32: { eyebrow: 'Cierre', title: 'Lunes por la mañana.', subtitle: 'Cinco cosas que puedes hacer en las próximas dos semanas para empezar esta jornada.' },
+    s33: { eyebrow: 'Lunes · las próximas dos semanas', title: 'Cinco acciones concretas, en secuencia.' },
+    s34: { eyebrow: 'Cómo se ve el éxito a los 12 meses', title: 'Seis resultados medibles que prueban que el framework funcionó.' },
+    s35: { eyebrow: 'Referencias y documentos fuente', title: 'El framework completo vive en diez documentos compañeros.' },
+    end: { titleHTML: 'Modernización que llega. <span class="accent-blue">Sin riesgo de big-bang.</span>', tagline: 'Building the future of software development with AI and Agentic DevOps.' }
+  }
+};
+
+let currentLocale = 'en';
+
+function resolveKey(obj, dotted){
+  return dotted.split('.').reduce(function(acc, k){ return (acc && acc[k] !== undefined) ? acc[k] : undefined; }, obj);
+}
+
+/* Safe HTML parser using DOMParser (no script execution) */
+function setSafeHTML(el, htmlString){
+  if(typeof htmlString !== 'string'){ el.textContent = String(htmlString); return; }
+  /* If no tags present, use textContent (fastest, safest) */
+  if(htmlString.indexOf('<') === -1){ el.textContent = htmlString; return; }
+  const doc = new DOMParser().parseFromString('<div>' + htmlString + '</div>', 'text/html');
+  const wrapper = doc.body.firstChild;
+  while(el.firstChild) el.removeChild(el.firstChild);
+  if(!wrapper) return;
+  /* Reject any <script> or event-handler attributes (defense-in-depth) */
+  wrapper.querySelectorAll('script').forEach(function(s){ s.remove(); });
+  wrapper.querySelectorAll('*').forEach(function(node){
+    Array.from(node.attributes).forEach(function(a){
+      if(a.name.toLowerCase().indexOf('on') === 0) node.removeAttribute(a.name);
+    });
+  });
+  Array.from(wrapper.childNodes).forEach(function(n){ el.appendChild(n); });
+}
+
+function setLocale(locale){
+  if(!I18N[locale]) return;
+  currentLocale = locale;
+  document.documentElement.lang = locale === 'pt-BR' ? 'pt-BR' : (locale === 'es' ? 'es' : 'en');
+  /* For each [data-i18n] el: try the key first, then key+HTML suffix */
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const key = el.dataset.i18n;
+    const valPlain = resolveKey(I18N[locale], key);
+    const valHTML = resolveKey(I18N[locale], key + 'HTML');
+    if(valHTML !== undefined) setSafeHTML(el, valHTML);
+    else if(valPlain !== undefined) setSafeHTML(el, valPlain);
+  });
+  document.querySelectorAll('.lang-switcher__btn').forEach(function(b){
+    if(b.dataset.locale === locale) b.setAttribute('aria-current', 'true');
+    else b.removeAttribute('aria-current');
+  });
+  const brand = document.querySelector('.deck-brand__text');
+  if(brand && I18N[locale].chrome) brand.textContent = I18N[locale].chrome.brand;
+  const hint = document.getElementById('kbdHint');
+  if(hint && I18N[locale].chrome && I18N[locale].chrome.kbdHintHTML) setSafeHTML(hint, I18N[locale].chrome.kbdHintHTML);
+  const ovTitle = document.querySelector('.overview__title');
+  const ovHint = document.querySelector('.overview__hint');
+  if(ovTitle && I18N[locale].chrome) ovTitle.textContent = I18N[locale].chrome.overviewTitle;
+  if(ovHint && I18N[locale].chrome) ovHint.textContent = I18N[locale].chrome.overviewHint;
+  buildOverview();
+  updateOverviewCurrent();
+  try{ localStorage.setItem('deck-locale', locale); }catch(_){}
+}
+window.setLocale = setLocale;
+
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total = slides.length;
+let current = 0;
+const counter = document.getElementById('slideCounter');
+const progressFill = document.getElementById('progressFill');
+const overview = document.getElementById('overview');
+const overviewGrid = document.getElementById('overviewGrid');
+const kbdHint = document.getElementById('kbdHint');
+
+function syncSlideTheme(slide){
+  const isDark = slide.classList.contains('slide--dark');
+  document.body.dataset.slideTheme = isDark ? 'dark' : 'light';
+}
+
+function show(i){
+  if(i < 0 || i >= total) return;
+  slides[current].dataset.active = 'false';
+  current = i;
+  slides[current].dataset.active = 'true';
+  counter.textContent = String(i+1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+  progressFill.style.width = ((i+1)/total*100) + '%';
+  const accent = slides[current].style.getPropertyValue('--accent');
+  if(accent) progressFill.style.background = accent;
+  syncSlideTheme(slides[current]);
+  updateOverviewCurrent();
+}
+
+function nextSlide(){ show(current+1); }
+function prevSlide(){ show(current-1); }
+window.nextSlide = nextSlide;
+window.prevSlide = prevSlide;
+
+document.getElementById('prevBtn').addEventListener('click', prevSlide);
+document.getElementById('nextBtn').addEventListener('click', nextSlide);
+
+/* Overview modal */
+function buildOverview(){
+  while(overviewGrid.firstChild) overviewGrid.removeChild(overviewGrid.firstChild);
+  slides.forEach((s, idx) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'overview-card';
+    const accent = s.style.getPropertyValue('--accent') || '#00A4EF';
+    card.style.setProperty('--card-accent', accent);
+    card.dataset.idx = String(idx);
+
+    const accentBar = document.createElement('div');
+    accentBar.className = 'overview-card__accent';
+    card.appendChild(accentBar);
+
+    const num = document.createElement('span');
+    num.className = 'overview-card__num';
+    num.textContent = String(idx+1).padStart(2,'0');
+    card.appendChild(num);
+
+    const eyebrowEl = s.querySelector('.eyebrow');
+    if(eyebrowEl){
+      const eb = document.createElement('span');
+      eb.className = 'overview-card__eyebrow';
+      eb.textContent = eyebrowEl.textContent.trim();
+      card.appendChild(eb);
+    }
+
+    const titleEl = s.querySelector('.title, .section-title');
+    if(titleEl){
+      const t = document.createElement('div');
+      t.className = 'overview-card__title';
+      t.textContent = titleEl.textContent.trim();
+      card.appendChild(t);
+    }
+
+    card.addEventListener('click', () => {
+      show(idx);
+      closeOverview();
+    });
+    overviewGrid.appendChild(card);
+  });
+}
+
+function updateOverviewCurrent(){
+  const cards = overviewGrid.querySelectorAll('.overview-card');
+  cards.forEach((c, i) => c.dataset.current = (i === current) ? 'true' : 'false');
+}
+
+function openOverview(){
+  overview.dataset.open = 'true';
+  overview.setAttribute('aria-hidden', 'false');
+  document.body.dataset.overviewOpen = 'true';
+  updateOverviewCurrent();
+}
+
+function closeOverview(){
+  overview.dataset.open = 'false';
+  overview.setAttribute('aria-hidden', 'true');
+  document.body.dataset.overviewOpen = 'false';
+}
+
+function toggleOverview(){
+  if(overview.dataset.open === 'true') closeOverview();
+  else openOverview();
+}
+
+/* Kbd hint: show briefly on load + on mouse move */
+let hintTimer = null;
+function flashHint(){
+  kbdHint.dataset.visible = 'true';
+  if(hintTimer) clearTimeout(hintTimer);
+  hintTimer = setTimeout(() => { kbdHint.dataset.visible = 'false'; }, 3500);
+}
+
+/* Keyboard nav */
+document.addEventListener('keydown', (e) => {
+  if(['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+  if(overview.dataset.open === 'true'){
+    if(e.key === 'Escape' || e.key === 'o' || e.key === 'O'){ e.preventDefault(); closeOverview(); }
+    return;
+  }
+  if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); nextSlide(); }
+  else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); prevSlide(); }
+  else if(e.key === 'Home'){ e.preventDefault(); show(0); }
+  else if(e.key === 'End'){ e.preventDefault(); show(total-1); }
+  else if(e.key === 'o' || e.key === 'O' || e.key === 'Escape'){ e.preventDefault(); toggleOverview(); }
+});
+
+buildOverview();
+show(0);
+flashHint();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
+<title>Semantic Context Layer (SCL-AD) · Paula Silva</title>
+<meta name="description" content="Vendor-neutral framework for engineering deterministic semantic context that grounds AI coding agents.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Semantic Context Layer (SCL-AD) · Paula Silva">
+<meta property="og:description" content="Vendor-neutral framework for engineering deterministic semantic context that grounds AI coding agents.">
+<meta property="og:image" content="../_shared/paulasilva-logo.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Semantic Context Layer (SCL-AD) · Paula Silva">
+<meta name="twitter:description" content="Vendor-neutral framework for engineering deterministic semantic context that grounds AI coding agents.">
+<meta name="twitter:image" content="../_shared/paulasilva-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/landing.css">
+</head>
+<body>
+<noscript>
+  <a href="../index.html" style="position:fixed;top:18px;left:32px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;text-decoration:none;background:#FFFFFF;padding:8px 14px;border:1px solid #E5E5E0;border-radius:4px;">← Knowledge Hub</a>
+  <p style="position:fixed;top:60px;left:32px;z-index:200;font-family:Inter,sans-serif;font-size:13px;color:#737373;max-width:300px;background:#FFF7E0;padding:10px 14px;border:1px solid #FFB900;border-radius:4px;">JavaScript is disabled. The full page chrome and trilingual switcher require JavaScript. Please enable JS for the complete experience, or click the link above to return to the hub.</p>
+</noscript>
+
+<div id="landing-root"></div>
+<script>
+window.PAGE_DATA = {
+  topicNumber: '03',
+  topicLabel: 'Semantic Context Layer',
+  accent: 'red',
+  existingDeck: 'Semantic_Context_Layer_Deck_v1_0_0_2026-05-06_multi.html',
+  existingPlaybook: 'playbook.html',
+  heroArt: `<svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four capability pillars">
+    <rect x="20" y="20" width="220" height="150" rx="8" fill="var(--c-red-50)" stroke="var(--c-red-500)" stroke-width="0.6"/>
+    <text x="36" y="46" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" letter-spacing="0.14em" fill="var(--c-red-700)">PILLAR 01</text>
+    <text x="36" y="74" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="var(--c-red-700)">Precompute</text>
+    <text x="36" y="100" font-family="Inter,sans-serif" font-size="11" fill="var(--ink-2)"><tspan x="36" dy="0">Derive structure ahead</tspan><tspan x="36" dy="14">of time, version, reuse</tspan></text>
+    <rect x="260" y="20" width="220" height="150" rx="8" fill="var(--c-red-50)" stroke="var(--c-red-500)" stroke-width="0.6"/>
+    <text x="276" y="46" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" letter-spacing="0.14em" fill="var(--c-red-700)">PILLAR 02</text>
+    <text x="276" y="74" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="var(--c-red-700)">Target</text>
+    <text x="276" y="100" font-family="Inter,sans-serif" font-size="11" fill="var(--ink-2)"><tspan x="276" dy="0">Pre-computed indexes,</tspan><tspan x="276" dy="14">structured queries</tspan></text>
+    <rect x="20" y="190" width="220" height="150" rx="8" fill="var(--c-red-50)" stroke="var(--c-red-500)" stroke-width="0.6"/>
+    <text x="36" y="216" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" letter-spacing="0.14em" fill="var(--c-red-700)">PILLAR 03</text>
+    <text x="36" y="244" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="var(--c-red-700)">Execute</text>
+    <text x="36" y="270" font-family="Inter,sans-serif" font-size="11" fill="var(--ink-2)"><tspan x="36" dy="0">Coordinated changesets,</tspan><tspan x="36" dy="14">parallel rollout</tspan></text>
+    <rect x="260" y="190" width="220" height="150" rx="8" fill="var(--c-red-50)" stroke="var(--c-red-500)" stroke-width="0.6"/>
+    <text x="276" y="216" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" letter-spacing="0.14em" fill="var(--c-red-700)">PILLAR 04</text>
+    <text x="276" y="244" font-family="Inter,sans-serif" font-size="14" font-weight="500" fill="var(--c-red-700)">Coordinate</text>
+    <text x="276" y="270" font-family="Inter,sans-serif" font-size="11" fill="var(--ink-2)"><tspan x="276" dy="0">Share change context</tspan><tspan x="276" dy="14">across agents and org</tspan></text>
+  </svg>`,
+  hero: {
+    eyebrow: { en:'03 · Semantic layer', 'pt-br':'03 · Camada semântica', es:'03 · Capa semántica' },
+    title: {
+      en: 'A vendor-neutral framework for deterministic semantic context.',
+      'pt-br': 'Um framework vendor-neutral para contexto semântico determinístico.',
+      es: 'Un framework vendor-neutral para contexto semántico determinístico.'
+    },
+    subtitle: {
+      en: 'AI coding agents in enterprise environments share a common failure pattern. They reconstruct context on every interaction, infer architecture from raw files, and generate code that violates conventions the codebase already encodes. SCL-AD turns that into a solved problem.',
+      'pt-br': 'Agentes de codificação IA em ambientes corporativos compartilham um padrão de falha comum. Reconstroem contexto a cada interação, inferem arquitetura de arquivos brutos, e geram código que viola convenções que a base já codifica. SCL-AD transforma isso em problema resolvido.',
+      es: 'Los agentes de codificación IA en ambientes corporativos comparten un patrón de falla común. Reconstruyen contexto en cada interacción, infieren arquitectura desde archivos crudos, y generan código que viola convenciones que la base ya codifica. SCL-AD convierte eso en un problema resuelto.'
+    }
+  },
+  stats: [
+    { num:'19%', label:{ en:'Slower with AI in mature repos (METR 2025)', 'pt-br':'Mais lento com IA em repos maduros (METR 2025)', es:'Más lento con IA en repos maduros (METR 2025)' } },
+    { num:'4', label:{ en:'Capability pillars (Precompute, Target, Execute, Coordinate)', 'pt-br':'Pilares (Precompute, Target, Execute, Coordinate)', es:'Pilares (Precompute, Target, Execute, Coordinate)' } },
+    { num:'8', label:{ en:'Recipe categories (Structural Inventory to Deployment Context)', 'pt-br':'Categorias de receita (Structural Inventory a Deployment Context)', es:'Categorías de receta (Structural Inventory a Deployment Context)' } },
+    { num:'11', label:{ en:'Documents in the framework', 'pt-br':'Documentos no framework', es:'Documentos en el framework' } }
+  ],
+  pillarsTitle: {
+    en: 'Four capability pillars: Precompute, Target, Execute, Coordinate.',
+    'pt-br': 'Quatro pilares de capacidade: Precompute, Target, Execute, Coordinate.',
+    es: 'Cuatro pilares de capacidad: Precompute, Target, Execute, Coordinate.'
+  },
+  pillarsLead: {
+    en: 'SCL-AD frames its operational capabilities along four verbs (originally from Moderne). The pillars are orthogonal to the four-layer architecture: the architecture describes structure, the pillars describe behavior. Adoption typically achieves Precompute first (Phase 1), Target during Phase 2, and Execute plus Coordinate during Phase 3.',
+    'pt-br': 'SCL-AD organiza suas capacidades operacionais ao longo de quatro verbos (originados na Moderne). Os pilares são ortogonais à arquitetura de quatro camadas: a arquitetura descreve estrutura, os pilares descrevem comportamento. A adoção tipicamente atinge Precompute primeiro (Fase 1), Target na Fase 2, e Execute mais Coordinate na Fase 3.',
+    es: 'SCL-AD organiza sus capacidades operativas a lo largo de cuatro verbos (originados en Moderne). Los pilares son ortogonales a la arquitectura de cuatro capas: la arquitectura describe estructura, los pilares describen comportamiento. La adopción típicamente alcanza Precompute primero (Fase 1), Target en la Fase 2, y Execute más Coordinate en la Fase 3.'
+  },
+  pillars: [
+    { num:'PILLAR 01', accent:'red',
+      title:{ en:'Precompute', 'pt-br':'Precompute', es:'Precompute' },
+      desc:{ en:'Reduce token waste by deriving structured system knowledge ahead of time, not on every agent interaction. Architecture, dependencies, conventions, and integration points resolved once, versioned, reused. Foundation that the rest depends on.',
+             'pt-br':'Reduz desperdício de token derivando conhecimento estruturado do sistema antecipadamente, não a cada interação. Arquitetura, dependências, convenções e pontos de integração resolvidos uma vez, versionados, reusados. Fundação da qual o resto depende.',
+             es:'Reduce desperdicio de token derivando conocimiento estructurado del sistema con antelación, no en cada interacción. Arquitectura, dependencias, convenciones y puntos de integración resueltos una vez, versionados, reusados. Fundación de la que depende el resto.' } },
+    { num:'PILLAR 02', accent:'red',
+      title:{ en:'Target', 'pt-br':'Target', es:'Target' },
+      desc:{ en:'Eliminate unnecessary scanning by enabling agents to find the right code fast. Pre-computed indexes and structured queries narrow work to the relevant repositories and symbols. Discovery is cheap, analysis is reserved for places that matter.',
+             'pt-br':'Elimina varredura desnecessária permitindo que agentes encontrem o código certo rápido. Índices pré-computados e queries estruturadas estreitam o trabalho aos repositórios e símbolos relevantes. Descoberta é barata, análise fica reservada para o que importa.',
+             es:'Elimina escaneo innecesario permitiendo que los agentes encuentren el código correcto rápido. Índices precomputados y queries estructuradas estrechan el trabajo a los repositorios y símbolos relevantes. Descubrimiento es barato, análisis queda reservado para lo que importa.' } },
+    { num:'PILLAR 03', accent:'red',
+      title:{ en:'Execute', 'pt-br':'Execute', es:'Execute' },
+      desc:{ en:'Apply changes deterministically across many repositories at once. Coordinated changesets, validation gates, parallel rollout turn agent suggestions into reliable, large-scale transformation. Without this pillar, agents stay in pilot mode forever.',
+             'pt-br':'Aplica mudanças deterministicamente em muitos repositórios ao mesmo tempo. Changesets coordenados, gates de validação, rollout paralelo transformam sugestões de agente em transformação confiável em larga escala. Sem este pilar, agentes ficam em piloto para sempre.',
+             es:'Aplica cambios deterministamente en muchos repositorios al mismo tiempo. Changesets coordinados, gates de validación, rollout paralelo convierten sugerencias del agente en transformación confiable a gran escala. Sin este pilar, los agentes se quedan en piloto para siempre.' } },
+    { num:'PILLAR 04', accent:'red',
+      title:{ en:'Coordinate', 'pt-br':'Coordinate', es:'Coordinate' },
+      desc:{ en:'Share change context across agents and across the organization. Each agent knows what others have proposed, what merged, what is in flight. Duplication, conflict, and wasted token spend drop as a function of organizational awareness.',
+             'pt-br':'Compartilha contexto de mudança entre agentes e pela organização. Cada agente sabe o que outros propuseram, o que mergeou, o que está em andamento. Duplicação, conflito e desperdício de token caem em função da consciência organizacional.',
+             es:'Comparte contexto de cambio entre agentes y por la organización. Cada agente sabe qué propusieron otros, qué fusionó, qué está en curso. Duplicación, conflicto y gasto desperdiciado de token caen en función de la conciencia organizacional.' } }
+  ],
+  formats: [
+    { kicker:'LANDING · YOU ARE HERE', accent:'red',
+      title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
+      desc:{ en:'10-second hook. The METR finding, the four pillars, the eight recipes, the formats available.', 'pt-br':'Hook de 10 segundos. O achado da METR, os quatro pilares, as oito receitas, os formatos.', es:'Hook de 10 segundos. El hallazgo de METR, los cuatro pilares, las ocho recetas, los formatos.' },
+      meta:{ en:'HTML · 5 min', 'pt-br':'HTML · 5 min', es:'HTML · 5 min' },
+      href:'#' },
+    { kicker:'DECK · v1.0.0', accent:'red',
+      title:{ en:'Semantic Context Layer deck', 'pt-br':'Deck Semantic Context Layer', es:'Deck Semantic Context Layer' },
+      desc:{ en:'Trilingual slide presentation. Includes the Gartner reprint excerpt and the eight context recipes deep dive.', 'pt-br':'Apresentação trilíngue. Inclui o excerpt da Gartner reprint e o deep dive nas oito receitas.', es:'Presentación trilingüe. Incluye el extracto del Gartner reprint y el deep dive en las ocho recetas.' },
+      meta:{ en:'HTML · 90 min', 'pt-br':'HTML · 90 min', es:'HTML · 90 min' },
+      href:'Semantic_Context_Layer_Deck_v1_0_0_2026-05-06_multi.html' },
+    { kicker:'PLAYBOOK · 11 DOCS', accent:'red',
+      title:{ en:'SCL-AD framework playbook', 'pt-br':'Playbook do framework SCL-AD', es:'Playbook del framework SCL-AD' },
+      desc:{ en:'Eleven-document framework: README, concept, architecture, code intelligence, recipes, registry, agent integration, governance, adoption roadmap, glossary, build vs buy.', 'pt-br':'Framework de onze documentos: README, conceito, arquitetura, code intelligence, receitas, registry, integração de agente, governança, roadmap de adoção, glossário, build vs buy.', es:'Framework de once documentos: README, concepto, arquitectura, code intelligence, recetas, registry, integración de agente, gobernanza, roadmap de adopción, glosario, build vs buy.' },
+      meta:{ en:'HTML · ~22K words', 'pt-br':'HTML · ~22K palavras', es:'HTML · ~22K palabras' },
+      href:'playbook.html' },
+    { kicker:'EXTERNAL REFERENCE', accent:'ink',
+      title:{ en:'Gartner reprint (PDF)', 'pt-br':'Gartner reprint (PDF)', es:'Gartner reprint (PDF)' },
+      desc:{ en:'External Gartner research kept alongside the framework for reference. Not part of the eleven-document SCL-AD playbook itself.', 'pt-br':'Pesquisa externa do Gartner mantida junto ao framework como referência. Não faz parte dos onze documentos do playbook SCL-AD.', es:'Investigación externa de Gartner mantenida junto al framework como referencia. No forma parte de los once documentos del playbook SCL-AD.' },
+      meta:{ en:'PDF · external reference', 'pt-br':'PDF · referência externa', es:'PDF · referencia externa' },
+      href:'Gartner%20Reprint.pdf' }
+  ],
+  crosslinks: [
+    { accent:'yellow', kicker:'Layer 03 model',
+      title:{ en:'Context Platform Stack', 'pt-br':'Context Platform Stack', es:'Context Platform Stack' },
+      hint:{ en:'The four-layer model where SCL-AD lives at layer 04 (intent + semantic).', 'pt-br':'O modelo de quatro camadas onde SCL-AD vive na camada 04 (intent + semantic).', es:'El modelo de cuatro capas donde SCL-AD vive en la capa 04 (intent + semantic).' },
+      href:'../context-engineering-platform/landing.html' },
+    { accent:'green', kicker:'Runtime',
+      title:{ en:'Agentic DevOps Platform', 'pt-br':'Plataforma Agentic DevOps', es:'Plataforma Agentic DevOps' },
+      hint:{ en:'The platform that hosts the SCL-AD registry and serves context to agents.', 'pt-br':'A plataforma que hospeda o registry SCL-AD e serve contexto a agentes.', es:'La plataforma que hospeda el registry SCL-AD y sirve contexto a agentes.' },
+      href:'../agentic-devops-platform/landing.html' },
+    { accent:'ink', kicker:'Cost discipline',
+      title:{ en:'Token Management', 'pt-br':'Gestão de Tokens', es:'Gestión de Tokens' },
+      hint:{ en:'How SCL-AD reduces token spend by serving pre-shaped context bundles.', 'pt-br':'Como SCL-AD reduz gasto de token servindo bundles pré-moldados.', es:'Cómo SCL-AD reduce el gasto de token sirviendo bundles pre-moldeados.' },
+      href:'../token-best-practices/landing.html' },
+    { accent:'blue', kicker:'Migration',
+      title:{ en:'Legacy Modernization', 'pt-br':'Modernização de Legado', es:'Modernización de Legado' },
+      hint:{ en:'Apply SCL-AD to give agents a deterministic view of legacy code.', 'pt-br':'Aplique SCL-AD para dar aos agentes visão determinística de código legado.', es:'Aplica SCL-AD para dar a los agentes una vista determinística de código legado.' },
+      href:'../legacy-modernization-framework/landing.html' }
+  ]
+};
+</script>
+<script src="../_shared/landing-template.js"></script>
+</body>
+</html>
