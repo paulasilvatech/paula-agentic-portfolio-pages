@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/playbook.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body class="acc-red">
 <noscript>
@@ -62,6 +63,40 @@
       <blockquote data-lang="es">Un estudio de 2025 de METR encontró que los devs experimentados tardaron un <strong>19% más</strong> en completar tareas con IA en repositorios grandes y maduros, con menos de la mitad de los outputs aceptados tal cual. La causa no fue la capacidad de razonamiento del modelo; fue la ausencia de contexto estructurado sobre cómo la base realmente funciona.</blockquote>
     </section>
 
+    <section id="stack-glance" class="stack-glance-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Four capability layers, stacked.</span><span data-lang="pt-br">Quatro camadas de capacidade, empilhadas.</span><span data-lang="es">Cuatro capas de capacidad, apiladas.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">SCL-AD stack at a glance</span><span data-lang="pt-br">Stack SCL-AD em uma vista</span><span data-lang="es">Stack SCL-AD en una vista</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Each layer compounds the one below it. Skip Precompute and the upper layers spend tokens rediscovering what was already known.</span><span data-lang="pt-br">Cada camada compõe sobre a de baixo. Pule o Precompute e as camadas superiores gastam tokens redescobrindo o que já era sabido.</span><span data-lang="es">Cada capa compone sobre la de abajo. Salta Precompute y las capas superiores gastan tokens redescubriendo lo ya conocido.</span>
+      </p>
+      <div class="stack-glance">
+        <div class="stack-glance__layer" data-layer="red">
+          <div class="stack-glance__num">IV · COORDINATE</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Org-wide change context</span><span data-lang="pt-br">Contexto de mudança org-wide</span><span data-lang="es">Contexto de cambio org-wide</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Agents share what others proposed, merged, or have in flight.</span><span data-lang="pt-br">Agentes compartilham o que outros propuseram, mergearam ou têm em andamento.</span><span data-lang="es">Los agentes comparten lo que otros propusieron, fusionaron o tienen en curso.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="yellow">
+          <div class="stack-glance__num">III · EXECUTE</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Multi-repo deterministic apply</span><span data-lang="pt-br">Apply determinístico multi-repo</span><span data-lang="es">Apply determinista multi-repo</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Coordinated changesets, validation gates, parallel rollout.</span><span data-lang="pt-br">Changesets coordenados, gates de validação, rollout paralelo.</span><span data-lang="es">Changesets coordinados, gates de validación, rollout paralelo.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="green">
+          <div class="stack-glance__num">II · TARGET</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Indexed code search and queries</span><span data-lang="pt-br">Busca indexada e queries</span><span data-lang="es">Búsqueda indexada y queries</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Pre-built indexes narrow work to the symbols that matter.</span><span data-lang="pt-br">Índices prontos estreitam o trabalho aos símbolos que importam.</span><span data-lang="es">Índices prefabricados estrechan el trabajo a los símbolos relevantes.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="blue">
+          <div class="stack-glance__num">I · PRECOMPUTE</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Versioned system knowledge</span><span data-lang="pt-br">Conhecimento de sistema versionado</span><span data-lang="es">Conocimiento de sistema versionado</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Architecture, deps, conventions resolved once, reused everywhere.</span><span data-lang="pt-br">Arquitetura, deps, convenções resolvidas uma vez, reusadas em tudo.</span><span data-lang="es">Arquitectura, deps, convenciones resueltas una vez, reusadas en todo.</span></p>
+        </div>
+      </div>
+    </section>
+
     <section id="audience">
       <h2>2. <span data-lang="en" class="lang-active">Who should read this</span><span data-lang="pt-br">Quem deve ler isto</span><span data-lang="es">Quién debe leer esto</span></h2>
       <ul>
@@ -94,6 +129,38 @@
           <tr><td><strong>04. Coordinate</strong></td><td>Share change context across agents and the organization. Drop duplication, conflict, wasted token spend.</td><td>Phase 3</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <section id="token-cards" class="token-cards-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Three context-engineering metrics, three sources.</span><span data-lang="pt-br">Três métricas de context engineering, três fontes.</span><span data-lang="es">Tres métricas de context engineering, tres fuentes.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Numbers worth defending</span><span data-lang="pt-br">Números que valem defender</span><span data-lang="es">Números que vale la pena defender</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Anchor every claim to a number that survives a CFO review. These three baselines come from METR field studies, the Moderne SCL playbook, and observed Open Horizons rollouts.</span><span data-lang="pt-br">Ancore toda alegação a um número que sobreviva à revisão do CFO. Estes três baselines vêm de estudos de campo da METR, do playbook SCL da Moderne, e de rollouts observados do Open Horizons.</span><span data-lang="es">Ancla cada afirmación a un número que sobreviva una revisión de CFO. Estos tres baselines vienen de estudios de campo de METR, del playbook SCL de Moderne, y de rollouts observados de Open Horizons.</span>
+      </p>
+      <div class="token-cards">
+        <article class="token-card" data-layer="green">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">TOKEN SAVINGS</span><span data-lang="pt-br">ECONOMIA DE TOKEN</span><span data-lang="es">AHORRO DE TOKEN</span></div>
+          <div class="token-card__num">40-70%</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">token reduction with Precompute and Target</span><span data-lang="pt-br">redução de token com Precompute e Target</span><span data-lang="es">reducción de token con Precompute y Target</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Reference token-cost reduction when teams ship Pillar 1 (Precompute) and Pillar 2 (Target) before scaling to multi-repo work. Lower bound matches teams with 50 to 100 services. Upper bound holds in monorepos with strong type information that the SCL can index once and reuse.</span><span data-lang="pt-br">Redução de referência em custo de token quando os times entregam Pilar 1 (Precompute) e Pilar 2 (Target) antes de escalar para multi-repo. Limite inferior bate com times de 50 a 100 serviços. Limite superior se sustenta em monorepos com tipagem forte que o SCL indexa uma vez e reutiliza.</span><span data-lang="es">Reducción de referencia en costo de token cuando los equipos entregan Pilar 1 (Precompute) y Pilar 2 (Target) antes de escalar a multi-repo. Límite inferior coincide con equipos de 50 a 100 servicios. Límite superior se sostiene en monorepos con tipado fuerte que el SCL indexa una vez y reutiliza.</span></p>
+        </article>
+        <article class="token-card" data-layer="blue">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">METR FINDING</span><span data-lang="pt-br">ACHADO METR</span><span data-lang="es">HALLAZGO METR</span></div>
+          <div class="token-card__num">-19%</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">productivity drop without context engineering</span><span data-lang="pt-br">queda de produtividade sem context engineering</span><span data-lang="es">caída de productividad sin context engineering</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">METR 2025 randomized study found that experienced developers using AI coding assistants without a structured context layer were 19 percent slower on real tasks, even though they self-reported being faster. The four-pillar discipline is the published countermeasure that closes the perception-reality gap.</span><span data-lang="pt-br">Estudo randomizado METR 2025 mostrou que devs experientes usando assistentes de IA sem camada estruturada de contexto ficaram 19% mais lentos em tarefas reais, mesmo se autorrelatando mais rápidos. A disciplina dos quatro pilares é a contramedida publicada que fecha o gap percepção-realidade.</span><span data-lang="es">Estudio aleatorizado METR 2025 mostró que devs experimentados usando asistentes de IA sin capa estructurada de contexto fueron 19% más lentos en tareas reales, aun cuando se reportaban más rápidos. La disciplina de los cuatro pilares es la contramedida publicada que cierra la brecha percepción-realidad.</span></p>
+        </article>
+        <article class="token-card" data-layer="yellow">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">MULTI-REPO REACH</span><span data-lang="pt-br">ALCANCE MULTI-REPO</span><span data-lang="es">ALCANCE MULTI-REPO</span></div>
+          <div class="token-card__num">100s</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">repos changed in one coordinated rollout</span><span data-lang="pt-br">repos alterados em um rollout coordenado</span><span data-lang="es">repos modificados en un rollout coordinado</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Reference scale at which Pillar 3 (Execute) and Pillar 4 (Coordinate) become mandatory. Below 50 repos, ad hoc tooling can fake it. From 100 repos and up, only deterministic execution plus org-wide change context keep agent rework time bounded. Most enterprises cross this threshold within two years of agent adoption.</span><span data-lang="pt-br">Escala de referência onde os Pilares 3 (Execute) e 4 (Coordinate) viram obrigatórios. Abaixo de 50 repos, tooling ad hoc disfarça. A partir de 100 repos, só execução determinística + contexto de mudança org-wide mantêm o retrabalho do agente sob controle. A maioria das empresas cruza esse limiar em até dois anos de adoção.</span><span data-lang="es">Escala de referencia donde los Pilares 3 (Execute) y 4 (Coordinate) se vuelven obligatorios. Por debajo de 50 repos, el tooling ad hoc lo disfraza. A partir de 100 repos, solo la ejecución determinista más el contexto de cambio org-wide mantienen acotado el retrabajo del agente. La mayoría de las empresas cruza ese umbral en dos años de adopción.</span></p>
+        </article>
+      </div>
     </section>
 
     <section id="recipes">
@@ -198,5 +265,6 @@ window.PLAYBOOK_DATA = {
 };
 </script>
 <script src="../_shared/playbook.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

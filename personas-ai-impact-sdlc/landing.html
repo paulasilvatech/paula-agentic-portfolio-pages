@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -110,6 +111,41 @@ window.PAGE_DATA = {
              'pt-br':'Cada arquivo de persona é renderizado, auditado e pontuado. O audit é o que torna o framework reproduzível entre times.',
              es:'Cada archivo de persona se renderiza, audita y puntúa. El audit es lo que hace que el framework sea reproducible entre equipos.' } }
   ],
+  stackGlance: {
+    label: { en:'Persona stack at a glance', 'pt-br':'Stack de personas em uma vista', es:'Stack de personas en una vista' },
+    title: { en:'Four maturity layers, stacked.', 'pt-br':'Quatro camadas de maturidade, empilhadas.', es:'Cuatro capas de madurez, apiladas.' },
+    lead: { en:'Each layer depends on the one below it. Skip the foundation and the wave does not move.', 'pt-br':'Cada camada depende da de baixo. Pule a base e a onda não avança.', es:'Cada capa depende de la de abajo. Salta la base y la ola no avanza.' },
+    layers: [
+      { layer:'red', num:'IV · METRICS',
+        name:{ en:'Outcome-driven metrics', 'pt-br':'Métricas guiadas por resultado', es:'Métricas guiadas por resultado' },
+        desc:{ en:'Cycle time, CFR, deploy freq, MTTR plus persona-specific outcomes.', 'pt-br':'Cycle time, CFR, freq de deploy, MTTR mais resultados por persona.', es:'Cycle time, CFR, frec de deploy, MTTR más resultados por persona.' } },
+      { layer:'yellow', num:'III · LEVELS',
+        name:{ en:'L0 to L4 personalization', 'pt-br':'Personalização L0 a L4', es:'Personalización L0 a L4' },
+        desc:{ en:'Default, settings, instructions, prompts and chat modes, custom agents.', 'pt-br':'Default, settings, instructions, prompts e chat modes, agentes custom.', es:'Default, settings, instructions, prompts y chat modes, agentes custom.' } },
+      { layer:'green', num:'II · WAVES',
+        name:{ en:'Assistant, collaborator, delegate, autonomous', 'pt-br':'Assistente, colaborador, delegado, autônomo', es:'Asistente, colaborador, delegado, autónomo' },
+        desc:{ en:'Four adoption waves, each one changes who is in the loop.', 'pt-br':'Quatro ondas, cada uma muda quem está no loop.', es:'Cuatro olas, cada una cambia quién está en el loop.' } },
+      { layer:'blue', num:'I · PERSONAS',
+        name:{ en:'24 SDLC personas', 'pt-br':'24 personas do SDLC', es:'24 personas del SDLC' },
+        desc:{ en:'Each one with a unit of work, a decision set, an AI impact profile.', 'pt-br':'Cada uma com unidade de trabalho, decisões e perfil de impacto IA.', es:'Cada una con unidad de trabajo, decisiones y perfil de impacto IA.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three impact metrics, three sources.', 'pt-br':'Três métricas de impacto, três fontes.', es:'Tres métricas de impacto, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a steering review. These three baselines are computed across the 24 personas using the published SDLC ODM model.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão de steering. Estes três baselines são calculados nas 24 personas com o modelo ODM publicado.', es:'Ancla cada afirmación a un número que sobreviva una revisión de steering. Estos tres baselines se calculan en las 24 personas con el modelo ODM publicado.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'PERSONAS COVERED', 'pt-br':'PERSONAS COBERTAS', es:'PERSONAS CUBIERTAS' },
+        num:'24', sub:{ en:'roles across product, design, dev, ops, security', 'pt-br':'papéis em produto, design, dev, ops, segurança', es:'roles en producto, diseño, dev, ops, seguridad' },
+        body:{ en:'Total persona count documented in the impact study. Each one has a primary unit of work, a decision set, an AI impact profile, and a custom-instructions starter file. The 24 was chosen as the smallest set that covers a full SDLC without merging accountabilities.', 'pt-br':'Total de personas documentadas no estudo de impacto. Cada uma com unidade primária de trabalho, conjunto de decisões, perfil de impacto IA e arquivo starter de custom instructions. As 24 foram escolhidas como o menor conjunto que cobre um SDLC completo sem fundir responsabilidades.', es:'Total de personas documentadas en el estudio de impacto. Cada una con unidad primaria de trabajo, conjunto de decisiones, perfil de impacto IA y archivo starter de custom instructions. Las 24 se eligieron como el menor conjunto que cubre un SDLC completo sin fusionar responsabilidades.' } },
+      { layer:'blue', eyebrow:{ en:'WAVE COVERAGE', 'pt-br':'COBERTURA DE ONDA', es:'COBERTURA DE OLA' },
+        num:'4 waves', sub:{ en:'assistant, collaborator, delegate, autonomous', 'pt-br':'assistente, colaborador, delegado, autônomo', es:'asistente, colaborador, delegado, autónomo' },
+        body:{ en:'The four-wave adoption model maps the human-in-the-loop trajectory. Most enterprise teams are at wave 1 or 2 in 2026. Wave 3 demands an eval harness and a reversal mechanism. Wave 4 demands a constitution. Persona-by-persona placement on this axis tells you what to invest in next.', 'pt-br':'O modelo de quatro ondas mapeia a trajetória de human-in-the-loop. A maioria dos times corporativos está nas ondas 1 ou 2 em 2026. Onda 3 exige eval harness e mecanismo de reversal. Onda 4 exige constituição. Posicionar persona por persona nesse eixo mostra onde investir.', es:'El modelo de cuatro olas mapea la trayectoria de human-in-the-loop. La mayoría de los equipos corporativos está en la ola 1 o 2 en 2026. La ola 3 exige eval harness y mecanismo de reversal. La ola 4 exige constitución. Posicionar persona por persona en ese eje indica dónde invertir.' } },
+      { layer:'yellow', eyebrow:{ en:'PERSONALIZATION LEVELS', 'pt-br':'NÍVEIS DE PERSONALIZAÇÃO', es:'NIVELES DE PERSONALIZACIÓN' },
+        num:'5 levels', sub:{ en:'L0 default to L4 custom agents and Spec-Kit', 'pt-br':'L0 default a L4 agentes custom e Spec-Kit', es:'L0 default a L4 agentes custom y Spec-Kit' },
+        body:{ en:'Five Copilot personalization levels match the persona maturity stages: L0 default, L1 settings, L2 instructions files, L3 custom prompts and chat modes, L4 custom agents and Spec-Kit. Most personas should ship at L2 within the first month and reach L3 by month three.', 'pt-br':'Cinco níveis de personalização do Copilot batem com os estágios de maturidade da persona: L0 default, L1 settings, L2 arquivos de instruções, L3 prompts customizados e chat modes, L4 agentes customizados e Spec-Kit. A maioria das personas deve entregar em L2 no primeiro mês e chegar a L3 no mês 3.', es:'Cinco niveles de personalización de Copilot coinciden con las etapas de madurez de la persona: L0 default, L1 settings, L2 archivos de instrucciones, L3 prompts custom y chat modes, L4 agentes custom y Spec-Kit. La mayoría de las personas debe entregar en L2 el primer mes y alcanzar L3 al mes 3.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'red',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -158,5 +194,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

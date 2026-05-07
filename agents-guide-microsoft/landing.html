@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -98,6 +99,41 @@ window.PAGE_DATA = {
       title:{ 'en': 'Architecture principles', 'pt-br': 'Princípios de arquitetura', 'es': 'Principios de arquitectura' },
       desc:{ 'en': 'Five rules for any Microsoft AI agent program.', 'pt-br': 'Cinco regras para qualquer programa Microsoft AI.', 'es': 'Cinco reglas para cualquier programa Microsoft AI.' } }
   ],
+  stackGlance: {
+    label: { en:'Decision stack at a glance', 'pt-br':'Stack de decisão em uma vista', es:'Stack de decisión en una vista' },
+    title: { en:'Four decision layers, stacked.', 'pt-br':'Quatro camadas de decisão, empilhadas.', es:'Cuatro capas de decisión, apiladas.' },
+    lead: { en:'Each layer constrains the one below it. Skip a layer and the agent reaches production unsupervised.', 'pt-br':'Cada camada restringe a de baixo. Pule uma camada e o agente vai para produção sem supervisão.', es:'Cada capa restringe a la de abajo. Salta una capa y el agente llega a producción sin supervisión.' },
+    layers: [
+      { layer:'red', num:'IV · HITL',
+        name:{ en:'Human-in-the-Loop quadrants', 'pt-br':'Quadrantes Human-in-the-Loop', es:'Cuadrantes Human-in-the-Loop' },
+        desc:{ en:'Reversibility times impact decide where humans review or own the call.', 'pt-br':'Reversibilidade x impacto decidem onde humanos revisam ou decidem.', es:'Reversibilidad x impacto deciden dónde humanos revisan o deciden.' } },
+      { layer:'yellow', num:'III · TYPE',
+        name:{ en:'Dev, productivity, business, data', 'pt-br':'Dev, produtividade, negócio, dados', es:'Dev, productividad, negocio, datos' },
+        desc:{ en:'Agent type matches task family and the persona that owns it.', 'pt-br':'Tipo de agente bate com a família de tarefa e a persona dona.', es:'Tipo de agente coincide con la familia de tarea y la persona dueña.' } },
+      { layer:'green', num:'II · PLATFORM',
+        name:{ en:'Studio, Copilot Agents, Foundry', 'pt-br':'Studio, Copilot Agents, Foundry', es:'Studio, Copilot Agents, Foundry' },
+        desc:{ en:'Three Microsoft platforms, three different governance models.', 'pt-br':'Três plataformas Microsoft, três modelos de governança.', es:'Tres plataformas Microsoft, tres modelos de gobernanza.' } },
+      { layer:'blue', num:'I · ANATOMY',
+        name:{ en:'Perceive, decide, act', 'pt-br':'Perceber, decidir, agir', es:'Percibir, decidir, actuar' },
+        desc:{ en:'The three faculties every enterprise agent must implement.', 'pt-br':'As três faculdades que todo agente corporativo precisa implementar.', es:'Las tres facultades que todo agente corporativo debe implementar.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three masterclass metrics, three sources.', 'pt-br':'Três métricas da masterclass, três fontes.', es:'Tres métricas de la masterclass, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a board review. These three baselines are referenced in the deck and the case studies.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão do board. Estes três baselines são referenciados no deck e nos cases.', es:'Ancla cada afirmación a un número que sobreviva una revisión de board. Estos tres baselines se referencian en el deck y los casos.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'PLATFORM CHOICE', 'pt-br':'ESCOLHA DE PLATAFORMA', es:'ELECCIÓN DE PLATAFORMA' },
+        num:'3 paths', sub:{ en:'Studio for citizens, Copilot for devs, Foundry for prod', 'pt-br':'Studio para citizens, Copilot para devs, Foundry para prod', es:'Studio para citizens, Copilot para devs, Foundry para prod' },
+        body:{ en:'Microsoft Learn defines the three production paths for enterprise agents. Pick by audience and governance need: Copilot Studio for low-code citizen developers, GitHub Copilot Agents for engineering teams, Azure AI Foundry for regulated production with content safety and AAD or RBAC.', 'pt-br':'Microsoft Learn define os três caminhos de produção para agentes corporativos. Escolha pela audiência e governança: Copilot Studio para citizen developers low-code, GitHub Copilot Agents para times de engenharia, Azure AI Foundry para produção regulada com content safety e AAD ou RBAC.', es:'Microsoft Learn define los tres caminos de producción para agentes corporativos. Elige por audiencia y gobernanza: Copilot Studio para citizen developers low-code, GitHub Copilot Agents para equipos de ingeniería, Azure AI Foundry para producción regulada con content safety y AAD o RBAC.' } },
+      { layer:'blue', eyebrow:{ en:'HITL QUADRANTS', 'pt-br':'QUADRANTES HITL', es:'CUADRANTES HITL' },
+        num:'4', sub:{ en:'reversibility times impact, four review modes', 'pt-br':'reversibilidade x impacto, quatro modos de revisão', es:'reversibilidad x impacto, cuatro modos de revisión' },
+        body:{ en:'Reversibility plus business impact yield four quadrants for human review: full autonomy, sample audit, every-action review, human owns. Most enterprise agents belong in quadrant 2 or 3, not quadrant 1. Quadrant 1 is the smallest band and demands the most rigorous evals.', 'pt-br':'Reversibilidade e impacto formam quatro quadrantes para revisão humana: autonomia total, auditoria por amostra, revisão por ação, humano decide. A maioria dos agentes corporativos cai no quadrante 2 ou 3, não no 1. O 1 é a banda mais estreita e exige os evals mais rigorosos.', es:'Reversibilidad e impacto forman cuatro cuadrantes para revisión humana: autonomía total, auditoría por muestra, revisión por acción, humano decide. La mayoría de los agentes corporativos cae en el cuadrante 2 o 3, no en el 1. El 1 es la banda más estrecha y exige los evals más rigurosos.' } },
+      { layer:'yellow', eyebrow:{ en:'CASE STUDY DEPTH', 'pt-br':'PROFUNDIDADE DE CASE', es:'PROFUNDIDAD DE CASO' },
+        num:'4 agents', sub:{ en:'vehicle leasing flow with NF-e compliance', 'pt-br':'fluxo de leasing com conformidade NF-e', es:'flujo de leasing con conformidad NF-e' },
+        body:{ en:'The end-to-end vehicle leasing case study chains four specialized agents (intake, document parsing, NF-e validation, contract assembly) under HITL gates. The pattern transfers to any document-heavy regulated workflow in finance, healthcare, retail, or manufacturing with minor changes.', 'pt-br':'O case fim-a-fim de leasing encadeia quatro agentes especializados (intake, parsing de documento, validação NF-e, montagem de contrato) sob gates HITL. O padrão transfere para qualquer workflow regulado e document-heavy em finance, healthcare, varejo ou manufatura com poucas mudanças.', es:'El caso end-to-end de leasing encadena cuatro agentes especializados (intake, parsing de documento, validación NF-e, ensamblaje de contrato) bajo gates HITL. El patrón se transfiere a cualquier workflow regulado y document-heavy en finance, healthcare, retail o manufactura con pocos cambios.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'ink',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -136,5 +172,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

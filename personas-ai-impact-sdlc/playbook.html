@@ -5,22 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="../_shared/favicon.svg">
 <title>Agentic DevOps SDLC, 24 Personas · Playbook · Paula Silva</title>
-<meta name="description" content="Playbook on the impact of AI agents across the SDLC, 24 personas, 4 adoption waves, 5 levels of Copilot personalization, ODM.">
+<meta name="description" content="Playbook on the impact of AI agents across the SDLC, 24 personas, four adoption waves, five levels of Copilot personalization, ODM and financial conversion.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Agentic DevOps SDLC, 24 Personas · Playbook · Paula Silva">
-<meta property="og:description" content="Playbook on 24 SDLC personas, 4 adoption waves, 5 levels of Copilot personalization, outcome-driven metrics.">
+<meta property="og:description" content="Playbook on 24 SDLC personas, four adoption waves, five levels of Copilot personalization, outcome-driven metrics.">
 <meta property="og:image" content="../_shared/paulasilva-logo.png">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="900">
 <meta property="og:image:alt" content="Paula Silva, Software Global Black Belt at Microsoft">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Agentic DevOps SDLC, 24 Personas · Playbook · Paula Silva">
-<meta name="twitter:description" content="Playbook on 24 SDLC personas, 4 adoption waves, 5 levels of Copilot personalization.">
+<meta name="twitter:description" content="Playbook on 24 SDLC personas, four adoption waves, five levels of Copilot personalization.">
 <meta name="twitter:image" content="../_shared/paulasilva-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/playbook.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body class="acc-red">
 <noscript>
@@ -31,9 +32,9 @@
 
 <section class="doc-hero">
   <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
-    <div class="doc-hero__eyebrow">Playbook · v2.0.0 · 2026-04-22</div>
+    <div class="doc-hero__eyebrow">Playbook · v1.1.0 · 2026-05-07</div>
     <h1 class="doc-hero__title"><span data-lang="en" class="lang-active">Agentic DevOps SDLC, 24 Personas.</span><span data-lang="pt-br">Agentic DevOps SDLC, 24 Personas.</span><span data-lang="es">Agentic DevOps SDLC, 24 Personas.</span></h1>
-    <p class="doc-hero__lead"><span data-lang="en" class="lang-active">A trilingual playbook mapping 24 personas across the software lifecycle, the four adoption waves, the five levels of GitHub Copilot personalization, and the outcome-driven metrics that prove the impact. Read in order, or jump by persona.</span><span data-lang="pt-br">Playbook trilíngue mapeando 24 personas no ciclo de vida do software, as quatro ondas de adoção, os cinco níveis de personalização do GitHub Copilot e as métricas guiadas por resultado que provam o impacto. Leia em ordem, ou pule por persona.</span><span data-lang="es">Playbook trilingüe que mapea 24 personas en el ciclo de vida del software, las cuatro olas de adopción, los cinco niveles de personalización del GitHub Copilot y las métricas guiadas por resultado que prueban el impacto. Lee en orden, o salta por persona.</span></p>
+    <p class="doc-hero__lead"><span data-lang="en" class="lang-active">A trilingual playbook mapping 24 personas across the software lifecycle, four adoption waves, the five-level GitHub Copilot personalization hierarchy, the outcome-driven metrics that prove impact, and the productivity-to-financial conversion model that turns time saved into cash. Built on Microsoft 365, Azure and the GitHub platform.</span><span data-lang="pt-br">Playbook trilíngue que mapeia 24 personas no ciclo de vida do software, quatro ondas de adoção, a hierarquia de cinco níveis de personalização do GitHub Copilot, as métricas guiadas por resultado e o modelo de conversão de produtividade em valor financeiro. Construído sobre Microsoft 365, Azure e a plataforma GitHub.</span><span data-lang="es">Playbook trilingüe que mapea 24 personas en el ciclo de vida del software, cuatro olas de adopción, la jerarquía de cinco niveles de personalización del GitHub Copilot, las métricas guiadas por resultado y el modelo de conversión de productividad en valor financiero. Construido sobre Microsoft 365, Azure y la plataforma GitHub.</span></p>
   </div>
 </section>
 
@@ -41,117 +42,347 @@
 
   <aside class="toc">
     <h4>On this page</h4>
-    <a href="#fact" class="active">1. The fact</a>
-    <a href="#thesis">2. The thesis</a>
-    <a href="#numbers">3. The numbers</a>
-    <a href="#parts">4. Five pillars</a>
-    <a href="#personas">5. 24 personas</a>
-    <a href="#waves">6. 4 waves</a>
-    <a href="#levels">7. 5 levels</a>
-    <a href="#odm">8. ODM</a>
+    <a href="#overview" class="active">1. Overview</a>
+    <a href="#thesis">2. Thesis</a>
+    <a href="#frameworks">3. Frameworks</a>
+    <a href="#personas-by-group">4. 24 personas, 4 clusters</a>
+    <a href="#waves">5. Four adoption waves</a>
+    <a href="#odm">6. ODM matrix</a>
+    <a href="#financial-conversion">7. Financial conversion</a>
+    <a href="#references">8. References</a>
     <a href="#deck">9. Deck</a>
   </aside>
 
   <article class="article">
 
-    <section id="fact">
-      <h2>1. <span data-lang="en" class="lang-active">The fact</span><span data-lang="pt-br">O fato</span><span data-lang="es">El hecho</span></h2>
-      <p data-lang="en" class="lang-active">AI agents do not change one role. They change <strong>24 roles</strong>, with different intensity at different times. The product manager, the staff engineer, the SRE, the data engineer, the support specialist, all have a different agentic horizon. Treating "AI for engineering" as a single roadmap is a category error.</p>
-      <p data-lang="pt-br">Agentes de IA não mudam um papel. Mudam <strong>24 papéis</strong>, com intensidade diferente em momentos diferentes. O product manager, o staff engineer, o SRE, o engenheiro de dados, o especialista de suporte, todos têm um horizonte agêntico diferente. Tratar "IA para engenharia" como um único roadmap é erro de categoria.</p>
-      <p data-lang="es">Los agentes de IA no cambian un rol. Cambian <strong>24 roles</strong>, con intensidad diferente en momentos diferentes. El product manager, el staff engineer, el SRE, el ingeniero de datos, el especialista de soporte, todos tienen un horizonte agéntico diferente. Tratar "IA para ingeniería" como un único roadmap es un error de categoría.</p>
+    <section id="overview">
+      <h2>1. <span data-lang="en" class="lang-active">Overview</span><span data-lang="pt-br">Visão geral</span><span data-lang="es">Visión general</span></h2>
+      <p data-lang="en" class="lang-active">AI agents do not change one role. They change <strong>24 roles</strong>, with different intensity at different times. Treating "AI for engineering" as a single roadmap is a category error. The Product Manager, the Staff Engineer, the SRE, the Data Engineer, the Compliance Officer, all face a different agentic horizon and need a different combination of Microsoft 365, Azure and GitHub services to land value.</p>
+      <p data-lang="pt-br">Agentes de IA não mudam um papel. Mudam <strong>24 papéis</strong>, com intensidades diferentes em momentos diferentes. Tratar "IA para engenharia" como um único roadmap é um erro de categoria. O Product Manager, o Staff Engineer, o SRE, o Engenheiro de Dados, o Compliance Officer, todos enfrentam um horizonte agêntico diferente e precisam de uma combinação distinta de Microsoft 365, Azure e GitHub para entregar valor.</p>
+      <p data-lang="es">Los agentes de IA no cambian un rol. Cambian <strong>24 roles</strong>, con intensidades distintas en momentos diferentes. Tratar "IA para ingeniería" como un único roadmap es un error de categoría. El Product Manager, el Staff Engineer, el SRE, el Ingeniero de Datos, el Compliance Officer, todos enfrentan un horizonte agéntico distinto y requieren una combinación específica de Microsoft 365, Azure y GitHub para aterrizar valor.</p>
+      <p data-lang="en" class="lang-active">This playbook condenses two source documents totaling 264 KB into a working reference. Read it cover to cover for the system, or jump to the cluster that matches your role. The companion deck walks the same content visually. The companion calculator quantifies the financial conversion for any persona mix.</p>
+      <p data-lang="pt-br">Este playbook condensa dois documentos fonte que somam 264 KB em uma referência de trabalho. Leia de ponta a ponta para entender o sistema, ou pule para o cluster que corresponde ao seu papel. O deck complementar percorre o mesmo conteúdo visualmente. A calculadora complementar quantifica a conversão financeira para qualquer combinação de personas.</p>
+      <p data-lang="es">Este playbook condensa dos documentos fuente que suman 264 KB en una referencia de trabajo. Léelo de principio a fin para entender el sistema, o salta al cluster que corresponda a tu rol. El deck complementario recorre el mismo contenido visualmente. La calculadora complementaria cuantifica la conversión financiera para cualquier combinación de personas.</p>
+      <ul>
+        <li><strong><span data-lang="en" class="lang-active">For whom.</span><span data-lang="pt-br">Para quem.</span><span data-lang="es">Para quién.</span></strong> <span data-lang="en" class="lang-active">CIO, VP Engineering, CFO partner, Engineering Managers, Platform Engineering leads, persona owners, Copilot champions.</span><span data-lang="pt-br">CIO, VP de Engenharia, parceiro de CFO, Engineering Managers, líderes de Platform Engineering, donos de persona, champions de Copilot.</span><span data-lang="es">CIO, VP de Ingeniería, socio del CFO, Engineering Managers, líderes de Platform Engineering, dueños de persona, champions de Copilot.</span></li>
+        <li><strong><span data-lang="en" class="lang-active">Reading time.</span><span data-lang="pt-br">Tempo de leitura.</span><span data-lang="es">Tiempo de lectura.</span></strong> <span data-lang="en" class="lang-active">35 to 50 minutes for the full pass, 10 minutes for the cluster you own.</span><span data-lang="pt-br">35 a 50 minutos na passada completa, 10 minutos para o cluster que você lidera.</span><span data-lang="es">35 a 50 minutos en la pasada completa, 10 minutos para el cluster que lideras.</span></li>
+        <li><strong><span data-lang="en" class="lang-active">Outcome.</span><span data-lang="pt-br">Resultado.</span><span data-lang="es">Resultado.</span></strong> <span data-lang="en" class="lang-active">A defensible 12-month wave plan with named ODMs, executive sponsors, and the conversion mechanic that turns hours saved into dollars.</span><span data-lang="pt-br">Um plano de 12 meses defensável, com ODMs nomeadas, patrocinadores executivos e o mecanismo que transforma horas economizadas em dólares.</span><span data-lang="es">Un plan de 12 meses defendible, con ODMs nombradas, patrocinadores ejecutivos y el mecanismo que convierte horas ahorradas en dólares.</span></li>
+      </ul>
     </section>
 
     <section id="thesis">
-      <h2>2. <span data-lang="en" class="lang-active">The thesis</span><span data-lang="pt-br">A tese</span><span data-lang="es">La tesis</span></h2>
-      <blockquote data-lang="en" class="lang-active">A persona is a unit of work, a set of decisions, and a measurable outcome. Mapping AI impact persona by persona, across four adoption waves and five levels of personalization, is what turns "AI strategy" into something a 5,000-person engineering org can actually execute.</blockquote>
-      <blockquote data-lang="pt-br">Uma persona é uma unidade de trabalho, um conjunto de decisões e um resultado mensurável. Mapear impacto de IA persona por persona, em quatro ondas de adoção e cinco níveis de personalização, é o que transforma "estratégia de IA" em algo que uma org de 5.000 engenheiros consegue executar.</blockquote>
-      <blockquote data-lang="es">Una persona es una unidad de trabajo, un conjunto de decisiones y un resultado medible. Mapear el impacto de IA persona por persona, en cuatro olas de adopción y cinco niveles de personalización, es lo que convierte "estrategia de IA" en algo que una organización de 5,000 ingenieros puede ejecutar.</blockquote>
+      <h2>2. <span data-lang="en" class="lang-active">Thesis: time saved is not money saved</span><span data-lang="pt-br">Tese: tempo economizado não é dinheiro economizado</span><span data-lang="es">Tesis: tiempo ahorrado no es dinero ahorrado</span></h2>
+      <blockquote data-lang="en" class="lang-active">Productivity gains alone do not pay for AI. Every persona must declare a Conversion Action that turns recovered hours into one of three Gartner-validated buckets: cost reduction, revenue growth, or improved employee experience. Without that step, time leaks back into rework, validation overhead and meetings, and the CFO is right to disbelieve the business case.</blockquote>
+      <blockquote data-lang="pt-br">Ganhos de produtividade sozinhos não pagam pela IA. Toda persona precisa declarar uma Ação de Conversão que transforme horas recuperadas em um de três baldes validados pelo Gartner: redução de custo, crescimento de receita ou melhoria da experiência do colaborador. Sem essa etapa, o tempo vaza de volta para retrabalho, sobrecarga de validação e reuniões, e o CFO está certo em duvidar do business case.</blockquote>
+      <blockquote data-lang="es">Las ganancias de productividad por sí solas no pagan por la IA. Cada persona debe declarar una Acción de Conversión que transforme las horas recuperadas en uno de tres cubos validados por Gartner: reducción de costo, crecimiento de ingreso o mejora de la experiencia del colaborador. Sin ese paso, el tiempo se fuga a retrabajo, sobrecarga de validación y reuniones, y el CFO tiene razón en dudar del caso de negocio.</blockquote>
+      <p data-lang="en" class="lang-active">The deeper claim of this playbook is structural. A persona is a unit of work, a set of decisions, and a measurable outcome. Mapping AI impact persona by persona, across four adoption waves and the five levels of personalization, is what turns "AI strategy" into something a 5,000-person engineering organization can actually execute. The 24 personas come from a real enterprise SDLC, including legacy roles like COBOL and Natural/ADABAS that the generic playbooks always skip.</p>
+      <p data-lang="pt-br">A tese mais profunda deste playbook é estrutural. Uma persona é uma unidade de trabalho, um conjunto de decisões e um resultado mensurável. Mapear impacto de IA persona por persona, em quatro ondas de adoção e cinco níveis de personalização, é o que transforma "estratégia de IA" em algo que uma org de 5.000 engenheiros consegue executar. As 24 personas vêm de um SDLC corporativo real, incluindo papéis legados como COBOL e Natural/ADABAS que os playbooks genéricos costumam ignorar.</p>
+      <p data-lang="es">La tesis más profunda de este playbook es estructural. Una persona es una unidad de trabajo, un conjunto de decisiones y un resultado medible. Mapear el impacto de IA persona por persona, en cuatro olas de adopción y cinco niveles de personalización, es lo que convierte la "estrategia de IA" en algo que una organización de 5,000 ingenieros puede ejecutar. Las 24 personas vienen de un SDLC empresarial real, incluyendo roles legados como COBOL y Natural/ADABAS que los playbooks genéricos suelen omitir.</p>
     </section>
 
-    <section id="numbers">
-      <h2>3. <span data-lang="en" class="lang-active">The numbers that justify the framework</span><span data-lang="pt-br">Os números que justificam o framework</span><span data-lang="es">Los números que justifican el marco</span></h2>
-      <ul>
-        <li><strong>24</strong> personas covered, from product to support.</li>
-        <li><strong>4</strong> adoption waves: assistant, collaborator, delegate, autonomous.</li>
-        <li><strong>5</strong> levels of GitHub Copilot personalization (L0 to L4).</li>
-        <li><strong>1</strong> outcome-driven metrics framework, persona-aware.</li>
-        <li><strong>2</strong> source documents totaling <strong>264 KB</strong> of analysis and audit.</li>
-      </ul>
+    <section id="stack-glance" class="stack-glance-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Four maturity layers, stacked.</span><span data-lang="pt-br">Quatro camadas de maturidade, empilhadas.</span><span data-lang="es">Cuatro capas de madurez, apiladas.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Persona stack at a glance</span><span data-lang="pt-br">Stack de personas em uma vista</span><span data-lang="es">Stack de personas en una vista</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Each layer depends on the one below it. Skip the foundation and the wave does not move.</span><span data-lang="pt-br">Cada camada depende da de baixo. Pule a base e a onda não avança.</span><span data-lang="es">Cada capa depende de la de abajo. Salta la base y la ola no avanza.</span>
+      </p>
+      <div class="stack-glance">
+        <div class="stack-glance__layer" data-layer="red">
+          <div class="stack-glance__num">IV · METRICS</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Outcome-driven metrics</span><span data-lang="pt-br">Métricas guiadas por resultado</span><span data-lang="es">Métricas guiadas por resultado</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Cycle time, CFR, deploy freq, MTTR plus persona-specific outcomes.</span><span data-lang="pt-br">Cycle time, CFR, freq de deploy, MTTR mais resultados por persona.</span><span data-lang="es">Cycle time, CFR, frec de deploy, MTTR más resultados por persona.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="yellow">
+          <div class="stack-glance__num">III · LEVELS</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">L0 to L4 personalization</span><span data-lang="pt-br">Personalização L0 a L4</span><span data-lang="es">Personalización L0 a L4</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Default, settings, instructions, prompts and chat modes, custom agents.</span><span data-lang="pt-br">Default, settings, instructions, prompts e chat modes, agentes custom.</span><span data-lang="es">Default, settings, instructions, prompts y chat modes, agentes custom.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="green">
+          <div class="stack-glance__num">II · WAVES</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Assistant, collaborator, delegate, autonomous</span><span data-lang="pt-br">Assistente, colaborador, delegado, autônomo</span><span data-lang="es">Asistente, colaborador, delegado, autónomo</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Four adoption waves, each one changes who is in the loop.</span><span data-lang="pt-br">Quatro ondas, cada uma muda quem está no loop.</span><span data-lang="es">Cuatro olas, cada una cambia quién está en el loop.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="blue">
+          <div class="stack-glance__num">I · PERSONAS</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">24 SDLC personas</span><span data-lang="pt-br">24 personas do SDLC</span><span data-lang="es">24 personas del SDLC</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Each one with a unit of work, a decision set, an AI impact profile.</span><span data-lang="pt-br">Cada uma com unidade de trabalho, decisões e perfil de impacto IA.</span><span data-lang="es">Cada una con unidad de trabajo, decisiones y perfil de impacto IA.</span></p>
+        </div>
+      </div>
     </section>
 
-    <section id="parts">
-      <h2>4. <span data-lang="en" class="lang-active">Five pillars of this playbook</span><span data-lang="pt-br">Cinco pilares deste playbook</span><span data-lang="es">Cinco pilares de este playbook</span></h2>
+    <section id="frameworks">
+      <h2>3. <span data-lang="en" class="lang-active">Three frameworks that hold the program together</span><span data-lang="pt-br">Três frameworks que sustentam o programa</span><span data-lang="es">Tres marcos que sostienen el programa</span></h2>
+      <p data-lang="en" class="lang-active">Every persona section in Part C of the audit document references the same three structures: the four-wave adoption model, the five-level Copilot personalization hierarchy, and the Outcome-Driven Metrics matrix. They are visualized below.</p>
+      <p data-lang="pt-br">Toda persona da Parte C do documento de auditoria referencia as mesmas três estruturas: o modelo de adoção em quatro ondas, a hierarquia de cinco níveis de personalização do Copilot e a matriz de Métricas Guiadas por Resultado. Elas estão visualizadas abaixo.</p>
+      <p data-lang="es">Cada persona de la Parte C del documento de auditoría referencia las mismas tres estructuras: el modelo de adopción de cuatro olas, la jerarquía de cinco niveles de personalización del Copilot y la matriz de Métricas Guiadas por Resultado. Están visualizadas abajo.</p>
+
+      <h3 data-lang="en" class="lang-active">3.1 Four-wave adoption timeline (12 months)</h3>
+      <h3 data-lang="pt-br">3.1 Linha do tempo de quatro ondas (12 meses)</h3>
+      <h3 data-lang="es">3.1 Línea de tiempo de cuatro olas (12 meses)</h3>
+      <svg viewBox="0 0 960 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four wave adoption timeline" style="width:100%;height:auto;max-width:960px;display:block;margin:16px 0;">
+        <rect x="0" y="0" width="960" height="280" fill="#FFFFFF"/>
+        <line x1="40" y1="240" x2="920" y2="240" stroke="#3A3A3A" stroke-width="1.5"/>
+        <text x="40" y="260" font-family="JetBrains Mono, monospace" font-size="11" fill="#3A3A3A">M1</text>
+        <text x="260" y="260" font-family="JetBrains Mono, monospace" font-size="11" fill="#3A3A3A">M3</text>
+        <text x="480" y="260" font-family="JetBrains Mono, monospace" font-size="11" fill="#3A3A3A">M6</text>
+        <text x="700" y="260" font-family="JetBrains Mono, monospace" font-size="11" fill="#3A3A3A">M9</text>
+        <text x="900" y="260" font-family="JetBrains Mono, monospace" font-size="11" fill="#3A3A3A">M12</text>
+
+        <rect x="40" y="60" width="220" height="44" fill="#F25022" rx="3"/>
+        <text x="56" y="85" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">Wave 1, immediate gain</text>
+        <text x="56" y="100" font-family="Inter, sans-serif" font-size="11" fill="#FFFFFF">7 personas, cost reduction</text>
+
+        <rect x="260" y="110" width="220" height="44" fill="#7FBA00" rx="3"/>
+        <text x="276" y="135" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">Wave 2, expansion</text>
+        <text x="276" y="150" font-family="Inter, sans-serif" font-size="11" fill="#FFFFFF">8 personas, supplier optimization</text>
+
+        <rect x="480" y="160" width="220" height="44" fill="#FFB900" rx="3"/>
+        <text x="496" y="185" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#3A3A3A">Wave 3, specialization</text>
+        <text x="496" y="200" font-family="Inter, sans-serif" font-size="11" fill="#3A3A3A">8 personas, revenue growth</text>
+
+        <rect x="700" y="210" width="220" height="22" fill="#00A4EF" rx="3"/>
+        <text x="716" y="226" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Wave 4, maturity (eNPS)</text>
+
+        <text x="40" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#3A3A3A">Adoption is sequenced, not simultaneous</text>
+        <text x="40" y="48" font-family="Inter, sans-serif" font-size="11" fill="#737373">Each wave has a primary ROI bucket and a named executive sponsor.</text>
+      </svg>
+
+      <h3 data-lang="en" class="lang-active">3.2 Five-level Copilot personalization hierarchy</h3>
+      <h3 data-lang="pt-br">3.2 Hierarquia de cinco níveis de personalização do Copilot</h3>
+      <h3 data-lang="es">3.2 Jerarquía de cinco niveles de personalización del Copilot</h3>
+      <p data-lang="en" class="lang-active">Generic Copilot is L1. Custom agents declared in <code>.agent.md</code> are L4. Most enterprise teams stall at L1 and L2 and then conclude that "Copilot does not understand our codebase." The diagnosis is wrong. The team simply has not climbed the hierarchy. Each level compounds with the previous.</p>
+      <p data-lang="pt-br">O Copilot genérico é L1. Agentes customizados em <code>.agent.md</code> são L4. A maior parte dos times empresariais estaciona em L1 e L2 e depois conclui que "o Copilot não entende nosso código". O diagnóstico está errado. O time apenas não subiu a hierarquia. Cada nível compõe sobre o anterior.</p>
+      <p data-lang="es">El Copilot genérico es L1. Los agentes personalizados en <code>.agent.md</code> son L4. La mayoría de los equipos empresariales se estanca en L1 y L2 y luego concluyen que "Copilot no entiende nuestro código". El diagnóstico es incorrecto. El equipo simplemente no ha subido la jerarquía. Cada nivel se compone sobre el anterior.</p>
+      <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five level Copilot personalization pyramid" style="width:100%;height:auto;max-width:720px;display:block;margin:16px 0;">
+        <rect x="0" y="0" width="720" height="360" fill="#FFFFFF"/>
+        <text x="20" y="24" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#3A3A3A">Five levels, base to specialized</text>
+        <text x="20" y="42" font-family="Inter, sans-serif" font-size="11" fill="#737373">First-value at L1+L2, steady-state at L3+L4+L5.</text>
+
+        <rect x="60" y="60" width="600" height="46" fill="#00A4EF" rx="3"/>
+        <text x="80" y="88" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">L1, base Copilot, no customization</text>
+
+        <rect x="120" y="120" width="480" height="46" fill="#7FBA00" rx="3"/>
+        <text x="140" y="148" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">L2, copilot-instructions.md, repo-wide grounding</text>
+
+        <rect x="180" y="180" width="360" height="46" fill="#FFB900" rx="3"/>
+        <text x="200" y="208" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#3A3A3A">L3, .instructions.md with applyTo globs</text>
+
+        <rect x="240" y="240" width="240" height="46" fill="#F25022" rx="3"/>
+        <text x="260" y="268" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">L4, .agent.md custom agents</text>
+
+        <rect x="290" y="300" width="140" height="40" fill="#3A3A3A" rx="3"/>
+        <text x="306" y="326" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">L5, SKILL.md</text>
+      </svg>
+
+      <h3 data-lang="en" class="lang-active">3.3 Outcome-Driven Metrics matrix</h3>
+      <h3 data-lang="pt-br">3.3 Matriz de Métricas Guiadas por Resultado</h3>
+      <h3 data-lang="es">3.3 Matriz de Métricas Guiadas por Resultado</h3>
+      <p data-lang="en" class="lang-active">Per Gartner G00799085 and G00841077, an Outcome-Driven Metric has direct line of sight to a business outcome. Below are the five most-used ODMs across the 24 personas, paired with the team that owns the lever and the CFO-tracked outcome.</p>
+      <p data-lang="pt-br">Conforme Gartner G00799085 e G00841077, uma Métrica Guiada por Resultado tem visão direta para um resultado de negócio. Abaixo, as cinco ODMs mais usadas pelas 24 personas, com o time dono da alavanca e o resultado acompanhado pelo CFO.</p>
+      <p data-lang="es">Según Gartner G00799085 y G00841077, una Métrica Guiada por Resultado tiene línea directa de vista a un resultado de negocio. A continuación, las cinco ODMs más usadas en las 24 personas, con el equipo dueño de la palanca y el resultado seguido por el CFO.</p>
       <table>
-        <thead><tr><th>Pillar</th><th>Focus</th><th>For whom</th></tr></thead>
+        <thead><tr><th><span data-lang="en" class="lang-active">ODM</span><span data-lang="pt-br">ODM</span><span data-lang="es">ODM</span></th><th><span data-lang="en" class="lang-active">Team that owns the lever</span><span data-lang="pt-br">Time dono da alavanca</span><span data-lang="es">Equipo dueño de la palanca</span></th><th><span data-lang="en" class="lang-active">CFO-tracked outcome</span><span data-lang="pt-br">Resultado acompanhado pelo CFO</span><span data-lang="es">Resultado seguido por el CFO</span></th></tr></thead>
         <tbody>
-          <tr><td><strong>I. 24 Personas</strong></td><td>Unit of work, decisions, AI impact</td><td>Everyone</td></tr>
-          <tr><td><strong>II. 4 Waves</strong></td><td>Assistant, collaborator, delegate, autonomous</td><td>Leadership, persona owners</td></tr>
-          <tr><td><strong>III. 5 Levels</strong></td><td>L0 default to L4 custom agents</td><td>Platform, Copilot champions</td></tr>
-          <tr><td><strong>IV. ODM</strong></td><td>Outcome-driven metrics by persona</td><td>FinOps, EM, VPE</td></tr>
-          <tr><td><strong>V. HTML audit</strong></td><td>Reproducible persona evidence</td><td>Practitioners</td></tr>
+          <tr><td><strong>Time-to-market</strong></td><td>Product, Tech Lead, Release Manager</td><td><span data-lang="en" class="lang-active">Revenue growth</span><span data-lang="pt-br">Crescimento de receita</span><span data-lang="es">Crecimiento de ingreso</span></td></tr>
+          <tr><td><strong>Cycle time</strong></td><td>Developer, QA, DevOps</td><td><span data-lang="en" class="lang-active">Cost reduction, throughput</span><span data-lang="pt-br">Redução de custo, throughput</span><span data-lang="es">Reducción de costo, throughput</span></td></tr>
+          <tr><td><strong>Defect escape rate</strong></td><td>QA, AppSec, SRE</td><td><span data-lang="en" class="lang-active">Penalty avoidance, NPS</span><span data-lang="pt-br">Evitar multa, NPS</span><span data-lang="es">Evitar multa, NPS</span></td></tr>
+          <tr><td><strong>Customer NPS</strong></td><td>Product, UX, Support</td><td><span data-lang="en" class="lang-active">Retention, ACV growth</span><span data-lang="pt-br">Retenção, crescimento de ACV</span><span data-lang="es">Retención, crecimiento de ACV</span></td></tr>
+          <tr><td><strong>Revenue per engineer</strong></td><td>Engineering Manager, CFO partner</td><td><span data-lang="en" class="lang-active">Headcount efficiency</span><span data-lang="pt-br">Eficiência de headcount</span><span data-lang="es">Eficiencia de headcount</span></td></tr>
         </tbody>
       </table>
     </section>
 
-    <section id="personas">
-      <h2>5. <span data-lang="en" class="lang-active">The 24 personas</span><span data-lang="pt-br">As 24 personas</span><span data-lang="es">Las 24 personas</span></h2>
-      <p data-lang="en" class="lang-active">Grouped into ten SDLC bands. The full mapping lives in the source markdown.</p>
-      <p data-lang="pt-br">Agrupadas em dez faixas do SDLC. O mapeamento completo está no markdown de origem.</p>
-      <p data-lang="es">Agrupadas en diez bandas del SDLC. El mapeo completo está en el markdown de origen.</p>
-      <ul>
-        <li><strong>Product:</strong> Product Manager, Product Owner.</li>
-        <li><strong>Design:</strong> UX Designer, UX Researcher.</li>
-        <li><strong>Architecture:</strong> Solutions Architect, Staff/Principal Engineer.</li>
-        <li><strong>Development:</strong> Frontend Developer, Backend Developer, Mobile Developer, Full-stack Developer.</li>
-        <li><strong>Quality:</strong> QA Engineer, SDET.</li>
-        <li><strong>Security:</strong> AppSec Engineer, Security Architect.</li>
-        <li><strong>Platform:</strong> Platform Engineer, DevOps Engineer.</li>
-        <li><strong>Data:</strong> Data Engineer, ML Engineer, Data Scientist.</li>
-        <li><strong>Operations:</strong> SRE, Incident Commander.</li>
-        <li><strong>Support:</strong> Tech Support, DevRel, Engineering Manager.</li>
-      </ul>
+    <section id="personas-by-group">
+      <h2>4. <span data-lang="en" class="lang-active">24 personas in four clusters</span><span data-lang="pt-br">24 personas em quatro clusters</span><span data-lang="es">24 personas en cuatro clusters</span></h2>
+      <p data-lang="en" class="lang-active">The full 24 personas are organized in four clusters that follow the lifecycle: discover what to build, build it well, run it reliably, and govern the program. Each cluster shares a dominant AI impact pattern, a common risk, and a primary tooling stack. Persona-specific detail (M365 stack, Azure stack, GitHub stack, custom agents, ROI mapping, conversion action, predictive measure, governance posture, before-after table) lives in Part C of the audit document.</p>
+      <p data-lang="pt-br">As 24 personas estão organizadas em quatro clusters que seguem o ciclo de vida: descobrir o que construir, construir bem, operar com confiabilidade e governar o programa. Cada cluster compartilha um padrão dominante de impacto de IA, um risco comum e uma stack primária. Detalhe por persona (stacks M365, Azure, GitHub, agentes customizados, mapeamento de ROI, ação de conversão, medida preditiva, postura de governança, tabela antes-depois) vive na Parte C do documento de auditoria.</p>
+      <p data-lang="es">Las 24 personas están organizadas en cuatro clusters que siguen el ciclo de vida: descubrir qué construir, construir bien, operar con confiabilidad y gobernar el programa. Cada cluster comparte un patrón dominante de impacto de IA, un riesgo común y una stack primaria. El detalle por persona (stacks M365, Azure, GitHub, agentes personalizados, mapeo de ROI, acción de conversión, medida predictiva, postura de gobernanza, tabla antes-después) vive en la Parte C del documento de auditoría.</p>
+
+      <h3 data-lang="en" class="lang-active">4.1 Strategy and discovery</h3>
+      <h3 data-lang="pt-br">4.1 Estratégia e descoberta</h3>
+      <h3 data-lang="es">4.1 Estrategia y descubrimiento</h3>
+      <p data-lang="en" class="lang-active"><strong>Personas.</strong> Business Manager, Project Manager, Product Owner, Requirements Engineer, Enterprise/Solution Architect, Tech Lead, Scrum Master, UAT Analyst.</p>
+      <p data-lang="pt-br"><strong>Personas.</strong> Business Manager, Project Manager, Product Owner, Requirements Engineer, Enterprise/Solution Architect, Tech Lead, Scrum Master, UAT Analyst.</p>
+      <p data-lang="es"><strong>Personas.</strong> Business Manager, Project Manager, Product Owner, Requirements Engineer, Enterprise/Solution Architect, Tech Lead, Scrum Master, UAT Analyst.</p>
+      <p data-lang="en" class="lang-active"><strong>AI impact pattern.</strong> Compress meeting and synthesis overhead. Replace 30 to 40 minute manual minutes with 3 to 5 minute Copilot-generated minutes. Replace 4 to 5 hour weekly status compilation with 30 to 60 minute agent-assisted reports. The strategic gain is to redirect recovered time to scope analysis, dependency negotiation and stakeholder discovery.</p>
+      <p data-lang="pt-br"><strong>Padrão de impacto.</strong> Comprimir overhead de reuniões e síntese. Trocar atas manuais de 30 a 40 minutos por atas geradas pelo Copilot em 3 a 5 minutos. Trocar compilação semanal de status de 4 a 5 horas por relatórios assistidos por agente em 30 a 60 minutos. O ganho estratégico é redirecionar tempo recuperado para análise de escopo, negociação de dependência e descoberta com stakeholders.</p>
+      <p data-lang="es"><strong>Patrón de impacto.</strong> Comprimir el overhead de reuniones y síntesis. Sustituir actas manuales de 30 a 40 minutos por actas generadas por Copilot en 3 a 5 minutos. Sustituir la compilación semanal de status de 4 a 5 horas por reportes asistidos por agente en 30 a 60 minutos. La ganancia estratégica es redirigir el tiempo recuperado a análisis de alcance, negociación de dependencias y descubrimiento con stakeholders.</p>
+      <p data-lang="en" class="lang-active"><strong>Key risks.</strong> Capacity reallocation must be enforced in the operating cadence, otherwise time leaks back to status meetings. <strong>Primary tooling.</strong> Microsoft 365 Copilot, Microsoft Loop, Copilot Studio, GitHub Projects with Ask mode, Azure DevOps Boards, Power BI.</p>
+      <p data-lang="pt-br"><strong>Riscos.</strong> A realocação de capacidade precisa ser imposta no cadência operacional, senão o tempo vaza de volta para reuniões. <strong>Tooling principal.</strong> Microsoft 365 Copilot, Microsoft Loop, Copilot Studio, GitHub Projects com Ask mode, Azure DevOps Boards, Power BI.</p>
+      <p data-lang="es"><strong>Riesgos.</strong> La reasignación de capacidad debe imponerse en la cadencia operacional, si no el tiempo se fuga de regreso a reuniones. <strong>Tooling principal.</strong> Microsoft 365 Copilot, Microsoft Loop, Copilot Studio, GitHub Projects con Ask mode, Azure DevOps Boards, Power BI.</p>
+
+      <h3 data-lang="en" class="lang-active">4.2 Build and quality</h3>
+      <h3 data-lang="pt-br">4.2 Construção e qualidade</h3>
+      <h3 data-lang="es">4.2 Construcción y calidad</h3>
+      <p data-lang="en" class="lang-active"><strong>Personas.</strong> Modern Software Developer, QA Engineer, Legacy Developer, COBOL Developer, Natural/ADABAS Developer, Application Security Engineer, Data Engineer, ML Engineer.</p>
+      <p data-lang="pt-br"><strong>Personas.</strong> Modern Software Developer, QA Engineer, Legacy Developer, COBOL Developer, Natural/ADABAS Developer, Application Security Engineer, Data Engineer, ML Engineer.</p>
+      <p data-lang="es"><strong>Personas.</strong> Modern Software Developer, QA Engineer, Legacy Developer, COBOL Developer, Natural/ADABAS Developer, Application Security Engineer, Data Engineer, ML Engineer.</p>
+      <p data-lang="en" class="lang-active"><strong>AI impact pattern.</strong> Move from typing code to specifying intent. The unit of work shifts from the keystroke to the spec. Personalization through L2 to L5 ensures generated code matches corporate standards on the first try, eliminating most review iterations. Modern Developer productivity goes from 40 to 80-100 function points per month with superior coverage. Legacy modernization (COBOL, Natural/ADABAS) gets a documented baseline and assisted refactoring path that did not exist before.</p>
+      <p data-lang="pt-br"><strong>Padrão de impacto.</strong> Sair de digitar código para especificar intenção. A unidade de trabalho passa do toque de tecla para a spec. Personalização L2 a L5 garante que o código gerado bate com os padrões corporativos na primeira tentativa, eliminando a maior parte das iterações de review. A produtividade do Modern Developer sobe de 40 para 80 a 100 function points por mês, com cobertura superior. A modernização de legado (COBOL, Natural/ADABAS) ganha baseline documentado e refatoração assistida que antes não existia.</p>
+      <p data-lang="es"><strong>Patrón de impacto.</strong> Pasar de escribir código a especificar intención. La unidad de trabajo cambia del tecleo a la especificación. La personalización L2 a L5 garantiza que el código generado cumple los estándares corporativos a la primera, eliminando la mayoría de iteraciones de review. La productividad del Modern Developer sube de 40 a 80 a 100 function points por mes, con cobertura superior. La modernización de legado (COBOL, Natural/ADABAS) gana un baseline documentado y refactor asistido que antes no existía.</p>
+      <p data-lang="en" class="lang-active"><strong>Key risks.</strong> Without a Conversion Action (hiring freeze, capacity redirected to innovation backlog), the productivity gain is leaked. AppSec must remain a hard gate, not a recommendation. <strong>Primary tooling.</strong> GitHub Copilot in Ask, Edit, Agent, Plan and Coding Agent modes, GitHub Copilot Code Review, GitHub Advanced Security, GitHub Codespaces, GitHub Copilot Workspace, Azure DevOps Repos and Pipelines, Microsoft Fabric, Microsoft Purview, Azure AI Foundry, Azure Machine Learning, Azure AI Search.</p>
+      <p data-lang="pt-br"><strong>Riscos.</strong> Sem uma Ação de Conversão (congelamento de contratação, capacidade redirecionada ao backlog de inovação), o ganho de produtividade vaza. AppSec precisa continuar como gate rígido, não recomendação. <strong>Tooling principal.</strong> GitHub Copilot em Ask, Edit, Agent, Plan e Coding Agent, GitHub Copilot Code Review, GitHub Advanced Security, GitHub Codespaces, GitHub Copilot Workspace, Azure DevOps Repos e Pipelines, Microsoft Fabric, Microsoft Purview, Azure AI Foundry, Azure Machine Learning, Azure AI Search.</p>
+      <p data-lang="es"><strong>Riesgos.</strong> Sin una Acción de Conversión (congelamiento de contratación, capacidad redirigida al backlog de innovación), la ganancia de productividad se fuga. AppSec debe seguir siendo gate duro, no recomendación. <strong>Tooling principal.</strong> GitHub Copilot en Ask, Edit, Agent, Plan y Coding Agent, GitHub Copilot Code Review, GitHub Advanced Security, GitHub Codespaces, GitHub Copilot Workspace, Azure DevOps Repos y Pipelines, Microsoft Fabric, Microsoft Purview, Azure AI Foundry, Azure Machine Learning, Azure AI Search.</p>
+
+      <h3 data-lang="en" class="lang-active">4.3 Run and reliability</h3>
+      <h3 data-lang="pt-br">4.3 Operação e confiabilidade</h3>
+      <h3 data-lang="es">4.3 Operación y confiabilidad</h3>
+      <p data-lang="en" class="lang-active"><strong>Personas.</strong> DevOps/Platform Engineer, Database Administrator, Release Manager, Site Reliability Engineer.</p>
+      <p data-lang="pt-br"><strong>Personas.</strong> DevOps/Platform Engineer, Database Administrator, Release Manager, Site Reliability Engineer.</p>
+      <p data-lang="es"><strong>Personas.</strong> DevOps/Platform Engineer, Database Administrator, Release Manager, Site Reliability Engineer.</p>
+      <p data-lang="en" class="lang-active"><strong>AI impact pattern.</strong> Move from reactive firefighting to proactive engineering. Incident triage drops from 15-30 minutes to 3-5 minutes with an incident-commander agent. Post-mortems shrink from 4-8 hours to 1-2 hours with a post-mortem-writer agent. Release notes go from 3-5 hours per release to 30-60 minutes. Toil percentage moves from 40-50 percent to under 30 percent of capacity.</p>
+      <p data-lang="pt-br"><strong>Padrão de impacto.</strong> Sair do combate reativo para engenharia proativa. Triagem de incidente cai de 15 a 30 minutos para 3 a 5 minutos com agente incident-commander. Post-mortems encolhem de 4 a 8 horas para 1 a 2 horas com agente post-mortem-writer. Notas de release vão de 3 a 5 horas por release para 30 a 60 minutos. Toil cai de 40 a 50 por cento para abaixo de 30 por cento da capacidade.</p>
+      <p data-lang="es"><strong>Patrón de impacto.</strong> Salir del combate reactivo a la ingeniería proactiva. La triage de incidente cae de 15 a 30 minutos a 3 a 5 minutos con agente incident-commander. Los post-mortems pasan de 4 a 8 horas a 1 a 2 horas con agente post-mortem-writer. Las notas de release pasan de 3 a 5 horas por release a 30 a 60 minutos. El toil baja de 40 a 50 por ciento a menos de 30 por ciento de la capacidad.</p>
+      <p data-lang="en" class="lang-active"><strong>Key risks.</strong> Automated remediation must pass three supervised runs before promotion. The agent stays advisory during incidents, the human commander retains authority. <strong>Primary tooling.</strong> Azure Monitor, Azure Managed Prometheus, Azure Managed Grafana, Application Insights, Microsoft Sentinel, Azure Chaos Studio, GitHub Actions deployment environments, GitHub Releases, GitHub Artifact Attestations.</p>
+      <p data-lang="pt-br"><strong>Riscos.</strong> Remediação automatizada precisa passar por três execuções supervisionadas antes de promover. O agente é consultivo durante incidentes, o comandante humano mantém a autoridade. <strong>Tooling principal.</strong> Azure Monitor, Azure Managed Prometheus, Azure Managed Grafana, Application Insights, Microsoft Sentinel, Azure Chaos Studio, ambientes de deployment do GitHub Actions, GitHub Releases, GitHub Artifact Attestations.</p>
+      <p data-lang="es"><strong>Riesgos.</strong> La remediación automatizada debe pasar tres ejecuciones supervisadas antes de promover. El agente es consultivo durante incidentes, el comandante humano mantiene la autoridad. <strong>Tooling principal.</strong> Azure Monitor, Azure Managed Prometheus, Azure Managed Grafana, Application Insights, Microsoft Sentinel, Azure Chaos Studio, entornos de deployment de GitHub Actions, GitHub Releases, GitHub Artifact Attestations.</p>
+
+      <h3 data-lang="en" class="lang-active">4.4 Govern and grow</h3>
+      <h3 data-lang="pt-br">4.4 Governar e crescer</h3>
+      <h3 data-lang="es">4.4 Gobernar y crecer</h3>
+      <p data-lang="en" class="lang-active"><strong>Personas.</strong> Engineering Manager/IT Manager, InfoSec/Compliance Officer, Compliance/Audit Officer, UX/Product Designer.</p>
+      <p data-lang="pt-br"><strong>Personas.</strong> Engineering Manager/IT Manager, InfoSec/Compliance Officer, Compliance/Audit Officer, UX/Product Designer.</p>
+      <p data-lang="es"><strong>Personas.</strong> Engineering Manager/IT Manager, InfoSec/Compliance Officer, Compliance/Audit Officer, UX/Product Designer.</p>
+      <p data-lang="en" class="lang-active"><strong>AI impact pattern.</strong> Continuous evidence replaces point-in-time audit. The Engineering Manager owns adoption metrics from day 1 (which is why this persona sits in Wave 1). InfoSec moves from PR-time scanning to continuous compliance collection. UX research synthesis drops from 2-3 days per study to 4-8 hours, and accessibility audits become continuous instead of annual.</p>
+      <p data-lang="pt-br"><strong>Padrão de impacto.</strong> Evidência contínua substitui auditoria pontual. O Engineering Manager assume as métricas de adoção desde o dia 1 (por isso essa persona está na Wave 1). InfoSec sai de varredura por PR para coleta contínua de compliance. A síntese de pesquisa de UX cai de 2 a 3 dias por estudo para 4 a 8 horas, e auditorias de acessibilidade passam a ser contínuas no lugar de anuais.</p>
+      <p data-lang="es"><strong>Patrón de impacto.</strong> Evidencia continua reemplaza auditoría puntual. El Engineering Manager asume las métricas de adopción desde el día 1 (por eso esta persona está en Wave 1). InfoSec pasa de escaneo por PR a recolección continua de compliance. La síntesis de investigación de UX cae de 2 a 3 días por estudio a 4 a 8 horas, y las auditorías de accesibilidad pasan a ser continuas en lugar de anuales.</p>
+      <p data-lang="en" class="lang-active"><strong>Key risks.</strong> Public preview features must not be deployed to production for critical workloads. IP indemnification must be confirmed (GitHub Copilot Enterprise, Azure OpenAI Customer Copyright Commitment). <strong>Primary tooling.</strong> Microsoft Defender for DevOps, Microsoft Defender for Cloud, Microsoft Sentinel, Microsoft Purview, GitHub Advanced Security, GitHub Audit Log API, Power BI compliance dashboards, Azure Policy.</p>
+      <p data-lang="pt-br"><strong>Riscos.</strong> Recursos em public preview não podem ir para produção em workloads críticos. Indenização de IP precisa ser confirmada (GitHub Copilot Enterprise, Azure OpenAI Customer Copyright Commitment). <strong>Tooling principal.</strong> Microsoft Defender for DevOps, Microsoft Defender for Cloud, Microsoft Sentinel, Microsoft Purview, GitHub Advanced Security, GitHub Audit Log API, dashboards de compliance no Power BI, Azure Policy.</p>
+      <p data-lang="es"><strong>Riesgos.</strong> Las funciones en public preview no deben ir a producción en workloads críticos. La indemnización de IP debe confirmarse (GitHub Copilot Enterprise, Azure OpenAI Customer Copyright Commitment). <strong>Tooling principal.</strong> Microsoft Defender for DevOps, Microsoft Defender for Cloud, Microsoft Sentinel, Microsoft Purview, GitHub Advanced Security, GitHub Audit Log API, dashboards de compliance en Power BI, Azure Policy.</p>
     </section>
 
     <section id="waves">
-      <h2>6. <span data-lang="en" class="lang-active">Four adoption waves</span><span data-lang="pt-br">Quatro ondas de adoção</span><span data-lang="es">Cuatro olas de adopción</span></h2>
+      <h2>5. <span data-lang="en" class="lang-active">Four waves, twelve months</span><span data-lang="pt-br">Quatro ondas, doze meses</span><span data-lang="es">Cuatro olas, doce meses</span></h2>
+      <p data-lang="en" class="lang-active">The wave model is sequential, not optional. Wave 1 personas have the lowest barrier to entry and the most concrete near-term impact. Wave 2 expands into supplier and outsourcing optimization plus the legacy estate. Wave 3 unlocks revenue-affecting personas. Wave 4 closes the loop on resilience and employee experience.</p>
+      <p data-lang="pt-br">O modelo de ondas é sequencial, não opcional. As personas da Wave 1 têm a menor barreira de entrada e o impacto mais concreto no curto prazo. A Wave 2 expande para otimização de fornecedor e outsourcing, além do parque legado. A Wave 3 destrava as personas que afetam receita. A Wave 4 fecha o ciclo em resiliência e experiência do colaborador.</p>
+      <p data-lang="es">El modelo de olas es secuencial, no opcional. Las personas de la Wave 1 tienen la menor barrera de entrada y el impacto más concreto en el corto plazo. La Wave 2 se expande a optimización de proveedor y outsourcing, además del parque legado. La Wave 3 desbloquea las personas que afectan ingreso. La Wave 4 cierra el ciclo en resiliencia y experiencia del colaborador.</p>
       <table>
-        <thead><tr><th>Wave</th><th>Mode</th><th>Human role</th></tr></thead>
+        <thead><tr><th><span data-lang="en" class="lang-active">Wave</span><span data-lang="pt-br">Onda</span><span data-lang="es">Ola</span></th><th><span data-lang="en" class="lang-active">Window</span><span data-lang="pt-br">Janela</span><span data-lang="es">Ventana</span></th><th><span data-lang="en" class="lang-active">Personas</span><span data-lang="pt-br">Personas</span><span data-lang="es">Personas</span></th><th><span data-lang="en" class="lang-active">Primary ROI bucket</span><span data-lang="pt-br">Balde primário de ROI</span><span data-lang="es">Cubo primario de ROI</span></th><th><span data-lang="en" class="lang-active">Predictive indicator</span><span data-lang="pt-br">Indicador preditivo</span><span data-lang="es">Indicador predictivo</span></th></tr></thead>
         <tbody>
-          <tr><td><strong>Wave 1</strong></td><td>Assistant</td><td>Author. AI suggests inline.</td></tr>
-          <tr><td><strong>Wave 2</strong></td><td>Collaborator</td><td>Reviewer. AI drafts, human refines.</td></tr>
-          <tr><td><strong>Wave 3</strong></td><td>Delegate</td><td>Approver. AI executes scoped tasks.</td></tr>
-          <tr><td><strong>Wave 4</strong></td><td>Autonomous agent</td><td>Supervisor. AI runs, human audits.</td></tr>
+          <tr><td><strong>Wave 1</strong></td><td><span data-lang="en" class="lang-active">Months 1 to 3</span><span data-lang="pt-br">Meses 1 a 3</span><span data-lang="es">Meses 1 a 3</span></td><td>7</td><td><span data-lang="en" class="lang-active">Cost reduction via experience compression</span><span data-lang="pt-br">Redução de custo via compressão de experiência</span><span data-lang="es">Reducción de costo vía compresión de experiencia</span></td><td><span data-lang="en" class="lang-active">Daily-active-use above 70 percent in 60 days</span><span data-lang="pt-br">Uso diário acima de 70 por cento em 60 dias</span><span data-lang="es">Uso diario por encima del 70 por ciento en 60 días</span></td></tr>
+          <tr><td><strong>Wave 2</strong></td><td><span data-lang="en" class="lang-active">Months 4 to 6</span><span data-lang="pt-br">Meses 4 a 6</span><span data-lang="es">Meses 4 a 6</span></td><td>8</td><td><span data-lang="en" class="lang-active">Cost reduction via supplier and outsourcing optimization</span><span data-lang="pt-br">Redução de custo via otimização de fornecedor e outsourcing</span><span data-lang="es">Reducción de costo vía optimización de proveedor y outsourcing</span></td><td><span data-lang="en" class="lang-active">3 contracts renegotiated with AI-driven leverage</span><span data-lang="pt-br">3 contratos renegociados com alavancagem de IA</span><span data-lang="es">3 contratos renegociados con palanca de IA</span></td></tr>
+          <tr><td><strong>Wave 3</strong></td><td><span data-lang="en" class="lang-active">Months 7 to 9</span><span data-lang="pt-br">Meses 7 a 9</span><span data-lang="es">Meses 7 a 9</span></td><td>8</td><td><span data-lang="en" class="lang-active">Revenue growth via shorter time-to-value</span><span data-lang="pt-br">Crescimento de receita via menor time-to-value</span><span data-lang="es">Crecimiento de ingreso vía menor time-to-value</span></td><td><span data-lang="en" class="lang-active">Median time-to-value down by at least 30 percent</span><span data-lang="pt-br">Time-to-value mediano cai pelo menos 30 por cento</span><span data-lang="es">Time-to-value mediano cae al menos 30 por ciento</span></td></tr>
+          <tr><td><strong>Wave 4</strong></td><td><span data-lang="en" class="lang-active">Months 10 to 12</span><span data-lang="pt-br">Meses 10 a 12</span><span data-lang="es">Meses 10 a 12</span></td><td>1 + refinement</td><td><span data-lang="en" class="lang-active">Improved employee experience and resilience</span><span data-lang="pt-br">Experiência do colaborador e resiliência</span><span data-lang="es">Experiencia del colaborador y resiliencia</span></td><td><span data-lang="en" class="lang-active">eNPS uplift of at least 8 points among AI users</span><span data-lang="pt-br">eNPS sobe pelo menos 8 pontos entre usuários de IA</span><span data-lang="es">eNPS sube al menos 8 puntos entre usuarios de IA</span></td></tr>
         </tbody>
       </table>
-    </section>
-
-    <section id="levels">
-      <h2>7. <span data-lang="en" class="lang-active">Five levels of Copilot personalization</span><span data-lang="pt-br">Cinco níveis de personalização do Copilot</span><span data-lang="es">Cinco niveles de personalización del Copilot</span></h2>
-      <table>
-        <thead><tr><th>Level</th><th>Surface</th><th>Best for</th></tr></thead>
-        <tbody>
-          <tr><td><strong>L0</strong></td><td>Default Copilot</td><td>Onboarding any persona</td></tr>
-          <tr><td><strong>L1</strong></td><td>Settings, model picker</td><td>Tuning per language or stack</td></tr>
-          <tr><td><strong>L2</strong></td><td>Instructions files</td><td>Repo-level conventions</td></tr>
-          <tr><td><strong>L3</strong></td><td>Custom prompts, chatmodes</td><td>Persona-specific workflows</td></tr>
-          <tr><td><strong>L4</strong></td><td>Custom agents, Spec-Kit</td><td>Wave 3-4 delegated work</td></tr>
-        </tbody>
-      </table>
+      <p data-lang="en" class="lang-active">The Engineering Manager sits in Wave 1 deliberately, even though the role does not produce code. Without an adoption tracker from day 1, the program loses defensibility before Wave 2 starts. Wave 4 introduces only one new persona (SRE) because by month 10 the rest of the organization is refining rather than onboarding.</p>
+      <p data-lang="pt-br">O Engineering Manager fica na Wave 1 deliberadamente, mesmo o papel não produzindo código. Sem um tracker de adoção desde o dia 1, o programa perde defensibilidade antes da Wave 2 começar. A Wave 4 introduz apenas uma persona nova (SRE) porque, no mês 10, o resto da organização está refinando, não onboarding.</p>
+      <p data-lang="es">El Engineering Manager está en Wave 1 deliberadamente, aunque el rol no produzca código. Sin un tracker de adopción desde el día 1, el programa pierde defensibilidad antes de que arranque la Wave 2. La Wave 4 introduce sólo una persona nueva (SRE) porque, en el mes 10, el resto de la organización está refinando, no haciendo onboarding.</p>
     </section>
 
     <section id="odm">
-      <h2>8. <span data-lang="en" class="lang-active">Outcome-driven metrics</span><span data-lang="pt-br">Métricas guiadas por resultado</span><span data-lang="es">Métricas guiadas por resultado</span></h2>
-      <p data-lang="en" class="lang-active">DORA-style cycle time, change failure rate, deployment frequency, MTTR, plus persona-specific outcomes (defect escape, design debt, support deflection, incident learning rate). What gets measured gets adopted.</p>
-      <p data-lang="pt-br">Cycle time estilo DORA, taxa de falha em mudança, frequência de deployment, MTTR, mais resultados por persona (escape de defeito, dívida de design, deflexão de suporte, taxa de aprendizado por incidente). O que é medido é adotado.</p>
-      <p data-lang="es">Cycle time estilo DORA, tasa de falla en cambio, frecuencia de deployment, MTTR, más resultados por persona (escape de defecto, deuda de diseño, deflexión de soporte, tasa de aprendizaje por incidente). Lo que se mide se adopta.</p>
+      <h2>6. <span data-lang="en" class="lang-active">ODM matrix tied to AI controls</span><span data-lang="pt-br">Matriz ODM ligada aos controles de IA</span><span data-lang="es">Matriz ODM ligada a los controles de IA</span></h2>
+      <p data-lang="en" class="lang-active">Each ODM is paired with the AI control that makes the metric move. Without the control, the metric trends are anecdotal. Without the metric, the control has no business defense. The matrix below summarizes the five ODMs that drive most of the persona-level impact.</p>
+      <p data-lang="pt-br">Cada ODM é pareada com o controle de IA que efetivamente move a métrica. Sem o controle, a tendência é anedótica. Sem a métrica, o controle não tem defesa de negócio. A matriz abaixo resume as cinco ODMs que respondem por boa parte do impacto por persona.</p>
+      <p data-lang="es">Cada ODM está emparejada con el control de IA que efectivamente mueve la métrica. Sin el control, la tendencia es anecdótica. Sin la métrica, el control no tiene defensa de negocio. La matriz de abajo resume las cinco ODMs que explican gran parte del impacto por persona.</p>
+      <table>
+        <thead><tr><th>ODM</th><th><span data-lang="en" class="lang-active">AI control</span><span data-lang="pt-br">Controle de IA</span><span data-lang="es">Control de IA</span></th><th><span data-lang="en" class="lang-active">Source signal</span><span data-lang="pt-br">Sinal de origem</span><span data-lang="es">Señal de origen</span></th><th><span data-lang="en" class="lang-active">Cadence</span><span data-lang="pt-br">Cadência</span><span data-lang="es">Cadencia</span></th></tr></thead>
+        <tbody>
+          <tr><td><strong>Time-to-market</strong></td><td><span data-lang="en" class="lang-active">Spec-Kit and L4 custom agents</span><span data-lang="pt-br">Spec-Kit e agentes L4</span><span data-lang="es">Spec-Kit y agentes L4</span></td><td><span data-lang="en" class="lang-active">GitHub Releases, Azure DevOps Release</span><span data-lang="pt-br">GitHub Releases, Azure DevOps Release</span><span data-lang="es">GitHub Releases, Azure DevOps Release</span></td><td><span data-lang="en" class="lang-active">Weekly</span><span data-lang="pt-br">Semanal</span><span data-lang="es">Semanal</span></td></tr>
+          <tr><td><strong>Cycle time</strong></td><td><span data-lang="en" class="lang-active">Copilot Code Review on every PR</span><span data-lang="pt-br">Copilot Code Review em todo PR</span><span data-lang="es">Copilot Code Review en todo PR</span></td><td><span data-lang="en" class="lang-active">GitHub Insights, Azure DevOps Analytics</span><span data-lang="pt-br">GitHub Insights, Azure DevOps Analytics</span><span data-lang="es">GitHub Insights, Azure DevOps Analytics</span></td><td><span data-lang="en" class="lang-active">Weekly</span><span data-lang="pt-br">Semanal</span><span data-lang="es">Semanal</span></td></tr>
+          <tr><td><strong>Defect escape rate</strong></td><td><span data-lang="en" class="lang-active">GitHub Advanced Security gates plus QA agent</span><span data-lang="pt-br">Gates do GitHub Advanced Security e agente de QA</span><span data-lang="es">Gates de GitHub Advanced Security y agente de QA</span></td><td><span data-lang="en" class="lang-active">Defender for Cloud, Sentinel, GHAS</span><span data-lang="pt-br">Defender for Cloud, Sentinel, GHAS</span><span data-lang="es">Defender for Cloud, Sentinel, GHAS</span></td><td><span data-lang="en" class="lang-active">Monthly</span><span data-lang="pt-br">Mensal</span><span data-lang="es">Mensual</span></td></tr>
+          <tr><td><strong>Customer NPS</strong></td><td><span data-lang="en" class="lang-active">UX research synthesizer plus a11y auditor</span><span data-lang="pt-br">Sintetizador de pesquisa UX e auditor a11y</span><span data-lang="es">Sintetizador de research UX y auditor a11y</span></td><td><span data-lang="en" class="lang-active">Microsoft Clarity, in-product surveys</span><span data-lang="pt-br">Microsoft Clarity, surveys no produto</span><span data-lang="es">Microsoft Clarity, surveys en producto</span></td><td><span data-lang="en" class="lang-active">Quarterly</span><span data-lang="pt-br">Trimestral</span><span data-lang="es">Trimestral</span></td></tr>
+          <tr><td><strong>Revenue per engineer</strong></td><td><span data-lang="en" class="lang-active">Adoption tracker plus capacity reallocation policy</span><span data-lang="pt-br">Tracker de adoção e política de realocação de capacidade</span><span data-lang="es">Tracker de adopción y política de reasignación de capacidad</span></td><td><span data-lang="en" class="lang-active">GitHub Copilot Metrics API, finance reports</span><span data-lang="pt-br">GitHub Copilot Metrics API, relatórios financeiros</span><span data-lang="es">GitHub Copilot Metrics API, reportes financieros</span></td><td><span data-lang="en" class="lang-active">Quarterly</span><span data-lang="pt-br">Trimestral</span><span data-lang="es">Trimestral</span></td></tr>
+        </tbody>
+      </table>
+      <p data-lang="en" class="lang-active">Cadence discipline is itself a leading indicator. The Engineering Manager owns the weekly and monthly cadences. The CTO owns the quarterly cadence. A missed cadence signals the program is losing executive sponsorship before any KPI does.</p>
+      <p data-lang="pt-br">Disciplina de cadência é, em si, um indicador antecedente. O Engineering Manager é dono das cadências semanal e mensal. O CTO é dono da cadência trimestral. Cadência perdida sinaliza perda de patrocínio executivo antes que qualquer KPI sinalize.</p>
+      <p data-lang="es">La disciplina de cadencia es, en sí, un indicador adelantado. El Engineering Manager es dueño de las cadencias semanal y mensual. El CTO es dueño de la cadencia trimestral. Una cadencia perdida señala pérdida de patrocinio ejecutivo antes que cualquier KPI.</p>
+    </section>
+
+    <section id="financial-conversion">
+      <h2>7. <span data-lang="en" class="lang-active">Productivity to financial conversion</span><span data-lang="pt-br">Conversão de produtividade em valor financeiro</span><span data-lang="es">Conversión de productividad en valor financiero</span></h2>
+      <p data-lang="en" class="lang-active">This is the closure mechanism that most decks lack. Per Gartner G00837723, time saved leaks back into rework, validation overhead, context switching and unused capacity unless a deliberate Conversion Action redirects it. The chain below is the formula every persona section in Part C of the audit document declares explicitly.</p>
+      <p data-lang="pt-br">Este é o mecanismo de fechamento que a maior parte dos decks não tem. Conforme Gartner G00837723, tempo economizado vaza de volta para retrabalho, overhead de validação, troca de contexto e capacidade não usada, a menos que uma Ação de Conversão deliberada o redirecione. A cadeia abaixo é a fórmula que toda persona da Parte C do documento de auditoria declara explicitamente.</p>
+      <p data-lang="es">Este es el mecanismo de cierre que a la mayoría de los decks le falta. Según Gartner G00837723, el tiempo ahorrado se fuga de regreso a retrabajo, overhead de validación, cambio de contexto y capacidad no utilizada, a menos que una Acción de Conversión deliberada lo redirija. La cadena de abajo es la fórmula que cada persona de la Parte C del documento de auditoría declara explícitamente.</p>
+      <pre><code>Initial Time Saved
+  minus Productivity Leak (rework, validation overhead, context switching)
+  minus Value Not Realized (capacity not redirected to a value activity)
+  equals Actual Productivity Gained
+  multiplied by Conversion Action (HITL discount, capacity reuse, error cost
+                                   reduction, throughput uplift, hiring freeze,
+                                   contract renegotiation)
+  equals Financial ROI in dollars</code></pre>
+      <ul>
+        <li><strong><span data-lang="en" class="lang-active">HITL discount.</span><span data-lang="pt-br">Desconto HITL.</span><span data-lang="es">Descuento HITL.</span></strong> <span data-lang="en" class="lang-active">Discount the gross hours saved by the human-in-the-loop review time required by the persona's governance posture (typically 15 to 35 percent).</span><span data-lang="pt-br">Descontar das horas brutas economizadas o tempo de revisão humana exigido pela postura de governança da persona (tipicamente 15 a 35 por cento).</span><span data-lang="es">Descontar de las horas brutas ahorradas el tiempo de revisión humana exigido por la postura de gobernanza de la persona (típicamente 15 a 35 por ciento).</span></li>
+        <li><strong><span data-lang="en" class="lang-active">Capacity reuse.</span><span data-lang="pt-br">Reuso de capacidade.</span><span data-lang="es">Reúso de capacidad.</span></strong> <span data-lang="en" class="lang-active">Capacity must land somewhere measurable: innovation backlog, dependency negotiation, customer discovery, scope refinement.</span><span data-lang="pt-br">Capacidade precisa cair em algo mensurável: backlog de inovação, negociação de dependência, descoberta com cliente, refinamento de escopo.</span><span data-lang="es">La capacidad debe aterrizar en algo medible: backlog de innovación, negociación de dependencias, descubrimiento de cliente, refinamiento de alcance.</span></li>
+        <li><strong><span data-lang="en" class="lang-active">Error cost reduction.</span><span data-lang="pt-br">Redução do custo de erro.</span><span data-lang="es">Reducción del costo de error.</span></strong> <span data-lang="en" class="lang-active">Defects caught earlier multiply value: an AppSec finding caught at PR-time costs near zero, the same finding caught in production can trigger a contract penalty.</span><span data-lang="pt-br">Defeitos pegos mais cedo multiplicam valor: um achado de AppSec capturado no PR custa quase zero, o mesmo achado em produção pode acionar multa contratual.</span><span data-lang="es">Los defectos detectados antes multiplican el valor: un hallazgo de AppSec capturado en PR cuesta casi cero, el mismo hallazgo en producción puede activar penalidad contractual.</span></li>
+        <li><strong><span data-lang="en" class="lang-active">Throughput gains.</span><span data-lang="pt-br">Ganhos de throughput.</span><span data-lang="es">Ganancias de throughput.</span></strong> <span data-lang="en" class="lang-active">More releases per quarter at constant headcount means more revenue per engineer, the only ratio that survives a CFO review.</span><span data-lang="pt-br">Mais releases por trimestre com o mesmo headcount significa mais receita por engenheiro, a única razão que sobrevive a uma revisão de CFO.</span><span data-lang="es">Más releases por trimestre con el mismo headcount significa más ingreso por ingeniero, la única razón que sobrevive a una revisión del CFO.</span></li>
+      </ul>
+      <p data-lang="en" class="lang-active">Wave 1 Conversion Actions are typically capacity reallocation. Wave 2 Conversion Actions add supplier renegotiation. Wave 3 Conversion Actions add revenue uplift via faster time-to-value. Wave 4 Conversion Actions add risk avoidance and eNPS-driven retention savings. The companion calculator combines these by persona mix.</p>
+      <p data-lang="pt-br">Ações de Conversão da Wave 1 costumam ser realocação de capacidade. Wave 2 acrescenta renegociação de fornecedor. Wave 3 acrescenta uplift de receita via menor time-to-value. Wave 4 acrescenta evitamento de risco e economia de retenção via eNPS. A calculadora complementar combina esses elementos por mix de personas.</p>
+      <p data-lang="es">Las Acciones de Conversión de la Wave 1 suelen ser reasignación de capacidad. La Wave 2 suma renegociación de proveedor. La Wave 3 suma incremento de ingreso vía menor time-to-value. La Wave 4 suma evitación de riesgo y ahorro de retención vía eNPS. La calculadora complementaria combina estos elementos por mix de personas.</p>
+    </section>
+
+    <section id="token-cards" class="token-cards-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Three impact metrics, three sources.</span><span data-lang="pt-br">Três métricas de impacto, três fontes.</span><span data-lang="es">Tres métricas de impacto, tres fuentes.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Numbers worth defending</span><span data-lang="pt-br">Números que valem defender</span><span data-lang="es">Números que vale la pena defender</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Anchor every claim to a number that survives a steering review. These three baselines are computed across the 24 personas using the published SDLC ODM model.</span><span data-lang="pt-br">Ancore toda alegação a um número que sobreviva à revisão de steering. Estes três baselines são calculados nas 24 personas com o modelo ODM publicado.</span><span data-lang="es">Ancla cada afirmación a un número que sobreviva una revisión de steering. Estos tres baselines se calculan en las 24 personas con el modelo ODM publicado.</span>
+      </p>
+      <div class="token-cards">
+        <article class="token-card" data-layer="green">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">PERSONAS COVERED</span><span data-lang="pt-br">PERSONAS COBERTAS</span><span data-lang="es">PERSONAS CUBIERTAS</span></div>
+          <div class="token-card__num">24</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">roles across product, design, dev, ops, security</span><span data-lang="pt-br">papéis em produto, design, dev, ops, segurança</span><span data-lang="es">roles en producto, diseño, dev, ops, seguridad</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Total persona count documented in the impact study. Each one has a primary unit of work, a decision set, an AI impact profile, and a custom-instructions starter file. The 24 was chosen as the smallest set that covers a full SDLC without merging accountabilities.</span><span data-lang="pt-br">Total de personas documentadas no estudo de impacto. Cada uma com unidade primária de trabalho, conjunto de decisões, perfil de impacto IA e arquivo starter de custom instructions. As 24 foram escolhidas como o menor conjunto que cobre um SDLC completo sem fundir responsabilidades.</span><span data-lang="es">Total de personas documentadas en el estudio de impacto. Cada una con unidad primaria de trabajo, conjunto de decisiones, perfil de impacto IA y archivo starter de custom instructions. Las 24 se eligieron como el menor conjunto que cubre un SDLC completo sin fusionar responsabilidades.</span></p>
+        </article>
+        <article class="token-card" data-layer="blue">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">WAVE COVERAGE</span><span data-lang="pt-br">COBERTURA DE ONDA</span><span data-lang="es">COBERTURA DE OLA</span></div>
+          <div class="token-card__num">4 waves</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">assistant, collaborator, delegate, autonomous</span><span data-lang="pt-br">assistente, colaborador, delegado, autônomo</span><span data-lang="es">asistente, colaborador, delegado, autónomo</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">The four-wave adoption model maps the human-in-the-loop trajectory. Most enterprise teams are at wave 1 or 2 in 2026. Wave 3 demands an eval harness and a reversal mechanism. Wave 4 demands a constitution. Persona-by-persona placement on this axis tells you what to invest in next.</span><span data-lang="pt-br">O modelo de quatro ondas mapeia a trajetória de human-in-the-loop. A maioria dos times corporativos está nas ondas 1 ou 2 em 2026. Onda 3 exige eval harness e mecanismo de reversal. Onda 4 exige constituição. Posicionar persona por persona nesse eixo mostra onde investir.</span><span data-lang="es">El modelo de cuatro olas mapea la trayectoria de human-in-the-loop. La mayoría de los equipos corporativos está en la ola 1 o 2 en 2026. La ola 3 exige eval harness y mecanismo de reversal. La ola 4 exige constitución. Posicionar persona por persona en ese eje indica dónde invertir.</span></p>
+        </article>
+        <article class="token-card" data-layer="yellow">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">PERSONALIZATION LEVELS</span><span data-lang="pt-br">NÍVEIS DE PERSONALIZAÇÃO</span><span data-lang="es">NIVELES DE PERSONALIZACIÓN</span></div>
+          <div class="token-card__num">5 levels</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">L0 default to L4 custom agents and Spec-Kit</span><span data-lang="pt-br">L0 default a L4 agentes custom e Spec-Kit</span><span data-lang="es">L0 default a L4 agentes custom y Spec-Kit</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Five Copilot personalization levels match the persona maturity stages: L0 default, L1 settings, L2 instructions files, L3 custom prompts and chat modes, L4 custom agents and Spec-Kit. Most personas should ship at L2 within the first month and reach L3 by month three.</span><span data-lang="pt-br">Cinco níveis de personalização do Copilot batem com os estágios de maturidade da persona: L0 default, L1 settings, L2 arquivos de instruções, L3 prompts customizados e chat modes, L4 agentes customizados e Spec-Kit. A maioria das personas deve entregar em L2 no primeiro mês e chegar a L3 no mês 3.</span><span data-lang="es">Cinco niveles de personalización de Copilot coinciden con las etapas de madurez de la persona: L0 default, L1 settings, L2 archivos de instrucciones, L3 prompts custom y chat modes, L4 agentes custom y Spec-Kit. La mayoría de las personas debe entregar en L2 el primer mes y alcanzar L3 al mes 3.</span></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="references">
+      <h2>8. <span data-lang="en" class="lang-active">References</span><span data-lang="pt-br">Referências</span><span data-lang="es">Referencias</span></h2>
+      <p data-lang="en" class="lang-active">The recommendations in this playbook are anchored in Gartner research, Microsoft official documentation, GitHub blog posts and academic research from August 2025 through 2026. The full reference list lives in the audit document. The most-cited sources are below.</p>
+      <p data-lang="pt-br">As recomendações deste playbook estão ancoradas em pesquisa Gartner, documentação oficial Microsoft, posts do GitHub blog e pesquisa acadêmica de agosto de 2025 a 2026. A lista completa está no documento de auditoria. As fontes mais citadas estão abaixo.</p>
+      <p data-lang="es">Las recomendaciones de este playbook están ancladas en investigación Gartner, documentación oficial Microsoft, posts del GitHub blog e investigación académica de agosto de 2025 a 2026. La lista completa vive en el documento de auditoría. Las fuentes más citadas están abajo.</p>
+      <h3>Gartner</h3>
+      <ul>
+        <li><strong>G00837723.</strong> Potosky E., Quinlan P. <em>Productivity Gains Alone Won't Pay for AI</em>. 9 October 2025.</li>
+        <li><strong>G00799085.</strong> Proctor P., Naegle R., Anderson J. et al. <em>Outcome-Driven Metrics for the Digital Era</em>. 11 July 2025.</li>
+        <li><strong>G00841077.</strong> Suda N. <em>10 AI Value Metrics That Matter to the C-Suite</em>. 2 January 2026.</li>
+        <li><strong>G00846878.</strong> Budgar E., Kumar S., Kumar V. <em>Select Reliable Metrics to Assess Strategy Performance</em>. 6 February 2026.</li>
+        <li><strong>G00844741.</strong> Janosevic V., Zimmerhansl S. <em>5 Agentic AI Capabilities That Turn Autonomy Into Adoption</em>. 9 January 2026.</li>
+        <li><strong>G00833880.</strong> Howard C., Suda N., Sribar V. <em>AI-Driven Methods for Cost-Efficiency</em>. 26 February 2026.</li>
+      </ul>
+      <h3>Microsoft and GitHub</h3>
+      <ul>
+        <li>Azure AI Foundry, Microsoft Fabric, Microsoft Purview, Microsoft Sentinel, Microsoft Defender for DevOps, Microsoft Security Copilot, Copilot Studio: <a href="https://learn.microsoft.com">learn.microsoft.com</a>.</li>
+        <li>GitHub Copilot, Spec-Kit, Coding Agent, GitHub Advanced Security, Artifact Attestations, Audit Log API: <a href="https://docs.github.com">docs.github.com</a>.</li>
+        <li>GitHub Blog, <em>The Era of AI as Text is Over: Execution is the New Interface</em>, <em>Security Architecture of Agentic Workflows</em>, <em>Continuous AI for Accessibility</em>.</li>
+      </ul>
+      <h3><span data-lang="en" class="lang-active">Academic and industry</span><span data-lang="pt-br">Acadêmico e indústria</span><span data-lang="es">Académico e industria</span></h3>
+      <ul>
+        <li>Vasilopoulos (2026) <em>Context Engineering for AI Agents</em> arXiv:2602.20478. JAWs (2026) <em>Impact of AGENTS.md on AI Coding Agents</em> arXiv:2601.20404. SkillReducer <em>Token Cost Analysis</em> arXiv:2603.29919.</li>
+        <li>DORA State of DevOps Report 2024. Forrester Total Economic Impact of GitHub Copilot 2024. McKinsey Digital 2025. Microsoft Work Trend Index 2024. Google SRE Workbook (toil definition).</li>
+      </ul>
     </section>
 
     <section id="deck">
-      <h2>9. <span data-lang="en" class="lang-active">Companion deck</span><span data-lang="pt-br">Deck complementar</span><span data-lang="es">Deck complementario</span></h2>
-      <p data-lang="en" class="lang-active">The companion deck walks through every persona with diagrams, the four-wave model, the five levels, and an ODM dashboard.</p>
-      <p data-lang="pt-br">O deck complementar passa por cada persona com diagramas, o modelo de quatro ondas, os cinco níveis e um dashboard de ODM.</p>
-      <p data-lang="es">El deck complementario recorre cada persona con diagramas, el modelo de cuatro olas, los cinco niveles y un dashboard de ODM.</p>
-      <p><a href="Agentic_DevOps_SDLC_Personas_Deck_v2_0_0_2026-04-07_en.html"><strong>Open the deck →</strong></a></p>
+      <h2>9. <span data-lang="en" class="lang-active">Companion deck and calculator</span><span data-lang="pt-br">Deck complementar e calculadora</span><span data-lang="es">Deck complementario y calculadora</span></h2>
+      <p data-lang="en" class="lang-active">The companion deck walks every persona with diagrams, the four-wave model, the five levels and an ODM dashboard view. The companion long-form is the audit document with full Part C detail. Together they form the read-write pair: this playbook is the index, the deck is the narrated version, the long-form is the source of record.</p>
+      <p data-lang="pt-br">O deck complementar percorre cada persona com diagramas, o modelo de quatro ondas, os cinco níveis e a visão de dashboard ODM. O long-form complementar é o documento de auditoria com o detalhe completo da Parte C. Juntos, formam o par leitura-escrita: este playbook é o índice, o deck é a versão narrada, o long-form é a fonte de verdade.</p>
+      <p data-lang="es">El deck complementario recorre cada persona con diagramas, el modelo de cuatro olas, los cinco niveles y la vista de dashboard ODM. El long-form complementario es el documento de auditoría con el detalle completo de la Parte C. Juntos forman el par lectura-escritura: este playbook es el índice, el deck es la versión narrada, el long-form es la fuente de verdad.</p>
+      <p><a href="Agentic_DevOps_SDLC_Personas_Deck_v2_0_0_2026-04-07_en.html"><strong><span data-lang="en" class="lang-active">Open the deck →</span><span data-lang="pt-br">Abrir o deck →</span><span data-lang="es">Abrir el deck →</span></strong></a></p>
     </section>
 
     <nav class="pagenav">
@@ -193,5 +424,6 @@ function setLocale(lang){
 }
 </script>
 <script src="../_shared/playbook.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

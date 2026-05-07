@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -95,6 +96,41 @@ window.PAGE_DATA = {
       title:{ 'en': 'Runtime layer', 'pt-br': 'Camada de runtime', 'es': 'Capa de runtime' },
       desc:{ 'en': 'Hooks, MCP, plugins, VS Code settings.', 'pt-br': 'Hooks, MCP, plugins, settings do VS Code.', 'es': 'Hooks, MCP, plugins, settings de VS Code.' } }
   ],
+  stackGlance: {
+    label: { en:'Config stack at a glance', 'pt-br':'Stack de config em uma vista', es:'Stack de config en una vista' },
+    title: { en:'Four layers, one Copilot session.', 'pt-br':'Quatro camadas, uma sessão Copilot.', es:'Cuatro capas, una sesión Copilot.' },
+    lead: { en:'Each layer loads context for the layer above it. Skip a layer and the upper ones miss the grounding they expect.', 'pt-br':'Cada camada carrega contexto para a de cima. Pular uma camada e as superiores perdem o grounding esperado.', es:'Cada capa carga contexto para la de arriba. Saltar una capa y las superiores pierden el grounding esperado.' },
+    layers: [
+      { layer:'red', num:'IV · RUNTIME',
+        name:{ en:'Hooks, MCP, plugins', 'pt-br':'Hooks, MCP, plugins', es:'Hooks, MCP, plugins' },
+        desc:{ en:'Pre and post tool hooks, MCP servers, plugins, VS Code settings.', 'pt-br':'Hooks pre e post tool, servidores MCP, plugins, settings do VS Code.', es:'Hooks pre y post tool, servidores MCP, plugins, settings de VS Code.' } },
+      { layer:'yellow', num:'III · AUTHORING',
+        name:{ en:'Agents, chat modes, skills', 'pt-br':'Agentes, chat modes, skills', es:'Agentes, chat modes, skills' },
+        desc:{ en:'Authored artifacts that shape Copilot behavior per task.', 'pt-br':'Artefatos autorais que moldam o comportamento do Copilot por tarefa.', es:'Artefactos de autor que moldean el comportamiento de Copilot por tarea.' } },
+      { layer:'green', num:'II · WORKSPACE',
+        name:{ en:'.github/instructions and copilot-instructions.md', 'pt-br':'.github/instructions e copilot-instructions.md', es:'.github/instructions y copilot-instructions.md' },
+        desc:{ en:'Repo-scoped instructions that load into every Copilot turn.', 'pt-br':'Instruções por repo que carregam em cada turn do Copilot.', es:'Instrucciones por repo que cargan en cada turno de Copilot.' } },
+      { layer:'blue', num:'I · ENVIRONMENT',
+        name:{ en:'VS Code settings, identity, network', 'pt-br':'Settings VS Code, identidade, rede', es:'Settings VS Code, identidad, red' },
+        desc:{ en:'Editor configuration, signed-in identity, network reachability to model.', 'pt-br':'Configuração do editor, identidade logada, alcance de rede ao modelo.', es:'Configuración del editor, identidad firmada, alcance de red al modelo.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three context-load metrics, three sources.', 'pt-br':'Três métricas de carga de contexto, três fontes.', es:'Tres métricas de carga de contexto, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a code review. These three baselines were measured across the 2,303 real config files studied for this map.', 'pt-br':'Ancore toda alegação a um número que sobreviva a um code review. Estes três baselines foram medidos nos 2.303 arquivos reais estudados para este mapa.', es:'Ancla cada afirmación a un número que sobreviva un code review. Estos tres baselines se midieron en los 2.303 archivos reales estudiados para este mapa.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'CORPUS STUDIED', 'pt-br':'CORPUS ESTUDADO', es:'CORPUS ESTUDIADO' },
+        num:'2,303', sub:{ en:'real Copilot config files across public repos', 'pt-br':'arquivos reais de config em repos públicos', es:'archivos reales de config en repos públicos' },
+        body:{ en:'Source corpus that grounds the ten-layer map. Files were collected from public repositories that had a copilot-instructions.md or a .github/instructions folder, then classified by layer, length, and renewal frequency.', 'pt-br':'Corpus base que ancora o mapa de dez camadas. Arquivos coletados de repos públicos que tinham copilot-instructions.md ou pasta .github/instructions, depois classificados por camada, tamanho e frequência de atualização.', es:'Corpus base que ancla el mapa de diez capas. Archivos recolectados de repos públicos con copilot-instructions.md o carpeta .github/instructions, luego clasificados por capa, tamaño y frecuencia de renovación.' } },
+      { layer:'blue', eyebrow:{ en:'HOT TIER LIMIT', 'pt-br':'LIMITE DO TIER HOT', es:'LÍMITE DEL TIER HOT' },
+        num:'< 2 KB', sub:{ en:'recommended size for instructions in the prompt', 'pt-br':'tamanho recomendado para instruções no prompt', es:'tamaño recomendado para instrucciones en el prompt' },
+        body:{ en:'Hot-tier files (system instructions, agent prompts) load on every turn. Above 2 KB the eviction risk grows and the model starts to drop trailing constraints. Move the bulky reference content to warm or cold tier and link to it from the hot tier.', 'pt-br':'Arquivos do tier hot (system instructions, prompts de agente) carregam em cada turn. Acima de 2 KB o risco de eviction cresce e o modelo começa a derrubar restrições do final. Mova conteúdo de referência denso para warm ou cold e linke do hot tier.', es:'Los archivos del tier hot (system instructions, prompts de agente) cargan en cada turno. Por encima de 2 KB el riesgo de eviction crece y el modelo comienza a soltar restricciones finales. Mueve el contenido de referencia denso a warm o cold y enlaza desde hot.' } },
+      { layer:'yellow', eyebrow:{ en:'CONTEXT MISS RATE', 'pt-br':'TAXA DE MISS DE CONTEXTO', es:'TASA DE MISS DE CONTEXTO' },
+        num:'40-60%', sub:{ en:'when only the workspace layer is configured', 'pt-br':'quando só a camada de workspace está configurada', es:'cuando solo la capa de workspace está configurada' },
+        body:{ en:'Range of Copilot turns that miss authoritative context when teams configure only copilot-instructions.md without authoring or runtime layers. Adding chat modes for the top three task families and a single MCP server typically halves the rate.', 'pt-br':'Faixa de turns do Copilot que perdem contexto autoritativo quando o time configura só copilot-instructions.md sem camada de autoria ou runtime. Adicionar chat modes para as três famílias de tarefa principais e um MCP server tipicamente reduz a taxa pela metade.', es:'Rango de turnos de Copilot que pierden contexto autoritativo cuando el equipo configura solo copilot-instructions.md sin capa de autoría o runtime. Agregar chat modes para las tres familias de tarea principales y un MCP server típicamente reduce la tasa a la mitad.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'ink',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -133,5 +169,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

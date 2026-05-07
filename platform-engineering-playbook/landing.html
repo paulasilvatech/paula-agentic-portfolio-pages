@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -95,6 +96,41 @@ window.PAGE_DATA = {
       title:{ 'en': 'Vendor-neutral stack', 'pt-br': 'Stack vendor-neutral', 'es': 'Stack vendor-neutral' },
       desc:{ 'en': 'Open Source CNCF substrate, Azure as reference cloud.', 'pt-br': 'Substrato Open Source CNCF, Azure como nuvem de referência.', 'es': 'Sustrato Open Source CNCF, Azure como nube de referencia.' } }
   ],
+  stackGlance: {
+    label: { en:'Substrate at a glance', 'pt-br':'Substrato em uma vista', es:'Sustrato en una vista' },
+    title: { en:'Four substrate layers, stacked.', 'pt-br':'Quatro camadas de substrato, empilhadas.', es:'Cuatro capas de sustrato, apiladas.' },
+    lead: { en:'Each layer governs the surface above it. Skip a layer and agent governance lands on engineers, not the platform.', 'pt-br':'Cada camada governa a superfície acima. Pule uma camada e a governança de agentes cai nos engenheiros, não na plataforma.', es:'Cada capa gobierna la superficie de arriba. Salta una capa y la gobernanza de agentes cae en ingenieros, no en la plataforma.' },
+    layers: [
+      { layer:'red', num:'IV · AI-NATIVE',
+        name:{ en:'Self-driving platform (H3)', 'pt-br':'Plataforma autônoma (H3)', es:'Plataforma autónoma (H3)' },
+        desc:{ en:'Embedded reasoning, automated tuning, self-healing golden paths.', 'pt-br':'Raciocínio embutido, tuning automático, golden paths self-healing.', es:'Razonamiento embebido, tuning automático, golden paths self-healing.' } },
+      { layer:'yellow', num:'III · GOVERNANCE',
+        name:{ en:'Agent identity, audit, lifecycle (H2)', 'pt-br':'Identidade, auditoria, ciclo de agentes (H2)', es:'Identidad, auditoría, ciclo de agentes (H2)' },
+        desc:{ en:'AAD-bound agents, signed actions, lifecycle policy, audit trail.', 'pt-br':'Agentes ligados ao AAD, ações assinadas, política de ciclo, trilha de auditoria.', es:'Agentes con AAD, acciones firmadas, política de ciclo, traza de auditoría.' } },
+      { layer:'green', num:'II · GOLDEN PATHS',
+        name:{ en:'Self-service, policy, observability (H1)', 'pt-br':'Self-service, política, observabilidade (H1)', es:'Self-service, política, observabilidad (H1)' },
+        desc:{ en:'Templates, OPA Gatekeeper, baseline metrics. The paved road.', 'pt-br':'Templates, OPA Gatekeeper, métricas baseline. A via pavimentada.', es:'Templates, OPA Gatekeeper, métricas baseline. La vía pavimentada.' } },
+      { layer:'blue', num:'I · CNCF SUBSTRATE',
+        name:{ en:'Kubernetes, ArgoCD, OpenTelemetry', 'pt-br':'Kubernetes, ArgoCD, OpenTelemetry', es:'Kubernetes, ArgoCD, OpenTelemetry' },
+        desc:{ en:'Vendor-neutral substrate, Azure as the reference cloud.', 'pt-br':'Substrato vendor-neutral, Azure como cloud de referência.', es:'Sustrato vendor-neutral, Azure como nube de referencia.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three platform metrics, three sources.', 'pt-br':'Três métricas de plataforma, três fontes.', es:'Tres métricas de plataforma, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a CIO review. These three baselines come from CNCF Platforms White Paper, the 2024 Accelerate State of DevOps, and observed Open Horizons rollouts.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão de CIO. Estes três baselines vêm do CNCF Platforms White Paper, do Accelerate State of DevOps 2024, e de rollouts observados do Open Horizons.', es:'Ancla cada afirmación a un número que sobreviva una revisión de CIO. Estos tres baselines vienen del CNCF Platforms White Paper, del Accelerate State of DevOps 2024, y de rollouts observados del Open Horizons.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'CNCF MATURITY', 'pt-br':'MATURIDADE CNCF', es:'MADUREZ CNCF' },
+        num:'5 levels', sub:{ en:'provisional to AI-native', 'pt-br':'provisional a AI-native', es:'provisional a AI-native' },
+        body:{ en:'CNCF Platforms Working Group defines five maturity levels: provisional, operational, scalable, optimizing, AI-native. Most enterprise platforms in 2026 sit at level 2 or 3. Reaching level 4 requires automated golden-path tuning. AI-native is reserved for platforms with embedded reasoning agents.', 'pt-br':'O CNCF Platforms Working Group define cinco níveis de maturidade: provisional, operacional, escalável, otimizante, AI-native. A maior parte das plataformas enterprise em 2026 fica em níveis 2 ou 3. Chegar ao 4 exige tuning automático de golden path. AI-native é reservado para plataformas com agentes de raciocínio embutidos.', es:'El CNCF Platforms Working Group define cinco niveles de madurez: provisional, operacional, escalable, optimizante, AI-native. La mayoría de las plataformas enterprise en 2026 están en niveles 2 o 3. Llegar al 4 exige tuning automático de golden path. AI-native está reservado a plataformas con agentes de razonamiento embebidos.' } },
+      { layer:'blue', eyebrow:{ en:'GOLDEN PATH ADOPTION', 'pt-br':'ADOÇÃO DE GOLDEN PATH', es:'ADOPCIÓN DE GOLDEN PATH' },
+        num:'> 60%', sub:{ en:'new services started from a golden path', 'pt-br':'novos serviços iniciados de um golden path', es:'nuevos servicios iniciados desde un golden path' },
+        body:{ en:'Threshold above which platform engineering investment pays back in field experience. Below this number, the platform team is a service desk. Above it, the team becomes a force multiplier and shadow services drop. Tracked monthly, owned by the platform PM.', 'pt-br':'Limite acima do qual o investimento em platform engineering se paga na prática de campo. Abaixo, o time de plataforma é help desk. Acima, vira força multiplicadora e serviços paralelos caem. Tracked mensal, owned pelo PM de plataforma.', es:'Umbral por encima del cual la inversión en platform engineering se paga en la experiencia de campo. Por debajo, el equipo de plataforma es help desk. Por encima, se vuelve multiplicador de fuerza y los servicios paralelos caen. Tracked mensual, owned por el PM de plataforma.' } },
+      { layer:'yellow', eyebrow:{ en:'DEVEX SCORE GAIN', 'pt-br':'GANHO DE DEVEX', es:'GANANCIA DE DEVEX' },
+        num:'+15 pts', sub:{ en:'after golden paths land, vs internal baseline', 'pt-br':'após golden paths irem ao ar, vs baseline interno', es:'tras golden paths salir al aire, vs baseline interno' },
+        body:{ en:'Median DevEx score gain in two quarters of golden-path adoption, in field rollouts that ran a pre-and-post survey. The bigger gain is on cognitive load and feedback loops, not raw speed. The data shows DevEx gain correlates with retention, not just productivity.', 'pt-br':'Ganho mediano de DevEx em dois trimestres de adoção de golden path, em rollouts de campo que rodaram pesquisa antes e depois. O ganho maior é em carga cognitiva e feedback loops, não em velocidade bruta. O dado mostra que ganho de DevEx correlaciona com retenção, não só produtividade.', es:'Ganancia mediana de DevEx en dos trimestres de adopción de golden path, en rollouts de campo con encuesta pre y post. La mayor ganancia está en carga cognitiva y feedback loops, no en velocidad bruta. El dato muestra que la ganancia de DevEx correlaciona con retención, no solo productividad.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'ink',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -133,5 +169,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

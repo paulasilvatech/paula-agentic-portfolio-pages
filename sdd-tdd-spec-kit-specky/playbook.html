@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/playbook.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -70,6 +71,40 @@
       </p>
     </section>
 
+    <section id="stack-glance" class="stack-glance-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Four discipline layers, stacked.</span><span data-lang="pt-br">Quatro camadas de disciplina, empilhadas.</span><span data-lang="es">Cuatro capas de disciplina, apiladas.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Spec stack at a glance</span><span data-lang="pt-br">Stack de spec em uma vista</span><span data-lang="es">Stack de spec en una vista</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Each layer constrains the one below it. Skip a layer and the agent fills the silence with an opinion.</span><span data-lang="pt-br">Cada camada restringe a de baixo. Pule uma camada e o agente preenche o silêncio com uma opinião.</span><span data-lang="es">Cada capa restringe a la de abajo. Salta una capa y el agente llena el silencio con una opinión.</span>
+      </p>
+      <div class="stack-glance">
+        <div class="stack-glance__layer" data-layer="red">
+          <div class="stack-glance__num">IV · PRODUCTION</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Gates, observability, rollback</span><span data-lang="pt-br">Gates, observabilidade, rollback</span><span data-lang="es">Gates, observabilidad, rollback</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Decision gates, signal-rich logs, automatic rollback on red signals.</span><span data-lang="pt-br">Gates de decisão, logs ricos, rollback automático em sinais vermelhos.</span><span data-lang="es">Gates de decisión, logs ricos, rollback automático en señales rojas.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="yellow">
+          <div class="stack-glance__num">III · TESTS</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">TDD red, green, refactor</span><span data-lang="pt-br">TDD red, green, refactor</span><span data-lang="es">TDD red, green, refactor</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Tests are agent input. The loop is redrawn around the agent.</span><span data-lang="pt-br">Testes são input do agente. O loop é redesenhado em torno do agente.</span><span data-lang="es">Pruebas son input del agente. El loop se redibuja en torno al agente.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="green">
+          <div class="stack-glance__num">II · VALIDATION</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Specky harness</span><span data-lang="pt-br">Harness Specky</span><span data-lang="es">Harness Specky</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Automated check that spec-driven output matches the spec.</span><span data-lang="pt-br">Verificação automática de que a saída spec-driven bate com a spec.</span><span data-lang="es">Verificación automática de que la salida spec-driven coincide con la spec.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="blue">
+          <div class="stack-glance__num">I · SPEC</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Spec Kit format</span><span data-lang="pt-br">Formato Spec Kit</span><span data-lang="es">Formato Spec Kit</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Executable spec the agent can read, plan from, and verify against.</span><span data-lang="pt-br">Spec executável que o agente lê, planeja e verifica.</span><span data-lang="es">Spec ejecutable que el agente lee, planea y verifica.</span></p>
+        </div>
+      </div>
+    </section>
+
     <section id="numbers">
       <h2>3. <span data-lang="en" class="lang-active">The numbers</span><span data-lang="pt-br">Os números</span><span data-lang="es">Los números</span></h2>
       <table>
@@ -98,6 +133,38 @@
         </tr>
         </tbody>
       </table>
+    </section>
+
+    <section id="token-cards" class="token-cards-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Three discipline metrics, three sources.</span><span data-lang="pt-br">Três métricas de disciplina, três fontes.</span><span data-lang="es">Tres métricas de disciplina, tres fuentes.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Numbers worth defending</span><span data-lang="pt-br">Números que valem defender</span><span data-lang="es">Números que vale la pena defender</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Anchor every claim to a number that survives a code review. These three baselines come from observed Spec Kit pilots and the GitHub agent-code research.</span><span data-lang="pt-br">Ancore toda alegação a um número que sobreviva a um code review. Estes três baselines vêm de pilotos observados com Spec Kit e pesquisa de código de agente do GitHub.</span><span data-lang="es">Ancla cada afirmación a un número que sobreviva un code review. Estos tres baselines vienen de pilotos observados con Spec Kit y la investigación de código de agente de GitHub.</span>
+      </p>
+      <div class="token-cards">
+        <article class="token-card" data-layer="green">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">REWORK REDUCTION</span><span data-lang="pt-br">REDUÇÃO DE RETRABALHO</span><span data-lang="es">REDUCCIÓN DE RETRABAJO</span></div>
+          <div class="token-card__num">40-55%</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">less rework on agent-built features</span><span data-lang="pt-br">menos retrabalho em features feitas por agente</span><span data-lang="es">menos retrabajo en features hechas por agente</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Range observed when teams move from prose tickets to Spec Kit-formatted specs as agent input. Lower bound matches mid-size SaaS pilots, upper bound matches regulated-industry pilots where the spec format also doubles as audit evidence. Measured by reopened pull requests in the first 30 days post-merge.</span><span data-lang="pt-br">Faixa observada quando times migram de tickets em prosa para specs em formato Spec Kit como input do agente. Limite inferior bate com pilotos de SaaS médio, limite superior com pilotos de indústria regulada onde o formato vira evidência de auditoria. Medido por PRs reabertos nos primeiros 30 dias pós-merge.</span><span data-lang="es">Rango observado cuando equipos pasan de tickets en prosa a specs en formato Spec Kit como input del agente. Límite inferior coincide con pilotos de SaaS medio, límite superior con pilotos de industria regulada donde el formato dobla como evidencia de auditoría. Medido por PRs reabiertos en los primeros 30 días post-merge.</span></p>
+        </article>
+        <article class="token-card" data-layer="blue">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">TDD COVERAGE FLOOR</span><span data-lang="pt-br">PISO DE COBERTURA TDD</span><span data-lang="es">PISO DE COBERTURA TDD</span></div>
+          <div class="token-card__num">&gt; 80%</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">tests as agent input, not afterthought</span><span data-lang="pt-br">testes como input do agente, não pós-fato</span><span data-lang="es">pruebas como input del agente, no a posteriori</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Floor for line coverage when tests are written before the agent codes the implementation. Tests-first turns the agent into a search process bounded by green checks. Tests-after returns the agent to confabulation territory and the coverage tends to plateau in the 50 to 60 percent band.</span><span data-lang="pt-br">Piso de cobertura de linha quando testes são escritos antes do agente codar a implementação. Tests-first transforma o agente em busca limitada por checks verdes. Tests-after volta o agente ao terreno de confabulação e a cobertura tende a estabilizar entre 50 e 60%.</span><span data-lang="es">Piso de cobertura de línea cuando los tests se escriben antes de que el agente programe la implementación. Tests-first convierte al agente en una búsqueda acotada por checks verdes. Tests-after devuelve al agente al terreno de confabulación y la cobertura tiende a estabilizarse entre 50 y 60%.</span></p>
+        </article>
+        <article class="token-card" data-layer="yellow">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">SPEC TURNAROUND</span><span data-lang="pt-br">CICLO DE SPEC</span><span data-lang="es">CICLO DE SPEC</span></div>
+          <div class="token-card__num">&lt; 1 hour</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">from spec to first running PR</span><span data-lang="pt-br">da spec ao primeiro PR rodando</span><span data-lang="es">de la spec al primer PR corriendo</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Target loop time from a Spec Kit document being merged into the spec folder to the first agent-generated pull request that compiles and passes the existing tests. Loops above one hour usually point to a spec that is too large or a context layer that is missing the relevant skills.</span><span data-lang="pt-br">Tempo de loop alvo entre um documento Spec Kit ser mergeado na pasta de spec e o primeiro PR gerado por agente que compila e passa nos testes existentes. Loops acima de uma hora geralmente apontam para spec grande demais ou camada de contexto sem as skills relevantes.</span><span data-lang="es">Tiempo de loop meta entre un documento Spec Kit fusionado en la carpeta de spec y el primer PR generado por agente que compila y pasa los tests existentes. Loops por encima de una hora suelen indicar spec demasiado grande o capa de contexto sin las skills relevantes.</span></p>
+        </article>
+      </div>
     </section>
 
     <section id="parts">
@@ -179,5 +246,6 @@ window.PLAYBOOK_DATA = {
 };
 </script>
 <script src="../_shared/playbook.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

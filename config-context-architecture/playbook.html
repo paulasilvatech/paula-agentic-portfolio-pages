@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/playbook.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -70,6 +71,40 @@
       </p>
     </section>
 
+    <section id="stack-glance" class="stack-glance-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Four layers, one Copilot session.</span><span data-lang="pt-br">Quatro camadas, uma sessão Copilot.</span><span data-lang="es">Cuatro capas, una sesión Copilot.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Config stack at a glance</span><span data-lang="pt-br">Stack de config em uma vista</span><span data-lang="es">Stack de config en una vista</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Each layer loads context for the layer above it. Skip a layer and the upper ones miss the grounding they expect.</span><span data-lang="pt-br">Cada camada carrega contexto para a de cima. Pular uma camada e as superiores perdem o grounding esperado.</span><span data-lang="es">Cada capa carga contexto para la de arriba. Saltar una capa y las superiores pierden el grounding esperado.</span>
+      </p>
+      <div class="stack-glance">
+        <div class="stack-glance__layer" data-layer="red">
+          <div class="stack-glance__num">IV · RUNTIME</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Hooks, MCP, plugins</span><span data-lang="pt-br">Hooks, MCP, plugins</span><span data-lang="es">Hooks, MCP, plugins</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Pre and post tool hooks, MCP servers, plugins, VS Code settings.</span><span data-lang="pt-br">Hooks pre e post tool, servidores MCP, plugins, settings do VS Code.</span><span data-lang="es">Hooks pre y post tool, servidores MCP, plugins, settings de VS Code.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="yellow">
+          <div class="stack-glance__num">III · AUTHORING</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Agents, chat modes, skills</span><span data-lang="pt-br">Agentes, chat modes, skills</span><span data-lang="es">Agentes, chat modes, skills</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Authored artifacts that shape Copilot behavior per task.</span><span data-lang="pt-br">Artefatos autorais que moldam o comportamento do Copilot por tarefa.</span><span data-lang="es">Artefactos de autor que moldean el comportamiento de Copilot por tarea.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="green">
+          <div class="stack-glance__num">II · WORKSPACE</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">.github/instructions and copilot-instructions.md</span><span data-lang="pt-br">.github/instructions e copilot-instructions.md</span><span data-lang="es">.github/instructions y copilot-instructions.md</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Repo-scoped instructions that load into every Copilot turn.</span><span data-lang="pt-br">Instruções por repo que carregam em cada turn do Copilot.</span><span data-lang="es">Instrucciones por repo que cargan en cada turno de Copilot.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="blue">
+          <div class="stack-glance__num">I · ENVIRONMENT</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">VS Code settings, identity, network</span><span data-lang="pt-br">Settings VS Code, identidade, rede</span><span data-lang="es">Settings VS Code, identidad, red</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Editor configuration, signed-in identity, network reachability to model.</span><span data-lang="pt-br">Configuração do editor, identidade logada, alcance de rede ao modelo.</span><span data-lang="es">Configuración del editor, identidad firmada, alcance de red al modelo.</span></p>
+        </div>
+      </div>
+    </section>
+
     <section id="numbers">
       <h2>3. <span data-lang="en" class="lang-active">The numbers</span><span data-lang="pt-br">Os números</span><span data-lang="es">Los números</span></h2>
       <table>
@@ -98,6 +133,38 @@
         </tr>
         </tbody>
       </table>
+    </section>
+
+    <section id="token-cards" class="token-cards-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Three context-load metrics, three sources.</span><span data-lang="pt-br">Três métricas de carga de contexto, três fontes.</span><span data-lang="es">Tres métricas de carga de contexto, tres fuentes.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Numbers worth defending</span><span data-lang="pt-br">Números que valem defender</span><span data-lang="es">Números que vale la pena defender</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Anchor every claim to a number that survives a code review. These three baselines were measured across the 2,303 real config files studied for this map.</span><span data-lang="pt-br">Ancore toda alegação a um número que sobreviva a um code review. Estes três baselines foram medidos nos 2.303 arquivos reais estudados para este mapa.</span><span data-lang="es">Ancla cada afirmación a un número que sobreviva un code review. Estos tres baselines se midieron en los 2.303 archivos reales estudiados para este mapa.</span>
+      </p>
+      <div class="token-cards">
+        <article class="token-card" data-layer="green">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">CORPUS STUDIED</span><span data-lang="pt-br">CORPUS ESTUDADO</span><span data-lang="es">CORPUS ESTUDIADO</span></div>
+          <div class="token-card__num">2,303</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">real Copilot config files across public repos</span><span data-lang="pt-br">arquivos reais de config em repos públicos</span><span data-lang="es">archivos reales de config en repos públicos</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Source corpus that grounds the ten-layer map. Files were collected from public repositories that had a copilot-instructions.md or a .github/instructions folder, then classified by layer, length, and renewal frequency.</span><span data-lang="pt-br">Corpus base que ancora o mapa de dez camadas. Arquivos coletados de repos públicos que tinham copilot-instructions.md ou pasta .github/instructions, depois classificados por camada, tamanho e frequência de atualização.</span><span data-lang="es">Corpus base que ancla el mapa de diez capas. Archivos recolectados de repos públicos con copilot-instructions.md o carpeta .github/instructions, luego clasificados por capa, tamaño y frecuencia de renovación.</span></p>
+        </article>
+        <article class="token-card" data-layer="blue">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">HOT TIER LIMIT</span><span data-lang="pt-br">LIMITE DO TIER HOT</span><span data-lang="es">LÍMITE DEL TIER HOT</span></div>
+          <div class="token-card__num">&lt; 2 KB</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">recommended size for instructions in the prompt</span><span data-lang="pt-br">tamanho recomendado para instruções no prompt</span><span data-lang="es">tamaño recomendado para instrucciones en el prompt</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Hot-tier files (system instructions, agent prompts) load on every turn. Above 2 KB the eviction risk grows and the model starts to drop trailing constraints. Move the bulky reference content to warm or cold tier and link to it from the hot tier.</span><span data-lang="pt-br">Arquivos do tier hot (system instructions, prompts de agente) carregam em cada turn. Acima de 2 KB o risco de eviction cresce e o modelo começa a derrubar restrições do final. Mova conteúdo de referência denso para warm ou cold e linke do hot tier.</span><span data-lang="es">Los archivos del tier hot (system instructions, prompts de agente) cargan en cada turno. Por encima de 2 KB el riesgo de eviction crece y el modelo comienza a soltar restricciones finales. Mueve el contenido de referencia denso a warm o cold y enlaza desde hot.</span></p>
+        </article>
+        <article class="token-card" data-layer="yellow">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">CONTEXT MISS RATE</span><span data-lang="pt-br">TAXA DE MISS DE CONTEXTO</span><span data-lang="es">TASA DE MISS DE CONTEXTO</span></div>
+          <div class="token-card__num">40-60%</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">when only the workspace layer is configured</span><span data-lang="pt-br">quando só a camada de workspace está configurada</span><span data-lang="es">cuando solo la capa de workspace está configurada</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Range of Copilot turns that miss authoritative context when teams configure only copilot-instructions.md without authoring or runtime layers. Adding chat modes for the top three task families and a single MCP server typically halves the rate.</span><span data-lang="pt-br">Faixa de turns do Copilot que perdem contexto autoritativo quando o time configura só copilot-instructions.md sem camada de autoria ou runtime. Adicionar chat modes para as três famílias de tarefa principais e um MCP server tipicamente reduz a taxa pela metade.</span><span data-lang="es">Rango de turnos de Copilot que pierden contexto autoritativo cuando el equipo configura solo copilot-instructions.md sin capa de autoría o runtime. Agregar chat modes para las tres familias de tarea principales y un MCP server típicamente reduce la tasa a la mitad.</span></p>
+        </article>
+      </div>
     </section>
 
     <section id="parts">
@@ -179,5 +246,6 @@ window.PLAYBOOK_DATA = {
 };
 </script>
 <script src="../_shared/playbook.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

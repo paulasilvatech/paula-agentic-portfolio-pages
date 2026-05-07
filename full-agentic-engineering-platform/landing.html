@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -114,6 +115,41 @@ window.PAGE_DATA = {
              'pt-br':'Como as camadas se integram na prática. Modelo de maturidade, roteamento de modelos, dez princípios, quick-starts por persona. FinOps para IA: orçamentos, alertas, FOCUS export. Azure AI Foundry: PTU vs PAYG, content safety, AAD/RBAC.',
              es:'Cómo se integran las capas en la práctica. Modelo de madurez, ruteo de modelos, diez principios, quick-starts por persona. FinOps para IA: presupuestos, alertas, FOCUS export. Azure AI Foundry: PTU vs PAYG, content safety, AAD/RBAC.' } }
   ],
+  stackGlance: {
+    label: { en:'Platform stack at a glance', 'pt-br':'Stack da plataforma em uma vista', es:'Stack de plataforma en una vista' },
+    title: { en:'Four engineering disciplines, stacked.', 'pt-br':'Quatro disciplinas de engenharia, empilhadas.', es:'Cuatro disciplinas de ingeniería, apiladas.' },
+    lead: { en:'Six disciplines collapse into the four-layer canonical view. Each layer constrains the one below it.', 'pt-br':'Seis disciplinas colapsam na visão canônica de quatro camadas. Cada camada restringe a de baixo.', es:'Seis disciplinas colapsan en la vista canónica de cuatro capas. Cada capa restringe a la de abajo.' },
+    layers: [
+      { layer:'red', num:'IV · INTENT',
+        name:{ en:'Constitution, specs, SDD', 'pt-br':'Constituição, specs, SDD', es:'Constitución, specs, SDD' },
+        desc:{ en:'Goals, values, trade-off hierarchies the agent must respect.', 'pt-br':'Objetivos, valores e hierarquias de trade-off que o agente respeita.', es:'Metas, valores y jerarquías de trade-off que el agente respeta.' } },
+      { layer:'yellow', num:'III · CONTEXT',
+        name:{ en:'Memory, skills, MCP, AGENTS.md', 'pt-br':'Memória, skills, MCP, AGENTS.md', es:'Memoria, skills, MCP, AGENTS.md' },
+        desc:{ en:'What the agent reads, where it lives, how it ages out.', 'pt-br':'O que o agente lê, onde mora, como expira.', es:'Lo que el agente lee, dónde vive, cómo expira.' } },
+      { layer:'green', num:'II · PLATFORM',
+        name:{ en:'IDP, golden paths, RBAC, MCP registry', 'pt-br':'IDP, golden paths, RBAC, registro MCP', es:'IDP, golden paths, RBAC, registro MCP' },
+        desc:{ en:'Runtime that lets the agent act safely without inventing infra.', 'pt-br':'Runtime que deixa o agente agir com segurança sem reinventar infra.', es:'Runtime que deja al agente actuar seguro sin reinventar infra.' } },
+      { layer:'blue', num:'I · INFRASTRUCTURE',
+        name:{ en:'Kubernetes, MCP protocol, IaC', 'pt-br':'Kubernetes, protocolo MCP, IaC', es:'Kubernetes, protocolo MCP, IaC' },
+        desc:{ en:'Where the agent runs, at what cost, with which signed supply chain.', 'pt-br':'Onde o agente roda, a que custo, com qual cadeia de suprimentos assinada.', es:'Dónde corre el agente, a qué costo, con qué cadena de suministro firmada.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three umbrella metrics, three sources.', 'pt-br':'Três métricas guarda-chuva, três fontes.', es:'Tres métricas paraguas, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a board review. These three baselines are the public anchors used across all six disciplines.', 'pt-br':'Ancore toda alegação a um número que sobreviva a revisão de board. Estes três baselines são as âncoras públicas usadas nas seis disciplinas.', es:'Ancla cada afirmación a un número que sobreviva una revisión de board. Estos tres baselines son las anclas públicas usadas en las seis disciplinas.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'AGENT ADOPTION · 2026', 'pt-br':'ADOÇÃO DE AGENTES · 2026', es:'ADOPCIÓN DE AGENTES · 2026' },
+        num:'40%', sub:{ en:'enterprise apps with task-specific AI agents', 'pt-br':'apps corporativos com agentes específicos', es:'apps corporativas con agentes específicos' },
+        body:{ en:'Gartner forecast for 2026 enterprise application footprint that includes at least one task-specific AI agent. Up from roughly 5 percent in 2024. The growth curve is what makes the discipline gap visible: capability arrives faster than the platform that should govern it.', 'pt-br':'Previsão Gartner para 2026 de pegada de aplicação corporativa que inclui ao menos um agente IA específico de tarefa. Saindo de cerca de 5% em 2024. A curva de crescimento é o que torna o gap de disciplina visível: capacidade chega mais rápido que a plataforma que deveria governá-la.', es:'Pronóstico Gartner para 2026 de huella de aplicación corporativa que incluye al menos un agente IA específico de tarea. Saliendo de cerca de 5% en 2024. La curva de crecimiento es lo que hace visible la brecha de disciplina: la capacidad llega más rápido que la plataforma que debería gobernarla.' } },
+      { layer:'blue', eyebrow:{ en:'TOKEN COST DELTA', 'pt-br':'DELTA DE CUSTO DE TOKEN', es:'DELTA DE COSTO DE TOKEN' },
+        num:'30-70%', sub:{ en:'reduction with the four disciplines applied', 'pt-br':'redução com as quatro disciplinas aplicadas', es:'reducción con las cuatro disciplinas aplicadas' },
+        body:{ en:'Field-observed range when the four context engineering tactics ship together: prompt caching, semantic compaction, model routing, and context expiry. Lower bound matches Microsoft customer references. Upper bound holds when retrieval is also tuned and the eval gates retry storms.', 'pt-br':'Faixa observada em campo quando as quatro táticas de context engineering vão juntas: cache de prompt, compaction semântico, model routing e expiração de contexto. Limite inferior bate com referências de cliente Microsoft. Limite superior se mantém quando a recuperação está afinada e o eval barra retry storm.', es:'Rango observado en campo cuando las cuatro tácticas de context engineering van juntas: caché de prompt, compaction semántico, model routing y expiración de contexto. Límite inferior coincide con referencias de cliente Microsoft. Límite superior se sostiene cuando la recuperación está afinada y el eval frena retry storm.' } },
+      { layer:'yellow', eyebrow:{ en:'COMPLEXITY DRIFT', 'pt-br':'DRIFT DE COMPLEXIDADE', es:'DRIFT DE COMPLEJIDAD' },
+        num:'+39%', sub:{ en:'cognitive complexity from ungoverned agents', 'pt-br':'complexidade cognitiva sem governança', es:'complejidad cognitiva sin gobernanza' },
+        body:{ en:'CMU AIDev study (Liu et al. 2026, 304K AI commits, 6,275 repos): cognitive complexity rises 39 percent in repos that adopt AI assistants without intent specs and review gates. Static-analysis warnings rise 18 percent. Both metrics fall back to baseline when intent and context layers are added.', 'pt-br':'Estudo CMU AIDev (Liu et al. 2026, 304K commits IA, 6.275 repos): complexidade cognitiva sobe 39% em repos que adotam assistentes IA sem spec de intent e gates de revisão. Warnings de análise estática sobem 18%. Ambas voltam ao baseline com camadas de intent e contexto.', es:'Estudio CMU AIDev (Liu et al. 2026, 304K commits IA, 6,275 repos): la complejidad cognitiva sube 39% en repos que adoptan asistentes IA sin spec de intent y gates de revisión. Warnings de análisis estático suben 18%. Ambas vuelven al baseline al agregar capas de intent y contexto.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'green',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -152,5 +188,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -109,6 +110,41 @@ window.PAGE_DATA = {
              'pt-br':'Desligar o módulo legado. Arquivar dados, documentação e o conhecimento das pessoas. Capturar lições.',
              es:'Apagar el módulo legado. Archivar datos, documentación y el conocimiento de las personas. Capturar lecciones.' } }
   ],
+  stackGlance: {
+    label: { en:'Modernization stack at a glance', 'pt-br':'Stack de modernização em uma vista', es:'Stack de modernización en una vista' },
+    title: { en:'Four runway layers, stacked.', 'pt-br':'Quatro camadas de runway, empilhadas.', es:'Cuatro capas de runway, apiladas.' },
+    lead: { en:'Each layer borrows trust from the one below it. Skip a layer and the cutover fails on go-live night.', 'pt-br':'Cada camada empresta confiança da de baixo. Pule uma camada e o cutover falha na noite do go-live.', es:'Cada capa toma confianza de la de abajo. Salta una capa y el cutover falla la noche del go-live.' },
+    layers: [
+      { layer:'red', num:'IV · CUTOVER',
+        name:{ en:'Cutover, parity, rollback', 'pt-br':'Cutover, paridade, rollback', es:'Cutover, paridad, rollback' },
+        desc:{ en:'Side-by-side run, parity check, rollback rehearsal, signed acceptance.', 'pt-br':'Execução lado a lado, paridade, ensaio de rollback, aceitação assinada.', es:'Ejecución lado a lado, paridad, ensayo de rollback, aceptación firmada.' } },
+      { layer:'yellow', num:'III · CARVE',
+        name:{ en:'Strangler fig, smallest slice', 'pt-br':'Strangler fig, fatia menor', es:'Strangler fig, slice más pequeño' },
+        desc:{ en:'Carve the smallest module that ships value with legacy still running.', 'pt-br':'Talhe o menor módulo que entrega valor com o legado ainda no ar.', es:'Talla el menor módulo que entrega valor con el legado aún corriendo.' } },
+      { layer:'green', num:'II · DECIDE',
+        name:{ en:'5R framework per workload', 'pt-br':'Framework 5R por workload', es:'Framework 5R por workload' },
+        desc:{ en:'Rehost, refactor, rearchitect, rebuild, replace, with risk and ROI.', 'pt-br':'Rehost, refactor, rearchitect, rebuild, replace, com risco e ROI.', es:'Rehost, refactor, rearchitect, rebuild, replace, con riesgo y ROI.' } },
+      { layer:'blue', num:'I · DISCOVER',
+        name:{ en:'IFPUG sizing, dependency graph', 'pt-br':'Sizing IFPUG, grafo de dependências', es:'Sizing IFPUG, grafo de dependencias' },
+        desc:{ en:'Inventory, function points, business-value map. Most underestimate by 3x.', 'pt-br':'Inventário, function points, mapa de valor. Maioria subestima em 3x.', es:'Inventario, function points, mapa de valor. Mayoría subestima en 3x.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three modernization metrics, three sources.', 'pt-br':'Três métricas de modernização, três fontes.', es:'Tres métricas de modernización, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a steering review. These three baselines reflect Azure Migrate field data and IFPUG industry sizing.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão de steering. Estes três baselines refletem dados de campo do Azure Migrate e sizing IFPUG.', es:'Ancla cada afirmación a un número que sobreviva una revisión de steering. Estos tres baselines reflejan datos de campo de Azure Migrate y sizing IFPUG.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'DISCOVERY UNDERSIZE', 'pt-br':'SUBDIMENSIONAMENTO DA DESCOBERTA', es:'SUBESTIMACIÓN DEL DESCUBRIMIENTO' },
+        num:'3x', sub:{ en:'typical underestimate of phase 1 effort', 'pt-br':'subdimensionamento típico do esforço da fase 1', es:'subestimación típica del esfuerzo de la fase 1' },
+        body:{ en:'Reference factor by which teams underestimate the discovery phase before they apply IFPUG sizing and a dependency graph. Hidden dependencies, undocumented batches, and dormant integrations account for most of the gap. The framework treats discovery as the gate, not the kickoff.', 'pt-br':'Fator de referência pelo qual times subestimam a fase de descoberta antes de aplicar sizing IFPUG e grafo de dependências. Dependências escondidas, batches não documentados e integrações dormentes respondem pela maior parte do gap. O framework trata descoberta como gate, não como kickoff.', es:'Factor de referencia por el que los equipos subestiman la fase de descubrimiento antes de aplicar sizing IFPUG y grafo de dependencias. Dependencias ocultas, batches sin documentar e integraciones dormidas explican la mayor parte de la brecha. El framework trata el descubrimiento como compuerta, no como kickoff.' } },
+      { layer:'blue', eyebrow:{ en:'STRANGLER FIG SLICE', 'pt-br':'FATIA STRANGLER FIG', es:'SLICE STRANGLER FIG' },
+        num:'< 90 days', sub:{ en:'first carved module in production', 'pt-br':'primeiro módulo talhado em produção', es:'primer módulo tallado en producción' },
+        body:{ en:'Target window for the first strangler-fig slice to reach production with legacy still running. Smaller slices are stronger evidence. Anything beyond 90 days indicates the slice was too large or the boundary too entangled. Re-cut and reduce scope.', 'pt-br':'Janela alvo para a primeira fatia strangler fig chegar a produção com o legado ainda no ar. Fatias menores são evidência mais forte. Acima de 90 dias indica fatia grande demais ou fronteira muito emaranhada. Recorte e reduza escopo.', es:'Ventana meta para la primera fatia strangler fig llegar a producción con el legado aún corriendo. Slices más pequeños son evidencia más fuerte. Sobre 90 días indica slice demasiado grande o frontera muy enredada. Recorta y reduce alcance.' } },
+      { layer:'yellow', eyebrow:{ en:'5R DECISIONS', 'pt-br':'DECISÕES 5R', es:'DECISIONES 5R' },
+        num:'5 paths', sub:{ en:'rehost, refactor, rearchitect, rebuild, replace', 'pt-br':'rehost, refactor, rearchitect, rebuild, replace', es:'rehost, refactor, rearchitect, rebuild, replace' },
+        body:{ en:'The five canonical paths from Microsoft Cloud Adoption Framework. Each workload gets one decision, defended by a one-page brief: business value, risk, cost, time, reversibility. Decisions are revisited only when one of the five inputs materially changes.', 'pt-br':'Os cinco caminhos canônicos do Microsoft Cloud Adoption Framework. Cada workload recebe uma decisão, defendida por um brief de uma página: valor, risco, custo, tempo, reversibilidade. Decisões são revisitadas só quando uma das cinco entradas muda materialmente.', es:'Los cinco caminos canónicos del Microsoft Cloud Adoption Framework. Cada workload recibe una decisión, defendida por un brief de una página: valor, riesgo, costo, tiempo, reversibilidad. Las decisiones se revisan solo cuando una de las cinco entradas cambia materialmente.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'blue',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -152,5 +188,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

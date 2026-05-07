@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -107,6 +108,41 @@ window.PAGE_DATA = {
              'pt-br':'GPUs, Kubernetes, serviços CNCF. Onde os agentes rodam, e a que custo.',
              es:'GPUs, Kubernetes, servicios CNCF. Dónde corren los agentes, y a qué costo.' } }
   ],
+  stackGlance: {
+    label: { en:'Stack at a glance', 'pt-br':'O stack em uma vista', es:'El stack en una vista' },
+    title: { en:'Four layers, stacked.', 'pt-br':'Quatro camadas, empilhadas.', es:'Cuatro capas, apiladas.' },
+    lead: { en:'Each layer constrains the one below it. Skip a layer and the agent cemetery grows.', 'pt-br':'Cada camada restringe a de baixo. Pule uma camada e o cemitério de agentes cresce.', es:'Cada capa restringe a la de abajo. Salta una capa y el cementerio de agentes crece.' },
+    layers: [
+      { layer:'red', num:'IV · INTENT',
+        name:{ en:'Constitutions, specs, governance', 'pt-br':'Constituições, specs, governança', es:'Constituciones, specs, gobernanza' },
+        desc:{ en:'Codified rules the agent must follow before doing anything.', 'pt-br':'Regras codificadas que o agente segue antes de qualquer coisa.', es:'Reglas codificadas que el agente sigue antes que nada.' } },
+      { layer:'yellow', num:'III · CONTEXT',
+        name:{ en:'ACE, skills, memory, MCP', 'pt-br':'ACE, skills, memória, MCP', es:'ACE, skills, memoria, MCP' },
+        desc:{ en:'What the agent reads at runtime, where it lives, how it expires.', 'pt-br':'O que o agente lê em runtime, onde mora, como expira.', es:'Lo que el agente lee en runtime, dónde vive, cómo expira.' } },
+      { layer:'green', num:'II · PLATFORM',
+        name:{ en:'IDP, golden paths, guardrails', 'pt-br':'IDP, golden paths, guardrails', es:'IDP, golden paths, guardrails' },
+        desc:{ en:'Runtime that lets agents act safely without inventing infra.', 'pt-br':'Runtime que deixa o agente agir com segurança sem reinventar infra.', es:'Runtime que deja al agente actuar seguro sin reinventar infra.' } },
+      { layer:'blue', num:'I · INFRA',
+        name:{ en:'GPUs, Kubernetes, CNCF', 'pt-br':'GPUs, Kubernetes, CNCF', es:'GPUs, Kubernetes, CNCF' },
+        desc:{ en:'Where the agents run, and at what unit cost per hour.', 'pt-br':'Onde os agentes rodam e a que custo unitário por hora.', es:'Dónde corren los agentes y a qué costo unitario por hora.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three field metrics, three sources.', 'pt-br':'Três métricas de campo, três fontes.', es:'Tres métricas de campo, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a board review. These three baselines tie back to Deloitte 2026, Gartner 2026, and the Liu et al. 2026 GitHub study.', 'pt-br':'Ancore toda alegação a um número que sobreviva a revisão de board. Estes três baselines voltam a Deloitte 2026, Gartner 2026, e ao estudo Liu et al. 2026 do GitHub.', es:'Ancla cada afirmación a un número que sobreviva una revisión de board. Estos tres baselines vuelven a Deloitte 2026, Gartner 2026, y al estudio Liu et al. 2026 de GitHub.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'PILOT TO PROD GAP', 'pt-br':'GAP DE PILOTO PARA PROD', es:'BRECHA PILOTO A PROD' },
+        num:'75 vs 34', sub:{ en:'percent planning vs percent transforming', 'pt-br':'percentual planejando vs percentual transformando', es:'porcentaje planeando vs porcentaje transformando' },
+        body:{ en:'Deloitte State of Generative AI 2026 (n=3,235): 75 percent of enterprises plan agentic AI within two years, 34 percent report it is actually transforming the business. The 41-point gap is the agent cemetery, and it widens without the four-layer discipline.', 'pt-br':'Deloitte State of Generative AI 2026 (n=3.235): 75% das empresas planejam IA agêntica em dois anos, 34% reportam que de fato está transformando o negócio. O gap de 41 pontos é o cemitério de agentes e cresce sem a disciplina das quatro camadas.', es:'Deloitte State of Generative AI 2026 (n=3,235): 75% de las empresas planean IA agéntica en dos años, 34% reportan que realmente está transformando el negocio. La brecha de 41 puntos es el cementerio de agentes y crece sin la disciplina de las cuatro capas.' } },
+      { layer:'blue', eyebrow:{ en:'CODE-QUALITY DRIFT', 'pt-br':'DRIFT DE QUALIDADE', es:'DRIFT DE CALIDAD' },
+        num:'+18 / +39', sub:{ en:'percent more warnings, percent more complexity', 'pt-br':'% mais warnings, % mais complexidade', es:'% más warnings, % más complejidad' },
+        body:{ en:'CMU and GitHub research on AI-assisted code (Liu et al. 2026, 304K AI commits across 6,275 repos): static-analysis warnings up 18 percent, cognitive complexity up 39 percent without context engineering. The signal: model fluency without context discipline accumulates technical debt fast.', 'pt-br':'Pesquisa CMU e GitHub em código com IA (Liu et al. 2026, 304K commits IA em 6.275 repos): warnings de análise estática +18%, complexidade cognitiva +39% sem context engineering. O sinal: fluência do modelo sem disciplina de contexto acumula débito técnico rápido.', es:'Investigación CMU y GitHub en código asistido por IA (Liu et al. 2026, 304K commits IA en 6,275 repos): warnings de análisis estático +18%, complejidad cognitiva +39% sin context engineering. La señal: fluidez del modelo sin disciplina de contexto acumula deuda técnica rápido.' } },
+      { layer:'yellow', eyebrow:{ en:'AGENT FAILURE MODE', 'pt-br':'MODO DE FALHA DE AGENTE', es:'MODO DE FALLA DE AGENTE' },
+        num:'~70%', sub:{ en:'pilots that never reach production at scale', 'pt-br':'pilotos que nunca chegam a produção em escala', es:'pilotos que nunca llegan a producción a escala' },
+        body:{ en:'Industry analyst convergence (Gartner 2026, KPMG 2026, Deloitte 2026): the share of agentic AI pilots that fail to reach a second business unit. Cause is rarely the model. Cause is missing intent specs, weak context layer, and platform that did not exist when the pilot was built.', 'pt-br':'Convergência de analistas de indústria (Gartner 2026, KPMG 2026, Deloitte 2026): fatia de pilotos de IA agêntica que não chegam a uma segunda unidade de negócio. A causa raramente é o modelo. A causa é spec de intent ausente, camada de contexto fraca e plataforma que não existia quando o piloto foi construído.', es:'Convergencia de analistas de industria (Gartner 2026, KPMG 2026, Deloitte 2026): porcentaje de pilotos de IA agéntica que no llegan a una segunda unidad de negocio. La causa rara vez es el modelo. La causa es spec de intent ausente, capa de contexto débil y plataforma que no existía cuando se construyó el piloto.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'yellow',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -145,5 +181,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

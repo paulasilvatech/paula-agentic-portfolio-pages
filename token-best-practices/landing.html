@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -109,6 +110,41 @@ window.PAGE_DATA = {
              'pt-br':'Capítulos 12 e 13. Oito padrões aplicados: roteamento dinâmico, cache hierárquico, subagent fan-out, plan/execute, cache semântico, composição de ferramentas, MCP enxuto, agente custom Spec-Kit. 40 a 70% de redução em cargas agênticas.',
              es:'Capítulos 12 y 13. Ocho patrones aplicados: ruteo dinámico, cache jerárquico, subagent fan-out, plan/execute, cache semántico, composición de herramientas, MCP esbelto, agente custom Spec-Kit. 40 a 70% de reducción en cargas agénticas.' } }
   ],
+  stackGlance: {
+    label: { en:'Token economy at a glance', 'pt-br':'Economia de tokens em uma vista', es:'Economía de tokens en una vista' },
+    title: { en:'Four control layers, stacked.', 'pt-br':'Quatro camadas de controle, empilhadas.', es:'Cuatro capas de control, apiladas.' },
+    lead: { en:'Each layer constrains the spend in the layer above it. Skip the foundation and AI Credits run out before the value lands.', 'pt-br':'Cada camada restringe o gasto da de cima. Pule a base e os AI Credits acabam antes do valor chegar.', es:'Cada capa restringe el gasto de la de arriba. Salta la base y los AI Credits se agotan antes de que el valor llegue.' },
+    layers: [
+      { layer:'red', num:'IV · APPLICATION',
+        name:{ en:'Eight applied patterns', 'pt-br':'Oito padrões aplicados', es:'Ocho patrones aplicados' },
+        desc:{ en:'Routing, hierarchical cache, fan-out, plan and execute, semantic cache.', 'pt-br':'Roteamento, cache hierárquico, fan-out, plan and execute, cache semântico.', es:'Ruteo, cache jerárquico, fan-out, plan and execute, cache semántico.' } },
+      { layer:'yellow', num:'III · GOVERNANCE',
+        name:{ en:'FinOps, budgets, attribution', 'pt-br':'FinOps, orçamentos, atribuição', es:'FinOps, presupuestos, atribución' },
+        desc:{ en:'Per-session, per-agent, per-repo budgets with alerts and hard caps.', 'pt-br':'Orçamentos por sessão, agente, repo com alertas e caps duros.', es:'Presupuestos por sesión, agente, repo con alertas y caps duros.' } },
+      { layer:'green', num:'II · DISCIPLINES',
+        name:{ en:'Context, cache, agent design', 'pt-br':'Contexto, cache, design de agente', es:'Contexto, cache, diseño de agente' },
+        desc:{ en:'Concave utility, 22.7% compaction, prompt caching, SkillReducer.', 'pt-br':'Utilidade côncava, compactação 22.7%, prompt caching, SkillReducer.', es:'Utilidad cóncava, compactación 22.7%, prompt caching, SkillReducer.' } },
+      { layer:'blue', num:'I · FOUNDATIONS',
+        name:{ en:'Counting, model families, multipliers', 'pt-br':'Contagem, famílias de modelo, multiplicadores', es:'Conteo, familias de modelo, multiplicadores' },
+        desc:{ en:'How tokens are counted, where they go, what each model multiplier costs.', 'pt-br':'Como tokens são contados, para onde vão, quanto custa cada multiplicador.', es:'Cómo se cuentan los tokens, adónde van, cuánto cuesta cada multiplicador.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three token economics metrics, three sources.', 'pt-br':'Três métricas de economia de token, três fontes.', es:'Tres métricas de economía de token, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a CFO review. These three baselines come from GitHub Copilot AI Credits documentation, the SkillReducer experiment, and observed enterprise rollouts.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão de CFO. Estes três baselines vêm da documentação de AI Credits do GitHub Copilot, do experimento SkillReducer, e de rollouts corporativos observados.', es:'Ancla cada afirmación a un número que sobreviva una revisión de CFO. Estos tres baselines vienen de la documentación de AI Credits de GitHub Copilot, del experimento SkillReducer, y de rollouts corporativos observados.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'AGENTIC SAVINGS', 'pt-br':'ECONOMIA AGÊNTICA', es:'AHORRO AGÉNTICO' },
+        num:'40-70%', sub:{ en:'reduction with the eight applied patterns', 'pt-br':'redução com os oito padrões aplicados', es:'reducción con los ocho patrones aplicados' },
+        body:{ en:'Reference reduction range when teams ship the eight applied patterns together: dynamic routing, hierarchical cache, subagent fan-out, plan and execute, semantic cache, tool composition, lean MCP, custom agent Spec-Kit. Lower bound matches mid-size pilots, upper bound holds when the eval gate also blocks retry storms.', 'pt-br':'Faixa de redução de referência quando times entregam os oito padrões juntos: roteamento dinâmico, cache hierárquico, subagent fan-out, plan and execute, cache semântico, composição de ferramentas, MCP enxuto, agente custom Spec-Kit. Limite inferior bate com pilotos médios, limite superior se sustenta quando o eval gate barra retry storm.', es:'Rango de reducción de referencia cuando los equipos entregan los ocho patrones juntos: ruteo dinámico, cache jerárquico, subagent fan-out, plan and execute, cache semántico, composición de herramientas, MCP esbelto, agente custom Spec-Kit. Límite inferior coincide con pilotos medianos, límite superior se sostiene cuando el eval gate frena retry storm.' } },
+      { layer:'blue', eyebrow:{ en:'COMPACTION GAIN', 'pt-br':'GANHO DE COMPACTAÇÃO', es:'GANANCIA DE COMPACTACIÓN' },
+        num:'22.7%', sub:{ en:'context size reduction, concave utility curve', 'pt-br':'redução de tamanho de contexto, curva côncava', es:'reducción de tamaño de contexto, curva cóncava' },
+        body:{ en:'Median compaction gain reported in the published context-engineering experiment that grounds Chapter 04. The technique exploits the concave utility curve: the last 25 percent of tokens carry the smallest fraction of decision value, so semantic compaction trims them with negligible loss in eval scores.', 'pt-br':'Ganho mediano de compactação reportado no experimento de context engineering publicado que ancora o Capítulo 04. A técnica explora a curva côncava de utilidade: os últimos 25% de tokens carregam a menor fração de valor de decisão, então a compactação semântica os corta com perda desprezível em eval scores.', es:'Ganancia mediana de compactación reportada en el experimento publicado de context engineering que ancla el Capítulo 04. La técnica explota la curva cóncava de utilidad: el último 25% de tokens carga la menor fracción de valor de decisión, por lo que la compactación semántica los recorta con pérdida despreciable en eval scores.' } },
+      { layer:'yellow', eyebrow:{ en:'SKILL BODY CUT', 'pt-br':'CORTE NO CORPO DE SKILL', es:'RECORTE EN CUERPO DE SKILL' },
+        num:'-39%', sub:{ en:'SkillReducer reduction in skill payload', 'pt-br':'redução do SkillReducer no payload', es:'reducción de SkillReducer en el payload' },
+        body:{ en:'SkillReducer experiment median reduction in skill body size while keeping eval scores within 1 percent of baseline. The technique is mechanical: drop redundant headers, collapse parallel examples, replace prose with reference paths. Applied across a skill library it removes a recurring tax on every Copilot turn.', 'pt-br':'Redução mediana do experimento SkillReducer no tamanho do corpo de skill mantendo eval scores em até 1% do baseline. A técnica é mecânica: remover headers redundantes, colapsar exemplos paralelos, trocar prosa por caminhos de referência. Aplicada numa biblioteca de skills, remove um imposto recorrente em cada turn do Copilot.', es:'Reducción mediana del experimento SkillReducer en el tamaño del cuerpo de skill manteniendo eval scores dentro del 1% del baseline. La técnica es mecánica: quitar headers redundantes, colapsar ejemplos paralelos, reemplazar prosa por rutas de referencia. Aplicada en una biblioteca de skills, quita un impuesto recurrente en cada turno de Copilot.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'ink',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -147,5 +183,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

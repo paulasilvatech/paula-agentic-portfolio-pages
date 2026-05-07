@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/playbook.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body class="acc-yellow">
 <noscript>
@@ -91,6 +92,40 @@
       </div>
     </section>
 
+    <section id="stack-glance" class="stack-glance-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Four layers, stacked.</span><span data-lang="pt-br">Quatro camadas, empilhadas.</span><span data-lang="es">Cuatro capas, apiladas.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Stack at a glance</span><span data-lang="pt-br">O stack em uma vista</span><span data-lang="es">El stack en una vista</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Each layer constrains the one below it. Skip a layer and the agent cemetery grows.</span><span data-lang="pt-br">Cada camada restringe a de baixo. Pule uma camada e o cemitério de agentes cresce.</span><span data-lang="es">Cada capa restringe a la de abajo. Salta una capa y el cementerio de agentes crece.</span>
+      </p>
+      <div class="stack-glance">
+        <div class="stack-glance__layer" data-layer="red">
+          <div class="stack-glance__num">IV · INTENT</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Constitutions, specs, governance</span><span data-lang="pt-br">Constituições, specs, governança</span><span data-lang="es">Constituciones, specs, gobernanza</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Codified rules the agent must follow before doing anything.</span><span data-lang="pt-br">Regras codificadas que o agente segue antes de qualquer coisa.</span><span data-lang="es">Reglas codificadas que el agente sigue antes que nada.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="yellow">
+          <div class="stack-glance__num">III · CONTEXT</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">ACE, skills, memory, MCP</span><span data-lang="pt-br">ACE, skills, memória, MCP</span><span data-lang="es">ACE, skills, memoria, MCP</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">What the agent reads at runtime, where it lives, how it expires.</span><span data-lang="pt-br">O que o agente lê em runtime, onde mora, como expira.</span><span data-lang="es">Lo que el agente lee en runtime, dónde vive, cómo expira.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="green">
+          <div class="stack-glance__num">II · PLATFORM</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">IDP, golden paths, guardrails</span><span data-lang="pt-br">IDP, golden paths, guardrails</span><span data-lang="es">IDP, golden paths, guardrails</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Runtime that lets agents act safely without inventing infra.</span><span data-lang="pt-br">Runtime que deixa o agente agir com segurança sem reinventar infra.</span><span data-lang="es">Runtime que deja al agente actuar seguro sin reinventar infra.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="blue">
+          <div class="stack-glance__num">I · INFRA</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">GPUs, Kubernetes, CNCF</span><span data-lang="pt-br">GPUs, Kubernetes, CNCF</span><span data-lang="es">GPUs, Kubernetes, CNCF</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Where the agents run, and at what unit cost per hour.</span><span data-lang="pt-br">Onde os agentes rodam e a que custo unitário por hora.</span><span data-lang="es">Dónde corren los agentes y a qué costo unitario por hora.</span></p>
+        </div>
+      </div>
+    </section>
+
     <section id="ch01">
       <h2>01. <span data-lang="en" class="lang-active">Cloud &amp; infrastructure</span><span data-lang="pt-br">Cloud &amp; infraestrutura</span><span data-lang="es">Cloud &amp; infraestructura</span></h2>
       <p data-lang="en" class="lang-active">Layer 01 answers a simple question: where do agents run, and at what cost? GPU, Kubernetes, networking, storage, and the CNCF service mesh. The patterns are mature. The discipline is to keep this layer boring so the layers above can change fast.</p>
@@ -121,6 +156,38 @@
       <p data-lang="pt-br">A camada 04 responde: para que o agente deve otimizar? Constituições, especificações, logs de decisão, políticas como código. Intent é a camada que a maioria dos times pula primeiro, e é a causa da maioria das falhas em produção: o agente otimizou para sucesso superficial, não para a necessidade real do negócio.</p>
       <p data-lang="es">La capa 04 responde: ¿para qué debe optimizar el agente? Constituciones, especificaciones, logs de decisión, políticas como código. Intent es la capa que la mayoría de los equipos saltan primero, y es la causa de la mayoría de fallos en producción: el agente optimizó para éxito superficial, no para la necesidad real del negocio.</p>
       <p><a href="04_Intent_Engineering_v1_3_0_2026-04-11.md">→ Full chapter (Markdown source)</a></p>
+    </section>
+
+    <section id="token-cards" class="token-cards-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Three field metrics, three sources.</span><span data-lang="pt-br">Três métricas de campo, três fontes.</span><span data-lang="es">Tres métricas de campo, tres fuentes.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Numbers worth defending</span><span data-lang="pt-br">Números que valem defender</span><span data-lang="es">Números que vale la pena defender</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Anchor every claim to a number that survives a board review. These three baselines tie back to Deloitte 2026, Gartner 2026, and the Liu et al. 2026 GitHub study.</span><span data-lang="pt-br">Ancore toda alegação a um número que sobreviva a revisão de board. Estes três baselines voltam a Deloitte 2026, Gartner 2026, e ao estudo Liu et al. 2026 do GitHub.</span><span data-lang="es">Ancla cada afirmación a un número que sobreviva una revisión de board. Estos tres baselines vuelven a Deloitte 2026, Gartner 2026, y al estudio Liu et al. 2026 de GitHub.</span>
+      </p>
+      <div class="token-cards">
+        <article class="token-card" data-layer="green">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">PILOT TO PROD GAP</span><span data-lang="pt-br">GAP DE PILOTO PARA PROD</span><span data-lang="es">BRECHA PILOTO A PROD</span></div>
+          <div class="token-card__num">75 vs 34</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">percent planning vs percent transforming</span><span data-lang="pt-br">percentual planejando vs percentual transformando</span><span data-lang="es">porcentaje planeando vs porcentaje transformando</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Deloitte State of Generative AI 2026 (n=3,235): 75 percent of enterprises plan agentic AI within two years, 34 percent report it is actually transforming the business. The 41-point gap is the agent cemetery, and it widens without the four-layer discipline.</span><span data-lang="pt-br">Deloitte State of Generative AI 2026 (n=3.235): 75% das empresas planejam IA agêntica em dois anos, 34% reportam que de fato está transformando o negócio. O gap de 41 pontos é o cemitério de agentes e cresce sem a disciplina das quatro camadas.</span><span data-lang="es">Deloitte State of Generative AI 2026 (n=3,235): 75% de las empresas planean IA agéntica en dos años, 34% reportan que realmente está transformando el negocio. La brecha de 41 puntos es el cementerio de agentes y crece sin la disciplina de las cuatro capas.</span></p>
+        </article>
+        <article class="token-card" data-layer="blue">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">CODE-QUALITY DRIFT</span><span data-lang="pt-br">DRIFT DE QUALIDADE</span><span data-lang="es">DRIFT DE CALIDAD</span></div>
+          <div class="token-card__num">+18 / +39</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">percent more warnings, percent more complexity</span><span data-lang="pt-br">% mais warnings, % mais complexidade</span><span data-lang="es">% más warnings, % más complejidad</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">CMU and GitHub research on AI-assisted code (Liu et al. 2026, 304K AI commits across 6,275 repos): static-analysis warnings up 18 percent, cognitive complexity up 39 percent without context engineering. The signal: model fluency without context discipline accumulates technical debt fast.</span><span data-lang="pt-br">Pesquisa CMU e GitHub em código com IA (Liu et al. 2026, 304K commits IA em 6.275 repos): warnings de análise estática +18%, complexidade cognitiva +39% sem context engineering. O sinal: fluência do modelo sem disciplina de contexto acumula débito técnico rápido.</span><span data-lang="es">Investigación CMU y GitHub en código asistido por IA (Liu et al. 2026, 304K commits IA en 6,275 repos): warnings de análisis estático +18%, complejidad cognitiva +39% sin context engineering. La señal: fluidez del modelo sin disciplina de contexto acumula deuda técnica rápido.</span></p>
+        </article>
+        <article class="token-card" data-layer="yellow">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">AGENT FAILURE MODE</span><span data-lang="pt-br">MODO DE FALHA DE AGENTE</span><span data-lang="es">MODO DE FALLA DE AGENTE</span></div>
+          <div class="token-card__num">~70%</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">pilots that never reach production at scale</span><span data-lang="pt-br">pilotos que nunca chegam a produção em escala</span><span data-lang="es">pilotos que nunca llegan a producción a escala</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Industry analyst convergence (Gartner 2026, KPMG 2026, Deloitte 2026): the share of agentic AI pilots that fail to reach a second business unit. Cause is rarely the model. Cause is missing intent specs, weak context layer, and platform that did not exist when the pilot was built.</span><span data-lang="pt-br">Convergência de analistas de indústria (Gartner 2026, KPMG 2026, Deloitte 2026): fatia de pilotos de IA agêntica que não chegam a uma segunda unidade de negócio. A causa raramente é o modelo. A causa é spec de intent ausente, camada de contexto fraca e plataforma que não existia quando o piloto foi construído.</span><span data-lang="es">Convergencia de analistas de industria (Gartner 2026, KPMG 2026, Deloitte 2026): porcentaje de pilotos de IA agéntica que no llegan a una segunda unidad de negocio. La causa rara vez es el modelo. La causa es spec de intent ausente, capa de contexto débil y plataforma que no existía cuando se construyó el piloto.</span></p>
+        </article>
+      </div>
     </section>
 
     <section id="ch05">
@@ -176,5 +243,6 @@ window.PLAYBOOK_DATA = {
 };
 </script>
 <script src="../_shared/playbook.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

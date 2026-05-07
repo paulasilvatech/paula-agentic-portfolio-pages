@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -105,6 +106,41 @@ window.PAGE_DATA = {
              'pt-br':'Sync por ambiente do ArgoCD (dev auto, staging gated, prod manual), Change Advisory via GitHub Issues, gates de promoção de agentes. Responsabilidade, não gargalo.',
              es:'Sync por ambiente de ArgoCD (dev auto, staging gated, prod manual), Change Advisory via GitHub Issues, gates de promoción de agentes. Responsabilidad, no cuello de botella.' } }
   ],
+  stackGlance: {
+    label: { en:'Platform stack at a glance', 'pt-br':'Stack da plataforma em uma vista', es:'Stack de plataforma en una vista' },
+    title: { en:'Four control planes, stacked.', 'pt-br':'Quatro planos de controle, empilhados.', es:'Cuatro planos de control, apilados.' },
+    lead: { en:'Each layer borrows trust from the one below it. Skip the foundation and the upper layers cannot enforce policy.', 'pt-br':'Cada camada empresta confiança da de baixo. Pular a base e as superiores não conseguem aplicar política.', es:'Cada capa toma confianza de la de abajo. Saltar la base y las superiores no logran aplicar política.' },
+    layers: [
+      { layer:'red', num:'IV · REVIEW',
+        name:{ en:'Manual gates and CAB', 'pt-br':'Gates manuais e CAB', es:'Compuertas manuales y CAB' },
+        desc:{ en:'Prod sync gated, Change Advisory in GitHub Issues, signed approval.', 'pt-br':'Sync de prod com gate, Change Advisory em GitHub Issues, aprovação assinada.', es:'Sync de prod con compuerta, Change Advisory en GitHub Issues, aprobación firmada.' } },
+      { layer:'yellow', num:'III · SAFETY',
+        name:{ en:'ArgoCD, Prometheus, Velero', 'pt-br':'ArgoCD, Prometheus, Velero', es:'ArgoCD, Prometheus, Velero' },
+        desc:{ en:'Self-heal, drift detection, alerting, backup and restore in minutes.', 'pt-br':'Self-heal, detecção de drift, alertas, backup e restore em minutos.', es:'Self-heal, detección de drift, alertas, backup y restore en minutos.' } },
+      { layer:'green', num:'II · GUARDRAILS',
+        name:{ en:'OPA, Azure Policy, Workload ID', 'pt-br':'OPA, Azure Policy, Workload ID', es:'OPA, Azure Policy, Workload ID' },
+        desc:{ en:'Admission policy, signed images, identity-bound workloads, no exceptions.', 'pt-br':'Política de admissão, imagens assinadas, workloads com identidade, sem exceções.', es:'Política de admisión, imágenes firmadas, cargas con identidad, sin excepciones.' } },
+      { layer:'blue', num:'I · PAVED ROAD',
+        name:{ en:'Backstage golden paths', 'pt-br':'Golden paths do Backstage', es:'Golden paths de Backstage' },
+        desc:{ en:'22 scaffolder templates. The right way is the easiest way.', 'pt-br':'22 templates do scaffolder. O jeito certo é o mais fácil.', es:'22 templates del scaffolder. La forma correcta es la más fácil.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three platform metrics, three sources.', 'pt-br':'Três métricas de plataforma, três fontes.', es:'Tres métricas de plataforma, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a CIO review. These three baselines are referenced across the playbook and the deck.', 'pt-br':'Ancore toda alegação a um número que sobreviva a uma revisão de CIO. Estes três baselines são referenciados no playbook e no deck.', es:'Ancla cada afirmación a un número que sobreviva a una revisión de CIO. Estos tres baselines se referencian en el playbook y el deck.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'TIME TO FIRST APP', 'pt-br':'TEMPO ATÉ PRIMEIRO APP', es:'TIEMPO HASTA PRIMERA APP' },
+        num:'< 1 day', sub:{ en:'from scaffold to running deployment', 'pt-br':'do scaffold ao deploy rodando', es:'del scaffold al deployment corriendo' },
+        body:{ en:'Backstage scaffolder plus golden path defaults reduce platform onboarding from weeks to under one working day. Measured across the six H1 foundation templates: empty repo, signed image, ArgoCD app, observability wired, policy passing.', 'pt-br':'O scaffolder do Backstage e os defaults dos golden paths reduzem o onboarding de plataforma de semanas para menos de um dia útil. Medido nos seis templates H1 de fundação: repo vazio, imagem assinada, app ArgoCD, observabilidade conectada, política passando.', es:'El scaffolder de Backstage y los defaults de los golden paths reducen el onboarding de plataforma de semanas a menos de un día útil. Medido en los seis templates H1 de fundación: repo vacío, imagen firmada, app ArgoCD, observabilidad conectada, política pasando.' } },
+      { layer:'blue', eyebrow:{ en:'CHANGE FAILURE RATE', 'pt-br':'TAXA DE FALHA EM MUDANÇA', es:'TASA DE FALLA EN CAMBIO' },
+        num:'< 5%', sub:{ en:'DORA elite band, with progressive delivery', 'pt-br':'banda elite DORA, com progressive delivery', es:'banda elite DORA, con progressive delivery' },
+        body:{ en:'DORA elite performers report change failure rate at or below 5 percent. Argo Rollouts plus signed-image admission plus drift self-heal pull the team into that band within two quarters of platform adoption, per the 2024 Accelerate State of DevOps report.', 'pt-br':'Elite performers DORA reportam taxa de falha de mudança em 5% ou menos. Argo Rollouts mais admissão de imagens assinadas mais self-heal de drift colocam o time nessa banda em dois trimestres de adoção da plataforma, conforme o relatório Accelerate State of DevOps 2024.', es:'Los elite performers DORA reportan tasa de falla de cambio en 5% o menos. Argo Rollouts más admisión de imágenes firmadas más self-heal de drift llevan al equipo a esa banda en dos trimestres de adopción de la plataforma, según el reporte Accelerate State of DevOps 2024.' } },
+      { layer:'yellow', eyebrow:{ en:'90-DAY ADOPTION', 'pt-br':'ADOÇÃO EM 90 DIAS', es:'ADOPCIÓN EN 90 DÍAS' },
+        num:'3 teams', sub:{ en:'first three teams onboarded in one quarter', 'pt-br':'três primeiros times em um trimestre', es:'tres primeros equipos en un trimestre' },
+        body:{ en:'A realistic target for the first three internal teams to adopt the platform end to end. Lighthouse team in week 4, second in week 8, third in week 12. Anything faster is heroics, anything slower is institutional friction that the platform itself must address.', 'pt-br':'Meta realista para os três primeiros times internos adotarem a plataforma de ponta a ponta. Lighthouse na semana 4, segundo na 8, terceiro na 12. Mais rápido é heroísmo, mais lento é fricção institucional que a própria plataforma precisa endereçar.', es:'Meta realista para los tres primeros equipos internos en adoptar la plataforma de extremo a extremo. Lighthouse en semana 4, segundo en 8, tercero en 12. Más rápido es heroísmo, más lento es fricción institucional que la propia plataforma debe atender.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'green',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -143,5 +179,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

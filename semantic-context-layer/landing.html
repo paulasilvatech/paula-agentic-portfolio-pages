@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -105,6 +106,41 @@ window.PAGE_DATA = {
              'pt-br':'Compartilha contexto de mudança entre agentes e pela organização. Cada agente sabe o que outros propuseram, o que mergeou, o que está em andamento. Duplicação, conflito e desperdício de token caem em função da consciência organizacional.',
              es:'Comparte contexto de cambio entre agentes y por la organización. Cada agente sabe qué propusieron otros, qué fusionó, qué está en curso. Duplicación, conflicto y gasto desperdiciado de token caen en función de la conciencia organizacional.' } }
   ],
+  stackGlance: {
+    label: { en:'SCL-AD stack at a glance', 'pt-br':'Stack SCL-AD em uma vista', es:'Stack SCL-AD en una vista' },
+    title: { en:'Four capability layers, stacked.', 'pt-br':'Quatro camadas de capacidade, empilhadas.', es:'Cuatro capas de capacidad, apiladas.' },
+    lead: { en:'Each layer compounds the one below it. Skip Precompute and the upper layers spend tokens rediscovering what was already known.', 'pt-br':'Cada camada compõe sobre a de baixo. Pule o Precompute e as camadas superiores gastam tokens redescobrindo o que já era sabido.', es:'Cada capa compone sobre la de abajo. Salta Precompute y las capas superiores gastan tokens redescubriendo lo ya conocido.' },
+    layers: [
+      { layer:'red', num:'IV · COORDINATE',
+        name:{ en:'Org-wide change context', 'pt-br':'Contexto de mudança org-wide', es:'Contexto de cambio org-wide' },
+        desc:{ en:'Agents share what others proposed, merged, or have in flight.', 'pt-br':'Agentes compartilham o que outros propuseram, mergearam ou têm em andamento.', es:'Los agentes comparten lo que otros propusieron, fusionaron o tienen en curso.' } },
+      { layer:'yellow', num:'III · EXECUTE',
+        name:{ en:'Multi-repo deterministic apply', 'pt-br':'Apply determinístico multi-repo', es:'Apply determinista multi-repo' },
+        desc:{ en:'Coordinated changesets, validation gates, parallel rollout.', 'pt-br':'Changesets coordenados, gates de validação, rollout paralelo.', es:'Changesets coordinados, gates de validación, rollout paralelo.' } },
+      { layer:'green', num:'II · TARGET',
+        name:{ en:'Indexed code search and queries', 'pt-br':'Busca indexada e queries', es:'Búsqueda indexada y queries' },
+        desc:{ en:'Pre-built indexes narrow work to the symbols that matter.', 'pt-br':'Índices prontos estreitam o trabalho aos símbolos que importam.', es:'Índices prefabricados estrechan el trabajo a los símbolos relevantes.' } },
+      { layer:'blue', num:'I · PRECOMPUTE',
+        name:{ en:'Versioned system knowledge', 'pt-br':'Conhecimento de sistema versionado', es:'Conocimiento de sistema versionado' },
+        desc:{ en:'Architecture, deps, conventions resolved once, reused everywhere.', 'pt-br':'Arquitetura, deps, convenções resolvidas uma vez, reusadas em tudo.', es:'Arquitectura, deps, convenciones resueltas una vez, reusadas en todo.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three context-engineering metrics, three sources.', 'pt-br':'Três métricas de context engineering, três fontes.', es:'Tres métricas de context engineering, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a CFO review. These three baselines come from METR field studies, the Moderne SCL playbook, and observed Open Horizons rollouts.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão do CFO. Estes três baselines vêm de estudos de campo da METR, do playbook SCL da Moderne, e de rollouts observados do Open Horizons.', es:'Ancla cada afirmación a un número que sobreviva una revisión de CFO. Estos tres baselines vienen de estudios de campo de METR, del playbook SCL de Moderne, y de rollouts observados de Open Horizons.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'TOKEN SAVINGS', 'pt-br':'ECONOMIA DE TOKEN', es:'AHORRO DE TOKEN' },
+        num:'40-70%', sub:{ en:'token reduction with Precompute and Target', 'pt-br':'redução de token com Precompute e Target', es:'reducción de token con Precompute y Target' },
+        body:{ en:'Reference token-cost reduction when teams ship Pillar 1 (Precompute) and Pillar 2 (Target) before scaling to multi-repo work. Lower bound matches teams with 50 to 100 services. Upper bound holds in monorepos with strong type information that the SCL can index once and reuse.', 'pt-br':'Redução de referência em custo de token quando os times entregam Pilar 1 (Precompute) e Pilar 2 (Target) antes de escalar para multi-repo. Limite inferior bate com times de 50 a 100 serviços. Limite superior se sustenta em monorepos com tipagem forte que o SCL indexa uma vez e reutiliza.', es:'Reducción de referencia en costo de token cuando los equipos entregan Pilar 1 (Precompute) y Pilar 2 (Target) antes de escalar a multi-repo. Límite inferior coincide con equipos de 50 a 100 servicios. Límite superior se sostiene en monorepos con tipado fuerte que el SCL indexa una vez y reutiliza.' } },
+      { layer:'blue', eyebrow:{ en:'METR FINDING', 'pt-br':'ACHADO METR', es:'HALLAZGO METR' },
+        num:'-19%', sub:{ en:'productivity drop without context engineering', 'pt-br':'queda de produtividade sem context engineering', es:'caída de productividad sin context engineering' },
+        body:{ en:'METR 2025 randomized study found that experienced developers using AI coding assistants without a structured context layer were 19 percent slower on real tasks, even though they self-reported being faster. The four-pillar discipline is the published countermeasure that closes the perception-reality gap.', 'pt-br':'Estudo randomizado METR 2025 mostrou que devs experientes usando assistentes de IA sem camada estruturada de contexto ficaram 19% mais lentos em tarefas reais, mesmo se autorrelatando mais rápidos. A disciplina dos quatro pilares é a contramedida publicada que fecha o gap percepção-realidade.', es:'Estudio aleatorizado METR 2025 mostró que devs experimentados usando asistentes de IA sin capa estructurada de contexto fueron 19% más lentos en tareas reales, aun cuando se reportaban más rápidos. La disciplina de los cuatro pilares es la contramedida publicada que cierra la brecha percepción-realidad.' } },
+      { layer:'yellow', eyebrow:{ en:'MULTI-REPO REACH', 'pt-br':'ALCANCE MULTI-REPO', es:'ALCANCE MULTI-REPO' },
+        num:'100s', sub:{ en:'repos changed in one coordinated rollout', 'pt-br':'repos alterados em um rollout coordenado', es:'repos modificados en un rollout coordinado' },
+        body:{ en:'Reference scale at which Pillar 3 (Execute) and Pillar 4 (Coordinate) become mandatory. Below 50 repos, ad hoc tooling can fake it. From 100 repos and up, only deterministic execution plus org-wide change context keep agent rework time bounded. Most enterprises cross this threshold within two years of agent adoption.', 'pt-br':'Escala de referência onde os Pilares 3 (Execute) e 4 (Coordinate) viram obrigatórios. Abaixo de 50 repos, tooling ad hoc disfarça. A partir de 100 repos, só execução determinística + contexto de mudança org-wide mantêm o retrabalho do agente sob controle. A maioria das empresas cruza esse limiar em até dois anos de adoção.', es:'Escala de referencia donde los Pilares 3 (Execute) y 4 (Coordinate) se vuelven obligatorios. Por debajo de 50 repos, el tooling ad hoc lo disfraza. A partir de 100 repos, solo la ejecución determinista más el contexto de cambio org-wide mantienen acotado el retrabajo del agente. La mayoría de las empresas cruza ese umbral en dos años de adopción.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'red',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -148,5 +184,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

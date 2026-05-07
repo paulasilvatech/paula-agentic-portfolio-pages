@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -109,6 +110,41 @@ window.PAGE_DATA = {
              'pt-br':'Seções 10 a 12. Cenários integrados, air-gapped e regulados. Runbook Dia 0, Dia 1, Dia 2. Matriz de responsabilidades, processo de aprovação de artefato, cadência de revisão. Framework completo.',
              es:'Secciones 10 a 12. Escenarios integrados, air-gapped y regulados. Runbook Día 0, Día 1, Día 2. Matriz de responsabilidades, proceso de aprobación de artefacto, cadencia de revisión. Framework completo.' } }
   ],
+  stackGlance: {
+    label: { en:'Marketplace stack at a glance', 'pt-br':'Stack do marketplace em uma vista', es:'Stack del marketplace en una vista' },
+    title: { en:'Four control planes, one workstation.', 'pt-br':'Quatro planos de controle, uma workstation.', es:'Cuatro planos de control, una workstation.' },
+    lead: { en:'Each layer governs the surface above it. Skip a layer and shadow tools route around the platform.', 'pt-br':'Cada camada governa a superfície acima. Pular uma camada e ferramentas paralelas contornam a plataforma.', es:'Cada capa gobierna la superficie de arriba. Saltar una capa y herramientas paralelas evaden la plataforma.' },
+    layers: [
+      { layer:'red', num:'IV · OPERATIONS',
+        name:{ en:'Day 0, Day 1, Day 2', 'pt-br':'Dia 0, Dia 1, Dia 2', es:'Día 0, Día 1, Día 2' },
+        desc:{ en:'Air-gap scenarios, ownership matrix, audit cadence, artifact approval.', 'pt-br':'Cenários air-gap, matriz de donos, cadência de auditoria, aprovação de artefato.', es:'Escenarios air-gap, matriz de dueños, cadencia de auditoría, aprobación de artefacto.' } },
+      { layer:'yellow', num:'III · AI TOOLS',
+        name:{ en:'MCP, Copilot, agents, prompts', 'pt-br':'MCP, Copilot, agentes, prompts', es:'MCP, Copilot, agentes, prompts' },
+        desc:{ en:'Curated AI artifacts, scoped tools, distribution via mcp.json and agents/.', 'pt-br':'Artefatos IA curados, ferramentas com escopo, distribuição via mcp.json e agents/.', es:'Artefactos IA curados, herramientas con alcance, distribución vía mcp.json y agents/.' } },
+      { layer:'green', num:'II · MARKETPLACE',
+        name:{ en:'Private VS Code marketplace', 'pt-br':'Marketplace privado VS Code', es:'Marketplace privado VS Code' },
+        desc:{ en:'Internal extensions, rehosted public ones, AllowedExtensions enforced.', 'pt-br':'Extensões internas, públicas rehospedadas, AllowedExtensions aplicada.', es:'Extensiones internas, públicas rehospedadas, AllowedExtensions aplicada.' } },
+      { layer:'blue', num:'I · INVENTORY',
+        name:{ en:'Azure API Center', 'pt-br':'Azure API Center', es:'Azure API Center' },
+        desc:{ en:'Single register of every API, environment, version, and shadow discovery.', 'pt-br':'Registro único de cada API, ambiente, versão e descoberta de shadow.', es:'Registro único de cada API, ambiente, versión y descubrimiento de shadow.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three governance metrics, three sources.', 'pt-br':'Três métricas de governança, três fontes.', es:'Tres métricas de gobernanza, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a security review. These three baselines tie back to API Center, the Private Marketplace policy, and Microsoft Purview.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão de segurança. Estes três baselines voltam ao API Center, à policy do Private Marketplace e ao Microsoft Purview.', es:'Ancla cada afirmación a un número que sobreviva a la revisión de seguridad. Estos tres baselines vuelven al API Center, la policy del Private Marketplace y Microsoft Purview.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'SHADOW API DISCOVERY', 'pt-br':'DESCOBERTA DE SHADOW API', es:'DESCUBRIMIENTO DE SHADOW API' },
+        num:'30-50%', sub:{ en:'undocumented APIs found in week one', 'pt-br':'APIs não documentadas encontradas na semana 1', es:'APIs no documentadas encontradas en semana 1' },
+        body:{ en:'Typical share of APIs that are running in production but missing from any register before API Center is connected to APIM. Defender for APIs and Application Insights surface the gap. Most teams underestimate this number by half until they run the discovery.', 'pt-br':'Fatia típica de APIs rodando em produção mas ausentes de qualquer registro antes do API Center estar conectado ao APIM. Defender for APIs e Application Insights expõem a lacuna. A maioria dos times subestima esse número pela metade até rodar a descoberta.', es:'Porcentaje típico de APIs corriendo en producción pero ausentes de cualquier registro antes de conectar API Center al APIM. Defender for APIs y Application Insights exponen la brecha. La mayoría subestima ese número a la mitad hasta correr el descubrimiento.' } },
+      { layer:'blue', eyebrow:{ en:'EXTENSION FOOTPRINT', 'pt-br':'FOOTPRINT DE EXTENSÕES', es:'FOOTPRINT DE EXTENSIONES' },
+        num:'150 to 12', sub:{ en:'from sprawl to a curated catalog', 'pt-br':'da dispersão a um catálogo curado', es:'de la dispersión a un catálogo curado' },
+        body:{ en:'Reference reduction observed when AllowedExtensions policy enforces the curated catalog. From the typical 150 distinct extensions across a developer base to roughly 12 vetted ones plus internal ones. The unblocked extensions are still installable on request, with traceable approval.', 'pt-br':'Redução de referência observada quando a policy AllowedExtensions força o catálogo curado. Das típicas 150 extensões distintas na base para cerca de 12 vetadas mais internas. As bloqueadas continuam instaláveis sob pedido, com aprovação rastreável.', es:'Reducción de referencia observada cuando la policy AllowedExtensions fuerza el catálogo curado. De las típicas 150 extensiones distintas en la base a unas 12 vetadas más internas. Las bloqueadas siguen instalables a pedido, con aprobación rastreable.' } },
+      { layer:'yellow', eyebrow:{ en:'AUDIT TRAIL COVERAGE', 'pt-br':'COBERTURA DE AUDITORIA', es:'COBERTURA DE AUDITORÍA' },
+        num:'100%', sub:{ en:'every API call, MCP call, agent action logged', 'pt-br':'cada chamada API, MCP, ação de agente logada', es:'cada llamada API, MCP, acción de agente loggeada' },
+        body:{ en:'When the four planes are wired together, every developer-facing surface produces a logged event into Microsoft Purview or the SIEM of choice. The audit trail is the difference between a regulated industry pilot that scales and one that gets revoked at the next external audit.', 'pt-br':'Quando os quatro planos estão conectados, toda superfície voltada para o dev gera evento logado no Microsoft Purview ou no SIEM escolhido. A trilha de auditoria é a diferença entre um piloto em indústria regulada que escala e um que é revogado na próxima auditoria externa.', es:'Cuando los cuatro planos se conectan, cada superficie hacia el dev produce un evento loggeado en Microsoft Purview o el SIEM elegido. La traza de auditoría es la diferencia entre un piloto en industria regulada que escala y uno que es revocado en la próxima auditoría externa.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'yellow',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -147,5 +183,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

@@ -268,3 +268,31 @@ a { color:var(--c-blue-700); }
 body { padding-top:56px; }
 .deck-brand { z-index:60; top:14px; }
 .lang-switcher { z-index:60; top:12px; }
+
+/* === Stack-at-a-glance (canonical 4-layer overview, shared with landing) === */
+.stack-glance { display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; margin:20px 0 32px; }
+@media(max-width:760px) { .stack-glance { grid-template-columns:repeat(2, 1fr); } }
+.stack-glance__layer { padding:20px 22px; border-radius:8px; color:#FFFFFF; transition:transform .15s ease, box-shadow .15s ease; }
+.stack-glance__layer:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,0.08); }
+.stack-glance__layer[data-layer="red"]    { background:var(--c-red-500); }
+.stack-glance__layer[data-layer="green"]  { background:var(--c-green-500); }
+.stack-glance__layer[data-layer="blue"]   { background:var(--c-blue-500); }
+.stack-glance__layer[data-layer="yellow"] { background:var(--c-yellow-500); color:var(--ink); }
+.stack-glance__layer[data-layer="ink"]    { background:var(--ink); }
+.stack-glance__num { font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; opacity:0.8; margin-bottom:10px; }
+.stack-glance__name { font-size:16px; font-weight:500; letter-spacing:-0.01em; margin:0 0 6px; line-height:1.25; }
+.stack-glance__desc { font-size:12px; line-height:1.5; opacity:0.88; margin:0; }
+
+/* === Token cards (3-up metric cards, shared with landing) === */
+.token-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin:20px 0 32px; }
+.token-card { background:var(--paper); border:1px solid var(--rule); border-left:3px solid var(--token-accent, var(--c-blue-500)); border-radius:8px; padding:20px 22px; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.token-card:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,0.05); }
+.token-card[data-layer="red"]    { --token-accent:var(--c-red-500); }
+.token-card[data-layer="green"]  { --token-accent:var(--c-green-500); }
+.token-card[data-layer="blue"]   { --token-accent:var(--c-blue-500); }
+.token-card[data-layer="yellow"] { --token-accent:var(--c-yellow-500); }
+.token-card[data-layer="ink"]    { --token-accent:var(--ink); }
+.token-card__eyebrow { font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--token-accent); margin-bottom:12px; }
+.token-card__num { font-size:26px; font-weight:500; letter-spacing:-0.025em; line-height:1; margin-bottom:6px; color:var(--ink); }
+.token-card__sub { font-size:11px; color:var(--ink-3); margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule); }
+.token-card__body { font-size:12.5px; line-height:1.55; color:var(--ink-2); margin:0; }

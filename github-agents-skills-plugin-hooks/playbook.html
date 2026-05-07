@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/playbook.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body class="acc-red">
 <noscript>
@@ -69,6 +70,40 @@
       <blockquote data-lang="es">Los agentes eligen el camino. Las skills empaquetan el conocimiento. Los plugins alcanzan el mundo. Los servidores MCP exponen herramientas tipadas. Los hooks mantienen los rieles. La jerarquía de configuración decide quién gana cuando hay desacuerdo. Componlos los seis a propósito, y el workspace escala de un dev a la organización entera.</blockquote>
     </section>
 
+    <section id="stack-glance" class="stack-glance-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Four control points, one task flow.</span><span data-lang="pt-br">Quatro pontos de controle, um fluxo de tarefa.</span><span data-lang="es">Cuatro puntos de control, un flujo de tarea.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Workspace stack at a glance</span><span data-lang="pt-br">Stack do workspace em uma vista</span><span data-lang="es">Stack del workspace en una vista</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">A task moves bottom up: skill loads, tools attach, hooks gate, agent answers. Skip a layer and the task escapes the rails.</span><span data-lang="pt-br">Uma tarefa sobe: skill carrega, tools acoplam, hooks fazem gate, agente responde. Pule uma camada e a tarefa sai dos trilhos.</span><span data-lang="es">Una tarea sube: skill carga, tools se acoplan, hooks hacen gate, agente responde. Salta una capa y la tarea sale de los rieles.</span>
+      </p>
+      <div class="stack-glance">
+        <div class="stack-glance__layer" data-layer="red">
+          <div class="stack-glance__num">IV · AGENT</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Generalist or custom router</span><span data-lang="pt-br">Generalista ou router custom</span><span data-lang="es">Generalista o router custom</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Routes the task, owns the personality, picks the model.</span><span data-lang="pt-br">Roteia a tarefa, dona a personalidade, escolhe o modelo.</span><span data-lang="es">Rutea la tarea, dueña la personalidad, elige el modelo.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="yellow">
+          <div class="stack-glance__num">III · HOOKS</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">PreToolUse, PostToolUse, Stop</span><span data-lang="pt-br">PreToolUse, PostToolUse, Stop</span><span data-lang="es">PreToolUse, PostToolUse, Stop</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Deterministic gates for secrets, formatters, audit, policy.</span><span data-lang="pt-br">Gates determinísticos para segredos, formatadores, auditoria, política.</span><span data-lang="es">Gates deterministas para secretos, formateadores, auditoría, política.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="green">
+          <div class="stack-glance__num">II · TOOLS</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Plugins and MCP servers</span><span data-lang="pt-br">Plugins e servidores MCP</span><span data-lang="es">Plugins y servidores MCP</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Typed bridge to repos, databases, queues, dashboards, secrets.</span><span data-lang="pt-br">Ponte tipada para repos, bancos, filas, dashboards, segredos.</span><span data-lang="es">Puente tipado a repos, bases, colas, dashboards, secretos.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="blue">
+          <div class="stack-glance__num">I · SKILL</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">SKILL.md bundle, versioned</span><span data-lang="pt-br">Bundle SKILL.md, versionado</span><span data-lang="es">Bundle SKILL.md, versionado</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Frontmatter, body, scripts, references. Discoverable, reusable.</span><span data-lang="pt-br">Frontmatter, corpo, scripts, referências. Descoberta, reúso.</span><span data-lang="es">Frontmatter, cuerpo, scripts, referencias. Descubrible, reutilizable.</span></p>
+        </div>
+      </div>
+    </section>
+
     <section id="numbers">
       <h2>3. <span data-lang="en" class="lang-active">The numbers that justify the effort</span><span data-lang="pt-br">Os números que justificam o esforço</span><span data-lang="es">Los números que justifican el esfuerzo</span></h2>
       <ul>
@@ -78,6 +113,38 @@
         <li><strong>6 hook events.</strong> PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop.</li>
         <li><strong>2 deck formats.</strong> Skills &amp; Agents (60 min) and GitHub Copilot in VS Code (75 min).</li>
       </ul>
+    </section>
+
+    <section id="token-cards" class="token-cards-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Three workspace metrics, three sources.</span><span data-lang="pt-br">Três métricas do workspace, três fontes.</span><span data-lang="es">Tres métricas del workspace, tres fuentes.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Numbers worth defending</span><span data-lang="pt-br">Números que valem defender</span><span data-lang="es">Números que vale la pena defender</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Anchor every claim to a number that survives a security review. These three baselines come from observed Copilot Enterprise rollouts and the GitHub Octoverse 2025 telemetry.</span><span data-lang="pt-br">Ancore toda alegação a um número que sobreviva à revisão de segurança. Estes três baselines vêm de rollouts observados de Copilot Enterprise e telemetria Octoverse 2025 do GitHub.</span><span data-lang="es">Ancla cada afirmación a un número que sobreviva la revisión de seguridad. Estos tres baselines vienen de rollouts observados de Copilot Enterprise y la telemetría Octoverse 2025 de GitHub.</span>
+      </p>
+      <div class="token-cards">
+        <article class="token-card" data-layer="green">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">PROMPT LAYERS</span><span data-lang="pt-br">CAMADAS DE PROMPT</span><span data-lang="es">CAPAS DE PROMPT</span></div>
+          <div class="token-card__num">6 layers</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">system, project, user, session, skill, tool</span><span data-lang="pt-br">sistema, projeto, usuário, sessão, skill, tool</span><span data-lang="es">sistema, proyecto, usuario, sesión, skill, tool</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">The exact order in which Copilot composes the active prompt at every turn. Knowing the order is what lets a platform team move policy from the system layer to the project layer without breaking developer flow. Misordering it is the most common cause of leaked guardrails.</span><span data-lang="pt-br">A ordem exata em que o Copilot compõe o prompt ativo em cada turn. Saber a ordem permite ao time de plataforma mover política da camada sistema para a de projeto sem quebrar o flow do dev. Errar a ordem é a causa mais comum de guardrail vazado.</span><span data-lang="es">El orden exacto en que Copilot compone el prompt activo en cada turno. Saber el orden permite al equipo de plataforma mover política de la capa sistema a la de proyecto sin romper el flujo del dev. Errar el orden es la causa más común de guardrail filtrado.</span></p>
+        </article>
+        <article class="token-card" data-layer="blue">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">HOOK COVERAGE</span><span data-lang="pt-br">COBERTURA DE HOOKS</span><span data-lang="es">COBERTURA DE HOOKS</span></div>
+          <div class="token-card__num">6 events</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">lifecycle hooks where policy can attach</span><span data-lang="pt-br">hooks de ciclo onde a política se acopla</span><span data-lang="es">hooks de ciclo donde la política se acopla</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. The six events at which a deterministic hook can run. Secrets blocking, formatter, audit log, and policy gate are the four hooks every enterprise rollout should ship on day one.</span><span data-lang="pt-br">PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. Os seis eventos onde um hook determinístico pode rodar. Bloqueio de segredos, formatter, log de auditoria e gate de política são os quatro hooks que todo rollout corporativo entrega no dia 1.</span><span data-lang="es">PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. Los seis eventos donde puede correr un hook determinista. Bloqueo de secretos, formatter, log de auditoría y gate de política son los cuatro hooks que todo rollout corporativo entrega el día 1.</span></p>
+        </article>
+        <article class="token-card" data-layer="yellow">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">CONFIG TIERS</span><span data-lang="pt-br">TIERS DE CONFIG</span><span data-lang="es">TIERS DE CONFIG</span></div>
+          <div class="token-card__num">3 tiers</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">enterprise, project, user, last-write-wins</span><span data-lang="pt-br">enterprise, projeto, usuário, último escreve vence</span><span data-lang="es">enterprise, proyecto, usuario, último escribe gana</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">The three configuration tiers with explicit precedence. Enterprise locks policy and security defaults. Project sets repo-specific behavior. User personalizes inside what the upper tiers allow. The override rules belong in the project tier, documented as a table the security team can audit.</span><span data-lang="pt-br">Três tiers de configuração com precedência explícita. Enterprise tranca política e defaults de segurança. Projeto define comportamento por repo. Usuário personaliza dentro do que as camadas superiores permitem. As regras de override ficam no tier de projeto, documentadas em tabela auditável.</span><span data-lang="es">Tres tiers de configuración con precedencia explícita. Enterprise bloquea política y defaults de seguridad. Proyecto define comportamiento por repo. Usuario personaliza dentro de lo que permiten las capas superiores. Las reglas de override viven en el tier de proyecto, documentadas en tabla auditable.</span></p>
+        </article>
+      </div>
     </section>
 
     <section id="parts">
@@ -160,5 +227,6 @@ window.PLAYBOOK_DATA = {
 };
 </script>
 <script src="../_shared/playbook.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -95,6 +96,41 @@ window.PAGE_DATA = {
       title:{ 'en': 'Production patterns', 'pt-br': 'Padrões de produção', 'es': 'Patrones de producción' },
       desc:{ 'en': 'Decision gates, observability, rollback strategies.', 'pt-br': 'Gates de decisão, observabilidade, estratégias de rollback.', 'es': 'Decision gates, observabilidad, estrategias de rollback.' } }
   ],
+  stackGlance: {
+    label: { en:'Spec stack at a glance', 'pt-br':'Stack de spec em uma vista', es:'Stack de spec en una vista' },
+    title: { en:'Four discipline layers, stacked.', 'pt-br':'Quatro camadas de disciplina, empilhadas.', es:'Cuatro capas de disciplina, apiladas.' },
+    lead: { en:'Each layer constrains the one below it. Skip a layer and the agent fills the silence with an opinion.', 'pt-br':'Cada camada restringe a de baixo. Pule uma camada e o agente preenche o silêncio com uma opinião.', es:'Cada capa restringe a la de abajo. Salta una capa y el agente llena el silencio con una opinión.' },
+    layers: [
+      { layer:'red', num:'IV · PRODUCTION',
+        name:{ en:'Gates, observability, rollback', 'pt-br':'Gates, observabilidade, rollback', es:'Gates, observabilidad, rollback' },
+        desc:{ en:'Decision gates, signal-rich logs, automatic rollback on red signals.', 'pt-br':'Gates de decisão, logs ricos, rollback automático em sinais vermelhos.', es:'Gates de decisión, logs ricos, rollback automático en señales rojas.' } },
+      { layer:'yellow', num:'III · TESTS',
+        name:{ en:'TDD red, green, refactor', 'pt-br':'TDD red, green, refactor', es:'TDD red, green, refactor' },
+        desc:{ en:'Tests are agent input. The loop is redrawn around the agent.', 'pt-br':'Testes são input do agente. O loop é redesenhado em torno do agente.', es:'Pruebas son input del agente. El loop se redibuja en torno al agente.' } },
+      { layer:'green', num:'II · VALIDATION',
+        name:{ en:'Specky harness', 'pt-br':'Harness Specky', es:'Harness Specky' },
+        desc:{ en:'Automated check that spec-driven output matches the spec.', 'pt-br':'Verificação automática de que a saída spec-driven bate com a spec.', es:'Verificación automática de que la salida spec-driven coincide con la spec.' } },
+      { layer:'blue', num:'I · SPEC',
+        name:{ en:'Spec Kit format', 'pt-br':'Formato Spec Kit', es:'Formato Spec Kit' },
+        desc:{ en:'Executable spec the agent can read, plan from, and verify against.', 'pt-br':'Spec executável que o agente lê, planeja e verifica.', es:'Spec ejecutable que el agente lee, planea y verifica.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three discipline metrics, three sources.', 'pt-br':'Três métricas de disciplina, três fontes.', es:'Tres métricas de disciplina, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a code review. These three baselines come from observed Spec Kit pilots and the GitHub agent-code research.', 'pt-br':'Ancore toda alegação a um número que sobreviva a um code review. Estes três baselines vêm de pilotos observados com Spec Kit e pesquisa de código de agente do GitHub.', es:'Ancla cada afirmación a un número que sobreviva un code review. Estos tres baselines vienen de pilotos observados con Spec Kit y la investigación de código de agente de GitHub.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'REWORK REDUCTION', 'pt-br':'REDUÇÃO DE RETRABALHO', es:'REDUCCIÓN DE RETRABAJO' },
+        num:'40-55%', sub:{ en:'less rework on agent-built features', 'pt-br':'menos retrabalho em features feitas por agente', es:'menos retrabajo en features hechas por agente' },
+        body:{ en:'Range observed when teams move from prose tickets to Spec Kit-formatted specs as agent input. Lower bound matches mid-size SaaS pilots, upper bound matches regulated-industry pilots where the spec format also doubles as audit evidence. Measured by reopened pull requests in the first 30 days post-merge.', 'pt-br':'Faixa observada quando times migram de tickets em prosa para specs em formato Spec Kit como input do agente. Limite inferior bate com pilotos de SaaS médio, limite superior com pilotos de indústria regulada onde o formato vira evidência de auditoria. Medido por PRs reabertos nos primeiros 30 dias pós-merge.', es:'Rango observado cuando equipos pasan de tickets en prosa a specs en formato Spec Kit como input del agente. Límite inferior coincide con pilotos de SaaS medio, límite superior con pilotos de industria regulada donde el formato dobla como evidencia de auditoría. Medido por PRs reabiertos en los primeros 30 días post-merge.' } },
+      { layer:'blue', eyebrow:{ en:'TDD COVERAGE FLOOR', 'pt-br':'PISO DE COBERTURA TDD', es:'PISO DE COBERTURA TDD' },
+        num:'> 80%', sub:{ en:'tests as agent input, not afterthought', 'pt-br':'testes como input do agente, não pós-fato', es:'pruebas como input del agente, no a posteriori' },
+        body:{ en:'Floor for line coverage when tests are written before the agent codes the implementation. Tests-first turns the agent into a search process bounded by green checks. Tests-after returns the agent to confabulation territory and the coverage tends to plateau in the 50 to 60 percent band.', 'pt-br':'Piso de cobertura de linha quando testes são escritos antes do agente codar a implementação. Tests-first transforma o agente em busca limitada por checks verdes. Tests-after volta o agente ao terreno de confabulação e a cobertura tende a estabilizar entre 50 e 60%.', es:'Piso de cobertura de línea cuando los tests se escriben antes de que el agente programe la implementación. Tests-first convierte al agente en una búsqueda acotada por checks verdes. Tests-after devuelve al agente al terreno de confabulación y la cobertura tiende a estabilizarse entre 50 y 60%.' } },
+      { layer:'yellow', eyebrow:{ en:'SPEC TURNAROUND', 'pt-br':'CICLO DE SPEC', es:'CICLO DE SPEC' },
+        num:'< 1 hour', sub:{ en:'from spec to first running PR', 'pt-br':'da spec ao primeiro PR rodando', es:'de la spec al primer PR corriendo' },
+        body:{ en:'Target loop time from a Spec Kit document being merged into the spec folder to the first agent-generated pull request that compiles and passes the existing tests. Loops above one hour usually point to a spec that is too large or a context layer that is missing the relevant skills.', 'pt-br':'Tempo de loop alvo entre um documento Spec Kit ser mergeado na pasta de spec e o primeiro PR gerado por agente que compila e passa nos testes existentes. Loops acima de uma hora geralmente apontam para spec grande demais ou camada de contexto sem as skills relevantes.', es:'Tiempo de loop meta entre un documento Spec Kit fusionado en la carpeta de spec y el primer PR generado por agente que compila y pasa los tests existentes. Loops por encima de una hora suelen indicar spec demasiado grande o capa de contexto sin las skills relevantes.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'ink',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -133,5 +169,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

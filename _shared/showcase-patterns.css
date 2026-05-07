@@ -1,0 +1,195 @@
+/* ============================================================
+   Showcase Patterns · paulasilva-ms · v1.0.0
+   Reusable visual blocks: simulations, animations, charts.
+   Loaded after landing.css / playbook.css.
+   ============================================================ */
+
+/* === Scroll reveal (fade up) === */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease, cubic-bezier(.4, 0, .2, 1)),
+              transform 0.6s var(--ease, cubic-bezier(.4, 0, .2, 1));
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal][data-reveal-delay="100"] { transition-delay: 0.1s; }
+[data-reveal][data-reveal-delay="200"] { transition-delay: 0.2s; }
+[data-reveal][data-reveal-delay="300"] { transition-delay: 0.3s; }
+[data-reveal][data-reveal-delay="400"] { transition-delay: 0.4s; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* === Animated counter (just needs JS to set --count via animate) === */
+.count-up { font-variant-numeric: tabular-nums; }
+
+/* === Pulse (used on dots, alerts, live indicators) === */
+@keyframes pulse-pm { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
+.pulse { animation: pulse-pm 2s ease-in-out infinite; }
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 164, 239, 0.45); }
+  50%      { box-shadow: 0 0 0 8px rgba(0, 164, 239, 0); }
+}
+.pulse-glow { animation: pulse-glow 1.8s ease-out infinite; }
+
+/* === Spinner (loading) === */
+@keyframes spin-pm { to { transform: rotate(360deg); } }
+.spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--rule); border-top-color: var(--c-blue-500); border-radius: 50%; animation: spin-pm 0.8s linear infinite; }
+
+/* === Caret blink (terminal-style) === */
+@keyframes caret-blink-pm { 50% { opacity: 0; } }
+
+/* ============================================================
+   SIMULATIONS
+   ============================================================ */
+
+/* --- Browser frame --- */
+.sim-browser { border: 1px solid var(--rule, #E5E5E0); border-radius: 10px; overflow: hidden; background: var(--paper, #FFFFFF); box-shadow: 0 8px 24px rgba(0,0,0,0.06); margin: 24px 0; }
+.sim-browser__chrome { background: var(--bg-alt, #ECECE8); border-bottom: 1px solid var(--rule, #E5E5E0); padding: 10px 14px; display: flex; align-items: center; gap: 14px; }
+.sim-browser__dots { display: flex; gap: 6px; flex-shrink: 0; }
+.sim-browser__dot { width: 11px; height: 11px; border-radius: 50%; }
+.sim-browser__dot--r { background: #FF5F57; }
+.sim-browser__dot--y { background: #FEBC2E; }
+.sim-browser__dot--g { background: #28C840; }
+.sim-browser__url { flex: 1; background: var(--paper, #FFFFFF); border: 1px solid var(--rule-2, #CECEC7); border-radius: 6px; padding: 5px 12px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3, #737373); display: flex; align-items: center; gap: 8px; }
+.sim-browser__url::before { content: "🔒"; font-size: 9px; opacity: 0.6; }
+.sim-browser__content { padding: 24px; min-height: 140px; font-size: 13px; color: var(--ink-2, #3A3A3A); line-height: 1.55; }
+
+/* --- Terminal frame --- */
+.sim-terminal { background: #1A1A1A; border-radius: 10px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.25); font-family: var(--font-mono); font-size: 12px; margin: 24px 0; }
+.sim-terminal__chrome { background: #2C2C2C; padding: 10px 14px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #1A1A1A; }
+.sim-terminal__dots { display: flex; gap: 6px; flex-shrink: 0; }
+.sim-terminal__title { color: #A8A8A4; font-size: 10px; flex: 1; text-align: center; font-family: var(--font-mono); letter-spacing: 0.04em; }
+.sim-terminal__body { padding: 16px 20px; color: #E5E5E0; line-height: 1.7; }
+.sim-terminal__prompt { color: #7FBA00; margin-right: 8px; }
+.sim-terminal__user { color: #00A4EF; }
+.sim-terminal__cmd { color: #F0F0F0; }
+.sim-terminal__output { color: #A8A8A4; display: block; padding-left: 0; }
+.sim-terminal__output--success { color: #7FBA00; }
+.sim-terminal__output--error { color: #F25022; }
+.sim-terminal__output--warn { color: #FFB900; }
+.sim-terminal__cursor { display: inline-block; background: #F0F0F0; width: 7px; height: 12px; vertical-align: middle; animation: caret-blink-pm 1s steps(2) infinite; }
+
+/* --- VS Code frame --- */
+.sim-vscode { background: #1E1E1E; border-radius: 8px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.25); font-family: var(--font-mono); font-size: 12px; color: #D4D4D4; margin: 24px 0; }
+.sim-vscode__titlebar { background: #3C3C3C; padding: 8px 12px; display: flex; align-items: center; gap: 14px; }
+.sim-vscode__title { color: #CCCCCC; font-size: 10px; }
+.sim-vscode__body { display: grid; grid-template-columns: 200px 1fr; min-height: 240px; }
+.sim-vscode__sidebar { background: #252526; padding: 10px 0; border-right: 1px solid #1E1E1E; }
+.sim-vscode__file { padding: 4px 14px; font-size: 11px; color: #CCCCCC; cursor: default; }
+.sim-vscode__file--folder { font-weight: 500; }
+.sim-vscode__file--nested   { padding-left: 24px; }
+.sim-vscode__file--nested-2 { padding-left: 34px; }
+.sim-vscode__file--active   { background: #094771; color: #FFFFFF; }
+.sim-vscode__main { display: flex; flex-direction: column; }
+.sim-vscode__tabs { background: #2D2D2D; display: flex; }
+.sim-vscode__tab { padding: 7px 14px; background: #2D2D2D; color: #969696; font-size: 11px; border-right: 1px solid #1E1E1E; }
+.sim-vscode__tab--active { background: #1E1E1E; color: #FFFFFF; }
+.sim-vscode__editor { flex: 1; padding: 12px 16px; line-height: 1.7; overflow-x: auto; }
+.sim-vscode__ln { color: #5A5A5A; user-select: none; padding-right: 16px; display: inline-block; min-width: 24px; text-align: right; }
+.code-kw { color: #569CD6; }
+.code-str { color: #CE9178; }
+.code-cm { color: #6A9955; font-style: italic; }
+.code-fn { color: #DCDCAA; }
+.code-num { color: #B5CEA8; }
+.code-type { color: #4EC9B0; }
+
+/* --- Copilot Chat panel --- */
+.sim-copilot { background: #1E1E1E; border-radius: 10px; overflow: hidden; font-family: var(--font-sans); font-size: 12px; color: #CCCCCC; box-shadow: 0 12px 32px rgba(0,0,0,0.25); margin: 24px 0; }
+.sim-copilot__header { background: #252526; padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #1E1E1E; }
+.sim-copilot__title { font-family: var(--font-mono); font-size: 11px; color: #CCCCCC; letter-spacing: 0.06em; }
+.sim-copilot__model { margin-left: auto; font-family: var(--font-mono); font-size: 10px; color: #969696; padding: 2px 8px; background: #1A1A1A; border-radius: 3px; border: 1px solid #3A3A3A; }
+.sim-copilot__messages { padding: 14px; display: flex; flex-direction: column; gap: 14px; }
+.sim-copilot__msg { display: flex; gap: 10px; }
+.sim-copilot__avatar { width: 26px; height: 26px; border-radius: 50%; background: #00A4EF; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 10px; flex-shrink: 0; font-family: var(--font-mono); }
+.sim-copilot__avatar--copilot { background: #1A1A1A; border: 1px solid #3A3A3A; color: #CCCCCC; }
+.sim-copilot__bubble { background: #2D2D2D; padding: 10px 12px; border-radius: 8px; flex: 1; line-height: 1.55; font-size: 12px; color: #E0E0E0; }
+.sim-copilot__msg--user .sim-copilot__bubble { background: #094771; color: #FFFFFF; }
+.sim-copilot__code { background: #1A1A1A; border-radius: 6px; padding: 10px 12px; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; overflow-x: auto; line-height: 1.5; color: #D4D4D4; }
+.sim-copilot__input { background: #252526; padding: 10px 14px; border-top: 1px solid #1E1E1E; display: flex; align-items: center; gap: 10px; }
+.sim-copilot__input input { flex: 1; background: #1A1A1A; border: 1px solid #3A3A3A; color: #E0E0E0; padding: 6px 10px; border-radius: 4px; font-family: inherit; font-size: 12px; }
+.sim-copilot__send { background: #094771; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: default; }
+
+/* ============================================================
+   CHARTS
+   ============================================================ */
+
+/* Chart frame: card around inline SVG diagrams */
+.chart-frame { background: var(--paper, #FFFFFF); border: 1px solid var(--rule, #E5E5E0); border-radius: 10px; padding: 24px 28px; margin: 24px 0; }
+.chart-frame__caption { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3, #737373); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; font-weight: 500; }
+.chart-frame__legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--rule, #E5E5E0); font-family: var(--font-mono); font-size: 11px; color: var(--ink-2, #3A3A3A); }
+.chart-frame__legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart-frame__legend i { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+/* Animated bar (left-to-right fill on reveal) */
+.bar-wrap { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.bar-row { display: grid; grid-template-columns: 140px 1fr 70px; gap: 12px; align-items: center; font-size: 13px; }
+.bar-row__label { color: var(--ink-2, #3A3A3A); font-weight: 500; }
+.bar-row__track { background: var(--bg-alt, #ECECE8); height: 8px; border-radius: 4px; overflow: hidden; position: relative; }
+.bar-row__fill { background: var(--bar-color, var(--c-blue-500, #00A4EF)); height: 100%; border-radius: 4px; transform-origin: left center; transform: scaleX(0); transition: transform 0.9s cubic-bezier(.2,.8,.2,1); }
+.bar-row.is-visible .bar-row__fill,
+[data-reveal].is-visible .bar-row__fill { transform: scaleX(var(--bar-pct, 1)); }
+.bar-row__value { font-family: var(--font-mono); color: var(--bar-color, var(--c-blue-500, #00A4EF)); font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+   CODE BLOCKS (improved)
+   ============================================================ */
+
+.codeblock-dark { background: #1A1A1A; color: #D4D4D4; border-radius: 8px; padding: 16px 20px; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; overflow-x: auto; margin: 20px 0; }
+.codeblock-dark .ln { color: #5A5A5A; user-select: none; padding-right: 12px; display: inline-block; min-width: 20px; text-align: right; }
+.codeblock-light { background: var(--bg-alt, #ECECE8); color: var(--ink, #1A1A1A); border: 1px solid var(--rule, #E5E5E0); border-left: 3px solid var(--c-blue-500, #00A4EF); border-radius: 6px; padding: 14px 18px; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; margin: 20px 0; overflow-x: auto; }
+.codeblock-light--green { border-left-color: var(--c-green-500, #7FBA00); }
+.codeblock-light--yellow { border-left-color: var(--c-yellow-500, #FFB900); }
+.codeblock-light--red { border-left-color: var(--c-red-500, #F25022); }
+
+/* ============================================================
+   CALLOUTS (info / success / warning / danger)
+   ============================================================ */
+
+.callout { padding: 14px 18px; border-radius: 6px; border-left: 4px solid; font-size: 13.5px; line-height: 1.55; margin: 20px 0; }
+.callout strong { font-weight: 600; }
+.callout--info    { background: rgba(0,164,239,0.06);  border-left-color: var(--c-blue-500);  color: var(--ink-2); }
+.callout--success { background: rgba(127,186,0,0.06);  border-left-color: var(--c-green-500); color: var(--ink-2); }
+.callout--warn    { background: rgba(255,185,0,0.08);  border-left-color: var(--c-yellow-500); color: var(--ink-2); }
+.callout--danger  { background: rgba(242,80,34,0.06);  border-left-color: var(--c-red-500);   color: var(--ink-2); }
+
+/* ============================================================
+   STAGGERED FADE-UP (cards in a grid)
+   ============================================================ */
+
+.stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up-pm 0.6s cubic-bezier(.4,0,.2,1) forwards;
+}
+.stagger > *:nth-child(1) { animation-delay: 0.0s; }
+.stagger > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger > *:nth-child(3) { animation-delay: 0.16s; }
+.stagger > *:nth-child(4) { animation-delay: 0.24s; }
+.stagger > *:nth-child(5) { animation-delay: 0.32s; }
+.stagger > *:nth-child(6) { animation-delay: 0.40s; }
+@keyframes fade-up-pm { to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .stagger > * { opacity: 1; transform: none; animation: none; }
+}
+
+/* ============================================================
+   MICRO-IMPROVEMENTS for existing blocks
+   ============================================================ */
+
+/* Add subtle hover to insight cards if not already */
+.insight { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+.insight:hover { transform: translateY(-2px); }
+
+/* Pillar grid stagger when in viewport */
+.pillars { gap: 14px; }
+
+/* Tighter chart-frame in playbooks */
+.doc .chart-frame, .doc .sim-browser, .doc .sim-terminal, .doc .sim-vscode, .doc .sim-copilot {
+  margin: 24px 0;
+  max-width: 100%;
+}

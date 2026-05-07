@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/playbook.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body class="acc-blue">
 <noscript>
@@ -62,6 +63,40 @@
       </div>
     </section>
 
+    <section id="stack-glance" class="stack-glance-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Four runway layers, stacked.</span><span data-lang="pt-br">Quatro camadas de runway, empilhadas.</span><span data-lang="es">Cuatro capas de runway, apiladas.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Modernization stack at a glance</span><span data-lang="pt-br">Stack de modernização em uma vista</span><span data-lang="es">Stack de modernización en una vista</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Each layer borrows trust from the one below it. Skip a layer and the cutover fails on go-live night.</span><span data-lang="pt-br">Cada camada empresta confiança da de baixo. Pule uma camada e o cutover falha na noite do go-live.</span><span data-lang="es">Cada capa toma confianza de la de abajo. Salta una capa y el cutover falla la noche del go-live.</span>
+      </p>
+      <div class="stack-glance">
+        <div class="stack-glance__layer" data-layer="red">
+          <div class="stack-glance__num">IV · CUTOVER</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Cutover, parity, rollback</span><span data-lang="pt-br">Cutover, paridade, rollback</span><span data-lang="es">Cutover, paridad, rollback</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Side-by-side run, parity check, rollback rehearsal, signed acceptance.</span><span data-lang="pt-br">Execução lado a lado, paridade, ensaio de rollback, aceitação assinada.</span><span data-lang="es">Ejecución lado a lado, paridad, ensayo de rollback, aceptación firmada.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="yellow">
+          <div class="stack-glance__num">III · CARVE</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">Strangler fig, smallest slice</span><span data-lang="pt-br">Strangler fig, fatia menor</span><span data-lang="es">Strangler fig, slice más pequeño</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Carve the smallest module that ships value with legacy still running.</span><span data-lang="pt-br">Talhe o menor módulo que entrega valor com o legado ainda no ar.</span><span data-lang="es">Talla el menor módulo que entrega valor con el legado aún corriendo.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="green">
+          <div class="stack-glance__num">II · DECIDE</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">5R framework per workload</span><span data-lang="pt-br">Framework 5R por workload</span><span data-lang="es">Framework 5R por workload</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Rehost, refactor, rearchitect, rebuild, replace, with risk and ROI.</span><span data-lang="pt-br">Rehost, refactor, rearchitect, rebuild, replace, com risco e ROI.</span><span data-lang="es">Rehost, refactor, rearchitect, rebuild, replace, con riesgo y ROI.</span></p>
+        </div>
+        <div class="stack-glance__layer" data-layer="blue">
+          <div class="stack-glance__num">I · DISCOVER</div>
+          <div class="stack-glance__name"><span data-lang="en" class="lang-active">IFPUG sizing, dependency graph</span><span data-lang="pt-br">Sizing IFPUG, grafo de dependências</span><span data-lang="es">Sizing IFPUG, grafo de dependencias</span></div>
+          <p class="stack-glance__desc"><span data-lang="en" class="lang-active">Inventory, function points, business-value map. Most underestimate by 3x.</span><span data-lang="pt-br">Inventário, function points, mapa de valor. Maioria subestima em 3x.</span><span data-lang="es">Inventario, function points, mapa de valor. Mayoría subestima en 3x.</span></p>
+        </div>
+      </div>
+    </section>
+
     <section id="architect">
       <h2><span data-lang="en" class="lang-active">For architects (4-6 hour read)</span><span data-lang="pt-br">Para arquitetos (4-6 horas)</span><span data-lang="es">Para arquitectos (4-6 horas)</span></h2>
       <div class="chapter-grid">
@@ -79,6 +114,38 @@
         <a class="chap-card" href="12_Technical_Implementation_Runbook_v1_2_0_2026-03-19_en.md"><div class="chap-card__num">DOC 12</div><div class="chap-card__title">Implementation runbook</div><div class="chap-card__desc">Step-by-step commands and verification gates.</div></a>
         <a class="chap-card" href="Modernizing_Legacy_Code_Infographic_v1_0_0_2026-03-18_en.md"><div class="chap-card__num">VIS</div><div class="chap-card__title">Visual infographic</div><div class="chap-card__desc">One-page summary, share with stakeholders.</div></a>
         <a class="chap-card" href="Legacy_Modernization_Playbook_v1_1_0_2026-05-06_multi.html"><div class="chap-card__num">HTML</div><div class="chap-card__title">Full playbook HTML</div><div class="chap-card__desc">Trilingual multi-page playbook with all chapters.</div></a>
+      </div>
+    </section>
+
+    <section id="token-cards" class="token-cards-section">
+      <h2>
+        <span data-lang="en" class="lang-active">Three modernization metrics, three sources.</span><span data-lang="pt-br">Três métricas de modernização, três fontes.</span><span data-lang="es">Tres métricas de modernización, tres fuentes.</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="lang-active">Numbers worth defending</span><span data-lang="pt-br">Números que valem defender</span><span data-lang="es">Números que vale la pena defender</span>
+      </p>
+      <p>
+        <span data-lang="en" class="lang-active">Anchor every claim to a number that survives a steering review. These three baselines reflect Azure Migrate field data and IFPUG industry sizing.</span><span data-lang="pt-br">Ancore toda alegação a um número que sobreviva à revisão de steering. Estes três baselines refletem dados de campo do Azure Migrate e sizing IFPUG.</span><span data-lang="es">Ancla cada afirmación a un número que sobreviva una revisión de steering. Estos tres baselines reflejan datos de campo de Azure Migrate y sizing IFPUG.</span>
+      </p>
+      <div class="token-cards">
+        <article class="token-card" data-layer="green">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">DISCOVERY UNDERSIZE</span><span data-lang="pt-br">SUBDIMENSIONAMENTO DA DESCOBERTA</span><span data-lang="es">SUBESTIMACIÓN DEL DESCUBRIMIENTO</span></div>
+          <div class="token-card__num">3x</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">typical underestimate of phase 1 effort</span><span data-lang="pt-br">subdimensionamento típico do esforço da fase 1</span><span data-lang="es">subestimación típica del esfuerzo de la fase 1</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Reference factor by which teams underestimate the discovery phase before they apply IFPUG sizing and a dependency graph. Hidden dependencies, undocumented batches, and dormant integrations account for most of the gap. The framework treats discovery as the gate, not the kickoff.</span><span data-lang="pt-br">Fator de referência pelo qual times subestimam a fase de descoberta antes de aplicar sizing IFPUG e grafo de dependências. Dependências escondidas, batches não documentados e integrações dormentes respondem pela maior parte do gap. O framework trata descoberta como gate, não como kickoff.</span><span data-lang="es">Factor de referencia por el que los equipos subestiman la fase de descubrimiento antes de aplicar sizing IFPUG y grafo de dependencias. Dependencias ocultas, batches sin documentar e integraciones dormidas explican la mayor parte de la brecha. El framework trata el descubrimiento como compuerta, no como kickoff.</span></p>
+        </article>
+        <article class="token-card" data-layer="blue">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">STRANGLER FIG SLICE</span><span data-lang="pt-br">FATIA STRANGLER FIG</span><span data-lang="es">SLICE STRANGLER FIG</span></div>
+          <div class="token-card__num">&lt; 90 days</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">first carved module in production</span><span data-lang="pt-br">primeiro módulo talhado em produção</span><span data-lang="es">primer módulo tallado en producción</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">Target window for the first strangler-fig slice to reach production with legacy still running. Smaller slices are stronger evidence. Anything beyond 90 days indicates the slice was too large or the boundary too entangled. Re-cut and reduce scope.</span><span data-lang="pt-br">Janela alvo para a primeira fatia strangler fig chegar a produção com o legado ainda no ar. Fatias menores são evidência mais forte. Acima de 90 dias indica fatia grande demais ou fronteira muito emaranhada. Recorte e reduza escopo.</span><span data-lang="es">Ventana meta para la primera fatia strangler fig llegar a producción con el legado aún corriendo. Slices más pequeños son evidencia más fuerte. Sobre 90 días indica slice demasiado grande o frontera muy enredada. Recorta y reduce alcance.</span></p>
+        </article>
+        <article class="token-card" data-layer="yellow">
+          <div class="token-card__eyebrow"><span data-lang="en" class="lang-active">5R DECISIONS</span><span data-lang="pt-br">DECISÕES 5R</span><span data-lang="es">DECISIONES 5R</span></div>
+          <div class="token-card__num">5 paths</div>
+          <div class="token-card__sub"><span data-lang="en" class="lang-active">rehost, refactor, rearchitect, rebuild, replace</span><span data-lang="pt-br">rehost, refactor, rearchitect, rebuild, replace</span><span data-lang="es">rehost, refactor, rearchitect, rebuild, replace</span></div>
+          <p class="token-card__body"><span data-lang="en" class="lang-active">The five canonical paths from Microsoft Cloud Adoption Framework. Each workload gets one decision, defended by a one-page brief: business value, risk, cost, time, reversibility. Decisions are revisited only when one of the five inputs materially changes.</span><span data-lang="pt-br">Os cinco caminhos canônicos do Microsoft Cloud Adoption Framework. Cada workload recebe uma decisão, defendida por um brief de uma página: valor, risco, custo, tempo, reversibilidade. Decisões são revisitadas só quando uma das cinco entradas muda materialmente.</span><span data-lang="es">Los cinco caminos canónicos del Microsoft Cloud Adoption Framework. Cada workload recibe una decisión, defendida por un brief de una página: valor, riesgo, costo, tiempo, reversibilidad. Las decisiones se revisan solo cuando una de las cinco entradas cambia materialmente.</span></p>
+        </article>
       </div>
     </section>
 
@@ -143,5 +210,6 @@ window.PLAYBOOK_DATA = {
 };
 </script>
 <script src="../_shared/playbook.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

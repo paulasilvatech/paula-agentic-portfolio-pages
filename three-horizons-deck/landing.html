@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -95,6 +96,41 @@ window.PAGE_DATA = {
       title:{ 'en': 'Why Red Hat', 'pt-br': 'Por que Red Hat', 'es': 'Por qué Red Hat' },
       desc:{ 'en': 'Vendor support, certification path, Azure-native deployment.', 'pt-br': 'Suporte do fornecedor, caminho de certificação, deploy Azure-native.', 'es': 'Soporte del vendor, ruta de certificación, deploy Azure-native.' } }
   ],
+  stackGlance: {
+    label: { en:'Red Hat stack at a glance', 'pt-br':'Stack Red Hat em uma vista', es:'Stack Red Hat en una vista' },
+    title: { en:'Four substrate layers, stacked.', 'pt-br':'Quatro camadas de substrato, empilhadas.', es:'Cuatro capas de sustrato, apiladas.' },
+    lead: { en:'Each layer borrows trust from the one below it. Skip a layer and the upper ones miss the certification trail.', 'pt-br':'Cada camada empresta confiança da de baixo. Pule uma camada e as superiores perdem a trilha de certificação.', es:'Cada capa toma confianza de la de abajo. Salta una capa y las superiores pierden la traza de certificación.' },
+    layers: [
+      { layer:'red', num:'IV · AI-NATIVE',
+        name:{ en:'Agent-driven SRE (H3)', 'pt-br':'SRE guiado por agentes (H3)', es:'SRE guiado por agentes (H3)' },
+        desc:{ en:'Reasoning agents on the OpenShift substrate, signed and audited.', 'pt-br':'Agentes de raciocínio no substrato OpenShift, assinados e auditados.', es:'Agentes de razonamiento en el sustrato OpenShift, firmados y auditados.' } },
+      { layer:'yellow', num:'III · TRUST',
+        name:{ en:'Quay + ACS (H2)', 'pt-br':'Quay + ACS (H2)', es:'Quay + ACS (H2)' },
+        desc:{ en:'Image registry, Advanced Cluster Security, identity boundary.', 'pt-br':'Image registry, Advanced Cluster Security, fronteira de identidade.', 'es':'Image registry, Advanced Cluster Security, frontera de identidad.' } },
+      { layer:'green', num:'II · OPS',
+        name:{ en:'OpenShift + AAP (H1)', 'pt-br':'OpenShift + AAP (H1)', es:'OpenShift + AAP (H1)' },
+        desc:{ en:'ARO, Ansible Automation Platform, golden paths certified.', 'pt-br':'ARO, Ansible Automation Platform, golden paths certificados.', es:'ARO, Ansible Automation Platform, golden paths certificados.' } },
+      { layer:'blue', num:'I · CLOUD',
+        name:{ en:'Azure as reference cloud', 'pt-br':'Azure como cloud de referência', es:'Azure como nube de referencia' },
+        desc:{ en:'Vendor-supported substrate, certified Azure-native deployment.', 'pt-br':'Substrato com suporte de fornecedor, deploy Azure-native certificado.', es:'Sustrato con soporte de vendor, deploy Azure-native certificado.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three platform metrics, three sources.', 'pt-br':'Três métricas de plataforma, três fontes.', es:'Tres métricas de plataforma, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a CIO review. These three baselines come from CNCF maturity, Red Hat ARO SLAs, and 2024 Accelerate State of DevOps.', 'pt-br':'Ancore toda alegação a um número que sobreviva a revisão de CIO. Estes três baselines vêm da maturidade CNCF, dos SLAs ARO da Red Hat, e do Accelerate State of DevOps 2024.', es:'Ancla cada afirmación a un número que sobreviva una revisión de CIO. Estos tres baselines vienen de la madurez CNCF, los SLA ARO de Red Hat, y el Accelerate State of DevOps 2024.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'CNCF MATURITY', 'pt-br':'MATURIDADE CNCF', es:'MADUREZ CNCF' },
+        num:'5 levels', sub:{ en:'provisional to AI-native', 'pt-br':'provisional a AI-native', es:'provisional a AI-native' },
+        body:{ en:'CNCF Platforms Working Group defines five maturity levels mapped to Red Hat capabilities. Most ARO customers in 2026 sit at level 2 or 3. Reaching level 4 requires automated golden-path tuning. AI-native is reserved for platforms with embedded reasoning agents on certified images.', 'pt-br':'O CNCF Platforms Working Group define cinco níveis de maturidade mapeados às capabilities Red Hat. A maioria dos clientes ARO em 2026 está nos níveis 2 ou 3. Chegar ao 4 exige tuning automático de golden path. AI-native é reservado a plataformas com agentes de raciocínio embutidos em imagens certificadas.', es:'El CNCF Platforms Working Group define cinco niveles de madurez mapeados a las capabilities Red Hat. La mayoría de los clientes ARO en 2026 están en niveles 2 o 3. Llegar al 4 exige tuning automático de golden path. AI-native está reservado a plataformas con agentes de razonamiento embebidos en imágenes certificadas.' } },
+      { layer:'blue', eyebrow:{ en:'ARO SLA', 'pt-br':'SLA ARO', es:'SLA ARO' },
+        num:'99.95%', sub:{ en:'control plane availability, jointly supported', 'pt-br':'disponibilidade do control plane, suporte conjunto', es:'disponibilidad del control plane, soporte conjunto' },
+        body:{ en:'Azure Red Hat OpenShift control-plane SLA, jointly delivered by Microsoft and Red Hat. The joint support model is the difference between a vendor-supported substrate and a self-supported one. For regulated industries, the joint SLA is what unblocks the security review.', 'pt-br':'SLA do control plane do Azure Red Hat OpenShift, entregue em conjunto por Microsoft e Red Hat. O modelo de suporte conjunto é a diferença entre um substrato com suporte de fornecedor e um self-supported. Para indústrias reguladas, o SLA conjunto é o que destrava a revisão de segurança.', es:'SLA del control plane de Azure Red Hat OpenShift, entregado conjuntamente por Microsoft y Red Hat. El modelo de soporte conjunto es la diferencia entre un sustrato con soporte de vendor y uno self-supported. Para industrias reguladas, el SLA conjunto es lo que desbloquea la revisión de seguridad.' } },
+      { layer:'yellow', eyebrow:{ en:'CHANGE FAILURE RATE', 'pt-br':'TAXA DE FALHA EM MUDANÇA', es:'TASA DE FALLA EN CAMBIO' },
+        num:'< 5%', sub:{ en:'DORA elite band, with progressive delivery', 'pt-br':'banda elite DORA, com progressive delivery', es:'banda elite DORA, con progressive delivery' },
+        body:{ en:'2024 Accelerate State of DevOps elite band. ACS admission policy plus signed-image enforcement plus ArgoCD self-heal pull the team into that band within two quarters of substrate adoption. The DORA metric is what every CIO already knows how to read.', 'pt-br':'Banda elite do Accelerate State of DevOps 2024. Policy de admissão do ACS, enforcement de imagem assinada e self-heal do ArgoCD colocam o time nessa banda em dois trimestres de adoção. A métrica DORA é a que todo CIO já sabe ler.', es:'Banda elite del Accelerate State of DevOps 2024. Policy de admisión de ACS, enforcement de imagen firmada y self-heal de ArgoCD llevan al equipo a esa banda en dos trimestres de adopción. La métrica DORA es la que todo CIO ya sabe leer.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'ink',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -133,5 +169,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

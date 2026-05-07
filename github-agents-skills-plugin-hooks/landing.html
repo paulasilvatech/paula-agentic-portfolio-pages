@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -116,6 +117,41 @@ window.PAGE_DATA = {
              'pt-br':'Enterprise, projeto, usuário. Três tiers, com último escreve vence e precedência explícita. Centralize política no topo, libere o desenvolvedor na base, documente overrides no meio.',
              es:'Enterprise, proyecto, usuario. Tres tiers, con último escribe gana y precedencia explícita. Centraliza política arriba, libera al desarrollador abajo, documenta los overrides en medio.' } }
   ],
+  stackGlance: {
+    label: { en:'Workspace stack at a glance', 'pt-br':'Stack do workspace em uma vista', es:'Stack del workspace en una vista' },
+    title: { en:'Four control points, one task flow.', 'pt-br':'Quatro pontos de controle, um fluxo de tarefa.', es:'Cuatro puntos de control, un flujo de tarea.' },
+    lead: { en:'A task moves bottom up: skill loads, tools attach, hooks gate, agent answers. Skip a layer and the task escapes the rails.', 'pt-br':'Uma tarefa sobe: skill carrega, tools acoplam, hooks fazem gate, agente responde. Pule uma camada e a tarefa sai dos trilhos.', es:'Una tarea sube: skill carga, tools se acoplan, hooks hacen gate, agente responde. Salta una capa y la tarea sale de los rieles.' },
+    layers: [
+      { layer:'red', num:'IV · AGENT',
+        name:{ en:'Generalist or custom router', 'pt-br':'Generalista ou router custom', es:'Generalista o router custom' },
+        desc:{ en:'Routes the task, owns the personality, picks the model.', 'pt-br':'Roteia a tarefa, dona a personalidade, escolhe o modelo.', es:'Rutea la tarea, dueña la personalidad, elige el modelo.' } },
+      { layer:'yellow', num:'III · HOOKS',
+        name:{ en:'PreToolUse, PostToolUse, Stop', 'pt-br':'PreToolUse, PostToolUse, Stop', es:'PreToolUse, PostToolUse, Stop' },
+        desc:{ en:'Deterministic gates for secrets, formatters, audit, policy.', 'pt-br':'Gates determinísticos para segredos, formatadores, auditoria, política.', es:'Gates deterministas para secretos, formateadores, auditoría, política.' } },
+      { layer:'green', num:'II · TOOLS',
+        name:{ en:'Plugins and MCP servers', 'pt-br':'Plugins e servidores MCP', es:'Plugins y servidores MCP' },
+        desc:{ en:'Typed bridge to repos, databases, queues, dashboards, secrets.', 'pt-br':'Ponte tipada para repos, bancos, filas, dashboards, segredos.', es:'Puente tipado a repos, bases, colas, dashboards, secretos.' } },
+      { layer:'blue', num:'I · SKILL',
+        name:{ en:'SKILL.md bundle, versioned', 'pt-br':'Bundle SKILL.md, versionado', es:'Bundle SKILL.md, versionado' },
+        desc:{ en:'Frontmatter, body, scripts, references. Discoverable, reusable.', 'pt-br':'Frontmatter, corpo, scripts, referências. Descoberta, reúso.', es:'Frontmatter, cuerpo, scripts, referencias. Descubrible, reutilizable.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three workspace metrics, three sources.', 'pt-br':'Três métricas do workspace, três fontes.', es:'Tres métricas del workspace, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a security review. These three baselines come from observed Copilot Enterprise rollouts and the GitHub Octoverse 2025 telemetry.', 'pt-br':'Ancore toda alegação a um número que sobreviva à revisão de segurança. Estes três baselines vêm de rollouts observados de Copilot Enterprise e telemetria Octoverse 2025 do GitHub.', es:'Ancla cada afirmación a un número que sobreviva la revisión de seguridad. Estos tres baselines vienen de rollouts observados de Copilot Enterprise y la telemetría Octoverse 2025 de GitHub.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'PROMPT LAYERS', 'pt-br':'CAMADAS DE PROMPT', es:'CAPAS DE PROMPT' },
+        num:'6 layers', sub:{ en:'system, project, user, session, skill, tool', 'pt-br':'sistema, projeto, usuário, sessão, skill, tool', es:'sistema, proyecto, usuario, sesión, skill, tool' },
+        body:{ en:'The exact order in which Copilot composes the active prompt at every turn. Knowing the order is what lets a platform team move policy from the system layer to the project layer without breaking developer flow. Misordering it is the most common cause of leaked guardrails.', 'pt-br':'A ordem exata em que o Copilot compõe o prompt ativo em cada turn. Saber a ordem permite ao time de plataforma mover política da camada sistema para a de projeto sem quebrar o flow do dev. Errar a ordem é a causa mais comum de guardrail vazado.', es:'El orden exacto en que Copilot compone el prompt activo en cada turno. Saber el orden permite al equipo de plataforma mover política de la capa sistema a la de proyecto sin romper el flujo del dev. Errar el orden es la causa más común de guardrail filtrado.' } },
+      { layer:'blue', eyebrow:{ en:'HOOK COVERAGE', 'pt-br':'COBERTURA DE HOOKS', es:'COBERTURA DE HOOKS' },
+        num:'6 events', sub:{ en:'lifecycle hooks where policy can attach', 'pt-br':'hooks de ciclo onde a política se acopla', es:'hooks de ciclo donde la política se acopla' },
+        body:{ en:'PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. The six events at which a deterministic hook can run. Secrets blocking, formatter, audit log, and policy gate are the four hooks every enterprise rollout should ship on day one.', 'pt-br':'PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. Os seis eventos onde um hook determinístico pode rodar. Bloqueio de segredos, formatter, log de auditoria e gate de política são os quatro hooks que todo rollout corporativo entrega no dia 1.', es:'PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification, SubagentStop. Los seis eventos donde puede correr un hook determinista. Bloqueo de secretos, formatter, log de auditoría y gate de política son los cuatro hooks que todo rollout corporativo entrega el día 1.' } },
+      { layer:'yellow', eyebrow:{ en:'CONFIG TIERS', 'pt-br':'TIERS DE CONFIG', es:'TIERS DE CONFIG' },
+        num:'3 tiers', sub:{ en:'enterprise, project, user, last-write-wins', 'pt-br':'enterprise, projeto, usuário, último escreve vence', es:'enterprise, proyecto, usuario, último escribe gana' },
+        body:{ en:'The three configuration tiers with explicit precedence. Enterprise locks policy and security defaults. Project sets repo-specific behavior. User personalizes inside what the upper tiers allow. The override rules belong in the project tier, documented as a table the security team can audit.', 'pt-br':'Três tiers de configuração com precedência explícita. Enterprise tranca política e defaults de segurança. Projeto define comportamento por repo. Usuário personaliza dentro do que as camadas superiores permitem. As regras de override ficam no tier de projeto, documentadas em tabela auditável.', es:'Tres tiers de configuración con precedencia explícita. Enterprise bloquea política y defaults de seguridad. Proyecto define comportamiento por repo. Usuario personaliza dentro de lo que permiten las capas superiores. Las reglas de override viven en el tier de proyecto, documentadas en tabla auditable.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING · YOU ARE HERE', accent:'red',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -159,5 +195,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>

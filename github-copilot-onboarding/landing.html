@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/landing.css">
+<link rel="stylesheet" href="../_shared/showcase-patterns.css">
 </head>
 <body>
 <noscript>
@@ -109,6 +110,41 @@ window.PAGE_DATA = {
              'pt-br':'KPIs por estágio, DevEx score, sinais de risco, playbook de intervenção. Um CoE de Agentes sustenta os ganhos: champions por time, comunidade de prática, governança de conhecimento, política de uso de IA.',
              es:'KPIs por etapa, DevEx score, señales de riesgo, playbook de intervención. Un CoE de Agentes sostiene las ganancias: champions por equipo, comunidad de práctica, gobernanza de conocimiento, política de uso de IA.' } }
   ],
+  stackGlance: {
+    label: { en:'Program stack at a glance', 'pt-br':'Stack do programa em uma vista', es:'Stack del programa en una vista' },
+    title: { en:'Four enablement layers, stacked.', 'pt-br':'Quatro camadas de habilitação, empilhadas.', es:'Cuatro capas de habilitación, apiladas.' },
+    lead: { en:'Each layer depends on the one below it. Skip the foundation and adoption returns to the 23 percent baseline.', 'pt-br':'Cada camada depende da de baixo. Pular a base e a adoção volta à linha de base de 23%.', es:'Cada capa depende de la de abajo. Saltar la base y la adopción vuelve a la línea base de 23%.' },
+    layers: [
+      { layer:'red', num:'IV · MEASUREMENT',
+        name:{ en:'KPIs, DevEx, CoE', 'pt-br':'KPIs, DevEx, CoE', es:'KPIs, DevEx, CoE' },
+        desc:{ en:'Per-stage KPIs, risk signals, intervention playbook, sustained CoE.', 'pt-br':'KPIs por estágio, sinais de risco, playbook de intervenção, CoE sustentado.', es:'KPIs por etapa, señales de riesgo, playbook de intervención, CoE sostenido.' } },
+      { layer:'yellow', num:'III · LABS',
+        name:{ en:'Pair programming, prompt dojos', 'pt-br':'Pair programming, dojos de prompt', es:'Pair programming, dojos de prompt' },
+        desc:{ en:'Hands-on practice, fortnightly cadence, monthly showcase.', 'pt-br':'Prática hands-on, cadência quinzenal, showcase mensal.', es:'Práctica hands-on, cadencia quincenal, showcase mensual.' } },
+      { layer:'green', num:'II · STAGES',
+        name:{ en:'Five-stage 6-month journey', 'pt-br':'Jornada de 5 estágios em 6 meses', es:'Jornada de 5 etapas en 6 meses' },
+        desc:{ en:'Preparation, awareness, quick wins, fluency, autonomy with exit criteria.', 'pt-br':'Preparação, consciência, quick wins, fluência, autonomia com critérios de saída.', es:'Preparación, conciencia, quick wins, fluidez, autonomía con criterios de salida.' } },
+      { layer:'blue', num:'I · PERSONAS',
+        name:{ en:'24 SDLC personas, 7 clusters', 'pt-br':'24 personas do SDLC, 7 clusters', es:'24 personas del SDLC, 7 clusters' },
+        desc:{ en:'Engineering, Quality, Platform, Product, Data, Security, Leadership.', 'pt-br':'Engenharia, Qualidade, Plataforma, Produto, Dados, Segurança, Liderança.', es:'Ingeniería, Calidad, Plataforma, Producto, Datos, Seguridad, Liderazgo.' } }
+    ]
+  },
+  tokenCards: {
+    label: { en:'Numbers worth defending', 'pt-br':'Números que valem defender', es:'Números que vale la pena defender' },
+    title: { en:'Three adoption metrics, three sources.', 'pt-br':'Três métricas de adoção, três fontes.', es:'Tres métricas de adopción, tres fuentes.' },
+    lead: { en:'Anchor every claim to a number that survives a CFO review. These three baselines are referenced across the playbook and the deck.', 'pt-br':'Ancore toda alegação a um número que sobreviva a revisão de CFO. Estes três baselines são referenciados no playbook e no deck.', es:'Ancla cada afirmación a un número que sobreviva una revisión de CFO. Estos tres baselines se referencian en el playbook y el deck.' },
+    cards: [
+      { layer:'green', eyebrow:{ en:'ACTIVE ADOPTION · 90 DAYS', 'pt-br':'ADOÇÃO ATIVA · 90 DIAS', es:'ADOPCIÓN ACTIVA · 90 DÍAS' },
+        num:'80 vs 23', sub:{ en:'percent active with formal program vs without', 'pt-br':'% ativos com programa formal vs sem', es:'% activos con programa formal vs sin' },
+        body:{ en:'Reference reduction from informal to formal onboarding. The 57-point gap is the difference the five pillars are designed to capture. Active adoption is defined as at least one Copilot suggestion accepted per workday over the last two weeks.', 'pt-br':'Redução de referência entre onboarding informal e formal. O gap de 57 pontos é o que os cinco pilares foram desenhados para capturar. Adoção ativa é definida como ao menos uma sugestão Copilot aceita por dia útil nas duas últimas semanas.', es:'Reducción de referencia entre onboarding informal y formal. La brecha de 57 puntos es lo que los cinco pilares están diseñados para capturar. La adopción activa se define como al menos una sugerencia Copilot aceptada por día laboral en las últimas dos semanas.' } },
+      { layer:'blue', eyebrow:{ en:'TRAINING ROI · 12 MONTHS', 'pt-br':'ROI DE TREINO · 12 MESES', es:'ROI DE FORMACIÓN · 12 MESES' },
+        num:'4.20x', sub:{ en:'return per dollar of structured training', 'pt-br':'retorno por dólar de treino estruturado', es:'retorno por dólar de formación estructurada' },
+        body:{ en:'Median 12-month return per dollar invested in structured Copilot enablement. Computed from per-persona productivity uplift, multiplied by the persona-mix of the workforce, minus the program cost. The training ROI is the easiest CFO line item to defend in year one.', 'pt-br':'Retorno mediano em 12 meses por dólar investido em habilitação estruturada de Copilot. Calculado a partir do uplift de produtividade por persona, multiplicado pelo persona-mix da força de trabalho, menos o custo do programa. ROI de treino é a linha de CFO mais fácil de defender no ano 1.', es:'Retorno mediano a 12 meses por dólar invertido en habilitación estructurada de Copilot. Calculado a partir del uplift de productividad por persona, multiplicado por el persona-mix de la fuerza de trabajo, menos el costo del programa. El ROI de formación es la línea de CFO más fácil de defender en el año 1.' } },
+      { layer:'yellow', eyebrow:{ en:'FIRST QUICK WIN', 'pt-br':'PRIMEIRA VITÓRIA', es:'PRIMERA VICTORIA' },
+        num:'< 72 h', sub:{ en:'window for the first measurable win', 'pt-br':'janela para a primeira vitória mensurável', es:'ventana para la primera victoria medible' },
+        body:{ en:'Maximum elapsed time between a persona starting Stage 1 and shipping a real artifact (a PR, a test suite, a deployment, a PM agent). Past 72 hours, the literacy curve breaks and the persona drops out. The lab schedule is built around this window.', 'pt-br':'Tempo máximo entre uma persona começar o Estágio 1 e entregar um artefato real (um PR, suíte de testes, deploy, agente de PM). Acima de 72h a curva de letramento quebra e a persona desiste. O calendário dos labs é construído em torno dessa janela.', es:'Tiempo máximo entre una persona comenzando la Etapa 1 y entregando un artefacto real (un PR, una suite de tests, un deploy, un agente de PM). Sobre 72h la curva de alfabetización se rompe y la persona deserta. El calendario de los labs se arma en torno a esa ventana.' } }
+    ]
+  },
   formats: [
     { kicker:'LANDING &middot; YOU ARE HERE', accent:'green',
       title:{ en:'This page', 'pt-br':'Esta página', es:'Esta página' },
@@ -147,5 +183,6 @@ window.PAGE_DATA = {
 };
 </script>
 <script src="../_shared/landing-template.js"></script>
+<script src="../_shared/showcase-patterns.js" defer></script>
 </body>
 </html>
